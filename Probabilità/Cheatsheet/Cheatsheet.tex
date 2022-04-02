@@ -1,0 +1,632 @@
+\documentclass[12pt, a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+}
+
+\usepackage{titlesec}
+\titleformat
+{\chapter}
+[display]{\bfseries\Large\itshape}
+{Capitolo Nr.\thechapter}
+{0.5ex}
+{
+    \rule{\textwidth}{1pt}
+    \vspace{1ex}
+	\centering
+}
+[\vspace{-0.5ex}\rule{\textwidth}{0.3pt}]
+
+\renewcommand{\contentsname}{Indice}
+
+\usepackage{amsthm} % Fornisce il comando \newtheorem
+\usepackage{thmtools} % fornisce il comando \declaretheorem
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem} % Permette di usare la numerazione romana nelle liste
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{dsfont}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definizione}[section]
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{corollary}{Corollario}[theorem]
+\newtheorem{lemma}{Lemma}[theorem]
+\newtheorem{observation}{Oss}[section]
+\declaretheorem[name=Dim, qed=$\blacksquare$, numbered=no]{demonstration}
+\newtheorem*{proposition}{Prop}
+\newtheorem*{property}{Proprietà}
+\newtheorem*{note}{NB}
+
+\newcommand{\N}{\mathbb{N}}
+
+\title{Titolo}
+\author{Leonardo De Faveri}
+\date{}
+
+\begin{document}
+\chapter{Appunti di probabilità}
+\section{Combinatoria}
+\begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        & \textbf{Semplici} & \textbf{Con ripetizioni}\\
+        \hline
+        \textbf{Permutazioni} & $n!$ & $\frac{n!}{m!}$\\
+        \textbf{Disposizioni} & $\frac{n!}{(n-m)!}$ & $n^k$\\
+        \textbf{Combinazioni} & $\frac{n!}{m!\cdot(n-m)!}=\binom{n}{m}$ &
+        $\frac{(n+m-1)!}{m!\cdot(n-1)!}$\\
+        \hline
+    \end{tabular}
+\end{center}
+\begin{itemize}
+    \item \emph{Permutazioni semplici}: in quanti modi posso riordinare $n$ oggetti?
+    \item \emph{Permutazioni con ripetizioni}: in quanti modi posso riordinare $n$
+    oggetti se un oggetto si ripete $m$ volte?
+    \item \emph{Disposizioni semplici}: in quanti modi posso ordinare $m$ oggetti
+    scelti tra gli $n$ di un insieme?
+    \item \emph{Disposizioni con ripetizioni}: in quanti modi posso disporre $n$
+    oggetti in $k$ cassetti?
+    \item \emph{Combinazioni semplici}: in quanti modi posso scegliere, in modo non
+    ordinato, $m$ oggetti tra gli $n$ di un insieme?
+    \item \emph{Combinazioni con ripetizioni}: in quanti modi posso scegliere,
+    in modo non ordinato, $m$ oggetti tra gli $n$ di un insieme, se gli oggetti
+    da prendere sono più di quelli tra cui scegliere?
+\end{itemize}
+
+\section{Probabilità condizionata e indipendenza}
+Sia $(\Omega, \mathcal{F}, P)$ uno spazio di probabilità e siano $F,E\in\mathcal{F}$
+con $P(F)\neq0$ eventi su quello spazio. La probabilità di $E$ condizionato $F$ è:
+\[P(E|F)\coloneqq\frac{P(E\cap F)}{P(F)}\]
+
+\paragraph{Teorema di fattorizzazione o delle probabilità totali}
+Dato uno spazio di probabilità $(\Omega, \mathcal{F}, P)$ e una sua partizione
+$\{E_i\}_{i\in I}$ tale che $\bigcup_{i\in I}E_i=\Omega$ e $P(E_i)\neq0$, allora
+vale:
+\[\forall E\in\mathcal{F}\ P(E)=\sum_{i\in I}P(E\cap E_i)=\sum_{i\in I}P(E|E_i)
+\cdot P(E_i)\]
+
+\paragraph{Teorema di Bayes}
+\mbox{}
+\begin{enumerate}[label=(\roman*)]
+    \item Se $P(E)\neq0\neq P(F)$ vale:
+    \[P(E|F)=\frac{P(F|E)\cdot P(E)}{P(F)}\]
+    \item Se ho una partizione $\{E_i\}_{i\in I}$ tale che $\bigcup_{i\in I}E_i=
+    \Omega$ e $P(E_i)\neq0$, allora vale:
+    \[P(E_j|F)=\frac{P(F|E_j)\cdot P(E_j)}{\sum_{i\in I}(P(F|E_i)\cdot P(E_i))}\]
+\end{enumerate}
+
+\paragraph{Indipendenza}
+Due eventi $F,E\in\mathcal{F}$ sono indipendenti se e sole se:
+\[P(E\cap F)=P(E)\cdot P(F)\]
+
+\paragraph{Indipendenza condizionata}
+Dati due eventi \(E_1,E_2\in\mathcal{F}\) in uno spazio di probabilità $(\Omega,
+\mathcal{F}, P)$ e fissato un terzo evento \(F\in\mathcal{F}\), $E_1$ ed $E_2$
+sono indipendenti condizionatamente a $F$ se:
+\[P(E_1\cap E_2|F)=P(E_1|F)\cdot P(E_2|F)\]
+
+\section{Variabili aleatorie}
+\subsection{Variabili aleatorie discrete}
+\begin{itemize}
+	\item \emph{Bernoulliane} [$X\sim bin(1,p)$]: è una \emph{variabile aleatoria
+	indicatrice} di un evento $E="successo"$ che si verifica con probabilità $p$.
+    \[\varphi_X(x)=\begin{cases}
+		{p} & \text{se}\ {x=1}\\
+		{1-p} & \text{se}\ {x=0}\\
+		{0} & \text{altrimenti}
+	\end{cases}\text{ e }F_X(x)=\begin{cases}
+		{0} & \text{se}\ {x<0}\\
+		{1-p} & \text{se}\ {0\leq x<1}\\
+		{1} & \text{se}\ {x\geq 1}
+	\end{cases}\]
+
+	\item \emph{Binomiali} [$X\sim bin(n,p)$]: conta il numero di successi che
+	si verificano in $n$ tentativi.
+
+	\(\varphi_X(k)\): indica con che probabilità si verificano k successi
+    \[\varphi_X(k)=\begin{cases}
+		{\binom{n}{k}\cdot p^k\cdot(1-p)^{n-k}} & \text{se}\ {k\in\{0,..,n\}}\\
+		{0} & \text{altrimenti}
+	\end{cases}\]
+    \[F_X(x)=\sum_{k=0}^{\lfloor x\rfloor}\varphi_X(k)=\sum_{k=0}^{min\{\lfloor
+	x\rfloor,n\}}\binom{n}{k}\cdot p^k\cdot(1-p)^{n-k}\]
+
+	\item \emph{Geometriche} [$X\sim geom(p)$]: indica l'istante precedente al
+	primo successo.
+
+	\(\varphi_X(k)\): indica con che probabilità si verificano $k$ insuccessi
+	prima del primo successo
+    \[\varphi_X(k)=P(X=k)=\begin{cases}
+		{0} & \text{se}\ {k\notin\N}\\
+		{(1-p)^k\cdot p} & \text{se}\ {k\in\N}
+	\end{cases}\text{ e }F_X(x)=\begin{cases}
+		{0} & \text{se}\ {x<0}\\
+		{1-(1-p)^{\lfloor x\rfloor+1}} & \text{se}\ {x\geq 0}
+	\end{cases}\]
+
+	\item \emph{Binomiali negative} [$X\sim NB(n,p)$]: conta il numero di
+	insuccessi precedenti all'n-esimo successo.
+
+	\(\varphi_X(k)\): indica con che probabilità si verificano $k$ insuccessi
+	prima dell'n-esimo successo
+    \[\varphi_X(x)=p^n\cdot(1-p)^k\cdot\binom{k+n-1}{k}\]
+
+	\item \emph{Ipergeometriche} [$X\sim hyp(k,m,n)$]: conta il numeri di oggetti
+	di tipo $a$ estratti, senza reimmissione, da un insieme di $m$ oggetti di tipo
+	$a$ ed $n$ di tipo $b$.
+
+	\(\varphi_X(k)\): indica con che probabilità vengono estratti $k$ oggetti
+	di tipo $a$ tra gli $m$ di tipo $a$ e gli $n$ di tipo $b$
+    \[\varphi_X(b)=\begin{cases}
+		{\frac{\binom{n}{b}\cdot\binom{n}{k-b}}{\binom{m+n}{k}}} & \text{se}\ {max\{
+		0,k-n\}\leq b\leq min\{k,m\}}\\
+		{0} & \text{altrimenti}
+	\end{cases}\]
+
+	\item \emph{Poissoniane} [$X\sim pois(\lambda)$]: si usa quando si ha una
+	successione di \emph{ipergeometriche} di parametri $a_i$ e $b_i$ che tende a
+	una \emph{binomiale} con probabilità di successo $\alpha$.
+
+	\(\varphi_X(k)\): se, ad esempio, si stanno considerando i morti giornalieri
+	sul lavoro, e in media, ne muoiono \(3(=\lambda)\) ogni giorno, indica la
+	probabilità che un giorno ne muoiano $k$
+    \[\varphi_X(k)=\begin{cases}
+		{\frac{\lambda^k}{k!}\cdot e^{-\lambda}} & \text{se}\ {k\in\N}\\
+		{0} & \text{altrimenti}
+	\end{cases}\]
+\end{itemize}
+
+\subsection{Variabili aleatorie assolutamente continue}
+\begin{itemize}
+    \item \emph{Uniformi} [$X\sim unif(a,b)$]: hanno densità costante in $[a,b]$.
+    \[f_X(x)=\begin{cases}
+		{\frac{1}{b-a}} & \text{se}\ x\in(a,b)\\
+		{0} & \text{altrimenti}
+	\end{cases}\text{ e }F_X(x)=\begin{cases}
+		{0} & \text{se}\ {x\leq a}\\
+		{\frac{x-a}{b-a}} & \text{se}\ {a<x\leq b}\\
+		{1} & \text{se}\ {x>b}
+	\end{cases}\]
+
+    \item \emph{Esponenziali} [$X\sim exp(\lambda)$]: sono l'equivalente continuo
+    delle geometriche.
+    \[f_X(x)=\begin{cases}
+        {0} & \text{se}\ {x<0}\\
+		{c\cdot e^{-\lambda x}} & \text{se}\ {x\geq 0}
+	\end{cases}\text{ e }F_X(x)=\begin{cases}
+        {0} & \text{se}\ {x<0}\\
+        {1-e^{-\lambda x}} & \text{se}\ {x\geq 0}
+    \end{cases}\]
+    
+    \item \emph{Gaussiane} [$X\sim\mathcal{N}(\mu, \sigma)$]: i parametri sono
+    rispettivamente media e deviazione standard.
+    \[f_X(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\cdot e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+    \text{ e }F_X(x)=\Phi\left(\frac{x-\mu}{\sigma}\right)\]
+
+    Se $X\sim\mathcal{N}(0,1)$, $X$ è una normale standard e la funzione di
+    ripartizione è:
+    \[F_X(x)=\int_{-\infty}^x \frac{1}{\sqrt{2\pi}}\cdot e^{-\frac{-t^2}{2}}dt
+    =\Phi(x)\]
+
+
+    \item \emph{Chi quadro} [$X\sim\chi^2(n)$]: sono definite come somma di
+    Gaussiane standard indipendenti. Il parametro $n$ indica i gradi di libertà,
+    ovvero il numero di Gaussiane che sono state sommate per realizzare la Chi quadro.
+
+    \item \emph{t di Student} [$X\sim t(n)$]: $X$ è definita come
+    \[X=\frac{Z}{\sqrt{\frac{W}{n}}}\text{ con }Z\sim\mathcal{N}(0,1)\text{ e }
+    W\sim\chi^2(n)\]
+\end{itemize}
+
+\subsection{Riproducibilità}
+\begin{proposition}
+    La somma di $n$ \emph{Bernoulliane} indipendenti e identicamente distribuite
+    di parametro $p$ è distribuita come una \emph{binomiale} di parametri
+    $n$ e $p$. In particolare, se $X_i\sim bin(1,p)$ $\sum_{i=1}^nX_i\sim bin(n,p)$.
+\end{proposition}
+\begin{proposition}
+	La famiglia delle \emph{binomiali} a parametro $p$ fissato è riproducibile.
+	In particolare, se $X\sim bin(n,p)$ e $Y\sim bin(m,p)$ sono indipendenti
+	$X+Y\sim bin(n+m,p)$.
+\end{proposition}
+\begin{proposition}
+	La famiglia delle \emph{binomiali negative} a parametro $p$ fissato è
+	riproducibile. In particolare, se \(X\sim NB(n,p)\) e \(Y\sim NB(m,p)\) sono
+    indipendenti allora	\(X+Y\sim NB(n+m,p)\).
+\end{proposition}
+\begin{proposition}
+    La somma di $n$ \emph{geometriche} indipendenti e identicamente distribuite
+    di parametro $p$ è distribuita come una \emph{binomiale negativa} di parametri
+    $n$ e $p$. In particolare, se $X_i\sim geom(p)$ $\sum_{i=1}^nX_i\sim NB(n,p)$.
+\end{proposition}
+\begin{proposition}
+	La famiglia delle \emph{Poissoniane} è riproducibile. In particolare, se
+    \(X\sim pois(\lambda_1)\) e \(Y\sim pois(\lambda_2)\) sono indipendenti allora
+	\(X+Y\sim pois(\lambda_1+\lambda_2)\).
+\end{proposition}
+\begin{proposition}
+    Sia $Z\sim\mathcal{N}(0,1)$. $X$ è una \emph{normale} o \emph{Gaussiana} di
+	parametri $\mu,\sigma\in\mathbb{R}$ con $\sigma>0$ se:
+	\[X=\sigma*Z+\mu\]
+	In particolare, $X\sim\mathcal{N}(\mu,\sigma)$.
+\end{proposition}
+\begin{proposition}
+    La famiglia delle \emph{Chi quadro} è riproducibile. In particolare, se
+    \(X\sim \chi^2(n)\) e \(Y\sim \chi^2(m)\) sono indipendenti allora
+	\(X+Y\sim \chi^2(n+m)\).
+\end{proposition}
+
+\section{Indicatori per variabili aleatorie}
+\subsection{Valore atteso}
+\paragraph{Valore atteso di variabili aleatorie}
+\begin{itemize}
+    \item $X$ \emph{v.a. discreta}: $E[X]=\sum_{x\in\mathcal{R}_X}x\cdot\varphi_X(x)$
+    \item $X$ \emph{v.a. assolutamente continua}: $E[X]=\int_{-\infty}^{+\infty}x
+    \cdot f_X(x)dx$
+\end{itemize}
+
+\paragraph{Valore atteso di trasformazioni di variabili aleatorie}
+Sia $Y=g(X)$, vale:
+\begin{itemize}
+    \item $X$ \emph{v.a. discreta}: $E[Y]=\sum_{x\in\mathcal{R}_X}g(x)\cdot\varphi_X(x)$
+    \item $X$ \emph{v.a. assolutamente continua}: $E[Y]=\int_{-\infty}^{+\infty}
+    g(x)\cdot f_X(x)dx$
+\end{itemize}
+
+\paragraph{Valore atteso di 2-vettori}
+Sia $(X,Y)$ un \emph{2-vettore} e sia $Z=g(X,Y)$, vale:
+\begin{itemize}
+    \item \emph{2-vettore discreto}: $E[Z]=\sum_{x\in\mathcal{R}_X}\sum_
+    {y\in\mathcal{R}_Y}g(x,y)\cdot\varphi_{X,Y}(x,y)$
+    \item \emph{2-vettore assolutamente continuo}: $E[Z]=\int\int_{\mathbb{R}^2}
+    g(x,y)\cdot f_{X,Y}(x,y)dx\ dy$
+    \item \emph{2-vettore misto}:
+    \begin{itemize}
+        \item $X$ \emph{discreta}, $Y$ \emph{assolutamente continua}:
+        $E[Z]=\sum_{x\in\mathcal{R}_X}\int_{\mathbb{R}}g(x,y)\cdot f_{X,Y}(x,y)dy$
+        \item $X$ \emph{assolutamente continua}, $Y$ \emph{discreta}:
+        $E[Z]=\int_{\mathbb{R}}\sum_{y\in\mathcal{R}_Y}g(x,y)\cdot f_{X,Y}(x,y)dx$
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Proprietà del valore atteso}
+\begin{enumerate}[label=(\roman*)]
+    \item \emph{Linearità}: $E[a\cdot X+b]=a\cdot E[X]+b$
+    \item \emph{Prodotto di v.a. indipendenti}: $E[X\cdot Y]=E[X]\cdot E[Y]$
+    \item \emph{Monotonia}:
+    \begin{itemize}
+        \item $X=0\Rightarrow E[X]=0$
+        \item $X\geq0\Rightarrow E[X]\geq0$
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Momenti, varianza, deviazione standard}
+\paragraph{Momento n-esimo}
+Siano $n\in\mathbb{N}$ con $n>0$ e $X$ variabile aleatoria:
+\begin{itemize}
+    \item \emph{Momento n-esimo}: $E[X^n]$
+    \item \emph{Momento n-esimo centrato}: $E[(X-E[X])^n]$
+\end{itemize}
+
+\paragraph{Varianza di variabili aleatorie}
+Sia $X$ una variabile aleatoria. La varianza di $X$ è:
+\[Var[X]=E[X^2]-(E[X])^2\]
+\paragraph{Proprietà della varianza}
+\begin{enumerate}[label=(\roman*)]
+    \item $Var[X]\geq0$; $Var[X]=0\Leftrightarrow X=c$ $\forall c\in\mathbb{R}$
+    \item $Var[a\cdot X+b]=a^2\cdot Var[X]$
+\end{enumerate}
+\paragraph{Deviazione standard}
+Sia $X$ una variabile aleatoria. La deviazione standard di $X$ è:
+\[\sigma(X)=\sqrt{Var[X]}\]
+
+\subsection{Covarianza e correlazione}
+\paragraph{Covarianza}
+Siano $X$ e $Y$ due variabili aleatorie. La covarianza di $X$ e $Y$ è:
+\[Cov[X,Y]=E[(X-E[X])\cdot(Y-E[Y])]=E[X,Y]-E[X]\cdot E[Y]\]
+Se $X=Y$, vale:
+\[Cov[X,X]=E[(X-E[X])^2]=Var[X]\]
+\paragraph{Proprietà della covarianza}
+\begin{enumerate}[label=(\roman*)]
+	\item Se $X$ e $Y$ sono indipendenti allora \(Cov[X,Y]=0\)
+	\item \(Var[X+Y]=Var[X]+Var[Y]+2*Cov[X,Y]\)
+	\item \emph{Simmetria}: \(Cov[X,Y]=Cov[Y,X]\)
+	\item \emph{Linearità}: \(Cov[a*x+b*Y,Z]=a*Cov[X,Z]+b*Cov[Y,Z]\)
+	\item \emph{Bilinearità}: Siano $(a_i)_{i=1}^n$ e $(b_j)_{j=1}^m$
+	\emph{vettori reali} e $(X_i)_{i=1}^n$ e $(Y_j)_{j=1}^m$ \emph{vettori aleatori},
+vale:
+\[Cov\left[\sum_{i=1}^na_i*X_i,\sum_{j=1}^mb_j*Y_j\right]=\sum_{i=1}^n
+\sum_{j=1}^ma_i*b_j*Cov[X_i,Y_j]\]
+\end{enumerate}
+\paragraph{Correlazione e scorrelazione}
+Due variabili aleatorie $X$ e $Y$ sono scorrelate se e solo se $Cov[X,Y]=0$,
+altrimenti sono correlate.
+\paragraph{Coefficiente di correlazione}
+Date due \emph{variabili aleatorie} $X$ e $Y$ si dice \emph{coefficiente di
+correlazione} il numero:
+\[\rho(X,Y)=corr[X,Y]=\frac{Cov[X,Y]}{\sqrt{Var[X]*Var[Y]}}\]
+
+\subsection{Moda, mediana, mediana impropria}
+\paragraph{Moda}
+Chiamiamo \emph{moda} di una \emph{variabile aleatoria} $X$ il un numero
+$x\in\mathcal{R}_X$ tale che:
+\begin{itemize}
+    \item Se $X$ è \emph{discreta} $\varphi_X$ è massima in $x$, cioè \(x\in
+    argmax_y\varphi_X(y)\)
+    \item Se $X$ è \emph{assolutamente continua} $f_X$ è massima in $x$, cioè
+    \(x\in argmax_y f_X(y)\)
+\end{itemize}
+Intuitivamente, la moda di una variabile aleatoria è il valore più probabile.
+
+\paragraph{Mediana}
+Si dice \emph{mediana} di una \emph{variabile aleatoria} $X$ un numero $m_X$
+tale che:
+\[P(X\leq m_X)=P(X\geq m_X)\]
+\paragraph{Mediana impropria}
+Si dice \emph{mediana impropria} un numero reale $\tilde{m}_X$ tale che:
+\[P(X\leq\tilde{m}_X)\geq\frac{1}{2}\wedge P(X\geq\tilde{m}_X\geq\frac{1}{2})\]
+
+\subsection{Indicatori per modelli aleatori}
+\begin{itemize}
+    \item \emph{Bernoulliane} [$X\sim bin(1,p)$]: $E[X]=p$, $Var[X]=p\cdot(1-p)$
+    \item \emph{Binomiali} [$X\sim bin(n,p)$]: $E[X]=n\cdot p$, $Var[X]=n\cdot p
+    \cdot(1-p)$
+    \item \emph{Geometriche} [$X\sim geom(p)$]: $E[X]=\frac{1-p}{p}$, $Var[X]=
+    \frac{1-p}{p^2}$
+    \item \emph{Binomiali negative} [$X\sim NB(n,p)$]: $E[X]=n\cdot\frac{1-p}{p}$,
+    $Var[X]=n\cdot\frac{1-p}{p^2}$
+    \item \emph{Ipergeometriche} [$X\sim hyp(k,m,n)$]: $E[X]=k\cdot\frac{m}{m+n}$
+    \item \emph{Poissoniane} [$X\sim pois(\lambda)$]: $E[X]=\lambda$, $Var[X]=\lambda$
+    \item \emph{Uniformi} [$X\sim unif(a,b)$]: $E[X]=\frac{b+a}{2}$, $Var[X]=
+    \frac{(b-a)^2}{12}$
+    \item \emph{Esponenziali} [$X\sim exp(\lambda)$]: $E[X]=\frac{1}{\lambda}$,
+    $Var[X]=\frac{1}{\lambda^2}$
+    \item \emph{Gaussiane} [$X\sim\mathcal{N}(\mu,\sigma)$]: $E[X]=\mu$, $Var[X]=
+    \sigma^2$
+    \item \emph{Chi quadro} [$X\sim\chi^2(n)$]: $E[X]=n$, $Var[X]=2n$
+    \item \emph{t di Student} [$X\sim t(n)$]: $E[X]=1$, $Var[X]=\frac{2}{n}$
+\end{itemize}
+
+\subsection{Disuguaglianze}
+\paragraph{Markov}
+sia $X$ una \emph{variabile aleatoria} non negativa. Per ogni $a>0$ vale:
+\[P(X\geq a)\leq\frac{E[X]}{a}\]
+\paragraph{Chebychev}
+Sia $X$ una \emph{variabile aleatoria}. Per ogni $a>0$ vale:
+\[P(|X-E[X]|\geq a)\leq \frac{Var[X]}{a^2}\]
+
+\chapter{Appunti di statistica}
+\section{Stimatori}
+\paragraph{Correttezza e bias}
+Uno stimatore $\Theta$ di $\vartheta$ è:
+\begin{itemize}
+    \item \emph{Corretto} se $E[\Theta]=\vartheta$
+    \item \emph{Scorretto} se $E[\Theta]\neq\vartheta$ e il valore $E[\Theta]-
+    \vartheta$ è detto bias
+\end{itemize}
+\paragraph{Errore quadratico medio}
+L'errore quadratico medio di uno stimatore $\Theta$ per $\vartheta$ è il valore:
+\[MSE[\Theta]=E[(\Theta-\vartheta)^2]=Var[\Theta]+(bias)^2\]
+
+\paragraph{Consistenza}
+Uno stimatore $\Theta$ di $\vartheta$ è consistente se $\Theta_n$ converge in
+probabilità a $\vartheta$, ovvero se:
+\[\Theta_n\xrightarrow[n\to+\infty]{P}\vartheta\]
+\paragraph{Consistenza in media quadratica}
+Uno stimatore $\Theta$ di $\vartheta$ è consistente in media quadratica se
+$\Theta_n$ converge in media quadratica a $\vartheta$, ovvero se:
+\[\Theta_n\xrightarrow[n\to+\infty]{L^2}\vartheta\]
+\begin{note}
+    La consistenza in media quadratica implica:
+    \[\lim_{n\to+\infty}E[(\Theta_n-\vartheta)^2]=0\]
+\end{note}
+\begin{note}
+    Poiché la convergenza in media quadrati implica convergenza in probabilità,
+    la consistenza in media quadratica implica consistenza, quindi uno stimatore
+    è consistente se e solo se:
+    \[MSE[\Theta_n]=Var[\Theta_n]\]
+\end{note}
+
+\paragraph{Alcuni stimatori}
+Sia $(X_1,\dots,X_n)$ un campione di variabili aleatorie indipendenti e
+identicamente distribuite. I seguenti sono stimatori corretti e consistenti per
+quel campione:
+\begin{itemize}
+    \item \emph{Media campionaria}: è uno stimatore della media $\mu$
+    \[\hat{\mu}=\bar{X}=\frac{1}{n}\cdot\sum_{i=1}^nX_i\]
+    \item \emph{Varianza campionaria a media nota}: è uno stimatore della varianza
+    $\sigma$ a media $\mu$ nota
+    \[S^2_*=\frac{1}{n}\cdot\sum_{i=1}^n(X_i-\mu)^2\]
+    \item \emph{Varianza campionaria a media ignota}: è uno stimatore della varianza
+    $\sigma$ a media $\mu$ ignota
+    \[S^2=\frac{1}{n-1}\cdot\sum_{i=1}^n(X_i-\hat{\mu})^2\]
+\end{itemize}
+
+\section{Funzioni ancillari}
+\paragraph{Funzione ancillare}
+Chiamiamo funzione ancillare per un parametro $\vartheta$ una variabile aleatoria
+la cui legge sia nota a priori e che dipenda dai dati, da parametri noti e da
+$\vartheta$, unico parametro non noto.
+
+\paragraph{Alcune funzioni ancillari per Gaussiane}
+\begin{itemize}
+    \item Funzione ancillare per il parametro $\mu$ a varianza $\sigma^2$ nota:
+    \[\frac{\hat{\mu}-\mu}{\frac{\sigma}{\sqrt{n}}}\sim\mathcal{N}(0,1)\]
+    \item Funzione ancillare per il parametro $\mu$ a varianza $\sigma^2$ ignota:
+    \[\frac{\hat{\mu}-\mu}{\sqrt{\frac{S^2}{n}}}\sim t(n-1)\]
+    \item Funzione ancillare per la varianza $\sigma^2$ a speranza $\mu$ nota:
+    \[\frac{S^2_*}{\sigma^2}\cdot n=\sum_{i=1}^n(\frac{X_i-\mu}{\sigma})^2\sim
+    \chi^2(n)\]
+    \item Funzione ancillare per la varianza $\sigma^2$ a speranza $\mu$ ignota:
+    \[\frac{S^2}{\sigma^2}\cdot(n-1)\sim\chi^2(n-1)\]
+\end{itemize}
+
+\section{Costruire stimatori}
+\subsection{Stimatori col metodo dei momenti}
+Sia $X=(X_1,\dots,X_n)$ un campione di dimensione $n$ di variabili aleatorie
+indipendenti e identicamente distribuite. In base alla distribuzione di un
+generico $X_i$, vale:
+\begin{itemize}
+    \item $X_i\sim\mathcal{N}(\mu,\sigma)$:
+    $\hat{\vartheta}_{mom}=(\hat{\mu}_{mom},\hat{\sigma}^2_{mom})$,
+    $\sigma^2$ ignota
+    \[\begin{cases}
+        \hat{\mu}_{mom}=\hat{\mu}=\bar{X}=\frac{1}{n}\cdot\sum_{i=1}^n x_i\\
+        \hat{\sigma}^2_{mom}=\frac{n-1}{n}\cdot S^2=\frac{1}{n}\cdot\sum_{i=1}^n
+        (x_i-\mu)^2
+    \end{cases}\]
+\end{itemize}
+
+\subsection{Stimatori di massima verosimiglianza}
+Sia $X=(X_1,\dots,X_n)$ un campione di dimensione $n$ di variabili aleatorie
+indipendenti e identicamente distribuite. In base alla distribuzione di un
+generico $X_i$, vale:
+\begin{itemize}
+    \item $X_i\sim bin(1,p)$: $\hat{\vartheta}_{MLE}=\hat{p}_{MLE}$
+    \[\hat{p}_{MLE}=\bar{X}=\frac{1}{n}\cdot\sum_{i=1}^n x_i\]
+
+    \item $X_i\sim pois(\lambda)$: $\hat{\vartheta}_{MLE}=\hat{\lambda}_{MLE}$
+    \[\hat{\lambda}_{MLE}=\bar{X}\]
+
+    \item $X_i\sim unif[-a,a]$: $\hat{\vartheta}_{MLE}=\hat{a}_{MLE}$
+    \[\hat{a}_{MLE}=\max{(|\text{min}_i(x_i|,|\text{max}_i(x_i)|)}\]
+
+    \item $X_i\sim unif[a,b]$: $\hat{\vartheta}_{MLE}=(\hat{a}_{MLE},\hat{b}_{MLE})$
+    \[\begin{cases}
+        \hat{a}_{MLE}=\text{min}_i(x_i)\\
+        \hat{b}_{MLE}=\text{max}_i(x_i)
+    \end{cases}\]
+
+    \item $X_i\sim exp(\lambda)$: $\hat{\vartheta}_{MLE}=\hat{\lambda}_{MLE}$
+    \[\hat{\lambda}_{MLE}=\bar{X}^{-1}\]
+
+    \item $X_i\sim\mathcal{N}(\mu,\sigma)$:
+    $\hat{\vartheta}_{MLE}=(\hat{\mu}_{MLE},\hat{\sigma}^2_{MLE})$, $\sigma^2$
+    ignota
+    \[\begin{cases}
+        \hat{\mu}_{MLE}=\hat{\mu}=\bar{X}=\frac{1}{n}\cdot\sum_{i=1}^n x_i\\
+        \hat{\sigma}^2_{MLE}=\frac{n-1}{n}\cdot S^2=\frac{1}{n}\cdot\sum_{i=1}^n
+        (x_i-\mu)^2
+    \end{cases}\]
+\end{itemize}
+
+\section{Intervalli di confidenza}
+\subsection{Intervalli bilaterali}
+\begin{center}
+    \renewcommand{\arraystretch}{2.2}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{$\vartheta$} & \textbf{Note} & \textbf{Int. bilaterale}\\
+        \hline
+        $\mu$ & $\sigma^2$ nota & $\bar{X}_n\pm\Phi^{-1}(1-\frac{\alpha}{2})
+        \sqrt{\frac{\sigma^2}{n}}$\\
+        $\mu$ & $\sigma^2$ ignota & $\bar{X}_n\pm F^{-1}_{t_{n-1}}(1-\frac
+        {\alpha}{2})\sqrt{\frac{S^2}{n}}$\\
+        $\sigma^2$ & $\mu$ nota & $\left(\frac{S^2_{*n}n}{F^{-1}_{\chi^2_n}
+        (1-\frac{\alpha}{2})},\frac{S^2_{*n}n}{F^{-1}_{\chi^2_n}
+        (\frac{\alpha}{2})}\right)$\\
+        $\sigma^2$ & $\mu$ ignota & $\left(\frac{S^2_n(n-1)}{F^{-1}_{\chi^2_{n-1}}
+        \left(1-\frac{\alpha}{2},\right)},\frac{S^2_n(n-1)}{F^{-1}_{\chi^2_{n-1}}
+        \left(\frac{\alpha}{2},\right)}\right)$\\
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection{Intervalli unilaterali}
+\begin{center}
+    \renewcommand{\arraystretch}{2.2}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{$\vartheta$} & \textbf{Note} & \textbf{Int. sinistro} &
+        \textbf{Int. destro}\\
+        \hline
+        $\mu$ & $\sigma^2$ nota & $\left(-\infty,\bar{X}_n+\Phi^{-1}(1-
+        \alpha)\sqrt{\frac{\sigma^2}{n}}\right)$ & $\left(\bar{X}_n-\Phi_{-1}(1-
+        \alpha)\sqrt{\frac{\sigma^2}{n}},+\infty\right)$\\
+        $\mu$ & $\sigma^2$ ignota & $\left(-\infty,\bar{X}_n+F^{-1}_{t_
+        {n-1}}(1-\alpha)\sqrt{\frac{S^2}{n}}\right)$ & $\left(\bar{X}_n+F^{-1}_
+        {t_{n-1}}(1-\alpha)\sqrt{\frac{S^2}{n}},+\infty\right)$\\
+        $\sigma^2$ & $\mu$ nota & $\left(0,\frac{S^2_{*n}n}{F^{-1}_{\chi^2_n}
+        (\alpha)}\right)$ & $\left(\frac{S^2_{*n}n}{F^{-1}_{\chi^2_n}
+        (1-\alpha)},+\infty\right)$\\
+        $\sigma^2$ & $\mu$ ignota & $\left(0,\frac{S^2_n(n-1)}{F^{-1}_{\chi^2_{n-1}}
+        \left(\alpha,\right)}\right)$ & $\left(\frac{S^2_n(n-1)}{F^{-1}_{\chi^2_{n-1}}
+        \left(1-\alpha,\right)},+\infty\right)$\\
+        \hline
+    \end{tabular}
+\end{center}
+
+\paragraph{Larghezza di un intervallo}
+Sia $X=(X_1,\dots,X_n)$ un intervallo di variabili aleatorie indipendenti e
+identicamente distribuite come una Gaussiana di parametri $\mu$ e $\sigma$.
+La larghezza dell'intervallo di confidenza per la media $\mu$ al livello di
+confidenza $1-\alpha$ è:
+\[l=2\Phi^{-1}(1-\frac{\alpha}{2})\sqrt{\frac{\sigma^2}{n}}\]
+da cui è possibile ricavare la numerosità $n$ del campione tale per cui, la
+larghezza di tale intervallo, non superi una larghezza $l$ prefissata:
+\[n=\left\lceil\frac{4(\Phi^{-1}(1-\frac{\alpha}{2}))^2\sigma^2}{l^2}\right\rceil\]
+
+\section{Intervalli di confidenza approssimati}
+\subsection{Bernoulliane}
+Sia $X=(X_1,\dots,X_n)$ un campione di variabili aleatorie Bernoulliane di parametro
+$p$. Vogliamo stimare $p$. Sia $Y_n=\sum_{i=1}^nX_i$ la variabile aleatoria che
+conta il numero di successi ($Y_n\sim bin(n,p)$). Poiché, nel caso delle
+Bernoulliane, $p$ coincide con la media, $\hat{p}=\bar{X}_n=\frac{Y_n}{n}$ è uno
+stimatore della media e quindi di $p$. Vale, quindi:
+\[P\left(\hat{p}-\Phi^{-1}\left(1-\frac{\alpha}{2}\right)\sqrt{\frac{\hat{p}(1-
+\hat{p})}{n}}\leq p\leq\hat{p}+\Phi^{-1}\left(1-\frac{\alpha}{2}\right)\sqrt{
+\frac{\hat{p}(1-\hat{p})}{n}}\right)\approx1-\alpha\]
+
+\paragraph{Intervallo bilaterale}
+\[\hat{p}\pm\Phi^{-1}\left(1-\frac{\alpha}{2}\right)\sqrt{\frac{\hat{p}
+(1-\hat{p})}{n}}\]
+\paragraph{Intervallo unilaterale sinistro}
+\[\left(0,\hat{p}+\Phi^{-1}\left(1-\frac{\alpha}{2}\right)\sqrt{\frac{\hat{p}
+(1-\hat{p})}{n}}\right)\]
+\paragraph{Intervallo unilaterale destro}
+\[\left(\hat{p}-\Phi^{-1}\left(1-\frac{\alpha}{2}\right)\sqrt{\frac{\hat{p}
+(1-\hat{p})}{n}}, 1\right)\]
+\paragraph{Larghezza}
+\[l=2\Phi^{-1}\left(1-\frac{\alpha}{2}\right)\sqrt{\frac{\hat{p}
+(1-\hat{p})}{n}}\Rightarrow n=\left\lceil\frac{4(\Phi^{-1}(1-\frac{\alpha}{2}))^2}
+{l^2}\hat{p}(1-\hat{p})\right\rceil\leq\left\lceil\frac{(\Phi^{-1}(1-\frac{\alpha}
+{2}))^2}{l^2}\right\rceil\]
+Siccome, prima di iniziare a raccogliere i dati, non è possibile conoscere
+$\hat{p}$, si fanno delle misurazioni e poi si fa una prima stima di $\hat{p}$,
+che sarà quindi utilizzata per stimare la numerosità del campione.
+
+\subsection{Poissoniane}
+Sian $X=(X_1,\dots,X_n)$ un campione di variabili aleatorie indipendenti e
+identicamente distribuite come Poissoniane di parametro $\lambda$. Vogliamo
+stimare $\lambda$. Poiché $\lambda$ coincide con la media, $\bar{X}_n$ è uno
+stimatore della media. Grazie al fatto che $F_{pois(\lambda)}(k)=1-F_{\chi^2
+(2(k+1))}(2\lambda)$, l'intervallo di confidenza bilaterale a livello $1-\alpha$
+è:
+\[\left(\frac{1}{2n}F^{-1}_{\chi^2(2n\bar{X}_n)}\left(\frac{\alpha}{2}\right),
+\frac{1}{2n}F^{-1}_{\chi^2(2n\bar{X}_n+2)}\left(1-\frac{\alpha}{2}\right)\right)\]
+Questo intervallo può essere approssimato a:
+\paragraph{Intervallo bilaterale}
+\[\left(\bar{X}_n-\Phi^{-1}\left(1-\frac{\alpha}{2}\right)\sqrt{\frac{\bar{X}_n}
+{n}},\bar{X}_n+\Phi^{-1}\left(1-\frac{\alpha}{2}\right)\sqrt{\frac{\bar{X}_n}{n}}
+\right)\]
+\paragraph{Intervallo unilaterale sinistro}
+\[\left(0,\bar{X}_n+\Phi^{-1}\left(1-\frac{\alpha}{2}\right)\sqrt{\frac{\bar{X}_n}{n}}
+\right)\]
+\paragraph{Intervallo unilaterale destro}
+\[\left(\bar{X}_n-\Phi^{-1}\left(1-\frac{\alpha}{2}\right)\sqrt{\frac{\bar{X}_n}{n}},
++\infty\right)\]
+\paragraph{Larghezza}
+\[l=2\Phi^{-1}\left(1-\frac{\alpha}{2}\right)\sqrt{\frac{\bar{X}_n}{n}}\Rightarrow
+n=\left\lceil\frac{4\left(\Phi^{-1}\left(1-\frac{\alpha}{2}\right)\right)^2\bar{X}_n}
+{l^2}\right\rceil\]
+
+\end{document}

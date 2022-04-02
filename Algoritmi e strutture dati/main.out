@@ -1,0 +1,143 @@
+\BOOKMARK [0][-]{chapter.1}{Analisi di algoritmi}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Studio degli algoritmi}{chapter.1}% 2
+\BOOKMARK [2][-]{subsection.1.1.1}{Modello di calcolo}{section.1.1}% 3
+\BOOKMARK [1][-]{section.1.2}{Studio di alcuni algoritmi}{chapter.1}% 4
+\BOOKMARK [2][-]{subsection.1.2.1}{Minimo di un array}{section.1.2}% 5
+\BOOKMARK [2][-]{subsection.1.2.2}{Ricerca binaria ricorsiva}{section.1.2}% 6
+\BOOKMARK [2][-]{subsection.1.2.3}{Ordini di complessit\340}{section.1.2}% 7
+\BOOKMARK [1][-]{section.1.3}{Notazione asintotica}{chapter.1}% 8
+\BOOKMARK [1][-]{section.1.4}{Complessit\340 degli algoritmi e dei problemi}{chapter.1}% 9
+\BOOKMARK [1][-]{section.1.5}{Ordinamento degli array in senso crescente}{chapter.1}% 10
+\BOOKMARK [2][-]{subsection.1.5.1}{Algoritmo Selection sort}{section.1.5}% 11
+\BOOKMARK [2][-]{subsection.1.5.2}{Algoritmo Insertion sort}{section.1.5}% 12
+\BOOKMARK [2][-]{subsection.1.5.3}{Algoritmo Merge sort}{section.1.5}% 13
+\BOOKMARK [0][-]{chapter.2}{Notazione asintotica}{}% 14
+\BOOKMARK [1][-]{section.2.1}{Propriet\340 della notazione asintotica}{chapter.2}% 15
+\BOOKMARK [1][-]{section.2.2}{Altre notazioni}{chapter.2}% 16
+\BOOKMARK [1][-]{section.2.3}{Classificazione delle funzioni di costo}{chapter.2}% 17
+\BOOKMARK [0][-]{chapter.3}{Funzioni di ricorrenza}{}% 18
+\BOOKMARK [1][-]{section.3.1}{Studio delle equazioni di ricorrenza}{chapter.3}% 19
+\BOOKMARK [2][-]{subsection.3.1.1}{Metodo dell'albero di ricorsione}{section.3.1}% 20
+\BOOKMARK [2][-]{subsection.3.1.2}{Metodo della sostituzione}{section.3.1}% 21
+\BOOKMARK [2][-]{subsection.3.1.3}{Metodo delle ricorrenze comuni}{section.3.1}% 22
+\BOOKMARK [0][-]{chapter.4}{Strutture dati}{}% 23
+\BOOKMARK [1][-]{section.4.1}{Introduzione}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.2}{Strutture di dati astratte}{chapter.4}% 25
+\BOOKMARK [2][-]{subsection.4.2.1}{Sequenze}{section.4.2}% 26
+\BOOKMARK [2][-]{subsection.4.2.2}{Insiemi}{section.4.2}% 27
+\BOOKMARK [2][-]{subsection.4.2.3}{Dizionari}{section.4.2}% 28
+\BOOKMARK [2][-]{subsection.4.2.4}{Grafi e alberi}{section.4.2}% 29
+\BOOKMARK [2][-]{subsection.4.2.5}{Criticit\340 nell'implementazione di strutture dati astratte}{section.4.2}% 30
+\BOOKMARK [1][-]{section.4.3}{Strutture di dati elementari}{chapter.4}% 31
+\BOOKMARK [2][-]{subsection.4.3.1}{Liste}{section.4.3}% 32
+\BOOKMARK [2][-]{subsection.4.3.2}{Pile}{section.4.3}% 33
+\BOOKMARK [2][-]{subsection.4.3.3}{Code}{section.4.3}% 34
+\BOOKMARK [0][-]{chapter.5}{Alberi binari e alberi generici}{}% 35
+\BOOKMARK [1][-]{section.5.1}{Introduzione}{chapter.5}% 36
+\BOOKMARK [2][-]{subsection.5.1.1}{Terminologia}{section.5.1}% 37
+\BOOKMARK [1][-]{section.5.2}{Alberi binari}{chapter.5}% 38
+\BOOKMARK [2][-]{subsection.5.2.1}{Specifica}{section.5.2}% 39
+\BOOKMARK [2][-]{subsection.5.2.2}{Memorizzazione di un albero binario}{section.5.2}% 40
+\BOOKMARK [2][-]{subsection.5.2.3}{Implementazione di un albero binario}{section.5.2}% 41
+\BOOKMARK [2][-]{subsection.5.2.4}{Visite di un albero binario}{section.5.2}% 42
+\BOOKMARK [1][-]{section.5.3}{Alberi generici}{chapter.5}% 43
+\BOOKMARK [2][-]{subsection.5.3.1}{Specifica}{section.5.3}% 44
+\BOOKMARK [2][-]{subsection.5.3.2}{Memorizzazione di un albero generico}{section.5.3}% 45
+\BOOKMARK [2][-]{subsection.5.3.3}{Implementazione di un albero generico}{section.5.3}% 46
+\BOOKMARK [2][-]{subsection.5.3.4}{Visite di un albero generico}{section.5.3}% 47
+\BOOKMARK [0][-]{chapter.6}{Alberi binari di ricerca e alberi bilanciati}{}% 48
+\BOOKMARK [1][-]{section.6.1}{Alberi binari di ricerca}{chapter.6}% 49
+\BOOKMARK [2][-]{subsection.6.1.1}{Specifica}{section.6.1}% 50
+\BOOKMARK [2][-]{subsection.6.1.2}{Ricerca}{section.6.1}% 51
+\BOOKMARK [2][-]{subsection.6.1.3}{Massimo e minimo}{section.6.1}% 52
+\BOOKMARK [2][-]{subsection.6.1.4}{Successore e predecessore}{section.6.1}% 53
+\BOOKMARK [2][-]{subsection.6.1.5}{Inserimento}{section.6.1}% 54
+\BOOKMARK [2][-]{subsection.6.1.6}{Cancellazione}{section.6.1}% 55
+\BOOKMARK [2][-]{subsection.6.1.7}{Costo computazionale delle operazioni}{section.6.1}% 56
+\BOOKMARK [1][-]{section.6.2}{Alberi binari di ricerca bilanciati}{chapter.6}% 57
+\BOOKMARK [1][-]{section.6.3}{Alberi Red-Black}{chapter.6}% 58
+\BOOKMARK [2][-]{subsection.6.3.1}{Rotazioni}{section.6.3}% 59
+\BOOKMARK [2][-]{subsection.6.3.2}{Inserimento}{section.6.3}% 60
+\BOOKMARK [2][-]{subsection.6.3.3}{Altezza degli Alberi Red-Black}{section.6.3}% 61
+\BOOKMARK [2][-]{subsection.6.3.4}{Cancellazione}{section.6.3}% 62
+\BOOKMARK [0][-]{chapter.7}{Grafi}{}% 63
+\BOOKMARK [1][-]{section.7.1}{Introduzione}{chapter.7}% 64
+\BOOKMARK [2][-]{subsection.7.1.1}{Dimensioni dei grafi}{section.7.1}% 65
+\BOOKMARK [2][-]{subsection.7.1.2}{Casi speciali}{section.7.1}% 66
+\BOOKMARK [2][-]{subsection.7.1.3}{Cammini e gradi dei nodi}{section.7.1}% 67
+\BOOKMARK [2][-]{subsection.7.1.4}{Specifica}{section.7.1}% 68
+\BOOKMARK [2][-]{subsection.7.1.5}{Memorizzare un grafo}{section.7.1}% 69
+\BOOKMARK [1][-]{section.7.2}{Visite di un grafo}{chapter.7}% 70
+\BOOKMARK [2][-]{subsection.7.2.1}{Visita in ampiezza}{section.7.2}% 71
+\BOOKMARK [2][-]{subsection.7.2.2}{Visita in profondit\340}{section.7.2}% 72
+\BOOKMARK [2][-]{subsection.7.2.3}{Complessit\340 delle visite}{section.7.2}% 73
+\BOOKMARK [1][-]{section.7.3}{Problemi sui grafi risolubili con visite in ampiezza}{chapter.7}% 74
+\BOOKMARK [2][-]{subsection.7.3.1}{Calcolo della distanza tra nodi}{section.7.3}% 75
+\BOOKMARK [2][-]{subsection.7.3.2}{Ricerca del cammino pi\371 breve fra due nodi}{section.7.3}% 76
+\BOOKMARK [1][-]{section.7.4}{Problemi sui grafi risolubili con visite in profondit\340}{chapter.7}% 77
+\BOOKMARK [2][-]{subsection.7.4.1}{Ricerca delle componenti connesse}{section.7.4}% 78
+\BOOKMARK [2][-]{subsection.7.4.2}{Verifica di esistenza di cicli nei grafi non orientati}{section.7.4}% 79
+\BOOKMARK [2][-]{subsection.7.4.3}{Verifica di esistenza di cicli nei grafi orientati}{section.7.4}% 80
+\BOOKMARK [2][-]{subsection.7.4.4}{Realizzare un ordinamento topologico di un grafo orientato}{section.7.4}% 81
+\BOOKMARK [2][-]{subsection.7.4.5}{Ricerca delle componenti fortemente connesse}{section.7.4}% 82
+\BOOKMARK [0][-]{chapter.8}{Hashing}{}% 83
+\BOOKMARK [1][-]{section.8.1}{Caratteristiche e implementazioni di funzioni hash}{chapter.8}% 84
+\BOOKMARK [2][-]{subsection.8.1.1}{Realizzare una funzione hash}{section.8.1}% 85
+\BOOKMARK [2][-]{subsection.8.1.2}{Metodo dell'estrazione}{section.8.1}% 86
+\BOOKMARK [2][-]{subsection.8.1.3}{Metodo dello XOR}{section.8.1}% 87
+\BOOKMARK [2][-]{subsection.8.1.4}{Metodo della divisione}{section.8.1}% 88
+\BOOKMARK [2][-]{subsection.8.1.5}{Metodo della moltiplicazione}{section.8.1}% 89
+\BOOKMARK [1][-]{section.8.2}{Gestione delle collisioni}{chapter.8}% 90
+\BOOKMARK [2][-]{subsection.8.2.1}{Liste di trabocco}{section.8.2}% 91
+\BOOKMARK [2][-]{subsection.8.2.2}{Indirizzamento aperto}{section.8.2}% 92
+\BOOKMARK [2][-]{subsection.8.2.3}{Complessit\340 delle diverse implementazioni}{section.8.2}% 93
+\BOOKMARK [0][-]{chapter.9}{Analisi ammortizzata}{}% 94
+\BOOKMARK [1][-]{section.9.1}{Metodi per l'analisi ammortizzata}{chapter.9}% 95
+\BOOKMARK [1][-]{section.9.2}{Esempio di analisi ammortizzata}{chapter.9}% 96
+\BOOKMARK [1][-]{section.9.3}{Vettori dinamici}{chapter.9}% 97
+\BOOKMARK [2][-]{subsection.9.3.1}{Inserimento}{section.9.3}% 98
+\BOOKMARK [2][-]{subsection.9.3.2}{Cancellazione}{section.9.3}% 99
+\BOOKMARK [1][-]{section.9.4}{Discussione sugli insiemi}{chapter.9}% 100
+\BOOKMARK [2][-]{subsection.9.4.1}{Insieme come vettore di booleani}{section.9.4}% 101
+\BOOKMARK [2][-]{subsection.9.4.2}{Insieme come lista non ordinata}{section.9.4}% 102
+\BOOKMARK [2][-]{subsection.9.4.3}{Insieme come lista ordinata}{section.9.4}% 103
+\BOOKMARK [2][-]{subsection.9.4.4}{Confronto generale}{section.9.4}% 104
+\BOOKMARK [0][-]{chapter.10}{Divide-et-impera}{}% 105
+\BOOKMARK [1][-]{section.10.1}{Introduzione}{chapter.10}% 106
+\BOOKMARK [1][-]{section.10.2}{Algoritmo Quicksort}{chapter.10}% 107
+\BOOKMARK [2][-]{subsection.10.2.1}{Principi di funzionamento}{section.10.2}% 108
+\BOOKMARK [2][-]{subsection.10.2.2}{Implementazione}{section.10.2}% 109
+\BOOKMARK [2][-]{subsection.10.2.3}{Costo computazionale}{section.10.2}% 110
+\BOOKMARK [1][-]{section.10.3}{Esercizio di applicazione del Divide-et-impera}{chapter.10}% 111
+\BOOKMARK [0][-]{chapter.11}{Strutture dati specializzate}{}% 112
+\BOOKMARK [1][-]{section.11.1}{Code a priorit\340}{chapter.11}% 113
+\BOOKMARK [2][-]{subsection.11.1.1}{Heap}{section.11.1}% 114
+\BOOKMARK [2][-]{subsection.11.1.2}{Algoritmo HeapSort}{section.11.1}% 115
+\BOOKMARK [2][-]{subsection.11.1.3}{Implementazione di code a priorit\340}{section.11.1}% 116
+\BOOKMARK [0][-]{chapter.12}{Programmazione dinamica}{}% 117
+\BOOKMARK [1][-]{section.12.1}{Introduzione}{chapter.12}% 118
+\BOOKMARK [2][-]{subsection.12.1.1}{Approccio generale}{section.12.1}% 119
+\BOOKMARK [1][-]{section.12.2}{Gioco del domino}{chapter.12}% 120
+\BOOKMARK [2][-]{subsection.12.2.1}{Approccio basato su divide-et-impera}{section.12.2}% 121
+\BOOKMARK [2][-]{subsection.12.2.2}{Approccio basato su programmazione dinamica}{section.12.2}% 122
+\BOOKMARK [1][-]{section.12.3}{Problema di Hateville}{chapter.12}% 123
+\BOOKMARK [2][-]{subsection.12.3.1}{Approccio basato su divide-et-impera}{section.12.3}% 124
+\BOOKMARK [2][-]{subsection.12.3.2}{Approccio basato su programmazione dinamica}{section.12.3}% 125
+\BOOKMARK [1][-]{section.12.4}{Problema dello zaino}{chapter.12}% 126
+\BOOKMARK [2][-]{subsection.12.4.1}{Approccio basato su programmazione dinamica}{section.12.4}% 127
+\BOOKMARK [2][-]{subsection.12.4.2}{Approccio basato su memoization}{section.12.4}% 128
+\BOOKMARK [1][-]{section.12.5}{Problema dello zaino senza limiti}{chapter.12}% 129
+\BOOKMARK [1][-]{section.12.6}{Ricerca della sottosequenza comune massimale}{chapter.12}% 130
+\BOOKMARK [2][-]{subsection.12.6.1}{Approccio basato su programmazione dinamica}{section.12.6}% 131
+\BOOKMARK [1][-]{section.12.7}{Problema dello string matching approssimato}{chapter.12}% 132
+\BOOKMARK [1][-]{section.12.8}{Problema del prodotto a catena di matrici}{chapter.12}% 133
+\BOOKMARK [2][-]{subsection.12.8.1}{Approccio basato su divide-et-impera}{section.12.8}% 134
+\BOOKMARK [2][-]{subsection.12.8.2}{Approccio basato su programmazione dinamica}{section.12.8}% 135
+\BOOKMARK [1][-]{section.12.9}{Ricerca dell'insieme indipendente di peso massimo}{chapter.12}% 136
+\BOOKMARK [0][-]{chapter.13}{Scelta della struttura dati}{}% 137
+\BOOKMARK [1][-]{section.13.1}{Ricerca dei cammini minimi da sorgente singola}{chapter.13}% 138
+\BOOKMARK [2][-]{subsection.13.1.1}{Prototipo di algoritmo}{section.13.1}% 139
+\BOOKMARK [2][-]{subsection.13.1.2}{Algoritmo di Dijkstra}{section.13.1}% 140
+\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 141
+\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 142
+\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 143

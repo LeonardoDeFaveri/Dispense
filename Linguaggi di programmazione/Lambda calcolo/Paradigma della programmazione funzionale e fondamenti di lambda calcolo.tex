@@ -1,0 +1,1429 @@
+\documentclass[12pt, a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+}
+
+\usepackage{titlesec}
+\titleformat
+{\chapter}
+[display]{\bfseries\Large\itshape}
+{Capitolo Nr.\thechapter}
+{0.5ex}
+{
+    \rule{\textwidth}{1pt}
+    \vspace{1ex}
+	\centering
+}
+[\vspace{-0.5ex}\rule{\textwidth}{0.3pt}]
+
+\renewcommand{\contentsname}{Indice}
+
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage[dvipsnames]{xcolor}
+
+\lstdefinelanguage{Lambda}{
+morekeywords={                % keywords go here
+    if,then,else,fix
+},
+morekeywords={[2]int},        % types go here
+otherkeywords={:},            % operators go here
+literate={                    % replace strings with symbols
+{->}{{$\to$}}{2}
+{lambda}{{$\lambda$}}{1}
+},
+basicstyle={\ttfamily},
+keywordstyle=\color{NavyBlue},
+stringstyle=\color{OliveGreen},
+commentstyle=\color{Gray}
+keepspaces,
+mathescape
+}[keywords,comments,strings]%
+
+\lstset{
+language=ML,                    % the language of the code
+basicstyle=\small\ttfamily,
+keywordstyle=\color{NavyBlue},
+stringstyle=\color{OliveGreen},
+commentstyle=\color{Gray},
+literate={~} {$\sim$}{1},
+literate={è}{{\`{e}}}{1}
+        {ò}{{\`{o}}}{1},
+%numbers=left,                  % where to put the line-numbers
+%stepnumber=1,                  % the step between two line-numbers. If it's 1, each line 
+                                % will be numbered
+%numbersep=10pt,                % how far the line-numbers are from the code
+%backgroundcolor=\color{white}, % choose the background color. You must add \usepackage{color}
+showspaces=false,               % show spaces adding particular underscores
+showstringspaces=false,         % underline spaces within strings
+showtabs=false,                 %show tabs within strings adding particular underscores
+frame=none,                     % adds a frame around the code
+tabsize=2,                      % sets default tabsize to 2 spaces
+captionpos=t,                   % sets the caption-position to bottom
+breaklines=true,                % sets automatic line breaking
+breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+%title=\lstname,                % show the filename of files included with \lstinputlisting;
+}
+\renewcommand{\lstlistingname}{\bfseries Frammento}
+\makeatletter
+\def\fnum@lstlisting{%
+  \lstlistingname
+  \ifx\lst@@caption\@empty\else~\thelstlisting\normalfont\fi}%
+\makeatother
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definizione}[section]
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{proposition}{Prop}[section]
+\newtheorem*{observation}{Oss}
+\newtheorem*{property}{Proprietà}
+\newtheorem*{note}{NB}
+
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\red}{\to_\beta}
+\newcommand{\beq}{=_\beta}
+\newcommand{\aeq}{\equiv_\alpha}
+\newcommand{\mydef}{\stackrel{\mathclap{\normalfont{def}}}{=}}
+
+
+\title{Paradigma funzionale e fondamenti di $\lambda$-calcolo}
+\author{Leonardo De Faveri}
+\date{}
+
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks,
+  linkcolor={red!90!black},
+  citecolor={blue!50!black},
+  urlcolor={blue!80!black}
+  pdftitle={Dispense di algoritmi e strutture dati},
+  pdfpagemode=FullScreen,
+}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{Computazione}
+
+I più comuni linguaggi di programmazione sono basati sul modello della 
+\emph{Macchina di von Neumann}, cioè basano la propria strategia di computazione sul
+concetto di \emph{variabile modificabile}. Una variabile è un'area di memoria
+identificata da un nome e un tipo, alla quale, durante l'esecuzione del programma,
+è possibile assegnare dei valori. Quindi, di fatto, una \emph{variabile modificabile}
+altro non è se non un contenitore al quale, durante la computazione, possono essere
+assegnati valori diversi attraverso un'operazione di \emph{assegnazione} che ne
+modifica il contenuto, lasciando però invariata l'associazione tra il nome e la
+locazione di memoria corrispondente (viene modificato il \emph{r-value}, mentre
+rimane invariato il \emph{l-value}, che viene fissato al momento della dichiarazione
+della variabile). Risulta quindi evidente che nei linguaggi di programmazione basati
+sul modello di \emph{von Neumann} è fondamentale il concetto di \emph{stato}.
+
+Il paradigma funzionale propone invece una strategia alternativa, nella quale i
+concetti di \emph{stato} e di \emph{variabile modificabile} e l'operazione di
+\emph{assegnazione} perdono di significato.
+
+\begin{definition}
+    Il paradigma della \emph{programmazione funzionale} è un paradigma nel quale la
+    computazione avviene per riscrittura di funzioni e non per modifica dello stato.
+\end{definition}
+
+Gli elementi fondamentali di questo paradigma sono ora funzioni, funzioni di ordine
+superiore e ricorsione (l'iterazione è diventata irrilevante nel momento in cui
+abbiamo stabilito che la computazione non prevede modifiche allo stato).
+
+\section{Espressioni e funzioni}
+Sfruttando la sintassi del linguaggio \emph{ML} possiamo definire una funzione
+come qualcosa del tipo:
+\begin{lstlisting}[breaklines]
+val f = fn x => x * x;
+\end{lstlisting}
+La parola chiave \code{val} introduce una dichiarazione con la quale l'ambiente
+viene esteso con una nuova associazione tra un nome e un valore; in questo caso
+il nome \code{f} è legato alla funzione che trasforma \code{x} in \code{x * x}.
+L'istruzione \code{fn} introduce la definizione di una funzione con un
+\emph{parametro formale} \code{x}, il quale viene modificato dal corpo della
+funzione, definito a destra dei caratteri \code{=>}.
+
+Ciò che potrebbe sembrare strano a qualcuno non abituato a lavorare con i linguaggi
+funzionali è il fatto che la funzione definita da \code{fn} sia stata associata al
+nome \code{f} dopo la definizione. Questo è possibile perché in tutti i linguaggi
+funzionali le funzioni sono valori \emph{esprimibili}, cioè possono essere il
+risultato di espressioni complesse. Nel nostro caso, l'espressione alla destra
+dell'uguale (\code{=}) è appunto un'espressione che denota una funzione.
+Sarebbe infatti possibile estendere ulteriormente l'ambiente creando una nuova
+associazione con l'istruzione:
+\begin{lstlisting}[breaklines]
+val g = f;
+\end{lstlisting}
+
+Per quanto riguarda l'applicazione di una funzione a un argomento, possiamo usare
+diverse sintassi: \code{f(2)}, \code{(f 2)} e \code{f 2} producono tutte lo stesso
+risultato. È anche possibile scrivere e valutare una funzione senza doverle
+assegnare un nome, ad esempio:
+\begin{lstlisting}
+(fn x => x + 1) (6);
+\end{lstlisting}
+ha valore 7, che risulta dall'applicazione della funzione (\emph{anonima})
+\code{fn x => x + 1} all'argomento 6, detto anche \emph{parametro attuale}.
+
+È possibile definite funzioni all'interno di altre funzioni, ad esempio:
+\begin{lstlisting}[breaklines]
+val somma = fn x => (fn y => y + x);
+\end{lstlisting}
+definisce una funzione \emph{somma} che preso un parametro \code{x} restituisce
+una funzione anonima, la quale, preso un parametro \code{y} restituisce \code{x + y}.
+Una tale funzione può essere applicata in molteplici modi:
+\begin{lstlisting}[breaklines]
+val tre = somma 1 2;
+val somma2 = somma 2;
+val cinque = somma2 3;
+\end{lstlisting}
+
+\begin{note}
+    Il linguaggio \emph{ML} mette a disposizione una sintassi più leggera per
+    definire funzioni. La prima funzione \code{f} può essere definita come:
+    \begin{lstlisting}
+fun f x = x * x;
+    \end{lstlisting}
+    Più in generale, una definizione del tipo:
+    \begin{lstlisting}
+fun F x1 x2 ... xn = corpo;
+    \end{lstlisting}
+    corrisponde a:
+    \begin{lstlisting}
+val F = fn x1 => (fn x2 => ... (fn xn => corpo) ...);
+    \end{lstlisting}
+\end{note}
+
+\section{Computazione come riduzione}
+La valutazione di un'espressione, ossia il procedimento con il quale si passa da
+un'espressione complessa ad un valore, può essere descritta come un processo di
+riscrittura nel quale una sotto espressione nella forma di "funzione applicata ad
+un parametro" viene sostituita, all'interno dell'espressione complessa che la
+contiene, con il suo corpo, nel quale al posto del parametro formale è stato posto
+il parametro attuale.
+
+\paragraph{Esempio}
+Sia data la funzione fattoriale con la seguente definizione ricorsiva:
+\begin{lstlisting}
+fun fatt n = if n = 0 then 1 else n * fatt(n - 1);
+\end{lstlisting}
+Usando questo metodo di computazione, vediamo come è possibile arrivare ad un
+valore:
+\begin{lstlisting}[mathescape]
+fatt 3 $\rightarrow$ (fn n => if n = 0 then 1 else n * fatt(n - 1)) 3
+    $\rightarrow$ if 3 = 0 then 1 else 3 * fatt(3 - 1)
+    $\rightarrow$ 3*fatt(2)
+    $\rightarrow$ 3*((fn n => if n = 0 then 1 else n * fatt(n - 1)) 2)
+    $\rightarrow$ 3*(if 2 = 0 then 1 else 2 * fatt(2 - 1))
+    $\rightarrow$ 3*(2*fatt(1))
+    $\rightarrow$ 3*(2*((fn n => if n = 0 then 1 else n * fatt(n - 1)) 1))
+    $\rightarrow$ 3*(2*(if 1 = 0 then 1 else 1 * fatt(1 - 1)))
+    $\rightarrow$ 3*(2*(1*fatt(0)))
+    $\rightarrow$ 3*(2*(1*((fn n => if n = 0 then 1 else n * fatt(n - 1)) 0)))
+    $\rightarrow$ 3*(2*(1*(if 1 = 0 then 1 else 1 * fatt(0 - 1))))
+    $\rightarrow$ 3*(2*(1*1))
+    $\rightarrow$ 6
+\end{lstlisting}
+
+Si noti come, ad eccezione dei calcoli aritmetici e delle espressioni
+condizionali, si proceda per manipolazione simbolica di stringhe.
+
+\begin{note}
+    La seguente definizione:
+    \begin{lstlisting}
+fun r x = r(r(x));
+    \end{lstlisting}
+    è un esempio di funzione \emph{divergente} con risultato indefinito. Ogni
+    riscrittura di \code{r} infatti si risolve in una riscrittura infinita.
+\end{note}
+
+Quindi, sintatticamente, questo tipo di linguaggi si basa su espressioni e non
+comandi. I due costrutti principali che consentono di definire espressioni sono:
+\begin{itemize}
+    \item \emph{Astrazione}: data una qualsiasi espressione \code{exp} ed un
+    identificatore \code{x}, permette di definire una nuova espressione del tipo
+    \code{fn x => exp} che denota la funzione che trasforma il parametro formale
+    \code{x} in \code{exp}
+    \item \emph{Applicazione}: un'espressione \code{f\_exp} viene applicata ad
+    un'altra espressione \code{a\_exp}, ovvero la funzione denotata da \code{f\_exp}
+    viene applicata all'argomento \code{a\_exp};
+\end{itemize}
+
+Il processo di riduzione si basa anch'esso su due operazioni principali:
+\begin{enumerate}[label=(\roman*)]
+    \item Quando si incontra un identificatore legato all'ambiente, l'identificatore
+    viene sostituito con la sua definizione;
+    \item Nel caso di un'applicazione funzionale applicata ad un argomento, questo
+    viene sostituito a tutte le occorrenze del parametro formale;
+\end{enumerate}
+
+La (ii) è una riformulazione della regola di copia, che qui prende il nome di
+$\beta$\emph{-regola}.
+
+\begin{definition}[Redex]
+    Un \emph{redex} (\emph{reducible expression}) è un'applicazione della forma
+    \code{((fn x => corpo) arg)}.
+    \begin{itemize}
+        \item \emph{Ridotto}: il \emph{ridotto} di un \emph{redex}
+        \code{((fn x => corpo) arg)} è l'espressione che si ottiene sostituendo
+        in \code{corpo} ogni occorrenza del parametro formale \code{x} con una
+        copia di \code{arg};
+        \item $\beta$\emph{-regola}: un'espressione \code{exp} nella quale compaia
+        come sotto espressione un \emph{redex} si riduce in \code{exp1}
+        (notazione: \code{exp} $\rightarrow$ \code{exp1}), dove \code{exp1} si
+        ottiene da \code{exp} rimpiazzando il \emph{redex} con il suo ridotto;
+    \end{itemize}
+\end{definition}
+
+\chapter{Valutazione}
+\section{Valori}
+Un \emph{valore} è un'espressione che non deve essere ulteriormente riscritta.
+In un linguaggio funzionale i valori sono di due tipi:
+\begin{itemize}
+    \item \emph{Primitivi}: sono i valori di tipo primitivo forniti dal
+    linguaggio. Ad ogni tipo primitivo è associato un insieme di valori che non
+    necessitano di valutazione (e.g. interi, reali, booleani, caratteri, ...);
+    \item \emph{Funzionali}: sono funzioni o espressioni complesse;
+\end{itemize}
+È importante notare che i \emph{valori funzionali} nella forma:
+\begin{lstlisting}
+fn x => exp;
+\end{lstlisting}
+sono di per sé \emph{valori} e quindi eventuali \emph{redex} presenti in \code{exp}
+non vengono ridotti finché a una tale espressione non viene applicato un argomento.
+
+\paragraph*{Esempio} Consideriamo la seguente definizione:
+\begin{lstlisting}
+val G = fn x => ((fn y => y + 1) 2);
+\end{lstlisting}
+Quale valore verrà assegnato a \code{G}?
+
+Sappiamo che una definizione comporta la creazione di un legame tra il nome a
+sinistra dell'uguale e l'espressione a destra. In questo caso però non è chiaro
+quale sia l'espressione da associare. Potrebbe essere:
+\begin{lstlisting}
+fn x => 3;
+\end{lstlisting}
+che è l'espressione ottenuta riducendo il \emph{redex} \code{((fn y => y + 1) 2)}.
+Oppure potrebbe essere:
+\begin{lstlisting}
+fn x => ((fn y => y + 1) 2);
+\end{lstlisting}
+nella quale non è avvenuta alcuna riduzione.
+
+Sebbene possa sembrare strano, il valore associato a \code{G} è il secondo, in
+quanto, sulla base di ciò che è stato detto in precedenza, espressioni della
+forma \code{fn x => exp} sono di per sé valori e quindi non avviene alcuna
+riduzione del \emph{redex} in esse contenuti.
+
+\newpage
+\section{Strategie di valutazione}
+Consideriamo il seguente frammento di codice:
+\begin{lstlisting}[caption={Un'espressione con più redex},captionpos=b]
+fun k x y = x;
+fun r z = r(r(z));
+fun D u = if u = 0 then 1 else u;
+fun succ v = v + 1;
+
+val v = K (D (succ 0)) (r 2);
+\end{lstlisting}
+Quale valore viene associato a \code{v} e come viene determinato?
+
+La $\beta$\emph{-regola} da sola non basta perché a destra dell'uguale sono presenti
+4 \emph{redex}:
+\begin{lstlisting}
+k (D (succ 0))
+D (succ 0)
+succ 0
+r 2
+\end{lstlisting}
+Quale viene ridotto per primo? Generalmente i linguaggi usando una valutazione
+da sinistra a destra, ma anche dopo aver fissato quest'ordine di valutazione
+non è chiaro quale sia il \emph{redex} più a sinistra tra:
+\begin{lstlisting}
+k (D (succ 0))
+D (succ 0)
+succ 0
+\end{lstlisting}
+I 3 \emph{redex} sono infatti sovrapposti ed è quindi necessaria un'ulteriore
+specifica.
+
+\subsection{Valutazione per valore}
+In questa strategia di valutazione, detta anche \emph{in ordine applicativo},
+\emph{eager} o \emph{inner most}, un \emph{redex} viene valutato solo se l'espressione
+che costituisce il suo argomento è già un valore.
+
+Il processo, in particolare, prevede 4 passi:
+\begin{enumerate}
+    \item Scandisci l'espressione da valutare a partire da sinistra, selezionando
+    la prima espressione che incontri e sia essa \code{(f\_exp a\_exp)};
+    \item Valuta per prima (applicando ricorsivamente questo stesso metodo)
+    \code{f\_exp}, fino a ridurla ad un valore (\emph{funzionale}) di tipo \code
+    {(fn x => ...)};
+    \item Valutala la parte argomento \code{a\_exp} fino a ridurla ad un valore
+    \code{val};
+    \item Riduci il \emph{redex} \code{((fn x => ...) val)} e riparti dal punto (1);
+\end{enumerate}
+Nel caso del Frammento 2.1, il punto (1) seleziona l'applicazione
+\code{(K (D (succ 0)))}. Ora \code{K}, \code{D} e \code{succ} sono già valori,
+quindi il primo \emph{redex} ad essere ridotto sarà \code{(succ 0)}, cioè 
+\code{((fn v => v + 1) 0)} che viene valutato a \code{1}. A questo punto viene
+ridotto il redex \code{(D 1)}, cioè \code{((fn u => if u = 0 then 1 else u))}
+che da, anch'esso, valore \code{1}. Infine, viene valutato \code{(K 1)} che
+produce il valore \code{(fn y => 1)}.
+Alla fine, l'espressione ha raggiunto la forma:
+\begin{lstlisting}
+(fn y => 1) (r 2)
+\end{lstlisting}
+
+Siccome la parte funzionale di questa espressione (\code{f\_exp}) è già un valore,
+la strategia della valutazione per valore prevede che venga valutata la parte
+argomento (\code{a\_exp}), ovvero \code{(r 2)}. Riscrivendo quell'espressione
+si ottiene \code{(r (r 2))}, poi \code{(r (r (r 2)))} e così via.
+
+A \code{v} dunque, non sarà mai associato alcun valore, in quanto la valutazione
+diverge.
+
+\subsection{Valutazione per nome}
+In questa strategia di valutazione, detta anche \emph{in ordine normale} o
+\emph{outermost}, un \emph{redex} viene valutato prima della sua parte argomento.
+
+In particolare la valutazione procede come segue:
+\begin{enumerate}
+    \item Scandisci l'espressione da valutare a partire da sinistra, selezionando
+    la prima applicazione che incontri e sia essa \code{(f\_exp a\_exp)};
+    \item Valuta per prima (applicando ricorsivamente questo metodo) \code{f\_exp},
+    fino a ridurla ad un valore (\emph{funzionale}) di tipo \code{(fn x => ...)};
+    \item Riduci il \emph{redex} \code{((fn x => ...) a\_exp)} usando la
+    $\beta$\emph{-regola} e riparti dal punto (1).
+\end{enumerate}
+Nel caso del Frammento 2.1, il primo \emph{redex} ad essere ridotto è:
+\begin{lstlisting}
+K (D (succ 0))
+\end{lstlisting}
+che viene riscritto come:
+\begin{lstlisting}
+fn y => D (succ 0)
+\end{lstlisting}
+che è un \emph{valore funzionale} nella forma:
+\begin{lstlisting}
+(fn y => D (succ 0)) (r 2)
+\end{lstlisting}
+Ora, il punto (2) prescrive di ridurre il redex più esterno, cioè:
+\begin{lstlisting}
+D (succ 0)
+\end{lstlisting}
+Dopo la riduzione si ottiene:
+\begin{lstlisting}
+if (succ 0) = 0 then 1 else (succ 0)
+\end{lstlisting}
+Procedendo da sinistra si ottiene prima
+\begin{lstlisting}
+if 1 = 0 then 1 else (succ 0)
+\end{lstlisting}
+e quindi
+\begin{lstlisting}
+succ 0    
+\end{lstlisting}
+dal quale si ottiene il valore \code{1}, che è quello che viene assegnato a \code{v}.
+
+\begin{note}
+    Si noti come non sia stato necessario valutare \code{(r 2)}. E che quindi
+    sia stato possibile completare la valutazione senza incappare in una divergenza.
+\end{note}
+
+\subsection{Valutazione lazy}
+Nella valutazione per \emph{nome}, uno stesso \emph{redex} può dover essere
+ridotto più volte per effetto di qualche duplicazione avvenuta durante il
+processo di riscrittura. Nell'esempio precedente \code{(succ 0)} è stato
+duplicato nella riscrittura della funzione \code{D} ed è stato ridotto 2 volte.
+Questa una diretta conseguenza della scelta di non valutare gli argomenti
+\code{a\_exp} prima della componente funzionale.
+
+Per ovviare ai problemi di efficienza risultanti, la strategia \emph{lazy} procede
+come la strategia per \emph{nome}, ma la prima volta che incontra un \emph{redex}
+duplicato, ne salva il valore, che verrà poi usato in corrispondenza delle altre
+copie.
+
+Nelle strategie per \emph{nome} e quindi anche nella valutazione \emph{lazy} un
+\emph{redex} viene ridotto solo se necessario alla computazione.
+
+\section{Confronto tra strategie}
+Come abbiamo visto, diverse tecniche di valutazione hanno prodotto risultati
+diversi. Nella fattispecie, con la tecnica di valutazione per \emph{valore}
+l'espressione da associare a \code{v} divergeva, mentre usando la valutazione
+per \emph{nome} si è arrivati ad un valore \emph{primitivo}. Viene quindi da
+chiedersi se tecniche diverse, a parità di espressione, possano arrivare a
+produrre due valori diversi (salvo divergenze).
+\begin{definition}
+    Un'espressione è \emph{chiusa} se tutte le sue variabili sono legate da
+    qualche \code{fn}.
+\end{definition}
+
+Per rispondere alla domanda di cui sopra, definiamo il seguente teorema:
+\begin{theorem}
+    Sia \code{exp} un'espressione \emph{chiusa}. Se \code{exp} si riduce ad un
+    valore primitivo \code{val} usando una qualsiasi delle 3 strategie viste
+    sopra, allora \code{exp} si riduce a \code{val} seguendo la strategia per
+    \emph{nome}. Se \code{exp} diverge usando la strategia per \emph{nome},
+    allora diverge anche con le altre due strategie.
+\end{theorem}
+
+Quindi, questo teorema esclude che un'espressione \emph{chiusa} valutata secondo
+due diverse strategie possa produrre due valori \code{val1} e \code{val2} diversi
+tra loro. Inoltre, la dimostrazione del Teorema si basa sulla
+seguente proprietà che viene addirittura considerata fondamentale per poter
+definire funzionale un linguaggio di programmazione.
+
+\begin{proposition}
+    Fissata una strategia qualsiasi, nello scope dello stesso ambiente la
+    valutazione di tutte le occorrenze di una stessa espressione produce sempre
+    lo stesso valore.
+\end{proposition}
+
+\chapter{Strumenti per la programmazione}
+Vediamo ora alcuni strumenti tipici dei linguaggi basati sul paradigma funzionale,
+che permettono di rendere la programmazione più semplice ed espressiva. Va però
+fatto notare, che quanto visto finora sarebbe già sufficiente a definire un
+linguaggio \emph{Turing completo}. Continueremo ad usare come riferimento il
+linguaggio \emph{ML}.
+
+\section{Interattività}
+Tutti i linguaggi funzionali forniscono un ambiente interattivo nel quale la
+\emph{macchina astratta} valuta ogni espressione nel momento in cui viene inserita.
+Inoltre, ogni definizione modifica l'ambiente globale introducendo un nuovo legame
+tra un nome e un valore (\emph{primitivo} o \emph{funzionale}). Ovviamente, è
+consentito importare definizioni da file esterni o esportare l'ambiente corrente.
+
+\section{Ambiente locale}
+È possibile definire riferimenti e associazioni all'interno di \emph{scope}
+limitati. Ciò è realizzato attraverso costrutti del tipo \code{let-in-end}:
+\begin{lstlisting}
+let x = exp in exp1 end;
+\end{lstlisting}
+In questo esempio, viene introdotto un legame tra il nome \code{x} e il valore
+di \code{exp} in uno \emph{scope} che include solo \code{exp1}.
+Questo costrutto, altro non è se non zucchero sintattico per:
+\begin{lstlisting}
+(fn x => exp1) exp;
+\end{lstlisting}
+Questo è vero perché le funzioni introducono degli ambienti locali costituiti
+dai legami tra \emph{parametri attuali} e \emph{formali}.
+
+\section{Pattern matching}
+Uno strumento utilissimo messo a disposizione dai linguaggi di programmazione
+funzionali è la possibilità di definire funzioni per casi. Vediamo questo
+esempio:
+\begin{lstlisting}
+(* Definizione ricorsiva della funzione di Fibonacci *)
+fun fib n = if n = 0 then 1
+    else if n = 1 then 1
+    else fib(n - 1) + fib(n - 2);
+
+(* Definizione con pattern matching *)
+(* Il carattere | si legge "oppure" *)
+fun fib 0 = 1
+ | fib 1 = 1
+ | fib n = fib(n - 1) + fib (n - 2);
+\end{lstlisting}
+Il comportamento delle due funzioni è lo stesso, ma la seconda forma risulta
+molto più chiara e lineare. Quando si definisce una funzione sfruttando il
+\emph{pattern matching}, è importante ricordare che all'applicazione i pattern
+vengono confrontati con il parametro attuale in base all'ordine in cui sono
+definiti. È quindi necessario definire i pattern con un ordine decrescente di
+specificità.
+
+Questa feature mostra la sua potenza quando si lavora con tipi di dato strutturati,
+come ad esempio le liste. In \emph{ML} le liste sono indicate tra parantesi
+quadre con i valori separati tra parentesi:
+\begin{lstlisting}
+["uno", "due", "tre"];
+\end{lstlisting}
+L'operatore \code{::} consente di aggiungere un valore in testa ad una lista,
+mentre \code{nil} rappresenta la lista vuota \code{[]}.
+\begin{lstlisting}
+"zero" :: ["uno", "due", "tre"];(* => ["zero", "uno", "due", "tre"] *)
+"quattro" :: [];                (* => ["quattro"] *)
+\end{lstlisting}
+Quindi, usando il \emph{pattern matching}, possiamo definire una funzione per
+il calcolo della lunghezza di una stringa come segue:
+\begin{lstlisting}
+fun lung nil = 0
+ | lung (x::xs) = 1 + lung(xs);
+\end{lstlisting}
+Si noti come i nomi usati nel pattern sono poi usati all'interno della funzione
+per riferirsi a parti del parametro attuale.
+
+Quando si sfrutta questo meccanismo è fondamentale ricordare che i pattern servono
+per distinguere la \emph{forma} del parametro attuale e non il valore, pertanto
+la seguente definizione non avrebbe alcun senso:
+\begin{lstlisting}
+(* La funzione testa l'uguaglianza dei primi due valori di una lista*)
+fun testaUguaglianza nil = false
+ | testaUguaglianza [x] = false
+ | testaUguaglianza [x::x::xs] = true(* il nome x non può ripetersi *)
+ | testaUguaglianza [x::y::zs] = false;
+\end{lstlisting}
+\begin{note}
+    Se in un pattern non fossimo interessati ad utilizzare uno o più dei parametri
+    della funzione, nella definizione del pattern, potremmo specificare quei
+    parametri con un carattere di underscore \code{\_}.
+\begin{lstlisting}
+fun mul (_, 0) = 0
+    | mul (0, _) = 0
+    | mul (a, b) = a * b;
+\end{lstlisting}
+\end{note}
+
+\section{Tipi di dato}
+Come detto esistono tipi di dato \emph{primitivi} messi a disposizione direttamente
+dai linguaggi. Tipicamente questi tipi sono:
+\begin{itemize}
+    \item \code{int}: valori interi;
+    \item \code{real}: numeri reali (virgola mobile);
+    \item \code{char}: caratteri;
+    \item \code{string}: stringhe;
+    \item \code{bool}: valori booleani \code{true/false};
+\end{itemize}
+Questi tipi di dato possono poi essere aggregati in liste o tuple:
+\begin{lstlisting}
+(* Definisce una coppia di interi
+    int * int
+*)
+val coppia1 = (1, 2);
+
+(* Una tupla di 3 elementi
+    char * real * bool
+*)
+val trio = (#"a", 2.4, true);
+
+(* 'a list *)
+val lista_vuota = [];
+
+(* int list *)
+val lista_interi = [1, 2, 3, ~1, ~2, ~3];
+\end{lstlisting}
+
+Si noti in particolare il tipo della lista vuota \code{'a list}: \code{list}
+indica ovviamente il fatto che si tratti di una lista, mentre \code{'a} indica
+una variabile di tipo, cioè un tipo generico non ancora istanziato. In particolare
+qualunque tipo preceduto da un apostrofo \code{'} è un tipo generico.
+
+Per quanto riguarda i tipi di dato \emph{funzionali}, le funzioni sono valori
+denotabili ed esprimibili. Ad esempio:
+\begin{lstlisting}
+(* val f = int -> int *)
+val f = fn x => x + 1;
+
+(* val g = fn: int * string * char list -> char list *)
+val g = fn (x, y, z) => if x = 2 then explode(y) else z;
+
+(* val k = fn: ''a * ''a * bool -> bool *)
+val k = fn (x, y, z) => if x = y then z else false;
+
+(* val l = fn: 'a * 'b -> 'b * 'a *)
+val l = fn (x, y) => (y, x);
+
+(* val h = fn real * int -> int * real *)
+val h = fn (x: real, y: int) => (y, x);
+\end{lstlisting}
+
+Da questi esempi emerge chiaramente il fatto che, tipicamente, i linguaggi di
+tipo funzionale abbiano meccanismi d'identificazione (inferenza) di tipo in base
+all'espressione in cui compare un certo dato. Nella funzione \code{f} il tipo
+del parametro \code{x} viene identificato essere \code{int} perché in
+\code{f\_exp} viene sommato al valore \code{1} che è intero.
+
+Per il parametro \code{x} della funzione \code{g} vale lo stesso ragionamento;
+\code{y} viene stabilito essere di tipo \code{string} perché viene fornito come
+parametro alla funzione \code{explode} che accetta una stringa come argomento
+e siccome il costrutto \code{if-then-else} è valorizzato, ovvero il tipo del
+ramo \code{else} deve essere lo stesso del \code{then}, \code{z} deve
+essere dello stesso tipo del valore di ritorno di \code{explode(y)}.
+
+È interessante soffermarsi sul tipo della funzione \code{k}. Come abbiamo visto
+in precedenza i tipi di preceduti da \code{'} sono etichette per tipi non ancora
+istanziati e che quindi vengono stabili al momento dell'invocazione. In questo
+caso però abbiamo due apostrofi. Questi indicano il fatto che il tipo dei parametri
+\code{x} e \code{y} deve essere un \emph{equality type}, ovvero un tipo sul quale
+è applicabile l'operatore di uguaglianza \code{=}.
+
+Nella funzione \code{l} invece, abbiamo un esempio di come sia possibile usare
+una stringa qualsiasi per indicare un tipo generico, in questo caso \code{'a} e
+\code{'b}. Ovviamente, nulla vieta che al momento dell'invocazione della funzione
+i tipi dei parametri si eguaglino, cioè anche se indicati con etichette diverse
+i tipi dei parametri \emph{attuali} possono essere uguali.
+
+Si noti come nell'ultima funzione \code{h}, la definizione sia identica alla
+precedente, tranne per il fatto che abbiamo specificato esplicitamente quali
+dovessero essere i tipi.
+
+Si consideri ora la seguente definizione:
+\begin{lstlisting}
+fun delta x = x x;
+\end{lstlisting}
+
+Il tipo della funzione \code{delta} non è inferenziabile. L'espressione
+\code{(x x)} è illegale in quanto non vi è alcun modo per assegnare un unico tipo
+consistente ad \code{x}. A sinistra occorrerebbe qualcosa del tipo \code{'a -> 'b},
+mentre a destra dovrebbe soddisfare il tipo dell'argomento della funzione, cioè
+\code{'a}. Quindi, \code{x} dovrebbe essere contemporaneamente di tipo \code{'a}
+e \code{'a -> 'b}.
+
+\subsection{Alias}
+Alcuni linguaggi funzionali mettono a disposizione dell'utente la possibilità di
+definire \emph{alias} per tipi già esistenti (o altri \emph{alias}). In \emph{ML}
+ciò è fatto con l'istruzione \code{type}:
+\begin{lstlisting}
+(* Definiamo un alias per il tipo int list *)
+type signal = int list;
+
+(* val v1 = int list *)
+val v1 = [1, 2];
+
+(* val v2 = signal *)
+val v2 = [1, 2]: signal;
+
+(* Possiamo confrontare v1 e v2 in quanto, anche se v1 è di tipo
+    signal, rimane comunque una int list
+*)
+v1 = v2; (* true *)
+\end{lstlisting}
+Si noti, che è necessario esplicitare il tipo nel caso si voglia usare un alias.
+
+Un caso in cui gli alias possono essere molto utili, è quello in cui si sta
+lavorando con liste di tuple. Vediamo un esempio:
+\begin{lstlisting}
+(* Definisco un alias per le tuple composte da 2 valori di un tipo e
+    il terzo di un secondo tipo
+*)
+type ('a, 'b) mapping = ('a * 'a * 'b) list;
+
+(* val it = [(1, 1, 2.0)]: (int * int * real) list *)
+[(1, 1, 2.0)]
+
+(* val it = [(1, 1, 2.0)]: (int, real) mapping *)
+[(1, 1, 2.0)] : (int, real) mapping;
+\end{lstlisting}
+Come nel caso precedente, abbiamo dovuto forzare l'utilizzo dell'alias.
+
+\subsection{Definire nuovi tipi di dato}
+Oltre che creare \emph{alias} per tipi di dato esistenti, è possibile anche creare
+nuovi tipi in grado di modellare le specifiche esigenze di un programma.
+In \emph{ML} per fare questo abbiamo il comando \code{datatype}.
+
+\begin{lstlisting}
+(* Crea un tipo di dato "frutto" che può assumere solo 3 valori: mela, pera, uva
+*)
+datatype frutto = mela | pera | uva;
+
+(* Possiamo sfruttare questo nuovo tipo di dato come qualsiasi altro tipo
+*)
+fun isPera(x) = (x = pera);
+isPera(mela); (* => false *)
+isPera(pera); (* => true *)
+\end{lstlisting}
+L'esempio precedente definisce un tipo di dato simile a quello che sono gli
+\code{enum} in \code{C++}, inoltre i valori \code{mela}, \code{pera}, \code{uva}
+sono \emph{costruttori costanti} per il tipo di dato \code{frutto}. È possibile
+avere anche \emph{costruttori non costanti}.
+
+\begin{lstlisting}
+(* Definisce un tipo "oggetto" con due funzioni (nome, prezzo) che
+    restituiscono valori di tipo "oggetto"
+*)
+datatype oggetto = nome of string | prezzo of real;
+
+(* val ogg1 = nome "stringa": oggetto *)
+val ogg1 = nome("stringa");
+(* val ogg2 = prezzo 4.2: oggetto *)
+val ogg2 = prezzo(4.2);
+
+(* Definisce un tipo di dato con costruttore da tipi generici *)
+datatype ('a, 'b) element =
+   P of 'a * 'b |
+   S of 'a;
+
+(* val it = P ("a", 1): (string, int) element *)
+P ("a", 1);
+(* val it = P (1.0, 2.0): (real, real) element *)
+P (1.0, 2.0);
+
+(* val it = S 4: (int, 'a) element *)
+S (4);
+(* val it = S ["a", "b"]: (string list, 'a) element *)
+S (["a","b"]);
+
+(* Definisce un albero binario di tipo generico ('a) chiamato btree *)
+datatype 'a btree =
+Empty |                             (* Ramo vuoto *)
+Node of 'a * 'a btree * 'a btree;   (* Ramo con due rami *)
+
+(* val zeroNodi = Empty: 'a btree *)
+val zeroNodi = Empty;
+
+(* val unNodo = Node (1, Empty, Empty): int btree *)
+val unNodo = Node(1, Empty, Empty);
+(* val dueNodi = Node (1, Node (2, Empty, Empty), Empty): int btree *)
+val dueNodi = Node(1, Node(2, Empty, Empty), Empty);
+\end{lstlisting}
+È anche possibile definire strutture più complesse usando le keyword
+\code{signature} e \code{structure} che, grosso modo, corrispondono rispettivamente
+ai file \code{.h} e \code{.cpp} nel \code{C++}. \code{signature} consente infatti,
+di definire nuovi tipi di dato e le firme di tutte le funzioni su di essi. Tali
+funzioni saranno poi implementate nel blocco introdotto da \code{structure}.
+
+\begin{lstlisting}
+signature STACK =
+sig
+    exception StackEmpty
+    val empty : 'a list
+    val isEmpty : 'a list -> bool
+    val push : 'a * 'a list -> 'a list
+    val top : 'a list -> 'a
+    val pop : 'a list -> 'a list
+    (* Specifica il fatto che il tipo deve essere un equality type *)
+    eqtype 'a stack
+end;
+(* All'intero di signature non serve mettere i punti e virgola *)
+
+(* Implementa la struttura appena modellata *)
+structure Stack =
+struct
+    type 'a stack = 'a list;
+    exception StackEmpty;
+    val empty = [];
+    fun isEmpty [] = true
+        | isEmpty _ = false;
+    fun push (x, elements) = x :: elements;
+    fun top [] = raise StackEmpty
+        | top (x::xs) = x;
+    fun pop [] = raise StackEmpty
+        | pop (x::xs) = xs;
+end :> STACK;
+\end{lstlisting}
+Il simbolo \code{:>} introduce il nome della \code{signature} sulla quale si
+vuole basare una struttura. Avremmo potuto anche specificarlo tra il nome della
+struttura e l'uguale. Vediamo come usare una struttura:
+
+\begin{lstlisting}
+(* Creazione di uno stack di interi*)
+(* val stack = [1]: int list *)
+stack = Stack.push(1, Stack.empty);
+(* val stack = []: int list *)
+stack = Stack.pop();
+(* val it = true: bool *)
+stack = Stack.empty;
+\end{lstlisting}
+Si notino, in particolare, due cose:
+\begin{enumerate}[label=(\roman*)]
+    \item Il tipo del valore \code{stack} è \code{int list} e non \code{int Stack.stack}
+    come ci saremmo aspettati;
+    \item Il controllo \code{stack = Stack.empty} restituisce un valore, quindi
+    \code{Stack} è un \emph{equality type};
+\end{enumerate}
+Se volessimo che il linguaggio riconoscesse il valore \code{stack} come 
+\code{int Stack.stack} potremmo riscrivere la signature come segue:
+\begin{lstlisting}
+signature STACK =
+sig
+    type 'a stack
+    val empty : 'a stack
+    val isEmpty : 'a stack -> bool
+    val push : 'a * 'a stack -> 'a stack
+    val top : 'a stack -> 'a
+    val pop : 'a stack -> 'a stack
+end;
+\end{lstlisting}
+Se ora rieseguiamo le istruzioni di prima otteniamo:
+\begin{lstlisting}
+(* Creazione di uno stack di interi*)
+(* val stack = ?: int Stack.stack *)
+stack = Stack.push(1, Stack.empty);
+(* val stack = ?: int Stack.stack *)
+stack = Stack.pop();
+(* Errore! *)
+stack = Stack.empty;
+\end{lstlisting}
+Il tipo di dato adesso è quello che volevamo, ma come possiamo dedurre dal
+risultato dell'ultima istruzione, il tipo \code{Stack} non è più un \emph{equality
+type}.
+
+\chapter{Lambda calcolo}
+All'inizio della trattazione, abbiamo detto che i linguaggi più comuni poggiano
+sul modello di computazione proposto da Alan Turing, mentre abbiamo detto essere
+basati su un modello diverso i linguaggi funzionali. Quel modello è il
+\emph{Lambda Calcolo} ideato da Alonso Church.
+
+Questo modello è strettamente legato al concetto matematico di funzione. Nella
+matematica moderna una funzione è definita come un sottoinsieme del prodotto
+cartesiano di due insiemi che sono, rispettivamente, dominio e codominio.
+Per ogni funzione vengono poi distinti due aspetti:
+\begin{itemize}
+    \item \emph{Estensionalità}: Una funzione è caratterizzata dall'associazione
+    tra i valori del dominio e del codominio; non importa come il valore in ingresso
+    sia trasformato per ottenere il risultato;
+    \item \emph{Intensionalità}: Una funzione è caratterizzata dal procedimento
+    matematico che permette di arrivare ad un valore in uscita partendo
+    dall'argomento in ingresso;
+\end{itemize}
+Ad esempio, proviamo a considerare le seguenti funzioni:
+\begin{lstlisting}
+fn x => x + 1;
+fn x => (x - 2) + 1 + 1 + 1;
+\end{lstlisting}
+Da un punto di vista \emph{estensionale} queste funzioni sono identiche perché
+le associazioni realizzate dall prima sono le stesse della seconda. Tuttavia,
+dal punto di vista dell'\emph{intensionalità} sono due funzione diverse.
+
+In questo secondo aspetto si inserisce il \emph{Lambda calcolo} che, attraverso
+un sistema di funzioni e nozioni logiche, semplifica la scrittura delle funzioni.
+
+Utilizzando la notazione del \emph{Lambda calcolo} possiamo definire le funzioni
+dell'esempio precedente come segue:
+
+\[\lambda x.x+1\]
+\[\lambda x.(x-2)+1+1+1\]
+
+\begin{note}
+    In realtà, questa notazione non è veramente corretta, in quanto i simboli
+    $+$, $2$ e $1$, nell'ambito del \emph{$\lambda$-calcolo}, non hanno alcun
+    significato. Tuttavia, per il momento, per non creare confusione useremo una
+    notazione semplificata, ma vedremo più avanti nella trattazione come quei
+    simboli vengano rappresentati veramente.
+\end{note}
+
+\section{Notazione}
+Nell'ultimo esempio abbiamo introdotto la notazione del \emph{Lambda calcolo},
+vediamo quindi che significato hanno i simboli inseriti:
+\begin{itemize}
+    \item $\lambda$: introduce il parametro $x$ (è l'equivalente di \code{fn});
+    \item $x$: è il parametro della funzione;
+    \item $.$ e $()$: sono simboli terminali;
+    \item $x + 1$: un'espressione che probabilmente userà il parametro $x$;
+\end{itemize}
+L'espressione nella sua interezza, cioè \(\lambda x.x+1\) nel primo caso,
+prende il nome di \emph{$\lambda$-termine} o \emph{$\lambda$-astrazione}.
+Tanto è semplice, possiamo definire tutta la sintassi del \emph{Lambda calcolo}
+in una sola riga:
+\[M::= x\ |\ (MM)\ |\ \lambda x.M\]
+Ciò significa che un'espressione $M$ può essere uno tra:
+\begin{itemize}
+    \item $x$: una variabile;
+    \item $(M M)$: l'applicazione di un'espressione ad un'altra
+    (possono essere due espressioni diverse);
+    \item \(\lambda x.M\): un'astrazione, cioè una funzione che data $x$
+    restituisce $M$;
+\end{itemize}
+Per chiarezza e per migliorare la leggibilità possono essere usate delle parentesi
+all'interno delle espressioni. Ad esempio, le seguenti espressioni sono equivalenti:
+\[(((f_1 f_2) f_3) f_4)\equiv f_1 f_2 f_3 f_4\]
+E ciò ci dice anche che, di base, l'applicazione è da sinistra.
+
+Sempre parlando di espressioni, distinguiamo il concetto di \emph{astrazione} da
+quello di \emph{applicazione}:
+\begin{itemize}
+    \item \emph{Astrazione}: \(\lambda x.M\);
+    \item \emph{Applicazione}: \((M M)\);
+\end{itemize}
+
+\section{Variabili legate e libere}
+Se abbiamo un \emph{$\lambda$-termine} \emph{$\lambda$x.M}, l'operatore di astrazione
+$\lambda$ lega la variabile sulla quale agisce, cioè lega \emph{x} all'espressione
+\emph{M}. A questo punto introduciamo i concetti di \emph{variabili libere} e
+\emph{variabili legate}: data una generica espressione \emph{M} definiamo l'insieme
+delle sue \emph{variabili libere}, indicato con $Fv(M)$ (free variables), e delle
+sue \emph{variabili legate}, $Bv(M)$ (bound variables), come segue:
+\[\begin{aligned}
+    Fv(x) & = \{x\} & Bv(x) & = \emptyset\\
+    Fv(MN) & = Fv(M) \cup Fv(N) & Bv(M\ M) & = Bv(M) \cup Bv(N)\\
+    Fv(\lambda x.M) & = Fv(M)-\{x\} & Bv(\lambda x.M) & = Bv(M) \cup \{x\}
+\end{aligned}\]
+La nozione di \emph{variabile legata} ha due implicazioni:
+\begin{itemize}
+    \item \emph{Semantica}: la ridenominazione consistente della \emph{variabile
+    legata} non modifica la semantica dell'espressione;
+    \item \emph{Sintattica}: eventuali \emph{sostituzioni} non hanno effetto
+    sulle variabili legate;
+\end{itemize}
+
+\paragraph{Sostituzione}
+Diamo ora, una definizione formale di \emph{sostituzione}. Definiamo la notazione
+\emph{M[N/x]} che leggiamo: sostituzione di \emph{N} al posto delle occorrenze
+libere di \emph{x} in \emph{M}.
+
+Vediamo alcune casistiche:
+\[\begin{aligned}
+    x[N/x] & = N\\
+    y[N/x] & = y && \text{qualora}\ x\neq y\\
+    (M_1M_2)[N/x] & = (M_1[N/x]M_2[N/x])\\
+    (\lambda y.M)[N/x] & = (\lambda y.M[N/x]) && \text{qualora}\ x\neq y\ \text{e}
+    \ y\notin Fv(N)\\
+    (\lambda y.M)[N/x] & = (\lambda y.M) && \text{qualora}\ x=y
+\end{aligned}\]
+
+Esaminiamo i casi singolarmente:
+\begin{enumerate}[label=(\roman*)]
+    \item \(x[N/x]=N\): sostituendo \emph{N} al posto di \emph{x} in \emph{x}
+    ottengo \emph{N};
+    \item \(y[N/x]=y\): se $x\neq y$ non ho nessun posto in cui andare a sostituire
+    \emph{N}, quindi rimane \emph{y};
+    \item \((M_1M_2)[N/x]=(M_1[N/x]M_2[N/x])\): sostituire \emph{N} a $x$ nel risultato
+    dell'applicazione di $M_1$ a $M_2$ è equivalente a sostituire \emph{N} al
+    posto di \emph{x} in $M_1$ e $M_2$ e poi procedere con l'applicazione;
+    \item \((\lambda y.M)[N/x]=(\lambda y.M[N/x])\): ricordando che \emph{N} va
+    sostituito a tutte le occorrenze libere di \emph{x}, qui possiamo distinguere
+    3 casi:
+    \begin{enumerate}
+        \item \(x\neq y\) e \(y\notin Fv(N)\): siccome $x\neq y$ sono sicuro di
+        non andare a toccare le occorrenze della \emph{variabile legata y}. La
+        seconda condizione invece, mi garantisce che l'espressione \emph{N} non
+        contiene \emph{variabili libere} chiamate \emph{y}, le quali, se venissero
+        sostituite dentro \emph{M} creerebbero una situazioni di conflitto per
+        via dell'omonimia con il parametro della funzione;
+        \item \(x\neq y\) e \(y\in Fv(N)\): qui, per evitare che si verifichi il
+        problema appena discusso, rinomino la \emph{variabile legata y} prima di
+        effettuare la sostituzione;
+        \item \(x=y\): in questo caso sostituire equivarrebbe a cambiare il nome
+        del parametro e quindi non cambierebbe la \emph{semantica} dell'espressione;
+    \end{enumerate}
+\end{enumerate}
+
+Da quanto visto finora sappiamo che due espressioni che differiscono solo per il
+nome delle \emph{variabili legate} sono equivalenti, ma intuitivamente, possiamo
+pensare che lo stesso valga anche per il nome delle \emph{variabili libere}.
+
+\begin{proposition}[$\alpha$-equivalenza]
+    Due espressioni che differiscono solo per il nome delle \emph{variabili libere}
+    sono \emph{$\alpha$-equivalenti}, cioè vale:
+    \[\lambda x.M\aeq\lambda y.M[y/x]\ \text{con $y$ fresca}\]
+    Con "fresca" vogliamo dire che si tratta di una variabile non presente in
+    \emph{M}.
+\end{proposition}
+
+\begin{observation}
+    Due termini che differiscono tra loro per il solo fatto che qualche sotto
+    termine dell'uno è stata rimpiazzato con un sotto termine
+    \emph{$\alpha$-equivalente}, saranno considerati uguali.
+\end{observation}
+
+\section{Computazione}
+
+\subsection{$\beta$-riduzione}
+\begin{proposition}[$\beta$-riduzione]
+    La regola di \emph{$\beta$-riduzione} prescrive che un \emph{$\lambda$-termine}
+    \(\lambda x.M\) applicato ad un'espressione \emph{N}, venga ridotto come segue:
+    \[(\lambda x.M)N\red M[N/x]\]
+\end{proposition}
+
+In generale, diremo che \emph{M} \emph{$\beta$-riduce} a \emph{N}, e scriveremo
+in simboli $M\to N$, quando \emph{N} è il risultato dell'applicazione di un passo
+di \emph{$\beta$-riduzione} a qualche sottotermine di \emph{M}. Ad esempio, un
+sottotermine della forma \emph{($\lambda$x.M)N} è un \emph{redex}, il cui
+\emph{ridotto} è \emph{M[N/x]}.
+
+\begin{observation}
+    La \emph{$\beta$-riduzione} è una relazione non simmetrica, cioè se $M\to N$,
+    non è sempre vero che $N\to M$.
+\end{observation}
+\begin{observation}
+    La \emph{$\beta$-riduzione} è una relazione non deterministica, in quanto, se
+    nello stesso termine esistono più \emph{redex}, non definisce una regola
+    che indichi l'ordine in cui ridurli.
+\end{observation}
+
+\begin{proposition}[$\beta$-uguaglianza]
+    Tra 2 espressioni \emph{M} ed \emph{N} sussiste una relazione di
+    \emph{$\beta$-uguaglianza} se \emph{M} ed \emph{N} sono collegate da una
+    sequenza di \emph{$\beta$-riduzioni}, non necessariamente tutte dello stesso
+    verso. Scriveremo in simboli:
+    \[M\beq N\]
+\end{proposition}
+
+\subsection{Forme normali}
+Per ora non abbiamo ancora discusso quando un \emph{$\lambda$-termine} sia
+sufficientemente semplice da non richiedere più alcuna riduzione.
+\begin{proposition}
+    Un \emph{$\lambda$-termine} che non contiene alcun \emph{redex} è detto essere
+    in \emph{forma normale}.
+\end{proposition}
+
+Possiamo affermare che quando un \emph{$\lambda$-termine} ha raggiunto una
+\emph{forma normale} possiamo terminare la \emph{$\beta$-riduzione}. In particolare
+un \emph{$\lambda$-termine} in \emph{forma normale}, secondo il paragrafo 2.1,
+è un \emph{valore}, in quanto non deve essere ulteriormente riscritto. Ovviamente,
+non vale il contrario, cioè non tutti i \emph{valori} sono \emph{$\lambda$-termini}
+in \emph{forma normale}.
+
+\paragraph{Esempio}
+Vediamo un paio di esempi:
+\begin{itemize}
+    \item \(\lambda x.(\lambda y.x)\) è una \emph{forma normale} perché non può
+    essere ridotta;
+    \item \(\lambda x.(\lambda y.y)x\) non è una \emph{forma normale} perché
+    contiene un sottotermine riducibile \((\lambda y.y)x\). Procediamo allora con
+    la riduzione:
+    \[\lambda x.(\lambda y.y)x\to\lambda x.x\]
+    \(\lambda x.x\) è ora una \emph{forma normale};
+\end{itemize}
+
+\subsection{Confluenza}
+Finora abbiamo ragionato nell'ipotesi che tutti \emph{$\lambda$-termini} fossero
+riducibili ad una \emph{forma normale}, ma in realtà non è così. Ad esempio il
+seguente \emph{$\lambda$-termine} diverge:
+\[(\lambda x.xx)(\lambda x.xx)\red(xx)[(\lambda x.xx)/x]=(\lambda x.xx)(\lambda
+x.xx)\red(xx)[(\lambda x.xx)/x]=\dots\]
+Un altro problema che era sorto quando abbiamo dato la definizione di
+\emph{$\beta$-riduzione} era il non determinismo, ma fortunatamente, per tutti i
+\emph{$\lambda$-termini} vale la seguente proprietà:
+\begin{property}[Convergenza]
+    Dato un \emph{$\lambda$-termine M}, se \emph{M} si riduce a $N_1$ con qualche
+    passo di riduzione, e si riduce anche a $N_2$ con qualche passo di riduzione,
+    allora esiste un termine $P$ tale che sia $N_1$ che $N_2$ si riducono a $P$
+    con qualche passo di riduzione.
+\end{property}
+
+\begin{observation}
+    Se un \emph{$\lambda$-termine} può essere ridotto ad una \emph{forma normale},
+    allora questa è unica e indipendente dall'ordine dei passi di riduzione
+    eseguiti per raggiungerla.
+\end{observation}
+
+Vediamo ora, alcuni esempi di riduzioni:
+\paragraph*{Esempio}
+Riduci in \emph{forma normale} la seguente:
+\[(\lambda x.x(xy))(\lambda z.zx)\]
+Prima d'iniziare, ricordo la \emph{$\beta$-regola}:
+\[(\lambda x.M)N\red M[N/x]\]
+In questo caso posso porre \(M=x(xy)\) e \(N=(\lambda z.zx)\) e riscrivere quindi
+la mia espressione come:
+\[(\lambda x.x(xy))(\lambda z.zx)\red x(xy)[(\lambda z.zx)/x]\]
+Andando a sostituire ottengo:
+\[x(xy)[(\lambda z.zx)/x]=(\lambda z.zx)((\lambda z.zx)y)\]
+Procedo allo stesso modo fino ad arrivare alla \emph{forma normale}:
+\[(\lambda z.zx)((\lambda z.zx)y)\to(\lambda z.zx)(yx)\to (yx)x\]
+
+\paragraph*{Esempio}
+Riduci in \emph{forma normale} la seguente:
+\[(\lambda x.xy)(\lambda x.xz)(\lambda z.zx)\]
+Per risolvere questo esercizio è fondamentale ricordare che l'applicazione è da
+sinistra:
+\[(\lambda x.xy)(\lambda x.xz)(\lambda z.zx)\to((\lambda x.xz)y)(\lambda z.zx)
+\to yz(\lambda z.zx )\]
+
+\paragraph*{Esempio}
+Riduci in \emph{forma normale} la seguente:
+\[(\lambda t.tx)((\lambda z.xz)(xz))\]
+
+\[(\lambda t.tx)((\lambda z.xz)(xz))\to (\lambda t.xt)(x(xz))\to (x(xz))x\]
+
+\paragraph*{Esempio}
+Riduci in \emph{forma normale} le seguenti:
+\begin{enumerate}
+    \item \((\lambda x.yx)((\lambda y.\lambda t.yt)zx)\)
+    \item \((\lambda x.xzx)((\lambda y.yyx)z)\)
+    \item \((\lambda x.xy)(\lambda t.tz)((\lambda x.\lambda z.xyz)yx)\)
+\end{enumerate}
+Soluzioni:
+\begin{enumerate}
+    \item Per la riduzione posso pensare di partire dalla parte più esterna, o
+    più interna. Vediamo prima questo secondo approccio:
+
+    Tenendo a mente la definizione di \emph{$\beta$-regola}, possiamo porre
+    $M=\lambda t.yt$ e $N=zx$. Vado quindi a sostituire $N$ dentro $M$ al posto
+    di tutte le occorrenze libere di $y$:
+    \[(\lambda x.yx)((\lambda y.\lambda t.yt)zx)\to(\lambda x.yx)(\lambda t.zxt)\]
+    A questo punto il termine più interno è stato ridotto, quindi vado a
+    ridurre \(\lambda x.yx\):
+    \[(\lambda x.yx)(\lambda t.zxt)\to y(\lambda t.zxt)\]
+
+    Viceversa, procedendo dall'esterno avremmo:
+    \[(\lambda x.yx)((\lambda y.\lambda t.yt)zx)\to y((\lambda y.\lambda t.yt)zx)
+    \to y(\lambda t.zxt)\]
+    \item Anche qui potremmo procedere dall'interno o dall'esterno. Scegliamo di
+    ridurre partendo dall'interno:
+    \[(\lambda x.xzx)((\lambda y.yyx)z)\to(\lambda x.xzx)(zzx)\to zzxzzzx\]
+    \item Procediamo a ridurre dall'esterno:
+    \[(\lambda x.xy)(\lambda t.tz)((\lambda x.\lambda z.xyz)yx)\to(\lambda t.tz)
+    y((\lambda x.\lambda z.xyz)yx)\to yz((\lambda x.\lambda z.xyz)yx)\]
+    Giunti a questo punto l'unica cosa che possiamo ridurre è il \emph{redex}
+    interno:
+    \[yz((\lambda x.\lambda z.xyz)yx)\to yz(\lambda x.yxyz)\]
+\end{enumerate}
+
+\section{Espressività}
+Per quanto visto finora, il \emph{$\lambda$-calcolo} sembra un linguaggio estremamente
+limitato, con solo 3 tipi di espressioni: variabili, astrazioni e applicazioni.
+Ad esempio, l'espressione \(\lambda x.x+2\) non è valida in quanto l'operazione
+$+$ e il simbolo $2$ non sono definiti.
+
+Nonostante questo, il \emph{$\lambda$-calcolo} è un modello di computazione
+\emph{Turing completo}, cioè può risolvere ogni problema che ammette soluzione.
+A livello generale, per poter essere \emph{Turing completo} un linguaggio, o un
+modello di computazione, deve poter esprimere i numeri naturali, le operazioni
+aritmetiche e prevedere un meccanismo d'iterazione.
+
+\subsection{Rappresentazione dei numeri naturali}
+In matematica i numeri naturali sono definiti a partire dagli \emph{assiomi di
+Peano} e, partendo dallo zero, tutti i numeri sono determinati come 1 + il precedente:
+\[succ(n)=n+1\]
+Per quanto riguarda il \emph{$\lambda$-calcolo}, Alonso Church ipotizzò che un
+numero potesse essere rappresentato come il numero di volte che una funzione viene
+applicata ad un argomento. Secondo l'idea di Church quindi, lo $0$ viene espresso
+come:
+\[0\coloneqq\lambda f.\lambda x.x\]
+e un generico $n\in\mathbb{N}$ è rappresentato applicando $n$ volte la funzione
+$f$ ad $x$. Formalmente scriviamo:
+\[f^n=\underbrace{f\circ f\circ\dots \circ f}_\text{n volte}\]
+che è equivalente alla notazione $nf$ per il \emph{$\lambda$-calcolo}.
+
+Vediamo alcuni esempi:
+
+\begin{center}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{Numero} & \textbf{Espressione matematica} & \textbf{$\lambda$-termine}\\
+        \hline
+        0 & $f\ x = x$ & $\lambda f.\lambda x.x$\\
+        1 & $f\ x = f(x)$ & $\lambda f.\lambda x.f\ x$\\
+        2 & $f\ x = f(f(x))$ & $\lambda f.\lambda x.f(f\ x)$\\
+        3 & $f\ x = f(f(f(x)))$ & $\lambda f.\lambda x.f(f(f\ x))$\\
+        \vdots & \vdots & \vdots\\
+        n & $f\ x = f^n(x)$ & $\lambda f.\lambda x.nf\ x$\\
+        \hline
+    \end{tabular}
+\end{center}
+Riassumendo: un numero $n$ è espresso applicando $n$ volte una funzione ad
+un dato argomento. Se la funzione è la funzione che restituisce il successivo di
+un numero, allora $n$ è ottenuta applicando quella funzione $n$ volte all'argomento
+$0$. Ciò che è importante ricordare è che è la funzione stessa la rappresentazione
+del numero non il suo risultato.
+\newpage
+\noindent
+Ma come è definita la funzione per il successivo?
+
+Il valore $n$ è \(\lambda f.\lambda x.nf\ x\), quindi definiamo la funzione
+$succ(n)$ come:
+\[succ(n)\coloneqq\lambda n.\lambda f.\lambda x.f(nfx)\]
+
+\begin{note}
+    Potrebbe essere difficile convincersi della correttezza di questa definizione,
+    ma se applicata alla rappresentazione di $n$, quell'espressione si riduce ad
+    un \emph{$\lambda$-termine} che corrisponde al successivo di $n$.
+\end{note}
+
+\paragraph*{Esempio}
+Calcoliamo $succ(0)$:
+\[succ(0)=(\lambda n.\lambda f.\lambda x.f((nf)x))(\lambda f.\lambda x.x)\]
+Prima di procedere con la riduzione chiariamo un po' il significato di quest'espressione:
+\begin{itemize}
+    \item \((\lambda n.\lambda f.\lambda x.f((nf)x))\): definizione della funzione
+    \emph{succ};
+    \item \((\lambda f.\lambda x.x)\): rappresentazione del numero $0$;
+\end{itemize}
+Per evitare di creare confusione durante la riduzione rinominiamo, all'interno
+della definizione di \emph{succ}, $f$ in $y$ e $x$ in $g$:
+\[(\lambda n.\lambda f.\lambda x.f((nf)x))\aeq(\lambda n.\lambda y.\lambda g.y((ny)g))\]
+Procediamo ora con la riduzione:
+\[(\lambda n.\lambda y.\lambda g.y((ny)g))(\lambda f.\lambda x.x)\red
+\lambda y.\lambda g.y((ny)g)[(\lambda f.\lambda x.x)/n]=
+\lambda y.\lambda g.y(((\lambda f.\lambda x.x)y)g)\]
+\[\to\lambda y.\lambda g.y((\lambda x.x)g)\to\lambda y.\lambda g.yg\]
+Infine, sostituendo di nuovo i nomi originali otteniamo:
+\[\lambda f.\lambda x.fx\]
+La forma raggiunta è la rappresentazione del valore $1$, cioè il successivo di $0$.
+
+\paragraph*{Esempio}
+Calcoliamo $succ(1)$:
+\[succ(1)=(\lambda n.\lambda f.\lambda x.f((nf)x))(\lambda f.\lambda x.fx)\]
+Procediamo come prima, rinominando $f$ e $x$ nel corpo di \emph{succ}:
+\[\lambda n.\lambda y.\lambda g.y((ny)g)(\lambda f.\lambda x.fx)\to
+\lambda y.\lambda g.y(((\lambda f.\lambda x.fx)y)g)\]
+\[\to\lambda y.\lambda g.y((\lambda x.yx)g)\to\lambda y.\lambda g.y(yg)\]
+A questo punto, cambiamo i nomi ed otteniamo:
+\[\lambda f.\lambda x.f(fx)\]
+ovvero, la rappresentazione del $2$.
+
+\subsection{Rappresentazione della somma}
+Partendo dalla rappresentazione che abbiamo dato per un generico $n\in\mathbb{N}$,
+possiamo derivare facilmente la definizione, almeno a livello concettuale, della
+funzione di somma. Ad esempio, la somma tra $2$ e $3$ può essere descritta come:
+
+\begin{quote}
+    "Applicare 2 volte una funzione al risultato dell'applicazione per 3 volte
+    della stessa funzione all'argomento 0"
+\end{quote}
+Supponiamo quindi che, dati due numeri naturali \(n,m\in\mathbb{N}\), si voglia
+calcolare la somma \(n+m\). Innanzitutto, vediamo le rappresentazioni in
+\emph{$\lambda$-calcolo} di $n$ ed $m$:
+\begin{itemize}
+    \item \(n\coloneqq\lambda f.\lambda x.nfx\);
+    \item \(m\coloneqq\lambda f.\lambda x.mfx\);
+\end{itemize}
+Idealmente, realizzare la somma tra $n$ e $m$ significa, per quanto detto sopra,
+applicare $n$ volte una funzione al risultato dell'applicazione per $m$ volte di
+quella stessa funzione all'argomento 0. Ciò, equivale a mettere al posto di $x$
+nella rappresentazione di $n$, il "corpo" di $m$:
+\[\lambda f.\lambda x.nfx[(mfx)/x]=\lambda f.\lambda x.nf(mfx)\]
+Siccome la somma è una funzione in due parametri, la sua definizione in
+\emph{$\lambda$-calcolo} è:
+\[\lambda n.\lambda m.\lambda f.\lambda x.nf(mfx)\]
+
+\paragraph*{Esempio}
+Vediamo come calcolare la somma $2+3$.
+
+La somma, come visto, è definita come:
+\[\lambda n.\lambda m.\lambda f.\lambda x.nf(mfx)\]
+Gli argomenti $2$ e $3$ sono rispettivamente \(\lambda f.\lambda x.f(fx)\) e
+\(\lambda f.\lambda x.f(f(fx))\). Applichiamo quindi i due argomenti alla funzione:
+\[\lambda n.\lambda m.\lambda f.\lambda x.nf(mfx)(\lambda f.\lambda x.f(fx))
+(\lambda f.\lambda x.f(f(fx)))\]
+Prima di procedere con la riduzione, rinominiamo $f$ nella rappresentazione della
+somma e del $2$, rispettivamente come $g$ e $h$:
+\[\lambda n.\lambda m.\lambda g.\lambda x.ng(mgx)(\lambda h.\lambda x.h(hx))
+(\lambda f.\lambda x.f(f(fx)))\]
+A questo punto, siamo pronti a iniziare la riduzione:
+\[\lambda n.\lambda m.\lambda g.\lambda x.ng(mgx)(\lambda h.\lambda xh(hx))
+(\lambda f.\lambda xf(f(fx)))\]
+\[\to\lambda g.\lambda x.(\lambda h.\lambda x.h(hx))g((\lambda f.\lambda x.f(f(fx)))gx)\]
+Ora, per chiarezza, rinominiamo il parametro $x$ di $\lambda g$ e
+$\lambda h$, rispettivamente come $y$ e $z$:
+\[\lambda g.\lambda y.(\lambda h.\lambda z.h(hz))g((\lambda f.\lambda x.f(f(fx)))gy)\]
+Prima di riprendere la riduzione, ricordiamo che l'applicazione è sempre da
+sinistra:
+\[\lambda g.\lambda y.(\lambda h.\lambda z.h(hz))g((\lambda f.\lambda x.f(f(fx)))gy)
+\to\lambda g.\lambda y.(\lambda z.g(gz))((\lambda x.g(g(gx)))y)\]
+\[\to\lambda g.\lambda y.(\lambda z.g(gz))(g(g(gy)))\to
+\lambda g.\lambda y.(g(g(g(g(gy)))))\]
+Se ora rimettiamo i nomi originali, otteniamo:
+\[\lambda f.\lambda x.(f(f(f(f(fx)))))\]
+Questa è proprio la rappresentazione del 5, quindi abbiamo calcolato con successo
+la somma tra $2$ e $3$.
+
+\paragraph*{Notazione estesa}
+Con modalità simili possiamo rappresentare valori booleani, le altre operazioni
+aritmetiche, condizioni, etc., tuttavia la notazione risulterebbe estremamente
+complicata. Per semplificare la trattazione, introduciamo, con quello che di
+fatto è un abuso di notazione, la possibilità di utilizzare numeri, operatori ed
+espressioni.
+
+Ad esempio, con la nuova notazione, espressioni tipo \(\lambda x.(x+2)\) o
+\code{$\lambda x.$if x = 0 then 1 else x + 2}, risulteranno valide.
+
+\subsection{Iterazione e ricorsione}
+L'ultima cosa che ci resta da definire per dimostrare che il \emph{$\lambda$-calcolo}
+è un modello di computazione \emph{Turing completo}, è un sistema che consenta
+l'iterazione. Trattandosi di un modello basato sulle funzioni, la soluzione più
+ovvia è la ricorsione. Tuttavia, siccome alle funzioni non sono associati nomi,
+non possiamo semplicemente invocare una funzione all'interno di un'altra, ma
+siamo costretti a sfruttare i soli concetti di \emph{astrazione} e \emph{applicazione}.
+
+Consideriamo, ad esempio, la seguente definizione ricorsiva della funzione
+identità:
+\begin{lstlisting}
+fun f n = if n = 0 then 0 else 1 + f(n);
+\end{lstlisting}
+Come si implementa una tale funzione col \emph{$\lambda$-calcolo}?
+
+Proviamo a esaminare la definizione sottostante:
+\[f=\lambda n.\code{if $n$ = 0 then 0 else 1 + $f$($n$ - 1)}\]
+A questo punto, abbiamo che \(f=G(f)\) dove $G$ è una funzione di ordine superiore
+che prende una funzione come argomento e restituisce la stessa come risultato.
+
+Valutando la funzione $G$ otteniamo $f$, tuttavia non sappiamo ancora come è
+definita $G$. Non è difficile convincersi la seguente sia una definizione valida:
+\[G=\lambda f.\lambda n.\code{if $n$ = 0 then 0 else 1 + $f$($n$ - 1)}\]
+In questo modo abbiamo reso $f$ un parametro e, di fatto, eliminato la ricorsione.
+
+Ciò che abbiamo fatto corrisponde, in \emph{ML}, a sostituire la definizione data
+in precedenza con la seguente:
+\begin{lstlisting}
+fun G f n = if n = 0 then 0 else f(n - 1);
+\end{lstlisting}
+
+\paragraph*{Operatori di punto fisso}
+Dalla definizione di $G$ di cui sopra, possiamo derivare la seguente
+\emph{$\beta$-uguaglianza}:
+\[f\beq Gf\]
+Siamo quindi riusciti a ridurre il nostro problema di definire un meccanismo che
+consenta la ricorsione, alla sola ricerca di una funzione $f$ tale per cui valga
+quella \emph{$\beta$-uguaglianza}.
+
+Una funzione $f$ siffatta è detta essere un \emph{punto fisso} (in inglese
+\emph{fixpoint}) dell'operatore $G$ e il \emph{$\lambda$-calcolo} mette a disposizione
+dei costrutti che consentono di calcolare il \emph{punto fisso} di un qualunque
+termine arbitrario. Questi costrutti sono detti \emph{operatori di punto fisso}
+o \emph{combinatori} e non sono altro che espressioni prive di \emph{variabili
+libere}.
+
+I seguenti sono 3 esempi di \emph{operatori di punto fisso}:
+\begin{itemize}
+    \item \emph{Y-combinator}: usato nei linguaggi funzionali con \emph{valutazione
+    per nome}:
+    \[Y\mydef\lambda f.(\lambda x.f(xx))(\lambda x.f(xx))\]
+    \item \emph{Z-combinator}: usato nei linguaggi funzionali con \emph{valutazione
+    per valore}:
+    \[Z\mydef\lambda f.((\lambda x.(f(\lambda y.(xx)y)))(\lambda x.(f(\lambda y.(xx)y))))\]
+    \item \emph{H-combinator}: usato nei linguaggi funzionali con \emph{valutazione
+    per valore}:
+    \[H\mydef\lambda f.((\lambda x.xx)(\lambda x.(f(\lambda y.(xx)y))))\]
+\end{itemize}
+Nel resto della trattazione ci concentreremo solo sul \emph{combinatore Y}, ciò
+che diremo ha però una valenza generale.
+
+Da ciò che abbiamo appena enunciato segue che, se $G$ è un \emph{operatore}, allora
+\(YG=G(YG)\) e quindi \(YG\) è un \emph{punto fisso} di $G$. Vogliamo dimostrare
+che ciò è valido per qualsiasi espressione $G$.
+Dalla definizione abbiamo:
+\[Y\mydef\lambda f.(\lambda x.f(xx))(\lambda x.f(xx))\]
+Applichiamo una generica espressione $G$ ad $Y$:
+\[YG=\lambda f.(\lambda x.f(xx))(\lambda x.f(xx))G\to
+(\lambda x.G(xx))(\lambda x.G(xx)\]
+\[\to G(\lambda x.G(xx))(\lambda x.G(xx)=G(YG)\]
+
+\begin{note}
+    Il \emph{$\lambda$-termine} $Y$ non può essere ridotto ad una \emph{forma
+    normale} e la riduzioni potrebbe continuare all'infinito. Questo è proprio il
+    motivo per cui è usato soltanto dai linguaggi che sfruttano un meccanismo di
+    \emph{valutazione per nome} che riduce il \emph{redex} prima della sua parte
+    argomento. In questo caso, dopo il secondo passaggio di riduzione il
+    \emph{redex} diventa $G$ e quindi, la riduzione di $Y$ termina.
+\end{note}
+
+Ora che abbiamo definito dei costrutti che consentono di realizzare la ricorsione,
+possiamo implementare in \emph{$\lambda$-calcolo} la funzione di partenza, che a
+questo punto possiamo esprimere come:
+\[id\mydef YG\]
+Proviamo quindi ad applicare \(id\) a un qualche valore:
+\[\begin{aligned}
+    id\ 2   &\mydef && (YG)2\\
+            &\to && G(YG)2\\
+            &\to && \code{if 2 = 0 then 0 else 1 + (($YG$)(2 - 1))}\\
+            &\to && \code{1 + (($YG$) 1)}\\
+            &\to && \code{1 + ($G$($YG$) 1)}\\
+            &\to && \code{1 + ((if 1 = 0 then 0 else 1 + (($YG$)(1 - 1))))}\\
+            &\to && \code{1 + (1 + (($YG$) 0))}\\
+            &\to && \code{1 + (1 + (if 0 = 0 then 0 else 1 + (($YG$)(0 - 1))))}\\
+            &\to && \code{1 + (1 + 0)}\\
+            &\to && \code{2}
+\end{aligned}\]
+2 è proprio il valore che ci aspettavamo, perciò, siamo riusciti con successo ad
+implementare una funzione ricorsiva in \emph{$\lambda$-calcolo}.
+
+Giunti a questo punto siamo anche riusciti a giustificare quanto affermato in
+precedenza sulla sua espressività, ovvero abbiamo dimostrato che il
+\emph{$\lambda$-calcolo} descrive un modello di computazione \emph{Turing completo}.
+
+\end{document}

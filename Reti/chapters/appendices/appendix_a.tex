@@ -1,0 +1,44 @@
+\begin{appendices}
+\chapter{Simboli e formule}
+\section{Simboli}
+\begin{enumerate}
+    \setcounter{enumii}{0}
+    \hitem{sym}{\emph{L}: \emph{dimensione} in $bit$ di un \emph{pacchetto};}
+    \hitem{sym}{\emph{R}: \emph{frequenza di trasmissione} (\emph{banda}) di un
+    \emph{collegamento} in $\frac{bit}{s}$;}
+    \hitem{sym}{\emph{d}: \emph{lunghezza} in $m$ del \emph{collegamento fisico};}
+    \hitem{sym}{\emph{s}: \emph{velocità di propagazione} in $\frac{m}{s}$ di un
+    \emph{collegamento fisico};}
+    \hitem{sym}{\emph{RTT}: \emph{tempo di propagazione} necessario affinché un
+    messaggio arrivi destinatario e ritorni al mittente;}
+\end{enumerate}
+
+\section{Formule}
+\subsection{Ritardo di trasmissione}\label{ssec:num1}
+\[d_{\emph{trasferimento}}=\frac{L}{R}\]
+Il \emph{ritardo di trasmissione} è il tempo necessario a trasmettere un
+\emph{pacchetto} di \emph{dimensione} $L$ su un \emph{collegamento} con
+\emph{frequenza di trasmissione}, o \emph{banda}, $R$.
+
+\subsection{Ritardo di propagazione}\label{ssec:num2}
+\[d_{\emph{propagazione}}=\frac{d}{s}\]
+Il \emph{ritardo di propagazione} è il tempo necessario per propagare un segnale
+attraverso un \emph{collegamento fisico}.
+
+\subsection{BDP}\label{ssec:num3}
+\[BDP=R\cdot d_{\emph{propagazione}}=R\cdot\frac{d}{s}\]
+Il \emph{\gls{glos:BDP}} permette di calcolare il numero massimo di $bit$ che
+in un dato momento possono transitare su un \emph{collegamento} con \emph{banda}
+$R$ e \emph{ritardo di propagazione} $d_{\emph{propagazione}}$.
+
+Questo valore massimo viene raggiunto solo se il \emph{ritardo di trasmissione},
+ovvero il rapporto $\frac{L}{R}$, è maggiore del \emph{ritardo di propagazione},
+cioè se:
+\[d_{\emph{trasferimento}}>d_{\emph{propagazione}}\]
+
+\subsection{Lunghezza in metri di un bit}\label{ssec:num4}
+\[BL=\frac{d}{BDP}=d\cdot R\cdot d_{\emph{propagazione}}=d^2\cdot\frac{R}{s}\]
+Il \emph{\gls{glos:BL}} rappresenta lo spazio in $m$ che deve essere coperto
+da un bit prima che sia possibile trasmetterne un altro.
+
+\end{appendices}

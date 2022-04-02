@@ -1,0 +1,31 @@
+\contentsline {chapter}{\numberline {1}Computazione}{2}{chapter.1}
+\contentsline {section}{\numberline {1.1}Espressioni e funzioni}{2}{section.1.1}
+\contentsline {section}{\numberline {1.2}Computazione come riduzione}{3}{section.1.2}
+\contentsline {paragraph}{Esempio}{3}{paragraph*.2}
+\contentsline {chapter}{\numberline {2}Valutazione}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Valori}{5}{section.2.1}
+\contentsline {section}{\numberline {2.2}Strategie di valutazione}{6}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Valutazione per valore}{6}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Valutazione per nome}{7}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Valutazione lazy}{7}{subsection.2.2.3}
+\contentsline {section}{\numberline {2.3}Confronto tra strategie}{8}{section.2.3}
+\contentsline {chapter}{\numberline {3}Strumenti per la programmazione}{9}{chapter.3}
+\contentsline {section}{\numberline {3.1}Interattivit\IeC {\`a}}{9}{section.3.1}
+\contentsline {section}{\numberline {3.2}Ambiente locale}{9}{section.3.2}
+\contentsline {section}{\numberline {3.3}Pattern matching}{9}{section.3.3}
+\contentsline {section}{\numberline {3.4}Tipi di dato}{10}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Alias}{12}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Definire nuovi tipi di dato}{13}{subsection.3.4.2}
+\contentsline {chapter}{\numberline {4}Lambda calcolo}{16}{chapter.4}
+\contentsline {section}{\numberline {4.1}Notazione}{17}{section.4.1}
+\contentsline {section}{\numberline {4.2}Variabili legate e libere}{17}{section.4.2}
+\contentsline {paragraph}{Sostituzione}{18}{paragraph*.3}
+\contentsline {section}{\numberline {4.3}Computazione}{18}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}$\beta $-riduzione}{18}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Forme normali}{19}{subsection.4.3.2}
+\contentsline {paragraph}{Esempio}{19}{paragraph*.4}
+\contentsline {subsection}{\numberline {4.3.3}Confluenza}{19}{subsection.4.3.3}
+\contentsline {section}{\numberline {4.4}Espressivit\IeC {\`a}}{21}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Rappresentazione dei numeri naturali}{21}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Rappresentazione della somma}{23}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.3}Iterazione e ricorsione}{24}{subsection.4.4.3}

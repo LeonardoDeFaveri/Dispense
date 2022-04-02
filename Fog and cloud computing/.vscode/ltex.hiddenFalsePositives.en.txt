@@ -1,0 +1,26 @@
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qprivileged-ring-model.png 0.5 Privilege-ring model\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qprivileged-ring-model.png 0.5 Privilege-ring model Virtualization can use a ring de-priviledging\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\QSimilarly, when an hardware interrupt verifies\\E$"}
+{"rule":"COMMA_COMPOUND_SENTENCE","sentence":"^\\QSimilarly, when an hardware interrupt verifies, CPU execution will stop and it will jump to\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\QSimilarly, when an hardware interrupt verifies, CPU execution will stop and it will jump to interrupt handler in OS.\\E$"}
+{"rule":"COMMA_COMPOUND_SENTENCE","sentence":"^\\QSimilarly, when an hardware interrupt verifies, CPU execution will stop and it will jump to interrupt handler in OS.\\E$"}
+{"rule":"COMMA_COMPOUND_SENTENCE_2","sentence":"^\\QPracically, userland code writes the address of the targeted kernel routine in a specific register, then SYSENTER is called and the kernel reads the address\\E$"}
+{"rule":"COMMA_COMPOUND_SENTENCE_2","sentence":"^\\QPracically, userland code writes the address of the targeted kernel routine in a specific register, then SYSENTER is called and the kernel jumps to the selected routing reading the address from the register.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qtrap-handling-traditional-OSs.png 0.25 Trap handling in traditional OSs Diving deeper into trap handling, when a trap is generated, userland code (i.e. code outside the kernel) generates a software interrupt (e.g. thorugh the instruction INT xx).\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qtrap-handling-trap-and-emulate2.png 0.8\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qprivileged-ring-model.png 0.4 Privilege-ring model\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qtrap-handling-traditional-OSs.png 0.25 Trap handling in traditional OSs\\E$"}
+{"rule":"COMMA_COMPOUND_SENTENCE_2","sentence":"^\\QPractically, userland code writes the address of the targeted kernel routine in a specific register, then SYSENTER is called and the kernel jumps to the selected routing reading the address from the register without additional accesses to memory.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qhav.png 0.4 Hardware assisted virtualization modes The VMM runs al ring 0 in root-mode, while guest OSs run at ring 0 in non-root mode.\\E$"}
+{"rule":"COMMA_COMPOUND_SENTENCE_2","sentence":"^\\QTo address these problematics distributed and scalable systems are required.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qcloud-computing-5points.png 0.8 Five key aspects of cloud computing\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qcloud-computing-5points.png 0.8 Five key aspects of cloud computing cloud-computing-nist.png 1 NIST reference model for cloud computing\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qcloud-computing-5points.png 0.7 Five key aspects of cloud computing cloud-computing-nist.png 1 NIST reference model for cloud computing A carrier is someone who provide access to a cloud service, such as Telecom, while a broker is a subject that the delivery of cloud services to users, such as a portal to the cloud (e.g. Booking.com).\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qvmcs.png 0.4 Virtual Machine Control Structure\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qcloud-computing-5points.png 0.7 Five key aspects of cloud computing cloud-computing-nist.png 1 NIST reference model for cloud computing A carrier is someone who provides access to a cloud service, such as Telecom, while a broker is a subject that handles the delivery of cloud services to users, such as a portal to the cloud (e.g. Booking.com).\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qpage-tables.png 0.6 Memory paging\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qshadow-page-tables.png 0.6 Memory paging in virtualised environments\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qpage-tables-HW.png 0.6 Hardware assisted memory virtualization\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\QSystems with dual boot where a normal OS resides together with a type 1 hypervisor are an example of an hybrid approch.\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\QSystems with dual boot where a normal OS resides together with a type 1 hypervisor are an example of how an hybrid approch works.\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\QWith device emulation the VMM proposes to the Guest OS an emulated device which implements in software an hardware specification.\\E$"}

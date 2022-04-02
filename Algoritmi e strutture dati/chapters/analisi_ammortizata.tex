@@ -1,0 +1,749 @@
+\chapter{Analisi ammortizzata}
+Dopo aver parlato a lungo di \emph{strutture dati}, vediamo ora una tecnica che
+ci permette di effettuare una stima dall'alto del costo che è necessario pagare
+per eseguire delle operazioni su quelle strutture.
+\begin{definition}[Analisi ammortizzata]
+    L'analisi ammortizzata è una tecnica per l'analisi di complessità che valuta
+    il tempo richiesto per eseguire, nel caso pessimo, una sequenza di operazioni
+    su una struttura dati.
+\end{definition}\noindent
+In generale, esistono operazioni più o meno costose, ma se le operazioni più
+costose sono poco frequenti, il loro costo può essere ammortizzato da quelle
+meno costose.
+
+È importante esplicitare la profonda differenza tra l'analisi del caso medio
+e l'\emph{analisi ammortizzata}, effettuata sul caso pessimo. Nella prima,
+l'analisi è di tipo probabilistico ed è effettuata sulle singole operazioni,
+mentre, la seconda, è un'analisi deterministica effettuata su una sequenza di
+operazioni, e in particolare, sulla sequenza più costosa possibile.
+
+\section{Metodi per l'analisi ammortizzata}
+Esistono diverse tecniche per realizzare un'\emph{analisi ammortizzata}.
+
+\begin{definition}[Metodo dell'aggregazione]
+    Col metodo dell'aggregazione si calcola la complessità $T(n)$ necessaria
+    per eseguire $n$ operazioni in sequenza nel caso pessimo, quindi, si calcola
+    il costo ammortizzato come $T(n)/n$ cioè come media su $n$ operazioni.
+\end{definition}
+
+\noindent
+Definiamo meglio i termini presenti nella definizione:
+\begin{itemize}
+    \item \emph{Sequenza}: è una sequenza di operazioni che permettono alla
+    \emph{struttura dati} di evolvere;
+    \item \emph{Caso pessimo}: è la \emph{sequenza} con \emph{complessità} più
+    alta tra tutte quelle possibili;
+    \item \emph{Aggregazione}: la \emph{complessità} $T(n)$ è ottenuta mediante
+    una sommatoria dei costi delle singole operazioni;
+\end{itemize}
+
+\newpage
+\begin{definition}[Metodo degli accantonamenti]
+    Col metodo degli accantonamenti si assegna ad ogni operazione un costo
+    ammortizzato che può anche essere diverso dal costo effettivo. In particolare,
+    le operazioni meno costose vengono caricate di un costo aggiuntivo detto
+    credito, che viene poi usato per pagare le operazioni più costose.
+\end{definition}
+\begin{note}
+    Potenzialmente, ad ogni operazione potrebbe essere assegnato un costo diverso.
+\end{note}
+
+\noindent
+In generale, utilizzando il \emph{metodo degli accantonamenti}, il \emph{costo
+ammortizzato} assegnato alle operazioni meno costose è definito come:
+\[\emph{Costo ammortizzato}=\emph{Costo effettivo}+\emph{Credito prodotto}\]
+Viceversa, il costo per le operazioni più costose è:
+\[\emph{Costo ammortizzato}=\emph{Costo effettivo}-\emph{Credito consumato}\]
+Quindi, l'obiettivo, quando si utilizza questo metodo, è dimostrare che la somma
+dei \emph{costi ammortizzati} $a_i$ è un limite superiore ai costi effettivi
+$c_i$, ovvero che vale:
+\[\sum_{i=1}^nc_i\leq\sum_{i=1}^na_i\]
+Ovviamente, la dimostrazione deve valere per tutte le sequenze, ma se vale per il
+caso pessimo vale anche per tutti gli altri. Il \emph{credito} dopo la $t$-esima
+operazione è sempre positivo ed è espresso dalla seguente formula:
+\[\sum_{i=1}^ta_i-\sum_{i=1}^tc_i\geq0\]
+
+\begin{definition}[Metodo del potenziale]
+    Col metodo del potenziale si associa una funzione di potenziale $\Phi$ ad
+    uno stato $S$ della struttura. La funzione $\Phi$ definisce la \q{quantità
+    di lavoro} $\Phi(S)$ che è stato contabilizzata nell'analisi ammortizzata,
+    ma non ancora spesa.
+\end{definition}
+\begin{note}
+    $\Phi(S)$ rappresenta la quantità di energia potenziale che è stata
+    \q{immagazzinata} in quello stato e che può essere spesa per eseguire le
+    operazioni più costose.
+\end{note}\noindent
+In pratica, $\Phi(S)$ può essere vista come la cumulazione dei \emph{crediti
+prodotti} dalle operazioni fino al raggiungimento dello stato $S$.
+
+\bigskip\noindent
+In generale, il \emph{costo ammortizzato} di un'operazione è pari a:
+\[\begin{array}[t]{rcl}
+    \emph{Costo ammortizzato} & = & \emph{Costo effettivo}+\emph{Variazione di potenziale}\\
+    a_i & = & c_i + (\Phi(S_i)-\Phi(S_{i-1}))
+\end{array}\]
+dove $S_i$ è lo stato associato all'$i$-esima operazione.
+
+Se proviamo a calcolare il \emph{costo ammortizzato} di una sequenza di $n$
+operazioni, vale quanto segue:
+\[A\begin{array}[t]{cl}
+    = & \sum_{i=1}^na_i\\
+    = & \sum_{i=1}^n\left(c_i+\Phi(S_i)-\Phi(S_{i-1})\right)\\
+    = & \sum_{i=1}^nc_i+\sum_{i=1}^n\left(\Phi(S_i)-\Phi(S_{i-1})\right)\\
+    = & C + \left(\Phi(S_1) - \Phi(S_{0})\right) + \left(\Phi(S_2) - \Phi(S_1)\right)+\dots+\left(\Phi(S_n)-\Phi(S_{n-1})\right)\\
+    = & C + \Phi(S_n) - \Phi(S_0)
+\end{array}\]
+Allora, se $\Phi(S_n)-\Phi(S_0)\geq0$, $A$ è un limite superiore al costo effettivo.
+
+\section{Esempio di analisi ammortizzata}
+\begin{eg}[Contatore binario]
+Si consideri un contatore binario a $k$ bit implementato come un vettore $A$ di
+booleani, nel quale $A[0]$ è il bit meno significativo e $A[k-1]$ il più significativo.
+Il valore del contatore corrisponde al risultato della seguente sommatoria:
+\[x=\sum_{i=0}^{k-1}A[i]\cdot2^i\]
+Alla struttura del contatore è associata soltanto la funzione \texttt{increment}
+per l'incremento del valore.
+
+\begin{minicode}{Implementazione funzione increment per contatori binari}
+\ind increment(\bc{int}[] A, int k)\\
+    \bc{int} i = 0\\
+    \indf while (i < k and A[i] == 1) do\hfill\com{Imposta a 0 la prima sequenza di bit a 1}
+        A[i] = 0\\
+        i = i + 1\\
+    \indf if (i < k) then\hfill\com{Se $i < k$ non c'è overflow}
+        A[i] = 1
+\end{minicode}\noindent
+Se $k=8$, si ottiene un contatore binario a 8 bit e la seguente tabella ne mostra
+lo stato dopo il sedicesimo incremento.
+\begin{table}[h!]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+        \hline
+        \bm{$x$} & \bm{$A[7]$} & \bm{$A[6]$} & \bm{$A[5]$} & \bm{$A[4]$} &
+        \bm{$A[3]$} & \bm{$A[2]$} & \bm{$A[1]$} & \bm{$A[0]$}\\
+        \hline
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+        \hline
+        1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\
+        \hline
+        2 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0\\
+        \hline
+        3 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1\\
+        \hline
+        4 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0\\
+        \hline
+        5 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1\\
+        \hline
+        6 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0\\
+        \hline
+        7 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1\\
+        \hline
+        8 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0\\
+        \hline
+        9 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1\\
+        \hline
+        10 & 0 & 0 & 0 & 0 & 1 & 0 & 1 & 0\\
+        \hline
+        11 & 0 & 0 & 0 & 0 & 1 & 0 & 1 & 1\\
+        \hline
+        12 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 0\\
+        \hline
+        13 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & 1\\
+        \hline
+        14 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 0\\
+        \hline
+        15 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1\\
+        \hline
+        16 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+        \hline
+    \end{tabular}
+\end{table}
+
+\bigskip\noindent
+Proviamo ora a realizzare una stima dall'alto del costo della funzione
+\texttt{increment} usando i metodi per l'analisi ammortizzata.
+
+\paragraph{Metodo dell'aggregazione}
+Utilizzando questo metodo ci chiediamo quale sia il costo $T(n)$ da pagare per
+eseguire $n$ operazioni in sequenza.
+
+Inizialmente potremmo notare che per rappresentare $n$ in binario servono
+$k=\lceil\log(n+1)\rceil$ bit. Un'invocazione di \texttt{increment} nel caso
+pessimo richiede un tempo $O(k)$, quindi $n$ invocazioni costano $T(n)=O(nxk)$.
+A questo punto, il costo ammortizzato di ogni operazione è $T(n)/n=O(nk)/n=O(k)=O(\log n)$.
+
+Se però notiamo che il costo per eseguire l'intera sequenza è proporzionale al
+numero di bit che vengono modificati, possiamo provare a realizzare una stima
+più ristretta. Proviamo quindi a contare per ogni riga e per ogni colonna il
+numero di bit che sono stati modificati.
+
+\begin{table}[h!]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        \bm{$x$} & \bm{$A[7]$} & \bm{$A[6]$} & \bm{$A[5]$} & \bm{$A[4]$} &
+        \bm{$A[3]$} & \bm{$A[2]$} & \bm{$A[1]$} & \bm{$A[0]$} & \bm{$\#bit$}\\
+        \hline
+        0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+        \hline
+        1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \color{red}{1} & 1\\
+        \hline
+        2 & 0 & 0 & 0 & 0 & 0 & 0 & \color{red}{1} & \color{red}{0} & 2\\
+        \hline
+        3 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & \color{red}{1} & 1\\
+        \hline
+        4 & 0 & 0 & 0 & 0 & 0 & \color{red}{1} & \color{red}{0} & \color{red}{0} & 3\\
+        \hline
+        5 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & \color{red}{1} & 1\\
+        \hline
+        6 & 0 & 0 & 0 & 0 & 0 & 1 & \color{red}{1} & \color{red}{0} & 2\\
+        \hline
+        7 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & \color{red}{1} & 1\\
+        \hline
+        8 & 0 & 0 & 0 & 0 & \color{red}{1} & \color{red}{0} & \color{red}{0} & \color{red}{0} & 4\\
+        \hline
+        9 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & \color{red}{1} & 1\\
+        \hline
+        10 & 0 & 0 & 0 & 0 & 1 & 0 & \color{red}{1} & \color{red}{0} & 2\\
+        \hline
+        11 & 0 & 0 & 0 & 0 & 1 & 0 & 1 & \color{red}{1} & 1\\
+        \hline
+        12 & 0 & 0 & 0 & 0 & 1 & \color{red}{1} & \color{red}{0} & \color{red}{0} & 3\\
+        \hline
+        13 & 0 & 0 & 0 & 0 & 1 & 1 & 0 & \color{red}{1} & 1\\
+        \hline
+        14 & 0 & 0 & 0 & 0 & 1 & 1 & \color{red}{1} & \color{red}{0} & 2\\
+        \hline
+        15 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & \color{red}{1} & 1\\
+        \hline
+        16 & 0 & 0 & 0 & \color{red}{1} & \color{red}{0} & \color{red}{0} & \color{red}{0} & \color{red}{0} & 5\\
+        \hline
+        \#bit & 0 & 0 & 0 & 1 & 2 & 4 & 8 & 16 &\\
+        \hline
+    \end{tabular}
+\end{table}\noindent
+Guardando l'ultima riga possiamo notare che il bit in posizione $A[0]$ viene
+modificato ad ogni incremento, quello in $A[1]$ ogni due, quello in $A[2]$ ogni
+4 e così via. Di conseguenza, il costo $T(n)$ è una funzione di questo tipo:
+\[T(n)=\sum_{i=0}^{k-1}\lfloor\frac{n}{2^i}\rfloor\leq n\sum_{i=0}^{k-1}\frac
+{1}{2^i}\leq n\sum_{i=0}^{+\infty}\left(\frac{1}{2}\right)^i=2n\]
+e quindi il costo ammortizzato vale:
+\[\frac{T(n)}{n}\leq\frac{2n}{n}=2=O(1)\]
+
+\paragraph{Metodo degli accantonamenti}
+Supponiamo che il costo effettivo della \texttt{increment} sia $d$, dove $d$ è
+il numero di bit che vengono modificati ad ogni incremento. Proviamo però ad
+assegnare alla \texttt{increment} un costo di $2$ che include 1 per il costo
+effettivo che si paga per cambiare un bit da 0 a 1 e 1 per il futuro cambio
+dello stesso bit da 1 a 0.
+
+Di conseguenza, in ogni istante, il credito è pari al numero di bit a 1
+presenti e quindi il costo totale vale $O(n)$ e il costo ammortizzato $O(1)$.
+
+\paragraph{Metodo del potenziale}
+Scegliamo come funzione di potenziale $\Phi$ il numero di bit a 1 presenti nel
+contatore. Ad ogni utilizzo della funzione \texttt{increment}, se $t$ è il numero
+di bit a 1 incontrati prima del primo 0, il costo effettivo è $1+t$ perché
+cambiamo lo stato di tutti i primi $t$ bit a 1 e del primo bit a 0.
+
+La variazione di potenziale, invece, vale $1-t$ in quanto tutti i bit a 1
+incontrati diventano 0 e il primo bit a 0 diventa 1. Quindi, se allo stato $S_i$
+$\Phi(S_i)=t$, allo stato $S_{i+1}$ $\Phi(S_{i+1})=1$ e, conseguentemente, la
+variazione di potenziale tra lo stato $S_{i+1}$ e lo stato $S_i$ vale:
+\[\Phi(S_{i+1})-\Phi(S_i)=1-t\]
+Il costo ammortizzato di un'invocazione della \texttt{insert}, allora, vale:
+\[\emph{Costo ammortizzato}\begin{array}[t]{cl}
+    = & \emph{Costo effettivo}+\emph{Variazione di potenziale}\\
+    = & (1+t)+(1-t)\\
+    = & 2 = O(1)
+\end{array}\]
+Inoltre, poiché allo stato $S_0$, $\Phi(S_0)=0$ perché non ci sono bit impostati a
+1, e allo stato $S_n$, $\Phi(S_n)\geq0$, risulta verificata anche la
+condizione $\Phi(S_n)-\Phi(S_0)\geq0$.
+\end{eg}
+
+\section{Vettori dinamici}
+Possiamo utilizzare le tecniche di \emph{analisi ammortizzata} per stimare la
+\emph{complessità} delle operazioni di inserimento e cancellazione nei vettori
+con ridimensionamento dinamico della dimensione.
+
+Prima però vediamo brevemente cosa significa \q{ridimensionamento dinamico della
+dimensione}. Quando si implementa una \emph{\hyperref[def:27]{Sequenza}}
+utilizzando un vettore, se ne specifica una dimensione iniziale detta
+\emph{capacità}. Ovviamente, non è sempre nota a priori la quantità di elementi
+che dovranno essere inseriti nella struttura e quindi la \emph{capacità} iniziale
+può rivelarsi insufficiente. I \emph{vettori dinamici} risolvono questo problema
+allocando un nuovo vettore con una capacità maggiore e ricopiando in esso tutti
+i valori presenti nel vettore originale, che poi può essere eliminato.
+
+\subsection{Inserimento}
+Quando in fase di inserimento si rende necessario aumentare la dimensione del
+vettore, esistono due principali metodologie di approccio: \emph{incremento fisso}
+e \emph{incremento variabile}.
+
+Il primo approccio prevede che la \emph{capacità} venga incrementata di un fattore
+fisso (e.g. $+1$, $+2$, $+10$, \dots), mentre il secondo è dipendente dalla dimensione
+attuale della struttura (e.g. $\cdot2$, $\cdot1.5$, \dots).
+
+Ma qual è il metodo migliore? Proviamo a utilizzare l'\emph{analisi ammortizzata}
+per realizzare una stima.
+
+\paragraph{Incremento fisso}
+Il costo effettivo di un inserimento con ridimensionamento fisso è descritto
+dalla seguente espressione:
+\[c_i=\begin{cases}
+    i & \text{se}\ (i\Mod{d}) = 1\footnotemark\\
+    1 & \text{altrimenti}
+\end{cases}\]
+dove $d$ è sia la dimensione iniziale che il valore di cui viene incrementata.
+\footnotetext{L'inserimento ha un costo $i$ quando $(i\Mod{d})=1$ perché se è stata
+raggiunta la dimensione massima quell'operazione di modulo vale 1}
+
+\newpage\noindent
+Supponiamo $d=4$ e vediamo il costo delle prime 17 operazioni di inserimento:
+\begin{table}[ht]
+    \renewcommand{\arraystretch}{1.2}
+    \centering
+    \begin{tabular}{|c|l|}
+        \hline
+        \bm{$n$} & \textbf{Costo}\\
+        \hline
+        1 & 1\\
+        \hline
+        2 & 1\\
+        \hline
+        3 & 1\\
+        \hline
+        4 & 1\\
+        \hline
+        5 & $1+d=5$\\
+        \hline
+        6 & 1\\
+        \hline
+        7 & 1\\
+        \hline
+        8 & 1\\
+        \hline
+        9 & $1+2d=9$\\
+        \hline
+        10 & 1\\
+        \hline
+        11 & 1\\
+        \hline
+        12 & 1\\
+        \hline
+        13 & $1+3d=13$\\
+        \hline
+        14 & 1\\
+        \hline
+        15 & 1\\
+        \hline
+        16 & 1\\
+        \hline
+        17 & $1+4d=17$\\
+        \hline
+    \end{tabular}
+\end{table}
+
+\noindent A questo punto, calcoliamo il costo effettivo di $n$ operazioni:
+\[\renewcommand{\arraystretch}{1.3}
+    T(n)\begin{array}[t]{cll}
+    = & \sum_{i=1}^nc_i\\
+    = & n + \sum_{j=1}^{\lfloor n/d\rfloor}d\cdot j\\
+    = & n + d\sum_{j=1}^{\lfloor n/d\rfloor}j\\
+    = & n + d\frac{\left(\lfloor n/d\rfloor+1\right)\lfloor n/d\rfloor}{2}\\
+    \leq & n + \frac{\left(n/d+1\right)n}{2} & \quad\emph{Rimozione dell'intero inferiore}\\
+    = & n + \frac{n^2/d+n}{2}=O(n^2)
+\end{array}\]
+Il \emph{costo ammortizzato} vale:
+\[\frac{T(n)}{n}=\frac{O(n^2)}{n}=O(n)\]
+
+\paragraph{Incremento dinamico}
+Supponendo che ad ogni incremento la dimensione del vettore venga raddoppiata, il
+costo effettivo vale:
+\[c_i=\begin{cases}
+    i & \text{se}\ \exists k\in\mathbb{Z}^+_0:i=2^k+1\\
+    1 & \text{altrimenti}
+\end{cases}\]
+\newpage\noindent
+Se la dimensione iniziale è 1, il costo delle prime 17 operazioni è il seguente:
+\begin{table}[h!]
+    \renewcommand{\arraystretch}{1.2}
+    \centering
+    \begin{tabular}{|c|l|}
+        \hline
+        \bm{$n$} & \textbf{Costo}\\
+        \hline
+        1 & 1\\
+        \hline
+        2 & $1+2^0=2$\\
+        \hline
+        3 & $1+2^1=3$\\
+        \hline
+        4 & 1\\
+        \hline
+        5 & $1+2^2=5$\\
+        \hline
+        6 & 1\\
+        \hline
+        7 & 1\\
+        \hline
+        8 & 1\\
+        \hline
+        9 & $1+2^3=9$\\
+        \hline
+        10 & 1\\
+        \hline
+        11 & 1\\
+        \hline
+        12 & 1\\
+        \hline
+        13 & 1\\
+        \hline
+        14 & 1\\
+        \hline
+        15 & 1\\
+        \hline
+        16 & 1\\
+        \hline
+        17 & $1+2^4=17$\\
+        \hline
+    \end{tabular}
+\end{table}
+
+\noindent Il costo effettivo di $n$ operazioni vale:
+\[\renewcommand{\arraystretch}{1.3}
+    T(n)\begin{array}[t]{cll}
+    = & \sum_{i=1}^nc_i\\
+    = & n + \sum_{j=0}^{\lfloor\log n\rfloor}2^j\\
+    = & n + 2^{\lfloor\log n\rfloor+1}-1\\
+    \leq & 2^{\log(n)+1}-1 & \quad\emph{Rimozione dell'intero inferiore}\\
+    = & n+2n-1=O(n)
+\end{array}\]
+e di conseguenza quello \emph{ammortizzato} è:
+\[\frac{T(n)}{n}=\frac{O(n)}{n}=O(1)\]
+Giunti a questo punto, siamo riusciti a dimostrare che l'incremento dinamico
+ha un costo inferiore all'incremento fisso.
+
+\subsection{Cancellazione}
+Se il vettore non è ordinato, rimuovere un elemento significa spostare l'ultimo
+elemento della \emph{sequenza} nella posizione dell'elemento da rimuovere.
+
+Per ridurre lo spreco di memoria, è opportuno ridurre la dimensione del vettore
+quando il \emph{fattore di carico} $\alpha=\frac{\emph{Dim}}
+{\emph{Capacità}}$\footnotemark\ scende sotto una certa soglia.
+\footnotetext{Il valore \emph{Dim} rappresenta il numero di elementi che
+in dato momento sono presenti nella struttura}
+
+L'operazione di riduzione della \emph{capacità} è detta \emph{contrazione} e,
+similmente a quanto avviene con l'estensione, prevede che venga allocato un nuovo
+vettore di dimensione inferiore a quella attuale, che vi vengano copiati i
+valori del vettore originale e che quindi quest'ultimo venga eliminato.
+
+\bigskip\noindent
+Ma qual è la soglia di \emph{contrazione} ottimale?
+
+Una prima strategia potrebbe essere quella di dimezzare la \emph{capacità} quando
+\emph{Dim} raggiunge la metà della \emph{capacità}, cioè quando $\alpha=
+\frac{1}{2}$. Il problema di questa scelta è che dopo la \emph{contrazione}
+nella struttura non rimangono posizioni libere e quindi un successivo inserimento
+richiederebbe di fare subito un'\emph{espansione}.
+
+Una strategia migliore è quella invece di scegliere $\alpha=\frac{1}{4}$. In
+questo modo, se quando viene raggiunta la \emph{soglia di contrazione}, si va
+a dimezzare la \emph{capacità}, il \emph{fattore di carico} $\alpha$, invece di
+aumentare fino a $1$ si fermerà a $\frac{1}{2}$ concedendoci di aggiungere al
+vettore tanti elementi quanti sono quelli già presenti prima di dover effettuare
+un'\emph{espansione}.
+
+\paragraph{Analisi del costo}
+Proviamo a stimare il costo di questa seconda soluzione utilizzando il
+\emph{metodo del potenziale}. Scegliamo una funzione di potenziale $\Phi$ che
+vale 0 all'inizio e immediatamente dopo un'\emph{espansione} o una
+\emph{contrazione} e il cui valore cresca fino a raggiungere il numero di
+elementi presenti nella struttura quando $\alpha=1$ e diminuisca fino a un
+quarto quando $\alpha$ si riduce alla \emph{soglia di contrazione}.
+
+Quindi, la definizione di $\Phi$ è la seguente:
+\[\Phi=\begin{cases}
+    2\cdot\emph{Dim}-\emph{Capacità} & \text{se}\ \alpha\geq\frac{1}{2}\\
+    \frac{\emph{Capacità}}{2}-\emph{Dim} & \text{se}\ \alpha<\frac{1}{2}
+\end{cases}\]
+Vediamone il valore in alcuni casi particolari:
+\begin{itemize}
+    \item $\alpha=\frac{1}{2}$: è stata appena effettuata un'\emph{espansione} o
+    una \emph{contrazione} e quindi $\Phi=0$;
+    \item $\alpha=1$ la struttura è piena, ovvero $\emph{Dim}=\emph{Capacità}$
+    e quindi $\Phi=\emph{Dim}=\emph{Capacità}$;
+    \item $\alpha=\frac{1}{4}$: il \emph{fattore di carico} ha raggiunto la
+    \emph{soglia di contrazione}, ovvero $\emph{Dim}=\frac{\emph{Capacità}}
+    {4}$ e quindi $\Phi=\emph{Dim}$;
+\end{itemize}
+Una funzione di potenziale di questo tipo ci garantisce che il potenziale presente
+nel momento in cui si effettua un'\emph{espansione} o una \emph{contrazione} sia
+sufficiente per \q{pagare} quelle stesse operazioni.
+
+Proviamo quindi a calcolare il \emph{costo ammortizzato} in base ai diversi valori
+di $\alpha$:
+\begin{itemize}
+    \item $\alpha\geq\frac{1}{2}$:
+    \[a_i\begin{array}[t]{cl}
+        = & c_i + \Phi_i - \Phi_{i-1}\\
+        = & 1 + (2\emph{Dim}_i - \emph{Capacità}_i) - (2\emph{Dim}_{i-1}-\emph{Capacità}_{i-1})\\
+        = & 1 + 2(\emph{Dim}_{i-1}+1) - \emph{Capacità}_i - 2\emph{Dim}_{i-1}+\emph{Capacità}_{i-1}\\
+        = & 1 + 2(\emph{Dim}_{i-1}+1) - \emph{Capacità}_{i-1} - 2\emph{Dim}_{i-1}+\emph{Capacità}_{i-1}\\
+        = & 1 + 2\emph{Dim}_{i-1}+2 - \emph{Capacità}_{i-1} - 2\emph{Dim}_{i-1}+\emph{Capacità}_{i-1}\\
+        = & 3
+    \end{array}\]
+    \item $\alpha=1$:
+    \[a_i\begin{array}[t]{cl}
+        = & c_i+\Phi_i-\Phi_{i-1}\\
+        = & 1 + \emph{Dim}_{i-i}+(2\emph{Dim}_i+\emph{Capacità}_i)-(2\emph{Dim}_{i-1}-\emph{Capacità}_{i-1})\\
+        = & 1 + \emph{Dim}_{i-i}+2(\emph{Dim}_{i-1}+1)-2\emph{Dim}_{i-1}-2\emph{Dim}_{i-1}+\emph{Dim}_{i-1}\\
+        = & 3
+    \end{array}\]
+\end{itemize}
+In entrambi i casi il costo è $O(1)$.
+
+\begin{note}
+    Poiché non è conveniente che il \emph{fattore di carico} $\alpha$ cresca
+    troppo, regole di ridimensionamento simili vengono usate anche nelle
+    \emph{tabelle hash}. Solitamente, quando $\alpha$ raggiunge una soglia
+    di $0.5$ o $0.75$ la \emph{tabella hash} viene estesa raddoppiandone la
+    \emph{capacità}.  Quest'operazione, oltre che dimezzare il \emph{fattore di
+    carico}, rimuove anche tutti gli elementi \texttt{deleted}. Il costo nel
+    caso peggiore è $O(m)$, ma quello \emph{ammortizzato} è $O(1)$.
+\end{note}
+
+\section{Discussione sugli insiemi}
+Giunti a questo punto della trattazione, abbiamo introdotto una vasta gamma di
+\emph{strutture dati} più o meno complesse e caratterizzata da costi più o meno
+convenienti. Abbiamo anche visto che \emph{strutture dati astratte} possono
+essere implementate utilizzando diverse \emph{strutture dati concrete} e che
+questo influenza il costo delle operazioni. Per chiudere il cerchio, mettiamo ora
+a confronto diverse implementazioni di un \emph{\hyperref[def:28]{insieme}}.
+
+\subsection{Insieme come vettore di booleani}
+Quando si a che fare con $m$ valori ordinabili e consecutivi è possibile
+implementare un \emph{insieme} per quei valori come un vettore di booleani di
+dimensione $m$. Ogni posizione del vettore vale \texttt{true} l'elemento associato
+appartiene all'insieme, altrimenti vale \texttt{false}.
+
+Vediamone l'implementazione:
+\begin{code}{Insieme come vettore di booleani}
+\begin{minipage}[t]{0.48\textwidth}
+\bc{boolean}[] V\hfill\com{Vettore di booleani}
+\bc{int} size\hfill\com{Numero di elementi presenti}
+\bc{int} capacity\hfill\com{Dimensione massima}
+\nl\ind\bc{SET} Set(\bc{int} m)\\
+    \bc{SET} t = new \bc{SET}\\
+    t.size = 0\\
+    t.capacity = m\\
+    t.V = new \bc{int}[1\dots m] = {false}\\
+    return t\\
+
+\ind\bc{boolean} contains(\bc{int} x)\\
+    \indf if (1 $\leq$ x $\leq$ capacity) then\\
+        return V[x]\\
+    \indf else\\
+        return false
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\ind\bc{int} size()\\
+    return size\\
+
+\ind insert(\bc{int} x)\\
+    \indf if (1 $\leq$ x $\leq$ capacity) then\\
+        \indff if (not V[x]) then\\
+            size = size + 1\\
+            V[x] = true\\
+
+\ind remove(\bc{int} x)\\
+\indf if (1 $\leq$ x $\leq$ capacity) then\\
+    \indff if (V[x]) then\\
+        size = size - 1\\
+        V[x] = false
+\end{minipage}
+\newline\nl\ind\bc{SET} union(\bc{SET} A, \bc{SET} B)\\
+    \bc{int} newSize = max(A.capacity, B.capacity)\\
+    \bc{SET} C = Set(newSize)\\
+    \ind for (i = 1 to A.capacity) do\\
+        \indf if (A.contains(i)) then\\
+            \indff C.insert(i)\\
+    \ind for (i = 1 to B.capacity) do\\
+        \indf if (B.contains(i)) then\\
+            \indff C.insert(i)\\
+    \ind return C
+\end{code}
+\begin{codecont}
+\ind\bc{SET} difference(\bc{SET} A, \bc{SET} B)\\
+    \bc{SET} C = Set(A.capacity)\\
+    for (i = 1 to A.capacity) do\\
+        \indf if (A.contains(i) and not B.contains(i)) then\\
+            \indff C.insert(i)\\
+    \ind return C\\
+\nl\ind\bc{SET} intersection(\bc{SET} A, \bc{SET} B)\\
+    \bc{int} newSize = min(A.capacity, B.capacity)\\
+    \bc{SET} C = Set(newSize)\\
+    for (i = 1 to newSize) do\\
+        \indf if (A.contains(i) and B.contains(i)) do\\
+            \indff C.insert(i)\\
+    \indent return C
+\end{codecont}
+
+\bigskip\noindent
+I vantaggi di questa implementazione sono certamente la semplicità e
+l'efficienza delle operazioni di inserimento, rimozione e verifica di appartenenza.
+Tuttavia, la memoria occupata è indipendente dal numero di elementi effettivamente
+contenuti, così come lo sono le operazioni che visitano tutti gli elementi.
+Ad esempio, le operazioni di \texttt{union}, \texttt{difference} e
+\texttt{intersection} hanno costo $O(m)$.
+
+\subsection{Insieme come lista non ordinata}
+In un \emph{insieme} implementato come \emph{lista} non ordinata le operazioni
+di inserimento, ricerca e rimozione hanno un costo $O(n)$ dove $n$ è il numero
+di elementi presenti. Per le operazioni di unione, intersezione e differenza
+non va meglio, infatti dati due \emph{insiemi} $A$ e $B$ di dimensione $n_A$ e
+$n_B$, la \emph{complessità} è $O(n_An_B)$.
+
+\begin{note}
+    Se supponiamo di sapere che un elemento non appartiene all'\emph{insieme},
+    l'inserimento può avere costo $O(1)$.
+\end{note}
+
+\begin{minicode}{Insieme come lista non ordinata}
+\ind\bc{SET} union(\bc{SET} A, \bc{SET} B)\\
+    \bc{SET} C = Set()\\
+    \indf foreach (s $\in$ A) do\hfill\com{Costa $O(n_A)$}
+        C.insert(s)\hfill\com{Costa $O(n_C)$\footnotemark}
+    \indf foreach (s $\in$ B) do\hfill\com{Costa $O(n_B)$}
+        C.insert(s)\hfill\com{Costa $O(n_C)$}
+    \indf return C\hfill\com{Abbiamo pagato $O(n_An_C+n_Bn_C)=O(n_Cm)$}
+
+\ind\bc{SET} difference(\bc{SET} A, \bc{SET} B)\\
+    \bc{SET} C = Set()\\
+    \indf foreach (s $\in$ A) do\hfill\com{Costa $O(n_A)$}
+        \indff if (not B.contains(s))\hfill\com{Costa $O(n_B)$}
+            C.insert(s)\hfill\com{Possiamo supporre ci costi $O(1)$}
+    \indf return C\hfill\com{Abbiamo pagato $O(n_An_B1)=O(n_An_B)$}
+\end{minicode}
+\footnotetext{Avremmo anche potuto supporre di pagare $O(1)$ in quanto
+sicuramente nessuno degli elementi di $A$ apparteneva a $C$}
+\begin{codecont}
+\ind\bc{SET} intersection(\bc{SET} A, \bc{SET} B)\\
+    \bc{SET} C = Set()\\
+    \ind foreach (s $\in$ A) do\hfill\com{Costa $O(n_A)$}
+        \indf if (B.contains(s))\hfill\com{Costa $O(n_B)$}
+            \indff C.insert(s)\hfill\com{Possiamo supporre ci costi $O(1)$}
+    \indent return C\hfill\com{Abbiamo pagato $O(n_An_B1)=O(n_An_B)$}
+\end{codecont}
+
+\begin{note}
+    Il costo dell'implementazione come vettore non ordinato è in tutto e per
+    tutto equivalente all'implementazione come \emph{lista} non ordinata.
+\end{note}
+
+\subsection{Insieme come lista ordinata}
+Con le \emph{liste} ordinate i costi rimangono identici ad eccezione di
+unione, intersezione e differenza il cui costo si riduce a $O(n)$.
+
+\begin{minicode}{Insieme come lista ordinata}
+\ind\bc{SET} union(\bc{SET} A, \bc{SET} B)\\
+    \bc{SET} C = Set()\\
+    \bc{POS} pos$_A$ = A.head()\\
+    \bc{POS} pos$_B$ = B.head()\\
+    \indf while (not A.finished(pos$_A$) and not B.finished(pos$_B$)) do\hfill\com{$O(max(n_A,n_B))$}
+        C.insert(C.tail(), A.read(pos$_A$))\hfill\com{L'inserimento in coda costa $O(1)$}
+        \indff if (A.read(pos$_A$) == B.read(pos$_B$)) then\\    
+            pos$_A$ = A.next(pos$_A$)\\
+            pos$_B$ = B.next(pos$_B$)\\
+        \indff else if (A.read(pos$_A$) < B.read(pos$_B$)) then\\
+            pos$_A$ = A.next(pos$_A$)\\
+        \indff else\\
+            pos$_B$ = B.next(pos$_B$)\\
+    \indf return C\\
+
+\ind\bc{SET} difference(\bc{SET} A, \bc{SET} B)\\
+    \bc{SET} C = Set()\\
+    \bc{POS} pos$_A$ = A.head();\\
+    \bc{POS} pos$_B$ = B.head();\\
+    \indf while (not A.finished(pos$_A$) and not B.finished(pos$_B$)) do\hfill\com{$O(max(n_A,n_B))$}
+        \indff if  (A.read(pos$_A$) $\neq$ B.read(pos$_B$)) then\\
+            C.insert(C.tail(), A.read(pos$_A$))\hfill\com{L'inserimento in coda costa $O(1)$}
+            \indfff if (A.read(pos$_A$) > B.read(pos$_B$)) then\\
+                pos$_B$ = B.next(pos$_B$)\\
+            \indfff pos$_A$ = A.next(pos$_A$)\\
+    \indf return C\\
+\end{minicode}
+\newpage
+\begin{codecont}
+\ind\bc{SET} intersection(\bc{SET} A, \bc{SET} B)\\
+    \bc{SET} C = Set()\\
+    \bc{POS} pos$_A$ = A.head();\\
+    \bc{POS} pos$_B$ = B.head();\\
+    \ind while (not A.finished(pos$_A$) and not B.finished(pos$_B$)) do\hfill\com{$O(max(n_A,n_B))$}
+        \indf if  (A.read(pos$_A$) == B.read(pos$_B$)) then\\
+            \indff C.insert(C.tail(), A.read(pos$_A$))\hfill\com{L'inserimento in coda costa $O(1)$}
+            \indff pos$_A$ = A.next(pos$_A$)\\
+            \indff pos$_B$ = B.next(pos$_B$)\\
+        \indf else if (A.read(pos$_A$) < B.read(pos$_B$)) then\\
+            \indff pos$_A$ = A.next(pos$_A$)\\
+        \indf else\\
+            \indff pos$_B$ = B.next(pos$_B$)\\
+    \indent return C\\
+\end{codecont}
+\begin{note}
+    Il costo dell'implementazione come vettore ordinato è equivalente
+    all'implementazione come \emph{lista} ordinata, tranne la funzione di
+    \texttt{contains} che ha costo $O(\log n)$ in quanto su un vettore ordinato
+    è possibile usare un algoritmo di ricerca dicotomica.
+\end{note}
+
+\subsection{Confronto generale}
+In generale, se $n$ è il numero di elementi presenti in un \emph{insieme} ed \hspace{-3pt}
+$m$ è la capacità di quell'\emph{insieme}, la \emph{complessità} delle operazioni
+a seconda dell'implementazione usata è riassunta dalla tabella sottostante.
+
+\begin{table}[h!]
+\resizebox{\linewidth}{!}{
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|l|c|c|c|c|c|c|}
+    \hline
+    {
+        \diagbox[height=40pt, width=115pt, outerleftsep=-10pt]
+        {\textbf{Struttura}}{\textbf{Operazione}}
+    } &
+    $\begin{array}[c]{c}
+        \textbf{\texttt{contains}}\\
+        \textbf{\texttt{lookup}}
+    \end{array}$ & \textbf{\texttt{insert}} &   
+    \textbf{\texttt{remove}} & \textbf{\texttt{min}} & \textbf{\texttt{foreach}}
+    & \textbf{Ordinabile}\\
+    \hline
+    Vettore booleano & $O(1)$ & $O(1)$ & $O(1)$ & $O(m)$ & $O(m)$ & Sì\\
+    \hline
+    Lista non ordinata & $O(n)$ & $O(n)$ & $O(n)$ & $O(n)$ & $O(n)$ & No\\
+    \hline
+    Lista ordinata & $O(n)$ & $O(n)$ & $O(n)$ & $O(1)$ & $O(n)$ & Sì\\
+    \hline
+    Vettore ordinato & $O(\log n)$ & $O(n)$ & $O(n)$ & $O(1)$ & $O(n)$ & Sì\\
+    \hline
+    Albero bilanciato & $O(\log n)$ & $O(\log n)$ & $O(\log n)$ & $O(\log n)$ & $O(n)$ & Sì\\
+    \hline
+    $\begin{array}[c]{c}
+        \text{Tabella Hash}\\
+        \text{Mem. interna}
+    \end{array}$ & $O(1)$ & $O(1)$ & $O(1)$ & $O(m)$ & $O(m)$ & No\\
+    \hline
+    $\begin{array}[c]{c}
+        \text{Tabella Hash}\\
+        \text{Mem. esterna}
+    \end{array}$ & $O(1)$ & $O(1)$ & $O(1)$ & $O(m+n)$ & $O(m+n)$ & No\\
+    \hline
+\end{tabular}}
+\end{table}

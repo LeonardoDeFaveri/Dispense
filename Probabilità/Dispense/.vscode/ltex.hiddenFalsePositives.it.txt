@@ -1,0 +1,22 @@
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q.\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Qcompat=1.15.\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q.(,,P).\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\Q.(,,P).\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q.(,).\\E$"}
+{"rule":"ITALIAN_WORD_REPEAT_RULE","sentence":"^\\QE_i_i I.\\E$"}
+{"rule":"ST_04_001","sentence":"^\\Q.1.\\E$"}
+{"rule":"ST_04_001","sentence":"^\\Q[2]#2._#1.\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\Qsta nel fatto che, nel caso di un'algebra., la terza proprietà è vera solo per unioni finite di insiemi, mentre è vera per un'infinità numerabile di insiemi nel caso di una \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q-algebra..\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\Qallora è anche un'algebra..\\E$"}
+{"rule":"ST_03_001","sentence":"^\\QUn evento \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q si verifica se il risultato osservato dell'esperimento aleatorio appartiene ad \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"ST_03_001","sentence":"^\\QSiano \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q uno spazio di probabilità ed \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q un evento.\\E$"}
+{"rule":"ER_01_001","sentence":"^\\Q\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q è discontinua a costante a tratti con un numero al più numerabile di discontinuità (punti di discontinuità).\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Qdi \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q (pdf).\\E$"}
+{"rule":"ER_01_001","sentence":"^\\Qnon è continua., inoltre la funzione non è nemmeno costante a tratti quindi non si tratta nemmeno di una variabile aleatoria discreta..\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Qrhyper(nn, m, n, k).\\E$"}
+{"rule":"ER_01_001","sentence":"^\\QIn una partita di Premier League vengono segnati, in media, 2.5 goal a partita.\\E$"}
+{"rule":"ER_01_001","sentence":"^\\Qil numero di goal a partita?\\E$"}
+{"rule":"ST_03_001","sentence":"^\\Q[\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q]: conta il numeri di oggetti di tipo \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q estratti, senza reimmissione, da un insieme di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q oggetti di tipo \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q ed \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q di tipo \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"ER_01_001","sentence":"^\\Q\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q è discontinua e costante a tratti con un numero al più numerabile di discontinuità (punti di discontinuità).\\E$"}
+{"rule":"ST_03_001","sentence":"^\\QDati due eventi \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q in uno spazio di probabilità \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q e fissato un terzo evento \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q ed \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q sono indipendenti condizionatamente a \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q se: \\E(?:Dummy|Ina|Jimmy-)[0-9]+$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q.=.\\E$"}

@@ -1,0 +1,61 @@
+\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Could ecosystem}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Some definitions}{5}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Virtualization}{6}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Single-tenancy VS multi-tenancy}{6}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Elasticity and resource provisioning}{7}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Delivery models}{7}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Software as a service}{7}{subsection.2.2.1}%
+\contentsline {paragraph}{Examples}{8}{paragraph*.6}%
+\contentsline {subsection}{\numberline {2.2.2}Platform as a Service}{8}{subsection.2.2.2}%
+\contentsline {paragraph}{Examples}{8}{paragraph*.7}%
+\contentsline {subsection}{\numberline {2.2.3}Infrastructure as a Service}{8}{subsection.2.2.3}%
+\contentsline {paragraph}{Examples}{8}{paragraph*.8}%
+\contentsline {section}{\numberline {2.3}Deployment models}{8}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Public cloud}{8}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Private cloud}{8}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Community cloud}{9}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Hybrid cloud}{9}{subsection.2.3.4}%
+\contentsline {chapter}{\numberline {3}Virtualization}{10}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction}{10}{section.3.1}%
+\contentsline {paragraph}{Advantages}{10}{paragraph*.9}%
+\contentsline {paragraph}{Disadvantages}{11}{paragraph*.10}%
+\contentsline {subsection}{\numberline {3.1.1}Some definitions}{11}{subsection.3.1.1}%
+\contentsline {section}{\numberline {3.2}CPU virtualization}{12}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Some definitions}{12}{subsection.3.2.1}%
+\contentsline {paragraph}{System call invocation and hardware interrupts}{13}{paragraph*.12}%
+\contentsline {paragraph}{Going back to virtualization}{14}{paragraph*.14}%
+\contentsline {subsection}{\numberline {3.2.2}Trap \& emulate paradigm}{14}{subsection.3.2.2}%
+\contentsline {paragraph}{System call handling}{14}{paragraph*.15}%
+\contentsline {paragraph}{Privileged instruction handling}{15}{paragraph*.16}%
+\contentsline {paragraph}{Hardware interrupt handling}{15}{paragraph*.17}%
+\contentsline {paragraph}{Problems with systems virtualization}{15}{paragraph*.18}%
+\contentsline {paragraph}{Possible solutions}{15}{paragraph*.19}%
+\contentsline {paragraph}{Dynamic binary translation}{16}{paragraph*.20}%
+\contentsline {subsection}{\numberline {3.2.3}Paravirtualization}{16}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Hardware assisted virtualization}{16}{subsection.3.2.4}%
+\contentsline {paragraph}{VMX instructions}{17}{paragraph*.22}%
+\contentsline {paragraph}{Virtual machine control structure}{18}{paragraph*.23}%
+\contentsline {section}{\numberline {3.3}Memory virtualization}{18}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Memory management in general}{18}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Memory management in virtualised environments}{19}{subsection.3.3.2}%
+\contentsline {paragraph}{Shadow page table creation}{19}{paragraph*.27}%
+\contentsline {paragraph}{Problems with shadow page table}{20}{paragraph*.28}%
+\contentsline {subsection}{\numberline {3.3.3}Hardware assisted memory virtualization}{20}{subsection.3.3.3}%
+\contentsline {paragraph}{Tagged TLBs}{20}{paragraph*.30}%
+\contentsline {section}{\numberline {3.4}I/O virtualization}{20}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Device emulation}{20}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Paravirtualized devices}{21}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Direct assignment}{21}{subsection.3.4.3}%
+\contentsline {paragraph}{Hardware assisted direct assignment}{21}{paragraph*.31}%
+\contentsline {section}{\numberline {3.5}Hypervisors architectures}{22}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Type 1 architecture}{22}{subsection.3.5.1}%
+\contentsline {paragraph}{Examples}{22}{paragraph*.33}%
+\contentsline {subsection}{\numberline {3.5.2}Type 2 architecture}{22}{subsection.3.5.2}%
+\contentsline {paragraph}{Examples}{22}{paragraph*.34}%
+\contentsline {subsection}{\numberline {3.5.3}Hybrid architecture}{22}{subsection.3.5.3}%
+\contentsline {paragraph}{Examples}{22}{paragraph*.35}%
+\contentsline {section}{\numberline {3.6}OS-level virtualization}{22}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Lightweigth virtualization}{23}{subsection.3.6.1}%
+\contentsline {paragraph}{Why is process isolation so important?}{24}{paragraph*.37}%
+\contentsline {subsection}{\numberline {3.6.2}Linux cgroups}{24}{subsection.3.6.2}%

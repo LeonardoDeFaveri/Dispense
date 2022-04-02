@@ -1,0 +1,182 @@
+\chapter{Could ecosystem}
+\section{Some definitions}
+\begin{figure}[h!]
+    \centering
+    \img{cloud-computing-5points.png}{0.7}
+    \caption{Five key aspects of \emph{cloud computing}}
+\end{figure}
+\begin{figure}[h!]
+    \centering
+    \img{cloud-computing-nist.png}{1}
+    \caption{\emph{NIST} reference model for \emph{cloud computing}}
+\end{figure}
+\begin{note}
+    A carrier is someone who provides access to a cloud service, such as
+    Telecom, while a broker is a subject that handles the delivery of cloud
+    services to users, such as a portal to the cloud (e.g. Booking.com).
+\end{note}
+
+\noindent Before analysing some key aspects of \emph{cloud computing}, some
+definitions are required.
+
+\subsection{Virtualization}
+\begin{definition}[Virtualization]
+    Virtualization allows the abstraction of computing resources by hiding
+    their physical characteristics from the way system, applications and users
+    interact with them.
+\end{definition}
+
+\begin{figure}[h!]
+    \centering
+    \subfloat[Non-virtualized system]{\img{non-virtualized-system.png}{0.38}}
+    \hspace{1.5cm}
+    \subfloat[Virtualized system]{\img{virtualized-system.png}{0.38}}
+    \caption{General architecture of virtualized systems}
+\end{figure}
+
+\subsection{Single-tenancy VS multi-tenancy}
+\begin{definition}[Single-tenancy]
+    With single-tenancy each user has its own software instance.
+\end{definition}
+\begin{definition}[Multi-tenancy]
+    With multi-tenancy a single isntance of a software can serve multiple users.
+\end{definition}\noindent
+As a consequence of these definitions, we can say that with \emph{single-tenancy}
+each user requires a dedicated set of resources to fulfill its needs, while
+\emph{multi-tenancy} allows sharing resources managment and costs among all of
+them.
+
+Actually, in a \emph{multi-tenancy} enviroment, a group of users who share
+common access with specific privileges to the software isntances, is called
+\emph{tenent}. An instance includes, among others, data, configurations and
+users management.
+
+\newpage
+\begin{figure}[ht!]
+    \centering
+    \subfloat[\emph{Single-tenancy}]{\img{single-tenancy.png}{0.33}}
+    \hspace{2mm}
+    \subfloat[\emph{Single-tenancy} for database and \emph{multi-tenancy} for
+    the application]{\img{partial-multi-tenancy.png}{0.33}}
+    \hspace{2mm}
+    \subfloat[\emph{Multi-tenancy}]{\img{full-multi-tenancy.png}{0.3}}
+    \caption{\emph{Single-tenancy} VS \emph{multi-tenancy}}
+\end{figure}
+
+\subsection{Elasticity and resource provisioning}
+Resource provisioning is the ability of adding or removing resources at a fine
+grain (e.g. one server at a time) with a short lead time (e.g. minutes). This
+allows a close matching of resources and workloads and, together with the
+\emph{pay-as-you-go} model, brings elasticity to the users who no longer need
+to worry about sudden spikes of resource usage. The key advantage of elasticity
+is that it reduces the problems resulting from \emph{underprovisioning} and
+\emph{overprovisioning}.
+
+\emph{Overprovisioning} happens when the workload is using much less resources
+than the ones that have been allocated, thus resulting is a waste.
+Simmetrically, \emph{underprovisioning} means that the available resources are
+insufficient to serve the requests, thus resulting in bad performances and
+possible loss of clients.
+
+When users relies on proprietary resources (e.g. company's private servers) the
+amount of allocated resources must be determined by the quantity that is
+required to meet the highest predicted pick. Since it's difficult to predict
+picks, most of the time there will be redundant resources.
+
+Another advantage of the way \emph{cloud computing} provides resources is on costs,
+because with a \emph{cloud approch} there isn't any inital cost for buying and
+setting up the infrastructure.
+
+\section{Delivery models}
+Going back to the key aspects of \emph{cloud computing}, delivery models define
+the kind of product that is provided. There are three main types of models:
+\begin{itemize}
+    \item \emph{Software-as-a-Service} (\emph{SaaS}): an application is provided
+    to the users through the web;
+    \item \emph{Platform-as-a-Service} (\emph{PaaS}): APIs and deployment
+    environments are provided to developers;
+    \item \emph{Infrastructure-as-a-Service} (\emph{IaaS}): computing resources
+    are provided to system administrators;
+\end{itemize}
+
+\subsection{Software as a service}
+Applications are supplied by service providers and users have no control over their
+capabilities and underlying cloud infrastructure. This model isn't suitable for
+real-time applications or applications for which data isn't allows to be stored
+externally.
+
+\paragraph{Examples} Google Drive, Google Docs, Spotify
+
+\subsection{Platform as a Service}
+\emph{PaaS} allows developers to deploy applications (consumer-created or acquired
+from others) using tools and programming languages supported by the service
+provider. Developers have controll over the deployed applications and, possibly,
+over the app hosting environment. However, they still don't have access to the
+underlying insfrastructure (e.g. network devices, OSs, storage).
+
+
+This model isn't indicated for portable applications, apps in which proprietary
+programming languages are used or which require hardware and software customization.
+
+\paragraph{Examples} Google App Engine, Heroku
+
+\subsection{Infrastructure as a Service}
+Services provided by this model includes: server hosting, storage, computing
+hardware, operating systems, virtual instances, load balancing, internet access
+and bandwidth provisioning.
+
+System administrators can manage OSs, storage, deployed applications and may
+even have little control over network components such as firewalls. So, they're
+able to deploy arbitrary software including operating systems. However, there
+is still a below instrastructure that can't be accessed.
+
+\paragraph{Examples} Amazon EC2
+
+\begin{note}
+    Everything can be deployed ad a service, for example databases or hardware,
+    thus \emph{Database-as-a-Service} and \emph{Hardware-as-a-Service} may
+    exist.
+\end{note}
+
+\section{Deployment models}
+Deployment models describe the way the cloud infrastructure may be accessed
+and by whom and who is the owner. In particular, there are four types of
+environment.
+
+\subsection{Public cloud}
+\begin{itemize}
+    \item \emph{Consumer}: general users or large industrial group;
+    \item \emph{Service provider}: there's an organization that settles down
+    and manages the infrastructure;
+    \item \emph{Resource location}: all resources are within the premises of the
+    cloud provider;
+    \item \emph{Multi-tenancy model}: different consumers are served by the same
+    instances;
+\end{itemize}
+
+\subsection{Private cloud}
+\begin{itemize}
+    \item \emph{Consumer}: a specific organization;
+    \item \emph{Service provider}: the same organization that uses it or a third
+    party one;
+    \item \emph{Resource location}: it can either be on-premises if the organization
+    doesn't want to remotely host data, on off-premises if it relyes on a third
+    party private cloud;
+\end{itemize}
+
+\subsection{Community cloud}
+\begin{itemize}
+    \item \emph{Consumer}: a community composed by one or more organizations
+    which share common concerns sush as their mission, policies and security
+    considerations;
+    \item \emph{Service provider}: either the organizations or a third party;
+    \item \emph{Resource location}: either on-premises and off-promises;
+\end{itemize}
+
+\subsection{Hybrid cloud}
+It's the composition of more deployment models which remain unique
+entities, but are bound together by standardised or proprietary technologies
+that enables data and applications portability.
+
+For example an organization might use public cloud for some aspects of its
+business and a private one for its sensitive data.

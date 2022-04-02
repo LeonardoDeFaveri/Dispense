@@ -1,0 +1,986 @@
+\chapter{Funzioni di ricorrenza}
+Quando  si calcola la \emph{complessità} di un algoritmo ricorsivo, questa viene
+espressa tramite un'\emph{equazione} o una \emph{funzione di ricorrenza}, ovvero
+una formula matematica definita in maniera ricorsiva.
+
+Un esempio di \emph{equazione di ricorrenza} è quella che descrive il costo
+dell'algoritmo \hyperlink{sec:merge_sort}{\emph{Merge sort}}:
+\[T(n)\footnote{Questa descrive il caso generale, mentre la precedente
+si basava sull'ipotesi di array di dimensione $2^i$ con $i\in\mathbb{N}$}
+=\begin{cases}
+    T(\lfloor n/2\rfloor) + T(\lceil n/2\rceil) + \Theta(n) & n>1\\
+    \Theta(1) & n\leq 1
+\end{cases}\]
+Il nostro obiettivo è ottenere, quando possibile, una \emph{formula}, o
+\emph{forma chiusa}, che rappresenti la \emph{classe di complessità} della
+funzione. Nell'esempio del \emph{Merge sort} la \emph{formula chiusa} è:
+\[T(n)=\Theta(n\log n)\]
+
+\bigskip\noindent In realtà, le \emph{equazioni di ricorrenza} possono essere
+usate anche per risolvere problemi. Vediamone un esempio:
+
+\begin{problem}[Applicazione delle funzioni di ricorrenza nella risoluzione di problemi]
+    Un bambino scende una scala composta da $n$ scalini. Ad ogni passo,
+    può decidere di fare $1,2,3,4$ scalini alla volta. Determinare in quanti
+    modi diversi può scendere le scale.
+    
+    Ad esempio, se $n=7$, alcuni dei modi possibili sono i seguenti:
+    \begin{itemize}
+        \item 1,1,1,1,1,1,1;
+        \item 1,2,4;
+        \item 4,2,1;
+        \item 2,2,2,1;
+        \item 1,2,2,1,1;
+    \end{itemize}
+
+    \newpage
+    \paragraph{Soluzione} Sia $M(n)$ il numero di modi in cui è possibile scegliere
+    $n$ scalini. $M(n)$ può essere espresso come segue:
+    \[M(n)=\begin{cases}
+        0 & n<0\\
+        1 & n=0\\
+        \sum_{k=1}^4M(n-k) & n>0
+    \end{cases}\]
+\end{problem}\noindent
+Questa \emph{ricorrenza} può poi essere trasformata in un algoritmo\footnote{Il
+risultato sono i \emph{numeri di Tetranacci}: $1,1,2,4,8,15,29,56,108,208, 401,
+773,1490,2872, 5536,\dots$.} tramite \emph{ricorsione} o \emph{programmazione
+dinamica}.
+
+\section{Studio delle equazioni di ricorrenza}
+Vediamo di seguito alcuni modi per analizzare le \emph{funzioni di ricorrenza}
+e ricavarne la \emph{forma chiusa}.
+
+\subsection{Metodo dell'albero di ricorsione}
+Il \emph{metodo dell'albero di ricorsione} (o per \emph{livelli}) prevede che la
+\emph{ricorrenza} venga \q{srotolata} in un albero i cui nodi rappresentano il
+costo ai vari livelli della ricorsione.
+
+\begin{eg}[Esempio semplice di analisi con albero di ricorsione]
+    Sia $T(n)$ la seguente funzione di ricorrenza:
+    \[T(n)=\begin{cases}
+        T(n/2)+b & n>1\\
+        c & n\leq1
+    \end{cases}\]
+
+    \bigskip\noindent
+    Ipotizziamo, per semplicità, che $n=2^k$, quindi proviamo a
+    risolvere $T(n)=T(2^k)$:
+    \[T(n)\begin{array}[t]{cl}
+        = & b + T(n/2)\\
+        = & b + b + T(n/4)\\
+        = & b + b + b + T(n/8)\\
+        = & \dots\\
+        = & \underbrace{b + \dots + b}_{\log n} + T(1)\\
+        = & b\cdot\log n + c
+    \end{array}\]
+    Quindi, $T(n)=b\cdot\log k + c=\Theta(\log n)$.
+\end{eg}
+
+\begin{eg}[Utilizzo delle serie matematiche nel processo di semplificazione]
+    Sia $T(n)$ la seguente funzione di ricorrenza:
+    \[T(n)=\begin{cases}
+        4T(n/2)+n & n>1\\
+        1 & n\leq1
+    \end{cases}\]
+
+    \newpage\noindent
+    Ipotizziamo sempre $n=2^k$:
+    \[T(n)\begin{array}[t]{cl}
+        = & n + 4T(n/2)\\
+        = & n + 4(n/2) + 16T(n/4)\\
+        = & n + 2n + 16(n/4) + 64T(n/8)\\
+        = & \dots\\
+        = & n + 2n + 4n + 8n + \dots + 2^{\log(n)-1}n + 4^{\log n}T(1)\\
+        = & \left(\sum_{i=0}^{\log(n)-1}2^i\right)\cdot n+4^{\log n}
+    \end{array}\]
+    A questo punto, possiamo sfruttare la \hyperlink{ser:2}{\emph{serie geometrica
+    finita}} e riscrivere la funzione come:
+    \[T(n)\begin{array}[t]{cll}
+        = & \left(\sum_{i=0}^{\log(n)-1}2^i\right)\cdot n+4^{\log n}\\
+        = & \left(\frac{2^{\log n}-1}{2 - 1}\right)\cdot n + 4^{\log n} & \quad\hyperlink{ser:2}{\text{Serie geometrica finita}}\\
+        = & (2^{\log n}-1)\cdot n+4^{\log n}\\
+        = & (n^{\log 2}-1)\cdot n+n^{\log 4} & \quad\hyperlink{log:12}{\text{Teorema di scambio base-argomento}}\\
+        = & (n^1-1)\cdot n+n^2\\
+        = & (n-1)\cdot n+n^2\\
+        = & n^2 - n + n^2\\
+        = & 2n^2 - n
+    \end{array}\]
+    Da qui è evidente che $T(n)=\Theta(n^2)$.
+\end{eg}
+
+\begin{eg}[Utilizzo di una tabella dei costi]
+    Sia $T(n)$ la seguente funzione di ricorrenza:
+    \[t(n)=\begin{cases}
+        4T(n/2)+n^3 & n>1\\
+        1 & n\leq1
+    \end{cases}\]
+
+    \bigskip\noindent
+    Proviamo ad analizzare l'albero delle chiamate per i primi 3 livelli:
+    \begin{center}
+    \resizebox{1\hsize}{!}{
+    \LARGE
+    $\begin{array}{c}
+        n^3\\\\
+        \overbrace{\begin{array}{cccc}
+            \begin{array}{c}
+                \left(\frac{n}{2}\right)^3\\\\
+                \overbrace{\begin{array}{cccc}
+                    \left(\frac{n}{4}\right)^3 & \left(\frac{n}{4}\right)^3 &
+                    \left(\frac{n}{4}\right)^3 & \left(\frac{n}{4}\right)^3\\
+                \end{array}}
+            \end{array} &
+            \begin{array}{c}
+                \left(\frac{n}{2}\right)^3\\\\
+                \overbrace{\begin{array}{cccc}
+                    \left(\frac{n}{4}\right)^3 & \left(\frac{n}{4}\right)^3 &
+                    \left(\frac{n}{4}\right)^3 & \left(\frac{n}{4}\right)^3\\
+                \end{array}}
+            \end{array} &
+            \begin{array}{c}
+                \left(\frac{n}{2}\right)^3\\\\
+                \overbrace{\begin{array}{cccc}
+                    \left(\frac{n}{4}\right)^3 & \left(\frac{n}{4}\right)^3 &
+                    \left(\frac{n}{4}\right)^3 & \left(\frac{n}{4}\right)^3\\
+                \end{array}}
+            \end{array} &
+            \begin{array}{c}
+                \left(\frac{n}{2}\right)^3\\\\
+                \overbrace{\begin{array}{cccc}
+                    \left(\frac{n}{4}\right)^3 & \left(\frac{n}{4}\right)^3 &
+                    \left(\frac{n}{4}\right)^3 & \left(\frac{n}{4}\right)^3\\
+                \end{array}}
+            \end{array}
+        \end{array}}\\
+    \end{array}$}
+    \end{center}
+    È chiaro che con una funzione di questo tipo, non è possibile procedere in
+    questo modo. Una strategia migliore è quella di usare una tabella come la
+    seguente.
+    \begin{table}[ht]
+    \renewcommand{\arraystretch}{1.2}
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{Livello} & \textbf{Dim. input} & \textbf{Costo per chiamata} & \textbf{N. chiamate} & \textbf{Costo livello}\\
+        \hline
+        $0$ & $n$ & $n^3$ & $1$ & $n^3$\\
+        \hline
+        $1$ & $n/2$ & $(n/2)^3$ & $4$ & $4(n/2)^3$\\
+        \hline
+        $2$ & $n/4$ & $(n/4)^3$ & $16$ & $16(n/4)^3$\\
+        \hline
+        \dots & \dots & \dots & \dots & \dots\\
+        \hline
+        $i$ & $n/2^1$ & $(n/2^i)^3$ & $4^i$ & $4^i(n/2^i)^3$\\
+        \hline
+        \dots & \dots & \dots & \dots & \dots\\
+        \hline
+        $\log(n)-1$ & $n/2^{\log(n)-1}$ & $\left(n/2^{\log(n)-1}\right)$ & $4^{\log(n)-1}$ & $4^{\log(n))-1}\left(n/2^{\log(n)-1}\right)^3$\\
+        \hline
+        $\log n$ & $1$ & $T(1)$ & $4^{\log n}$ & $4^{\log n}$\\
+        \hline
+    \end{tabular}
+    \end{table}\newpage\noindent
+    Ora, il costo totale è dato dalla somma del costo di ogni livello. Vale
+    quindi:
+    \[T(n)\begin{array}[t]{cll}
+        = & \sum_{i=0}^{\log(n)-1}\left(4^i\left(n/2^i\right)^3\right)+4^{\log n}\\
+        = & \left(\sum_{i=0}^{\log(n)-1}\frac{4^i}{2^{3i}}\right)\cdot n^3 + 4^{\log n}\\
+        = & \left(\sum_{i=0}^{\log(n)-1}\frac{2^{2i}}{2^{3i}}\right)\cdot n^3 + 4^{\log n}\\
+        = & \left(\sum_{i=0}^{\log(n)-1}\left(\frac{1}{2}\right)^i\right)\cdot n^3 + 4^{\log n}\\
+        = & \left(\sum_{i=0}^{\log(n)-1}\left(\frac{1}{2}\right)^i\right)\cdot n^3 + n^{\log 4} &
+        \quad\hyperlink{log:12}{\text{Teorema di scambio base-argomento}}\\
+        = & \left(\sum_{i=0}^{\log(n)-1}\left(\frac{1}{2}\right)^i\right)\cdot n^3 + n^2\\
+        \leq & \left(\sum_{i=0}^{+\infty}\left(\frac{1}{2}\right)^i\right)\cdot n^3 + n^2 &
+        \quad\text{Estensione ad infinito della sommatoria}\\
+    \end{array}\]
+    Giunti a questo punto abbiamo:
+    \[T(n)\leq\left(\sum_{i=0}^{+\infty}\left(\frac{1}{2}\right)^i\right)\cdot n^3 + n^2\]
+    Tuttavia, possiamo riconoscere nella sommatoria la \hyperlink{ser:4}
+    {\emph{serie geometrica infinita decrescente}} e riscrivere $T(n)$ come:
+    \[T(n)\begin{array}[t]{cl}
+        \leq & \frac{1}{1-\frac{1}{2}}n^3+n^2\\
+        \leq & 2n^3+n^2
+    \end{array}\]
+    Abbiamo quindi dimostrato che $T(n)=O(n^3)$, tuttavia, poiché $T(n)\geq n^3$,
+    possiamo anche affermare che $T(n)=\Omega(n^3)$, quindi $T(n)=\Theta(n^3)$.
+\end{eg}
+
+\begin{note}
+    Abbiamo indicato $n^3$ come costo della prima chiamata perché di sicuro
+    lo si dovrà pagare, ma in realtà il vero costo avrebbe dovuto essere
+    $c\cdot n^3$ per qualche $c>0$. Abbiamo rimosso $c$ per semplicità, ma
+    grazie alla \hyperlink{prop:elimcost}{\emph{Proprietà di eliminazione
+    delle costanti}} sappiamo che considerarlo non sarebbe comunque servito.
+\end{note}
+
+\begin{eg}[Ulteriore esempio di utilizzo di una tabella dei costi]
+    Sia $T(n)$ la seguente funzione di ricorrenza:
+    \[T(n)=\begin{cases}
+        4T(n/2)+n^2 & n>1\\
+        1 & n\leq1
+    \end{cases}\]
+
+    \bigskip\noindent
+    Procediamo utilizzando una tabella come quella di prima.
+
+    \begin{table}[ht!]
+        \renewcommand{\arraystretch}{1.2}
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            \textbf{Livello} & \textbf{Dim. input} & \textbf{Costo per chiamata} & \textbf{N. chiamate} & \textbf{Costo livello}\\
+            \hline
+            $0$ & $n$ & $n^2$ & $1$ & $n^2$\\
+            \hline
+            $1$ & $n/2$ & $(n/2)^2$ & $4$ & $4(n/2)^2$\\
+            \hline
+            $2$ & $n/4$ & $(n/4)^2$ & $16$ & $16(n/4)^2$\\
+            \hline
+            \dots & \dots & \dots & \dots & \dots\\
+            \hline
+            $i$ & $n/2^i$ & $(n/2^i)^2$ & $4^i$ & $4^i(n/2^i)^2$\\
+            \hline
+            \dots & \dots & \dots & \dots & \dots\\
+            \hline
+            $\log(n)-1$ & $n/2^{\log(n)-1}$ & $(n/2^{\log(n)-1})$ & $4^{\log(n)-1}$ & $4^{\log(n)-1}(n/2^{\log(n)-1})^2$\\
+            \hline
+            $\log n$ & $1$ & $T(1)$ & $4^{\log n}$ & $4^{\log n}$\\
+            \hline
+        \end{tabular}
+    \end{table}\noindent
+    Scriviamo come prima la funzione di ricorrenza sotto forma di sommatoria:
+    \[T(n)\begin{array}[t]{cl}
+        = & \sum_{i=0}^{\log(n)-1}\left(4^i\cdot(n/2^i)^2\right)+4^{\log n}\\
+        = & \left(\sum_{i=0}^{\log(n)-1}\frac{4^i}{2^2i}\right)\cdot n^2+4^{\log n}\\
+        = & \left(\sum_{i=0}^{\log(n)-1}\frac{2^2i}{2^2i}\right)\cdot n^2+4^{\log n}\\
+        = & \left(\sum_{i=0}^{\log(n)-1}1\right)\cdot n^2+4^{\log n}\\
+        = & \left(\sum_{i=0}^{\log(n)-1}1\right)\cdot n^2+n^{\log 4}\\
+        = & \left(\sum_{i=0}^{\log(n)-1}1\right)\cdot n^2+n^2\\
+        = & n^2\log n+n^2\\
+    \end{array}\]
+    Quindi $T(n)=\Theta(n^2\log n)$.
+\end{eg}
+
+\subsection{Metodo della sostituzione}
+Con questo metodo si cerca di "indovinare" la \emph{forma chiusa} di una
+\emph{funzione di ricorrenza} e di dimostrarne la validità per induzione.
+
+\begin{eg}[Esempio di intuizione corretta]
+    Sia $T(n)$ la seguente funzione di ricorrenza:
+    \[T(n)=\begin{cases}
+        T(\lfloor n/2\rfloor)+n & n>1\\
+        1 & n\leq1
+    \end{cases}\]
+
+    \bigskip\noindent
+    Proviamo ad indovinarne la \emph{forma chiusa}:
+    \[T(n)\begin{array}[t]{cl}
+        = & n + T(\lfloor n/2\rfloor)\\
+        = & n + \frac{n}{2} + T(\lfloor n/4\rfloor)\\
+        = & n + \frac{n}{2} + \frac{n}{4} + T(\lfloor n/8\rfloor)\\
+        = & \dots\\
+        = & n + \frac{n}{2} + \frac{n}{4} + \frac{n}{8} + \dots + T(1)\\
+        \leq & 2n
+    \end{array}\]
+    Vedendo questa catena di uguaglianze possiamo supporre $T(n)=O(n)$. Proviamo
+    quindi a dimostrarlo procedendo per induzione.
+
+    \paragraph{Caso base} Dimostriamo la disequazione per $T(1)$:
+    \[T(1)=1\leq1\cdot c\quad\forall\,c\geq1\]
+    Il caso base è verificato.
+
+    \paragraph{Passo induttivo} Ipotizziamo che $T(k)\leq c\cdot k\quad\forall\,k<n$
+    e dimostriamo la disequazione per $T(n)$:
+    \[T(n)\begin{array}[t]{cll}
+        = & T(\lfloor n/2\rfloor)+n & \\
+        \leq & c\cdot(\lfloor n/2\rfloor) + n & \quad\text{Sostituzione}\\
+        \leq & c\cdot(n/2) + n & \quad\text{Rimozione dell'intero inferiore}\\
+        = & (c/2 + 1)\cdot n\\
+        \leq & c\cdot n
+    \end{array}\]
+    L'ultima disequazione è vera per:
+    \[\frac{c}{2}+1\leq c\Leftrightarrow c\geq2\]
+    Anche il passo induttivo è verificato, dunque vale:
+    \[T(n)\leq c\cdot n\text{ per }\begin{cases}
+        c\geq 1 & \text{Caso base}\\
+        c\geq 2 & \text{Passo induttivo}
+    \end{cases}\]
+    Quelle condizioni sono verificate $\forall\,c\geq2$ e $\forall\,n\geq1=m$.
+    Abbiamo quindi dimostrato la correttezza della nostra ipotesi, cioè $T(n)=O(n)$.
+
+    \bigskip\noindent
+    Riusciamo a fare lo stesso sul limite inferiore? Al primo livello
+    la funzione costa, di sicuro, almeno $n$. È quindi plausibile aspettarsi che
+    $T(n)=\Omega(n)$. Procediamo di nuovo per induzione.
+
+    \paragraph{Caso base} Dimostriamo la disequazione per $T(1)$:
+    \[T(1)=1\geq 1\cdot d\quad\forall\,d\leq1\]
+    Il caso base è verificato.
+
+    \paragraph{Passo induttivo} Ipotizziamo che $T(k)\geq d\cdot k\quad\forall\,k<n$
+    e dimostriamo la disequazione per $T(n)$:
+    \[T(n)\begin{array}[t]{cll}
+        = & T(\lfloor n/2\rfloor)+n & \\
+        \geq & d\cdot(\lfloor n/2\rfloor) + n & \quad\text{Sostituzione}\\
+        \geq & d\cdot(n/2) - 1 + n & \quad\text{Rimozione dell'intero inferiore}\\
+        = & (d/2-1/n+1)\cdot n\\
+        \geq & d\cdot n
+    \end{array}\]
+    L'ultima disequazione è vera per:
+    \[\frac{d}{2}-\frac{1}{n}+1\geq d\Leftrightarrow d\leq2-\frac{2}{n}\]
+    Anche il passo induttivo è verificato, dunque vale:
+    \[T(n)\geq d\cdot n\text{ per }\begin{cases}
+        d\leq 1 & \text{Caso base}\\
+        d\leq 2-\frac{2}{n} & \text{Passo induttivo}
+    \end{cases}\]
+    Quelle condizioni sono verificate per $d=1$ e $\forall\,n\geq2=m$.
+    Abbiamo quindi verificato la correttezza della nostra ipotesi, cioè
+    $T(n)=\Omega(n)$.
+
+    \bigskip\noindent
+    Avendo dimostrato che $T(n)$ è sia un $O(n)$ che un $\Omega(n)$, ne
+    consegue che $T(n)$ è anche un $\Theta(n)$.
+\end{eg}
+
+\begin{note}
+    Nel precedente esempio abbiamo provato per induzione che
+    \[T(n)=\begin{cases}
+        T(\lfloor n/2\rfloor)+n & n>1\\
+        1 & n\leq1
+    \end{cases}=\Omega(n)\]
+    Tuttavia, è possibile giungere allo stesso risultato senza ricorrere alla
+    ricorsione.  Ricordiamo la definizione di \hyperref[def:5]{$\Omega$}:
+    \[\exists\,d>0,\,\exists\,m\geq0:f(n)\geq d\cdot g(n)\quad\forall\,n\geq m\]
+    Vale la seguente catena di disequazioni:
+    \[T(n)=T(\lfloor n/2\rfloor)+n\geq n\geq d\cdot n\quad\forall\,d\leq1\]
+    Questa condizione è la stessa del caso base della dimostrazione per induzione,
+    dunque $T(n)=\Omega(n)$.
+\end{note}
+\begin{eg}[Esempio di intuizione errata]
+    Sia $T(n)$ la seguente funzione di ricorrenza:
+    \[T(n)=\begin{cases}
+        T(n-1)+n & n>1\\
+        1 & n\leq1
+    \end{cases}\]
+
+    \bigskip\noindent
+    Risolvendo questa funzione di ricorrenza per livelli vale:
+    \[T(n)\begin{array}[t]{cl}
+        = & n + T(n-1)\\
+        = & (n-1)+n+T(n-2)\\
+        = & (n-2)+(n-1)+n+T(n-3)\\
+        = & \dots\\
+        = & 1 + \dots + (n-2)+(n-1)+n\\
+        = & \sum_{i=1}^n i=\frac{n(n-1)}{2}=\Theta(n^2)
+    \end{array}\]
+    Supponiamo però di voler provare a dimostrare che $T(n)=O(n)$. Procediamo
+    quindi per induzione.
+
+    \paragraph{Caso base} Dimostriamo la disequazione per $T(1)$:
+    \[T(1)=1\leq 1\cdot c\quad\forall\,c\geq1\]
+    Il caso base è verificato.
+
+    \paragraph{Passo induttivo} Ipotizziamo che $T(k)\leq c\cdot k\quad\forall\,k<n$
+    e dimostriamo la disequazione per $T(n)$:
+    \[T(n)\begin{array}[t]{cll}
+        = & T(n-1)+n\\
+        \leq & c\cdot(n-1)+n & \quad\text{Sostituzione}\\
+        = & c\cdot n - c + n\\
+        = & (c+1)n - c\\
+        \leq & (c+1)n & \quad\text{Rimozione elemento negativo}\\
+        \leq & c\cdot n
+    \end{array}\]
+    L'ultima disequazione è impossibile poiché per essere vera dovrebbe vale:
+    \[c+1\leq c\]
+    Dunque, $T(n)\neq O(n)$.
+\end{eg}
+
+\begin{eg}[Limiti inferiori e superiori]
+    Sia $T(n)$ la seguente funzione di ricorrenza:
+    \[T(n)=\begin{cases}
+        T(\lfloor n/2\rfloor)+T(\lceil n/2\rceil)+1 & n>1\\
+        1 & n\leq1
+    \end{cases}\]
+    Qual è il costo di questa funzione?
+    
+    \bigskip\noindent
+    Iniziamo di nuovo procedendo per livelli.
+
+    \begin{table}[h!]
+        \renewcommand{\arraystretch}{1.2}
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            \textbf{Livello} & \textbf{Dim. input} & \textbf{Costo per chiamata} & \textbf{N. chiamate} & \textbf{Costo livello}\\
+            \hline
+            $0$ & $n$ & $1$ & $1$ & $1$\\
+            \hline
+            $1$ & $n/2$ & $2$ & $2$ & $2$\\
+            \hline
+            $2$ & $n/4$ & $4$ & $4$ & $4$\\
+            \hline
+            \dots & \dots & \dots & \dots & \dots\\
+            \hline
+            $i$ & $n/2^i$ & $2^i$ & $2^i$ & $2^i$\\
+            \hline
+            \dots & \dots & \dots & \dots & \dots\\
+            \hline
+            $\log(n)-1$ & $n/2^{\log(n)-1}$ & $1$ & $2^{\log(n)-1}$ & $2^{\log(n)-1}$\\
+            \hline
+            $\log n$ & $1$ & $T(1)$ & $2^{\log n}$ & $2^{\log n}$\\
+            \hline
+        \end{tabular}
+    \end{table}\noindent
+    Scrivendo ora la funzione di ricorrenza come sommatoria otteniamo:
+    \[T(n)\begin{array}[t]{cll}
+        = & \sum_{i=0}^{\log n}2^i\\
+        = & 2^0+2^1+\dots+2^{\log(n)-1}+2^{\log n}\\
+        = & 2^0+2^1+\dots+\frac{2^{\log n}}{2}+2^{\log n} & \quad\hyperlink{log:3}{\text{Teorema del prodotto}}\\
+        = & 2^0+2^i+\dots+\frac{n^{\log 2}}{2}+n^{\log 2} & \quad\hyperlink{log:12}{\text{Teorema di scambio base-argomento}}\\
+        = & 2^0+2^1+\dots+\frac{n}{2}+n=\Theta(n)
+    \end{array}\]
+    Quindi, $T(n)=\Theta(n)$. Adesso però proviamo a procedere per \emph{sostituzione}.
+    Dimostriamo quindi che $T(n)=O(n)$.
+
+    \paragraph{Caso base} Dimostriamo la disequazione per $T(1)$:
+    \[T(1)=1\leq 1\cdot c\quad\forall\,c\geq1\]
+    Il caso base è verificato.
+
+    \paragraph{Passo induttivo} Ipotizziamo che $T(k)\leq c\cdot k\quad\forall\,k<n$
+    e dimostriamo la disequazione per $T(n)$:
+    \[T(n)\begin{array}[t]{cll}
+        = & T(\lfloor n/2\rfloor)+T(\lceil n/2\rceil)+1\\
+        \leq & c\cdot(\lfloor n/2\rfloor)+c\cdot(\lceil n/2\rceil)+1 & \quad\text{Sostituzione}\\
+        = & c\cdot n + 1\\
+        \leq & c\cdot n
+    \end{array}\]
+    L'ultima disequazione è impossibile poiché si riduce a $1\leq 0$ che è
+    un'affermazione falsa.
+
+    \bigskip\noindent
+    Non siamo riusciti a dimostrare che $T(n)=O(n)$, tuttavia noi sappiamo
+    che in realtà lo è. Cosa c'è di sbagliato? Abbiamo ottenuto a sinistra un
+    termine troppo grande, quindi proviamo a partire da un'ipotesi più ristretta.
+    Proviamo con $O(n-b)$.
+
+    \paragraph{Caso base} Dimostriamo la disequazione per $T(1)$:
+    \[T(1)=1\leq 1\cdot c-b\quad\forall\,c\geq b+1\]
+    Il caso base è verificato.
+
+    \paragraph{Passo induttivo} Ipotizziamo che $\exists\,b>0:T(k)\leq c\cdot k-b\quad
+    \forall\,k<n$ e dimostriamo la disequazione per $T(n)$:
+    \[T(n)\begin{array}[t]{cll}
+        = & T(\lfloor n/2\rfloor)+T(\lceil n/2\rceil)+1\\
+        \leq & c\cdot(\lfloor n/2\rfloor)-b+c\cdot(\lceil n/2\rceil)-b+1 & \quad\text{Sostituzione}\\
+        = & c\cdot n-2b+1\\
+        \leq & c\cdot n-b
+    \end{array}\]
+    L'ultima disequazione è vera per:
+    \[-2b+1\leq-b\Leftrightarrow b\geq1\]
+    Quindi, per verificare sia il caso base che il passo induttivo, è sufficiente
+    porre $b=1$ e $c=2$. Inoltre, questo vale per ogni $n\geq1$, quindi poniamo
+    anche $m=1$.
+    Abbiamo dunque provato che $T(n)=O(n-b)=O(n)$.
+
+    \bigskip\noindent
+    A questo punto resta da dimostrare soltanto il limite inferiore,
+    cioè che $T(n)=\Omega(n)$.
+    \paragraph{Caso base} Dimostriamo la disequazione per $T(1)$:
+    \[T(1)=1\geq 1\cdot d\quad\forall\,d\leq1\]
+    Il caso base è verificato.
+
+    \paragraph{Passo induttivo} Ipotizziamo che $T(k)\geq d\cdot k\quad\forall\,d\leq k$
+    e dimostriamo la disequazione per $T(n)$:
+    \[T(n)\begin{array}[t]{cll}
+        = & T(\lfloor n/2\rfloor)+T(\lceil n/2\rceil)+1\\
+        \geq & d\cdot(\lfloor n/2\rfloor)+d\cdot(\lceil n/2\rceil)+1 & \quad\text{Sostituzione}\\
+        = & d\cdot n+1\\
+        \geq & d\cdot n
+    \end{array}\]
+    Chiaramente, l'ultima disequazione è sempre vera, dunque è dimostrato che
+    $T(n)=\Omega(n)$ e, di conseguenza, anche che $T(n)=\Theta(n)$.
+\end{eg}
+\
+\begin{eg}[Problemi con i casi base]
+    Sia T$(n)$ la seguente funzione di ricorrenza:
+    \[T(n)=\begin{cases}
+        2T(\lfloor n/2\rfloor)+n & n>1\\
+        1 & n\leq1
+    \end{cases}\]
+
+    \bigskip\noindent
+    Calcoliamo la forma chiusa procedendo per livelli.
+    \[T(n)\begin{array}[t]{cl}
+        = & n+2T(\lfloor n/2\rfloor)\\
+        = & n+2(n/2)+4T(\lfloor n/4\rfloor)\\
+        = & n+2(n/2)+4(n/4)+8T(\lfloor n/8\rfloor)\\
+        = & \dots\\
+        = & n+2(n/2)+4(n/4)+\dots+2^{\log(n)-1}(n/2^{\log(n)-1})+2^{\log(n)}\cdot T(1)\\
+        = & n\log n=\Theta(n\log n)
+    \end{array}\]
+    Passiamo al procedimento per sostituzione e proviamo a dimostrare che
+    $T(n)=O(n\log n)$.
+
+    \paragraph{Caso base} Dimostriamo la disequazione per $T(1)$:
+    \[T(1)=1\leq c\cdot1\log1=0\Rightarrow 1\leq0\]
+    Come nell'esempio precedente, pur avendo fatto un tentativo corretto non siamo
+    riusciti a dimostrarlo. Sta volta il problema è nel caso base, tuttavia, non
+    dimentichiamo che stiamo lavorando con notazioni asintotiche, che quindi
+    valgono a partire da un certo valore di $n$.
+    
+    Proviamo quindi a partire da un valore di $n>1$:
+    \[\begin{array}[t]{lcl}
+        T(2)=2T(\lfloor 2/2\rfloor)+2=2T(1)+2=4\leq c\cdot2\log2 & \Leftrightarrow &c\geq2\\
+        T(3)=2T(\lfloor 3/2\rfloor)+3=2T(1)+3=5\leq c\cdot3\log3 & \Leftrightarrow & c\geq\frac{5}{3\log3}\\
+        T(4)=2T(\lfloor 4/2\rfloor)+2=2T(\lfloor 2\rfloor)+4
+    \end{array}\]
+    Non serve dimostrare l'ultima disequazione perché è basata su $T(2)$ che
+    abbiamo già verificato.
+
+    \paragraph{Passo induttivo} Ipotizziamo che $T(k)\leq c\cdot k\log k\quad\forall\,k<n$
+    e dimostriamo la disequazione per $T(n)$:
+    \[T(n)\begin{array}[t]{cll}
+        = & 2T(\lfloor n/2\rfloor)+n\\
+        \leq & 2\cdot c\cdot(\lfloor n/2\rfloor)\log(\lfloor n/2\rfloor)+n & \quad\text{Sostituzione}\\
+        \leq & 2\cdot c\cdot(n/2)\log(n/2)+n & \quad\text{Rimozione intero inferiore}\\
+        = & c\cdot n(\log n-1)+n & \quad\text{\hyperlink{log:4}{Teorema del rapporto}}\\
+        = & c\cdot n\log n-c\cdot n+n\\
+        \leq & c\cdot n\log n
+    \end{array}\]
+    L'ultima disequazione è vera per:
+    \[-c\cdot n+n\leq0\Leftrightarrow -c\cdot n\leq -n\Leftrightarrow c\geq1\]
+    A questo punto vale che $T(n)\leq c\cdot n\log n$ per:
+    \begin{itemize}
+        \item \emph{Caso base}: $\forall\,c\geq2,\,\forall\,c\geq\frac{5}{3\log3}$;
+        \item \emph{Passo induttivo}: $\forall\,c\geq1$
+    \end{itemize}
+    Siccome in tutti e tre i casi $c$ è in una relazione $\geq$ con il secondo
+    termine, è sufficiente porre $c=\max\left\{1,2,\frac{5}{3\log3}\right\}$.
+    Inoltre, poiché abbiamo dimostrato il caso base per $n=2$ e $n=3$, prendiamo
+    $m=2$. Ecco provato che $T(n)=O(n)$.
+
+    \bigskip\noindent
+    La dimostrazione del limite inferiore non è necessaria poiché alla prima
+    invocazione di $T$ pagheremo certamente $n$, dunque $T(n)=\Omega(n)$.
+\end{eg}
+
+\bigskip\noindent Ricapitolando, questo metodo risolutivo si basa sul
+tentare di intuire la \emph{forma chiusa} delle \emph{funzioni di ricorrenza} e
+sul dimostrare per induzione, andando a sostituire il tentativo
+all'interno della funzione, la correttezza dell'intuizione.
+
+\subsection{Metodo delle ricorrenze comuni}
+Molte \emph{funzioni di ricorrenza} sono risolvibili velocemente mediante
+l'applicazione di un qualche teorema. Esistono diversi teoremi che sono
+specifici per particolari classi di \emph{funzioni di ricorrenza}.
+
+\paragraph{Ricorrenze lineari con partizione bilanciata}
+Per questa classe di \emph{funzioni di ricorrenza} esistono due versioni di uno
+stesso teorema. Vediamo prima la versione \emph{ridotta}.
+\begin{definition}[Teorema delle ricorrenze lineari con partizione bilanciata - Rid]
+    Siano $a$ e $b$ costanti intere tali che $a\geq1$ e $b\geq2$. Siano poi $c$
+    e $\beta$ costanti reali tali che $c>0$ e $\beta\geq0$. Sia $T(n)$ una
+    funzione di ricorrenza della seguente forma:
+    \[T(n)=\begin{cases}
+        aT(n/b)+c n^\beta & n>1\\
+        d & n\leq1
+    \end{cases}\]
+    Allora, posto $\alpha=\frac{\log a}{\log b}=\log_b a$ vale:
+    \[T(n)=\begin{cases}
+        \Theta(n^\alpha) & \alpha>\beta\\
+        \Theta(n^\alpha\log n) & \alpha=\beta\\
+        \Theta(n^\beta) & \alpha<\beta
+    \end{cases}\]
+\end{definition}
+
+\begin{note}
+    Di seguito, nella dimostrazione, ipotizziamo che $n=b^k\Rightarrow k=\log n$
+    così da semplificare i calcoli.
+\end{note}
+
+\begin{proof}[Dimostrazione]
+    Sia $T(n)$ la seguente \emph{funzione di ricorrenza}:
+    \[T(n)=\begin{cases}
+        aT(n/b)+cn^\beta & n>1\\
+        d & n\leq1
+    \end{cases}\]
+    
+    \bigskip\noindent
+    Calcoliamone la \emph{forma chiusa} procedendo per \emph{livelli}:
+
+    \begin{table}[h!]
+        \renewcommand{\arraystretch}{1.2}
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            \textbf{Livello} & \textbf{Dim. input} & \textbf{Costo per chiamata} & \textbf{N. chiamate} & \textbf{Costo livello}\\
+            \hline
+            $0$ & $b^k$ & $c b^{k\beta}$ & $1$ & $c b^{k\beta}$\\
+            \hline
+            $1$ & $b^{k-1}$ & $c b^{(k-1)\beta}$ & $a$ & $a c b^{k\beta}$\\
+            \hline
+            $2$ & $b^{k-2}$ & $c b^{(k-2)\beta}$ & $a^2$ & $a^2 c b^{k\beta}$\\
+            \hline
+            \dots & \dots & \dots & \dots & \dots\\
+            \hline
+            $i$ & $b^{k-i}$ & $c b^{k\beta}$ & $a^i$ & $a^i c b^{k\beta}$\\
+            \hline
+            \dots & \dots & \dots & \dots & \dots\\
+            \hline
+            $k-1$ & $b$ & $c b^\beta$ & $a^{k-1}$ & $a^{k-1} c b^{k\beta}$\\
+            \hline
+            $k$ & $1$ & $d$ & $a^k$ & $a^kd$\\
+            \hline
+        \end{tabular}
+    \end{table}\noindent
+    Sommando i costi di tutti i livelli si ottiene la seguente espressione:
+    \[T(n)=da^k+cb^{k\beta}\sum_{i=0}^{k-1}\frac{a^i}{b^{i\beta}}=da^k+cb^{k\beta}
+    \sum_{i=0}^{k=1}\left(\frac{a}{b^\beta}\right)^i\]
+    Possiamo osservare che:
+    \[\begin{array}[t]{l}
+        a^k=a^{\log_bn}=a^{\frac{\log n}{\log b}}=2^{\log a\frac{\log n}{\log b}}
+    =n^{\frac{\log a}{\log b}}=n^\alpha\\
+        \alpha=\frac{\log a}{\log b}\Rightarrow\alpha\log b=\log a\Rightarrow
+    \log b^\alpha=\log a\Rightarrow a=b^\alpha        
+    \end{array}\]
+    A questo punto, se poniamo $q=\frac{\alpha}{b^\beta}=\frac{b^\alpha}{b^\beta}
+    =b^{\alpha-\beta}$ possiamo riscrivere $T(n)$ come:
+    \[T(n)=da^k+cb^{k\beta}\sum_{i=0}^{k-1}\left(\frac{\alpha}{b^\beta}\right)^i
+    =dn^\alpha+cb^{k\beta}\sum_{i=0}^{k-1}q^i\]
+    Passiamo dunque alla dimostrazione, caso per caso, del teorema.
+    \paragraph{Caso \bm{$\alpha>\beta$}}
+    Se $\alpha>\beta$ segue che $q=b^{\alpha-\beta}>1$, quindi:
+    \[T(n)\begin{array}[t]{cll}
+        = & dn^\alpha+cb^{k\beta}\sum_{i=0}^{k-1}q^i\\
+        = & dn^\alpha+cb^{k\beta}\frac{q^k-1}{q-1} & \quad\text{\hyperlink{ser:2}{Serie geometrica finita}}\\
+        \leq & dn^\alpha+cb^{k\beta}\frac{q^k}{q-1}\\
+        = & dn^\alpha+\frac{cb^{k\beta}\alpha^k}{b^{k\beta}(q-1)} & \quad\text{Sostituzione di $q$}\\
+        = & dn^\alpha+\frac{c\alpha^k}{q-1}\\
+        = & dn^\alpha+\frac{cn^\alpha}{q-1} & \quad a^k=n^\alpha\\
+        = & n^\alpha\left(d+\frac{c}{q-1}\right)
+    \end{array}\]
+    Quindi, $T(n)=O(n^\alpha)$ e, per via della componente $dn^\alpha$,
+    $T(n)=\Omega(n^\alpha)$, dunque $T(n)=\Theta(n^2)$.
+
+    \paragraph{Caso \bm{$\alpha=\beta$}}
+    Se $\alpha=\beta\Rightarrow q=b^{\alpha-\beta}=1$, quindi:
+    \[T(n)\begin{array}[t]{cll}
+        = & dn^\alpha+cb^{k\beta}\sum_{i=0}^{k-1}q^i\\
+        = & dn^\alpha+cb^{k\alpha}k & \quad\alpha=\beta\wedge q^i=1^i=1\\
+        = & dn^\alpha+cn^\alpha k & \quad b^\alpha=a\wedge a^k=n^\alpha\\
+        = & n^\alpha(d+ck)\\
+        = & n^\alpha(d+c\frac{\log n}{\log b}) & \quad k=\log_b n=\frac{\log n}{\log b}
+    \end{array}\]
+    Quindi, $T(n)=\Theta(n^\alpha\log n)$.
+
+    \paragraph{Caso \bm{$\alpha<\beta$}}
+    Se $\alpha<\beta\Rightarrow q=b^{\alpha-\beta}<1$, quindi:
+    \[T(n)\begin{array}[t]{cll}
+        = & dn^\alpha+cb^{k\beta}\sum_{i=0}^{k-1}q^i\\
+        = & dn^\alpha+cn^{k\beta}\frac{q^k-1}{q-1} & \quad\text{\hyperlink{ser:2}{Serie geometrica finita}}\\
+        = & dn^\alpha+cb^{k\beta}\frac{1-q^k}{1-q} & \quad\text{Cambio di segno}\\
+        \leq & dn^\alpha+cb^{k\beta}\frac{1}{1-q}\\
+        = & dn^\alpha+\frac{cn^\beta}{1-q} & \quad b^k=n
+    \end{array}\]
+    Quindi, $T(n)=O(n^\beta)$ e, per il termine non ricorsivo $cb^{k\beta}=cn^\beta$,
+    $T(n)=\Omega(n^\beta)$, dunque $T(n)=\Theta(n^\beta)$.
+\end{proof}
+
+\begin{definition}[Teorema delle ricorrenze lineari con partizione bilanciata - Est]
+    Siano $a\geq1$, $b>1$ e $f(n)$ una funzione asintoticamente positiva. Sia poi
+    $T(n)$ una funzione di ricorrenza della seguente forma:
+    \[T(n)=\begin{cases}
+        aT(n/b)+f(n) & n>1\\
+        d & n\leq1
+    \end{cases}\]
+    Valgono le seguenti casistiche:
+    \[\renewcommand{\arraystretch}{1.2}\begin{array}[b]{llcl}
+        1) & \text{Se }\exists\,\epsilon>0:f(n)=O\left(n^{\log_b(a)-\epsilon}\right) &
+        \Rightarrow & T(n)=\Theta\left(n^{\log_ba}\right)\\
+        2) & \text{Se }f(n)=\Theta\left(n^{\log_ba}\right) & \Rightarrow & T(n)=\Theta\left(
+        f(n)\log n\right)\\
+        3) & \begin{aligned}
+            &\text{Se }\exists\,\epsilon>0:f(n)=\Omega\left(n^{\log_b(a)+\epsilon}\right)
+            \wedge\exists\,c:0<c<1,\,\exists\,m\geq0: \\[-0.3em]
+            & af(n/b)\leq cf(n)\quad\forall\,n\geq m
+        \end{aligned}
+         & \Rightarrow & T(n)=\Theta(f(n))
+    \end{array}\]
+\end{definition}
+
+\begin{note}
+    Nonostante non siano presenti nelle definizioni, i teoremi appena visti valgono
+    anche per \emph{funzioni di ricorrenza} espresse usando gli operatori di
+    \emph{intero-inferiore} e \emph{intero-superiore}.
+\end{note}
+
+\begin{eg}[Applicazione della forma estesa del teorema]
+    Sia $T(n)$ la seguente funzione di ricorrenza:
+    \[T(n)=\begin{cases}
+        9T(n/3)+n\log n & n>1\\
+        1 & n\leq 1
+    \end{cases}\]
+    Trovarne la forma chiusa.
+
+    \bigskip\noindent
+    Proviamo ad applicare il teorema appena visto. Poiché il fattore
+    non ricorsivo, cioè $n\log n$, non è una semplice potenza di $n$ e,
+    contemporaneamente, è una funzione crescente, quindi asintoticamente positiva,
+    applichiamo la versione estesa del teorema.
+
+    \begin{table}[h]
+        \renewcommand{\arraystretch}{1.2}
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|}
+            \hline
+            \textbf{Ricorrenza} & \bm{$a$} & \bm{$b$} & \bm{{$\log_b a$}} &
+            \textbf{Caso} & \textbf{Funzione} \\
+            \hline
+            $9T(n/3)+n\log n$ & $9$ & $3$ & $2$ & $(1)$ & $\Theta(n^2)$ \\
+            \hline
+        \end{tabular}
+    \end{table}\noindent
+    In questo esempio si applica la prima casistica del teorema perché
+    $f(n)=n\log n$ è certamente un $O(n^2)$, ma cresce comunque meno rispetto a
+    $n^2$ e più di $n$, quindi se prendiamo $\epsilon<1$, vale:
+    \[f(n)=n\log n=O(n^{\log_b(a)-\epsilon})=O(n^{2-\epsilon})\]
+    E quindi, per il primo caso del Teorema delle ricorrenze lineari con
+    partizione bilanciata esteso, $T(n)=\Theta(n^2)$.
+\end{eg}
+
+\begin{eg}[Applicazione della forma ridotta del teorema]
+    Sia $T(n)$ la seguente funzione di ricorrenza:
+    \[T(n)=\begin{cases}
+        T(2n/3)+1 & n>1\\
+        1 & n\leq1
+    \end{cases}\]
+    Trovare la forma chiusa.
+
+    \bigskip\noindent
+    Questa volta possiamo applicare la versione ridotta del teorema.
+
+    \begin{table}[h]
+        \renewcommand{\arraystretch}{1.2}
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|c|}
+            \hline
+            \textbf{Ricorrenza} & \bm{$a$} & \bm{$b$} & \bm{{$\log_b a$}} &
+            \bm{{$\beta$}} & \textbf{Caso} & \textbf{Funzione} \\
+            \hline
+            $T(2n/3)+1$ & $1$ & $3/2$ & $0$ & $0$ & $(2)$ & $\Theta(\log n)$ \\
+            \hline
+        \end{tabular}
+    \end{table}\noindent
+    In questo caso $\alpha=\log_b a=\log_{\frac{3}{2}}1=0$ e poiché anche $\beta=0$
+    si applica la seconda casistica, cioè $T(n)=\Theta(\log n)$.
+
+    \bigskip\noindent
+    In tutti i casi in cui è applicabile la versione ridotta del teorema, si può
+    usare anche quella estesa. Con questa funzione, ad esempio, avremmo potuto
+    notare che:
+    \[f(n)=1=\Theta(1)=\Theta(n^0)=\Theta(n^{\log_{b}a})\]
+    E quindi, per il secondo caso, avremmo ottenuto:
+    \[T(n)=\Theta(f(n)\log n)=\Theta(1\log n)=\Theta(\log n)\]
+\end{eg}
+
+\begin{eg}[Applicazione della forma estesa del teorema]
+    Sia $T(n)$ la seguente funzione di ricorrenza:
+    \[T(n)=\begin{cases}
+        3T(n/4)+n\log n & n>1\\
+        1 & n\leq1
+    \end{cases}\]
+    Trovare la forma chiusa.
+
+    \bigskip\noindent
+    $f(n)=n\log n$, quindi applico il teorema delle ricorrenze lineari
+    con partizione bilanciata nella sua forma estesa.
+
+    \begin{table}[h]
+        \renewcommand{\arraystretch}{1.2}
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|}
+            \hline
+            \textbf{Ricorrenza} & \bm{$a$} & \bm{$b$} & \bm{{$\log_b a$}} &
+            \textbf{Caso} & \textbf{Funzione} \\
+            \hline
+            $3T(n/4)+n\log n$ & $3$ & $4$ & $\approx0.79$ & $(3)$ & $\Theta(f(n))$ \\
+            \hline
+        \end{tabular}
+    \end{table}\noindent
+    Si tratta del terzo caso perché $f(n)=n\log n=\Omega(n)=\Omega(n^{\log_b(a)
+    -\epsilon})$ con $\epsilon<1-\log_ba=1-\log_4 3\approx0.208$.
+
+    Tuttavia, dobbiamo anche dimostrare che $\exists\,c:0<c<1$ e $\exists\,m\geq0$
+    tali che:
+    \[af(n/b)\leq cf(n)\quad\forall\,n\geq m\]
+    Vale quanto segue:
+    \[af(n/b)\begin{array}[t]{cll}
+        = & a(n/b)\log(n/b) & \quad\text{Sostituzione}\\
+        = & 3(n/4\log(n/4))\\
+        = & \frac{3}{4}n(\log(n)-\log(4)) & \quad\text{\hyperlink{log:4}{Teorema del rapporto}}\\
+        \leq & \frac{3}{4}n\log n\\
+        \leq & cn\log n
+    \end{array}\]
+    L'ultima disequazione è vera per $c=\frac{3}{4}$ e per qualsiasi $m$, quindi è
+    dimostrato che $T(n)=\Theta(f(n))=\Theta(n\log n)$.
+\end{eg}
+
+\begin{eg}[Esempio di inapplicabilità del teorema]
+    Sia $T(n)$ la seguente funzione di ricorrenza:
+    \[T(n)=\begin{cases}
+        2T(n/2)+n\log n & n>1\\
+        1 & n\leq1
+    \end{cases}\]
+    Trovare la forma chiusa.
+
+    \bigskip\noindent
+    In questo caso vale $\log_b a=\log_2 2=1$ e $f(n)=n\log n=\Omega(n)=
+    \Theta(n\log n)=O(n^2)$, ma poiché:
+    \begin{itemize}
+        \item $n\log n\neq O(n^{1-\epsilon})\quad\forall\,\epsilon>0$
+        \item $n\log n\neq\Theta(n^1)$
+        \item $n\log n\neq\Omega(n^{1+\epsilon})\quad\forall\,\epsilon>0$
+    \end{itemize}
+    non è possibile applicare nessuna casistica del teorema, dunque è necessario
+    usare altre tecniche.
+\end{eg}
+
+\paragraph{Ricorrenze lineari di ordine costante}
+\begin{definition}[Teorema delle ricorrenze lineari di ordine costante]
+    Siano $a_1,\,a_2,\,\dots,\,a_h$ costanti intere non negative con $h$ costante
+    e positiva. Siano poi $c$ e $\beta$ costanti reali tali che $c>0$ e $\beta\geq0$.
+    Sia infine $T(n)$ definita dalla seguente funzione di ricorrenza:
+    \[T(n)=\begin{cases}
+        \sum_{i=1}^h\left(a_iT(n-i)\right)+cn^{\beta} & n>m\\
+        \Theta(1) & n\leq m\leq h
+    \end{cases}\]
+    Allora, posto $a=\sum_{i=1}^ha_i$ vale:
+    \begin{flalign*}
+        &\begin{aligned}
+        &\renewcommand{\arraystretch}{1.2}\begin{array}[b]{llcl}
+        1) & \text{Se }a=1 & \Rightarrow & T(n)=\Theta(n^{\beta+1})\\
+        2) & \text{Se }a\geq2 & \Rightarrow & T(n)=\Theta(a^nn^\beta)
+        \end{array}\end{aligned}&&
+    \end{flalign*}
+\end{definition}
+
+\begin{eg}[Applicazione del teorema delle ricorrenze lineari di ordine costante]
+    Sia $T(n)$ la seguente funzione di ricorrenza:
+    \[T(n)=\begin{cases}
+        T(n-10)+n^2 & n>1\\
+        \Theta(1) & n\leq1
+    \end{cases}\]
+    Trovare la forma chiusa.
+
+    \bigskip\noindent
+    Proviamo ad applicare il teorema delle ricorrenze lineari di ordine costante.
+
+    \begin{table}[h]
+        \renewcommand{\arraystretch}{1.2}
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            \textbf{Ricorrenza} & \bm{$a$} & \bm{$\beta$} & \textbf{Caso}
+            & \textbf{Funzione} \\
+            \hline
+            $T(n-10)+n^2$ & $1$ & $2$ & $(1)$ & $\Theta(n^{\beta+1})$\\
+            \hline
+        \end{tabular}
+    \end{table}\noindent
+    In questo esempio vale il caso 1 perché il coefficiente di $T(n-10)$ è $1$,
+    quindi, per il teorema, risulta $T(n)=\Theta(n^{\beta+1})=\Theta(n^3)$.
+\end{eg}
+
+\begin{eg}[Applicazione del teorema delle ricorrenze lineari di ordine costante]
+    Sia $T(n)$ la seguente funzione di ricorrenza:
+    \[T(n)=\begin{cases}
+        T(n-2)+T(n-1)+1 & n>1\\
+        \Theta(1) & n\leq1
+    \end{cases}\]
+    Trovare la forma chiusa.
+
+    \bigskip\noindent
+    Applichiamo di nuovo il teorema appena enunciato.
+
+    \begin{table}[h]
+        \renewcommand{\arraystretch}{1.2}
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            \textbf{Ricorrenza} & \bm{$a$} & \bm{$\beta$} & \textbf{Caso}
+            & \textbf{Funzione} \\
+            \hline
+            $T(n-2)+T(n-1)+1$ & $2$ & $0$ & $(2)$ & $\Theta(a^nn^\beta)$\\
+            \hline
+        \end{tabular}
+    \end{table}\noindent
+    Qui si applica il caso 2 del teorema e poiché $\beta=0$ vale $T(n)=
+    \Theta(a^nn^\beta)=\Theta(2^n)$, cioè questa funzione ha costo esponenziale.
+\end{eg}
+
+\begin{problem}[Funzioni di ricorrenza parametriche]
+    Siano $T(n)$ e $T'(n)$ le seguenti funzioni di ricorrenza:
+    \begin{flalign*}
+      &\begin{aligned}
+        &\renewcommand{\arraystretch}{1.2}\begin{array}[b]{lcll}
+        T(n) & = & \begin{cases}
+            7T(n/2)+n^2 & n>1\\
+            1 & n\leq1
+        \end{cases} & \quad\text{Algoritmo $A$\footnotemark}\\
+        T'(n) & = & \begin{cases}
+            aT'(n/4)+n^2 & n>1\\
+            1 & n\leq1
+        \end{cases} & \quad\text{Algoritmo $A'$}
+        \end{array}
+      \end{aligned}&&
+    \end{flalign*}
+    \footnotetext{Funzione di ricorrenza dell'algoritmo di \emph{Strassen}}
+    Trovare il massimo valore intero di $a$ che renda $A'$ asintoticamente più
+    veloce di $A$.
+
+    \bigskip\noindent
+    Iniziamo calcolando la complessità di $A$ e, in particolare, applichiamo il
+    \nameref{def:19}.
+
+    \begin{table}[h]
+        \renewcommand{\arraystretch}{1.2}
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|c|}
+            \hline
+            \textbf{Ricorrenza} & \bm{$a$} & \bm{$b$} & \bm{{$\log_b a$}} &
+            \bm{{$\beta$}} & \textbf{Caso} & \textbf{Funzione} \\
+            \hline
+            $7T(n/2)+n^2$ & $7$ & $2$ & $\approx2.81$ & $2$ & $(1)$ & $\Theta(n^{\log_2 7})$ \\
+            \hline
+        \end{tabular}
+    \end{table}\noindent
+    Ora, poiché in $T'(n)$ compare $T'(n/4)$, trasformo $\log_27$ in un qualche
+    $\log_4$:
+    \[\log_27\begin{array}[t]{cll}
+        = & \frac{\log_47}{\log_42} & \quad\hyperlink{log:11}{\text{Cambio di base}}\\
+        = & \frac{\log_47}{1/2}\\
+        = & 2\log_4 7\\
+        = & \log_4 7^2 & \quad\hyperlink{log:5}{\text{Teorema della potenza}}\\
+        = & \log_4 49
+    \end{array}\]
+    A questo punto studio $T'(n)$ in base al variare di $a$:
+    \[\begin{array}[t]{lclclcl}\renewcommand{\arraystretch}{1.2}
+        a<16 & \Rightarrow & \alpha=\log_4a<2 & \Rightarrow & \alpha<\beta &
+        \Rightarrow & T'(n)=\Theta(n^2)=O(T(n))\\
+        a=16 & \Rightarrow & \alpha=\log_4a=2 & \Rightarrow & \alpha=\beta &
+        \Rightarrow & T'(n)=\Theta(n^2\log n)=O(T(n))\\
+        16<a\leq49 & \Rightarrow & \alpha=\log_4a>2 & \Rightarrow &
+        \alpha>\beta & \Rightarrow & T'(n)=\Theta(n^\alpha)=O(T(n))\\
+        a>49 & \Rightarrow & \alpha=\log_4a>2 & \Rightarrow & \alpha>\beta &
+        \Rightarrow & T'(n)=\Theta(n^\alpha)=\Omega(T(n))
+    \end{array}\]
+    Nel terzo caso $2<a\leq\log_4 49$ quindi $T'(n)$ cresce al più come $T(n)$,
+    mentre per $a>49$, $\alpha>\log_4 49$ e quindi $T'(n)$ cresce più di $T(n)$.
+
+    \bigskip\noindent
+    Quindi, il massimo valore intero di $a$ che rende $A'$ asintoticamente più
+    veloce di $A$ è $49$.
+\end{problem}

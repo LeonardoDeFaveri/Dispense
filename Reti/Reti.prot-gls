@@ -1,0 +1,88 @@
+\glossarysection[\glossarytoctitle]{\glossarytitle}\glossarypreamble
+\begin{theglossary}\glossaryheader
+\glsgroupheading{A}\relax \glsresetentrylist %
+\glossentry{prot:AIMD}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{49}}}%
+\glossentry{prot:ARP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{74}}}\glsgroupskip
+\glsgroupheading{B}\relax \glsresetentrylist %
+\glossentry{prot:BBR}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{56}}}%
+\glossentry{prot:BGP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{97}}}\glsgroupskip
+\glsgroupheading{C}\relax \glsresetentrylist %
+\glossentry{prot:CDMA}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{107}}}%
+\glossentry{prot:CSMA}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{110}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{124}}}%
+\glossentry{prot:CSMACA}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{111}}}%
+\glossentry{prot:CSMACD}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{111}}}\glsgroupskip
+\glsgroupheading{D}\relax \glsresetentrylist %
+\glossentry{prot:DHCP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{77}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{122}}}%
+\glossentry{prot:DNS}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{27}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{78}}}\glsgroupskip
+\glsgroupheading{F}\relax \glsresetentrylist %
+\glossentry{prot:FDMA}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{107}}}%
+\glossentry{prot:FTP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{24}}}\glsgroupskip
+\glsgroupheading{H}\relax \glsresetentrylist %
+\glossentry{prot:HTTP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{18}}}\glsgroupskip
+\glsgroupheading{I}\relax \glsresetentrylist %
+\glossentry{prot:ICMP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{76}}}%
+\glossentry{prot:IMAP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{26}}}%
+\glossentry{prot:IP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{43}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{62}}}\glsgroupskip
+\glsgroupheading{M}\relax \glsresetentrylist %
+\glossentry{prot:MACp}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{107}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{115}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{120}}}\glsgroupskip
+\glsgroupheading{O}\relax \glsresetentrylist %
+\glossentry{prot:OSPF}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{88}}}\glsgroupskip
+\glsgroupheading{P}\relax \glsresetentrylist %
+\glossentry{prot:POP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{26}}}%
+\glossentry{prot:PPP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{107}}}\glsgroupskip
+\glsgroupheading{Q}\relax \glsresetentrylist %
+\glossentry{prot:QUIC}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{57}}}\glsgroupskip
+\glsgroupheading{R}\relax \glsresetentrylist %
+\glossentry{prot:RIP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{95}}}\glsgroupskip
+\glsgroupheading{S}\relax \glsresetentrylist %
+\glossentry{prot:SMTP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{25}}}%
+\glossentry{prot:SPDY}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{21}}}%
+\glossentry{prot:STP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{118}}}\glsgroupskip
+\glsgroupheading{T}\relax \glsresetentrylist %
+\glossentry{prot:TCP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{17}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{26}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{31}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{40}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{97}}}%
+\glossentry{prot:TDMA}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{107}}}%
+\glossentry{prot:TLS}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{26}}}\glsgroupskip
+\glsgroupheading{U}\relax \glsresetentrylist %
+\glossentry{prot:UDP}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{17}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{31}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{96}}}%
+\end{theglossary}\glossarypostamble

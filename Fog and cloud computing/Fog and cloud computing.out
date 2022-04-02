@@ -1,0 +1,38 @@
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Could ecosystem}{}% 2
+\BOOKMARK [1][-]{section.2.1}{Some definitions}{chapter.2}% 3
+\BOOKMARK [2][-]{subsection.2.1.1}{Virtualization}{section.2.1}% 4
+\BOOKMARK [2][-]{subsection.2.1.2}{Single-tenancy VS multi-tenancy}{section.2.1}% 5
+\BOOKMARK [2][-]{subsection.2.1.3}{Elasticity and resource provisioning}{section.2.1}% 6
+\BOOKMARK [1][-]{section.2.2}{Delivery models}{chapter.2}% 7
+\BOOKMARK [2][-]{subsection.2.2.1}{Software as a service}{section.2.2}% 8
+\BOOKMARK [2][-]{subsection.2.2.2}{Platform as a Service}{section.2.2}% 9
+\BOOKMARK [2][-]{subsection.2.2.3}{Infrastructure as a Service}{section.2.2}% 10
+\BOOKMARK [1][-]{section.2.3}{Deployment models}{chapter.2}% 11
+\BOOKMARK [2][-]{subsection.2.3.1}{Public cloud}{section.2.3}% 12
+\BOOKMARK [2][-]{subsection.2.3.2}{Private cloud}{section.2.3}% 13
+\BOOKMARK [2][-]{subsection.2.3.3}{Community cloud}{section.2.3}% 14
+\BOOKMARK [2][-]{subsection.2.3.4}{Hybrid cloud}{section.2.3}% 15
+\BOOKMARK [0][-]{chapter.3}{Virtualization}{}% 16
+\BOOKMARK [1][-]{section.3.1}{Introduction}{chapter.3}% 17
+\BOOKMARK [2][-]{subsection.3.1.1}{Some definitions}{section.3.1}% 18
+\BOOKMARK [1][-]{section.3.2}{CPU virtualization}{chapter.3}% 19
+\BOOKMARK [2][-]{subsection.3.2.1}{Some definitions}{section.3.2}% 20
+\BOOKMARK [2][-]{subsection.3.2.2}{Trap \046 emulate paradigm}{section.3.2}% 21
+\BOOKMARK [2][-]{subsection.3.2.3}{Paravirtualization}{section.3.2}% 22
+\BOOKMARK [2][-]{subsection.3.2.4}{Hardware assisted virtualization}{section.3.2}% 23
+\BOOKMARK [1][-]{section.3.3}{Memory virtualization}{chapter.3}% 24
+\BOOKMARK [2][-]{subsection.3.3.1}{Memory management in general}{section.3.3}% 25
+\BOOKMARK [2][-]{subsection.3.3.2}{Memory management in virtualised environments}{section.3.3}% 26
+\BOOKMARK [2][-]{subsection.3.3.3}{Hardware assisted memory virtualization}{section.3.3}% 27
+\BOOKMARK [1][-]{section.3.4}{I/O virtualization}{chapter.3}% 28
+\BOOKMARK [2][-]{subsection.3.4.1}{Device emulation}{section.3.4}% 29
+\BOOKMARK [2][-]{subsection.3.4.2}{Paravirtualized devices}{section.3.4}% 30
+\BOOKMARK [2][-]{subsection.3.4.3}{Direct assignment}{section.3.4}% 31
+\BOOKMARK [1][-]{section.3.5}{Hypervisors architectures}{chapter.3}% 32
+\BOOKMARK [2][-]{subsection.3.5.1}{Type 1 architecture}{section.3.5}% 33
+\BOOKMARK [2][-]{subsection.3.5.2}{Type 2 architecture}{section.3.5}% 34
+\BOOKMARK [2][-]{subsection.3.5.3}{Hybrid architecture}{section.3.5}% 35
+\BOOKMARK [1][-]{section.3.6}{OS-level virtualization}{chapter.3}% 36
+\BOOKMARK [2][-]{subsection.3.6.1}{Lightweigth virtualization}{section.3.6}% 37
+\BOOKMARK [2][-]{subsection.3.6.2}{Linux cgroups}{section.3.6}% 38

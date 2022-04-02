@@ -1,0 +1,10 @@
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\QCapitolo Nr.\\E$"}
+{"rule":"GR_04_002","sentence":"^\\QQuindi \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q sarebbe un elemento di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, ma poiché \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q questo è impossibile, di conseguenza \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, ovvero \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"GR_04_002","sentence":"^\\QSe \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q e \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q sono due massimi comun divisori di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q e \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, allora \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qtale che \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q per ogni \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\QRiflessività..\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qfondamentale \\E(?:Dummy|Ina|Jimmy-)[0-9]+$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qfondamentale \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qfondamentale \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Poiché al termine destro ci sono solo quantità pari, anche il termine sinistro dovrebbe essere pari, ovvero ||\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qfondamentale \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Poiché al termine destro ci sono solo quantità pari, anche il termine sinistro deve essere pari, ovvero \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q è pari, cioè \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q è pari.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qfondamentale \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Poiché al termine destro ci sono solo quantità pari, anche il termine sinistro deve esserlo, ma \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q è pari se e soltanto se \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q è pari.\\E$"}

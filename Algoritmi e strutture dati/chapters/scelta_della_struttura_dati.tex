@@ -1,0 +1,438 @@
+\chapter{Scelta della struttura dati}
+Abbiamo già discusso più volte su come la scelta di una struttura dati influisca
+sulla \emph{complessità} degli algoritmi, tuttavia, ora riprendiamo l'argomento
+perché diverse tipologie di input allo stesso algoritmo potrebbero
+far risultare più efficiente l'uso di strutture dati differenti.
+
+Quanto detto emerge chiaramente nel caso degli algoritmi per la ricerca dei
+\emph{cammini minimi} all'interno di \emph{grafi}. Diversamente dal problema
+già affrontato parlando dei \emph{grafi}, ora ci interessiamo nel trovare tutti
+i \emph{cammini minimi} da un \emph{nodo} agli altri.
+
+\begin{problem}[Ricerca dei cammini minimi da sorgente singola]
+    Dato un grafo orientato $G=(V,E)$, una funzione di peso $w=E\to R$ e un
+    nodo sorgente $s$, trovare un cammino da $s$ a $u$, per ogni $u\in V$, il
+    cui costo sia minimo, ovvero minore o uguale a ogni altro cammino da $s$
+    a $u$.
+\end{problem}
+\begin{definition}[Costo di un cammino]
+    Dato un cammino $p=\left(v_1,\dots,v_k\right)$ con $k>1$, il costo del
+    cammino è dato dalla seguente sommatoria:
+    \[w(p)=\sum_{i=2}^k w(v_{i-1},w_i)\]
+\end{definition}\noindent
+Per quanto riguarda i pesi, possono essere sia numeri interi che reali, ma anche
+positivi e negativi e alcuni algoritmi potrebbero non funzionare per alcune
+tipologie di pesi.
+
+\section{Ricerca dei cammini minimi da sorgente singola}
+Consideriamo i due seguenti \emph{grafi}:
+
+\begin{figure*}[h!]
+\centering
+\resizebox{0.48\textwidth}{!}{
+    \begin{graph}
+        \node[main] (a) {$A$};
+        \node[main] (b) [right of=a] {$B$};
+        \node[main] (empty1) [right of=b] {};
+        \node[main] (empty2) [right of=empty1] {};
+        \node[main] (c) [right of=empty2] {$C$};
+        \node[main] (d) [above right of=c] {$D$};
+        \node[main] (e) [below right of=c] {$E$};
+
+        \path[->]   (a) edge (b)
+                    (b) edge (empty1)
+                    (empty1) edge (empty2)
+                    (empty2) edge (c)
+                    (c) edge (d)
+                    (c) edge (e);
+    \end{graph}
+}
+\hfill
+\resizebox{0.48\textwidth}{!}{
+    \begin{graph}
+        \node[main] (a) {$A$};
+        \node[main] (b) [right of=a] {$B$};
+        \node[main] (empty1) [above right of=b] {};
+        \node[main] (empty2) [right of=empty1] {};
+        \node[main] (empty3) [below right of=b] {};
+        \node[main] (empty4) [right of=empty3] {};
+        \node[main] (c) [below right of=empty2] {$C$};
+        \node[main] (d) [above right of=c] {$D$};
+        \node[main] (e) [below right of=c] {$E$};
+
+        \path[->]   (a) edge (b)
+                    (b) edge (empty1)
+                    (empty1) edge (empty2)
+                    (empty2) edge (c)
+                    (c) edge (d)
+                    (c) edge (e);
+        
+        \path[->, dashed]
+                    (b) edge (empty3)
+                    (empty3) edge (empty4)
+                    (empty4) edge (c);
+    \end{graph}
+}
+\caption{Esempi di \emph{cammini minimi}}
+\end{figure*}
+
+\noindent
+Notiamo subito che \emph{cammini minimi} verso \emph{nodi} diversi potrebbero
+percorrere un tratto in comune, ma non potrebbero convergere su un \emph{nodo}
+comune dopo aver percorso tratti diversi. Da ciò consegue che l'insieme dei
+\emph{cammini minimi} da un \emph{nodo} a tutti gli altri può essere rappresentato
+come un \emph{albero di copertura}.
+
+\noindent
+Sebbene abbiamo già incontrato gli \emph{alberi di copertura}, non li abbiamo
+ancora definiti formalmente.
+\begin{definition}[Albero di copertura]
+    Dato un grafo $G=(V,E)$ non orientato e connesso, un albero di copertura di
+    $G$ è un sottografo $T=(V,E_T)$ tale che $T$ è un albero che contiene tutti
+    i nodi di $G$ ed $E_T\subseteq E$.
+\end{definition}
+
+\begin{figure}[h!]
+    \centering
+    \begin{graph}
+        \node[main] (a) {$A$};
+        \node[main] (b) [above right of=a] {$B$};
+        \node[main] (i) [below right of=b] {$I$};
+        \node[main] (c) [above right of=i] {$C$};
+        \node[main, color=white]     (0) [below right of=c] {};
+        \node[main] (d) [above right of=0] {$D$};
+        \node[main] (e) [below right of=d] {$E$};
+        \node[main] (f) [below left of=e] {$F$};
+        \node[main] (g) [below right of=i] {$G$};
+        \node[main] (h) [below right of=a] {$H$};
+
+        \path[-]    (a) edge[line width=1.2pt] (h)
+                    (h) edge[line width=1.2pt] (b)
+                    (b) edge[line width=1.2pt] (c)
+                    (c) edge[line width=1.2pt] (d)
+                    (d) edge[line width=1.2pt] (f)
+                    (f) edge[line width=1.2pt] (e)
+                    (h) edge[line width=1.2pt] (i)
+                    (i) edge[line width=1.2pt] (g);
+        
+        \path[-]    (a) edge (b)
+                    (c) edge (i)
+                    (c) edge (f)
+                    (h) edge (g)
+                    (g) edge (f)
+                    (d) edge (e);
+    \end{graph}
+    \caption{Esempio di \emph{albero di copertura}}
+\end{figure}\noindent
+Detto questo, possiamo dire che tutte le soluzioni che non generano un
+\emph{albero di copertura} non sono ammissibili come soluzioni al problema.
+
+\begin{definition}[Soluzione ammissibile]
+    Una soluzione ammissibile può essere descritta da un albero di copertura $T$
+    radicato in $s$ e da un vettore di distanza $d$, i cui valori $d[u]$
+    rappresentano il costo del cammino da $s$ a $u$ in $T$.
+\end{definition}
+
+\begin{figure}[h!]
+    \centering
+    \subfloat[Soluzione non ammissibile]{
+    \begin{graph}
+        \node[main, line width=1.2pt] (a) [label={$d[A]=0$}] {$A$};
+        \node[main] (b) [right of=a, label={$d[B]=3$}, xshift=10mm] {$B$};
+        \node[main] (c) [below of=b, label=below:{$d[C]=4$}, yshift=-10mm] {$C$};
+        \node[main] (d) [left of=c, label=below:{$d[D]=6$}, xshift=-10mm] {$D$};
+
+        \path[->]
+                    (a) edge[line width=1.2pt] node[above] {$3$} (b)
+                    (b) edge[line width=1.2pt] node[right] {$1$} (c)
+                    (c) edge[line width=1.2pt] node[below] {$2$} (d);
+        \path[-]    (a) edge node[left] {$3$} (d);
+    \end{graph}
+    }
+    \hspace{3cm}
+    \subfloat[Soluzione ammissibile]{
+    \begin{graph}
+        \node[main, line width=1.2pt] (a) [label={$d[A]=0$}] {$A$};
+        \node[main] (b) [right of=a, label={$d[B]=3$}, xshift=10mm] {$B$};
+        \node[main] (c) [below of=b, label=below:{$d[C]=4$}, yshift=-10mm] {$C$};
+        \node[main] (d) [left of=c, label=below:{$d[D]=3$}, xshift=-10mm] {$D$};
+
+        \path[->]
+                    (a) edge[line width=1.2pt] node[above] {$3$} (b)
+                    (b) edge[line width=1.2pt] node[right] {$1$} (c)
+                    (a) edge[line width=1.2pt] node[left] {$3$} (d);
+        \path[-]    (d) edge node[below] {$2$} (c);
+    \end{graph}
+    }
+    \caption{Possibili \emph{cammini} con sorgente nel \emph{nodo} $A$}
+\end{figure}
+
+\noindent
+Nel primo caso la soluzione non è ammissibile perché la distanza del \emph{nodo}
+$D$ da $A$ è 6, quando potrebbe essere 3.
+
+\bigskip\noindent
+Per rappresentare l'\emph{albero di copertura} possiamo usare una versione
+modificata della \texttt{printPath} che avevamo usato per stampare il
+\emph{cammino} tra due \emph{nodi}.
+
+\newpage
+\begin{minicode}{printPath per la stampa dell'albero di copertura}
+\ind printPath(\bc{NODE} s, \bc{NODE} d, \bc{NODE}[] T)\\
+    \indf if (s == d) then\\
+        print s\\
+    \indf else if (T[d] == nil) then\\
+        print "error"\\
+    \indf else\\
+        printPath(s, T[d], T)\\
+        print d
+\end{minicode}\noindent
+Siccome tra tutte le soluzioni possibili siamo interessati a quelle che
+includono solo \emph{cammini minimi}, restringiamo il campo  ricerca alle
+\emph{soluzioni ottime}, quelle cioè che rispettano il seguente teorema.
+
+\begin{definition}[Teorema di Belman]
+    Dato un grafo $G=(V,E)$ e una soluzione $T=(V,E_T)$ in esso ammissibile, $T$
+    è anche una soluzione ottima se e solo se:
+    \[\begin{array}{ll}
+        d[v]=d[u]+w(u,v) & \forall(u,v)\in E_T\\
+        d[v]\leq d[u]+w(u,v) & \forall(u,v)\in E 
+    \end{array}\]
+\end{definition}\noindent
+Nell'esempio di prima, la soluzione della prima figura non è \emph{ottima}
+perché $d[D]>d[a]+w(A,D)$.
+
+\begin{proof}[Dimostrazione]
+    Dimostriamo separatamente del due parti del teorema.
+
+    \paragraph{Parte 1}
+    Sia $T$ una \emph{soluzione ottima} e sia $(u,v)\in E$:
+    \begin{itemize}
+        \item Se $(u,v)\in T$, allora $d[v]=d[u]+w(u,v)$;
+        \item Se $(u,v)\notin T$, allora $d[v]\leq d[u]+w(u,v)$, perché
+        altrimenti esisterebbe nel \emph{grafo} $G$ un \emph{cammino} da $s$ a
+        $v$ più corto di quello in $T$, generando un assurdo.
+    \end{itemize}
+
+    \paragraph{Parte 2}
+    Supponiamo per assurdo che $T$ non sia una \emph{soluzione ottima}. Se così
+    fosse, esisterebbe un \emph{cammino non ottimo} $C$ da $s$ a un altro
+    \emph{nodo} $u$ in $T$. Quindi, esisterebbe anche un \emph{albero di
+    copertura} $T'$, in cui il \emph{cammino} $C'$ da $s$ a $u$ ha distanza
+    $d'[u]<d[u]$ dove $d'$ è il vettore delle distanze associato a $T'$.
+
+    Poiché, $d'[s]=d[s]=0$, ma $d'[u]<d[u]$, esiste un \emph{arco} $(h,k)$ in
+    $C'$ tale che $d'[h]=d[h]$ e $d'[k]<d[k]$. La situazione sarebbe dunque la
+    seguente:
+
+    \begin{figure*}[h!]
+    \centering
+    \begin{graph}
+        \node[main] (s) [label=below:{$d'[s]=d[s]$}] {$s$};
+        \node[main] (h) [label=below:{$d'[h]=d[h]$}, right of=s, xshift=20mm] {$h$};
+        \node[main] (k) [label=below:{$d'[k]<d[k]$}, right of=h, xshift=20mm] {$k$};
+        \node[main] (u) [label=below:{$d'[u]<d[u]$}, right of=k, xshift=20mm] {$u$};
+
+        \path[-]    (s) edge[dashed] (h)
+                    (h) edge (k)
+                    (k) edge[dashed] (u);
+    \end{graph}
+    \end{figure*}
+
+    \noindent Per costruzione, $d'[h]=d[h]$ e $d'[k]=d'[h]+w(h,k)$, mentre, per
+    quanto ipotesi vale $d[k]\leq d[h]+w(h,k)$. Combinando queste due relazioni
+    si ottiene:
+    \[d'[k]=d'[h]+w(h,k)=d[h]+w(h,k)\geq d[k]\]
+    Da ciò seguirebbe $d'[k]\geq d[k]$ che contraddice la relazione $d'[k]<d[k]$
+    trovata in precedenza.
+\end{proof}
+
+\subsection{Prototipo di algoritmo}
+Vediamo quale potrebbe essere la struttura base di un algoritmo per la
+ricerca dei \emph{cammini minimi}.
+
+\begin{minicode}{Prototipo di algoritmo}
+\ind$\langle$\bc{int}[], \bc{int}[]$\rangle$ minPathPrototype(\bc{GRAPH} G, \bc{NODE} s)\\
+\com{Inizializza $T$ a una \emph{foresta di copertura} composta da \emph{nodi}
+isolati}
+\com{Inizializza $d$ con sovrastima della distanza, cioè $d[s]=0, d[x]=+\infty$}
+\indf while ($\exists\langle$u, v$\rangle$\,:\,d[u] + G.w(u, v) < d[v]) do\\
+    d[v] = d[u] + G.w(u, v)\\
+    \com{Sostituisci il \emph{padre} di $v$ in $T$ con $u$}
+\indf return $\langle$T, d$\rangle$
+\end{minicode}
+
+\begin{minicode}{Algoritmo generico}
+\ind$\langle$\bc{int}[], \bc{int}[]$\rangle$ shortestPath(\bc{GRAPH} G, \bc{NODE} s)\\
+    \bc{int}[] T = new \bc{int}[1\dots G.n]\hfill\com{$T[u]$ è il \emph{padre} di $u$
+    nell'\emph{albero} $T$}
+    \bc{int}[] d = new \bc{int}[1\dots G.n]\hfill\com{$d[u]$ è la distanza di $u$ da $s$}
+    \bc{boolean}[] b = new \bc{boolean}[1\dots G.n]\hfill\com{$b[u]$ è \bc{true} se $u\in S$}
+    \indf foreach (u $\in$ G.V() - \{s\}) do\\
+        T[u] = nil\\
+        d[u] = $+\infty$\\
+        b[u] = false\\
+    \indf T[s] = nil\\
+    \indf d[s] = 0\\
+    \indf b[s] = true\\
+    \indf\bc{DATASTRUCTURE} S = DataStructure()\\
+    \indf S.add(s)\\
+    \indf while (not S.isEmpty()) do\\
+        \bc{int} u = S.extract()\\
+        b[u] = false\\
+        \indff foreach (v $\in$ G.adj(u)) do\\
+            \indfff if (d[u] + G.w(u, v) < d[v]) then\\
+                \indffff if (not b[v]) then\\
+                    S.add(v)\\
+                    b[v] = true\\
+                \indffff else\\
+                    \com{Azione da svolgere nel caso $v\in S$}
+                \indffff T[v] = u\\
+                \indffff d[v] = d[u] + G.w(u, v)\\
+    \indf return $\langle$T, d$\rangle$
+\end{minicode}
+
+\subsection{Algoritmo di Dijkstra}
+La prima implementazione vera e propria che vediamo è quella proposta da
+Dijkstra nel 1959. Si basa su \emph{code a priorità} e funziona bene solo se
+i pesi sono positivi.
+
+\begin{note}
+    Siccome gli \emph{heap} furono introdotti solo nel 1964, la prima versione
+    dell'algoritmo utilizzava \emph{code a priorità} implementate usando un
+    vettore.
+\end{note}
+
+\begin{minicode}{Algoritmo di Dijkstra}
+\ind$\langle$\bc{int}[], \bc{int}[]$\rangle$ shortestPath(\bc{GRAPH} G, \bc{NODE} s)\\
+    \bc{int}[] T = new \bc{int}[1\dots G.n]\hfill\com{$T[u]$ è il \emph{padre} di $u$
+    nell'\emph{albero} $T$}
+    \bc{int}[] d = new \bc{int}[1\dots G.n]\hfill\com{$d[u]$ è la distanza di $u$ da $s$}
+    \bc{boolean}[] b = new \bc{boolean}[1\dots G.n]\hfill\com{$b[u]$ è \bc{true} se $u\in S$}
+    \indf foreach (u $\in$ G.V() - \{s\}) do\\
+        T[u] = nil\\
+        d[u] = $+\infty$\\
+        b[u] = false\\
+    \indf T[s] = nil\\
+    \indf d[s] = 0\\
+    \indf b[s] = true\\
+    \indf\bc{PRIORITYQUEUE} Q = PrioriryQueue()\\
+    \indf Q.insert(s, 0)\hfill\com{La \emph{priorità} di $s$ è 0}
+    \indf while (not Q.isEmpty()) do\\
+        \bc{int} u = Q.deleteMin()\hfill\com{A ogni ciclo viene estratto il \emph{nodo} più vicino}
+        b[u] = false\\
+        \indff foreach (v $\in$ G.adj(u)) do\\
+            \indfff if (d[u] + G.w(u, v) < d[v]) then\\
+                \indffff if (not b[v]) then\\
+                    Q.insert(v, d[u] + G.w(u, v))\hfill\com{Aggiungo $v$ alla \emph{coda}}
+                    b[v] = true\\
+                \indffff else\\
+                    Q.decrease(v, d[u] + G.w(u, v))\hfill\com{Riduco la \emph{priorità} di $v$ da $s$}
+            \indfff T[v] = u\\
+            \indfff d[v] = d[u] + G.w(u, v)\\
+    \indf return $\langle$T, d$\rangle$
+\end{minicode}\noindent
+L'idea alla base di questa soluzione è quella di usare la distanza di un nodo
+da $s$ come valore per la sua \emph{priorità}, quindi ad ogni iterazione,
+estrarre il \emph{nodo} con la \emph{priorità} minore significa estrarre il
+\emph{nodo} più vicino a $s$.
+
+Quando viene estratto un \emph{nodo} e l'esecuzione dell'algoritmo ricade nel
+ramo \texttt{else} del controllo sul valore $b[v]$, significa che dal \emph{nodo}
+$u$ è possibile raggiungere $v$ con costo minore a quello che stiamo pagando
+attualmente. Di conseguenza, aggiorniamo il valore di popolarità di $v$ indicando
+il costo del nuovo \emph{cammino}.
+
+\begin{eg}[Esempio d'esecuzione]
+    Consideriamo il seguente grafo:
+
+    \begin{figure*}[h!]
+        \centering
+        \begin{graph}
+            \node[main, line width=1.2pt] (a) {$A$};
+            \node[main] (b) [below right of=a] {$B$};
+            \node[main] (c) [above right of=a] {$C$};
+
+            \node[main, color=white] (0) [below right of=c] {};
+
+            \node[main] (d) [above right of=0] {$D$};
+            \node[main] (e) [below right of=0] {$E$};
+            \node[main] (f) [above right of=e] {$F$};
+
+            \path[->]   (a) edge node[above left] {$2$} (c)
+                        (a) edge node[below left] {$1$} (b)
+                        (b) edge node[below] {$2$} (e)
+                        (b) edge node[above left] {$5$} (d)
+                        (e) edge node[below right] {$3$} (f)
+                        (e) edge node[left] {$1$} (d)
+                        (c) edge node[above] {$3$} (d)
+                        (c) edge node[left] {$1$} (b)
+                        (d) edge node[above right] {$1$} (f);
+        \end{graph}
+    \end{figure*}
+    
+    \noindent
+    Eseguendo l'algoritmo partendo da $A$ otteniamo la seguente tabella:
+
+    \begin{table}[ht!]
+        \centering
+        \renewcommand{\arraystretch}{1.2}
+        \begin{tabular}{|c|c|c|c|c|c|c|c|}
+            \hline
+             & & \bm{$A$} & \bm{$B$} & \bm{$C$} & \bm{$E$} & \bm{$D$} & \bm{$F$}\\
+            \hline
+            \bm{$A$} & 0 & \textbf{0} & \cancel{0} & \cancel{0} & \cancel{0} & \cancel{0} & \cancel{0}\\
+            \hline
+            \bm{$B$} & $+\infty$ & 1 & \textbf{1} & \cancel{1} & \cancel{1} & \cancel{1} & \cancel{1}\\
+            \hline
+            \bm{$C$} & $+\infty$ & 2 & 2 & \textbf{2} & \cancel{2} & \cancel{2} & \cancel{2}\\
+            \hline
+            \bm{$D$} & $+\infty$ & $+\infty$ & 6 & 5 & 4 & \textbf{4} & \cancel{4}\\
+            \hline
+            \bm{$E$} & $+\infty$ & $+\infty$ & 3 & 3 & \textbf{3} & \cancel{3} & \cancel{3}\\
+            \hline
+            \bm{$F$} & $+\infty$ & $+\infty$ & $+\infty$ & $+\infty$ & 6 & 5 & \textbf{5}\\
+            \hline
+        \end{tabular}
+    \end{table}
+
+    \noindent
+    Nella tabella, ogni colonna contiene lo stato del vettore $d$ all'inizio di
+    ogni iterazione del ciclo \texttt{while (not Q.isEmpty())}, mentre ogni riga
+    traccia l'evoluzione dello stato del rispettivo nodo. I nodi barrati sono
+    quelli che non sono presenti nella coda.
+
+    Prima dell'ingresso nel ciclo, la sorgente, ovvero il nodo $A$ è a distanza
+    0 da sé stesso. Tutti gli altri sono a $+\infty$. Alla prima iterazione viene
+    estratto $A$ e vengono inseriti i nodi $B$ e $C$ ad esso adiacenti, indicando
+    anche il peso del relativo arco.
+
+    Alla seconda iterazione viene estratto $B$ perché il costo per raggiungerlo
+    è minimo. Come prima, vengono inseriti nella coda i nodi $D$ ed $E$ che
+    sono adiacenti a $B$. L'algoritmo continua fino all'estrazione di $F$.
+\end{eg}
+
+\paragraph{Dimostrazione di correttezza per pesi positivi}
+\begin{proof}[Dimostrazione]
+    La correttezza dell'algoritmo per pesi positivi si basa su due assunti:
+    \begin{enumerate}
+        \item Ogni \emph{nodo} viene estratto una sola volta;
+        \item Al momento dell'estrazione il peso dal \emph{cammino} dalla
+        sorgente $s$ è minimo;
+    \end{enumerate}
+    Per la dimostrazione procediamo per induzione sul numero $k$ di \emph{nodi}
+    estratti.
+
+    \paragraph{Caso base: \bm{$k=0$}}
+    Il caso è verificato in quanto $d[s]=0$ e non ci sono pesi negativi.
+
+    \paragraph{Passo induttivo: \bm{$k>0$}}
+    Per ipotesi induttiva, supponiamo che gli assunti siano corretti per i primi
+    $k-1$ elementi. Quando viene estratto il $k$-esimo elemento $u$, il peso
+    $d[u]$ dipende esclusivamente dai \emph{nodi} già estratti quindi la sua
+    distanza da $s$ è minima. Siccome non ci sono pesi negativi e tutti gli
+    altri \emph{nodi} hanno una distanza da $s$ almeno pari a quella di $u$,
+    $u$ non verrà mai più inserito nella \emph{coda}.
+\end{proof}
+
+\paragraph{Complessità}

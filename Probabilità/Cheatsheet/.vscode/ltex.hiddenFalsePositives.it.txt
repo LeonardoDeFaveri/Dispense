@@ -1,0 +1,2 @@
+{"rule":"ST_03_001","sentence":"^\\QLa probabilità di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q condizionato \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q è: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Se \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q ed \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q sono indipendenti, vale anche:\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\QSia \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q una variabile aleatoria..\\E$"}

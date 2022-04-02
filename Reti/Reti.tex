@@ -1,0 +1,151 @@
+\documentclass[12pt, a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+}
+
+\usepackage{titlesec}
+\titleformat
+{\chapter}
+[display]{\bfseries\Large\itshape}
+{Capitolo Nr.\thechapter}
+{0.5ex}
+{
+    \rule{\textwidth}{1pt}
+    \vspace{1ex}
+	\centering
+}
+[\vspace{-0.5ex}\rule{\textwidth}{0.3pt}]
+
+\renewcommand{\contentsname}{Indice}
+
+\title{Dispense di Reti di calcolatori}
+\author{Leonardo De Faveri}
+\date{A.A. 2021/2022}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks,
+  linkcolor={red!90!black},
+  citecolor={blue!50!black},
+  urlcolor={blue!80!black}
+  pdftitle={Dispense di reti di calcolatori},
+  pdfpagemode=FullScreen,
+}
+
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{subfig}
+\usepackage{caption}
+\graphicspath{{./images/}}% Imposta il percorso relativo per le immagini
+\renewcommand{\figurename}{Fig.}% Cambia il testo delle caption
+
+\usepackage{amssymb,amsmath,amsthm}
+\theoremstyle{remark}
+\newtheorem*{note}{\textbf{NB}}
+
+\newtheoremstyle{def}
+{\topsep}{\topsep}%
+{\em}{}%
+{\bfseries}{}
+{\newline}
+{%
+  \rule{\textwidth}{0.4pt}\\*%
+  \thmname{#1}~\thmnumber{#2}\thmnote{\ -\ #3}\label{def:#2}.\\*[-1.5ex]%
+  \rule{\textwidth}{0.4pt}
+}
+
+\newtheoremstyle{eg}
+{\topsep}{\topsep}%
+{\em}{}%
+{\bfseries}{}
+{\newline}
+{%
+  \rule{\textwidth}{0.4pt}\\*%
+  \thmname{#1}~\thmnumber{#2}\thmnote{\ -\ #3}\label{eg:#2}.\\*[-1.5ex]
+  \rule{\textwidth}{0.4pt}
+}
+
+\theoremstyle{def}
+\newtheorem{definition}{Definizione}
+\theoremstyle{eg}
+\newtheorem{eg}{Esempio}
+
+\newtheoremstyle{codestyle}
+{\topsep}{\topsep}%
+{\tt\color{Sepia!90!Black}}{}%
+{\bfseries\color{black}}{}
+{\newline}
+{%
+  \rule{\textwidth}{0.4pt}\\*%
+  \thmname{#1}~\thmnumber{#2}\thmnote{\ -\ #3}\label{code:#2}.\\*[-1.5ex]
+  \rule{\textwidth}{0.4pt}
+}
+\theoremstyle{codestyle}
+\newtheorem{codeblock}{Frammento}
+\newenvironment{code}[1]
+{\begin{codeblock}[#1]\hbadness=10000}{\end{codeblock}}
+\newenvironment{minicode}[1]
+{\begin{codeblock}[#1]\hbadness=10000\begin{minipage}[t]{\textwidth}}
+{\end{minipage}\end{codeblock}}
+\newenvironment{codecont}{\noindent\tt\color{Sepia!90!Black}\hbadness=10000}{}
+
+\newcommand{\com}[1]{{\color{ForestGreen}\% #1}\\}
+\newcommand{\bc}[1]{{\bf#1}}
+\newcommand{\nl}{\par\smallskip\noindent}
+
+\newcommand{\customindent}{19pt}
+\newcommand{\lineheight}{\baselineskip}
+\newcommand{\rmbreak}{\par\vspace{-\lineheight}}
+\newcommand{\fstart}{\hspace{-\customindent}\par\rmbreak}
+\newcommand{\ind}{\noindent\hangindent=\customindent}
+\newcommand{\indf}{\rmbreak\hspace*{\customindent}\hangindent=38pt}
+\newcommand{\indff}{\rmbreak\hspace*{38pt}\hangindent=57pt}
+\newcommand{\indfff}{\rmbreak\hspace*{57pt}\hangindent=76pt}
+\newcommand{\indffff}{\rmbreak\hspace*{76pt}\hangindent=95pt}
+\newcommand{\indfffff}{\rmbreak\hspace*{95pt}\hangindent=114pt}
+
+\usepackage[toc, automake]{glossaries}
+\usepackage{glossary-mcols}
+\setglossarystyle{mcolindexgroup}
+
+\newglossary*{glos}{Glossario}
+\newglossary*{prot}{Protocolli}
+\makeglossaries
+\loadglsentries{glossaries/glossario.tex}
+\loadglsentries{glossaries/protocolli.tex}
+
+\newcommand{\quotes}[1]{``#1''}
+\newcommand{\hitem}[1]{\refstepcounter{enumii}\hypertarget{#1:\arabic{enumii}}{\item}}
+\newcommand{\Mod}[1]{\ \mathrm{mod}\ #1}
+
+\usepackage{numprint}
+\usepackage{listings}
+\usepackage[title]{appendix}
+\usepackage{nameref}
+\usepackage{bm}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\include{chapters/introduzione}
+\include{chapters/livello_applicativo}
+\include{chapters/livello_trasporto}
+\include{chapters/livello_rete}
+\include{chapters/protocolli_instradamento}
+\include{chapters/livello_data_link}
+
+\include{chapters/appendices/appendix_a}
+
+\clearpage
+\printglossary[type=glos, title=Glossario]
+\printglossary[type=prot, title=Protocolli]
+
+\end{document}

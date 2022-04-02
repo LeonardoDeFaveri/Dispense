@@ -1,0 +1,239 @@
+\contentsline {chapter}{\numberline {1}Introduzione}{5}{chapter.1}
+\contentsline {section}{\numberline {1.1}Struttura di internet}{5}{section.1.1}
+\contentsline {paragraph}{Internet Exchange Point}{5}{paragraph*.2}
+\contentsline {paragraph}{Reti single-homed e multi-homed}{5}{paragraph*.3}
+\contentsline {subsection}{\numberline {1.1.1}Nucleo della rete}{6}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Periferia della rete}{6}{subsection.1.1.2}
+\contentsline {section}{\numberline {1.2}Mezzi trasmissivi}{6}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Doppini intrecciati}{7}{subsection.1.2.1}
+\contentsline {paragraph}{Cavi patch VS cavi cross}{7}{paragraph*.4}
+\contentsline {section}{\numberline {1.3}Tecniche di commutazione}{8}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Commutazione di circuito}{8}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}Commutazione a pacchetto}{9}{subsection.1.3.2}
+\contentsline {paragraph}{Ritardi nelle trasmissioni}{9}{paragraph*.6}
+\contentsline {section}{\numberline {1.4}Protocolli di comunicazione}{9}{section.1.4}
+\contentsline {paragraph}{Livelli dello stack protocollare ISO/OSI}{10}{paragraph*.8}
+\contentsline {paragraph}{Incapsulamento}{11}{paragraph*.9}
+\contentsline {paragraph}{Comunicazione tra livelli}{11}{paragraph*.10}
+\contentsline {paragraph}{Data unit}{12}{paragraph*.13}
+\contentsline {paragraph}{Trasmissione e ricezione}{12}{paragraph*.14}
+\contentsline {paragraph}{Le PDU di livello}{12}{paragraph*.16}
+\contentsline {chapter}{\numberline {2}Livello Applicativo}{13}{chapter.2}
+\contentsline {section}{\numberline {2.1}Applicazioni di rete}{13}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Architetture di applicazioni di rete}{13}{subsection.2.1.1}
+\contentsline {paragraph}{Architettura client-server}{13}{paragraph*.17}
+\contentsline {paragraph}{Architettura P2P}{14}{paragraph*.19}
+\contentsline {paragraph}{Cloud computing}{15}{paragraph*.21}
+\contentsline {paragraph}{Data center}{15}{paragraph*.22}
+\contentsline {paragraph}{Content Delivery Network}{16}{paragraph*.24}
+\contentsline {section}{\numberline {2.2}Comunicazione in rete tra processi}{16}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Socket}{17}{subsection.2.2.1}
+\contentsline {paragraph}{Socket TCP}{17}{paragraph*.25}
+\contentsline {paragraph}{Socket UDP}{17}{paragraph*.28}
+\contentsline {section}{\numberline {2.3}Protocolli del livello Applicativo}{18}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Protocollo HTTP}{18}{subsection.2.3.1}
+\contentsline {paragraph}{Connessioni persistenti e non}{18}{paragraph*.29}
+\contentsline {paragraph}{Struttura dei messaggi}{19}{paragraph*.30}
+\contentsline {paragraph}{HTTP/2.0}{21}{paragraph*.33}
+\contentsline {paragraph}{Comunicazioni senza stato e i cookie}{23}{paragraph*.38}
+\contentsline {paragraph}{Server proxy}{24}{paragraph*.40}
+\contentsline {subsection}{\numberline {2.3.2}Protocollo FTP}{24}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Protocolli per la posta elettronica}{25}{subsection.2.3.3}
+\contentsline {paragraph}{Protocollo SMTP}{25}{paragraph*.43}
+\contentsline {paragraph}{Protocolli POP3 e IMAP4}{26}{paragraph*.46}
+\contentsline {paragraph}{Protocollo TLS}{26}{paragraph*.48}
+\contentsline {subsection}{\numberline {2.3.4}Protocollo DNS}{27}{subsection.2.3.4}
+\contentsline {paragraph}{Struttura dei nomi di dominio}{27}{paragraph*.49}
+\contentsline {paragraph}{Implementazione del DNS}{27}{paragraph*.50}
+\contentsline {paragraph}{Interrogare i server}{28}{paragraph*.52}
+\contentsline {paragraph}{DNS caching}{29}{paragraph*.54}
+\contentsline {paragraph}{Resource record}{29}{paragraph*.55}
+\contentsline {paragraph}{Messaggi DNS}{29}{paragraph*.56}
+\contentsline {paragraph}{Inserire record nel database}{30}{paragraph*.58}
+\contentsline {chapter}{\numberline {3}Livello Trasporto}{31}{chapter.3}
+\contentsline {section}{\numberline {3.1}Caratteristiche dei servizi offerti}{31}{section.3.1}
+\contentsline {paragraph}{Controllo di congestione e di flusso}{31}{paragraph*.59}
+\contentsline {subsection}{\numberline {3.1.1}Multiplexing e demultiplexing}{31}{subsection.3.1.1}
+\contentsline {paragraph}{Funzionamento del demultiplexing}{32}{paragraph*.60}
+\contentsline {paragraph}{Demultiplexing senza connessione}{32}{paragraph*.62}
+\contentsline {paragraph}{Demultiplexing con connessione}{32}{paragraph*.63}
+\contentsline {subsection}{\numberline {3.1.2}Numeri di porta}{32}{subsection.3.1.2}
+\contentsline {section}{\numberline {3.2}Protocollo UDP}{33}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Controllo degli errori}{34}{subsection.3.2.1}
+\contentsline {section}{\numberline {3.3}Trasferimento dati affidabile}{34}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Protocollo Stop-and-Wait}{34}{subsection.3.3.1}
+\contentsline {paragraph}{Efficienza}{35}{paragraph*.66}
+\contentsline {paragraph}{Pipelining}{35}{paragraph*.67}
+\contentsline {subsection}{\numberline {3.3.2}Finestre di trasmissione e acknowledgement}{36}{subsection.3.3.2}
+\contentsline {paragraph}{Finestre di trasmissione}{36}{paragraph*.70}
+\contentsline {paragraph}{Pacchetti di acknowledgement}{37}{paragraph*.72}
+\contentsline {subsection}{\numberline {3.3.3}Protocollo Go-back-N}{37}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Protocollo Selective repeat}{38}{subsection.3.3.4}
+\contentsline {paragraph}{Relazione tra numeri dimensione della finestra e numeri di sequenza}{39}{paragraph*.75}
+\contentsline {paragraph}{Esempio di sovrapposizione}{39}{paragraph*.76}
+\contentsline {section}{\numberline {3.4}Protocollo TCP}{40}{section.3.4}
+\contentsline {paragraph}{Struttura dei segmenti TCP}{40}{paragraph*.78}
+\contentsline {subsection}{\numberline {3.4.1}Instaurazione di una connessione TCP}{42}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Dimensione dei segmenti}{42}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}Chiusura di una connessione TCP}{43}{subsection.3.4.3}
+\contentsline {paragraph}{Modalit\IeC {\`a} ``gentile''}{43}{paragraph*.82}
+\contentsline {paragraph}{Modalit\IeC {\`a} ``brusca''}{43}{paragraph*.84}
+\contentsline {subsection}{\numberline {3.4.4}Stimare l'RTT e scegliere l'RTO}{44}{subsection.3.4.4}
+\contentsline {paragraph}{Inizializzazione dei valori}{44}{paragraph*.87}
+\contentsline {subsection}{\numberline {3.4.5}Controllo di flusso}{45}{subsection.3.4.5}
+\contentsline {section}{\numberline {3.5}Gestione della congestione}{46}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Modelli per sistemi a coda}{46}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Cause della congestione}{47}{subsection.3.5.2}
+\contentsline {paragraph}{Scenario 1}{47}{paragraph*.91}
+\contentsline {paragraph}{Scenario 2}{47}{paragraph*.93}
+\contentsline {paragraph}{Scenario 3}{48}{paragraph*.95}
+\contentsline {section}{\numberline {3.6}Controllo della congestione in TCP}{49}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Protocollo AIMD}{49}{subsection.3.6.1}
+\contentsline {paragraph}{Fairness}{50}{paragraph*.98}
+\contentsline {paragraph}{Slow Start e Congestion Avoidance}{50}{paragraph*.100}
+\contentsline {paragraph}{Funzionamento dell'algoritmo}{52}{paragraph*.103}
+\contentsline {paragraph}{Fast retransmit e fast recovery}{52}{paragraph*.104}
+\contentsline {paragraph}{Macchina a stati dell'algoritmo AIMD}{54}{paragraph*.106}
+\contentsline {paragraph}{Calcolo del throughput}{54}{paragraph*.108}
+\contentsline {paragraph}{Problemi di fairness}{55}{paragraph*.109}
+\contentsline {section}{\numberline {3.7}Versioni moderne del TCP}{55}{section.3.7}
+\contentsline {subsection}{\numberline {3.7.1}Protocollo CUBIC}{55}{subsection.3.7.1}
+\contentsline {subsection}{\numberline {3.7.2}Protocollo BBR}{56}{subsection.3.7.2}
+\contentsline {subsection}{\numberline {3.7.3}Protocollo QUIC}{57}{subsection.3.7.3}
+\contentsline {chapter}{\numberline {4}Livello Rete}{58}{chapter.4}
+\contentsline {section}{\numberline {4.1}Funzioni del livello Rete}{58}{section.4.1}
+\contentsline {section}{\numberline {4.2}Struttura e funzionamento di un router}{59}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Porte di ingresso}{59}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Sistemi di commutazione}{60}{subsection.4.2.2}
+\contentsline {paragraph}{Commutazione a memoria}{60}{paragraph*.117}
+\contentsline {paragraph}{Commutazione a bus}{60}{paragraph*.119}
+\contentsline {paragraph}{Commutazione a matrice}{61}{paragraph*.121}
+\contentsline {subsection}{\numberline {4.2.3}Conseguenze dei ritardi di commutazione}{61}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Porte di uscita}{62}{subsection.4.2.4}
+\contentsline {paragraph}{Dimensione dei buffer}{62}{paragraph*.125}
+\contentsline {section}{\numberline {4.3}Protocollo IP}{62}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Struttura dei pacchetti}{62}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Frammentazione dei pacchetti}{64}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Indirizzamento}{64}{subsection.4.3.3}
+\contentsline {paragraph}{Struttura degli indirizzi IP}{65}{paragraph*.127}
+\contentsline {paragraph}{Indirizzamento classful}{65}{paragraph*.128}
+\contentsline {paragraph}{Indirizzamento classless}{65}{paragraph*.130}
+\contentsline {paragraph}{Conversione binario-decimale delle netmask}{67}{paragraph*.131}
+\contentsline {paragraph}{Regole di inoltro}{67}{paragraph*.132}
+\contentsline {subsection}{\numberline {4.3.4}Indirizzi privati e NAT}{71}{subsection.4.3.4}
+\contentsline {paragraph}{Indirizzi pubblici e privati}{71}{paragraph*.140}
+\contentsline {paragraph}{NAT}{71}{paragraph*.141}
+\contentsline {subsection}{\numberline {4.3.5}Indirizzi speciali}{73}{subsection.4.3.5}
+\contentsline {paragraph}{Indirizzi di rete}{73}{paragraph*.145}
+\contentsline {paragraph}{Indirizzi di broadcast di rete}{73}{paragraph*.146}
+\contentsline {paragraph}{Indirizzo di broadcast di rete locale}{73}{paragraph*.147}
+\contentsline {paragraph}{Indirizzo ``questo computer''}{73}{paragraph*.148}
+\contentsline {paragraph}{Indirizzi di loopback}{73}{paragraph*.149}
+\contentsline {paragraph}{Indirizzi multicast}{73}{paragraph*.150}
+\contentsline {paragraph}{Indirizzi link-local}{74}{paragraph*.151}
+\contentsline {paragraph}{Indirizzi IP per i router}{74}{paragraph*.152}
+\contentsline {section}{\numberline {4.4}Protocollo ARP}{74}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Cenni sul livello 2}{74}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Principi dell'ARP}{75}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.3}Messaggi ARP}{75}{subsection.4.4.3}
+\contentsline {subsection}{\numberline {4.4.4}ARP caching}{76}{subsection.4.4.4}
+\contentsline {subsection}{\numberline {4.4.5}Proxy ARP}{76}{subsection.4.4.5}
+\contentsline {section}{\numberline {4.5}Protocollo ICMP}{76}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}Messaggi ICMP}{76}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {4.5.2}Ping tramite ICMP}{77}{subsection.4.5.2}
+\contentsline {subsection}{\numberline {4.5.3}Traceroute tramite ICMP}{77}{subsection.4.5.3}
+\contentsline {section}{\numberline {4.6}Protocollo DHCP}{77}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}Principio di funzionamento}{77}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}Gestione dei prestiti}{78}{subsection.4.6.2}
+\contentsline {subsection}{\numberline {4.6.3}Messaggi DHCP}{79}{subsection.4.6.3}
+\contentsline {subsection}{\numberline {4.6.4}Reti senza DHCP}{80}{subsection.4.6.4}
+\contentsline {section}{\numberline {4.7}Il viaggio di un pacchetto attraverso la rete}{80}{section.4.7}
+\contentsline {section}{\numberline {4.8}Protocollo IPv6}{80}{section.4.8}
+\contentsline {subsection}{\numberline {4.8.1}Struttura dei pacchetti IPv6}{81}{subsection.4.8.1}
+\contentsline {subsection}{\numberline {4.8.2}Tunneling tramite IPv4}{81}{subsection.4.8.2}
+\contentsline {subsection}{\numberline {4.8.3}Struttura e tipologia di indirizzi IPv6}{82}{subsection.4.8.3}
+\contentsline {paragraph}{CIDR IPv6}{83}{paragraph*.164}
+\contentsline {paragraph}{Indirizzi speciali}{83}{paragraph*.166}
+\contentsline {chapter}{\numberline {5}Metodi e protocolli di instradamento}{84}{chapter.5}
+\contentsline {section}{\numberline {5.1}Principi generali}{84}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Rappresentazione delle reti come grafi non orientati}{84}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Tipi di algoritmi di routing}{85}{subsection.5.1.2}
+\contentsline {paragraph}{Informazioni globali e distribuite}{85}{paragraph*.168}
+\contentsline {paragraph}{Configurazione statica e dinamica}{85}{paragraph*.169}
+\contentsline {section}{\numberline {5.2}Algoritmo di Dijkstra}{85}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Complessit\IeC {\`a} e problemi dell'algoritmo}{87}{subsection.5.2.1}
+\contentsline {section}{\numberline {5.3}Protocollo OSPF}{88}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Autonomous system}{88}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Funzionamento del protocollo}{88}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.3}OSPF gerarchico}{88}{subsection.5.3.3}
+\contentsline {subsection}{\numberline {5.3.4}Traffic engineering}{89}{subsection.5.3.4}
+\contentsline {section}{\numberline {5.4}Algoritmo di Bellman-Ford}{90}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}Logica di funzionamento}{90}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.2}Problema del count-to-infinity}{92}{subsection.5.4.2}
+\contentsline {paragraph}{Soluzioni al count-to-infinity}{94}{paragraph*.180}
+\contentsline {section}{\numberline {5.5}Protocollo RIP}{95}{section.5.5}
+\contentsline {paragraph}{Gestione dei guasti}{96}{paragraph*.186}
+\contentsline {paragraph}{Gestione delle tabelle di inoltro}{96}{paragraph*.187}
+\contentsline {section}{\numberline {5.6}Confronto tra algoritmi link state e distance vector}{97}{section.5.6}
+\contentsline {section}{\numberline {5.7}Protocollo BGP}{97}{section.5.7}
+\contentsline {subsection}{\numberline {5.7.1}Principi di funzionamento}{97}{subsection.5.7.1}
+\contentsline {paragraph}{Protocollo path vector}{97}{paragraph*.188}
+\contentsline {paragraph}{Macchina a stati del BGP}{98}{paragraph*.190}
+\contentsline {paragraph}{Interconnessioni e policy}{98}{paragraph*.192}
+\contentsline {paragraph}{Best path BGP}{98}{paragraph*.193}
+\contentsline {subsection}{\numberline {5.7.2}Messaggi BGP}{99}{subsection.5.7.2}
+\contentsline {paragraph}{Messaggio Open}{99}{paragraph*.195}
+\contentsline {paragraph}{Messaggio Notification}{100}{paragraph*.197}
+\contentsline {paragraph}{Messaggio KeepAlive}{100}{paragraph*.199}
+\contentsline {paragraph}{Messaggi Update}{100}{paragraph*.200}
+\contentsline {subsection}{\numberline {5.7.3}Gestione delle rotte}{101}{subsection.5.7.3}
+\contentsline {paragraph}{Filtri}{102}{paragraph*.205}
+\contentsline {paragraph}{Routing Information Base - RIB}{102}{paragraph*.206}
+\contentsline {chapter}{\numberline {6}Livello Data Link}{103}{chapter.6}
+\contentsline {section}{\numberline {6.1}Introduzione}{103}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Servizi del livello Data Link}{103}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Implementazione dei servizi Data Link}{104}{subsection.6.1.2}
+\contentsline {section}{\numberline {6.2}Rilevamento e correzione di errori}{104}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Bit di parit\IeC {\`a}}{105}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}Ridondanza e interleaving}{105}{subsection.6.2.2}
+\contentsline {subsection}{\numberline {6.2.3}Cyclic Redundancy Check}{106}{subsection.6.2.3}
+\contentsline {paragraph}{Calcolare il CRC}{106}{paragraph*.210}
+\contentsline {section}{\numberline {6.3}Gestione degli accessi multipli ai canali}{107}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Protocolli a ripartizione di risorse}{107}{subsection.6.3.1}
+\contentsline {subsection}{\numberline {6.3.2}Protocolli ad accesso casuale}{108}{subsection.6.3.2}
+\contentsline {paragraph}{Slotted ALOHA}{108}{paragraph*.214}
+\contentsline {paragraph}{ALOHA}{109}{paragraph*.216}
+\contentsline {paragraph}{CSMA}{110}{paragraph*.219}
+\contentsline {subsection}{\numberline {6.3.3}Protocolli a turni intelligenti}{112}{subsection.6.3.3}
+\contentsline {paragraph}{Polling}{112}{paragraph*.223}
+\contentsline {paragraph}{Token passing}{112}{paragraph*.224}
+\contentsline {section}{\numberline {6.4}Protocollo Ethernet}{113}{section.6.4}
+\contentsline {subsection}{\numberline {6.4.1}Organizzazione delle reti Ethernet}{113}{subsection.6.4.1}
+\contentsline {subsection}{\numberline {6.4.2}Struttura dei frame Ethernet}{114}{subsection.6.4.2}
+\contentsline {subsection}{\numberline {6.4.3}Caratteristiche del protocollo Ethernet}{115}{subsection.6.4.3}
+\contentsline {section}{\numberline {6.5}Ethernet switching}{115}{section.6.5}
+\contentsline {subsection}{\numberline {6.5.1}Domini di collisione}{116}{subsection.6.5.1}
+\contentsline {subsection}{\numberline {6.5.2}Domini di broadcast}{116}{subsection.6.5.2}
+\contentsline {subsection}{\numberline {6.5.3}Funzionamento degli switch}{117}{subsection.6.5.3}
+\contentsline {subsection}{\numberline {6.5.4}Protocollo STP}{118}{subsection.6.5.4}
+\contentsline {paragraph}{Processo di costruzione dell'albero di copertura}{118}{paragraph*.235}
+\contentsline {paragraph}{Variazioni dell'albero di copertura}{119}{paragraph*.237}
+\contentsline {subsection}{\numberline {6.5.5}Organizzazione logica delle LAN}{119}{subsection.6.5.5}
+\contentsline {section}{\numberline {6.6}Organizzazione e funzionamento delle reti wireless}{120}{section.6.6}
+\contentsline {subsection}{\numberline {6.6.1}Elementi di una rete wireless}{120}{subsection.6.6.1}
+\contentsline {subsection}{\numberline {6.6.2}Architettura di riferimento}{121}{subsection.6.6.2}
+\contentsline {subsection}{\numberline {6.6.3}Protocolli per le comunicazioni wireless}{122}{subsection.6.6.3}
+\contentsline {paragraph}{Struttura di un frame wireless}{123}{paragraph*.243}
+\contentsline {paragraph}{Caratteristiche dei collegamenti wireless}{123}{paragraph*.245}
+\contentsline {paragraph}{Problemi nel rilevamento delle collisioni}{123}{paragraph*.246}
+\contentsline {subsection}{\numberline {6.6.4}Collision avoidance nelle reti wireless}{124}{subsection.6.6.4}
+\contentsline {subsection}{\numberline {6.6.5}Problema del terminale nascosto}{125}{subsection.6.6.5}
+\contentsline {chapter}{\numberline {A}Simboli e formule}{127}{Appendix.1.A}
+\contentsline {section}{\numberline {A.1}Simboli}{127}{section.1.A.1}
+\contentsline {section}{\numberline {A.2}Formule}{127}{section.1.A.2}
+\contentsline {subsection}{\numberline {A.2.1}Ritardo di trasmissione}{127}{subsection.1.A.2.1}
+\contentsline {subsection}{\numberline {A.2.2}Ritardo di propagazione}{127}{subsection.1.A.2.2}
+\contentsline {subsection}{\numberline {A.2.3}BDP}{127}{subsection.1.A.2.3}
+\contentsline {subsection}{\numberline {A.2.4}Lunghezza in metri di un bit}{128}{subsection.1.A.2.4}
+\contentsline {chapter}{Glossario}{129}{section*.253}
+\contentsline {chapter}{Protocolli}{131}{section*.255}

@@ -1,0 +1,12 @@
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q.\\E$"}
+{"rule":"GR_04_002","sentence":"^\\Qdi \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q e anche che \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q congiunge.\\E$"}
+{"rule":"ST_03_001","sentence":"^\\Qed \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, cioè è un lato di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, allora diciamo che \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q e \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q sono gli estremi.\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\QSiano \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q e \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q due grafi..\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\Qse e solo se lo sono con passeggiata..\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\Qo equivalentemente per passeggiata..\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\QIndichiamo con \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q l'insieme di tutte le -classi di equivalenza (considerate come sottoinsiemi di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q).\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\Qse possiede una sola componente connessa., altrimenti si dice sconnesso..\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\Qe sia \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q un morfismo..\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\Qo entrambi sconnessi..\\E$"}
+{"rule":"GR_04_002","sentence":"^\\Qdi \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q come la n-upla di interi\\E$"}
+{"rule":"GR_04_002","sentence":"^\\QLa conoscenza di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q implica quella del numero di vertici.\\E$"}

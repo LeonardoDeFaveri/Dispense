@@ -1,0 +1,95 @@
+\BOOKMARK [0][-]{chapter.1}{Introduzione}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Definizione di Probabilit\340}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Statistica descrittiva e inferenziale}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Cenni di teoria degli insiemi}{chapter.1}% 4
+\BOOKMARK [2][-]{subsection.1.3.1}{Operazioni sugli insiemi}{section.1.3}% 5
+\BOOKMARK [2][-]{subsection.1.3.2}{Cardinalit\340 di un insieme}{section.1.3}% 6
+\BOOKMARK [0][-]{chapter.2}{Principi di calcolo combinatorio}{}% 7
+\BOOKMARK [1][-]{section.2.1}{Permutazioni}{chapter.2}% 8
+\BOOKMARK [2][-]{subsection.2.1.1}{Permutazioni con ripetizioni}{section.2.1}% 9
+\BOOKMARK [1][-]{section.2.2}{Disposizioni}{chapter.2}% 10
+\BOOKMARK [2][-]{subsection.2.2.1}{Disposizioni con ripetizioni}{section.2.2}% 11
+\BOOKMARK [1][-]{section.2.3}{Combinazioni}{chapter.2}% 12
+\BOOKMARK [2][-]{subsection.2.3.1}{Combinazioni con ripetizioni}{section.2.3}% 13
+\BOOKMARK [1][-]{section.2.4}{Coefficiente binomiale}{chapter.2}% 14
+\BOOKMARK [0][-]{chapter.3}{Eventi aleatori}{}% 15
+\BOOKMARK [1][-]{section.3.1}{Insieme degli esiti}{chapter.3}% 16
+\BOOKMARK [1][-]{section.3.2}{Algebra e -algebra}{chapter.3}% 17
+\BOOKMARK [1][-]{section.3.3}{Definizione di probabilit\340 sugli eventi}{chapter.3}% 18
+\BOOKMARK [2][-]{subsection.3.3.1}{Propriet\340 della probabilit\340}{section.3.3}% 19
+\BOOKMARK [1][-]{section.3.4}{Probabilit\340 condizionata}{chapter.3}% 20
+\BOOKMARK [1][-]{section.3.5}{Indipendenza degli eventi}{chapter.3}% 21
+\BOOKMARK [0][-]{chapter.4}{Funzioni di probabilit\340}{}% 22
+\BOOKMARK [1][-]{section.4.1}{ \350 finito o numerabile}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.2}{Spazi prodotto}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.3}{ \350 pi\371 che numerabile}{chapter.4}% 25
+\BOOKMARK [0][-]{chapter.5}{Variabili aleatorie}{}% 26
+\BOOKMARK [1][-]{section.5.1}{Definizione di una variabile aleatoria}{chapter.5}% 27
+\BOOKMARK [1][-]{section.5.2}{Tipi di variabili aleatorie}{chapter.5}% 28
+\BOOKMARK [2][-]{subsection.5.2.1}{Variabili aleatorie degeneri}{section.5.2}% 29
+\BOOKMARK [2][-]{subsection.5.2.2}{Variabili aleatorie indicatrici}{section.5.2}% 30
+\BOOKMARK [2][-]{subsection.5.2.3}{Variabili aleatorie semplici: combinazioni lineari di v.a. indicatrici}{section.5.2}% 31
+\BOOKMARK [1][-]{section.5.3}{Funzione di ripartizione}{chapter.5}% 32
+\BOOKMARK [2][-]{subsection.5.3.1}{Propriet\340 della funzione di ripartizione}{section.5.3}% 33
+\BOOKMARK [1][-]{section.5.4}{Classi di variabili aleatorie}{chapter.5}% 34
+\BOOKMARK [2][-]{subsection.5.4.1}{Variabili aleatorie discrete}{section.5.4}% 35
+\BOOKMARK [2][-]{subsection.5.4.2}{Variabili aleatorie continue}{section.5.4}% 36
+\BOOKMARK [2][-]{subsection.5.4.3}{Variabili aleatorie miste}{section.5.4}% 37
+\BOOKMARK [1][-]{section.5.5}{Costante di rinormalizzazione}{chapter.5}% 38
+\BOOKMARK [0][-]{chapter.6}{Trasformazioni di variabili aleatorie}{}% 39
+\BOOKMARK [1][-]{section.6.1}{Trasformazioni lineari}{chapter.6}% 40
+\BOOKMARK [1][-]{section.6.2}{Trasformazioni non lineari}{chapter.6}% 41
+\BOOKMARK [2][-]{subsection.6.2.1}{Variabili aleatorie discrete}{section.6.2}% 42
+\BOOKMARK [2][-]{subsection.6.2.2}{Variabili aleatorie assolutamente continue}{section.6.2}% 43
+\BOOKMARK [0][-]{chapter.7}{Vettori aleatori}{}% 44
+\BOOKMARK [1][-]{section.7.1}{Coppie di variabili aleatorie}{chapter.7}% 45
+\BOOKMARK [1][-]{section.7.2}{Vettori aleatori discreti}{chapter.7}% 46
+\BOOKMARK [1][-]{section.7.3}{Vettori aleatori assolutamente continui}{chapter.7}% 47
+\BOOKMARK [1][-]{section.7.4}{Vettori aleatori misti}{chapter.7}% 48
+\BOOKMARK [0][-]{chapter.8}{Modelli di variabili aleatorie discrete}{}% 49
+\BOOKMARK [1][-]{section.8.1}{Bernoulliane}{chapter.8}% 50
+\BOOKMARK [1][-]{section.8.2}{Binomiali}{chapter.8}% 51
+\BOOKMARK [2][-]{subsection.8.2.1}{Bernoulliane e binomiali in R}{section.8.2}% 52
+\BOOKMARK [1][-]{section.8.3}{Schema o processo di Bernoulli}{chapter.8}% 53
+\BOOKMARK [1][-]{section.8.4}{Geometriche}{chapter.8}% 54
+\BOOKMARK [2][-]{subsection.8.4.1}{Geometriche in R}{section.8.4}% 55
+\BOOKMARK [1][-]{section.8.5}{Binomiali negative}{chapter.8}% 56
+\BOOKMARK [2][-]{subsection.8.5.1}{Binomiali negative in R}{section.8.5}% 57
+\BOOKMARK [1][-]{section.8.6}{Riproducibilit\340}{chapter.8}% 58
+\BOOKMARK [1][-]{section.8.7}{Ipergeometriche}{chapter.8}% 59
+\BOOKMARK [2][-]{subsection.8.7.1}{Ipergeometriche in R}{section.8.7}% 60
+\BOOKMARK [1][-]{section.8.8}{Poissoniane}{chapter.8}% 61
+\BOOKMARK [2][-]{subsection.8.8.1}{Poissoniane in R}{section.8.8}% 62
+\BOOKMARK [1][-]{section.8.9}{Riepilogo}{chapter.8}% 63
+\BOOKMARK [0][-]{chapter.9}{Indicatori di una variabile aleatoria}{}% 64
+\BOOKMARK [1][-]{section.9.1}{Valore atteso}{chapter.9}% 65
+\BOOKMARK [2][-]{subsection.9.1.1}{Variabili aleatorie discrete}{section.9.1}% 66
+\BOOKMARK [2][-]{subsection.9.1.2}{Riepilogo}{section.9.1}% 67
+\BOOKMARK [2][-]{subsection.9.1.3}{Variabili aleatorie assolutamente continue}{section.9.1}% 68
+\BOOKMARK [1][-]{section.9.2}{Momento di una variabile aleatoria}{chapter.9}% 69
+\BOOKMARK [2][-]{subsection.9.2.1}{Varianza di modelli discreti}{section.9.2}% 70
+\BOOKMARK [1][-]{section.9.3}{Disuguaglianze}{chapter.9}% 71
+\BOOKMARK [1][-]{section.9.4}{Covarianza e correlazione}{chapter.9}% 72
+\BOOKMARK [1][-]{section.9.5}{Altri indicatori}{chapter.9}% 73
+\BOOKMARK [2][-]{subsection.9.5.1}{Mediana e mediana impropria}{section.9.5}% 74
+\BOOKMARK [2][-]{subsection.9.5.2}{Quantile}{section.9.5}% 75
+\BOOKMARK [2][-]{subsection.9.5.3}{Moda}{section.9.5}% 76
+\BOOKMARK [0][-]{chapter.10}{Modelli di variabili aleatorie assolutamente continue}{}% 77
+\BOOKMARK [1][-]{section.10.1}{Uniformi}{chapter.10}% 78
+\BOOKMARK [2][-]{subsection.10.1.1}{Uniformi in R}{section.10.1}% 79
+\BOOKMARK [1][-]{section.10.2}{Esponenziali}{chapter.10}% 80
+\BOOKMARK [2][-]{subsection.10.2.1}{Esponenziali in R}{section.10.2}% 81
+\BOOKMARK [1][-]{section.10.3}{Gaussiane o normali}{chapter.10}% 82
+\BOOKMARK [2][-]{subsection.10.3.1}{Normali in R}{section.10.3}% 83
+\BOOKMARK [1][-]{section.10.4}{Chi quadro}{chapter.10}% 84
+\BOOKMARK [2][-]{subsection.10.4.1}{Chi quadro in R}{section.10.4}% 85
+\BOOKMARK [1][-]{section.10.5}{Distribuzione t di Student}{chapter.10}% 86
+\BOOKMARK [2][-]{subsection.10.5.1}{t di Student in R}{section.10.5}% 87
+\BOOKMARK [0][-]{chapter.11}{Convergenza di variabili aleatorie}{}% 88
+\BOOKMARK [1][-]{section.11.1}{Tipi di convergenza}{chapter.11}% 89
+\BOOKMARK [1][-]{section.11.2}{Teoremi limite}{chapter.11}% 90
+\BOOKMARK [0][-]{chapter.12}{Statistica}{}% 91
+\BOOKMARK [1][-]{section.12.1}{Generalit\340 sulla statistica}{chapter.12}% 92
+\BOOKMARK [1][-]{section.12.2}{Stimatori e stime}{chapter.12}% 93
+\BOOKMARK [2][-]{subsection.12.2.1}{Alcuni stimatori}{section.12.2}% 94
+\BOOKMARK [2][-]{subsection.12.2.2}{Distribuzione degli stimatori}{section.12.2}% 95

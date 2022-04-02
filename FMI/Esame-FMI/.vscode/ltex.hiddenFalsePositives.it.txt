@@ -1,0 +1,5 @@
+{"rule":"UNPAIRED_BRACKETS","sentence":"^\\QPasso) Compatibilità.\\E$"}
+{"rule":"UNPAIRED_BRACKETS","sentence":"^\\QInoltre vale: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q cioè \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Passo) Calcolo di una soluzione.\\E$"}
+{"rule":"GR_04_002","sentence":"^\\QPasso) Calcolo di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"UNPAIRED_BRACKETS","sentence":"^\\QPasso) Calcolo di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"ST_04_001","sentence":"^\\QGrazie al Teorema cinese del resto so che l'insieme delle soluzioni \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q è: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Calcolo \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Dunque: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Seconda domanda.: poiché le soluzioni del sistema sono tutti e soli i valori contenuti in: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q e, in particolare, le soluzioni positive sono contenute in: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q ne segue che, siccome la cifra delle decine del valore del modulo, 1540, è 4, quindi è pari, mentre\\E$"}

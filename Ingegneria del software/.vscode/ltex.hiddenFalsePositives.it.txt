@@ -1,0 +1,6 @@
+{"rule":"ST_04_001","sentence":"^\\Q(IS.): L'Ingegneria del software si definisce come: L'applicazione di una strategia sistematica, disciplinata e misurabile allo sviluppo, esercizio e manutenzione di un software; Lo studio delle strategie di cui al punto (1);\\E$"}
+{"rule":"ER_01_001","sentence":"^\\QModello a cascata.\\E$"}
+{"rule":"ER_01_001","sentence":"^\\QIl modello a cascata., o waterfall.,\\E$"}
+{"rule":"ST_03_001","sentence":"^\\QQuesto modello segue un approccio iterativo: ad ogni \"giro\" viene consegnata una versione del prodotto\\E$"}
+{"rule":"ST_03_001","sentence":"^\\Qsi segue approccio iterativo: ad ogni \"giro\" viene consegnata una versione del prodotto.\\E$"}
+{"rule":"ST_01_005","sentence":"^\\QI test non valutano l'implementazione complessiva delle user story., ma si assicurano soltanto che a ogni input corrisponda un output corretto.\\E$"}

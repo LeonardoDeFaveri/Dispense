@@ -1,0 +1,30 @@
+\contentsline {chapter}{\numberline {1}Introduzione}{2}
+\contentsline {section}{\numberline {1.1}Definizione e finalit\IeC {\`a} dell'Ingegneria del software}{2}
+\contentsline {subsection}{\numberline {1.1.1}L'IS come tecnologia}{2}
+\contentsline {chapter}{\numberline {2}Processi di sviluppo}{4}
+\contentsline {section}{\numberline {2.1}Modelli per processi di sviluppo}{4}
+\contentsline {subsection}{\numberline {2.1.1}Modello a cascata}{4}
+\contentsline {subsection}{\numberline {2.1.2}Modello incrementale}{5}
+\contentsline {subsection}{\numberline {2.1.3}Modello a prototipi}{5}
+\contentsline {paragraph}{Prototipo}{5}
+\contentsline {paragraph}{Wireframe o mock-up}{6}
+\contentsline {subsection}{\numberline {2.1.4}Modello a spirale}{7}
+\contentsline {subsection}{\numberline {2.1.5}Modello di sviluppo a componenti}{7}
+\contentsline {paragraph}{Architetture orientate ai servizi}{8}
+\contentsline {subsection}{\numberline {2.1.6}Model-driven developement}{8}
+\contentsline {section}{\numberline {2.2}Metodologie agili}{8}
+\contentsline {subsection}{\numberline {2.2.1}Modello scrum}{8}
+\contentsline {subsection}{\numberline {2.2.2}Modello extreme programming}{9}
+\contentsline {paragraph}{Pianificazione a user story}{10}
+\contentsline {paragraph}{Approccio al testing}{10}
+\contentsline {paragraph}{Pair programming}{10}
+\contentsline {subsection}{\numberline {2.2.3}DevOps}{10}
+\contentsline {chapter}{\numberline {3}Linguaggi di modellazione}{11}
+\contentsline {section}{\numberline {3.1}Modellare i requisiti di sicurezza}{11}
+\contentsline {subsection}{\numberline {3.1.1}Misuse-case diagram}{11}
+\contentsline {subsection}{\numberline {3.1.2}Linguaggi goal-oriented}{12}
+\contentsline {section}{\numberline {3.2}Linguaggio UML}{12}
+\contentsline {paragraph}{Activity diagram VS Sequence diagram}{13}
+\contentsline {subsection}{\numberline {3.2.1}Linguaggio OCL}{13}
+\contentsline {chapter}{\numberline {4}Requisiti}{14}
+\contentsline {section}{\numberline {4.1}Requisiti non funzionali}{14}

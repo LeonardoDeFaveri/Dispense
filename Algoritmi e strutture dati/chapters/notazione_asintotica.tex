@@ -1,0 +1,211 @@
+\chapter{Notazione asintotica}
+Nel precedente capitolo abbiamo introdotto velocemente la \emph{notazione
+asintotica}, ma ora la riprendiamo per approfondirne le caratteristiche e 
+iniziamo con l'esplicitare una regola generale che finora abbiamo sfruttato
+senza pensarci troppo.
+
+\begin{definition}[Regola generale per le espressioni polinomiali]
+    Per ogni espressione polinomiale di grado $k$ del tipo
+    \[\begin{array}{rc}
+        f(n)=a_k\cdot n^k+a_{k-1}\cdot n^{k-1}+\dots+a_1\cdot n+a_0 & a_k>0
+    \end{array}\]
+    vale:
+    \[f(n)=\Theta(n^k)\]
+\end{definition}
+\begin{proof}[Dimostrazione]
+    La condizione necessaria per poter dire che $f(n)=\Theta(n^k)$ è:
+    \[\begin{array}{rcl}
+        f(n)=O(n^k) & \wedge & f(n)=\Omega(n^k)
+    \end{array}\]
+    Iniziamo quindi con la verifica del \emph{limite superiore}, ovvero dimostriamo
+    che vale la seguente:
+    \[\exists\,c>0,\,\exists\,m\geq 0:f(n)\leq c\cdot n^k\quad\forall\,n\geq m\]
+    Procediamo:
+    \[f(n)\begin{array}[t]{clr}
+        = & a_k\cdot n^k+a_{k-1}\cdot n^{k-1}+\dots+a_1\cdot n+a_0 & \\
+        \leq & a_k\cdot n^k+|a_{k-1}|\cdot n^{k-1}+\dots+|a_1|\cdot n+|a_0| & \\
+        \leq & a_k\cdot n^k+|a_{k-1}|\cdot n^k+\dots+|a_1|\cdot n^k+|a_0|\cdot n^k & \forall\,n\geq 1\\
+        = & (a_k+|a_{k-1}|+\dots+|a_1|+|a_0|)\cdot n^k & \\
+        \leq & c\cdot k^n
+    \end{array}\]
+    L'ultima disequazione è vera per:
+    \[\begin{array}{rcl}
+        c\geq(a_k+|a_{k-1}|+\dots+|a_1|+|a_0|) & \wedge & m=1
+    \end{array}\]
+
+    \bigskip\noindent
+    Ora passiamo alla verifica del \emph{limite inferiore} e quindi dimostriamo
+    che vale anche la seguente:
+    \[\exists\,d>0,\,\exists\,m\geq 0:f(n)\geq d\cdot n^k\quad\forall\,n\geq m\]
+    Procediamo:
+    \[f(n)\begin{array}[t]{clr}
+        = & a_k\cdot n^k+a_{k-1}\cdot n^{k-1}+\dots+a_1\cdot n+a_0 & \\
+        \geq & a_k\cdot n^k-|a_{k-1}|\cdot n^{k-1}-\dots-|a_1|\cdot n-|a_0| & \\
+        \geq & a_k\cdot n^k-|a_{k-1}|\cdot n^{k-1}-\dots-|a_1|\cdot n^{k-1}-|a_0|\cdot n^{k-1} & \forall\,n\geq 1\\
+        \geq & d\cdot n^k
+    \end{array}\]
+    L'ultima disequazione è vera per:
+    \[d\leq a_k-\frac{|a_{k-1|}}{n}-\frac{|a_{k-2}|}{n}-\dots-\frac{|a_1|}{n}-
+    \frac{|a_0|}{n}\]
+    Poiché $d>0$, anche il termine destro della disequazione dev'essere $>0$,
+    e quindi deve valere:
+    \[\begin{array}{rcl}
+        a_k-\frac{|a_{k-1|}}{n}-\frac{|a_{k-2}|}{n}-\dots-\frac{|a_1|}{n}-
+    \frac{|a_0|}{n} > 0 & \Leftrightarrow & n\geq\frac{|a_{k-1}|+\dots+|a_1|+|a_0|}
+    {a_k}=m
+    \end{array}\]
+\end{proof}
+
+\section{Proprietà della notazione asintotica}
+\begin{definition}[Proprietà di dualità]
+    Per ogni coppia di funzioni di costo $f(n)$ e $g(n)$ vale:
+    \[f(n)=O(g(n))\Leftrightarrow g(n)=\Omega(f(n))\]
+\end{definition}
+\begin{proof}[Dimostrazione]
+    \[f(n)=O(g(n))\begin{array}[t]{cll}
+        \Leftrightarrow & f(n)\leq c\cdot g(n) & \forall\,n\geq m\\
+        \Leftrightarrow & g(n)\geq\frac{1}{c}\cdot f(n) & \forall\,n\geq m\\
+        \Leftrightarrow & g(n)\geq c'\cdot f(n) & \forall\,n\geq m,\,c'=\frac{1}{c}\\
+        \Leftrightarrow & g(n)=\Omega(f(n)) &
+    \end{array}\]
+\end{proof}\noindent
+Questa proprietà stabilisce che se $f(n)$ è un $O(g(n))$, allora $g(n)$ è un
+$\Omega(f(n))$.
+
+\begin{definition}[Proprietà di eliminazione delle costanti]
+    Per ogni funzione di costo $f(n)$ vale:
+    \[f(n)=O(g(n))\Leftrightarrow a\cdot f(n)=O(g(n))\quad\forall\, a>0\]
+    \[f(n)=\Omega(g(n))\Leftrightarrow a\cdot f(n)=\Omega(g(n))\quad\forall\, a>0\]
+\end{definition}
+\begin{proof}[Dimostrazione]
+    \[f(n)=O(g(n))\begin{array}[t]{cll}
+        \Leftrightarrow & f(n)\leq c\cdot g(n) & \forall\,n\geq m\\
+        \Leftrightarrow & a\cdot f(n)\leq a\cdot c\cdot g(n) & \forall\,n\geq m,\,\forall\,a>0\\
+        \Leftrightarrow & a\cdot f(n)\leq c'\cdot g(n) & \forall n\geq m,\,c'=a\cdot c>0\\
+        \Leftrightarrow & a\cdot f(n)=O(g(n)) &
+    \end{array}\]
+\end{proof}
+\begin{note}
+    La dimostrazione è analoga per $\Omega(g(n))$.
+\end{note}\noindent
+Questa proprietà permette di ignorare le costanti moltiplicative per le
+\emph{funzioni di costo}.
+
+\begin{definition}[Proprietà di massimo costo]
+    Per ogni coppia di funzioni di costo $f_1(n)$ e $f_2(n)$ vale:
+    \[f_1(n)=O(g_1(n)),\,f_2(n)=O(g_2(n))\Rightarrow f_1(n)+f_2(n)=
+    O(\max\{g_1(n),\,g_2(n)\})\]
+    \[f_1(n)=\Omega(g_1(n)),\,f_2(n)=\Omega(g_2(n))\Rightarrow f_1(n)+f_2(n)=
+    \Omega(\max\{g_1(n),\,g_2(n)\})\]
+\end{definition}
+\begin{proof}[Dimostrazione]
+    \[\begin{array}{rc}
+        f_1(n)=O(g_1(n))\wedge f_2(n)=O(g_2(n)) & \Rightarrow\\
+        f_1(n)\leq c_1\cdot g_1(n)\wedge f_2(n)\leq c_2\cdot g_2(n) & \Rightarrow\\
+        f_1(n)+f_2(n)\leq c_1\cdot g_1(n)+c_2\cdot g_2(n) & \Rightarrow\\
+        f_1(n)+f_2(n)\leq\max\{c_1,\,c_2\}\cdot(2\max\{g_1(n),\,g_2(n)\}) & \Rightarrow\\
+        f_1(n)+f_2(n)=O(\max\{g_1(n),\,g_2(n)\})
+    \end{array}\]
+\end{proof}
+\begin{note}
+    La dimostrazione è analoga per $f_1(n)+f_2(n)=\Omega(\max\{g_1(n),\,g_2(n)\})$.
+\end{note}\noindent
+Questa proprietà stabilisce, che nel caso in cui si vada a sommare più \emph{funzioni
+di costo} (e.g. sequenze di algoritmi), si può considerare solo la funzione di
+costo maggiore.
+
+\begin{definition}[Proprietà del prodotto dei costi]
+    Per ogni coppia di funzioni di costo $f_1(n)$ e $f_2(n)$ vale:
+    \[f_1(n)=O(g_1(n)),\,f_2(n)=O(g_2(n))\Rightarrow f_1(n)\cdot f_2(n)=
+    O(g_1(n)\cdot g_2(n))\]
+    \[f_1(n)=\Omega(g_1(n)),\,f_2(n)=\Omega(g_2(n))\Rightarrow f_1(n)\cdot f_2(n)=
+    \Omega(g_1(n)\cdot g_2(n))\]
+\end{definition}
+\begin{proof}[Dimostrazione]
+    \[\begin{array}{rc}
+        f_1(n)=O(g_1(n))\wedge f_2(n)=O(g_2(n)) & \Rightarrow\\
+        f_1(n)\leq c_1\cdot g_1(n)\wedge f_2(n)\leq c_2\cdot g_2(n) & \Rightarrow\\
+        f_1(n)\cdot f_2(n)\leq c_1\cdot c_2\cdot g_1(n)\cdot g_2(n) & \Rightarrow\\
+        f_1(n)\cdot f_2(n)=O(g_1(n)\cdot g_2(n))
+    \end{array}\]
+\end{proof}
+\begin{note}
+    La dimostrazione è analoga per $f_1(n)\cdot f_2(n)=\Omega(g_1(n)\cdot g_2(n))$.
+\end{note}\noindent
+Questa proprietà stabilisce che nel caso in cui si vada a moltiplicare tra loro più
+\emph{funzioni di costo} (e.g. cicli annidati), il costo totale è proprio il
+prodotto dei costi delle singole funzioni.
+
+\begin{definition}[Proprietà di simmetria]
+    Per ogni coppia di funzioni di costo $f(n)$ e $g(n)$ vale:
+    \[f(n)=\Theta(g(n))\Leftrightarrow g(n)=\Theta(f(n))\]
+\end{definition}
+\begin{proof}[Dimostrazione]
+    Grazie alla \emph{proprietà di dualità} vale:
+    \[\begin{array}{rcccl}
+        f(n)=\Theta(g(n)) & \Rightarrow & f(n)=O(g(n)) & \Rightarrow & g(n)=\Omega(f(n))\\
+        f(n)=\Theta(g(n)) & \Rightarrow & f(n)=\Omega(g(n)) & \Rightarrow & g(n)=O(f(n))
+    \end{array}\]
+\end{proof}\noindent
+Questa proprietà stabilisce che se $f(n)$ è un $\Theta(g(n))$ allora anche $g(n)$
+è un $\Theta(f(n))$.
+
+\begin{definition}[Proprietà di transitività]
+    Prese tre funzioni di costo $f(n)$, $g(n)$ e $h(n)$ tali che:
+    \[\begin{array}{lcr}
+        f(n)=O(g(n)) & \wedge & g(n)=O(h(n))
+    \end{array}\]
+    vale:
+    \[f(n)=O(h(n))\]
+\end{definition}
+\begin{proof}[Dimostrazione]
+    \[\begin{array}{rc}
+        f(n)=O(g(n))\wedge g(n)=O(h(n)) & \Rightarrow\\
+        f(n)\leq c_1\cdot g(n)\wedge g(n)\leq c_2\cdot h(n) & \Rightarrow\\
+        f(n)\leq c_2\cdot h(n) & \Rightarrow\\
+        f(n)=O(h(n))
+    \end{array}\]
+\end{proof}
+
+\section{Altre notazioni}
+\begin{definition}[Notazione $o$]
+    Sia $g(n)$ una funzione di costo. Si indica con $o(g(n))$ l'insieme delle
+    funzioni di costo tali per cui:
+    \[\forall\,c,\,\exists\,m:f(n)<c\cdot g(n)\quad\forall\,n\geq m\]
+\end{definition}\noindent
+Le funzioni $f(n)$ che rispettano questa disuguaglianza sono dette essere
+\emph{$o$-piccoli} di $g(n)$ e si scrive in simboli $f(n)=o(g(n))$.
+
+\begin{definition}[Notazione $\omega$]
+    Sia $g(n)$ una funzione di costo. Si indica con $\omega(g(n))$ l'insieme
+    delle funzioni di costo tali per cui:
+    \[\forall\,c,\,\exists\,m:f(n)>c\cdot g(n)\quad\forall\,n\geq m\]
+\end{definition}\noindent
+Le funzioni $f(n)$ che rispettano questa disuguaglianza sono dette essere
+\emph{$\omega$-piccoli} di $g(n)$ e si scrive in simboli $f(n)=\omega(g(n))$.
+
+\paragraph{Osservazioni}
+Date due \emph{funzioni di costo} $f(n)$ e $g(n)$ possiamo fare le seguenti
+affermazioni:
+\[\renewcommand{\arraystretch}{1.3} 
+\begin{array}{rcl}
+    \lim\limits_{n\to+\infty}\frac{f(n)}{g(n)}=0 & \Rightarrow & f(n)=o(g(n))\\
+    \lim\limits_{n\to+\infty}\frac{f(n)}{g(n)}=c\neq0 & \Rightarrow & f(n)=\Theta(g(n))\\
+    \lim\limits_{n\to+\infty}\frac{f(n)}{g(n)}=+\infty & \Rightarrow & f(n)=\omega(g(n))
+\end{array}\]
+Si noti anche che:
+\[\begin{array}{rcl}
+    f(n)=o(g(n)) & \Rightarrow & f(n)=O(g(n))\\
+    f(n)=\omega(g(n)) & \Rightarrow & f(n)=\Omega(g(n))
+\end{array}\]
+
+\section{Classificazione delle funzioni di costo}
+Giunti a questo punto possiamo definire un ordinamento per le principali
+\emph{funzioni di costo}:
+
+\begin{definition}[Ordinamento delle funzioni di costo]
+    Per ogni $r<s$, $h<k$ e $a<b$ vale:
+    \[O(1)\subset O(\log^rn)\subset O(\log^sn)\subset O(n^h)\subset
+    O(n^h\log^rn)\]
+    \[\subset O(n^h\log^sn)\subset O(n^k)\subset O(a^n)\subset O(b^n)\]
+\end{definition}

@@ -1,0 +1,177 @@
+\documentclass[12pt, a4paper]{report}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+}
+
+\usepackage{titlesec}
+\titleformat
+{\chapter}
+[display]{\bfseries\Large\itshape}
+{Capitolo Nr.\thechapter}
+{0.5ex}
+{
+    \rule{\textwidth}{1pt}
+    \vspace{1ex}
+	\centering
+}
+[\vspace{-0.5ex}\rule{\textwidth}{0.3pt}]
+
+\renewcommand{\contentsname}{Indice}
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks,
+  linkcolor={red!90!black},
+  citecolor={blue!50!black},
+  urlcolor={blue!80!black}
+  pdftitle={Dispense di algoritmi e strutture dati},
+  pdfpagemode=FullScreen,
+}
+
+\newcommand{\hitem}[1]{\refstepcounter{enumii}\hypertarget{#1:\arabic{enumii}}{\item}}
+
+\usepackage{graphicx}
+\usepackage{graphbox}
+\usepackage{subfig}
+\usepackage{caption}
+\graphicspath{{./images/}}% Imposta il percorso relativo per le immagini
+\renewcommand{\figurename}{Fig.}% Cambia il testo delle caption
+
+\usepackage{amssymb,amsmath,amsthm}
+\theoremstyle{remark}
+\newtheorem*{note}{\textbf{NB}}
+
+\newtheoremstyle{def}
+{\topsep}{\topsep}%
+{\em}{}%
+{\bfseries}{}
+{\newline}
+{%
+  \rule{\textwidth}{0.4pt}\\*%
+  \thmname{#1}~\thmnumber{#2}\thmnote{\ -\ #3}\label{def:#2}.\\*[-1.5ex]
+  \rule{\textwidth}{0.4pt}
+}
+
+\newtheoremstyle{eg}
+{\topsep}{\topsep}%
+{\em}{}%
+{\bfseries}{}
+{\newline}
+{%
+  \rule{\textwidth}{0.4pt}\\*%
+  \thmname{#1}~\thmnumber{#2}\thmnote{\ -\ #3}\label{eg:#2}.\\*[-1.5ex]
+  \rule{\textwidth}{0.4pt}
+}
+
+\newtheoremstyle{prob}
+{\topsep}{\topsep}%
+{\em}{}%
+{\bfseries}{}
+{\newline}
+{%
+  \rule{\textwidth}{0.4pt}\\*%
+  \thmname{#1}~\thmnumber{#2}\thmnote{\ -\ #3}\label{prob:#2}.\\*[-1.5ex]
+  \rule{\textwidth}{0.4pt}
+}
+
+\theoremstyle{def}
+\newtheorem{definition}{Definizione}
+\theoremstyle{prob}
+\newtheorem{problem}{Problema}
+\theoremstyle{eg}
+\newtheorem{eg}{Esempio}
+
+\definecolor{leaf}{RGB}{252,223,166}
+\newcommand{\codecolor}{Sepia!90!Black}
+
+\newtheoremstyle{codestyle}
+{\topsep}{\topsep}%
+{\tt\color{\codecolor}}{}%
+{\bfseries\color{black}}{}
+{\newline}
+{%
+  \rule{\textwidth}{0.4pt}\\*%
+  \thmname{#1}~\thmnumber{#2}\thmnote{\ -\ #3}\label{code:#2}.\\*[-1.5ex]
+  \rule{\textwidth}{0.4pt}
+}
+\theoremstyle{codestyle}
+\newtheorem{codeblock}{Frammento}
+\newenvironment{code}[1]
+{\begin{codeblock}[#1]\hbadness=10000}{\end{codeblock}}
+\newenvironment{minicode}[1]
+{\begin{codeblock}[#1]\hbadness=10000\begin{minipage}[t]{\textwidth}}
+{\end{minipage}\end{codeblock}}
+\newenvironment{codecont}{\noindent\tt\color{\codecolor}\hbadness=10000}{}
+
+\newenvironment{graph}{\begin{tikzpicture}[
+  baseline={(0,0)},
+  node distance={20mm},
+  main/.style={draw, circle, scale=0.95, minimum size=10mm},
+  every path/.style={line width=0.8pt}
+]}{\end{tikzpicture}}
+
+\newcommand{\com}[1]{{\color{ForestGreen}\% #1}\\}
+\newcommand{\bc}[1]{{\bf#1}}
+\newcommand{\nl}{\par\smallskip\noindent}
+
+\newcommand{\customindent}{19pt}
+\newcommand{\lineheight}{\baselineskip}
+\newcommand{\rmbreak}{\par\vspace{-\lineheight}}
+\newcommand{\fstart}{\hspace{-\customindent}\par\rmbreak}
+\newcommand{\ind}{\noindent\hangindent=\customindent}
+\newcommand{\indf}{\rmbreak\hspace*{\customindent}\hangindent=38pt}
+\newcommand{\indff}{\rmbreak\hspace*{38pt}\hangindent=57pt}
+\newcommand{\indfff}{\rmbreak\hspace*{57pt}\hangindent=76pt}
+\newcommand{\indffff}{\rmbreak\hspace*{76pt}\hangindent=95pt}
+\newcommand{\indfffff}{\rmbreak\hspace*{95pt}\hangindent=114pt}
+
+\newcommand{\rmindent}{\rmbreak\hspace*{0pt}\hangindent=\customindent}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage[title]{appendix}
+\usepackage{bm}
+
+\newcommand{\q}[1]{``#1''}
+\newcommand{\Mod}[1]{\ \mathrm{mod}\ #1}
+
+\usepackage{bold-extra}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{diagbox}
+
+\usepackage{cancel}
+
+\title{Dispense di algoritmi e strutture dati}
+\author{Leonardo De Faveri}
+\date{A.A. 2021/2022}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\include{chapters/analisi_di_algoritmi}
+\include{chapters/notazione_asintotica}
+\include{chapters/funzioni_di_ricorrenza}
+\include{chapters/strutture_dati}
+\include{chapters/alberi}
+\include{chapters/alberi_binari_di_ricerca}
+\include{chapters/grafi}
+\include{chapters/hashing}
+\include{chapters/analisi_ammortizata}
+\include{chapters/divide_et_impera}
+\include{chapters/strutture_specializzate}
+\include{chapters/programmazione_dinamica}
+\include{chapters/scelta_della_struttura_dati}
+
+\include{chapters/appendices/appendix_a}
+
+\end{document}

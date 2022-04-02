@@ -1,0 +1,12 @@
+{
+    "ltex.additionalRules.motherTongue": "en",
+    "ltex.language": "en",
+    "spellright.language": [
+        "Italian",
+        "English"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "plaintext"
+    ]
+}

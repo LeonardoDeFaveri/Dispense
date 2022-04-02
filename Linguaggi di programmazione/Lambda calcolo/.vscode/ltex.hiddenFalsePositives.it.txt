@@ -1,0 +1,45 @@
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q.\\E$"}
+{"rule":"ST_04_001","sentence":"^\\Q.v.#1.\\E$"}
+{"rule":"ST_04_001","sentence":"^\\Q.v. #1.\\E$"}
+{"rule":"ST_04_001","sentence":"^\\Qe f 2.\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\QApplicazione.: un'espressione fexp.\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Qviene applicata ad un'altra espressione aexp., ovvero la funzione denotata da fexp.\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Qviene applicata all'argomento aexp.\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Qviene applicata all'argomento aexp.;\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Qlanguage=ML, showspaces=false, showstringspaces=false, showtabs=false, frame=none, tabsize=2, captionpos=t, breaklines=true, breakatwhitespace=false, escapeinside=.*)., morekeywords=*,...\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Qlanguage=ML, showspaces=false, showstringspaces=false, showtabs=false, frame=none, tabsize=2, captionpos=t, breaklines=true, breakatwhitespace=false, .\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Qlanguage=ML, basicstyle=, showspaces=false, showstringspaces=false, showtabs=false, frame=none, tabsize=2, captionpos=t, breaklines=true, breakatwhitespace=false, .\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Qlanguage=ML, basicstyle=, Figura., showspaces=false, showstringspaces=false, showtabs=false, frame=none, tabsize=2, captionpos=t, breaklines=true, breakatwhitespace=false, .\\E$"}
+{"rule":"ARTICOLATA_SOSTANTIVO","sentence":"^\\QFissata una strategia qualsiasi, nello scope dello stesso ambiente la valutazione di tutte le occorrenze di una stessa espressione produce sempre lo stesso valore.\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\QCiò è realizzato attraverso costrutti del tipo costrutto let-in.:\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Qlanguage=ML, basicstyle=, keywordstyle=, stringstyle=, commentstyle=, showspaces=false, showstringspaces=false, showtabs=false, frame=none, tabsize=2, captionpos=t, breaklines=true, breakatwhitespace=false, .\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\QCiò è realizzato attraverso costrutti del tipo let-in.:\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\QCiò è realizzato attraverso costrutti del tipo let-in.: In questo esempio, viene introdotto un legame tra il nome x.\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\QTipicamente questi tipi sono: int.: valori interi; real.: numeri reali (virgola mobile); char.: caratteri; string.: stringhe; bool.: valori booleani true/false.;\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Qlanguage=ML, basicstyle=, keywordstyle=, stringstyle=, commentstyle=, literate= .\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Q\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.1., showspaces=false, showstringspaces=false, showtabs=false, frame=none, tabsize=2, captionpos=t, breaklines=true, breakatwhitespace=false, .\\E$"}
+{"rule":"ITALIAN_WORD_REPEAT_RULE","sentence":"^\\QL'espressione (x x).\\E$"}
+{"rule":"ER_01_002","sentence":"^\\Qche, grosso modo, corrispondono rispettivamente ai file .h.\\E$"}
+{"rule":"WHITESPACE_PUNCTUATION","sentence":"^\\Qle liste sono indicate tra parantesi quadre con i valori separati tra parentesi: L'operatore :: consente di aggiungere un valore in testa ad una lista, mentre nil.\\E$"}
+{"rule":"ST_01_005","sentence":"^\\Qdel parametro attuale e non il valore, pertanto la seguente definizione non avrebbe alcun senso: Qualora volessimo definire un pattern per una funzione che riceve come input una tupla.\\E$"}
+{"rule":"ST_01_005","sentence":"^\\Qdel parametro attuale e non il valore, pertanto la seguente definizione non avrebbe alcun senso: Qualora volessimo definire un pattern per una funzione che riceve come input una tupla però in un caso non ci interessa fare distinzioni sul primo elemento della tupla e non vogliamo neanche usarne il valore possiamo specificarlo nella definizione del pattern con un carattere di underscore ..\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\QLambda.morekeywords=if,then,else,fix .,morekeywords=[2]int., otherkeywords=:, literate=->.\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Q., basicstyle=., keywordstyle=., keywordstyle=[2]., keepspaces, mathescape .[keywords,comments,strings]\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Qmorekeywords= if,then,else,fix ., morekeywords=[2]int., otherkeywords=:, literate= ->.\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Q., basicstyle=., keywordstyle=, stringstyle=, commentstyle= keepspaces, mathescape .[keywords,comments,strings]\\E$"}
+{"rule":"ITALIAN_WORD_REPEAT_RULE","sentence":"^\\Qpuò essere uno tra: X.: una variabile; (M M).: l'applicazione di un'espressione ad un'altra (possono essere due espressioni diverse); \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\QX.\\E$"}
+{"rule":"ITALIAN_WORD_REPEAT_RULE","sentence":"^\\Qin una sola riga: M::= X \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q (M M) \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\QX.\\E$"}
+{"rule":"ITALIAN_WORD_REPEAT_RULE","sentence":"^\\Qda quello di applicazione.: Astrazione.: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.; Applicazione.: (e e).;\\E$"}
+{"rule":"ITALIAN_WORD_REPEAT_RULE","sentence":"^\\Qda quello di applicazione.: Astrazione.: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Qx.e.; Applicazione.: (e e).;\\E$"}
+{"rule":"ITALIAN_WORD_REPEAT_RULE","sentence":"^\\QM.; Applicazione.: (M M).;\\E$"}
+{"rule":"ITALIAN_WORD_REPEAT_RULE","sentence":"^\\Qin una sola riga: M::= x \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q (M M) \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\QX.\\E$"}
+{"rule":"ITALIAN_WORD_REPEAT_RULE","sentence":"^\\Qpuò essere uno tra: x.: una variabile; (M M).: l'applicazione di un'espressione ad un'altra (possono essere due espressioni diverse); \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\QX.\\E$"}
+{"rule":"GR_04_002","sentence":"^\\Qnel risultato dell'applicazione di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q a \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q è equivalente ad applicare il risultato della sostituzione di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q in \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q al risultato della sostituzione di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q in \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q;\\E$"}
+{"rule":"GR_04_002","sentence":"^\\Qnel risultato dell'applicazione di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q a \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q è equivalente ad applicare il risultato della sostituzione di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q in \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q al risultato della sostituzione di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q in \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q; \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q:\\E$"}
+{"rule":"GR_04_002","sentence":"^\\Qa \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q nel risultato dell'applicazione di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q a \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q è equivalente a sostituire in \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q e \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q N.\\E$"}
+{"rule":"GR_04_002","sentence":"^\\QRiduci in forma normale la seguente: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q Prima di iniziare, ricordo la \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q-regola.: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q posso porre: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q \\E(?:Dummy|Ina|Jimmy-)[0-9]+$"}
+{"rule":"GR_04_002","sentence":"^\\QPotrebbe essere difficile convincersi della correttezza di questa definizione, ma se applicata alla rappresentazione di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, quell'espressione si riduce ad un \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q-termine.\\E$"}
+{"rule":"GR_04_002","sentence":"^\\Qche corrisponde al successivo di \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"GR_04_002","sentence":"^\\Qdi \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q ed \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q; \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q;\\E$"}
+{"rule":"GR_04_002","sentence":"^\\Qdi \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q ed \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q: \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q; \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q; Il \"corpo\" di\\E$"}
+{"rule":"WHITESPACE_PUNCTUATION","sentence":"^\\QIl simbolo :>.\\E$"}
