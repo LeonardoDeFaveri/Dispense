@@ -329,3 +329,10 @@ maxInterval
 Dijkstra
 white
 minPathPrototype
+Johnson
+Fredman
+Tarjan
+riaggiunto
+line
+shortestPath
+floydWarshall

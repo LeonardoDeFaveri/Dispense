@@ -268,6 +268,13 @@
 \contentsline {paragraph}{Caso base: \bm {$k=0$}}{172}{paragraph*.224}%
 \contentsline {paragraph}{Passo induttivo: \bm {$k>0$}}{172}{paragraph*.225}%
 \contentsline {paragraph}{Complessità}{172}{paragraph*.226}%
-\contentsline {chapter}{\numberline {A}Appendice A}{173}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{173}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{173}{section.1.A.2}%
+\contentsline {subsection}{\numberline {13.1.3}Algoritmo di Bellman-Ford-Moore}{173}{subsection.13.1.3}%
+\contentsline {paragraph}{Complessità}{174}{paragraph*.229}%
+\contentsline {subsection}{\numberline {13.1.4}Ricerca dei cammini minimi sui grafi DAG}{174}{subsection.13.1.4}%
+\contentsline {subsection}{\numberline {13.1.5}Casi d'uso delle soluzioni}{175}{subsection.13.1.5}%
+\contentsline {section}{\numberline {13.2}Ricerca dei cammini minimi da sorgente multipla}{175}{section.13.2}%
+\contentsline {subsection}{\numberline {13.2.1}Algoritmo di Floyd-Watshall}{175}{subsection.13.2.1}%
+\contentsline {paragraph}{Complessità}{177}{paragraph*.232}%
+\contentsline {chapter}{\numberline {A}Appendice A}{178}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{178}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{178}{section.1.A.2}%

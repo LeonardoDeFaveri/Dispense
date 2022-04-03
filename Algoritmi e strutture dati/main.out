@@ -138,6 +138,11 @@
 \BOOKMARK [1][-]{section.13.1}{Ricerca dei cammini minimi da sorgente singola}{chapter.13}% 138
 \BOOKMARK [2][-]{subsection.13.1.1}{Prototipo di algoritmo}{section.13.1}% 139
 \BOOKMARK [2][-]{subsection.13.1.2}{Algoritmo di Dijkstra}{section.13.1}% 140
-\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 141
-\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 142
-\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 143
+\BOOKMARK [2][-]{subsection.13.1.3}{Algoritmo di Bellman-Ford-Moore}{section.13.1}% 141
+\BOOKMARK [2][-]{subsection.13.1.4}{Ricerca dei cammini minimi sui grafi DAG}{section.13.1}% 142
+\BOOKMARK [2][-]{subsection.13.1.5}{Casi d'uso delle soluzioni}{section.13.1}% 143
+\BOOKMARK [1][-]{section.13.2}{Ricerca dei cammini minimi da sorgente multipla}{chapter.13}% 144
+\BOOKMARK [2][-]{subsection.13.2.1}{Algoritmo di Floyd-Watshall}{section.13.2}% 145
+\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 146
+\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 147
+\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 148

@@ -1,19 +1,19 @@
 \chapter{Scelta della struttura dati}
-Abbiamo già discusso più volte su come la scelta di una struttura dati influisca
-sulla \emph{complessità} degli algoritmi, tuttavia, ora riprendiamo l'argomento
-perché diverse tipologie di input allo stesso algoritmo potrebbero
-far risultare più efficiente l'uso di strutture dati differenti.
+Abbiamo già discusso più volte su come la scelta di una \emph{struttura dati}
+influisca sulla \emph{complessità} degli algoritmi, tuttavia, ora riprendiamo
+l'argomento perché input diversi allo stesso algoritmo potrebbero far risultare
+più efficiente l'uso di una \emph{strutture dati} piuttosto che un'altra.
 
 Quanto detto emerge chiaramente nel caso degli algoritmi per la ricerca dei
 \emph{cammini minimi} all'interno di \emph{grafi}. Diversamente dal problema
-già affrontato parlando dei \emph{grafi}, ora ci interessiamo nel trovare tutti
-i \emph{cammini minimi} da un \emph{nodo} agli altri.
+già affrontato in precedenza, ora ci interessiamo nel trovare tutti
+i \emph{cammini minimi} che collegano un \emph{nodo} agli altri.
 
 \begin{problem}[Ricerca dei cammini minimi da sorgente singola]
-    Dato un grafo orientato $G=(V,E)$, una funzione di peso $w=E\to R$ e un
+    Dati un grafo orientato $G=(V,E)$, una funzione di peso $w=E\to R$ e un
     nodo sorgente $s$, trovare un cammino da $s$ a $u$, per ogni $u\in V$, il
-    cui costo sia minimo, ovvero minore o uguale a ogni altro cammino da $s$
-    a $u$.
+    cui costo sia minimo, ovvero minore o uguale al costo di ogni altro cammino
+    da $s$ a $u$.
 \end{problem}
 \begin{definition}[Costo di un cammino]
     Dato un cammino $p=\left(v_1,\dots,v_k\right)$ con $k>1$, il costo del
@@ -83,13 +83,12 @@ comune dopo aver percorso tratti diversi. Da ciò consegue che l'insieme dei
 \emph{cammini minimi} da un \emph{nodo} a tutti gli altri può essere rappresentato
 come un \emph{albero di copertura}.
 
-\noindent
-Sebbene abbiamo già incontrato gli \emph{alberi di copertura}, non li abbiamo
-ancora definiti formalmente.
+Abbiamo già incontrato gli \emph{alberi di copertura}, ma ora andiamo a definirli
+formalmente.
 \begin{definition}[Albero di copertura]
     Dato un grafo $G=(V,E)$ non orientato e connesso, un albero di copertura di
-    $G$ è un sottografo $T=(V,E_T)$ tale che $T$ è un albero che contiene tutti
-    i nodi di $G$ ed $E_T\subseteq E$.
+    $G$ è un sottografo $T=(V,E_T)$ tale per cui $T$ è un albero che contiene
+    tutti i nodi di $G$ ed $E_T\subseteq E$.
 \end{definition}
 
 \begin{figure}[h!]
@@ -115,7 +114,7 @@ ancora definiti formalmente.
                     (h) edge[line width=1.2pt] (i)
                     (i) edge[line width=1.2pt] (g);
         
-        \path[-]    (a) edge (b)
+        \path[-, dashed]    (a) edge (b)
                     (c) edge (i)
                     (c) edge (f)
                     (h) edge (g)
@@ -188,7 +187,7 @@ modificata della \texttt{printPath} che avevamo usato per stampare il
         print d
 \end{minicode}\noindent
 Siccome tra tutte le soluzioni possibili siamo interessati a quelle che
-includono solo \emph{cammini minimi}, restringiamo il campo  ricerca alle
+includono solo \emph{cammini minimi}, restringiamo il campo di ricerca alle
 \emph{soluzioni ottime}, quelle cioè che rispettano il seguente teorema.
 
 \begin{definition}[Teorema di Belman]
@@ -200,16 +199,16 @@ includono solo \emph{cammini minimi}, restringiamo il campo  ricerca alle
     \end{array}\]
 \end{definition}\noindent
 Nell'esempio di prima, la soluzione della prima figura non è \emph{ottima}
-perché $d[D]>d[a]+w(A,D)$.
+perché $d[D]>d[A]+w(A,D)$.
 
 \begin{proof}[Dimostrazione]
-    Dimostriamo separatamente del due parti del teorema.
+    Dimostriamo separatamente le due parti del teorema.
 
     \paragraph{Parte 1}
     Sia $T$ una \emph{soluzione ottima} e sia $(u,v)\in E$:
     \begin{itemize}
-        \item Se $(u,v)\in T$, allora $d[v]=d[u]+w(u,v)$;
-        \item Se $(u,v)\notin T$, allora $d[v]\leq d[u]+w(u,v)$, perché
+        \item Se $(u,v)\in E_T$, allora $d[v]=d[u]+w(u,v)$;
+        \item Se $(u,v)\notin E_T$, allora $d[v]\leq d[u]+w(u,v)$, perché
         altrimenti esisterebbe nel \emph{grafo} $G$ un \emph{cammino} da $s$ a
         $v$ più corto di quello in $T$, generando un assurdo.
     \end{itemize}
@@ -218,7 +217,7 @@ perché $d[D]>d[a]+w(A,D)$.
     Supponiamo per assurdo che $T$ non sia una \emph{soluzione ottima}. Se così
     fosse, esisterebbe un \emph{cammino non ottimo} $C$ da $s$ a un altro
     \emph{nodo} $u$ in $T$. Quindi, esisterebbe anche un \emph{albero di
-    copertura} $T'$, in cui il \emph{cammino} $C'$ da $s$ a $u$ ha distanza
+    copertura} $T'$, in cui il \emph{cammino} $C'$ da $s$ a $u$ abbia distanza
     $d'[u]<d[u]$ dove $d'$ è il vettore delle distanze associato a $T'$.
 
     Poiché, $d'[s]=d[s]=0$, ma $d'[u]<d[u]$, esiste un \emph{arco} $(h,k)$ in
@@ -240,7 +239,7 @@ perché $d[D]>d[a]+w(A,D)$.
     \end{figure*}
 
     \noindent Per costruzione, $d'[h]=d[h]$ e $d'[k]=d'[h]+w(h,k)$, mentre, per
-    quanto ipotesi vale $d[k]\leq d[h]+w(h,k)$. Combinando queste due relazioni
+    ipotesi, vale $d[k]\leq d[h]+w(h,k)$. Combinando queste due relazioni
     si ottiene:
     \[d'[k]=d'[h]+w(h,k)=d[h]+w(h,k)\geq d[k]\]
     Da ciò seguirebbe $d'[k]\geq d[k]$ che contraddice la relazione $d'[k]<d[k]$
@@ -264,10 +263,10 @@ isolati}
 
 \begin{minicode}{Algoritmo generico}
 \ind$\langle$\bc{int}[], \bc{int}[]$\rangle$ shortestPath(\bc{GRAPH} G, \bc{NODE} s)\\
-    \bc{int}[] T = new \bc{int}[1\dots G.n]\hfill\com{$T[u]$ è il \emph{padre} di $u$
+    \bc{int}[] T = new \bc{int}[1\dots G.size()]\hfill\com{$T[u]$ è il \emph{padre} di $u$
     nell'\emph{albero} $T$}
-    \bc{int}[] d = new \bc{int}[1\dots G.n]\hfill\com{$d[u]$ è la distanza di $u$ da $s$}
-    \bc{boolean}[] b = new \bc{boolean}[1\dots G.n]\hfill\com{$b[u]$ è \bc{true} se $u\in S$}
+    \bc{int}[] d = new \bc{int}[1\dots G.size()]\hfill\com{$d[u]$ è la distanza di $u$ da $s$}
+    \bc{boolean}[] b = new \bc{boolean}[1\dots G.size()]\hfill\com{$b[u]$ è \bc{true} se $u\in S$}
     \indf foreach (u $\in$ G.V() - \{s\}) do\\
         T[u] = nil\\
         d[u] = $+\infty$\\
@@ -305,10 +304,10 @@ i pesi sono positivi.
 
 \begin{minicode}{Algoritmo di Dijkstra}
 \ind$\langle$\bc{int}[], \bc{int}[]$\rangle$ shortestPath(\bc{GRAPH} G, \bc{NODE} s)\\
-    \bc{int}[] T = new \bc{int}[1\dots G.n]\hfill\com{$T[u]$ è il \emph{padre} di $u$
+    \bc{int}[] T = new \bc{int}[1\dots G.size()]\hfill\com{$T[u]$ è il \emph{padre} di $u$
     nell'\emph{albero} $T$}
-    \bc{int}[] d = new \bc{int}[1\dots G.n]\hfill\com{$d[u]$ è la distanza di $u$ da $s$}
-    \bc{boolean}[] b = new \bc{boolean}[1\dots G.n]\hfill\com{$b[u]$ è \bc{true} se $u\in S$}
+    \bc{int}[] d = new \bc{int}[1\dots G.size()]\hfill\com{$d[u]$ è la distanza di $u$ da $s$}
+    \bc{boolean}[] b = new \bc{boolean}[1\dots G.size()]\hfill\com{$b[u]$ è \bc{true} se $u\in S$}
     \indf foreach (u $\in$ G.V() - \{s\}) do\\
         T[u] = nil\\
         d[u] = $+\infty$\\
@@ -335,7 +334,7 @@ i pesi sono positivi.
 L'idea alla base di questa soluzione è quella di usare la distanza di un nodo
 da $s$ come valore per la sua \emph{priorità}, quindi ad ogni iterazione,
 estrarre il \emph{nodo} con la \emph{priorità} minore significa estrarre il
-\emph{nodo} più vicino a $s$.
+\emph{nodo} il cui cammino da $s$ sia di peso minore.
 
 Quando viene estratto un \emph{nodo} e l'esecuzione dell'algoritmo ricade nel
 ramo \texttt{else} del controllo sul valore $b[v]$, significa che dal \emph{nodo}
@@ -427,12 +426,339 @@ il costo del nuovo \emph{cammino}.
     Il caso è verificato in quanto $d[s]=0$ e non ci sono pesi negativi.
 
     \paragraph{Passo induttivo: \bm{$k>0$}}
-    Per ipotesi induttiva, supponiamo che gli assunti siano corretti per i primi
+    Per ipotesi induttiva supponiamo che gli assunti siano corretti per i primi
     $k-1$ elementi. Quando viene estratto il $k$-esimo elemento $u$, il peso
-    $d[u]$ dipende esclusivamente dai \emph{nodi} già estratti quindi la sua
+    $d[u]$ dipende esclusivamente dai \emph{nodi} già estratti, quindi la sua
     distanza da $s$ è minima. Siccome non ci sono pesi negativi e tutti gli
     altri \emph{nodi} hanno una distanza da $s$ almeno pari a quella di $u$,
     $u$ non verrà mai più inserito nella \emph{coda}.
 \end{proof}
 
 \paragraph{Complessità}
+Il costo per inizializzare i vettori $T$, $d$ e $b$ è $\Theta(n)$, la ricerca
+del minimo all'interno di una \emph{coda a priorità} implementata come vettore
+costa $\Theta(n)$, mentre l'inserimento e la modifica della \emph{priorità} di
+un elemento costano $\Theta(1)$. Complessivamente, dunque, l'algoritmo ha
+\emph{complessità} $T(n)=\Theta(n^2)$ perché vengono inseriti e rimossi dalla
+\emph{coda} tutti i \emph{nodi}.
+
+Esistono altre versioni dello stesso algoritmo che però fanno uso di
+implementazioni più efficienti delle \emph{code a priorità}.
+
+La versione di \emph{Johnson} del 1977 si basa su \emph{heap binari} e il costo
+delle operazioni sulla \emph{coda} diventa $O(\log n)$, riducendo la
+\emph{complessità} totale a $T(n)=O(m\log n)$. Una terza versione, quella
+proposta da \emph{Fredman e Tarjan} nel 1987, usa gli \emph{heap di Fibonacci},
+per cui le operazioni di inserimento e rimozione costano $O(\log n)$, mentre la
+modifica di \emph{priorità} ha un \emph{costo ammortizzato} $O(1)$. La
+\emph{complessità} complessiva è $O(m+n\log n)$.
+
+\subsection{Algoritmo di Bellman-Ford-Moore}
+Questo algoritmo ha una struttura simile a quello appena visto, ma al posto di
+una \emph{coda a priorità} viene usata una \emph{coda} \q{classica} e permette
+di trattare anche \emph{grafi} con \emph{archi} di peso negativo.
+
+\begin{minicode}{Algoritmo di Bellman-Ford-Moore}
+\ind$\langle$\bc{int}[], \bc{int}[]$\rangle$ shortestPath(\bc{GRAPH} G, \bc{NODE} s)\\
+\bc{int}[] T = new \bc{int}[1\dots G.size()]\hfill\com{$T[u]$ è il \emph{padre} di $u$
+nell'\emph{albero} $T$}
+\bc{int}[] d = new \bc{int}[1\dots G.size()]\hfill\com{$d[u]$ è la distanza di $u$ da $s$}
+\bc{boolean}[] b = new \bc{boolean}[1\dots G.size()]\hfill\com{$b[u]$ è \bc{true} se $u\in S$}
+\indf foreach (u $\in$ G.V() - \{s\}) do\\
+    T[u] = nil\\
+    d[u] = $+\infty$\\
+    b[u] = false\\
+\indf T[s] = nil\\
+\indf d[s] = 0\\
+\indf b[s] = true\\
+\indf\bc{QUEUE} Q = Queue()\\
+\indf Q.enqueue(s)\\
+\indf while (not Q.isEmpty()) do\\
+    \bc{int} u = Q.dequeue()\\
+    b[u] = false\\
+    \indff foreach (v $\in$ G.adj(u)) do\\
+        \indfff if (d[u] + G.w(u, v) < d[v]) then\\
+            \indffff if (not b[v]) then\\
+                Q.enqueue(v)\\
+                b[v] = true\\
+        \indfff T[v] = u\\
+        \indfff d[v] = d[u] + G.w(u, v)\\
+\indf return $\langle$T, d$\rangle$
+\end{minicode}
+
+\begin{eg}[Esempio d'esecuzione]
+Consideriamo il seguente grafo:
+
+\begin{figure*}[h!]
+    \centering
+    \begin{graph}
+        \node[main, line width=1.2pt] (a) {$A$};
+        \node[main] (b) [below right of=a] {$B$};
+        \node[main] (c) [above right of=a] {$C$};
+
+        \node[main, color=white] (0) [below right of=c] {};
+
+        \node[main] (d) [above right of=0] {$D$};
+        \node[main] (e) [below right of=0] {$E$};
+        \node[main] (f) [above right of=e] {$F$};
+
+        \path[->]   (a) edge node[above left] {$2$} (c)
+                    (a) edge node[below left] {$1$} (b)
+                    (b) edge node[below] {$2$} (e)
+                    (b) edge node[above left] {$4$} (d)
+                    (e) edge node[below right] {$3$} (f)
+                    (e) edge node[left] {$-1$} (d)
+                    (c) edge node[above] {$3$} (d)
+                    (c) edge node[left] {$-2$} (b)
+                    (d) edge node[above right] {$1$} (f);
+    \end{graph}
+\end{figure*}
+
+\noindent
+Eseguendo l'algoritmo partendo da $A$ otteniamo la seguente tabella:
+
+\newpage
+\begin{table}[ht!]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|c|c|c|cc|ccc|ccc|c|c|}
+        \cline{3-13}
+        \multicolumn{2}{c|}{} & \multicolumn{11}{c|}{\textbf{Passate}}\\
+        \hline
+        \multirow{2}{*}{\textbf{Nodo}} & \multirow{2}{*}{\textbf{Inizio}} &
+        \bm{$0$} & \multicolumn{2}{c|}{\bm{$1$}} & \multicolumn{3}{c|}{\bm{$2$}} &
+        \multicolumn{3}{c|}{\bm{$3$}} & \bm{$4$} & \bm{$5$}\\
+        \cline{3-13}
+        & & \bm{$A$} & \bm{$B$} & \bm{$C$} & \bm{$D$} & \bm{$E$} & \bm{$B$} & \bm{$F$}
+        & \bm{$D$} & \bm{$E$} & \bm{$D$} & \bm{$F$}\\
+        \hline
+        \bm{$A$} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+        \hline
+        \bm{$B$} & $+\infty$ & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+        \hline
+        \bm{$C$} & $+\infty$ & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2\\
+        \hline
+        \bm{$D$} & $+\infty$ & $+\infty$ & 5 & 5 & 5 & 3 & 3 & 3 & 3 & 2 & 2 & 2\\
+        \hline
+        \bm{$E$} & $+\infty$ & $+\infty$ & 4 & 4 & 4 & 4 & 3 & 3 & 3 & 3 & 3 & 3\\
+        \hline
+        \bm{$F$} & $+\infty$ & $+\infty$ & $+\infty$ & $+\infty$ & 6 & 6 & 6 & 6 &
+        4 & 4 & 3 & 3\\
+        \hline
+        \textbf{Coda} & $A$ & $BC$ & $CDE$ & $DEB$ & $EBF$ & $BFD$ & $FDE$ & $DE$
+        & $E$ & $D$ & $F$ & \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\noindent
+Inizialmente, il peso dei cammini da $A$ a tutti gli altri nodi è $+\infty$.
+Nella passata 0 vengono considerati tutti i nodi che possono essere raggiunti da
+$A$ attraversando 0 archi. Ovviamente, viene considerato soltanto $A$ che è anche
+l'unico nodo presente nella coda.
+
+Quindi, $A$ viene estratto dalla coda e ne vengono considerati i vicini: $B$ e $C$.
+Siccome il peso dei cammini da $A$ verso i suoi vicini è minore del valore
+attualmente noto (i.e. $+\infty$), $B$ e $C$ vengono aggiunti alla coda e i pesi
+dei cammini vengono aggiornati.
+
+Nella passata 1 vengono considerati tutti i nodi che possono essere raggiunti da
+$A$ attraversando un arco, e di nuovo ciò coincide con i nodi presenti nella coda.
+Da $B$ è possibile raggiungere $D$ ed $E$ in modo conveniente, quindi questi
+vengono accodati e il costo per raggiungerli viene aggiornato. Da $C$ invece, si
+possono raggiungere $D$ e $B$. Per quanto riguarda $D$, il costo del cammino
+passante per $C$ è $2+3=5$ che è uguale a quello del cammino passante per $B$,
+quindi $D$ non viene aggiunto nuovamente alla coda. D'altra parte, il cammino
+che raggiunge $B$ passando per $C$ ha peso totale pari a 0, che è minore del
+peso del cammino diretto da $A$, quindi $B$ viene riaggiunto in coda.
+
+L'algoritmo continua in questo modo fino a quando non viene svuotata la coda.
+\end{eg}
+
+\noindent
+Possiamo definire in modo più formale ciò che abbiamo chiamato \emph{passata}.
+Sfruttando la ricorsione possiamo dire che per $k=0$, la \emph{$0$-esima passata}
+consiste nell'estrazione dalla \emph{coda} del solo \emph{nodo} sorgente.
+Per $k>0$ invece, la \emph{$k$-esima passata} consiste nell'estrazione dalla
+\emph{coda} di tutti i \emph{nodi} presenti al termine della \emph{$k-1$-esima
+passata}.
+
+Questo ci permette anche di dire che al termine della \emph{$k$-esima passata},
+i vettori $T$ e $d$ descrivono i \emph{cammini minimi} di lunghezza $k$.
+Conseguentemente, dopo la \emph{$n-1$-esima passata}, dove $n$ è il
+numero di \emph{nodi}, sono noti tutti i \emph{cammini minimi} del \emph{grafo}.
+Ogni \emph{nodo} può infatti essere inserito nella \emph{coda} al massimo $n-1$
+volte.
+
+\paragraph{Complessità}
+L'inizializzazione dei vettori costa sempre $\Theta(n)$, mentre tutte le
+operazioni sulla \emph{coda} hanno \emph{complessità} $\Theta(1)$. Poiché ogni
+\emph{nodo} può essere reinserito nella \emph{coda} fino a $n-1$ volte, la
+\texttt{dequeue} viene eseguita $O(n^2)$ volte. L'\texttt{enqueue} invece,
+viene invocata tante volte quante sono i vicini di ogni \emph{nodo}, ovvero
+$O(nm)$, dove $m$ è il numero di \emph{archi} del \emph{grafo}. La
+\emph{complessità} totale dell'algoritmo è dunque $O(nm)$.
+
+\subsection{Ricerca dei cammini minimi sui grafi DAG}
+I \emph{\hyperref[def:79]{grafi DAG}} sono un caso particolare perché non
+essendoci \emph{cicli}, i \emph{cammini} sono sempre definiti anche in presenza
+di pesi negativi. Di conseguenza, possiamo ricercare i \emph{cammini minimi}
+semplicemente applicando l'algoritmo per l'\emph{\hyperref[def:83]{ordinamento
+topologico}}.
+
+\newpage
+\begin{minicode}{Ricerca dei cammini minimi su grafi DAG}
+\ind$\langle$\bc{int}[], \bc{int}[]$\rangle$ shortestPath(\bc{GRAPH} G, \bc{NODE} s)\\
+    \bc{int}[] T = new \bc{int}[1\dots G.size()]\\
+    \bc{int}[] d = new \bc{int}[1\dots G.size()]\\
+
+    \indf foreach (u $\in$ G.V() - \{s\}) do\\
+        T[u] = nil\\
+        d[u] = $+\infty$\\
+    \indf T[s] = nil\\
+    \indf d[s] = 0\\
+    \indf\bc{STACK} S = topsort(G)\\
+
+    \indf while (not S.isEmpty()) do\\
+        \bc{NODE} u = S.pop()\\
+        \indff foreach (v $\in$ G.adj(u)) do\\
+            \indfff if (d[u] + G.w(u, v) < d[v]) then\\
+                T[v] = u\\
+                d[v] = d[u] + G.w(u, v)\\
+    \indf return $\langle$T, d$\rangle$
+\end{minicode}
+
+\subsection{Casi d'uso delle soluzioni}
+\begin{table}[h!]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Algoritmo} & \textbf{Complessità} & \textbf{Caso d'uso}\\
+        \hline
+        Dijkstra & $\Theta(n^2)$ & Pesi positivi, grafi densi\\
+        \hline
+        Johnson & $O(m\log n)$ & Pesi positivi, grafi sparsi\\
+        \hline
+        Fredman-Tarjan & $O(m+n\log n)$ & $\begin{array}{l}
+            \text{Pesi positivi, grafi densi,}\\
+            \text{dimensioni molto grandi}
+        \end{array}$\\
+        \hline
+        Bellman-Ford-Moore & $O(nm)$ & Pesi negativi\\
+        \hline
+        topsort & $O(n+m)$ & Grafi DAG\\
+        \hline
+        bfs & $O(n+m)$ & Grafi non pesati\\
+        \hline
+    \end{tabular}
+\end{table}
+
+\section{Ricerca dei cammini minimi da sorgente multipla}
+Un possibile approccio al problema è quello di invocare gli algoritmi
+appena visti una volta per ogni \emph{nodo sorgente}. Il costo che si
+andrebbe a pagare sarebbe $n$ volte il costo delle singole esecuzioni.
+
+\subsection{Algoritmo di Floyd-Watshall}
+L'intuizione alla base dell'algoritmo è quella dei \emph{cammini $k$-vincolati}.
+
+\begin{definition}[Cammini \bm{$k$}-vincolati]
+    Sia $k\in\{0,\dots,n\}$. Diciamo che un cammino $p^k_{xy}$ è un cammino
+    minimo $k$-vincolato fra $x$ e $y$ se esso ha il costo minimo tra tutti i
+    cammini minimi da $x$ a $y$ che non passano per nessun vertice in $\{v_{k+1},
+    \dots,v_n\}$.
+\end{definition}
+\begin{note}
+    Stiamo assumendo, come in realtà abbiamo sempre fatto, che esista un
+    ordinamento fra i \emph{nodi} $v_1,\dots,v_n$ \emph{grafo}.
+\end{note}
+\begin{note}
+    Seguendo la definizione data, $p_{xy}^0$ e $p_{xy}^n$ corrispondono
+    rispettivamente all'\emph{arco} da $x$ a $y$, se esiste, e al \emph{cammino
+    minimo} da $x$ a $y$ in tutto il \emph{grafo}, cioè senza vincoli.
+\end{note}
+
+\noindent
+Se esistono i \emph{cammini $k$-vincolati} possiamo definire anche la
+\emph{distanza $k$-vincolata}.
+\begin{definition}[Distanza \bm{$k$}-vincolata]
+    Denotiamo con $d^k[x][y]$ il costo del cammino $k$-vincolato da $x$ a $y$:
+    \[d^k[x][y]=\begin{cases}
+        w(p^k_{xy}) & \text{Se esiste}\\
+        +\infty & \text{altrimenti}
+    \end{cases}\]
+\end{definition}
+\begin{note}
+    Parallelamente a prima, $d^0[x][y]$ e $d^n[x][y]$ corrispondono
+    rispettivamente al costo dell'\emph{arco} tra $x$ e $y$, se esiste, e al
+    costo del \emph{cammino minimo} da $x$ a $y$ in tutto il \emph{grafo}.
+\end{note}
+
+\noindent
+I \emph{cammini $k$-vincolati} ci permettono di ricercare i \emph{cammini minimi}
+in modo ricorsivo, partendo da $k=0$ e incrementandolo tenendo di volta in volta
+il \emph{cammino} di costo minore. Possiamo quindi esprimere la \emph{distanza
+$k$-vincolata} con la seguente:
+\[d^k[x][y]=\begin{cases}
+    w(x,y) & k=0\\
+    \min\left(d^{k-1}[x][y],d^{k-1}[x][k]+d^{k-1}[k][y]\right) & k>0
+\end{cases}\]
+
+\begin{eg}[Esempio del calcolo delle distanze \bm{$k$}-vincolate]
+    Consideriamo il seguente grafo:
+
+    \begin{figure}[h!]
+        \centering
+        \begin{graph}
+            \node[main] (1) {$1$};
+            \node[main] (2) [right of=1, xshift=20mm] {$2$};
+            \node[main] (3) [right of=2, xshift=20mm] {$3$};
+
+            \path[->]   (1) edge node[above] {$2$} (2)
+                        (2) edge node[above] {$-2$} (3)
+                        (1) edge [left=30] node[above] {$1$} (3);
+        \end{graph}
+    \end{figure}
+
+    \noindent
+    Le distanze $k$-vincolate tra $1$ e $3$ per valori crescenti di $k$ sono:
+    \[\begin{array}{lcl}
+        d^0[1][3] & = & 1\\
+        d^1[1][3] & = & 1\\
+        d^2[1][3] & = & \min\left(d^1[1][3], d^1[1][2]+d^1[2][3]\right)\\
+                  & = & \min\left(1,0\right)=0
+    \end{array}\]
+\end{eg}\noindent
+Oltre alla matrice $d$ dei costi, definiamo anche una matrice $T$ dei \emph{padri}
+dove $T[x][y]$ rappresenta il \emph{predecessore} di $y$ in nel \emph{cammino
+minimo} tra $x$ e $y$.
+
+Nell'esempio di prima, avremmo avuto $T[1][2]=1$, $T[2][3]=3$ e $T[1][3]=2$.
+
+\begin{minicode}{Algoritmo di Floyd-Warshall}
+\ind$\langle$\bc{int}[][], \bc{int}[][]$\rangle$ floydWarshall(\bc{GRAPH} G)\\
+    \bc{int}[][] d = new \bc{int}[1\dots G.size()][1\dots G.size()]\\
+    \bc{int}[][] T = new \bc{int}[1\dots G.size()][1\dots G.size()]\\
+\end{minicode}
+\newpage
+\begin{codecont}
+\indent foreach (u $\in$ G.V()) do\\
+    \indf foreach (v $\in$ G.V()) do\\
+        \indff d[u][v] = $+\infty$\\
+        \indff T[u][v] = nil\\
+\ind foreach (u $\in$ G.V()) do\\
+    \indf foreach (v $\in$ G.adj(u)) do\\
+            \indff d[u][v] = G.w(u, v)\\
+            \indff T[u][v] = u\\
+\ind for (k=1 to n) do\\
+    \indf foreach (u $\in$ G.V()) do\\
+        \indff foreach (v $in$ G.V()) do\\
+            \indfff if (d[u][k] + d[k][v] < d[u][v]) then\\
+                \indffff d[u][v] = d[u][k] + d[k][v]\\
+                \indffff T[u][v] = T[k][v]\\
+\indent return $\langle$d, T$\rangle$
+\end{codecont}
+
+\paragraph{Complessità}
+I tre cicli annidati fanno sì che la \emph{complessità} dell'algoritmo risulti
+$\Theta(n^3)$.
