@@ -536,4 +536,60 @@ decodifica.
 \subsection{Algoritmo di Huffman}
 L'\emph{algoritmo di Huffman} utilizza rappresentazioni ad albero per definire
 il codice di codifica a partire dal testo e per ritornare al testo originale a
-partire dalla codifica.
+partire dalla codifica. In particolare, viene usato un \emph{albero binario}
+in cui al ramo sinistro di ciascun \emph{nodo} è associato il bit 0, viceversa
+al ramo destro è sempre associato il bit 1. I caratteri si trovano nelle foglie
+e il \emph{cammino} che si percorre per andare dalla \emph{radice} a ciascuna
+\emph{foglia} corrisponde alla codifica del carattere associato.
+
+\begin{figure}[h!]
+    \centering
+    \hspace{5mm}
+    \begin{minipage}{0.48\textwidth}
+    \begin{graph}
+        \node[main] (0) {};
+        \node[main] (1) [below left of=0, xshift=-20, yshift=-20] {};
+        \node[main] (2) [below right of=0, xshift=20, yshift=-20] {};
+        \node[main] (3) [below left of=1, xshift=0, yshift=-20] {$a$};
+        \node[main] (4) [below right of=1, xshift=0, yshift=-20] {};
+        \node[main] (5) [below left of=2, xshift=0, yshift=-20] {$d$};
+        \node[main] (6) [below right of=2, xshift=0, yshift=-20] {$e$};
+        \node[main] (9) [below left of=4, xshift=20, yshift=-20] {$b$};
+        \node[main] (10) [below right of=4, xshift=-20, yshift=-20] {$c$};
+      
+        \path[-]  (0) edge node [above left] {$0$} (1)
+                  (0) edge node [above right] {$1$} (2)
+                  (1) edge node [above left] {$0$} (3)
+                  (1) edge node [above right] {$1$} (4)
+                  (2) edge node [above left] {$0$} (5)
+                  (2) edge node [above right] {$1$} (6)
+                  (4) edge node [left] {$0$} (9)
+                  (4) edge node [right] {$1$} (10);
+    \end{graph}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        \textbf{Carattere} & $a$ & $b$ & $c$ & $d$ & $e$\\
+        \hline
+        \textbf{Codifica} & $00$ & $010$ & $011$ & $10$ & $11$\\
+        \hline
+    \end{tabular}
+    \end{minipage}
+    \caption{Esempio di \emph{albero binario di decodifica}}
+\end{figure}
+
+\noindent
+Questa rappresentazione ci permette di legare il numero di bit necessari per
+codificare un carattere alla \emph{profondità} della \emph{foglia} associata,
+all'interno dell'\emph{albero}.
+
+\paragraph{Numero di bit necessari a codificare un file}
+In particolare, se $\Sigma$ è l'alfabeto di un file $F$ e $T$ è un albero
+che rappresenta la codifica, per ogni carattere $c\in\Sigma$, $d_T(c)$
+rappresenta la \emph{profondità} della \emph{foglia} che rappresenta $c$ in $T$.
+Dunque, la codifica di $c$ richiede $d_T(c)$ bit e, se $f[c]$ è il numero di
+occorrenze di $c$ in $F$, la dimensione della codifica per l'intero file è:
+\[C(F,T)=\sum_{c\in\Sigma}f[c]\cdot d_T(c)\]

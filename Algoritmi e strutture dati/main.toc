@@ -293,6 +293,7 @@
 \contentsline {paragraph}{Complessità}{186}{paragraph*.247}%
 \contentsline {section}{\numberline {14.5}Problema della compressione}{186}{section.14.5}%
 \contentsline {subsection}{\numberline {14.5.1}Algoritmo di Huffman}{187}{subsection.14.5.1}%
+\contentsline {paragraph}{Numero di bit necessari a codificare un file}{187}{paragraph*.250}%
 \contentsline {chapter}{\numberline {A}Appendice A}{188}{appendix.1.A}%
 \contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{188}{section.1.A.1}%
 \contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{188}{section.1.A.2}%
