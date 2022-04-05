@@ -460,3 +460,80 @@ quel tipo di scelta sia corretta.
 \end{proof}
 
 \section{Problema della compressione}
+Quello della compressione dei dati è una problema classico dell'informatica.
+Una delle possibili tecniche per la compressione dei caratteri\footnote{Per
+le immagini esistono tecniche migliori} è tramite una \emph{funzione di codifica}
+del tipo $f:f(c)=x$ in cui $c$ un carattere preso da un alfabeto $\Sigma$ e
+$x$ è la sua rappresentazione binaria.
+
+\begin{note}
+    $\Sigma$ può essere definito come l'insieme dei caratteri usati all'interno
+    di un file da comprimere.
+\end{note}
+
+\begin{eg}[Possibili compressioni]
+    Supponiamo di avere un file di $n$ caratteri, che $\Sigma=\{a,b,c,d,e,f\}$ e
+    di conoscere la frequenza di ogni carattere.
+
+    \begin{table}[h!]
+        \centering
+        \renewcommand{\arraystretch}{1.2}
+        \begin{adjustbox}{max width=0.98\textwidth}
+        \begin{tabular}{|c|c|c|c|c|c|c|c|}
+            \hline
+            \textbf{Caratteri} & \bc{\texttt{a}} & \bc{\texttt{b}} &
+            \bc{\texttt{c}} & \bc{\texttt{d}} & \bc{\texttt{e}} &
+            \bc{\texttt{f}} & \textbf{Dimensione}\\
+            \hline
+            \textbf{Frequenza} & 45\% & 13\% & 12\% & 16\% & 9\% & 5\% & \\
+            \hline
+            \textbf{ASCII} & \texttt{01100001} & \texttt{01100010} &
+            \texttt{01100011} & \texttt{01100100} & \texttt{01100101} &
+            \texttt{01100110} & 8n\\
+            \hline
+            \textbf{Codifica 1} & \texttt{000} & \texttt{001} & \texttt{010} &
+            \texttt{011} & \texttt{100} & \texttt{101} & 3n\\
+            \hline
+            \textbf{Codifica 2} & \texttt{0} & \texttt{101} & \texttt{100} &
+            \texttt{111} & \texttt{1101} & \texttt{1100} & 2.24n\\
+            \hline
+        \end{tabular}
+    \end{adjustbox}
+    \end{table}
+    
+    \noindent
+    Nella codifica 1 abbiamo codificato i caratteri usando il numero minimo
+    minimo di bit necessari per rappresentare 6 valori. Per quanto riguarda la
+    codifica 2 invece, abbiamo calcolato la dimensione totale come:
+    \[\left(0.45\cdot1+0.13\cdot3+0.12\cdot3+0.16\cdot3+0.09\cdot4+0.05\cdot
+    4\right)n=2.24n\]
+\end{eg}
+
+\begin{definition}[Codice a prefisso]
+    In un codice a prefisso, nessun codice è prefisso di un altro.
+\end{definition}\noindent
+La caratteristica dei \emph{codici a prefisso} è necessaria per consentire la
+decodifica.
+
+\begin{eg}[Codici a prefisso e non]
+    Consideriamo un codice del tipo:
+    \[a\to0,\,b\to 10,\,c\to11\]
+    La codifica per la stringa \texttt{babaca} è:
+    \[10\ 0\ 10\ 0\ 11\ 0\]
+    che può essere decodificata senza ambiguità percorrendola da sinistra, in
+    quanto, appena viene riscontrata la corrispondenza con un carattere, si
+    può sostituire quel carattere alla sua codifica sapendo che i bit successivi
+    costituiranno la rappresentazione di un altro carattere.
+
+    Nel caso di un codice di questo tipo invece:
+    \[a\to0,\, b\to1,\,c\to 11\]
+    dovendo decodificare la sequenza di bit:
+    \[111111\]
+    si crea un'ambiguità in quanto un singolo bit $1$ rappresenta la $b$, mentre
+    due bit rappresentano la $c$.
+\end{eg}
+
+\subsection{Algoritmo di Huffman}
+L'\emph{algoritmo di Huffman} utilizza rappresentazioni ad albero per definire
+il codice di codifica a partire dal testo e per ritornare al testo originale a
+partire dalla codifica.

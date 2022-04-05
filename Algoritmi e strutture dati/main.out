@@ -152,6 +152,7 @@
 \BOOKMARK [1][-]{section.14.3}{Problema dello scheduling}{chapter.14}% 152
 \BOOKMARK [1][-]{section.14.4}{Problema dello zaino frazionario}{chapter.14}% 153
 \BOOKMARK [1][-]{section.14.5}{Problema della compressione}{chapter.14}% 154
-\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 155
-\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 156
-\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 157
+\BOOKMARK [2][-]{subsection.14.5.1}{Algoritmo di Huffman}{section.14.5}% 155
+\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 156
+\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 157
+\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 158
