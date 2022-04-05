@@ -143,6 +143,15 @@
 \BOOKMARK [2][-]{subsection.13.1.5}{Casi d'uso delle soluzioni}{section.13.1}% 143
 \BOOKMARK [1][-]{section.13.2}{Ricerca dei cammini minimi da sorgente multipla}{chapter.13}% 144
 \BOOKMARK [2][-]{subsection.13.2.1}{Algoritmo di Floyd-Watshall}{section.13.2}% 145
-\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 146
-\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 147
-\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 148
+\BOOKMARK [0][-]{chapter.14}{Programmazione greedy}{}% 146
+\BOOKMARK [1][-]{section.14.1}{Problema del resto}{chapter.14}% 147
+\BOOKMARK [2][-]{subsection.14.1.1}{Approccio basato su programmazione dinamica}{section.14.1}% 148
+\BOOKMARK [2][-]{subsection.14.1.2}{Approccio basato su programmazione greedy}{section.14.1}% 149
+\BOOKMARK [1][-]{section.14.2}{Insieme indipendente massimale di intervalli}{chapter.14}% 150
+\BOOKMARK [2][-]{subsection.14.2.1}{Approccio basato su programmazione dinamica}{section.14.2}% 151
+\BOOKMARK [1][-]{section.14.3}{Problema dello scheduling}{chapter.14}% 152
+\BOOKMARK [1][-]{section.14.4}{Problema dello zaino frazionario}{chapter.14}% 153
+\BOOKMARK [1][-]{section.14.5}{Problema della compressione}{chapter.14}% 154
+\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 155
+\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 156
+\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 157

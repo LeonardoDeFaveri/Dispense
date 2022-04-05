@@ -275,6 +275,23 @@
 \contentsline {section}{\numberline {13.2}Ricerca dei cammini minimi da sorgente multipla}{175}{section.13.2}%
 \contentsline {subsection}{\numberline {13.2.1}Algoritmo di Floyd-Watshall}{175}{subsection.13.2.1}%
 \contentsline {paragraph}{Complessità}{177}{paragraph*.232}%
-\contentsline {chapter}{\numberline {A}Appendice A}{178}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{178}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{178}{section.1.A.2}%
+\contentsline {chapter}{\numberline {14}Programmazione greedy}{178}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Problema del resto}{178}{section.14.1}%
+\contentsline {subsection}{\numberline {14.1.1}Approccio basato su programmazione dinamica}{178}{subsection.14.1.1}%
+\contentsline {paragraph}{Complessità}{179}{paragraph*.233}%
+\contentsline {subsection}{\numberline {14.1.2}Approccio basato su programmazione greedy}{179}{subsection.14.1.2}%
+\contentsline {paragraph}{Complessità}{179}{paragraph*.234}%
+\contentsline {section}{\numberline {14.2}Insieme indipendente massimale di intervalli}{180}{section.14.2}%
+\contentsline {subsection}{\numberline {14.2.1}Approccio basato su programmazione dinamica}{181}{subsection.14.2.1}%
+\contentsline {paragraph}{Punto 1 - \bm {$S[i$}\dots \bm {$ j]=\emptyset $}}{182}{paragraph*.236}%
+\contentsline {paragraph}{Complessità}{183}{paragraph*.238}%
+\contentsline {section}{\numberline {14.3}Problema dello scheduling}{183}{section.14.3}%
+\contentsline {section}{\numberline {14.4}Problema dello zaino frazionario}{185}{section.14.4}%
+\contentsline {paragraph}{Ordinamento per profitto decrescente}{185}{paragraph*.244}%
+\contentsline {paragraph}{Ordinamento per peso crescente}{185}{paragraph*.245}%
+\contentsline {paragraph}{Ordinamento per profitto specifico decrescente}{185}{paragraph*.246}%
+\contentsline {paragraph}{Complessità}{186}{paragraph*.247}%
+\contentsline {section}{\numberline {14.5}Problema della compressione}{186}{section.14.5}%
+\contentsline {chapter}{\numberline {A}Appendice A}{187}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{187}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{187}{section.1.A.2}%

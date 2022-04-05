@@ -336,3 +336,12 @@ riaggiunto
 line
 shortestPath
 floydWarshall
+greedy
+multi-insieme
+moneyChange
+coin
+indipendentSet
+scheduling
+cell
+label
+float
