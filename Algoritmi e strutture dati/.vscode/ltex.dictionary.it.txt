@@ -346,3 +346,5 @@ cell
 label
 float
 Huffman
+huffman
+frequence
