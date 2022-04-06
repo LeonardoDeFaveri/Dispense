@@ -2,13 +2,15 @@
 Abbiamo già discusso più volte su come la scelta di una \emph{struttura dati}
 influisca sulla \emph{complessità} degli algoritmi, tuttavia, ora riprendiamo
 l'argomento perché input diversi allo stesso algoritmo potrebbero far risultare
-più efficiente l'uso di una \emph{strutture dati} piuttosto che un'altra.
+più efficiente l'uso di una \emph{struttura dati} piuttosto che un'altra.
 
 Quanto detto emerge chiaramente nel caso degli algoritmi per la ricerca dei
-\emph{cammini minimi} all'interno di \emph{grafi}. Diversamente dal problema
-già affrontato in precedenza, ora ci interessiamo nel trovare tutti
-i \emph{cammini minimi} che collegano un \emph{nodo} agli altri.
+\emph{cammini minimi} all'interno di \emph{grafi}. È un problema che abbiamo già
+affrontato in precedenza, ma qui ne vediamo due versioni più complesse: la
+ricerca dei \emph{cammini minimi} verso tutti i \emph{nodi}, da sorgente singola
+e da sorgente multipla.
 
+\section{Ricerca dei cammini minimi da sorgente singola}
 \begin{problem}[Ricerca dei cammini minimi da sorgente singola]
     Dati un grafo orientato $G=(V,E)$, una funzione di peso $w=E\to R$ e un
     nodo sorgente $s$, trovare un cammino da $s$ a $u$, per ogni $u\in V$, il
@@ -24,12 +26,12 @@ Per quanto riguarda i pesi, possono essere sia numeri interi che reali, ma anche
 positivi e negativi e alcuni algoritmi potrebbero non funzionare per alcune
 tipologie di pesi.
 
-\section{Ricerca dei cammini minimi da sorgente singola}
+\bigskip\noindent
 Consideriamo i due seguenti \emph{grafi}:
 
 \begin{figure*}[h!]
 \centering
-\resizebox{0.48\textwidth}{!}{
+\resizebox{0.44\textwidth}{!}{
     \begin{graph}
         \node[main] (a) {$A$};
         \node[main] (b) [right of=a] {$B$};
@@ -47,8 +49,8 @@ Consideriamo i due seguenti \emph{grafi}:
                     (c) edge (e);
     \end{graph}
 }
-\hfill
-\resizebox{0.48\textwidth}{!}{
+\hspace*{1cm}
+\resizebox{0.44\textwidth}{!}{
     \begin{graph}
         \node[main] (a) {$A$};
         \node[main] (b) [right of=a] {$B$};
@@ -83,8 +85,6 @@ comune dopo aver percorso tratti diversi. Da ciò consegue che l'insieme dei
 \emph{cammini minimi} da un \emph{nodo} a tutti gli altri può essere rappresentato
 come un \emph{albero di copertura}.
 
-Abbiamo già incontrato gli \emph{alberi di copertura}, ma ora andiamo a definirli
-formalmente.
 \begin{definition}[Albero di copertura]
     Dato un grafo $G=(V,E)$ non orientato e connesso, un albero di copertura di
     $G$ è un sottografo $T=(V,E_T)$ tale per cui $T$ è un albero che contiene
@@ -128,7 +128,7 @@ Detto questo, possiamo dire che tutte le soluzioni che non generano un
 
 \begin{definition}[Soluzione ammissibile]
     Una soluzione ammissibile può essere descritta da un albero di copertura $T$
-    radicato in $s$ e da un vettore di distanza $d$, i cui valori $d[u]$
+    radicato in $s$ e da un vettore delle distanze $d$, i cui valori $d[u]$
     rappresentano il costo del cammino da $s$ a $u$ in $T$.
 \end{definition}
 
@@ -334,7 +334,7 @@ i pesi sono positivi.
 L'idea alla base di questa soluzione è quella di usare la distanza di un nodo
 da $s$ come valore per la sua \emph{priorità}, quindi ad ogni iterazione,
 estrarre il \emph{nodo} con la \emph{priorità} minore significa estrarre il
-\emph{nodo} il cui cammino da $s$ sia di peso minore.
+\emph{nodo} il cui cammino da $s$ è di peso minore.
 
 Quando viene estratto un \emph{nodo} e l'esecuzione dell'algoritmo ricade nel
 ramo \texttt{else} del controllo sul valore $b[v]$, significa che dal \emph{nodo}
@@ -455,8 +455,9 @@ modifica di \emph{priorità} ha un \emph{costo ammortizzato} $O(1)$. La
 
 \subsection{Algoritmo di Bellman-Ford-Moore}
 Questo algoritmo ha una struttura simile a quello appena visto, ma al posto di
-una \emph{coda a priorità} viene usata una \emph{coda} \q{classica} e permette
-di trattare anche \emph{grafi} con \emph{archi} di peso negativo.
+una \emph{coda a priorità} viene usata una \emph{coda} \q{classica}. Questa
+soluzione permette di trattare anche \emph{grafi} con \emph{archi} di peso
+negativo.
 
 \begin{minicode}{Algoritmo di Bellman-Ford-Moore}
 \ind$\langle$\bc{int}[], \bc{int}[]$\rangle$ shortestPath(\bc{GRAPH} G, \bc{NODE} s)\\
@@ -594,13 +595,13 @@ volte.
 L'inizializzazione dei vettori costa sempre $\Theta(n)$, mentre tutte le
 operazioni sulla \emph{coda} hanno \emph{complessità} $\Theta(1)$. Poiché ogni
 \emph{nodo} può essere reinserito nella \emph{coda} fino a $n-1$ volte, la
-\texttt{dequeue} viene eseguita $O(n^2)$ volte. L'\texttt{enqueue} invece,
-viene invocata tante volte quante sono i vicini di ogni \emph{nodo}, ovvero
+\texttt{dequeue} viene eseguita $O(n^2)$ volte. L'\texttt{enqueue} viene invece
+invocata tante volte quante sono i vicini di ogni \emph{nodo}, ovvero
 $O(nm)$, dove $m$ è il numero di \emph{archi} del \emph{grafo}. La
 \emph{complessità} totale dell'algoritmo è dunque $O(nm)$.
 
 \subsection{Ricerca dei cammini minimi sui grafi DAG}
-I \emph{\hyperref[def:79]{grafi DAG}} sono un caso particolare perché non
+I \emph{\hyperref[def:79]{grafi DAG}} sono un caso particolare in quanto, non
 essendoci \emph{cicli}, i \emph{cammini} sono sempre definiti anche in presenza
 di pesi negativi. Di conseguenza, possiamo ricercare i \emph{cammini minimi}
 semplicemente applicando l'algoritmo per l'\emph{\hyperref[def:83]{ordinamento
@@ -659,7 +660,7 @@ Un possibile approccio al problema è quello di invocare gli algoritmi
 appena visti una volta per ogni \emph{nodo sorgente}. Il costo che si
 andrebbe a pagare sarebbe $n$ volte il costo delle singole esecuzioni.
 
-\subsection{Algoritmo di Floyd-Watshall}
+\subsection{Algoritmo di Floyd-Warshall}
 L'intuizione alla base dell'algoritmo è quella dei \emph{cammini $k$-vincolati}.
 
 \begin{definition}[Cammini \bm{$k$}-vincolati]
@@ -670,7 +671,7 @@ L'intuizione alla base dell'algoritmo è quella dei \emph{cammini $k$-vincolati}
 \end{definition}
 \begin{note}
     Stiamo assumendo, come in realtà abbiamo sempre fatto, che esista un
-    ordinamento fra i \emph{nodi} $v_1,\dots,v_n$ \emph{grafo}.
+    ordinamento fra i \emph{nodi} $v_1,\dots,v_n$ del \emph{grafo}.
 \end{note}
 \begin{note}
     Seguendo la definizione data, $p_{xy}^0$ e $p_{xy}^n$ corrispondono
@@ -696,7 +697,7 @@ Se esistono i \emph{cammini $k$-vincolati} possiamo definire anche la
 
 \noindent
 I \emph{cammini $k$-vincolati} ci permettono di ricercare i \emph{cammini minimi}
-in modo ricorsivo, partendo da $k=0$ e incrementandolo tenendo di volta in volta
+in modo ricorsivo partendo da $k=0$ e incrementandolo, e tenendo di volta in volta
 il \emph{cammino} di costo minore. Possiamo quindi esprimere la \emph{distanza
 $k$-vincolata} con la seguente:
 \[d^k[x][y]=\begin{cases}
@@ -731,9 +732,8 @@ $k$-vincolata} con la seguente:
 \end{eg}\noindent
 Oltre alla matrice $d$ dei costi, definiamo anche una matrice $T$ dei \emph{padri}
 dove $T[x][y]$ rappresenta il \emph{predecessore} di $y$ in nel \emph{cammino
-minimo} tra $x$ e $y$.
-
-Nell'esempio di prima, avremmo avuto $T[1][2]=1$, $T[2][3]=3$ e $T[1][3]=2$.
+minimo} tra $x$ e $y$. Nell'esempio di prima, avremmo avuto $T[1][2]=1$,
+$T[2][3]=3$ e $T[1][3]=2$.
 
 \begin{minicode}{Algoritmo di Floyd-Warshall}
 \ind$\langle$\bc{int}[][], \bc{int}[][]$\rangle$ floydWarshall(\bc{GRAPH} G)\\
