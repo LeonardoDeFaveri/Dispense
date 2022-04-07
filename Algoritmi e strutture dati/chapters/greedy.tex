@@ -5,7 +5,7 @@ dinamica} sono prese in maniera bottom-up e vengono valutate tutte le possibilit
 evitando però di ripetere decisioni già esaminate. Con la \emph{programmazione
 greedy} invece, tra tutte le possibili decisioni ne viene scelta solo una,
 quella che sembra ottima, o meglio localmente ottima. Tuttavia, è necessario
-dimostrare che quella particolare scelta permetta di ottenere un risultato
+dimostrare che quella particolare scelta permette di ottenere un risultato
 ottimo anche a livello globale.
 
 Proprio per questo motivo, la \emph{programmazione greedy} è utilizzabile sono
@@ -15,13 +15,13 @@ che porta ad una soluzione ottima.
 
 \section{Problema del resto}
 \begin{problem}[Problema del resto]
-    Dati un insieme di \q{tagli} di monete, espressi come vettore $t[1\dots n]$
+    Dati un insieme di \q{tagli} di monete, espressi come un vettore $t[1\dots n]$
     di interi positivi, e un valore $R$ rappresentate un resto da dover restituire,
     trovare il più piccolo numero intero di pezzi necessari per dare un resto
     $R$ di centesimi utilizzando i tagli disponibili, assumendo di avere un
     numero illimitato di monete.
 
-    Formalmente, è necessario trovare un vettore di $x$ di interi non negativi
+    Formalmente, è necessario trovare un vettore $x$ di interi non negativi
     tale che:
     \[R=\sum_{i=1}^n x[i]\cdot t[i]\quad\text{e}\quad m=\sum_{i=1}^n x[i]\quad
     \text{ha valore minimo}\]
@@ -31,7 +31,7 @@ che porta ad una soluzione ottima.
 Questo problema possiede una \emph{sottostruttura ottima}:
 \begin{definition}[Sottostruttura ottima]
     Siano $S(i)$ il problema di dare un resto pari ad $i$ e $A(i)$ una soluzione
-    ottima del problema $S(i)$, rappresentata da un multi-insieme. Sia poi
+    ottima del problema $S(i)$ rappresentata da un multi-insieme. Sia poi
     $j\in A(i)$. Allora, $S(i-t[j])$ è un sotto-problema di $S(i)$, la cui
     soluzione è data da $A(i)-\{j\}$.
 \end{definition}
@@ -52,19 +52,19 @@ problema $S(i)$, vale la seguente funzione ricorsiva:
 \begin{minicode}{Soluzione basata su programmazione dinamica}
 \ind\bc{int}[] moneyChange(\bc{int}[] t, \bc{int} n, \bc{int} R)\\
     \bc{int}[] DP = new \bc{int}[0\dots R]\hfill\com{\emph{Tabella delle soluzioni}}
-    \bc{int}[] coin = new \bc{int}[0\dots R]\hfill\com{Moneta da usare per uno specifico resto}
+    \bc{int}[] coins = new \bc{int}[0\dots R]\hfill\com{Moneta da usare per uno specifico resto}
     DP[0] = 0\\
     \indf for (i = 1 to R) do\\
         DP[i] = $+\infty$\\
         \indff for (j = 1 to n) do\\
-            \indfff if (i > t[j] and DP[i - t[j]] + 1 < DP[i]) then
+            \indfff if (i > t[j] and DP[i - t[j]] + 1 < DP[i]) then\\
                 DP[i] = DP[i - t[j]] + 1\\
-                coin[i] = j\\
+                coins[i] = j\\
     \indf\com{Ricostruzione della soluzione}
     \indf\bc{int}[] x = new \bc{int}[1\dots n] = \{0\}\hfill\com{Contatore delle monete usate}
     \indf while (R > 0) do\\
-        x[coin[R]] = x[coin[R]] + 1\\
-        R = R - t[coin[R]]\\
+        x[coins[R]] = x[coins[R]] + 1\\
+        R = R - t[coins[R]]\\
     \indf return x
 \end{minicode}
 
@@ -110,7 +110,7 @@ Ciò che dobbiamo fare adesso è dimostrare che la scelta fatta sia corretta.
     \end{array}\]
     Sia ora $m_k$ la somma delle monete di taglio inferiore a $t[k]$:
     \[m_k=\sum_{i=k+1}^4 x[i]\cdot t[i]\]
-    Se riusciamo a dimostrare che $\forall k\;:\;m_k<t[k]$, allora la soluzione
+    Se riusciamo a dimostrare che $m_k<t[k]$ $\forall k$, allora la soluzione
     proposta dall'algoritmo è proprio quella ottima. Per ogni valore di $k$
     otteniamo:
     \[\begin{array}{rclclclclc}
@@ -162,9 +162,9 @@ Il problema generale corrisponde quindi al problema $S[0\dots n+1]$.
     \begin{itemize}
         \item Il problema $S[i\dots j]$ può essere suddiviso in due intervalli:
         \begin{enumerate}
-            \item $S[i\dots k]$ contiene gli intervalli di $S[i\dots j]$ che
+            \item $S[i\dots k]$ contenente gli intervalli di $S[i\dots j]$ che
             finiscono prima di $k$;
-            \item $S[k\dots j]$ contiene gli intervalli di $S[i\dots j]$ che
+            \item $S[k\dots j]$ contenente gli intervalli di $S[i\dots j]$ che
             iniziano dopo $k$;
         \end{enumerate}
         \item $A[i\dots j]$ contiene le soluzioni ottimali di $S[i\dots k]$ e
@@ -188,17 +188,17 @@ ricorsiva:
     \max_{k\in S[i\dots j]}\{DP[i][k]+DP[k][j]+1\} & \text{altrimenti}
 \end{cases}\]
 Questa definizione ci permette di realizzare un algoritmo basato su
-\emph{programmazione dinamica} o \emph{memoization} con \emph{complessità} $O(n^3)$
-perché bisogna risolvere tutti i problemi con $i<j$ e, nel caso peggiore,
-paghiamo $O(n)$ per ogni sotto-problema.
+\emph{programmazione dinamica}, o su \emph{memoization}, con \emph{complessità}
+pari a $O(n^3)$. Questo perché bisogna risolvere tutti i problemi con $i<j$ e,
+nel caso peggiore, paghiamo $O(n)$ per ogni sotto-problema.
 
 \bigskip\noindent
 Possiamo fare meglio di così?
 
 Potremmo semplicemente usare la soluzione al problema con pesi generici, che
 ha \emph{complessità} $O(n\log n)$, ponendo a $1$ tutti i pesi. Tuttavia,
-possiamo chiederci se sia davvero necessario analizzare tutti i possibili valori
-di $k$. Definiamo il seguente teorema:
+possiamo provare a chiederci se sia davvero necessario analizzare tutti i
+possibili valori di $k$. Definiamo il seguente teorema:
 
 \begin{definition}[Scelta ingorda]
     Siano $S[i\dots j]$ un sotto-problema non vuoto e $m$ l'intervallo di $S[i\dots
@@ -216,7 +216,6 @@ di $k$. Definiamo il seguente teorema:
     Per la definizione di intervallo sappiamo che $a_m<b_m$. Inoltre, poiché $m$
     è l'intervallo con il minor tempo di fine $\forall k\in S[i\dots j]$ $b_m
     \leq b_k$ e, quindi, ne consegue che $\forall k\in S[i\dots j]$ $a_m<b_k$.
-
     Se nessun intervallo in $S[i\dots j]$ termina prima di $a_m$, allora $S[i
     \dots m]=\emptyset$.
 
@@ -259,8 +258,8 @@ Questa soluzione abbassa la \emph{complessità} a $O(n)$ se i vettori di input
 sono già ordinati, $O(n\log n)$ altrimenti.
 
 \begin{eg}[Esempio d'esecuzione]
-    Eseguendo l'algoritmo con gli stessi insiemi degli esempi precedenti
-    l'algoritmo fa le seguenti scelte:
+    Il comportamento del nuovo algoritmo con gli stessi intervalli degli esempi
+    precedenti è il seguente:
 
     \begin{figure}[h!]
         \centering
@@ -413,14 +412,14 @@ in cui è possibile prendere frazioni di oggetti.
 
     \noindent
     Per prendere gli oggetti possiamo provare a ordinarli in qualche modo
-    così poter operare una scelta ponderata sul tipo di ordinamento scelto.
+    così poter operare una scelta ponderata sul tipo di ordinamento applicato.
 
     \paragraph{Ordinamento per profitto decrescente}
-    In questo modo andremmo a scegliere gli oggetti $2$ e $3$ ottenendo un
+    In questo modo andiamo a scegliere gli oggetti $2$ e $3$ ottenendo un
     guadagno totale di $320$.
 
     \paragraph{Ordinamento per peso crescente}
-    Questo approccio ci porterebbe a scegliere la totalità degli oggetti $1$
+    Questo approccio ci porta a scegliere la totalità degli oggetti $1$
     e $3$, per un peso di $40$. Per usare la rimanente capacità prendiamo i
     $\frac{3}{4}$ dell'oggetto $2$. Il profitto che otteniamo sale quindi a
     $330$.
@@ -434,7 +433,7 @@ in cui è possibile prendere frazioni di oggetti.
 \begin{minicode}{Implementazione della soluzione}
 \ind\bc{float}[] zaino(\bc{float}[] p, \bc{float}[] w, \bc{float} C, \bc{int} n)\\
     \bc{float}[] x = new \bc{float}[1\dots n]\hfill\com{Vettore delle quantità raccolte}
-    \{ Ordina $p$ e $w$ in modo che $p[1]/w[1]\geq\dots\geq p[n]/w[n]$\}\\
+    \{ Ordina $p$ e $w$ in modo che $p[1]/w[1]\geq\dots\geq p[n]/w[n]$ \}\\
     \indf for (i = 1 to n) do\\
         x[i] = min(C / w[i], 1)\\
         C = C - x[i] $\cdot$ w[i]\\
@@ -503,7 +502,7 @@ $x$ è la sua rappresentazione binaria.
     
     \noindent
     Nella codifica 1 abbiamo codificato i caratteri usando il numero minimo
-    minimo di bit necessari per rappresentare 6 valori. Per quanto riguarda la
+    di bit necessari per rappresentare 6 valori. Per quanto riguarda la
     codifica 2 invece, abbiamo calcolato la dimensione totale come:
     \[\left(0.45\cdot1+0.13\cdot3+0.12\cdot3+0.16\cdot3+0.09\cdot4+0.05\cdot
     4\right)n=2.24n\]
@@ -525,11 +524,12 @@ decodifica.
     può sostituire quel carattere alla sua codifica sapendo che i bit successivi
     costituiranno la rappresentazione di un altro carattere.
 
+    \bigskip\noindent
     Nel caso di un codice di questo tipo invece:
     \[a\to0,\, b\to1,\,c\to 11\]
     dovendo decodificare la sequenza di bit:
     \[111111\]
-    si crea un'ambiguità in quanto un singolo bit $1$ rappresenta la $b$, mentre
+    si crea un'ambiguità, in quanto un singolo bit $1$ rappresenta la $b$, mentre
     due bit rappresentano la $c$.
 \end{eg}
 
@@ -538,9 +538,9 @@ L'\emph{Algoritmo di Huffman} utilizza rappresentazioni ad albero per definire
 il codice di codifica a partire dal testo e per ritornare al testo originale a
 partire dalla codifica. In particolare, viene usato un \emph{albero binario}
 in cui al ramo sinistro di ciascun \emph{nodo} è associato il bit 0, viceversa
-al ramo destro è sempre associato il bit 1. I caratteri si trovano nelle foglie
-e il \emph{cammino} che si percorre per andare dalla \emph{radice} a ciascuna
-\emph{foglia} corrisponde alla codifica del carattere associato.
+al ramo destro è sempre associato il bit 1. I caratteri si trovano nelle
+\emph{foglie} e il \emph{cammino} che si percorre per andare dalla \emph{radice}
+a ciascuna \emph{foglia} corrisponde alla codifica del carattere associato.
 
 \begin{figure}[h!]
     \centering
@@ -583,7 +583,7 @@ e il \emph{cammino} che si percorre per andare dalla \emph{radice} a ciascuna
 
 \noindent
 Questa rappresentazione ci permette di legare il numero di bit necessari per
-codificare un carattere alla \emph{profondità} della \emph{foglia} associata,
+codificare un carattere alla \emph{profondità} della \emph{foglia} associata
 all'interno dell'\emph{albero}.
 
 \paragraph{Numero di bit necessari a codificare un file}
@@ -708,7 +708,7 @@ La codifica ottenuta è quindi:
     associare una frequenza oltre che un valore. La firma della funzione
     \texttt{Tree} è quindi \texttt{Tree(\bc{int} frequence, \bc{ITEM} value)}.
     Oltre a ciò, ipotizziamo che sia possibile accedere alla frequenza di un
-    \emph{nodo} mediante un attributo $f$.
+    \emph{nodo} mediante un attributo \texttt{f}.
 \end{note}
 
 \paragraph{Complessità}
@@ -720,9 +720,9 @@ Come al solito dobbiamo dimostrare la correttezza dell'approccio scelto. In
 particolare, dobbiamo dimostrare che costruire un \emph{albero} scegliendo
 sempre i due caratteri con frequenza minore conduce sempre ad una soluzione
 ottimale. Inoltre, dobbiamo dimostrare che questa soluzione gode di una
-\emph{sottostruttura ottima} per cui dato un problema sull'alfabeto $\Sigma$,
-è possibile costruire un sotto-problema con un alfabeto più piccolo aggregando
-i due caratteri con frequenza minore.
+\emph{sottostruttura ottima}, per la quale, dato un problema sull'alfabeto
+$\Sigma$, è possibile costruire un sotto-problema con un alfabeto più piccolo
+aggregando i due caratteri con frequenza minore.
 
 Quanto detto è riassumibile nel seguente teorema:
 \begin{definition}[Teorema per la correttezza dell'Algoritmo di Huffman]
@@ -743,9 +743,9 @@ Quanto detto è riassumibile nel seguente teorema:
     dimostriamo che $C(f,T'')\leq C(f,T')\leq C(f,T)$:
     \[C(f,T)-C(f,T')\begin{array}[t]{cl}
         = & \sum_{c\in\Sigma} f[c]d_T(c)-\sum_{c\in\Sigma}f[c]d_{T'}(c)\\
-        = & \left(f[x]d_T(x)-f[a]d_{T'}(a)\right)-\left(f[x]d_{T'}(x)-
+        = & \left(f[x]d_T(x)-f[a]d_{T}(a)\right)-\left(f[x]d_{T'}(x)-
         f[a]d_{T'}(a)\right)\\
-        = & \left(f[x]d_T(x)-f[a]d_{T'}(a)\right)-\left(f[x]d_{T}(a)-
+        = & \left(f[x]d_T(x)-f[a]d_{T}(a)\right)-\left(f[x]d_{T}(a)-
         f[a]d_{T}(x)\right)\\
         = & \left(f[a]-f[x]\right)\cdot\left(d_T(a)-d_T(x)\right)\\
         \leq & 0
@@ -754,4 +754,3 @@ Quanto detto è riassumibile nel seguente teorema:
     poiché $T$ è ottimo deve valere anche $C(f,T)\leq C(f,T'')$ e quindi anche
     $T''$ è una soluzione ottima.
 \end{proof}
-

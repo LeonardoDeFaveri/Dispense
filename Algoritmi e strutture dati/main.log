@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.26)  6 APR 2022 14:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.26)  7 APR 2022 11:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1098,30 +1098,30 @@ Package pdftex.def Info: ./images/intervalli-ordinati-greedy1.png  used on input
  [180 <./images/intervalli-ordinati-greedy1.png>] [181]
 File: ./images/intervalli-ordinati-greedy1.png Graphic file (type png)
 <use ./images/intervalli-ordinati-greedy1.png>
-Package pdftex.def Info: ./images/intervalli-ordinati-greedy1.png  used on input line 240.
+Package pdftex.def Info: ./images/intervalli-ordinati-greedy1.png  used on input line 239.
 (pdftex.def)             Requested size: 217.6621pt x 150.73672pt.
  [182]
 <./images/intervalli-ordinati-greedy-s1.png, id=2423, 1057.9525pt x 700.6175pt>
 File: ./images/intervalli-ordinati-greedy-s1.png Graphic file (type png)
 <use ./images/intervalli-ordinati-greedy-s1.png>
-Package pdftex.def Info: ./images/intervalli-ordinati-greedy-s1.png  used on input line 268.
+Package pdftex.def Info: ./images/intervalli-ordinati-greedy-s1.png  used on input line 267.
 (pdftex.def)             Requested size: 232.17241pt x 153.75146pt.
 <./images/intervalli-ordinati-greedy-s2.png, id=2424, 1061.9675pt x 701.62125pt>
 File: ./images/intervalli-ordinati-greedy-s2.png Graphic file (type png)
 <use ./images/intervalli-ordinati-greedy-s2.png>
-Package pdftex.def Info: ./images/intervalli-ordinati-greedy-s2.png  used on input line 271.
+Package pdftex.def Info: ./images/intervalli-ordinati-greedy-s2.png  used on input line 270.
 (pdftex.def)             Requested size: 232.17241pt x 153.3829pt.
 <./images/intervalli-ordinati-greedy-s3.png, id=2425, 1061.9675pt x 702.625pt>
 File: ./images/intervalli-ordinati-greedy-s3.png Graphic file (type png)
 <use ./images/intervalli-ordinati-greedy-s3.png>
-Package pdftex.def Info: ./images/intervalli-ordinati-greedy-s3.png  used on input line 273.
+Package pdftex.def Info: ./images/intervalli-ordinati-greedy-s3.png  used on input line 272.
 (pdftex.def)             Requested size: 232.17241pt x 153.60234pt.
 <./images/intervalli-ordinati-greedy-s4.png, id=2426, 1066.98625pt x 699.61375pt>
 File: ./images/intervalli-ordinati-greedy-s4.png Graphic file (type png)
 <use ./images/intervalli-ordinati-greedy-s4.png>
-Package pdftex.def Info: ./images/intervalli-ordinati-greedy-s4.png  used on input line 276.
+Package pdftex.def Info: ./images/intervalli-ordinati-greedy-s4.png  used on input line 275.
 (pdftex.def)             Requested size: 232.17241pt x 152.2288pt.
- [183 <./images/intervalli-ordinati-greedy-s1.png> <./images/intervalli-ordinati-greedy-s2.png> <./images/intervalli-ordinati-greedy-s3.png> <./images/intervalli-ordinati-greedy-s4.png>] [184] [185] [186] [187] [188]) [189] [190]
+ [183 <./images/intervalli-ordinati-greedy-s1.png> <./images/intervalli-ordinati-greedy-s2.png> <./images/intervalli-ordinati-greedy-s3.png> <./images/intervalli-ordinati-greedy-s4.png>] [184] [185] [186] [187] [188] [189]) [190]
 \openout2 = `chapters/appendices/appendix_a.aux'.
 
  (./chapters/appendices/appendix_a.tex
@@ -1151,7 +1151,7 @@ Here is how much of TeX's memory you used:
 pdfTeX warning (dest): name{prop:elimcost} has been referenced but does not exist, replaced by a fixed one
 
  </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0800.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1440.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecit1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1728.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (192 pages, 2769129 bytes).
+Output written on main.pdf (192 pages, 2769220 bytes).
 PDF statistics:
  3681 PDF objects out of 4296 (max. 8388607)
  2584 compressed objects within 26 object streams
