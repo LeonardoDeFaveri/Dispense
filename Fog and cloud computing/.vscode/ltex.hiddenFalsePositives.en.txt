@@ -24,3 +24,25 @@
 {"rule":"EN_A_VS_AN","sentence":"^\\QSystems with dual boot where a normal OS resides together with a type 1 hypervisor are an example of an hybrid approch.\\E$"}
 {"rule":"EN_A_VS_AN","sentence":"^\\QSystems with dual boot where a normal OS resides together with a type 1 hypervisor are an example of how an hybrid approch works.\\E$"}
 {"rule":"EN_A_VS_AN","sentence":"^\\QWith device emulation the VMM proposes to the Guest OS an emulated device which implements in software an hardware specification.\\E$"}
+{"rule":"MISSING_GENITIVE","sentence":"^\\QLinux namespaces.\\E$"}
+{"rule":"MISSING_GENITIVE","sentence":"^\\QLinux namespaces are another kernel feature highly related to cgroups, although not being part of them.\\E$"}
+{"rule":"MISSING_GENITIVE","sentence":"^\\QLinux namespaces are another kernel feature, highly related to cgroups, although not being part of them.\\E$"}
+{"rule":"UNIT_SPACE","sentence":"^\\Q[main] (1) \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q; [main] (2) [below left of=1, yshift=-5mm] \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q; [main] (3) [below right of=1, yshift=-5mm] \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q; [main] (4) [below left of=2, yshift=-5mm] \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q; [main] (5) [below left of=3, yshift=-5mm] \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q; [main] (7) [below left of=5, yshift=-5mm] \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q; [main] (6) [below right of=3, yshift=-5mm] \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q;\\E$"}
+{"rule":"UNIT_SPACE","sentence":"^\\Q[rectangle, draw] (r2) at (6) [minimum width=50mm, minimum height=40mm, xshift=14mm, yshift=-32mm, fill=back2] ; [] (t2) at (r2.south) [yshift=4mm] Child PID namespace;\\E$"}
+{"rule":"UNIT_SPACE","sentence":"^\\Q[main] (8) [below right of=6, yshift=-5mm] \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q; [main] (9) [below left of=8, yshift=-5mm] \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q; [main] (10) [below right of=8, yshift=-5mm] \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q;\\E$"}
+{"rule":"UNIT_SPACE","sentence":"^\\Q[rectangle, draw] (r1) at (5) [shift=(14mm, 0mm), minimum width=111mm, minimum height=108mm, fill=back1] ; [] (t1) at (r1.north) [yshift=-4mm] Parent PID namespace; PID namespace example\\E$"}
+{"rule":"MISSING_GENITIVE","sentence":"^\\QLinux containers.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qpage-tables.png 0.5 Memory paging\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qhav.png 0.35 Hardware assisted virtualization modes The VMM runs al ring 0 in root-mode, while guest OSs run at ring 0 in non-root mode.\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qdef.\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q.#1.\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\Q- #3..\\E$"}
+{"rule":"E_G","sentence":"^\\Qeg.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qprob.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qcodestyle.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qminicode.[1] =10000.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qcode.[1] =10000.\\E$"}
+{"rule":"MISSING_GENITIVE","sentence":"^\\QLinux containers can both be seen as infrastructure primitives (aka lightwieigth VMs) and an application management and configuration system.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qdocker-network.png 0.4 Docker network setup\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qunion-file-system.png 0.4 Behaviour of a union file system\\E$"}

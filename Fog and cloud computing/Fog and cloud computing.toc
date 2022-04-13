@@ -35,12 +35,12 @@
 \contentsline {subsection}{\numberline {3.2.3}Paravirtualization}{16}{subsection.3.2.3}%
 \contentsline {subsection}{\numberline {3.2.4}Hardware assisted virtualization}{16}{subsection.3.2.4}%
 \contentsline {paragraph}{VMX instructions}{17}{paragraph*.22}%
-\contentsline {paragraph}{Virtual machine control structure}{18}{paragraph*.23}%
+\contentsline {paragraph}{Virtual machine control structure}{17}{paragraph*.23}%
 \contentsline {section}{\numberline {3.3}Memory virtualization}{18}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Memory management in general}{18}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Memory management in virtualised environments}{19}{subsection.3.3.2}%
 \contentsline {paragraph}{Shadow page table creation}{19}{paragraph*.27}%
-\contentsline {paragraph}{Problems with shadow page table}{20}{paragraph*.28}%
+\contentsline {paragraph}{Problems with shadow page table}{19}{paragraph*.28}%
 \contentsline {subsection}{\numberline {3.3.3}Hardware assisted memory virtualization}{20}{subsection.3.3.3}%
 \contentsline {paragraph}{Tagged TLBs}{20}{paragraph*.30}%
 \contentsline {section}{\numberline {3.4}I/O virtualization}{20}{section.3.4}%
@@ -55,7 +55,19 @@
 \contentsline {paragraph}{Examples}{22}{paragraph*.34}%
 \contentsline {subsection}{\numberline {3.5.3}Hybrid architecture}{22}{subsection.3.5.3}%
 \contentsline {paragraph}{Examples}{22}{paragraph*.35}%
-\contentsline {section}{\numberline {3.6}OS-level virtualization}{22}{section.3.6}%
+\contentsline {section}{\numberline {3.6}OS-level virtualization}{23}{section.3.6}%
 \contentsline {subsection}{\numberline {3.6.1}Lightweigth virtualization}{23}{subsection.3.6.1}%
 \contentsline {paragraph}{Why is process isolation so important?}{24}{paragraph*.37}%
 \contentsline {subsection}{\numberline {3.6.2}Linux cgroups}{24}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}Linux namespaces}{24}{subsection.3.6.3}%
+\contentsline {paragraph}{PID namespace}{25}{paragraph*.38}%
+\contentsline {paragraph}{Network namespace}{25}{paragraph*.40}%
+\contentsline {paragraph}{Other namespaces in short}{26}{paragraph*.42}%
+\contentsline {subsection}{\numberline {3.6.4}Linux containers}{26}{subsection.3.6.4}%
+\contentsline {paragraph}{LXC - Linux Containers in practical}{27}{paragraph*.44}%
+\contentsline {subsection}{\numberline {3.6.5}Docker}{27}{subsection.3.6.5}%
+\contentsline {paragraph}{Docker VS LXC}{28}{paragraph*.45}%
+\contentsline {subsection}{\numberline {3.6.6}Docker usage in general}{28}{subsection.3.6.6}%
+\contentsline {paragraph}{Docker network management}{28}{paragraph*.46}%
+\contentsline {paragraph}{Docker file system management}{28}{paragraph*.48}%
+\contentsline {paragraph}{Automatic build}{29}{paragraph*.51}%

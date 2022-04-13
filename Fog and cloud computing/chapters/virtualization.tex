@@ -400,7 +400,7 @@ with the usual \emph{privileg ring} structure.
 
 \begin{figure}[h!]
     \centering
-    \img{hav.png}{0.4}
+    \img{hav.png}{0.35}
     \caption{\emph{Hardware assisted virtualization} modes}
 \end{figure}\noindent
 The \emph{VMM} runs al \emph{ring 0} in \emph{root-mode}, while \emph{guest OSs}
@@ -475,7 +475,7 @@ addres too.
 
 \begin{figure}[h!]
     \centering
-    \img{page-tables.png}{0.6}
+    \img{page-tables.png}{0.5}
     \caption{Memory paging}
 \end{figure}
 
@@ -800,3 +800,356 @@ leveraged to create a form of \emph{lightweigth virtualization} with minimun
 overhead.
 
 \subsection{Linux cgroups}
+\emph{Linux cgroups} are a kernel feature created to limit, account and isolate
+or deny resource usage to processes or group of processes. They consist of two
+components: kernetl support and user-space tools that hadles the kernel control
+mechanism.
+
+For instance, commands such as \texttt{nice} and \texttt{cpulimit} can be used
+to managed cpu consumption of single processes, while \emph{cgroups} allow for
+a simpler control over a group of processes.
+
+So, \emph{cgroups} features are:
+\begin{itemize}
+    \item \emph{Resouces limiting}: groups can be set to not exceed a configured
+    memory limit, which also includes the file system cache;
+    \item \emph{Prioritization}: some groups may get a larger share of CPU
+    utilization, disk I/O throughput or Network bandwidth;
+    \item \emph{Accounting}: groups resources usage can be measured (usefull
+    for billing pourposes);
+    \item \emph{Control}: it's possible to freeze and restart groups of
+    processes, and control their checkpoints too;
+\end{itemize}
+
+\subsection{Linux namespaces}
+\emph{Linux namespaces} are another kernel feature, highly related to
+\emph{cgroups}, although not being part of them. They're ment to prevent
+groups of processes to \q{see} some kind of resources of other groups. They do
+so, by creating distinct virtual environment for a specific class of resources
+(e.g. different file systems, networking, \dots), and for each of them the
+kernel has to create different and indipendent instances of the data structures
+it uses to handle those resources. Each object (e.g. process) can be assigned to
+a \emph{namespace} and can access other objects belonging to the same
+\emph{namespace}. When the access to a given data structure is requested, the
+kernel uses the ID of the \emph{namespace} to retrieve data from the proper
+structure. Up to now, the Linux kernel offers seven typed of \emph{namespaces}:
+
+{
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \begin{longtable}{|l|l|l|}
+        \hline
+        \textbf{Namespace} & \textbf{Constant} & \textbf{Isolates}\\
+        \hline
+        IPC & \texttt{CLONE\_NEWIPC} & System V IPC, POSIX message queues\\
+        \hline
+        Network & \texttt{CLONE\_NEWNET} & Network devices, stacks, ports, \dots\\
+        \hline
+        Mount & \texttt{CLONE\_NEWNS} & Mount points\\
+        \hline
+        PID & \texttt{CLONE\_NEWPID} & Process ID's\\
+        \hline
+        User & \texttt{CLONE\_NEWUSER} & Users and groups IDs\\
+        \hline
+        UTS & \texttt{CLONE\_NEWUTS} & Hostname and NIS domain name\\
+        \hline
+        Cgroups & \texttt{CLONE\_NEWCGROUP} & Control groups\\
+        \hline
+        \caption{\emph{Linux namespaces}}
+    \end{longtable}
+}
+
+\paragraph{PID namespace}
+In Linux, every process originates from the \emph{init} process as it's child
+(or grandson, or great-grandson, \dots). Hence, all processes are placed in a
+single tree of processes. A process with enough privileges might inspect and
+kill others. To avoid that, \emph{PID namespaces} allow creating nested
+process trees which represent a separated set of resources. Processes in a
+subtree don't know the existance of other parallel trees, so they cannot inspect
+nor kill processes in those trees.
+
+So, \emph{PID namespaces} allow processes to create new trees, with their own
+PID 1 process. The process that creates the subtree remains in the parent tree
+and knows about its child. In fact, processes in the \emph{parent namespace} have
+a complete view of processes in the \emph{child namespace}, as if they were any
+other processes in the parent tree. However, the first child becomes the root of
+its own process tree, and it doesn't know anything about the originating one.
+
+\begin{figure}[h!]
+    \centering
+    \begin{graph}
+        \definecolor{back1}{RGB}{250,255,206}
+        \definecolor{back2}{RGB}{255,234,209}
+        \definecolor{for1}{RGB}{184,255,206}
+        \tikzset{
+            main/.style={circle, draw, minimum size=12mm, inner sep=0, fill=for1}
+        }
+
+        \node[main] (1) {$1$};
+        \node[main] (2) [below left of=1, yshift=-5mm] {$2$};
+        \node[main] (3) [below right of=1, yshift=-5mm] {$3$};
+        \node[main] (4) [below left of=2, yshift=-5mm] {$4$};
+        \node[main] (5) [below left of=3, yshift=-5mm] {$5$};
+        \node[main] (7) [below left of=5, yshift=-5mm] {$7$};
+        \node[main] (6) [below right of=3, yshift=-5mm] {$6$};
+
+        \node[rectangle, draw] (r2) at (6) [minimum width=50mm,
+        minimum height=40mm, xshift=14mm, yshift=-32mm, fill=back2] {};
+        \node[] (t2) at (r2.south) [yshift=4mm] {Child PID namespace};
+
+        \node[main] (8) [below right of=6, yshift=-5mm] {$8,1$};
+        \node[main] (9) [below left of=8, yshift=-5mm] {$9,2$};
+        \node[main] (10) [below right of=8, yshift=-5mm] {$10,3$};
+
+        \path[-]    (1) edge (2)
+                    (1) edge (3)
+                    (2) edge (4)
+                    (3) edge (5)
+                    (5) edge (7)
+                    (3) edge (6)
+                    (6) edge (8)
+                    (8) edge (9)
+                    (8) edge (10);
+
+        \begin{scope}[on background layer]
+            \node[rectangle, draw] (r1) at (5) [shift=({14mm, 0mm}),
+            minimum width=111mm, minimum height=108mm, fill=back1] {};
+            \node[] (t1) at (r1.north) [yshift=-4mm] {Parent PID namespace};
+        \end{scope}
+    \end{graph}
+    \caption{\emph{PID namespace} example}
+\end{figure}
+
+\begin{note}
+    The image above shows us that each process has one PID for each process
+    tree it belong to.
+\end{note}
+
+\paragraph{Network namespace}
+\emph{Network namespaces} allow processes to perceive a completely different
+network setup (i.e. loopback interface, generale interfaces, routing tables,
+firewall rules, \dots). Once a \emph{network namespace} is created, we should
+create an additional \q{virtual} network interface which spans multiple
+\emph{namespaces}. Virtual interfaces, often called \texttt{veth} are network
+abstractions of wires with two ends. Each end is \q{connected} to a
+\emph{namespace}, thus allowing traffic move between the two \emph{namespaces}.
+Finally, routing and bridging protocols in \emph{root namespace} can allow
+traffic to reach its destination (inside or outiside the machine).
+
+\begin{figure}[h!]
+    \centering
+    \subfloat{\includegraphics[width=0.6\textwidth, align=c]{namespace-eg.png}}
+    \hfill
+    \subfloat{\includegraphics[width=0.3\textwidth, align=c]{namespace-eg2.png}}
+    \caption{\emph{Network namespaces} examples}
+\end{figure}
+
+\paragraph{Other namespaces in short}
+\begin{itemize}
+    \item \emph{IPC}: creates private inter-process communication resources for
+    the isolates processes;
+    \item \emph{Mount}: enables the creation of a completely new file system
+    with the desired structure (it's similr to chroot);
+    \item \emph{UTS}: provides isolation of two system identifiers: hostname and
+    NIS domain name;
+    \item \emph{User}: allows a process to have root privileges within the
+    \emph{namespace}, without giving it that access to process outside the
+    \emph{namespace};
+    \item \emph{Cgroups}: provides a mechaism to virtualise the view of the
+    \texttt{/proc/\$PID/cgroup} file and \emph{cgroup} mounts;
+\end{itemize}
+
+\subsection{Linux containers}
+\emph{Linux cgroups} and \emph{namespaces} show some limitations beyond
+process isolation. In fact, they provide a way to accomplish virtualization on
+a single server, but can't be used on an entire datacenter. Then, they're
+flexible, but really hard to use, because they require a lot of commans to
+set up a simple isolated environment. Also, they cannot guarantee portability
+because there isn't an easy way to package and move them to another server.
+When it comes to portability, VMs are still preferable. So, \emph{cgroups} and
+\emph{namespaces} need to be extended and made easier to use; \emph{Linux
+containers} goes in this direction.
+
+Containers provide a \emph{lightweigth virtualization} that allow processes and
+resources isolation without the complexity of \emph{full virtualization}. They
+are an \emph{OS-level virtualization method} for running isolated Linux
+systems, called containers, on a single control host and over the same shared
+kernel.
+
+\emph{Containers} can group processes together inside an isolated environment,
+to which different resources can be assigned and, as we said earlier, they share
+the same kernel as the host. From the inside, each \emph{container} look like
+and indipendent machine, while from the outside they're seen as normale processes.
+
+On the other hand, they don't emulate software and can't use a different kernel.
+Also, security isn't guaranteed by the model itself, although an appropriate
+level of security can still be achived.
+
+\begin{figure}[ht!]
+    \centering
+    \subfloat[\emph{Containers architecture}]{
+        \includegraphics[width=0.3\textwidth]{containers-architecture.png}
+    }
+    \hspace{2.5cm}
+    \subfloat[\emph{Hypervisors architecture}]{
+        \includegraphics[width=0.3\textwidth]{VMM-architecture.png}
+    }
+    \caption{\emph{Containers VS Hypervisors architecture}}
+\end{figure}
+
+\noindent
+Compared to VMs, \emph{containers} are both faster and ligher in terms of
+resource usage. Hence, a larger number of \emph{containers} can cohexist on
+a single host. However, VMs still provide better isolation (e.g. kernel
+exploits don't affect other VMs) and security, as mentioned before.
+
+\begin{note}
+    \emph{Linux containers} can both be seen as infrastructure primitives
+    (aka \q{lightwieigth VMs}) and an application management and configuration
+    system.
+\end{note}
+
+\paragraph{LXC - Linux Containers in practical}
+What we've talked about until now are the general characteristics of
+\emph{containers} in a Linux system. \emph{LXCs} (\emph{LinuX Containers}) are
+the actual implementation of that technology. They're implemented using
+\emph{cgroups}, \emph{namespaces} and other technologies such as Apparmor and
+SELinux profiles that allow them to obtain bettere security performance.
+
+So, \emph{LXCs} make it easier to create and manage isolated environment, but
+they still lack in resource isolation, because the resource quota of a container
+might be affected by others, checkpointing and migration, because those features
+are not provided by the Linux kernel and third party tools aren't 100\% effective
+yet. Another importan limititantion is on portbility, because they cannot be
+transfered across servers without recreating them.
+
+\subsection{Docker}
+So far, we've been able to obtain some form of \emph{lightweigth virtualization},
+but we still struggle when it comes to packaging and deployment of environments
+themselves and applications in them. \emph{Docker} focuses on applications,
+simplifying the deployment and execution by creating a lightweigth, portable
+and self-contained \q{package} that runs everywhere.
+
+So, \emph{Docker} aims to obtain a clean separation of environments, an easy
+way to manage resources, applications (e.g. a unified \q{run} command for all
+apps) and networking (e.g. Docker bridge, transparent NAT, \dots). Therefore,
+\emph{Docker} is not a virtualization engine bacause it leverages existing
+primitives such as \emph{cgroups} and \emph{namespaces}.
+
+Summarizing, we can say that \emph{Docker} is ment to make applications run
+consistently in different machines regardless of the kernel version, operating
+system distribution (it needs to a Linux distro tho) and network setting.
+Also, it makes separation of concerns easy: developers can focus on what there
+is inside the container (e.g. libraries, binaries, \q{manifest}, \dots), devOPs
+can focus on the outside (logging, monitoring, remote access, \dots).
+
+\paragraph{Docker VS LXC}
+\emph{Docker} is optimized for the deployment of applications, as opposed to
+\emph{LXC} that focus more on containers as lightweigth machines. Then,
+\emph{Dockers} containers are portable across machines, while \emph{LXCc} need
+to be rebuilt.
+
+\subsection{Docker usage in general}
+\emph{Docker} distinguish between images and containers. The first are
+immutable templates for container that can be pushed and pulled from a registry.
+The seconds, on the other hand, are instances of an image that be started,
+stopped, etc. Thus, they maintain thery state within their file system.
+
+As mentioned, images can be stored and retrieved from a registry that can
+either be public (e.g. Docker hub) or private. Then, given an image, \emph{Docker}
+offers a unified interface for creating a container via the \texttt{docker run}
+command.
+
+\paragraph{Docker network management}
+By default, all containers are connected to a \texttt{docker0} bridge and
+\emph{Docker} automatically implements a private IP network with its address
+space and the appropriate routing table and iprules for internet connectivity.
+
+\begin{figure}[h!]
+    \centering
+    \img{docker-network.png}{0.4}
+    \caption{\emph{Docker} network setup}
+\end{figure}
+
+\noindent
+This way, \emph{Docker} provides automatically inbound connection, meaning that
+containers running on the same \emph{Docker host} can communicte each other
+without additional configurations. To communicate with the \emph{Docker host}
+itself or with other hosts, one or more container's ports have to be exposed.
+
+It's interesting to point out that \emph{Docker} doesn't use a DHCP server
+to assign IP addresses. Instead, network operations are carried out by the
+\texttt{libnetwork} component, that implements the \emph{Container Network
+Model} (\emph{CNM}). This component decides the IP address to use within the
+container, and configure the inside endpoint of the virtual interface with to
+which that address has been assigned.
+
+\paragraph{Docker file system management}
+Since containers must replicate the entire file system required for them to
+run, \emph{Docker} must assure that no host's file is accessed from within the
+container and that each container containes all that files required to run.
+Hence, \emph{Docker} must grant isolationa and portability.
+
+\begin{note}
+    Whereas containers need to hold all theri files, each container might
+    weigth hundreds of megabytes.
+\end{note}
+
+\noindent
+To comply with the requirements above, \emph{Docker} uses a \emph{union file
+system}. A \emph{union file system} works on top of other file systems, and
+it gives a single, coherent and unified view to file and directories of
+separate file system. In other words, it mounts multiple directories to a
+single root, in fact, it is more of a mounting system rather than a file
+system. There are different types of union file systems, \emph{Docker} in
+particular uses \emph{OverlayFS}.
+
+\begin{figure}[h!]
+    \centering
+    \img{union-file-system.png}{0.4}
+    \caption{Behaviour of a \emph{union file system}}
+\end{figure}
+
+\noindent
+A \emph{union file system} can be seen as a logical merge of multiple layers in
+which only the upper layer is writable; all the lower layers are read only.
+When a process wants to read from a file, it starts searching it from the
+upper layer, than moves to the lower ones until it isn't found. When accessing
+in write mode instead, the file system copy that files for that process (i.e.
+container) only. All the other processes continues using the original one.
+When it comes to file (or directory) removal, if it resides in the upper layer,
+it is removed directly, and it's simulated through a \emph{whiteout} file in
+lower layers. This kind of file exists only in \texttt{union} directory, whitout
+physically appearing in neither the upper not lower layers.
+
+Such a behaviour of \emph{union file systems} allows multiple containers to
+share the same files and directories until they need to modify them. This
+reduces the disk fooprint of containers on \emph{Docker host} and their loading
+time.
+
+\begin{figure}[h!]
+    \centering
+    \captionsetup[subfloat]{singlelinecheck=false, width=40mm,
+    justification=raggedright}
+    \subfloat[Original app]{\hspace{5mm}\img{ufs-1.png}{0.1}}
+    \hspace{1.5cm}
+    \subfloat[Copy of the app]{\hspace{5mm}\img{ufs-2.png}{0.1}}
+    \hspace{1.5cm}
+    \subfloat[Modified app]{\hspace{5mm}\img{ufs-3.png}{0.1}}
+    \caption{Files sharing into a \emph{union file system}}
+\end{figure}
+
+\noindent
+\emph{Docker} images are created exploting this behaviour. In fact, any
+image results from adding information on top of another image.
+
+\paragraph{Automatic build}
+\emph{Docker} allow developer to automatically create a container starting from
+its composing elements. The recipe used to create the container is stored in a
+file colled \texttt{Dockerfile} in which developers can write all the
+instructions that have to be executed to set up the container. Using a tool
+called \texttt{docker-compose}, multi-container applications can be configured
+and deployed using the single command \texttt{docker-compose up}. Finally,
+various \emph{Docker host} can be turned into a single virtual host through
+\emph{container orchestration tools} such as \emph{Docker swarm} and
+\emph{Kubernetes}.
