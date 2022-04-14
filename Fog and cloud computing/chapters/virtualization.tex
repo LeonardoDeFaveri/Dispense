@@ -10,7 +10,7 @@ particular, OSs couldn't provide:
     with another app requiring a different version for the same library;
     \item\emph{Temporal isolation for performance predictability}: it could
     happen that one app used a lot of resources causing the degradation of
-    performances for another app;
+    performance for another app;
     \item\emph{Strong spacial isolation for security and reliability}: if
     some app crashed it might have compromised others;
 \end{itemize}
@@ -370,7 +370,7 @@ kernel of efficient mechanisms that ease the communication with the
 Talking about pros and cons in a paravirtualized enviroment, only modifiable
 OSs can be used, because it's necessary to access their source code.
 
-Performances are surely higher than those of \emph{Trap \& Emulate paradigm}
+performance are surely higher than those of \emph{Trap \& Emulate paradigm}
 because neither emulation nor translation are required, hence \emph{MVV}
 implementation is also simpler and faster.
 
@@ -708,9 +708,9 @@ be very good.
 
 \section{OS-level virtualization}
 Going back to \emph{full virtualization} we can summarize its pros and cons as
-it follow:
+it follows:
 
-\noindent
+\bigskip\noindent
 \begin{minipage}[t]{0.48\textwidth}
     \textbf{Advantages}
     \begin{itemize}
@@ -735,10 +735,10 @@ it follow:
 Before cloud took place, datacenters stored lots of servers which were meant to
 run different OSs to meet different requirements (e.g. desktop environments for
 real users, support for specific peripherals). However, with the spreading of
-cloud computing, hardware became a commodity and interaction with users is
-provided by web applications instead of desktop environment. Hence, we could
-achive great operational efficiency if we reduced the number of OSs to just one:
-Linux.
+cloud computing, hardware became a commodity and interaction with users started
+to be provided by web applications instead of desktop environment. Hence, we
+could achive great operational efficiency if we reduced the number of OSs to
+just one: Linux.
 
 \begin{note}
     From now on, we will only discuss mechanism and approches used by Linux-based
@@ -766,17 +766,17 @@ the \emph{hypervisor} is the Linux kernel itself.
 
 As already mentioned, classical VMs are replaced by isolated environments (i.e.
 virtual private servers, jails, containers) and each one of them features a
-given extent of resources management and isolation that usually is less than
+given extent of resources management and isolation that, usually, is less than
 what can be guaranteed by classical VMs. Finally, applications can be executed
 inside these environments.
 
 A good \emph{lightwiegth virtualization} implementation must provide a
-fine-grained control of resources of the physical machine, allowing sysadmins to
-partition and control resources among different isoltated environments. Another
-requirement is on security and isolation, meaning that each environment should
-be assigned to one app or user, and it should prevent a misbehaviour in one
-environment from affecting others. Finally, it should be possible to manage an
-entire datacenter as a unique entity, such as with cloud toolkits; even better,
+fine-grained control of resources of the physical machine, allowing system
+admins to partition and control resources among different isoltated environments.
+Another requirement is on security and isolation, meaning that each environment
+should be assigned to one app or user, and it should prevent misbehaviours in
+one environment from affecting others. Finally, it should be possible to manage
+an entire datacenter as a unique entity, such as with cloud toolkits; even better,
 the capability to integrate \emph{lightweigth virtualization} with a cloud
 toolkit in order to have the flexibility to deploy VMs, containers and such upon
 requests, should be provided.
@@ -792,8 +792,8 @@ environment).
 How can all of this be done without adopting techniques such as hardware
 virtualization that generates too much overhead?
 
-In theory many possibilities exists, but practically only a few answers the
-questions: Linux containers (LXC) and LXC-based software. Other technologies
+In theory many possibilities exists, but practically only a few answer the
+question: Linux containers (LXC) and LXC-based software. Other technologies
 used are Linux \emph{cgroups} and \emph{namespaces}, that were created to
 strengthen processes isolation without thinking to virtualization, but can be
 leveraged to create a form of \emph{lightweigth virtualization} with minimun
@@ -801,8 +801,8 @@ overhead.
 
 \subsection{Linux cgroups}
 \emph{Linux cgroups} are a kernel feature created to limit, account and isolate
-or deny resource usage to processes or group of processes. They consist of two
-components: kernetl support and user-space tools that hadles the kernel control
+or deny resources usage to processes or groups of them. They consist of two
+components: kernel support and user-space tools that handles the kernel control
 mechanism.
 
 For instance, commands such as \texttt{nice} and \texttt{cpulimit} can be used
@@ -814,7 +814,7 @@ So, \emph{cgroups} features are:
     \item \emph{Resouces limiting}: groups can be set to not exceed a configured
     memory limit, which also includes the file system cache;
     \item \emph{Prioritization}: some groups may get a larger share of CPU
-    utilization, disk I/O throughput or Network bandwidth;
+    utilization, disk I/O throughput or network bandwidth;
     \item \emph{Accounting}: groups resources usage can be measured (usefull
     for billing pourposes);
     \item \emph{Control}: it's possible to freeze and restart groups of
@@ -832,7 +832,7 @@ it uses to handle those resources. Each object (e.g. process) can be assigned to
 a \emph{namespace} and can access other objects belonging to the same
 \emph{namespace}. When the access to a given data structure is requested, the
 kernel uses the ID of the \emph{namespace} to retrieve data from the proper
-structure. Up to now, the Linux kernel offers seven typed of \emph{namespaces}:
+structure. Up to now, the Linux kernel offers seven type of \emph{namespaces}:
 
 {
     \centering
@@ -847,7 +847,7 @@ structure. Up to now, the Linux kernel offers seven typed of \emph{namespaces}:
         \hline
         Mount & \texttt{CLONE\_NEWNS} & Mount points\\
         \hline
-        PID & \texttt{CLONE\_NEWPID} & Process ID's\\
+        PID & \texttt{CLONE\_NEWPID} & Process IDs\\
         \hline
         User & \texttt{CLONE\_NEWUSER} & Users and groups IDs\\
         \hline
@@ -863,7 +863,7 @@ structure. Up to now, the Linux kernel offers seven typed of \emph{namespaces}:
 In Linux, every process originates from the \emph{init} process as it's child
 (or grandson, or great-grandson, \dots). Hence, all processes are placed in a
 single tree of processes. A process with enough privileges might inspect and
-kill others. To avoid that, \emph{PID namespaces} allow creating nested
+kill others, and to avoid that, \emph{PID namespaces} allow creating nested
 process trees which represent a separated set of resources. Processes in a
 subtree don't know the existance of other parallel trees, so they cannot inspect
 nor kill processes in those trees.
@@ -927,12 +927,12 @@ its own process tree, and it doesn't know anything about the originating one.
 
 \paragraph{Network namespace}
 \emph{Network namespaces} allow processes to perceive a completely different
-network setup (i.e. loopback interface, generale interfaces, routing tables,
+network setup (i.e. loopback interface, general interfaces, routing tables,
 firewall rules, \dots). Once a \emph{network namespace} is created, we should
-create an additional \q{virtual} network interface which spans multiple
-\emph{namespaces}. Virtual interfaces, often called \texttt{veth} are network
+create an additional \q{virtual} network interface that spans multiple
+\emph{namespaces}. Virtual interfaces, often called \texttt{veth}, are network
 abstractions of wires with two ends. Each end is \q{connected} to a
-\emph{namespace}, thus allowing traffic move between the two \emph{namespaces}.
+\emph{namespace}, thus allowing traffic move between them.
 Finally, routing and bridging protocols in \emph{root namespace} can allow
 traffic to reach its destination (inside or outiside the machine).
 
@@ -947,14 +947,13 @@ traffic to reach its destination (inside or outiside the machine).
 \paragraph{Other namespaces in short}
 \begin{itemize}
     \item \emph{IPC}: creates private inter-process communication resources for
-    the isolates processes;
+    isolated processes;
     \item \emph{Mount}: enables the creation of a completely new file system
     with the desired structure (it's similr to chroot);
     \item \emph{UTS}: provides isolation of two system identifiers: hostname and
     NIS domain name;
     \item \emph{User}: allows a process to have root privileges within the
-    \emph{namespace}, without giving it that access to process outside the
-    \emph{namespace};
+    \emph{namespace} without giving the very same access outside it;
     \item \emph{Cgroups}: provides a mechaism to virtualise the view of the
     \texttt{/proc/\$PID/cgroup} file and \emph{cgroup} mounts;
 \end{itemize}
@@ -965,12 +964,12 @@ process isolation. In fact, they provide a way to accomplish virtualization on
 a single server, but can't be used on an entire datacenter. Then, they're
 flexible, but really hard to use, because they require a lot of commans to
 set up a simple isolated environment. Also, they cannot guarantee portability
-because there isn't an easy way to package and move them to another server.
-When it comes to portability, VMs are still preferable. So, \emph{cgroups} and
-\emph{namespaces} need to be extended and made easier to use; \emph{Linux
+because there isn't an easy way to package and move them to another server;
+hence, when it comes to portability, VMs are still preferable. So, \emph{cgroups}
+and \emph{namespaces} need to be extended and made easier to use; \emph{Linux
 containers} goes in this direction.
 
-Containers provide a \emph{lightweigth virtualization} that allow processes and
+Containers provide a \emph{lightweigth virtualization} that allows processes and
 resources isolation without the complexity of \emph{full virtualization}. They
 are an \emph{OS-level virtualization method} for running isolated Linux
 systems, called containers, on a single control host and over the same shared
@@ -1030,30 +1029,30 @@ themselves and applications in them. \emph{Docker} focuses on applications,
 simplifying the deployment and execution by creating a lightweigth, portable
 and self-contained \q{package} that runs everywhere.
 
-So, \emph{Docker} aims to obtain a clean separation of environments, an easy
+\emph{Docker} aims to obtain a clean separation of environments, an easy
 way to manage resources, applications (e.g. a unified \q{run} command for all
 apps) and networking (e.g. Docker bridge, transparent NAT, \dots). Therefore,
-\emph{Docker} is not a virtualization engine bacause it leverages existing
+\emph{Docker} is not a virtualization engine because it leverages existing
 primitives such as \emph{cgroups} and \emph{namespaces}.
 
 Summarizing, we can say that \emph{Docker} is ment to make applications run
 consistently in different machines regardless of the kernel version, operating
-system distribution (it needs to a Linux distro tho) and network setting.
+system distribution (it needs to be a Linux distro tho) and network settings.
 Also, it makes separation of concerns easy: developers can focus on what there
 is inside the container (e.g. libraries, binaries, \q{manifest}, \dots), devOPs
 can focus on the outside (logging, monitoring, remote access, \dots).
 
 \paragraph{Docker VS LXC}
 \emph{Docker} is optimized for the deployment of applications, as opposed to
-\emph{LXC} that focus more on containers as lightweigth machines. Then,
+\emph{LXCs} that focus more on containers as lightweigth machines. Then,
 \emph{Dockers} containers are portable across machines, while \emph{LXCc} need
 to be rebuilt.
 
 \subsection{Docker usage in general}
-\emph{Docker} distinguish between images and containers. The first are
+\emph{Docker} distinguishes between images and containers. The first are
 immutable templates for container that can be pushed and pulled from a registry.
-The seconds, on the other hand, are instances of an image that be started,
-stopped, etc. Thus, they maintain thery state within their file system.
+The seconds, on the other hand, are instances of an image that can be started,
+stopped, etc. Thus, they maintain their state within their file system.
 
 As mentioned, images can be stored and retrieved from a registry that can
 either be public (e.g. Docker hub) or private. Then, given an image, \emph{Docker}
@@ -1073,25 +1072,25 @@ space and the appropriate routing table and iprules for internet connectivity.
 
 \noindent
 This way, \emph{Docker} provides automatically inbound connection, meaning that
-containers running on the same \emph{Docker host} can communicte each other
+containers running on the same \emph{Docker host} can communicate with each other
 without additional configurations. To communicate with the \emph{Docker host}
 itself or with other hosts, one or more container's ports have to be exposed.
 
 It's interesting to point out that \emph{Docker} doesn't use a DHCP server
-to assign IP addresses. Instead, network operations are carried out by the
-\texttt{libnetwork} component, that implements the \emph{Container Network
+to assign IP addresses. Instead, network operations are carried out by a
+\texttt{libnetwork} component that implements the \emph{Container Network
 Model} (\emph{CNM}). This component decides the IP address to use within the
-container, and configure the inside endpoint of the virtual interface with to
+container, and configures the inside endpoint of the virtual interface to
 which that address has been assigned.
 
 \paragraph{Docker file system management}
 Since containers must replicate the entire file system required for them to
 run, \emph{Docker} must assure that no host's file is accessed from within the
-container and that each container containes all that files required to run.
+container and that each container holds all that files required to run.
 Hence, \emph{Docker} must grant isolationa and portability.
 
 \begin{note}
-    Whereas containers need to hold all theri files, each container might
+    Whereas containers need to hold all their files, each container might
     weigth hundreds of megabytes.
 \end{note}
 
@@ -1099,7 +1098,7 @@ Hence, \emph{Docker} must grant isolationa and portability.
 To comply with the requirements above, \emph{Docker} uses a \emph{union file
 system}. A \emph{union file system} works on top of other file systems, and
 it gives a single, coherent and unified view to file and directories of
-separate file system. In other words, it mounts multiple directories to a
+separate file systems. In other words, it mounts multiple directories to a
 single root, in fact, it is more of a mounting system rather than a file
 system. There are different types of union file systems, \emph{Docker} in
 particular uses \emph{OverlayFS}.
@@ -1144,7 +1143,7 @@ time.
 image results from adding information on top of another image.
 
 \paragraph{Automatic build}
-\emph{Docker} allow developer to automatically create a container starting from
+\emph{Docker} allows developers to automatically create a container starting from
 its composing elements. The recipe used to create the container is stored in a
 file colled \texttt{Dockerfile} in which developers can write all the
 instructions that have to be executed to set up the container. Using a tool
