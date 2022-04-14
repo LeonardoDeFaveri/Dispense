@@ -792,3 +792,321 @@ La \emph{complessità} di tutte le operazioni è riassunta dalla seguente tabell
         \hline
     \end{tabular}
 \end{table}
+
+\section{Insiemi disgiunti}
+In alcune applicazioni (e.g. ricerca delle \emph{componenti connesse} di un
+\emph{grafo}) siamo interessati a gestire una collezione $S=\{S_1,\dots,
+S_n\}$ di \emph{insiemi dinamici disgiunti}, ovvero tali per cui:
+\[S_i\cap S_j=\emptyset\quad\forall i,j : i\neq j\]
+\[\bigcup_{1=1}^n S_i=S\quad\text{con}\ n=\left|S\right|\]
+Definiamo quindi la struttura dati \emph{merge-find set} con le seguenti primitive:
+\begin{itemize}
+    \item Creazione di $n$ \emph{insiemi disgiunti} composti da un elemento
+    ciascuno;
+    \item \texttt{find}: identificazione dell'\emph{insieme} a cui appartiene un
+    elemento;
+    \item \texttt{merge}: unione di due \emph{insiemi};
+\end{itemize}\noindent
+Ogni insieme è identificato da un proprio elemento che viene designato come
+\emph{rappresentante}. Di conseguenza, la primitiva \texttt{find} deve restituire
+il \emph{rappresentante} dell'\emph{insieme} in cui si trova elemento cercato.
+Definito l'elemento \emph{rappresentante}, questo può essere cambiato solo in
+caso di unione con un altro \emph{insieme}.
+
+\begin{note}
+    Per semplicità di esposizione, ipotizziamo che gli elementi siano identificati
+    da un valore intero $1\dots n$ e che l'associazione con il valore vero e
+    proprio sia memorizzata esternamente.
+\end{note}
+
+\paragraph{Specifica}
+\begin{code}{Merge-find set}
+    \com{Crea $n$ \emph{insiemi} $\{1\},\dots,\{n\}$}
+    \bc{MFSET} Mfset(\bc{int} n)\\
+    \com{Restituisce il \emph{rappresentante} dell'\emph{insieme} contenente $x$}
+    \bc{int} find(\bc{int} x)\\
+    \com{Unisce gli \emph{insiemi} che contengono $x$ e $y$}
+    merge(\bc{int} x, \bc{int} y)
+\end{code}
+
+\newpage
+\begin{eg}[Esempio di utilizzo di un merge-find set]
+\mbox{}\begin{figure}[h!]
+\centering
+\begin{graph}
+    \tikzset{rect/.style={draw, rectangle, minimum size=5mm,
+            rounded corners=0.25cm, inner sep=4mm}}
+    \node[rect] (1)                 {\bm{$1$}};
+    \node[rect] (2) [right of=1]    {\bm{$2$}};
+    \node[rect] (3) [right of=2]    {\bm{$3$}};
+    \node[rect] (4) [right of=3]    {\bm{$4$}};
+    \node[rect] (5) [right of=4]    {\bm{$5$}};
+    \node[rect] (6) [right of=5]    {\bm{$6$}};
+
+    \node[rect] (12) [below of=1, xshift=9.9mm, minimum width=30.3mm,
+        inner sep=3.7mm] {\bm{$1$}$,2$};
+    \node[rect] (3b) [below of=3]    {\bm{$3$}};
+    \node[rect] (4b) [below of=4]    {\bm{$4$}};
+    \node[rect] (5b) [below of=5]    {\bm{$5$}};
+    \node[rect] (6b) [below of=6]    {\bm{$6$}};
+
+    \node[rect] (12c) [below of=12, minimum width=30.3mm,
+        inner sep=3.7mm] {\bm{$1$}$,2$};
+    \node[rect] (34) [below of=3b, xshift=9.9mm, minimum width=30.3mm,
+        inner sep=3.7mm] {\bm{$3$}$,4$};
+    \node[rect] (5c) [below of=5b]    {\bm{$5$}};
+    \node[rect] (6c) [below of=6b]    {\bm{$6$}};
+
+    \node[rect] (12c) [below of=12c, minimum width=30.3mm,
+        inner sep=3.7mm] {\bm{$1$}$,2$};
+    \node[rect] (34d) [below of=34, minimum width=30.3mm,
+        inner sep=3.7mm] {\bm{$3$}$,4$};
+    \node[rect] (56) [below of=5c, xshift=9.9mm, minimum width=30.3mm,
+        inner sep=3.7mm] {\bm{$5$}$,6$};
+
+    \node[rect] (123)[below of=12c, xshift=20mm, minimum width=70.3mm,
+        inner sep=3.7mm] {\bm{$1$}$,2,3,4$};
+    \node[rect] (56e) [below of=56, minimum width=30.3mm,
+        inner sep=3.7mm] {\bm{$5$}$,6$};
+
+    \node[rect] (f) [below of=123, xshift=20mm, minimum width=110.3mm,
+        inner sep=3.7mm] {\bm{$1$}$,2,3,4,5,6$};
+
+    \node[] (l1) [right of=6] {\texttt{Mfset(6)}};
+    \node[] (l2) [below of=l1, xshift=3mm] {\texttt{merge(1,2)}};
+    \node[] (l3) [below of=l2] {\texttt{merge(3,4)}};
+    \node[] (l4) [below of=l3] {\texttt{merge(5,6)}};
+    \node[] (l5) [below of=l4] {\texttt{merge(1,3)}};
+    \node[] (l6) [below of=l5] {\texttt{merge(1,5)}};
+\end{graph}
+\end{figure}
+\end{eg}
+
+\noindent
+Utilizzando la struttura dati così definita, possiamo semplificare molto
+l'algoritmo per la ricerca delle \emph{componenti connesse} di un \emph{grafo}
+$G=(V,E)$. In particolare, è sufficiente inizializzare la struttura vedendo ogni
+\emph{nodo} come un \emph{insieme}, quindi procedere ad unire \texttt{merge(u,v)}
+per ogni \emph{arco} $(u,v)\in E$. Al termine, ogni \emph{insieme disgiunto}
+rappresenterà una \emph{componente connesse}.
+
+\begin{minicode}{Ricerca delle componenti connesse con merge-find set}
+    \ind\bc{MFSET} cc(\bc{GRAPH} G)\\
+        \bc{MFSET} M = Mfset(G.size())\\
+        \indf foreach (u $\in$ G.V()) do\\
+            \indff foreach (v $\in$ G.adj(u)) do\\
+                M.merge(u,v)\\
+        \indf return M
+\end{minicode}\noindent
+La \emph{complessità} di questa versione è $T(n)=O(n+m)$ dove $m$ è il numero di
+invocazioni di \texttt{merge}.
+
+\begin{note}
+    Questa versione dell'algoritmo è particolarmente indicata nel caso di
+    \emph{grafi dinamici} ovvero \emph{grafi} nei quali vengono spesso aggiunti
+    nuovi \emph{archi}.
+\end{note}
+
+\bigskip\noindent
+Ma quanto costa eseguire una \texttt{merge} e come è implementata?
+
+Ci sono diverse implementazioni possibili tra le quali implementazioni basate su
+\emph{insiemi di liste} e su \emph{insiemi di alberi} (i.e. \emph{foreste}).
+
+\subsection{Implementazione basata su insiemi di liste}
+Ogni \emph{insieme} viene rappresentato da una \emph{lista concatenata} in cui
+ciascun elemento, oltre al proprio valore, contiene un puntatore all'elemento
+successivo e un puntatore al \emph{rappresentante}. Il \emph{rappresentate} è
+il primo elemento della lista.
+
+La primitiva \texttt{find} è banale, perché dato un \emph{elemento} è sufficiente
+restituire il valore del puntatore al \emph{rappresentante}, quindi richiede un
+tempo $O(1)$. Per la \texttt{merge}, si prende il \emph{rappresentate} di un
+elemento, lo si \q{appende} alla \emph{lista} del primo e si aggiornano tutti i
+\emph{rappresentati} della \emph{lista} \q{appesa}. Nel caso pessimo, eseguire
+$n$ operazioni \texttt{merge} costa $O(n^2)$, quindi il \emph{costo ammortizzato}
+è $O(n)$.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{merge-find-liste.png}
+    \caption{\emph{Merge-find set} implementati come \emph{insiemi di liste}}
+\end{figure}
+
+\subsection{Implementazione basata su insiemi di alberi}
+Ogni \emph{insieme} viene rappresentato da un \emph{albero} in cui ogni \emph{nodo}
+contiene il proprio valore e un puntatore al \emph{padre}. La \emph{radice} è il
+\emph{rappresentante} dell'\emph{insieme} e il puntatore al \emph{padre} punta a
+se stessa.
+
+\begin{figure}[h!]
+\centering
+\begin{graph}
+    \node[main] (1) {$1$};
+    \node[main] (2) [below left of=1, xshift=5mm, yshift=-5.8mm] {$2$};
+    \node[main] (3) [below right of=1, xshift=-5mm, yshift=-5.8mm] {$3$};
+    \node[main] (4) [below of=2] {$4$};
+
+    \path[->]   (1) edge[in=75, out=105, min distance=10mm] (1)
+                (2) edge (1)
+                (3) edge (1)
+                (4) edge (2);
+
+    \node[main] (5) [right of=1, xshift=20mm] {$5$};
+    \node[main] (6) [below of=5] {$6$};
+    \node[main] (7) [below of=6] {$7$};
+
+    \path[->]   (5) edge[in=75, out=105, min distance=10mm] (5)
+                (6) edge (5)
+                (7) edge (6);
+\end{graph}
+\caption{\emph{Merge-find set} implementati come \emph{insiemi di alberi}}
+\end{figure}
+
+\noindent
+In questo caso, nel \texttt{find} si risale l'intero \emph{albero} fino alla
+\emph{radice} e, nel caso pessimo, questo costa $O(n)$. Per fare la
+\texttt{merge} invece, è sufficiente cambiare il puntatore al \emph{padre}
+della \emph{radice} in uno dei due \emph{alberi} in modo che punti all'altra
+\emph{radice}. Il costo, se non consideriamo quello per la ricerca dei
+\emph{rappresentanti}, è $O(1)$.
+
+\subsection{Implementazioni con tecniche euristiche}
+Possiamo migliorare le implementazioni viste sfruttando qualche piccolo
+accorgimento?
+
+Nel caso dei \emph{merge-find set} basati su \emph{liste} potremmo provare ad
+eseguire la \texttt{merge} modificando i puntatori della \emph{lista} più corta.
+Per quanto riguarda gli \emph{alberi} invece, potremmo ridurre il costo della
+\texttt{find} minimizzando l'\emph{altezza} degli \emph{alberi}.
+
+Tecniche di questo tipo sono dette \emph{euristiche}, e gli algoritmi che le
+usano sono detti \emph{euristici}.
+
+\begin{definition}[Algoritmo euristico]
+    È detto euristico un algoritmo progettato per risolvere un problema più
+    velocemente, qualora i metodi tradizionali non siano sufficienti, oppure per
+    ricavare una soluzione approssimata, qualora non sia possibile ricavarne una
+    esatta.
+\end{definition}
+
+\paragraph{Euristica sul peso}
+Approfondendo l'intuizione sulla lunghezza delle \emph{liste}, possiamo
+memorizzare in ogni \emph{lista} l'informazione sulla propria lunghezza e
+implementare la \texttt{merge} in modo che modifichi i puntatori dei \emph{nodi}
+che stanno nella \emph{lista} più corta. La lunghezza può essere mantenuta in
+$O(1)$ ed è possibile dimostrare che in questo tipo di implementazione il
+\emph{costo ammortizzato} della \texttt{merge} è $O(\log n)$.
+
+\paragraph{Euristica sul rango}
+Abbiamo detto che per gli \emph{alberi} conviene cercare di minimizzare le
+\emph{altezze}. Quindi, facciamo in modo che ogni \emph{nodo} $k$ contenga
+l'informazione sul proprio \emph{rango} $rank[k]$, definito come segue:
+
+\begin{definition}[Rango di un nodo]
+    È definito rango di un nodo, il numero di archi del più lungo cammino tra
+    quel nodo e una delle proprie foglie.
+\end{definition}
+\begin{note}
+    Possiamo anche definire il \emph{rango} di un \emph{nodo} come
+    l'\emph{altezza} del \emph{sottoalbero} in esso radicato.
+\end{note}
+
+\noindent
+A questo punto, per ridurre il costo della \texttt{find} è sufficiente
+modificare la \texttt{merge} in modo che nel caso di \emph{alberi} di con
+\emph{ranghi} diversi, sia l'\emph{albero} con \emph{rango} minore ad essere
+\q{agganciato} all'altro. In questa situazione, l'\emph{altezza}
+dell'\emph{albero} con \emph{rango} maggiore non cambia, ma se invece i due
+\emph{alberi} avessero pari \emph{rango}, l'\emph{altezza} finale sarebbe
+incrementata di 1.
+
+\bigskip\noindent
+Per studiare la \emph{complessità} di questa implementazione, vediamo il
+seguente teorema:
+
+\begin{definition}[Legame tra il rango di un albero e il proprio numero di nodi]
+    Un albero MFSET con radice $r$ e ottenuto tramite euristica sul rango ha
+    almeno $2^{rank[r]}$ nodi.
+\end{definition}
+\begin{proof}[Dimostrazione]
+    Procediamo per induzione sul \emph{rango} di $r$.
+
+    \paragraph{Caso base: \bm{$rank[r]=0$}}
+    Dopo l'inizializzazione della struttura ogni \emph{albero} ha $2^{rank[r]}=1$
+    \emph{nodi};
+
+    \paragraph{Passo induttivo: \bm{$rank[r]>0$}}
+    Facendo la \texttt{merge} di due \emph{alberi} $x$ e $y$ di \emph{rango}
+    $rank[x]$ e $rank[y]$ distinguiamo due casi:
+    \begin{enumerate}
+        \item \bm{$rank[x]>rank[y]$}: il \emph{rango} dell'\emph{albero} $r$
+        ottenuto è $rank[r]=rank[x]$. Per induzione, il numero di \emph{nodi} di
+        $r$ è almeno pari a $2{rank[x]}+2^{rank[y]}$ e quindi è maggiore di
+        $2^{rank[x]}$;
+        \item \bm{$rank[x]=rank[y]$}: il \emph{rango} dell'\emph{albero} $r$
+        ottenuto è $rank[r]=rank[x]+1$. Per induzione, il numero di \emph{nodi}
+        di $r$ è almeno pari a $2^{rank[x]}+2^{rank[y]}=2^{rank[x]}+2^{rank[x]}=
+        2^{rank[x]+1}$;
+    \end{enumerate}
+\end{proof}
+
+\noindent
+Dal teorema appena dimostrato possiamo ricavare il seguente corollario:
+\begin{definition}[Corollario]
+    Un albero MFSET con radice $r$ e $n$ nodi ha un altezza inferiore a $\log n$.
+\end{definition}
+\begin{proof}[Dimostrazione]
+    Vale la seguente relazione:
+    \[n\geq 2^{rank[r]}\Leftrightarrow rank[r]\leq\log n\]
+\end{proof}
+
+\noindent
+Detto questo, la \emph{complessità} della primitiva \texttt{find} è $O(\log n)$.
+
+\paragraph{Euristica di compressione dei cammini}
+Poiché il costo della \texttt{find} è legato all'\emph{altezza} degli
+\emph{alberi}, se tutti avessero \emph{altezza} pari a $1$, cioè se il
+\emph{padre} di ogni \emph{nodo} fosse la \emph{radice}, riusciremmo a ridurre
+il costo di ogni invocazione a $O(1)$. Per raggiungere questo obiettivo, possiamo
+modificare l'implementazione della \texttt{find} in modo che quando risaliamo
+l'\emph{albero}, ogni \emph{nodo} modifichi il proprio puntatore al \emph{padre}
+indicando il \emph{padre} del proprio \emph{padre}. In questo modo, la prima
+invocazione di \texttt{find} costa $O(\log n)$, mentre ricerche successivo
+su \emph{nodi} già visitati, costeranno $O(1)$.
+
+
+\begin{code}{Merge-find set basati su insiemi di alberi}
+\begin{minipage}[t]{0.48\textwidth}
+\bc{int}[] parent\\
+\bc{int}[] rank\\
+
+\ind\bc{MFSET} Mfset(\bc{int} n)\\
+    \bc{MFSET} M = new \bc{MFSET}\\
+    t.parent = new \bc{int}[1\dots n]\\
+    t.rank = new \bc{int}[1\dots n]\\
+    \indf for (i = 1 to n) do\\
+        t.parent[i] = i\\
+        t.rank[i] = 1\\
+    \indf return t\\
+
+\ind\bc{int} find(\bc{int} x)\\
+    \indf if (parent[x] $\neq$ x) then\\
+        parent[x] = find(parent[x])\\
+    \indf return parent[x]\\
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+    \ind merge(\bc{int} x, \bc{int} y)\\
+        \bc{int} r$_x$ = find(x)\\
+        \bc{int} r$_y$ = find(y)\\
+        \indf if (r$_x$ $\neq$ r$_y$) then\\
+            \indff if (rank[r$_x$] > rank[r$_y$]) then\\
+                parent[r$_y$] = r$_x$\\
+            \indff else if (rank[r$_y$] > rank[r$_x$]) then\\
+                parent[r$_x$] = r$_y$\\
+            \indff else\\
+                parent[r$_x$] = r$_y$\\
+                rank[r$_y$] = rank[r$_y$] + 1\\
+\end{minipage}
+\end{code}

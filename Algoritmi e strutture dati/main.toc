@@ -222,80 +222,90 @@
 \contentsline {paragraph}{Conclusione}{137}{paragraph*.184}%
 \contentsline {subsection}{\numberline {11.1.3}Implementazione di code a priorità}{137}{subsection.11.1.3}%
 \contentsline {paragraph}{Complessità}{139}{paragraph*.185}%
-\contentsline {chapter}{\numberline {12}Programmazione dinamica}{140}{chapter.12}%
-\contentsline {section}{\numberline {12.1}Introduzione}{140}{section.12.1}%
-\contentsline {subsection}{\numberline {12.1.1}Approccio generale}{140}{subsection.12.1.1}%
-\contentsline {section}{\numberline {12.2}Gioco del domino}{141}{section.12.2}%
-\contentsline {subsection}{\numberline {12.2.1}Approccio basato su divide-et-impera}{141}{subsection.12.2.1}%
-\contentsline {subsection}{\numberline {12.2.2}Approccio basato su programmazione dinamica}{143}{subsection.12.2.2}%
-\contentsline {paragraph}{Criterio di costo logaritmico}{143}{paragraph*.189}%
-\contentsline {section}{\numberline {12.3}Problema di Hateville}{144}{section.12.3}%
-\contentsline {subsection}{\numberline {12.3.1}Approccio basato su divide-et-impera}{144}{subsection.12.3.1}%
-\contentsline {paragraph}{Caso 1: \bm {$i\notin S_i$}}{145}{paragraph*.191}%
-\contentsline {paragraph}{Caso 2: \bm {$i\in S_i$}}{145}{paragraph*.192}%
-\contentsline {subsection}{\numberline {12.3.2}Approccio basato su programmazione dinamica}{145}{subsection.12.3.2}%
-\contentsline {paragraph}{Ricostruire la soluzione}{146}{paragraph*.194}%
-\contentsline {section}{\numberline {12.4}Problema dello zaino}{147}{section.12.4}%
-\contentsline {subsection}{\numberline {12.4.1}Approccio basato su programmazione dinamica}{148}{subsection.12.4.1}%
-\contentsline {paragraph}{Complessità}{149}{paragraph*.196}%
-\contentsline {subsection}{\numberline {12.4.2}Approccio basato su memoization}{150}{subsection.12.4.2}%
-\contentsline {paragraph}{Complessità}{150}{paragraph*.197}%
-\contentsline {section}{\numberline {12.5}Problema dello zaino senza limiti}{151}{section.12.5}%
-\contentsline {paragraph}{Complessità}{153}{paragraph*.199}%
-\contentsline {section}{\numberline {12.6}Ricerca della sottosequenza comune massimale}{153}{section.12.6}%
-\contentsline {subsection}{\numberline {12.6.1}Approccio basato su programmazione dinamica}{154}{subsection.12.6.1}%
-\contentsline {paragraph}{Caso 1: \bm {$t_i=u_j$}}{155}{paragraph*.200}%
-\contentsline {paragraph}{Caso 2: \bm {$t_i\neq u_j$}}{155}{paragraph*.201}%
-\contentsline {paragraph}{Caso 1: \bm {$t_n=u_m$}}{155}{paragraph*.202}%
-\contentsline {paragraph}{Caso 2: \bm {$t_n\neq u_m$} e \bm {$x_k\neq t_n$}}{155}{paragraph*.203}%
-\contentsline {paragraph}{Caso 3: \bm {$t_n\neq u_m$} e \bm {$x_k\neq u_m$}}{155}{paragraph*.204}%
-\contentsline {paragraph}{Complessità}{156}{paragraph*.205}%
-\contentsline {section}{\numberline {12.7}Problema dello string matching approssimato}{157}{section.12.7}%
-\contentsline {section}{\numberline {12.8}Problema del prodotto a catena di matrici}{159}{section.12.8}%
-\contentsline {subsection}{\numberline {12.8.1}Approccio basato su divide-et-impera}{162}{subsection.12.8.1}%
-\contentsline {paragraph}{Complessità}{162}{paragraph*.209}%
-\contentsline {subsection}{\numberline {12.8.2}Approccio basato su programmazione dinamica}{162}{subsection.12.8.2}%
-\contentsline {paragraph}{Complessità}{163}{paragraph*.211}%
-\contentsline {section}{\numberline {12.9}Ricerca dell'insieme indipendente di peso massimo}{163}{section.12.9}%
-\contentsline {paragraph}{Complessità}{166}{paragraph*.214}%
-\contentsline {chapter}{\numberline {13}Scelta della struttura dati}{167}{chapter.13}%
-\contentsline {section}{\numberline {13.1}Ricerca dei cammini minimi da sorgente singola}{167}{section.13.1}%
-\contentsline {paragraph}{Parte 1}{169}{paragraph*.218}%
-\contentsline {paragraph}{Parte 2}{169}{paragraph*.219}%
-\contentsline {subsection}{\numberline {13.1.1}Prototipo di algoritmo}{170}{subsection.13.1.1}%
-\contentsline {subsection}{\numberline {13.1.2}Algoritmo di Dijkstra}{170}{subsection.13.1.2}%
-\contentsline {paragraph}{Dimostrazione di correttezza per pesi positivi}{172}{paragraph*.223}%
-\contentsline {paragraph}{Caso base: \bm {$k=0$}}{172}{paragraph*.224}%
-\contentsline {paragraph}{Passo induttivo: \bm {$k>0$}}{172}{paragraph*.225}%
-\contentsline {paragraph}{Complessità}{172}{paragraph*.226}%
-\contentsline {subsection}{\numberline {13.1.3}Algoritmo di Bellman-Ford-Moore}{173}{subsection.13.1.3}%
-\contentsline {paragraph}{Complessità}{174}{paragraph*.229}%
-\contentsline {subsection}{\numberline {13.1.4}Ricerca dei cammini minimi sui grafi DAG}{174}{subsection.13.1.4}%
-\contentsline {subsection}{\numberline {13.1.5}Casi d'uso delle soluzioni}{175}{subsection.13.1.5}%
-\contentsline {section}{\numberline {13.2}Ricerca dei cammini minimi da sorgente multipla}{175}{section.13.2}%
-\contentsline {subsection}{\numberline {13.2.1}Algoritmo di Floyd-Warshall}{175}{subsection.13.2.1}%
-\contentsline {paragraph}{Complessità}{177}{paragraph*.232}%
-\contentsline {chapter}{\numberline {14}Programmazione greedy}{178}{chapter.14}%
-\contentsline {section}{\numberline {14.1}Problema del resto}{178}{section.14.1}%
-\contentsline {subsection}{\numberline {14.1.1}Approccio basato su programmazione dinamica}{178}{subsection.14.1.1}%
-\contentsline {paragraph}{Complessità}{179}{paragraph*.233}%
-\contentsline {subsection}{\numberline {14.1.2}Approccio basato su programmazione greedy}{179}{subsection.14.1.2}%
-\contentsline {paragraph}{Complessità}{179}{paragraph*.234}%
-\contentsline {section}{\numberline {14.2}Insieme indipendente massimale di intervalli}{180}{section.14.2}%
-\contentsline {subsection}{\numberline {14.2.1}Approccio basato su programmazione dinamica}{181}{subsection.14.2.1}%
-\contentsline {paragraph}{Punto 1 - \bm {$S[i$}\dots \bm {$ j]=\emptyset $}}{182}{paragraph*.236}%
-\contentsline {paragraph}{Complessità}{183}{paragraph*.238}%
-\contentsline {section}{\numberline {14.3}Problema dello scheduling}{183}{section.14.3}%
-\contentsline {section}{\numberline {14.4}Problema dello zaino frazionario}{185}{section.14.4}%
-\contentsline {paragraph}{Ordinamento per profitto decrescente}{185}{paragraph*.244}%
-\contentsline {paragraph}{Ordinamento per peso crescente}{185}{paragraph*.245}%
-\contentsline {paragraph}{Ordinamento per profitto specifico decrescente}{185}{paragraph*.246}%
-\contentsline {paragraph}{Complessità}{186}{paragraph*.247}%
-\contentsline {section}{\numberline {14.5}Problema della compressione}{186}{section.14.5}%
-\contentsline {subsection}{\numberline {14.5.1}Algoritmo di Huffman}{187}{subsection.14.5.1}%
-\contentsline {paragraph}{Numero di bit necessari a codificare un file}{187}{paragraph*.250}%
-\contentsline {paragraph}{Principi dell'Algoritmo di Huffman}{188}{paragraph*.251}%
-\contentsline {paragraph}{Complessità}{189}{paragraph*.254}%
-\contentsline {chapter}{\numberline {A}Appendice A}{191}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{191}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{191}{section.1.A.2}%
+\contentsline {section}{\numberline {11.2}Insiemi disgiunti}{139}{section.11.2}%
+\contentsline {paragraph}{Specifica}{139}{paragraph*.187}%
+\contentsline {subsection}{\numberline {11.2.1}Implementazione basata su insiemi di liste}{141}{subsection.11.2.1}%
+\contentsline {subsection}{\numberline {11.2.2}Implementazione basata su insiemi di alberi}{141}{subsection.11.2.2}%
+\contentsline {subsection}{\numberline {11.2.3}Implementazioni con tecniche euristiche}{141}{subsection.11.2.3}%
+\contentsline {paragraph}{Euristica sul peso}{142}{paragraph*.191}%
+\contentsline {paragraph}{Euristica sul rango}{142}{paragraph*.192}%
+\contentsline {paragraph}{Caso base: \bm {$rank[r]=0$}}{142}{paragraph*.193}%
+\contentsline {paragraph}{Passo induttivo: \bm {$rank[r]>0$}}{142}{paragraph*.194}%
+\contentsline {paragraph}{Euristica di compressione dei cammini}{143}{paragraph*.195}%
+\contentsline {chapter}{\numberline {12}Programmazione dinamica}{144}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Introduzione}{144}{section.12.1}%
+\contentsline {subsection}{\numberline {12.1.1}Approccio generale}{144}{subsection.12.1.1}%
+\contentsline {section}{\numberline {12.2}Gioco del domino}{145}{section.12.2}%
+\contentsline {subsection}{\numberline {12.2.1}Approccio basato su divide-et-impera}{145}{subsection.12.2.1}%
+\contentsline {subsection}{\numberline {12.2.2}Approccio basato su programmazione dinamica}{147}{subsection.12.2.2}%
+\contentsline {paragraph}{Criterio di costo logaritmico}{147}{paragraph*.198}%
+\contentsline {section}{\numberline {12.3}Problema di Hateville}{148}{section.12.3}%
+\contentsline {subsection}{\numberline {12.3.1}Approccio basato su divide-et-impera}{148}{subsection.12.3.1}%
+\contentsline {paragraph}{Caso 1: \bm {$i\notin S_i$}}{149}{paragraph*.200}%
+\contentsline {paragraph}{Caso 2: \bm {$i\in S_i$}}{149}{paragraph*.201}%
+\contentsline {subsection}{\numberline {12.3.2}Approccio basato su programmazione dinamica}{149}{subsection.12.3.2}%
+\contentsline {paragraph}{Ricostruire la soluzione}{150}{paragraph*.203}%
+\contentsline {section}{\numberline {12.4}Problema dello zaino}{151}{section.12.4}%
+\contentsline {subsection}{\numberline {12.4.1}Approccio basato su programmazione dinamica}{152}{subsection.12.4.1}%
+\contentsline {paragraph}{Complessità}{153}{paragraph*.205}%
+\contentsline {subsection}{\numberline {12.4.2}Approccio basato su memoization}{154}{subsection.12.4.2}%
+\contentsline {paragraph}{Complessità}{154}{paragraph*.206}%
+\contentsline {section}{\numberline {12.5}Problema dello zaino senza limiti}{155}{section.12.5}%
+\contentsline {paragraph}{Complessità}{157}{paragraph*.208}%
+\contentsline {section}{\numberline {12.6}Ricerca della sottosequenza comune massimale}{157}{section.12.6}%
+\contentsline {subsection}{\numberline {12.6.1}Approccio basato su programmazione dinamica}{158}{subsection.12.6.1}%
+\contentsline {paragraph}{Caso 1: \bm {$t_i=u_j$}}{159}{paragraph*.209}%
+\contentsline {paragraph}{Caso 2: \bm {$t_i\neq u_j$}}{159}{paragraph*.210}%
+\contentsline {paragraph}{Caso 1: \bm {$t_n=u_m$}}{159}{paragraph*.211}%
+\contentsline {paragraph}{Caso 2: \bm {$t_n\neq u_m$} e \bm {$x_k\neq t_n$}}{159}{paragraph*.212}%
+\contentsline {paragraph}{Caso 3: \bm {$t_n\neq u_m$} e \bm {$x_k\neq u_m$}}{159}{paragraph*.213}%
+\contentsline {paragraph}{Complessità}{160}{paragraph*.214}%
+\contentsline {section}{\numberline {12.7}Problema dello string matching approssimato}{161}{section.12.7}%
+\contentsline {section}{\numberline {12.8}Problema del prodotto a catena di matrici}{163}{section.12.8}%
+\contentsline {subsection}{\numberline {12.8.1}Approccio basato su divide-et-impera}{166}{subsection.12.8.1}%
+\contentsline {paragraph}{Complessità}{166}{paragraph*.218}%
+\contentsline {subsection}{\numberline {12.8.2}Approccio basato su programmazione dinamica}{166}{subsection.12.8.2}%
+\contentsline {paragraph}{Complessità}{167}{paragraph*.220}%
+\contentsline {section}{\numberline {12.9}Ricerca dell'insieme indipendente di peso massimo}{167}{section.12.9}%
+\contentsline {paragraph}{Complessità}{170}{paragraph*.223}%
+\contentsline {chapter}{\numberline {13}Scelta della struttura dati}{171}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Ricerca dei cammini minimi da sorgente singola}{171}{section.13.1}%
+\contentsline {paragraph}{Parte 1}{173}{paragraph*.227}%
+\contentsline {paragraph}{Parte 2}{173}{paragraph*.228}%
+\contentsline {subsection}{\numberline {13.1.1}Prototipo di algoritmo}{174}{subsection.13.1.1}%
+\contentsline {subsection}{\numberline {13.1.2}Algoritmo di Dijkstra}{174}{subsection.13.1.2}%
+\contentsline {paragraph}{Dimostrazione di correttezza per pesi positivi}{176}{paragraph*.232}%
+\contentsline {paragraph}{Caso base: \bm {$k=0$}}{176}{paragraph*.233}%
+\contentsline {paragraph}{Passo induttivo: \bm {$k>0$}}{176}{paragraph*.234}%
+\contentsline {paragraph}{Complessità}{176}{paragraph*.235}%
+\contentsline {subsection}{\numberline {13.1.3}Algoritmo di Bellman-Ford-Moore}{177}{subsection.13.1.3}%
+\contentsline {paragraph}{Complessità}{178}{paragraph*.238}%
+\contentsline {subsection}{\numberline {13.1.4}Ricerca dei cammini minimi sui grafi DAG}{178}{subsection.13.1.4}%
+\contentsline {subsection}{\numberline {13.1.5}Casi d'uso delle soluzioni}{179}{subsection.13.1.5}%
+\contentsline {section}{\numberline {13.2}Ricerca dei cammini minimi da sorgente multipla}{179}{section.13.2}%
+\contentsline {subsection}{\numberline {13.2.1}Algoritmo di Floyd-Warshall}{179}{subsection.13.2.1}%
+\contentsline {paragraph}{Complessità}{181}{paragraph*.241}%
+\contentsline {chapter}{\numberline {14}Programmazione greedy}{182}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Problema del resto}{182}{section.14.1}%
+\contentsline {subsection}{\numberline {14.1.1}Approccio basato su programmazione dinamica}{182}{subsection.14.1.1}%
+\contentsline {paragraph}{Complessità}{183}{paragraph*.242}%
+\contentsline {subsection}{\numberline {14.1.2}Approccio basato su programmazione greedy}{183}{subsection.14.1.2}%
+\contentsline {paragraph}{Complessità}{183}{paragraph*.243}%
+\contentsline {section}{\numberline {14.2}Insieme indipendente massimale di intervalli}{184}{section.14.2}%
+\contentsline {subsection}{\numberline {14.2.1}Approccio basato su programmazione dinamica}{185}{subsection.14.2.1}%
+\contentsline {paragraph}{Punto 1 - \bm {$S[i$}\dots \bm {$ j]=\emptyset $}}{186}{paragraph*.245}%
+\contentsline {paragraph}{Complessità}{187}{paragraph*.247}%
+\contentsline {section}{\numberline {14.3}Problema dello scheduling}{187}{section.14.3}%
+\contentsline {section}{\numberline {14.4}Problema dello zaino frazionario}{189}{section.14.4}%
+\contentsline {paragraph}{Ordinamento per profitto decrescente}{189}{paragraph*.253}%
+\contentsline {paragraph}{Ordinamento per peso crescente}{189}{paragraph*.254}%
+\contentsline {paragraph}{Ordinamento per profitto specifico decrescente}{189}{paragraph*.255}%
+\contentsline {paragraph}{Complessità}{190}{paragraph*.256}%
+\contentsline {section}{\numberline {14.5}Problema della compressione}{190}{section.14.5}%
+\contentsline {subsection}{\numberline {14.5.1}Algoritmo di Huffman}{191}{subsection.14.5.1}%
+\contentsline {paragraph}{Numero di bit necessari a codificare un file}{191}{paragraph*.259}%
+\contentsline {paragraph}{Principi dell'Algoritmo di Huffman}{192}{paragraph*.260}%
+\contentsline {paragraph}{Complessità}{193}{paragraph*.263}%
+\contentsline {chapter}{\numberline {A}Appendice A}{195}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{195}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{195}{section.1.A.2}%

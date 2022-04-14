@@ -349,3 +349,9 @@ Huffman
 huffman
 frequence
 coins
+merge-find
+find
+rect
+Mfset
+Merge-find
+rank
