@@ -1587,29 +1587,28 @@ Vediamo un esempio che possa aiutare a rendere più chiaro il problema.
 
     Il problema con questa disposizione è che preso un intervallo, per capire
     quali altri intervalli possono ancora essere considerati, siamo costretti ad
-    analizzarli tutti.
-
-    Tuttavia, in una situazione come questa può essere conveniente eseguire
-    una pre-elaborazione dei dati. In questo caso, potremmo ordinare gli
-    intervalli per estremi di fine non decrescenti.
+    analizzarli tutti. Tuttavia, in una situazione come questa può essere
+    conveniente eseguire una pre-elaborazione dei dati, per esempio, potremmo
+    ordinare gli intervalli per estremi di fine non decrescenti.
 
     \begin{figure*}[ht!]
         \centering
         \includegraphics[width=0.8\textwidth]{intervalli-ordinati.png}
     \end{figure*}\noindent
-    Ora per decidere se tenere o meno l'ultimo intervallo, possiamo precedere
+    Ora, per decidere se tenere o meno l'ultimo intervallo, possiamo procedere
     come abbiamo fatto negli esempi precedenti, cioè considerando una qualche
     tabella $DP$ associata all'intervallo di tempo che si conclude nell'istante
     in cui inizia l'intervallo considerato.
 
-    Comunque, per rispondere al quesito, in questo caso l'hotel può massimizzare
-    i profitti, concedendo la sala ai clienti: 2, 4, 8 e 11.
+    \bigskip\noindent
+    Per rispondere al quesito originale, l'hotel può massimizzare
+    i profitti concedendo la sala ai clienti: $2$, $4$, $8$ e $11$.
 \end{eg}
 
 \noindent
 Chiarita la necessità di effettuare una pre-elaborazione, dobbiamo decidere in
 che modo trattare i dati. L'idea già citata è quella di ordinare gli intervalli
-per estremi di fine in modo non decrescente, cioè ordinarli in modo che $b_1\leq
+per estremi di fine non decrescenti, cioè ordinarli in modo che $b_1\leq
 \dots\leq b_n$. A questo punto, definiamo una tabella $DP$ tale che $DP[i]$
 contenga il massimo profitto realizzabile con i primi $i$ intervalli:
 \[DP[i]=\begin{cases}
@@ -1626,9 +1625,8 @@ dev'essere ripetuto per ogni intervallo, il costo finale è $O(n^2)$.
 
 Potremmo provare a pre-calcolare il predecessore $pred_i=j$ di $i$ tale che
 $j$ sia il massimo valore minore di $i$ per cui $b_j\leq a_i$. Se non esiste un
-tale valore, consideriamo $pred_i=0$.
-
-Noto il predecessore, la definizione di $DP$ diventa:
+tale valore, consideriamo $pred_i=0$. Noto il predecessore, la definizione di
+$DP$ diventa:
 \[DP[i]=\begin{cases}
     0 & i=0\\
     \max\left(DP[i-1],DP[pred_i]+w[i]\right) & i>0
@@ -1637,7 +1635,7 @@ Noto il predecessore, la definizione di $DP$ diventa:
     È possibile escludere un intervallo $i$, se sceglierne un altro $j$ con
     stesso tempo di fine, ma tempo di inizio precedente, ha un valore
     $DP[j]>DP[i]$.
-\end{note}
+\end{note}\noindent
 Un modo per calcolare i predecessori è il seguente:
 
 \begin{minicode}{Funzione per il calcolo dei predecessori}
