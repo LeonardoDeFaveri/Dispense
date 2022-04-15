@@ -978,10 +978,9 @@ accorgimento?
 Nel caso dei \emph{merge-find set} basati su \emph{liste} potremmo provare ad
 eseguire la \texttt{merge} modificando i puntatori della \emph{lista} più corta.
 Per quanto riguarda gli \emph{alberi} invece, potremmo ridurre il costo della
-\texttt{find} minimizzando l'\emph{altezza} degli \emph{alberi}.
-
-Tecniche di questo tipo sono dette \emph{euristiche}, e gli algoritmi che le
-usano sono detti \emph{euristici}.
+\texttt{find} minimizzando l'\emph{altezza} degli \emph{alberi}. Tecniche di
+questo tipo sono chiamate \emph{euristiche}, e gli algoritmi che le usano sono
+detti \emph{euristici}.
 
 \begin{definition}[Algoritmo euristico]
     È detto euristico un algoritmo progettato per risolvere un problema più
@@ -1000,8 +999,8 @@ $O(1)$ ed è possibile dimostrare che in questo tipo di implementazione il
 
 \paragraph{Euristica sul rango}
 Abbiamo detto che per gli \emph{alberi} conviene cercare di minimizzare le
-\emph{altezze}. Quindi, facciamo in modo che ogni \emph{nodo} $k$ contenga
-l'informazione sul proprio \emph{rango} $rank[k]$, definito come segue:
+\emph{altezze}. Quindi, associamo ad ogni \emph{nodo} $k$ il proprio
+\emph{rango}, $rank[k]$, definito come segue:
 
 \begin{definition}[Rango di un nodo]
     È definito rango di un nodo, il numero di archi del più lungo cammino tra
@@ -1020,10 +1019,6 @@ modificare la \texttt{merge} in modo che nel caso di \emph{alberi} di con
 dell'\emph{albero} con \emph{rango} maggiore non cambia, ma se invece i due
 \emph{alberi} avessero pari \emph{rango}, l'\emph{altezza} finale sarebbe
 incrementata di 1.
-
-\bigskip\noindent
-Per studiare la \emph{complessità} di questa implementazione, vediamo il
-seguente teorema:
 
 \begin{definition}[Legame tra il rango di un albero e il proprio numero di nodi]
     Un albero MFSET con radice $r$ e ottenuto tramite euristica sul rango ha
@@ -1075,7 +1070,53 @@ indicando il \emph{padre} del proprio \emph{padre}. In questo modo, la prima
 invocazione di \texttt{find} costa $O(\log n)$, mentre ricerche successivo
 su \emph{nodi} già visitati, costeranno $O(1)$.
 
+\begin{figure}[h!]
+    \centering
+    \begin{graph}
+        \node[main] (4a) {$4$};
+        \node[main] (3a) [below left of=4a] {$3$};
+        \node[main] (2a) [below left of=3a] {$2$};
+        \node[main] (1a) [below left of=2a] {$1$};
 
+        \path[->]   (1a) edge (2a)
+                    (2a) edge (3a)
+                    (3a) edge (4a)
+                    (4a) edge[in=30, out=60, min distance=10mm] (4a);
+
+        \node[]     (arrow) [below right of=3a, xshift=20mm]
+        {$\xRightarrow{\texttt{\normalsize find(1)}}$};
+
+        \node[main] (1b) [right of=arrow, xshift=20mm] {$1$};
+        \node[main] (2b) [right of=1b] {$2$};
+        \node[main] (3b) [right of=2b] {$3$};
+        \node[main] (4b) [above of=2b] {$4$};
+
+        \path[->]   (1b) edge (4b)
+                    (2b) edge (4b)
+                    (3b) edge (4b)
+                    (4b) edge[in=75, out=105, min distance=10mm] (4b);
+    \end{graph}
+    \caption{Esempio di \emph{compressione dei cammini}}
+\end{figure}
+
+\begin{note}
+    Applicando entrambe le \emph{euristiche}, il \emph{rango} non indica più
+    l'\emph{altezza} del \emph{nodo}, bensì un limite superiore. Questo perché
+    mantenere il valore corretto diventa troppo difficile (i.e. complesso) e
+    comunque non è necessario.
+\end{note}
+
+\paragraph{Complessità}
+Utilizzando entrambe le \emph{tecniche euristiche} viste, il \emph{costo
+ammortizzato} di $m$ operazioni \texttt{merge-find} in un \emph{insieme} di $n$
+elementi è $O(m\cdot\alpha(n))$, dove $\alpha(n)$ è la \emph{funzione inversa di
+Ackermann} che ha una crescita estremamente lenta\footnotemark. Di conseguenza,
+il \emph{costo ammortizzato} di una singola operazione è $O(1)$.
+
+\footnotetext{Ad esempio, per $n\leq2^{65536}$, $\alpha(n)\leq5$}
+
+\newpage
+\paragraph{Implementazione}
 \begin{code}{Merge-find set basati su insiemi di alberi}
 \begin{minipage}[t]{0.48\textwidth}
 \bc{int}[] parent\\
@@ -1110,3 +1151,36 @@ su \emph{nodi} già visitati, costeranno $O(1)$.
                 rank[r$_y$] = rank[r$_y$] + 1\\
 \end{minipage}
 \end{code}
+
+\subsection{Complessità}
+Riassumendo, le \emph{complessità} delle possibili implementazioni dei
+\emph{merge-find set} sono le seguenti\footnotemark:
+
+\begin{table}[h!]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|p{0.33\textwidth}|c|c|}
+        \hline
+        \textbf{Algoritmo} & \texttt{find} & \texttt{merge}\\
+        \hline
+        Liste & $O(1)$ & $O(n)$\\
+        \hline
+        Alberi & $O(n)$ & $O(1)^+$\\
+        \hline
+        Liste con euristica sul peso & $O(1)$ & $O(\log n)^*$\\
+        \hline
+        Albero con euristica sul rango & $O(\log n)$ & $O(1)^+$\\
+        \hline
+        Albero con euristica sul rango e compressione dei cammini & $O(1)^*$ &
+        $O(1)$\\
+        \hline
+    \end{tabular}
+\end{table}
+
+\footnotetext{
+$\begin{aligned}[t]
+    &*\text{: \emph{complessità ammortizzata};}\\
+    &+\text{: Consideriamo solo il costo della \texttt{merge}, senza
+    la ricerca dei \emph{rappresentanti} con la \texttt{find};}
+\end{aligned}$
+}
