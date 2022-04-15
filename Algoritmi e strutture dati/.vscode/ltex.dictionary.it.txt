@@ -357,3 +357,7 @@ Merge-find
 rank
 arrow
 Ackermann
+spanning
+fill
+red
+Kruskal

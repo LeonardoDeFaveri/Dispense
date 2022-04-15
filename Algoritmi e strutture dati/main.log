@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.26)  15 APR 2022 13:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.26)  15 APR 2022 15:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -803,13 +803,13 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 86
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ) [6] [7] [8]
-<./images/schema-theta.png, id=910, 909.3975pt x 662.475pt>
+<./images/schema-theta.png, id=925, 909.3975pt x 662.475pt>
 File: ./images/schema-theta.png Graphic file (type png)
 <use ./images/schema-theta.png>
 Package pdftex.def Info: ./images/schema-theta.png  used on input line 280.
 (pdftex.def)             Requested size: 483.69684pt x 352.36354pt.
  [9 <./images/schema-theta.png>] [10]
-<./images/schema-esempio-theta.png, id=932, 903.375pt x 655.44875pt>
+<./images/schema-esempio-theta.png, id=947, 903.375pt x 655.44875pt>
 File: ./images/schema-esempio-theta.png Graphic file (type png)
 <use ./images/schema-esempio-theta.png>
 Package pdftex.def Info: ./images/schema-esempio-theta.png  used on input line 360.
@@ -842,60 +842,60 @@ Chapter 4.
 
 
 ] [38] [39] [40] [41]
-<./images/tipi-liste.png, id=1230, 873.2625pt x 600.2425pt>
+<./images/tipi-liste.png, id=1245, 873.2625pt x 600.2425pt>
 File: ./images/tipi-liste.png Graphic file (type png)
 <use ./images/tipi-liste.png>
 Package pdftex.def Info: ./images/tipi-liste.png  used on input line 306.
 (pdftex.def)             Requested size: 435.32419pt x 299.22293pt.
  [42 <./images/tipi-liste.png>] [43]
-<./images/pila-lista.png, id=1247, 312.16624pt x 330.23375pt>
+<./images/pila-lista.png, id=1262, 312.16624pt x 330.23375pt>
 File: ./images/pila-lista.png Graphic file (type png)
 <use ./images/pila-lista.png>
 Package pdftex.def Info: ./images/pila-lista.png  used on input line 422.
 (pdftex.def)             Requested size: 193.47577pt x 204.67729pt.
-<./images/pila-vettore.png, id=1248, 310.15875pt x 199.74625pt>
+<./images/pila-vettore.png, id=1263, 310.15875pt x 199.74625pt>
 File: ./images/pila-vettore.png Graphic file (type png)
 <use ./images/pila-vettore.png>
 Package pdftex.def Info: ./images/pila-vettore.png  used on input line 424.
 (pdftex.def)             Requested size: 193.47577pt x 124.60031pt.
  [44 <./images/pila-lista.png> <./images/pila-vettore.png>] [45]
-<./images/coda-es-1.png, id=1270, 723.70375pt x 581.17125pt>
+<./images/coda-es-1.png, id=1285, 723.70375pt x 581.17125pt>
 File: ./images/coda-es-1.png Graphic file (type png)
 <use ./images/coda-es-1.png>
 Package pdftex.def Info: ./images/coda-es-1.png  used on input line 520.
 (pdftex.def)             Requested size: 241.84842pt x 194.21692pt.
-<./images/coda-es-2.png, id=1271, 715.67375pt x 572.1375pt>
+<./images/coda-es-2.png, id=1286, 715.67375pt x 572.1375pt>
 File: ./images/coda-es-2.png Graphic file (type png)
 <use ./images/coda-es-2.png>
 Package pdftex.def Info: ./images/coda-es-2.png  used on input line 521.
 (pdftex.def)             Requested size: 241.84842pt x 193.33687pt.
-<./images/coda-es-3.png, id=1272, 718.685pt x 569.12625pt>
+<./images/coda-es-3.png, id=1287, 718.685pt x 569.12625pt>
 File: ./images/coda-es-3.png Graphic file (type png)
 <use ./images/coda-es-3.png>
 Package pdftex.def Info: ./images/coda-es-3.png  used on input line 522.
 (pdftex.def)             Requested size: 241.84842pt x 191.52037pt.
-<./images/coda-es-4.png, id=1273, 722.7pt x 561.09625pt>
+<./images/coda-es-4.png, id=1288, 722.7pt x 561.09625pt>
 File: ./images/coda-es-4.png Graphic file (type png)
 <use ./images/coda-es-4.png>
 Package pdftex.def Info: ./images/coda-es-4.png  used on input line 523.
 (pdftex.def)             Requested size: 241.84842pt x 187.76506pt.
  [46 <./images/coda-es-1.png> <./images/coda-es-2.png> <./images/coda-es-3.png> <./images/coda-es-4.png>]
-<./images/coda-es-5.png, id=1288, 717.68124pt x 567.11874pt>
+<./images/coda-es-5.png, id=1303, 717.68124pt x 567.11874pt>
 File: ./images/coda-es-5.png Graphic file (type png)
 <use ./images/coda-es-5.png>
 Package pdftex.def Info: ./images/coda-es-5.png  used on input line 527.
 (pdftex.def)             Requested size: 241.84842pt x 191.10442pt.
-<./images/coda-es-6.png, id=1289, 715.67375pt x 563.10374pt>
+<./images/coda-es-6.png, id=1304, 715.67375pt x 563.10374pt>
 File: ./images/coda-es-6.png Graphic file (type png)
 <use ./images/coda-es-6.png>
 Package pdftex.def Info: ./images/coda-es-6.png  used on input line 528.
 (pdftex.def)             Requested size: 241.84842pt x 190.2842pt.
-<./images/coda-es-7.png, id=1290, 705.63625pt x 563.10374pt>
+<./images/coda-es-7.png, id=1305, 705.63625pt x 563.10374pt>
 File: ./images/coda-es-7.png Graphic file (type png)
 <use ./images/coda-es-7.png>
 Package pdftex.def Info: ./images/coda-es-7.png  used on input line 529.
 (pdftex.def)             Requested size: 241.84842pt x 192.99934pt.
-<./images/coda-es-8.png, id=1291, 718.685pt x 558.085pt>
+<./images/coda-es-8.png, id=1306, 718.685pt x 558.085pt>
 File: ./images/coda-es-8.png Graphic file (type png)
 <use ./images/coda-es-8.png>
 Package pdftex.def Info: ./images/coda-es-8.png  used on input line 530.
@@ -910,23 +910,23 @@ Chapter 5.
 
 
 ] [50]
-<./images/memorizzazione-albero-binario.png, id=1327, 803.0pt x 356.33125pt>
+<./images/memorizzazione-albero-binario.png, id=1342, 803.0pt x 356.33125pt>
 File: ./images/memorizzazione-albero-binario.png Graphic file (type png)
 <use ./images/memorizzazione-albero-binario.png>
 Package pdftex.def Info: ./images/memorizzazione-albero-binario.png  used on input line 195.
 (pdftex.def)             Requested size: 338.5863pt x 150.25075pt.
  [51 <./images/memorizzazione-albero-binario.png>] [52] [53] [54]
-<./images/vettore-dei-figli.png, id=1357, 1093.08376pt x 361.35pt>
+<./images/vettore-dei-figli.png, id=1372, 1093.08376pt x 361.35pt>
 File: ./images/vettore-dei-figli.png Graphic file (type png)
 <use ./images/vettore-dei-figli.png>
 Package pdftex.def Info: ./images/vettore-dei-figli.png  used on input line 432.
 (pdftex.def)             Requested size: 232.17241pt x 76.75139pt.
-<./images/vettore-dei-fratelli.png, id=1358, 996.72375pt x 497.86pt>
+<./images/vettore-dei-fratelli.png, id=1373, 996.72375pt x 497.86pt>
 File: ./images/vettore-dei-fratelli.png Graphic file (type png)
 <use ./images/vettore-dei-fratelli.png>
 Package pdftex.def Info: ./images/vettore-dei-fratelli.png  used on input line 434.
 (pdftex.def)             Requested size: 232.17241pt x 115.96396pt.
-<./images/vettore-dei-padri.png, id=1359, 192.72pt x 476.78125pt>
+<./images/vettore-dei-padri.png, id=1374, 192.72pt x 476.78125pt>
 File: ./images/vettore-dei-padri.png Graphic file (type png)
 <use ./images/vettore-dei-padri.png>
 Package pdftex.def Info: ./images/vettore-dei-padri.png  used on input line 453.
@@ -950,33 +950,33 @@ Chapter 7.
 
 
 ] [76] [77] [78]
-<./images/matrice-di-adiacenza-esempio-1.png, id=1584, 520.94624pt x 478.78876pt>
+<./images/matrice-di-adiacenza-esempio-1.png, id=1599, 520.94624pt x 478.78876pt>
 File: ./images/matrice-di-adiacenza-esempio-1.png Graphic file (type png)
 <use ./images/matrice-di-adiacenza-esempio-1.png>
 Package pdftex.def Info: ./images/matrice-di-adiacenza-esempio-1.png  used on input line 359.
 (pdftex.def)             Requested size: 232.17241pt x 213.38542pt.
-<./images/lista-di-adiacenza-esempio-1.png, id=1585, 584.1825pt x 598.235pt>
+<./images/lista-di-adiacenza-esempio-1.png, id=1600, 584.1825pt x 598.235pt>
 File: ./images/lista-di-adiacenza-esempio-1.png Graphic file (type png)
 <use ./images/lista-di-adiacenza-esempio-1.png>
 Package pdftex.def Info: ./images/lista-di-adiacenza-esempio-1.png  used on input line 361.
 (pdftex.def)             Requested size: 232.17241pt x 237.7562pt.
  [79 <./images/matrice-di-adiacenza-esempio-1.png> <./images/lista-di-adiacenza-esempio-1.png>]
-<./images/matrice-di-adiacenza-esempio-1n.png, id=1597, 514.92375pt x 469.755pt>
+<./images/matrice-di-adiacenza-esempio-1n.png, id=1612, 514.92375pt x 469.755pt>
 File: ./images/matrice-di-adiacenza-esempio-1n.png Graphic file (type png)
 <use ./images/matrice-di-adiacenza-esempio-1n.png>
 Package pdftex.def Info: ./images/matrice-di-adiacenza-esempio-1n.png  used on input line 401.
 (pdftex.def)             Requested size: 232.17241pt x 211.80353pt.
-<./images/lista-di-adiacenza-esempio-1n.png, id=1598, 578.16pt x 437.635pt>
+<./images/lista-di-adiacenza-esempio-1n.png, id=1613, 578.16pt x 437.635pt>
 File: ./images/lista-di-adiacenza-esempio-1n.png Graphic file (type png)
 <use ./images/lista-di-adiacenza-esempio-1n.png>
 Package pdftex.def Info: ./images/lista-di-adiacenza-esempio-1n.png  used on input line 403.
 (pdftex.def)             Requested size: 232.17241pt x 175.73871pt.
-<./images/matrice-di-adiacenza-esempio-1np.png, id=1599, 459.7175pt x 376.40625pt>
+<./images/matrice-di-adiacenza-esempio-1np.png, id=1614, 459.7175pt x 376.40625pt>
 File: ./images/matrice-di-adiacenza-esempio-1np.png Graphic file (type png)
 <use ./images/matrice-di-adiacenza-esempio-1np.png>
 Package pdftex.def Info: ./images/matrice-di-adiacenza-esempio-1np.png  used on input line 445.
 (pdftex.def)             Requested size: 232.17241pt x 190.098pt.
-<./images/lista-di-adiacenza-esempio-1np.png, id=1600, 555.07375pt x 406.51875pt>
+<./images/lista-di-adiacenza-esempio-1np.png, id=1615, 555.07375pt x 406.51875pt>
 File: ./images/lista-di-adiacenza-esempio-1np.png Graphic file (type png)
 <use ./images/lista-di-adiacenza-esempio-1np.png>
 Package pdftex.def Info: ./images/lista-di-adiacenza-esempio-1np.png  used on input line 447.
@@ -999,31 +999,31 @@ Chapter 8.
 
 
 ] [101] [102] [103]
-<./images/metodo-moltiplicazione.png, id=1819, 1123.7985pt x 568.67456pt>
+<./images/metodo-moltiplicazione.png, id=1834, 1123.7985pt x 568.67456pt>
 File: ./images/metodo-moltiplicazione.png Graphic file (type png)
 <use ./images/metodo-moltiplicazione.png>
 Package pdftex.def Info: ./images/metodo-moltiplicazione.png  used on input line 289.
 (pdftex.def)             Requested size: 386.95894pt x 195.81113pt.
  [104 <./images/metodo-moltiplicazione.png>]
-<./images/liste-di-trabocco1.png, id=1829, 552.0625pt x 490.83376pt>
+<./images/liste-di-trabocco1.png, id=1844, 552.0625pt x 490.83376pt>
 File: ./images/liste-di-trabocco1.png Graphic file (type png)
 <use ./images/liste-di-trabocco1.png>
 Package pdftex.def Info: ./images/liste-di-trabocco1.png  used on input line 318.
 (pdftex.def)             Requested size: 290.22105pt x 258.04358pt.
  [105 <./images/liste-di-trabocco1.png>]
-<./images/sequenza-ispezione-1.png, id=1837, 1063.975pt x 302.12875pt>
+<./images/sequenza-ispezione-1.png, id=1852, 1063.975pt x 302.12875pt>
 File: ./images/sequenza-ispezione-1.png Graphic file (type png)
 <use ./images/sequenza-ispezione-1.png>
 Package pdftex.def Info: ./images/sequenza-ispezione-1.png  used on input line 394.
 (pdftex.def)             Requested size: 483.69684pt x 137.34892pt.
  [106] [107 <./images/sequenza-ispezione-1.png>] [108]
-<./images/sequenza-ispezione-2.png, id=1862, 1073.00874pt x 324.21124pt>
+<./images/sequenza-ispezione-2.png, id=1877, 1073.00874pt x 324.21124pt>
 File: ./images/sequenza-ispezione-2.png Graphic file (type png)
 <use ./images/sequenza-ispezione-2.png>
 Package pdftex.def Info: ./images/sequenza-ispezione-2.png  used on input line 518.
 (pdftex.def)             Requested size: 483.69684pt x 146.14601pt.
  [109 <./images/sequenza-ispezione-2.png>]
-<./images/complessita-hash-table.png, id=1869, 1039.885pt x 628.3475pt>
+<./images/complessita-hash-table.png, id=1884, 1039.885pt x 628.3475pt>
 File: ./images/complessita-hash-table.png Graphic file (type png)
 <use ./images/complessita-hash-table.png>
 Package pdftex.def Info: ./images/complessita-hash-table.png  used on input line 552.
@@ -1050,12 +1050,12 @@ Chapter 10.
 
 
 ] [124]
-<./images/quicksort1.png, id=1972, 690.58pt x 170.6375pt>
+<./images/quicksort1.png, id=1987, 690.58pt x 170.6375pt>
 File: ./images/quicksort1.png Graphic file (type png)
 <use ./images/quicksort1.png>
 Package pdftex.def Info: ./images/quicksort1.png  used on input line 124.
 (pdftex.def)             Requested size: 338.5863pt x 83.66257pt.
-<./images/quicksort2.png, id=1973, 526.96875pt x 88.33pt>
+<./images/quicksort2.png, id=1988, 526.96875pt x 88.33pt>
 File: ./images/quicksort2.png Graphic file (type png)
 <use ./images/quicksort2.png>
 Package pdftex.def Info: ./images/quicksort2.png  used on input line 133.
@@ -1070,7 +1070,7 @@ Chapter 11.
 
 
 ] [130] [131] [132] [133] [134] [135] [136] [137] [138] [139] [140]
-<./images/merge-find-liste.png, id=2108, 1062.97125pt x 320.19624pt>
+<./images/merge-find-liste.png, id=2123, 1062.97125pt x 320.19624pt>
 File: ./images/merge-find-liste.png Graphic file (type png)
 <use ./images/merge-find-liste.png>
 Package pdftex.def Info: ./images/merge-find-liste.png  used on input line 932.
@@ -1085,12 +1085,12 @@ Chapter 12.
 
 
 ] [146] [147] [148] [149] [150] [151] [152] [153] [154] [155] [156] [157] [158] [159] [160] [161] [162] [163] [164] [165] [166] [167] [168]
-<./images/intervalli.png, id=2346, 935.495pt x 632.3625pt>
+<./images/intervalli.png, id=2361, 935.495pt x 632.3625pt>
 File: ./images/intervalli.png Graphic file (type png)
 <use ./images/intervalli.png>
 Package pdftex.def Info: ./images/intervalli.png  used on input line 1582.
 (pdftex.def)             Requested size: 386.95894pt x 261.57643pt.
-<./images/intervalli-ordinati.png, id=2347, 931.48pt x 633.36626pt>
+<./images/intervalli-ordinati.png, id=2362, 931.48pt x 633.36626pt>
 File: ./images/intervalli-ordinati.png Graphic file (type png)
 <use ./images/intervalli-ordinati.png>
 Package pdftex.def Info: ./images/intervalli-ordinati.png  used on input line 1596.
@@ -1114,7 +1114,7 @@ Chapter 14.
 
 
 ] [184]
-<./images/intervalli-ordinati-greedy1.png, id=2471, 1021.8175pt x 707.64375pt>
+<./images/intervalli-ordinati-greedy1.png, id=2486, 1021.8175pt x 707.64375pt>
 File: ./images/intervalli-ordinati-greedy1.png Graphic file (type png)
 <use ./images/intervalli-ordinati-greedy1.png>
 Package pdftex.def Info: ./images/intervalli-ordinati-greedy1.png  used on input line 141.
@@ -1125,32 +1125,40 @@ File: ./images/intervalli-ordinati-greedy1.png Graphic file (type png)
 Package pdftex.def Info: ./images/intervalli-ordinati-greedy1.png  used on input line 239.
 (pdftex.def)             Requested size: 217.6621pt x 150.73672pt.
  [187]
-<./images/intervalli-ordinati-greedy-s1.png, id=2499, 1057.9525pt x 700.6175pt>
+<./images/intervalli-ordinati-greedy-s1.png, id=2514, 1057.9525pt x 700.6175pt>
 File: ./images/intervalli-ordinati-greedy-s1.png Graphic file (type png)
 <use ./images/intervalli-ordinati-greedy-s1.png>
 Package pdftex.def Info: ./images/intervalli-ordinati-greedy-s1.png  used on input line 267.
 (pdftex.def)             Requested size: 232.17241pt x 153.75146pt.
-<./images/intervalli-ordinati-greedy-s2.png, id=2500, 1061.9675pt x 701.62125pt>
+<./images/intervalli-ordinati-greedy-s2.png, id=2515, 1061.9675pt x 701.62125pt>
 File: ./images/intervalli-ordinati-greedy-s2.png Graphic file (type png)
 <use ./images/intervalli-ordinati-greedy-s2.png>
 Package pdftex.def Info: ./images/intervalli-ordinati-greedy-s2.png  used on input line 270.
 (pdftex.def)             Requested size: 232.17241pt x 153.3829pt.
-<./images/intervalli-ordinati-greedy-s3.png, id=2501, 1061.9675pt x 702.625pt>
+<./images/intervalli-ordinati-greedy-s3.png, id=2516, 1061.9675pt x 702.625pt>
 File: ./images/intervalli-ordinati-greedy-s3.png Graphic file (type png)
 <use ./images/intervalli-ordinati-greedy-s3.png>
 Package pdftex.def Info: ./images/intervalli-ordinati-greedy-s3.png  used on input line 272.
 (pdftex.def)             Requested size: 232.17241pt x 153.60234pt.
-<./images/intervalli-ordinati-greedy-s4.png, id=2502, 1066.98625pt x 699.61375pt>
+<./images/intervalli-ordinati-greedy-s4.png, id=2517, 1066.98625pt x 699.61375pt>
 File: ./images/intervalli-ordinati-greedy-s4.png Graphic file (type png)
 <use ./images/intervalli-ordinati-greedy-s4.png>
 Package pdftex.def Info: ./images/intervalli-ordinati-greedy-s4.png  used on input line 275.
 (pdftex.def)             Requested size: 232.17241pt x 152.2288pt.
- [188 <./images/intervalli-ordinati-greedy-s1.png> <./images/intervalli-ordinati-greedy-s2.png> <./images/intervalli-ordinati-greedy-s3.png> <./images/intervalli-ordinati-greedy-s4.png>] [189] [190] [191] [192] [193] [194]) [195]
+ [188 <./images/intervalli-ordinati-greedy-s1.png> <./images/intervalli-ordinati-greedy-s2.png> <./images/intervalli-ordinati-greedy-s3.png> <./images/intervalli-ordinati-greedy-s4.png>] [189] [190] [191] [192] [193] [194]pdfTeX warning (ext4): destination with the same identifier (name{subfigure.14.4.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.786         \subfloat
+                       [\emph{Albero di copertura dei cammini minimi}]{pdfTeX warning (ext4): destination with the same identifier (name{subfigure.14.4.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.801         \subfloat
+                       [\emph{Albero di copertura di peso minimo}]{ [195] [196]) [197]
 \openout2 = `chapters/appendices/appendix_a.aux'.
 
  (./chapters/appendices/appendix_a.tex
 Appendix A.
-) [196
+) [198
 
 
 
@@ -1161,24 +1169,24 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 179.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 179.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 179.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 26BF7F4E5AAFD8D754DF6AD691DF38A7;12631.
+(rerunfilecheck)             Checksum: E0F38B59C48077E9598792E11BBCD2D2;12881.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 179.
  ) 
 Here is how much of TeX's memory you used:
- 25815 strings out of 483172
- 457823 string characters out of 5965816
- 774448 words of memory out of 5000000
- 39028 multiletter control sequences out of 15000+600000
+ 25884 strings out of 483172
+ 459064 string characters out of 5965816
+ 774924 words of memory out of 5000000
+ 39078 multiletter control sequences out of 15000+600000
  575455 words of font info for 138 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  64i,38n,102p,475b,1130s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{prop:elimcost} has been referenced but does not exist, replaced by a fixed one
 
  </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0800.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1440.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecit1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1728.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (197 pages, 2819980 bytes).
+Output written on main.pdf (199 pages, 2832649 bytes).
 PDF statistics:
- 3767 PDF objects out of 4296 (max. 8388607)
- 2658 compressed objects within 27 object streams
- 1122 named destinations out of 1200 (max. 500000)
- 1507 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3812 PDF objects out of 4296 (max. 8388607)
+ 2698 compressed objects within 27 object streams
+ 1141 named destinations out of 1200 (max. 500000)
+ 1531 words of extra memory for PDF output out of 10000 (max. 10000000)
 

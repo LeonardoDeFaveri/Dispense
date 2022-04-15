@@ -309,6 +309,10 @@
 \contentsline {paragraph}{Numero di bit necessari a codificare un file}{192}{paragraph*.263}%
 \contentsline {paragraph}{Principi dell'Algoritmo di Huffman}{193}{paragraph*.264}%
 \contentsline {paragraph}{Complessità}{194}{paragraph*.267}%
-\contentsline {chapter}{\numberline {A}Appendice A}{196}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{196}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{196}{section.1.A.2}%
+\contentsline {section}{\numberline {14.6}Ricerca degli alberi di copertura di peso minimo}{195}{section.14.6}%
+\contentsline {subsection}{\numberline {14.6.1}Approccio generico}{195}{subsection.14.6.1}%
+\contentsline {paragraph}{Definizioni necessarie}{196}{paragraph*.269}%
+\contentsline {subsection}{\numberline {14.6.2}Algoritmo di Kruskal}{197}{subsection.14.6.2}%
+\contentsline {chapter}{\numberline {A}Appendice A}{198}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{198}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{198}{section.1.A.2}%

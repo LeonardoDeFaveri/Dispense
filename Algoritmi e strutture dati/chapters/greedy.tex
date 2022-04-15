@@ -754,3 +754,194 @@ Quanto detto è riassumibile nel seguente teorema:
     poiché $T$ è ottimo deve valere anche $C(f,T)\leq C(f,T'')$ e quindi anche
     $T''$ è una soluzione ottima.
 \end{proof}
+
+\section{Ricerca degli alberi di copertura di peso minimo}
+\begin{problem}[Ricerca dell'albero di copertura di peso minimo]
+    Dati un grafo $G=(V,E)$ non orientato e una funzione di peso $w:V\times
+    V\to\mathbb{R}$, determinare il modo di interconnettere tutti i suoi
+    nodi che minimizzi il peso totale dei suoi archi.
+\end{problem}
+\begin{note}
+    Questo tipo di \emph{alberi} prende anche il nome di \emph{minimum spanning
+    tree} e \emph{alberi di connessione di peso minimo}.
+\end{note}
+
+\noindent
+La funzione di peso $w$ può essere meglio definita dicendo che se $(u,v)\in E$,
+allora $w(u,v)$ sarà pari al peso dell'\emph{arco} da $u$ a $v$. Altrimenti,
+assume valore $+\infty$. Inoltre, poiché il \emph{grafo} è \emph{non orientato},
+$w(u,v)=w(v,u)$. Poiché ricerchiamo l'\emph{albero di peso minimo}, il peso totale
+della soluzione $T$, definito come:
+\[w(T)=\sum_{(u,v)\in E_T}w(u,v)\]
+deve essere minimo rispetto al peso di tutti gli altri \emph{alberi di copertura}
+definibili su quel \emph{grafo}.
+
+\begin{note}
+    L'\emph{albero di copertura di peso minimo} non corrisponde necessariamente
+    con l'\emph{albero di copertura} associato ai \emph{cammini minimi} da un
+    \emph{nodo} a tutti gli altri.
+
+    \begin{figure}[h!]
+        \centering
+        \subfloat[\emph{Albero di copertura dei cammini minimi}]{
+        \begin{graph}
+            \node[main, line width=1.2pt] (a) [label={$d[A]=0$}] {$A$};
+            \node[main] (b) [right of=a, label={$d[B]=3$}, xshift=10mm] {$B$};
+            \node[main] (c) [below of=b, label=below:{$d[C]=4$}, yshift=-10mm] {$C$};
+            \node[main] (d) [left of=c, label=below:{$d[D]=3$}, xshift=-10mm] {$D$};
+    
+            \path[->]
+                        (a) edge[line width=1.2pt] node[above] {$3$} (b)
+                        (b) edge[line width=1.2pt] node[right] {$1$} (c)
+                        (a) edge[line width=1.2pt] node[left] {$3$} (d);
+            \path[-]    (d) edge node[below] {$2$} (c);
+        \end{graph}
+        }
+        \hspace{3cm}
+        \subfloat[\emph{Albero di copertura di peso minimo}]{
+        \begin{graph}
+            \node[main, line width=1.2pt] (a) [label={$d[A]=0$}] {$A$};
+            \node[main] (b) [right of=a, label={$d[B]=3$}, xshift=10mm] {$B$};
+            \node[main] (c) [below of=b, label=below:{$d[C]=4$}, yshift=-10mm] {$C$};
+            \node[main] (d) [left of=c, label=below:{$d[D]=6$}, xshift=-10mm] {$D$};
+    
+            \path[->]
+                        (a) edge[line width=1.2pt] node[above] {$3$} (b)
+                        (b) edge[line width=1.2pt] node[right] {$1$} (c)
+                        (c) edge[line width=1.2pt] node[below] {$2$} (d);
+            \path[-]    (a) edge node[left] {$3$} (d);
+        \end{graph}
+        }
+        \caption{\emph{Albero di copertura dei cammini minimi e di peso minimo}}
+    \end{figure}
+\end{note}
+
+\subsection{Approccio generico}
+L'approccio che intendiamo seguire è quello di partire da un sottoinsieme $A$ di
+\emph{archi} inizialmente vuoto, e di popolarlo in modo che ad ogni nuova
+aggiunta $A$ corrisponda ad un sottoinsieme di un qualche \emph{albero di
+copertura di peso minimo}.
+
+\begin{definition}[Arco sicuro]
+    Dato un grafo $G=(V,E)$ e un insieme $A\subseteq E$, un arco $(u,v)\in E$ è
+    detto essere sicuro per $A$ se $A\cup\{(u,v)\}$ è ancora un sottoinsieme di
+    un qualche albero di copertura di peso minimo.
+\end{definition}
+
+\begin{minicode}{Algoritmo generico}
+    \ind\bc{SET} mst-generico(\bc{GRAPH} G, \bc{int}[] w)\\
+        \bc{SET} A = $\emptyset$\\
+        \indf while (\{ A non forma un \emph{albero di copertura} \}) do\\
+            \{ Trova un \emph{arco sicuro} $(u,v)$ \}\\
+            A = A.insert(u, v)\\
+        \indf return A
+\end{minicode}
+
+\paragraph{Definizioni necessarie}
+\begin{definition}[Taglio]
+    Un taglio $(S, V-S)$ di un grafo non orientato $G=(V,E)$ è una partizione di
+    $V$ in due sottoinsiemi disgiunti.
+\end{definition}
+\begin{definition}[Arco di attraversamento]
+    Un arco $(u,v)$ attraversa il taglio $(S,V-S)$ se $u\in S$ e $v\in V-S$.
+\end{definition}
+\begin{definition}[Taglio rispettoso]
+    Dati un grafo $G=(V,E)$ e un sottoinsieme $A\subseteq E$, un taglio rispetta
+    $A$ se nessun arco di $A$ attraversa il taglio.
+\end{definition}
+\begin{definition}[Arco leggero]
+    Un arco che attraversa un taglio è detto essere leggero, se il suo peso è
+    minimo tra il peso di tutti gli archi che potrebbero attraversano lo stesso
+    taglio.
+\end{definition}
+
+\begin{figure}[h!]
+\centering
+\begin{graph}
+    \node[main, fill=Orchid] (a) {$A$};
+    \node[main, fill=Orchid] (b) [above right of=a] {$B$};
+    \node[main, fill=Dandelion] (i) [below right of=b] {$I$};
+    \node[main, fill=Dandelion] (c) [above right of=i] {$C$};
+    \node[main, color=white]     (0) [below right of=c] {};
+    \node[main, fill=Orchid] (d) [above right of=0] {$D$};
+    \node[main, fill=Orchid] (e) [below right of=d] {$E$};
+    \node[main, fill=Dandelion] (f) [below left of=e] {$F$};
+    \node[main, fill=Dandelion] (g) [below right of=i] {$G$};
+    \node[main, fill=Dandelion] (h) [below right of=a] {$H$};
+
+    \path[-]    (a) edge node[below left]   {$8$} (h)
+                (h) edge node[right]        {$11$} (b)
+                (b) edge node[below]        {$8$} (c)
+                (c) edge [blue] node[below]        {$7$} (d)
+                (d) edge node[left]         {$14$} (f)
+                (f) edge node[below right]  {$10$} (e)
+                (h) edge node[below right]  {$7$} (i)
+                (i) edge node[below left]   {$6$} (g)
+                (a) edge [red] node[above left]   {$4$} (b)
+                (c) edge [red] node[below right]  {$2$} (i)
+                (c) edge [red] node[left]         {$4$} (f)
+                (h) edge [red] node[below]        {$1$} (g)
+                (g) edge [red] node[below]        {$2$} (f)
+                (d) edge [red] node[above right]  {$9$} (e);
+    \draw[dashed] (f)+(12mm, -7.5mm) arc[
+        start angle=25, end angle=155,
+        x radius=42mm, y radius=70mm
+    ];
+
+    \node[draw, ellipse, minimum width=20mm, minimum height=10mm, fill=Orchid]
+        (vs) [right of=e, xshift=10mm] {$V-S$};
+    \node[draw, ellipse, minimum width=20mm, minimum height=10mm, fill=Dandelion]
+        (s) [above of=vs, yshift=-5mm] {$S$};
+    \draw[dashed] (vs)+(-11mm, 7.5mm) edge node [right, xshift=15mm] {\text{Taglio}} +(12mm, 7.5mm);
+    \draw[red] (vs)+(-11mm, -10mm) edge node [right, xshift=15mm, black] {\text{Insieme $A$}} +(12mm, -10mm);
+    \draw[blue] (vs)+(-11mm, -17.5mm) edge node [right, xshift=15mm, black] {\text{Arco leggero}} +(12mm, -17.5mm);
+\end{graph}
+\caption{Esempio di caratterizzazione}
+\end{figure}
+
+\begin{definition}[Teorema di caratterizzazione degli archi sicuri]
+    Dato un grafo $G=(V,E)$ non orientato e connesso sul quale è definita una
+    funzione di costo $w:V\times V\to\mathbb{R}$, si considerino un insieme
+    $A\subseteq E$ contenuto in qualche albero di copertura minimo di $G$ e un
+    taglio $(S,V-S)$ che rispetta $A$. Se $(u,v)$ è un arco leggero che attraversa
+    il taglio, $(u,v)$ è anche sicuro per $A$.
+\end{definition}
+
+\noindent
+In parole povere, un \emph{arco leggero} $(u,v)$ è \emph{sicuro} per $A$ se
+$(u,v)\notin A$ e $w(u, v)$ è minimo tra i pesi di tutti gli altri \emph{archi
+di attraversamento} che non appartengono ad $A$.
+
+\begin{proof}[Dimostrazione]
+    Se $T$ è un \emph{albero di copertura minimo} che contiene $A$, ci sono due
+    casi:
+    \begin{enumerate}
+        \item $(u,v)\in T$: sicuramente $(u,v)$ è sicuro per $A$;
+        \item $(u,v)\notin T$: trasformiamo $T$ in un \emph{albero} $T'$
+        contenente $(u,v)$ e dimostriamo che $T'$ è un \emph{albero di copertura
+        minimo};
+    \end{enumerate}
+    Procediamo quindi a dimostrare il secondo punto. Per la definizione di
+    \emph{albero}, $u$ e $v$ sono connessi da un \emph{cammino} $C\subseteq T$ e
+    poiché $(u,v)$è un \emph{arco di attraversamento}, $u$ e $v$ stanno ai lati
+    opposti del \emph{taglio}.
+    
+    Siccome $T$ è un \emph{albero di copertura} esiste un \emph{arco} $(x,y)\in C$
+    che attraversa i due lati del \emph{taglio}. Quindi, sia $T'=T-\{(x,y)\}
+    \cup\{(u,v)\}$ un secondo \emph{albero di copertura}. Poiché $w(u,v)\leq
+    w(x,y)$, $w(T')\leq w(T)$, ma dato che $T$ è un \emph{albero di copertura
+    minimo}, vale anche $w(T)\leq w(T')$. Ovvero, $w(T)=w(T')$ e $w(u,v)=w(x,y)$.
+\end{proof}
+
+\noindent
+A questo punto, possiamo definire il seguente corollario:
+\begin{definition}[Corollario]
+    Dato $G=(V,E)$ un grafo non orientato e connesso sul quale è definita una
+    funzione di costo $w:V\times V\to\mathbb{R}$, si considerino un insieme
+    $A\subseteq E$ contenuto in qualche albero di copertura minimo di $G$ e una
+    componente connessa della foresta $G_A(V,A)$. Se $(u,v)$ è un arco leggero
+    che connette $C$ a qualche altra componente connessa in $G_A$, l'arco $(u,v)$
+    è sicuro per $A$.
+\end{definition}
+
+\subsection{Algoritmo di Kruskal}

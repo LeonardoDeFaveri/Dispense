@@ -158,6 +158,9 @@
 \BOOKMARK [1][-]{section.14.4}{Problema dello zaino frazionario}{chapter.14}% 158
 \BOOKMARK [1][-]{section.14.5}{Problema della compressione}{chapter.14}% 159
 \BOOKMARK [2][-]{subsection.14.5.1}{Algoritmo di Huffman}{section.14.5}% 160
-\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 161
-\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 162
-\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 163
+\BOOKMARK [1][-]{section.14.6}{Ricerca degli alberi di copertura di peso minimo}{chapter.14}% 161
+\BOOKMARK [2][-]{subsection.14.6.1}{Approccio generico}{section.14.6}% 162
+\BOOKMARK [2][-]{subsection.14.6.2}{Algoritmo di Kruskal}{section.14.6}% 163
+\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 164
+\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 165
+\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 166
