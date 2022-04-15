@@ -313,6 +313,9 @@
 \contentsline {subsection}{\numberline {14.6.1}Approccio generico}{195}{subsection.14.6.1}%
 \contentsline {paragraph}{Definizioni necessarie}{196}{paragraph*.269}%
 \contentsline {subsection}{\numberline {14.6.2}Algoritmo di Kruskal}{197}{subsection.14.6.2}%
-\contentsline {chapter}{\numberline {A}Appendice A}{198}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{198}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{198}{section.1.A.2}%
+\contentsline {paragraph}{Complessità}{198}{paragraph*.271}%
+\contentsline {subsection}{\numberline {14.6.3}Algoritmo di Prim}{198}{subsection.14.6.3}%
+\contentsline {paragraph}{Complessità}{199}{paragraph*.273}%
+\contentsline {chapter}{\numberline {A}Appendice A}{200}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{200}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{200}{section.1.A.2}%

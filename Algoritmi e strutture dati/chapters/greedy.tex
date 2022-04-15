@@ -945,3 +945,120 @@ A questo punto, possiamo definire il seguente corollario:
 \end{definition}
 
 \subsection{Algoritmo di Kruskal}
+L'idea alla base dell'\emph{Algoritmo di Kruskal} è di aumentare la dimensione
+di sottoinsiemi disgiunti di un \emph{albero di copertura minimo} fino arrivare
+all'\emph{albero} complessivo. In particolare, di volta in volta viene individuato
+un \emph{arco sicuro} di peso minimo tra tutti gli \emph{archi} che connettono
+due \emph{componenti connesse} della \emph{foresta}. Questo algoritmo è
+\emph{greedy} perché ad ogni passo viene aggiunto all'\emph{albero} l'\emph{arco}
+di peso minimo.
+
+\begin{minicode}{Implementazione Algoritmo di Kruskal}
+\ind\bc{SET} kruskal(\bc{EDGE}[] A, \bc{int} n, \bc{int} m)\\
+    \bc{SET} T = Set()\\
+    \bc{MFSET} M = Mfset(n)\\
+    \{ Ordina $A[1,\dots,m]$ in modo che $A[1].weight\leq\dots\leq A[m].weight$ \}\\
+    \bc{int} count = 0\\
+    \bc{int} i = 1\\
+    \com{Termina quando l'\emph{albero} ha $n-1$ \emph{archi} o quando non ce ne sono più}
+    \indf while (count < n - 1 and i $\leq$ n) do\\
+        \com{Controlla se $u$ e $v$ sono in \emph{componenti connesse} diverse}
+        \indff if (M.find(A[i].u) $\neq$ M.find(A[i].v)) then\\
+            M.merge(A[i].u, A[i].v)\\
+            T.insert(A[i])\\
+            count = count + 1\\
+        \indff i = i + 1\\
+    \indf return T
+\end{minicode}
+
+\noindent
+In pratica, l'algoritmo considera un \emph{arco} del \emph{grafo} alla volta,
+partendo da quello di peso minore e, se questo collega due \emph{nodi} che sono
+in due \emph{componenti connesse} separate, viene aggiunto agli \emph{archi}
+dell'\emph{albero di copertura minimo}. Altrimenti non viene più considerato.
+
+\paragraph{Complessità}
+La \emph{complessità} dell'algoritmo dipende dall'implementazione usata per i
+\emph{merge-find set}. Se ipotizziamo di usare la versione con \emph{euristica
+sul rango} e \emph{compressione dei cammini} le operazione \texttt{find} e
+\texttt{merge} hanno \emph{costo ammortizzato} costante.
+
+\begin{table}[h!]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \textbf{Fase} & \textbf{Numero di ripetizioni} & \textbf{Costo}\\
+        \hline
+        Inizializzazione & $1$ & $O(n)$\\
+        \hline
+        Ordinamento & $1$ & $O(m\log m)$\\
+        \hline
+        Operazioni \texttt{find} e \texttt{merge} & $O(m)$ & $O(1)$\\
+        \hline
+    \end{tabular}
+\end{table}\noindent
+Il costo totale è:
+\[T(n)=O(n+m\log m+m)=O(m\log m)\]
+Poiché il numero di \emph{archi} $m$ è $O(n^2)$ vale:
+\[O(m\log m)=O(m\log n^2)=O(m\log n)\]
+
+\subsection{Algoritmo di Prim}
+Questo algoritmo si basa sull'idea di mantenere in $A$ un singolo \emph{albero}.
+Quindi viene individuato casualmente un \emph{nodo} $r$, che diventerà la
+\emph{radice} dell'\emph{albero}, a partire dal quale vengono raggiunti tutti
+gli altri \emph{nodi}. Ad ogni passo viene aggiunto ad $A$ un \emph{arco
+leggero} che collega un \emph{nodo} in $V_A$ con un \emph{nodo} in $V-V_A$,
+dove $V_A$ è l'insieme di \emph{nodi} raggiunti dagli \emph{archi} in $A$.
+
+L'algoritmo viene implementato facendo uso di una \emph{coda a priorità} $Q$
+nella quale vengono mantenuti tutti i \emph{nodi} non ancora raggiunti e sono
+ordinati in base a una \emph{priorità} definita come il peso minimo di un
+\emph{arco} che collega un \emph{nodo} a un \emph{nodo} dell'\emph{albero} o
+$+\infty$ se tale \emph{arco} non esiste. Inoltre, implementando l'\emph{albero}
+usando il \emph{vettore dei padri}, ogni \emph{nodo} $v$ mantiene un puntatore
+al proprio \emph{padre} $p[v]$ e quindi l'insieme $A$ è mantenuto implicitamente:
+\[A=\{(v,p[v])\,|\,v\in V-Q-\{r\}\}\]
+
+\begin{minicode}{Implementazione Algoritmo di Prim}
+\ind\bc{int}[] prim(\bc{GRAPH} G, \bc{NODE} r)\\
+    \bc{PRIORITYQUEUE} Q = MinPriorityQueue()\\
+    \bc{PRIORITYITEM}[] pos = new \bc{PRIORITYITEM}[1\dots G.size()]\\
+    \bc{int}[] p = new \bc{int}[1\dots G.size()]\hfill\com{\emph{Vettore dei padri}}
+    \indf foreach (u $\in$ G.V() - \{r\}) do\\
+        pos[u] = Q.insert(u, $+\infty$)\\
+    \indf pos[r] = Q.insert(r, 0)\\
+    \indf p[r] = 0\\
+    \indf while (not Q.isEmpty()) do\\
+        \bc{NODE} u = Q.deleteMin()\\
+        pos[u] = nil\\
+        \indff foreach (v $\in$ G.adj(u)) do\\
+            \indfff if (pos[v] $\neq$ nil and G.w(u, v) < pos[v].priority) then\\
+                Q.decrease(pos[v], G.w(u, v))\\
+                p[v] = u\\
+    \indf return p
+\end{minicode}
+
+\paragraph{Complessità}
+Implementando la \emph{coda a priorità} utilizzando un \emph{heap binario},
+otteniamo la seguente tabella dei costi:
+
+\begin{table}[h!]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \textbf{Fase} & \textbf{Numero di ripetizioni} & \textbf{Costo}\\
+        \hline
+        Inizializzazione & $1$ & $O(n\log n)$\\
+        \hline
+        \texttt{deleteMin} & $O(n)$ & $O(\log n)$\\
+        \hline
+        \texttt{decrease} & $O(m)$ & $O(\log n)$\\
+        \hline
+    \end{tabular}
+\end{table}\noindent
+La \emph{complessità} totale è quindi:
+\[T(n)=O(n+n\log n+m\log n)=O(m\log n)\]
+Quindi, l'\emph{Algoritmo di Prim} e l'\emph{Algoritmo di Kruskal} sono
+asintoticamente uguali.
