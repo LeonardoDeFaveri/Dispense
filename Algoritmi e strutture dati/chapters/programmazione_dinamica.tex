@@ -1658,7 +1658,7 @@ di \emph{complessità} $O(n\log n)$.
     \bc{int}[] pred = computePredecessors(a, b, n)\\
     \bc{int}[] DP = new \bc{int}[0\dots n]\\
     DP[0] = 0\\
-    \indf for (i = 1 to n) do\hfill\com{Riempimento tabelle delle soluzioni}
+    \indf for (i = 1 to n) do\hfill\com{Riempimento \emph{tabella delle soluzioni}}
         DP[i] = max(DP[i - 1], DP[pred[i]] + w[i])\\
     \indf\bc{int} i = n\\
     \indf\bc{SET} S = Set()\\

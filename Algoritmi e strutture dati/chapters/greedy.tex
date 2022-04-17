@@ -1,7 +1,7 @@
 \chapter{Programmazione greedy}
 Gli algoritmi realizzati per risolvere \emph{problemi di ottimizzazione}
-eseguono una sequenza di decisioni che nel caso della \emph{programmazione
-dinamica} sono prese in maniera bottom-up e vengono valutate tutte le possibilità,
+eseguono una sequenza di decisioni che, nel caso della \emph{programmazione
+dinamica}, sono prese in maniera bottom-up valutando tutte le possibilità,
 evitando però di ripetere decisioni già esaminate. Con la \emph{programmazione
 greedy} invece, tra tutte le possibili decisioni ne viene scelta solo una,
 quella che sembra ottima, o meglio localmente ottima. Tuttavia, è necessario
@@ -18,11 +18,11 @@ che porta ad una soluzione ottima.
     Dati un insieme di \q{tagli} di monete, espressi come un vettore $t[1\dots n]$
     di interi positivi, e un valore $R$ rappresentate un resto da dover restituire,
     trovare il più piccolo numero intero di pezzi necessari per dare un resto
-    $R$ di centesimi utilizzando i tagli disponibili, assumendo di avere un
+    $R$ di centesimi, utilizzando i tagli disponibili e assumendo di avere un
     numero illimitato di monete.
 
     Formalmente, è necessario trovare un vettore $x$ di interi non negativi
-    tale che:
+    tale per cui:
     \[R=\sum_{i=1}^n x[i]\cdot t[i]\quad\text{e}\quad m=\sum_{i=1}^n x[i]\quad
     \text{ha valore minimo}\]
 \end{problem}
@@ -75,7 +75,7 @@ due cicli annidati.
 \subsection{Approccio basato su programmazione greedy}
 Non è difficile immaginare che per minimizzare il numero di monete utilizzate
 sia sufficiente usare sempre il taglio più grande possibile. Ovvero, selezionare
-la moneta $j$ più grande, tale per cui $t[j]<R$, e risolvere il sotto-problema
+la moneta $j$ più grande, tale per cui $t[j]\leq R$, e risolvere il sotto-problema
 $S(R-t[j])$.
 
 \begin{minicode}{Soluzione basata su programmazione greedy}
@@ -101,7 +101,7 @@ Ciò che dobbiamo fare adesso è dimostrare che la scelta fatta sia corretta.
     \[R=\sum_{i=1}^n x[i]\cdot t[i]\quad\text{e}\quad m=\sum_{i=1}^n x[i]\quad
     \text{ha valore minimo}\]
     Sappiamo che $t[k]\cdot x[k]<t[k-1]$ altrimenti basterebbe sostituire un certo
-    numero di monete di taglia $t[k]$ con quelle del taglio $t[k-1]$. In questo
+    numero di monete di taglio $t[k]$ con quelle del taglio $t[k-1]$. In questo
     caso, i limiti al numero di monete per ogni taglio sono:
     \[\begin{array}{rclccclcl}
         t[2]\cdot x[2] & = & 10\cdot x[2] & < & t[1] & = & 50 & \Rightarrow & x[2]<5\\
@@ -133,7 +133,7 @@ Ciò che dobbiamo fare adesso è dimostrare che la scelta fatta sia corretta.
 
 \section{Insieme indipendente massimale di intervalli}
 Vediamo un caso particolare del problema sulla \nameref{prob:12} in cui il peso
-di tutti gli intervalli è $1$. Cioè vogliamo cercare l'insieme contenente il
+di tutti gli intervalli è $1$. Cioè, vogliamo cercare l'insieme contenente il
 maggior numero di intervalli.
 
 \begin{figure}[h!]
@@ -197,7 +197,7 @@ Possiamo fare meglio di così?
 
 Potremmo semplicemente usare la soluzione al problema con pesi generici, che
 ha \emph{complessità} $O(n\log n)$, ponendo a $1$ tutti i pesi. Tuttavia,
-possiamo provare a chiederci se sia davvero necessario analizzare tutti i
+potremmo anche chiederci se sia davvero necessario analizzare tutti i
 possibili valori di $k$. Definiamo il seguente teorema:
 
 \begin{definition}[Scelta ingorda]
@@ -214,8 +214,8 @@ possibili valori di $k$. Definiamo il seguente teorema:
 
     \paragraph{Punto 1 - \bm{$S[i$}\dots\bm{$ j]=\emptyset$}}
     Per la definizione di intervallo sappiamo che $a_m<b_m$. Inoltre, poiché $m$
-    è l'intervallo con il minor tempo di fine $\forall k\in S[i\dots j]$ $b_m
-    \leq b_k$ e, quindi, ne consegue che $\forall k\in S[i\dots j]$ $a_m<b_k$.
+    è l'intervallo con il minor tempo di fine, $\forall k\in S[i\dots j]$ $b_m
+    \leq b_k$ e quindi, ne consegue che $\forall k\in S[i\dots j]$ $a_m<b_k$.
     Se nessun intervallo in $S[i\dots j]$ termina prima di $a_m$, allora $S[i
     \dots m]=\emptyset$.
 
@@ -462,7 +462,7 @@ quel tipo di scelta sia corretta.
 Quello della compressione dei dati è una problema classico dell'informatica.
 Una delle possibili tecniche per la compressione dei caratteri\footnote{Per
 le immagini esistono tecniche migliori} è tramite una \emph{funzione di codifica}
-del tipo $f:f(c)=x$ in cui $c$ un carattere preso da un alfabeto $\Sigma$ e
+del tipo $f:f(c)=x$ in cui $c$ è un carattere preso da un alfabeto $\Sigma$ e
 $x$ è la sua rappresentazione binaria.
 
 \begin{note}
@@ -583,13 +583,13 @@ a ciascuna \emph{foglia} corrisponde alla codifica del carattere associato.
 
 \noindent
 Questa rappresentazione ci permette di legare il numero di bit necessari per
-codificare un carattere alla \emph{profondità} della \emph{foglia} associata
-all'interno dell'\emph{albero}.
+codificare un carattere alla \emph{profondità} della \emph{foglia} ad esso
+associata all'interno dell'\emph{albero}.
 
 \paragraph{Numero di bit necessari a codificare un file}
 In particolare, se $\Sigma$ è l'alfabeto di un file $F$ e $T$ è un albero
 che rappresenta la codifica, per ogni carattere $c\in\Sigma$, $d_T(c)$
-rappresenta la \emph{profondità} della \emph{foglia} che rappresenta $c$ in $T$.
+rappresenta la \emph{profondità} della \emph{foglia} associata a $c$ in $T$.
 Dunque, la codifica di $c$ richiede $d_T(c)$ bit e, se $f[c]$ è il numero di
 occorrenze di $c$ in $F$, la dimensione della codifica per l'intero file è:
 \[C(F,T)=\sum_{c\in\Sigma}f[c]\cdot d_T(c)\]
@@ -605,14 +605,14 @@ corrispondenti ai percorsi più lunghi all'interno dell'\emph{albero}.
 \end{note}
 
 \noindent
-Ad ogni \emph{nodo} dell'\emph{albero} viene associato un carattere con la relativa
-frequenza; la costruzione dell'\emph{albero} procede per aggregazione delle
-coppie di \emph{nodi} con frequenza minima. Ad ogni iterazione, i due \emph{nodi}
-$x$, $y$ con frequenza $f_x$ e $f_y$ minori vengono resi \emph{figli} di un
-nuovo \emph{nodo} fittizio con frequenza $f_x+f_y$. Questo \emph{nodo} viene
-quindi aggiunto all'insieme iniziale di caratteri. L'algoritmo continua in questo
-modo fino a quando non rimane un solo \emph{nodo} e termina dopo aver etichettato
-gli \emph{archi}.
+Ad ogni \emph{nodo} dell'\emph{albero} viene associato un carattere con la
+relativa frequenza. La costruzione dell'\emph{albero} procede per aggregazione
+delle coppie di \emph{nodi} con frequenza minima. Ad ogni iterazione, i due
+\emph{nodi} $x$, $y$ con frequenza $f_x$ e $f_y$ minori vengono resi
+\emph{figli} di un nuovo \emph{nodo} fittizio con frequenza $f_x+f_y$. Questo
+\emph{nodo} viene quindi aggiunto all'insieme iniziale di caratteri. L'algoritmo
+continua in questo modo fino a quando non rimane un solo \emph{nodo} e termina
+dopo aver etichettato gli \emph{archi}.
 
 \begin{figure}[h!]
     \centering
@@ -698,9 +698,10 @@ La codifica ottenuta è quindi:
     \indf for (i = 1 to n - 1) do\\
         z$_1$ = Q.deleteMin()\\
         z$_2$ = Q.deleteMin()\\
-        z = Tree(z$_1$.f, z$_2$.f, nil)\\
+        z = Tree(z$_1$.f, z$_2$.f, nil)\hfill\com{Crea il \emph{nodo} fittizio}
         z.insertLeft(z$_1$)\\
         z.insertRight(z$_2$)\\
+        Q.insert(z.f, z)\hfill\com{Rimette il \emph{nodo} fittizio nella \emph{coda}}
     \indf return Q.deleteMin()
 \end{minicode}
 \begin{note}
@@ -716,15 +717,14 @@ La costruzione dell'\emph{albero} attraverso l'uso di \emph{code a priorità}
 costa $O(n\log n)$, quindi la \emph{complessità} finale è $T(n)=O(n\log n)$.
 
 \bigskip\noindent
-Come al solito dobbiamo dimostrare la correttezza dell'approccio scelto. In
+Come al solito, dobbiamo dimostrare la correttezza dell'approccio scelto. In
 particolare, dobbiamo dimostrare che costruire un \emph{albero} scegliendo
 sempre i due caratteri con frequenza minore conduce sempre ad una soluzione
 ottimale. Inoltre, dobbiamo dimostrare che questa soluzione gode di una
 \emph{sottostruttura ottima}, per la quale, dato un problema sull'alfabeto
 $\Sigma$, è possibile costruire un sotto-problema con un alfabeto più piccolo
-aggregando i due caratteri con frequenza minore.
-
-Quanto detto è riassumibile nel seguente teorema:
+aggregando i due caratteri con frequenza minore. Quanto detto è riassumibile
+nel seguente teorema:
 \begin{definition}[Teorema per la correttezza dell'Algoritmo di Huffman]
     Dato un alfabeto $\Sigma$ e un vettore delle frequenze $f$, se $x$ e $y$
     sono i due caratteri con frequenza minore, esiste un codice ottimo per
@@ -750,7 +750,7 @@ Quanto detto è riassumibile nel seguente teorema:
         = & \left(f[a]-f[x]\right)\cdot\left(d_T(a)-d_T(x)\right)\\
         \leq & 0
     \end{array}\]
-    Allo stesso modo possiamo dimostrar che $C(f,T')-C(f,T'')\geq 0$, ma
+    Allo stesso modo possiamo dimostrare che $C(f,T')-C(f,T'')\geq 0$, ma
     poiché $T$ è ottimo deve valere anche $C(f,T)\leq C(f,T'')$ e quindi anche
     $T''$ è una soluzione ottima.
 \end{proof}
