@@ -904,7 +904,7 @@ copertura di peso minimo}.
     funzione di costo $w:V\times V\to\mathbb{R}$, si considerino un insieme
     $A\subseteq E$ contenuto in qualche albero di copertura minimo di $G$ e un
     taglio $(S,V-S)$ che rispetta $A$. Se $(u,v)$ è un arco leggero che attraversa
-    il taglio, $(u,v)$ è anche sicuro per $A$.
+    il taglio, allora è anche sicuro per $A$.
 \end{definition}
 
 \noindent
@@ -923,7 +923,7 @@ di attraversamento} che non appartengono ad $A$.
     \end{enumerate}
     Procediamo quindi a dimostrare il secondo punto. Per la definizione di
     \emph{albero}, $u$ e $v$ sono connessi da un \emph{cammino} $C\subseteq T$ e
-    poiché $(u,v)$è un \emph{arco di attraversamento}, $u$ e $v$ stanno ai lati
+    poiché $(u,v)$ è un \emph{arco di attraversamento}, $u$ e $v$ stanno ai lati
     opposti del \emph{taglio}.
     
     Siccome $T$ è un \emph{albero di copertura} esiste un \emph{arco} $(x,y)\in C$
@@ -1013,12 +1013,12 @@ dove $V_A$ è l'insieme di \emph{nodi} raggiunti dagli \emph{archi} in $A$.
 
 L'algoritmo viene implementato facendo uso di una \emph{coda a priorità} $Q$
 nella quale vengono mantenuti tutti i \emph{nodi} non ancora raggiunti e sono
-ordinati in base a una \emph{priorità} definita come il peso minimo di un
+ordinati in base a una \emph{priorità}, definita come il peso minimo di un
 \emph{arco} che collega un \emph{nodo} a un \emph{nodo} dell'\emph{albero} o
 $+\infty$ se tale \emph{arco} non esiste. Inoltre, implementando l'\emph{albero}
 usando il \emph{vettore dei padri}, ogni \emph{nodo} $v$ mantiene un puntatore
 al proprio \emph{padre} $p[v]$ e quindi l'insieme $A$ è mantenuto implicitamente:
-\[A=\{(v,p[v])\,|\,v\in V-Q-\{r\}\}\]
+\[A=\left\{(v,p[v])\,|\,v\in V-Q-\{r\}\right\}\]
 
 \begin{minicode}{Implementazione Algoritmo di Prim}
 \ind\bc{int}[] prim(\bc{GRAPH} G, \bc{NODE} r)\\
@@ -1058,7 +1058,7 @@ otteniamo la seguente tabella dei costi:
         \hline
     \end{tabular}
 \end{table}\noindent
-La \emph{complessità} totale è quindi:
+La \emph{complessità} totale è:
 \[T(n)=O(n+n\log n+m\log n)=O(m\log n)\]
 Quindi, l'\emph{Algoritmo di Prim} e l'\emph{Algoritmo di Kruskal} sono
 asintoticamente uguali.
