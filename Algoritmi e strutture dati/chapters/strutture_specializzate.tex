@@ -886,9 +886,9 @@ caso di unione con un altro \emph{insieme}.
 Utilizzando la struttura dati così definita, possiamo semplificare molto
 l'algoritmo per la ricerca delle \emph{componenti connesse} di un \emph{grafo}
 $G=(V,E)$. In particolare, è sufficiente inizializzare la struttura vedendo ogni
-\emph{nodo} come un \emph{insieme}, quindi procedere ad unire \texttt{merge(u,v)}
-per ogni \emph{arco} $(u,v)\in E$. Al termine, ogni \emph{insieme disgiunto}
-rappresenterà una \emph{componente connesse}.
+\emph{nodo} come un \emph{insieme}, quindi procedere ad unire ogni \emph{arco}
+$(u,v)\in E$ con una \texttt{merge(u,v)}. Al termine, ogni \emph{insieme
+disgiunto} rappresenterà una \emph{componente connessa}.
 
 \begin{minicode}{Ricerca delle componenti connesse con merge-find set}
     \ind\bc{MFSET} cc(\bc{GRAPH} G)\\
@@ -910,8 +910,8 @@ invocazioni di \texttt{merge}.
 \bigskip\noindent
 Ma quanto costa eseguire una \texttt{merge} e come è implementata?
 
-Ci sono diverse implementazioni possibili tra le quali implementazioni basate su
-\emph{insiemi di liste} e su \emph{insiemi di alberi} (i.e. \emph{foreste}).
+Ci sono diverse implementazioni possibili, tra le quali, implementazioni basate
+su \emph{insiemi di liste} e su \emph{insiemi di alberi} (i.e. \emph{foreste}).
 
 \subsection{Implementazione basata su insiemi di liste}
 Ogni \emph{insieme} viene rappresentato da una \emph{lista concatenata} in cui
@@ -921,8 +921,8 @@ il primo elemento della lista.
 
 La primitiva \texttt{find} è banale, perché dato un \emph{elemento} è sufficiente
 restituire il valore del puntatore al \emph{rappresentante}, quindi richiede un
-tempo $O(1)$. Per la \texttt{merge}, si prende il \emph{rappresentate} di un
-elemento, lo si \q{appende} alla \emph{lista} del primo e si aggiornano tutti i
+tempo $O(1)$. Per la \texttt{merge}, si prende il \emph{rappresentate} del secondo
+parametro, lo si \q{appende} alla \emph{lista} del primo e si aggiornano tutti i
 \emph{rappresentati} della \emph{lista} \q{appesa}. Nel caso pessimo, eseguire
 $n$ operazioni \texttt{merge} costa $O(n^2)$, quindi il \emph{costo ammortizzato}
 è $O(n)$.
@@ -936,8 +936,8 @@ $n$ operazioni \texttt{merge} costa $O(n^2)$, quindi il \emph{costo ammortizzato
 \subsection{Implementazione basata su insiemi di alberi}
 Ogni \emph{insieme} viene rappresentato da un \emph{albero} in cui ogni \emph{nodo}
 contiene il proprio valore e un puntatore al \emph{padre}. La \emph{radice} è il
-\emph{rappresentante} dell'\emph{insieme} e il puntatore al \emph{padre} punta a
-se stessa.
+\emph{rappresentante} dell'\emph{insieme} e il puntatore al \emph{padre} punta
+al \emph{nodo} stesso.
 
 \begin{figure}[h!]
 \centering
@@ -995,7 +995,7 @@ memorizzare in ogni \emph{lista} l'informazione sulla propria lunghezza e
 implementare la \texttt{merge} in modo che modifichi i puntatori dei \emph{nodi}
 che stanno nella \emph{lista} più corta. La lunghezza può essere mantenuta in
 $O(1)$ ed è possibile dimostrare che in questo tipo di implementazione il
-\emph{costo ammortizzato} della \texttt{merge} è $O(\log n)$.
+\emph{costo ammortizzato} della \texttt{merge} si riduce ad $O(\log n)$.
 
 \paragraph{Euristica sul rango}
 Abbiamo detto che per gli \emph{alberi} conviene cercare di minimizzare le
@@ -1017,7 +1017,7 @@ modificare la \texttt{merge} in modo che nel caso di \emph{alberi} di con
 \emph{ranghi} diversi, sia l'\emph{albero} con \emph{rango} minore ad essere
 \q{agganciato} all'altro. In questa situazione, l'\emph{altezza}
 dell'\emph{albero} con \emph{rango} maggiore non cambia, ma se invece i due
-\emph{alberi} avessero pari \emph{rango}, l'\emph{altezza} finale sarebbe
+\emph{alberi} avessero pari \emph{rango}, l'\emph{altezza} finale andrebbe
 incrementata di 1.
 
 \begin{definition}[Legame tra il rango di un albero e il proprio numero di nodi]
@@ -1028,8 +1028,8 @@ incrementata di 1.
     Procediamo per induzione sul \emph{rango} di $r$.
 
     \paragraph{Caso base: \bm{$rank[r]=0$}}
-    Dopo l'inizializzazione della struttura ogni \emph{albero} ha $2^{rank[r]}=1$
-    \emph{nodi};
+    Dopo l'inizializzazione della struttura ogni \emph{albero} ha $2^{rank[r]}
+    =2^0=1$ \emph{nodi};
 
     \paragraph{Passo induttivo: \bm{$rank[r]>0$}}
     Facendo la \texttt{merge} di due \emph{alberi} $x$ e $y$ di \emph{rango}
@@ -1037,7 +1037,7 @@ incrementata di 1.
     \begin{enumerate}
         \item \bm{$rank[x]>rank[y]$}: il \emph{rango} dell'\emph{albero} $r$
         ottenuto è $rank[r]=rank[x]$. Per induzione, il numero di \emph{nodi} di
-        $r$ è almeno pari a $2{rank[x]}+2^{rank[y]}$ e quindi è maggiore di
+        $r$ è almeno pari a $2^{rank[x]}+2^{rank[y]}$ e quindi è maggiore di
         $2^{rank[x]}$;
         \item \bm{$rank[x]=rank[y]$}: il \emph{rango} dell'\emph{albero} $r$
         ottenuto è $rank[r]=rank[x]+1$. Per induzione, il numero di \emph{nodi}
@@ -1119,11 +1119,11 @@ il \emph{costo ammortizzato} di una singola operazione è $O(1)$.
 \paragraph{Implementazione}
 \begin{code}{Merge-find set basati su insiemi di alberi}
 \begin{minipage}[t]{0.48\textwidth}
-\bc{int}[] parent\\
-\bc{int}[] rank\\
+\bc{int}[] parent\hfill\com{\emph{Vettore dei padri}}
+\bc{int}[] rank\hfill\com{\emph{Ranghi} dei \emph{nodi}}
 
 \ind\bc{MFSET} Mfset(\bc{int} n)\\
-    \bc{MFSET} M = new \bc{MFSET}\\
+    \bc{MFSET} t = new \bc{MFSET}\\
     t.parent = new \bc{int}[1\dots n]\\
     t.rank = new \bc{int}[1\dots n]\\
     \indf for (i = 1 to n) do\\
@@ -1144,7 +1144,7 @@ il \emph{costo ammortizzato} di una singola operazione è $O(1)$.
         \indf if (r$_x$ $\neq$ r$_y$) then\\
             \indff if (rank[r$_x$] > rank[r$_y$]) then\\
                 parent[r$_y$] = r$_x$\\
-            \indff else if (rank[r$_y$] > rank[r$_x$]) then\\
+            \indff else\:if\:(rank[r$_y$]\;>\;rank[r$_x$])\:then\\
                 parent[r$_x$] = r$_y$\\
             \indff else\\
                 parent[r$_x$] = r$_y$\\
