@@ -361,3 +361,8 @@ spanning
 fill
 red
 Kruskal
+at
+west
+east
+dashed
+thick

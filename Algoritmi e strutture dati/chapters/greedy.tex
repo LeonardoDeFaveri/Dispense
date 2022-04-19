@@ -137,9 +137,51 @@ di tutti gli intervalli è $1$. Cioè, vogliamo cercare l'insieme contenente il
 maggior numero di intervalli.
 
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.45\textwidth]{intervalli-ordinati-greedy1.png}
-    \caption{Possibile soluzione}
+\centering
+\resizebox{0.45\textwidth}{!}{
+\begin{graph}
+    \tikzset{
+        cell/.style={rectangle, draw, minimum size=10mm},
+        thick/.style={line width=2pt}
+    }
+    \foreach \x in {0,...,14}
+        \foreach \y in {1,...,11}
+        {
+        \ifthenelse{\x = 14\and\y = 11}{
+            \node[cell] (\x\y) at (\x,-\y) [label={[xshift=3mm]below left:{$\x$}},
+            label={[xshift=-3.5mm]below right:{$15$}}] {};
+        }{
+            \ifthenelse{\x = 0\and\y = 11}{
+            \node[cell] (\x\y) at (\x,-\y) [label=left:{$\y$},
+                label={[xshift=3mm]below left:{$\x$}}] {};
+            }{  
+            \ifthenelse{\x = 0}{
+                \node[cell] (\x\y) at (\x,-\y) [label=left:{$\y$}] {};
+            }{
+                \ifthenelse{\y = 11}{
+                \node[cell] (\x\y) at (\x,-\y) [label={[xshift=3mm]below left:{$\x$}}] {};
+                }{
+                \node[cell] (\x\y) at (\x,-\y) {};
+                }
+            }
+            }
+        }
+        }
+
+    \path[<->]  (11.west) edge[thick, red] (31.east)
+                (32.west) edge[thick]      (42.east)
+                (03.west) edge[thick]      (53.east)
+                (54.west) edge[thick, red] (74.east)
+                (35.west) edge[thick]      (75.east)
+                (56.west) edge[thick]      (86.east)
+                (67.west) edge[thick]      (97.east)
+                (88.west) edge[thick, red] (108.east)
+                (89.west) edge[thick]      (119.east)
+                (210.west) edge[thick]     (1210.east)
+                (1211.west) edge[thick, red] (1311.east);
+    \end{graph}
+}
+\caption{Possibile soluzione}
 \end{figure}
 
 \subsection{Approccio basato su programmazione dinamica}
@@ -235,9 +277,51 @@ il problema alla ricerca dell'\emph{insieme indipendente massimale} in $S[m\dots
 j]$.
 
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.45\textwidth]{intervalli-ordinati-greedy1.png}
-    \caption{Soluzione con \emph{scelte ingorde}}
+\centering
+\resizebox{0.45\textwidth}{!}{
+\begin{graph}
+    \tikzset{
+        cell/.style={rectangle, draw, minimum size=10mm},
+        thick/.style={line width=2pt}
+    }
+    \foreach \x in {0,...,14}
+        \foreach \y in {1,...,11}
+        {
+        \ifthenelse{\x = 14\and\y = 11}{
+            \node[cell] (\x\y) at (\x,-\y) [label={[xshift=3mm]below left:{$\x$}},
+            label={[xshift=-3.5mm]below right:{$15$}}] {};
+        }{
+            \ifthenelse{\x = 0\and\y = 11}{
+            \node[cell] (\x\y) at (\x,-\y) [label=left:{$\y$},
+                label={[xshift=3mm]below left:{$\x$}}] {};
+            }{  
+            \ifthenelse{\x = 0}{
+                \node[cell] (\x\y) at (\x,-\y) [label=left:{$\y$}] {};
+            }{
+                \ifthenelse{\y = 11}{
+                \node[cell] (\x\y) at (\x,-\y) [label={[xshift=3mm]below left:{$\x$}}] {};
+                }{
+                \node[cell] (\x\y) at (\x,-\y) {};
+                }
+            }
+            }
+        }
+        }
+
+    \path[<->]  (11.west) edge[thick, red] (31.east)
+                (32.west) edge[thick]      (42.east)
+                (03.west) edge[thick]      (53.east)
+                (54.west) edge[thick, red] (74.east)
+                (35.west) edge[thick]      (75.east)
+                (56.west) edge[thick]      (86.east)
+                (67.west) edge[thick]      (97.east)
+                (88.west) edge[thick, red] (108.east)
+                (89.west) edge[thick]      (119.east)
+                (210.west) edge[thick]     (1210.east)
+                (1211.west) edge[thick, red] (1311.east);
+    \end{graph}
+}
+\caption{Soluzione con \emph{scelte ingorde}}
 \end{figure}
 
 \begin{minicode}{Soluzione basata su programmazione greedy}
@@ -262,17 +346,197 @@ sono già ordinati, $O(n\log n)$ altrimenti.
     precedenti è il seguente:
 
     \begin{figure}[h!]
-        \centering
-        \subfloat{\includegraphics[width=0.48\textwidth]
-        {intervalli-ordinati-greedy-s1.png}}
-        \hfill
-        \subfloat{\includegraphics[width=0.48\textwidth]
-        {intervalli-ordinati-greedy-s2.png}}\\
-        \subfloat{\includegraphics[width=0.48\textwidth]
-        {intervalli-ordinati-greedy-s3.png}}
-        \hfill
-        \subfloat{\includegraphics[width=0.48\textwidth]
-        {intervalli-ordinati-greedy-s4.png}}
+    \centering
+    \subfloat{
+    \resizebox{0.48\textwidth}{!}{
+        \begin{graph}
+            \tikzset{
+              cell/.style={rectangle, draw, minimum size=10mm},
+              }
+            \foreach \x in {0,...,14}
+              \foreach \y in {1,...,11}
+              {
+                \ifthenelse{\x = 14\and\y = 11}{
+                  \node[cell] (\x\y) at (\x,-\y) [label={[xshift=3mm]below left:{$\x$}},
+                  label={[xshift=-3.5mm]below right:{$15$}}] {};
+                }{
+                  \ifthenelse{\x = 0\and\y = 11}{
+                    \node[cell] (\x\y) at (\x,-\y) [label=left:{$\y$},
+                      label={[xshift=3mm]below left:{$\x$}}] {};
+                  }{  
+                    \ifthenelse{\x = 0\and\y = 1}{
+                      \node[cell] (\x\y) at (\x,-\y) [label={[red]left:{$last=\y$}}] {};
+                    }{
+                      \ifthenelse{\y = 11}{
+                        \node[cell] (\x\y) at (\x,-\y) [label={[xshift=3mm]below left:{$\x$}}] {};
+                      }{
+                        \ifthenelse{\x = 0}{
+                          \node[cell] (\x\y) at (\x,-\y) [label=left:{$\y$}] {};
+                        }{
+                          \node[cell] (\x\y) at (\x,-\y) {};
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+        
+            \path[<->]  (11.west) edge[line width=1.5pt, red] (31.east)
+                        (32.west) edge[line width=1.5pt, dashed]      (42.east)
+                        (03.west) edge[line width=1.5pt, dashed]      (53.east)
+                        (54.west) edge[line width=1.5pt] (74.east)
+                        (35.west) edge[line width=1.5pt]      (75.east)
+                        (56.west) edge[line width=1.5pt]      (86.east)
+                        (67.west) edge[line width=1.5pt]      (97.east)
+                        (88.west) edge[line width=1.5pt] (108.east)
+                        (89.west) edge[line width=1.5pt]      (119.east)
+                        (210.west) edge[line width=1.5pt]     (1210.east)
+                        (1211.west) edge[line width=1.5pt] (1311.east);;
+          \end{graph}
+    }
+    }
+    \hfill
+    \subfloat{
+    \resizebox{0.48\textwidth}{!}{
+        \begin{graph}
+            \tikzset{
+              cell/.style={rectangle, draw, minimum size=10mm},
+              }
+            \foreach \x in {0,...,14}
+              \foreach \y in {1,...,11}
+              {
+                \ifthenelse{\x = 14\and\y = 11}{
+                  \node[cell] (\x\y) at (\x,-\y) [label={[xshift=3mm]below left:{$\x$}},
+                  label={[xshift=-3.5mm]below right:{$15$}}] {};
+                }{
+                  \ifthenelse{\x = 0\and\y = 11}{
+                    \node[cell] (\x\y) at (\x,-\y) [label=left:{$\y$},
+                      label={[xshift=3mm]below left:{$\x$}}] {};
+                  }{  
+                    \ifthenelse{\x = 0\and\y = 4}{
+                      \node[cell] (\x\y) at (\x,-\y) [label={[red]left:{$last=\y$}}] {};
+                    }{
+                      \ifthenelse{\y = 11}{
+                        \node[cell] (\x\y) at (\x,-\y) [label={[xshift=3mm]below left:{$\x$}}] {};
+                      }{
+                        \ifthenelse{\x = 0}{
+                          \node[cell] (\x\y) at (\x,-\y) [label=left:{$\y$}] {};
+                        }{
+                          \node[cell] (\x\y) at (\x,-\y) {};
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+        
+            \path[<->]  (11.west) edge[line width=1.5pt, red] (31.east)
+                        (32.west) edge[line width=1.5pt, dashed]      (42.east)
+                        (03.west) edge[line width=1.5pt, dashed]      (53.east)
+                        (54.west) edge[line width=1.5pt, red] (74.east)
+                        (35.west) edge[line width=1.5pt, dashed]      (75.east)
+                        (56.west) edge[line width=1.5pt, dashed]      (86.east)
+                        (67.west) edge[line width=1.5pt, dashed]      (97.east)
+                        (88.west) edge[line width=1.5pt] (108.east)
+                        (89.west) edge[line width=1.5pt]      (119.east)
+                        (210.west) edge[line width=1.5pt]     (1210.east)
+                        (1211.west) edge[line width=1.5pt] (1311.east);;
+          \end{graph}
+    }
+    }\\
+    \subfloat{
+    \resizebox{0.48\textwidth}{!}{
+        \begin{graph}
+            \tikzset{
+              cell/.style={rectangle, draw, minimum size=10mm},
+              }
+            \foreach \x in {0,...,14}
+              \foreach \y in {1,...,11}
+              {
+                \ifthenelse{\x = 14\and\y = 11}{
+                  \node[cell] (\x\y) at (\x,-\y) [label={[xshift=3mm]below left:{$\x$}},
+                  label={[xshift=-3.5mm]below right:{$15$}}] {};
+                }{
+                  \ifthenelse{\x = 0\and\y = 11}{
+                    \node[cell] (\x\y) at (\x,-\y) [label=left:{$\y$},
+                      label={[xshift=3mm]below left:{$\x$}}] {};
+                  }{  
+                    \ifthenelse{\x = 0\and\y = 8}{
+                      \node[cell] (\x\y) at (\x,-\y) [label={[red]left:{$last=\y$}}] {};
+                    }{
+                      \ifthenelse{\y = 11}{
+                        \node[cell] (\x\y) at (\x,-\y) [label={[xshift=3mm]below left:{$\x$}}] {};
+                      }{
+                        \ifthenelse{\x = 0}{
+                          \node[cell] (\x\y) at (\x,-\y) [label=left:{$\y$}] {};
+                        }{
+                          \node[cell] (\x\y) at (\x,-\y) {};
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+        
+            \path[<->]  (11.west) edge[line width=1.5pt, red] (31.east)
+                        (32.west) edge[line width=1.5pt, dashed]      (42.east)
+                        (03.west) edge[line width=1.5pt, dashed]      (53.east)
+                        (54.west) edge[line width=1.5pt, red] (74.east)
+                        (35.west) edge[line width=1.5pt, dashed]      (75.east)
+                        (56.west) edge[line width=1.5pt, dashed]      (86.east)
+                        (67.west) edge[line width=1.5pt, dashed]      (97.east)
+                        (88.west) edge[line width=1.5pt, red] (108.east)
+                        (89.west) edge[line width=1.5pt, dashed]      (119.east)
+                        (210.west) edge[line width=1.5pt, dashed]     (1210.east)
+                        (1211.west) edge[line width=1.5pt] (1311.east);;
+          \end{graph}
+    }
+    }
+    \hfill
+    \subfloat{
+    \resizebox{0.487\textwidth}{!}{
+        \begin{graph}
+            \tikzset{
+              cell/.style={rectangle, draw, minimum size=10mm},
+              }
+            \foreach \x in {0,...,14}
+              \foreach \y in {1,...,11}
+              {
+                \ifthenelse{\x = 14\and\y = 11}{
+                  \node[cell] (\x\y) at (\x,-\y) [label={[xshift=3mm]below left:{$\x$}},
+                  label={[xshift=-3.5mm]below right:{$15$}}] {};
+                }{
+                  \ifthenelse{\x = 0\and\y = 11}{
+                    \node[cell] (\x\y) at (\x,-\y) [label={[red]left:{$last=\y$}},
+                      label={[xshift=3mm]below left:{$\x$}}] {};
+                  }{  
+                    \ifthenelse{\y = 11}{
+                    \node[cell] (\x\y) at (\x,-\y) [label={[xshift=3mm]below left:{$\x$}}] {};
+                    }{
+                    \ifthenelse{\x = 0}{
+                        \node[cell] (\x\y) at (\x,-\y) [label=left:{$\y$}] {};
+                    }{
+                        \node[cell] (\x\y) at (\x,-\y) {};
+                    }
+                    }
+                  }
+                }
+              }
+        
+            \path[<->]  (11.west) edge[line width=1.5pt, red] (31.east)
+                        (32.west) edge[line width=1.5pt, dashed]      (42.east)
+                        (03.west) edge[line width=1.5pt, dashed]      (53.east)
+                        (54.west) edge[line width=1.5pt, red] (74.east)
+                        (35.west) edge[line width=1.5pt, dashed]      (75.east)
+                        (56.west) edge[line width=1.5pt, dashed]      (86.east)
+                        (67.west) edge[line width=1.5pt, dashed]      (97.east)
+                        (88.west) edge[line width=1.5pt, red] (108.east)
+                        (89.west) edge[line width=1.5pt, dashed]      (119.east)
+                        (210.west) edge[line width=1.5pt, dashed]     (1210.east)
+                        (1211.west) edge[line width=1.5pt, red] (1311.east);;
+          \end{graph}
+    }
+    }
     \end{figure}
 \end{eg}
 
