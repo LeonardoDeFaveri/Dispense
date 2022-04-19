@@ -1578,8 +1578,60 @@ Vediamo un esempio che possa aiutare a rendere più chiaro il problema.
     
     \newpage
     \begin{figure*}[ht!]
-        \centering
-        \includegraphics[width=0.8\textwidth]{intervalli.png}
+    \centering
+    \resizebox*{0.8\textwidth}{!}{\begin{graph}
+        \tikzset{
+          cell/.style={rectangle, draw, minimum size=10mm},
+          empty/.style={inner sep=0em, minimum size=10mm}
+        }
+    
+        \def\profits{12 12 4 7 8 7 8 10 3 3 15}
+        \readarray\profits\data[1,11]
+    
+        \foreach \x in {0,...,14}
+          \foreach \y in {1,...,11}
+          {
+            \ifthenelse{\x = 14\and\y = 11}{
+              \node[cell] (\x\y) at (\x,-\y) [label={[xshift=3mm]below left:{$\x$}},
+              label={[xshift=-3.5mm]below right:{$15$}}] {};
+            }{
+              \ifthenelse{\x = 0\and\y = 11}{
+                \node[cell] (\x\y) at (\x,-\y) [label=left:{$\y$},
+                  label={[xshift=3mm]below left:{$\x$}}] {};
+              }{  
+                \ifthenelse{\x = 0\and\y = 1}{
+                  \node[cell] (\x\y) at (\x,-\y) [label=left:{$\y$}] {};
+                }{
+                  \ifthenelse{\y = 11}{
+                    \node[cell] (\x\y) at (\x,-\y) [label={[xshift=3mm]below left:{$\x$}}] {};
+                  }{
+                    \ifthenelse{\x = 0}{
+                      \node[cell] (\x\y) at (\x,-\y) [label=left:{$\y$}] {};
+                    }{
+                      \node[cell] (\x\y) at (\x,-\y) {};
+                    }
+                  }
+                }
+              }
+            }
+         }
+    
+        \path[<->]  (13.west) edge[line width=1.5pt]    (33.east)
+                    (32.west) edge[line width=1.5pt]    (42.east)
+                    (010.west) edge[line width=1.5pt]    (510.east)
+                    (54.west) edge[line width=1.5pt]    (74.east)
+                    (35.west) edge[line width=1.5pt]    (75.east)
+                    (51.west) edge[line width=1.5pt]    (81.east)
+                    (67.west) edge[line width=1.5pt]    (97.east)
+                    (88.west) edge[line width=1.5pt]    (108.east)
+                    (89.west) edge[line width=1.5pt]    (119.east)
+                    (211.west) edge[line width=1.5pt]   (1211.east)
+                    (126.west) edge[line width=1.5pt]  (136.east);
+    
+        \foreach \y in {1,...,11} {
+          \node[empty] at (14\y) [label=right:{$\data[1,\y]$}] {};
+        }
+    \end{graph}}
     \end{figure*}\noindent
     Siccome non possono esserci sovrapposizioni, se l'hotel decidesse di
     concedere la sala al cliente 6, non potrebbe concederla al cliente 11
@@ -1592,8 +1644,60 @@ Vediamo un esempio che possa aiutare a rendere più chiaro il problema.
     ordinare gli intervalli per estremi di fine non decrescenti.
 
     \begin{figure*}[ht!]
-        \centering
-        \includegraphics[width=0.8\textwidth]{intervalli-ordinati.png}
+    \centering
+    \resizebox*{0.8\textwidth}{!}{\begin{graph}
+        \tikzset{
+          cell/.style={rectangle, draw, minimum size=10mm},
+          empty/.style={inner sep=0em, minimum size=10mm}
+        }
+    
+        \def\profits{4 12 3 7 8 12 8 10 3 15 7}
+        \readarray\profits\data[1,11]
+    
+        \foreach \x in {0,...,14}
+          \foreach \y in {1,...,11}
+          {
+            \ifthenelse{\x = 14\and\y = 11}{
+              \node[cell] (\x\y) at (\x,-\y) [label={[xshift=3mm]below left:{$\x$}},
+              label={[xshift=-3.5mm]below right:{$15$}}] {};
+            }{
+              \ifthenelse{\x = 0\and\y = 11}{
+                \node[cell] (\x\y) at (\x,-\y) [label=left:{$\y$},
+                  label={[xshift=3mm]below left:{$\x$}}] {};
+              }{  
+                \ifthenelse{\x = 0\and\y = 1}{
+                  \node[cell] (\x\y) at (\x,-\y) [label=left:{$\y$}] {};
+                }{
+                  \ifthenelse{\y = 11}{
+                    \node[cell] (\x\y) at (\x,-\y) [label={[xshift=3mm]below left:{$\x$}}] {};
+                  }{
+                    \ifthenelse{\x = 0}{
+                      \node[cell] (\x\y) at (\x,-\y) [label=left:{$\y$}] {};
+                    }{
+                      \node[cell] (\x\y) at (\x,-\y) {};
+                    }
+                  }
+                }
+              }
+            }
+         }
+    
+        \path[<->]  (11.west) edge[line width=1.5pt]    (31.east)
+                    (32.west) edge[line width=1.5pt]    (42.east)
+                    (03.west) edge[line width=1.5pt]    (53.east)
+                    (54.west) edge[line width=1.5pt]    (74.east)
+                    (35.west) edge[line width=1.5pt]    (75.east)
+                    (56.west) edge[line width=1.5pt]    (86.east)
+                    (67.west) edge[line width=1.5pt]    (97.east)
+                    (88.west) edge[line width=1.5pt]    (108.east)
+                    (89.west) edge[line width=1.5pt]    (119.east)
+                    (210.west) edge[line width=1.5pt]   (1210.east)
+                    (1211.west) edge[line width=1.5pt]  (1311.east);
+    
+        \foreach \y in {1,...,11} {
+          \node[empty] at (14\y) [label=right:{$\data[1,\y]$}] {};
+        }
+    \end{graph}}
     \end{figure*}\noindent
     Ora, per decidere se tenere o meno l'ultimo intervallo, possiamo procedere
     come abbiamo fatto negli esempi precedenti, cioè considerando una qualche

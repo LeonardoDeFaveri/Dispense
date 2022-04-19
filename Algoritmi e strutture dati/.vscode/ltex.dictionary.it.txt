@@ -366,3 +366,4 @@ west
 east
 dashed
 thick
+empty
