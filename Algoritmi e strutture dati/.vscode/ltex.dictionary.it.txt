@@ -367,3 +367,9 @@ east
 dashed
 thick
 empty
+newest
+compat
+bend
+antisimmetria
+equals
+dotted

@@ -1,0 +1,327 @@
+\chapter{Ricerca locale}
+\section{Introduzione}
+La \emph{ricerca locale} è una tecnica risolutiva che, partendo da una soluzione
+ammissibile qualunque, ricerca una soluzione migliore nelle \q{vicinanze} di
+quella nota. Questo processo continua fino ad arrivare a una soluzione localmente
+ottima. La particolarità di questa tecnica è che la soluzione trovata potrebbe
+non essere la migliore possibile.
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\begin{axis}[xmin = 0, xmax = 12, ymin = -1.5, ymax = 2.0,
+        axis lines = left,
+        xlabel = $x$,
+        ylabel = {\emph{Costo}},
+        ylabel style={rotate=-90},
+        every axis x label/.style={
+            at={(ticklabel* cs:1)},
+            anchor=west,
+        },
+        every axis y label/.style={
+            at={(ticklabel* cs:1)},
+            anchor=south,
+        },
+        ticks=none
+    ]
+    \addplot[
+        domain=0:12,
+        samples = 200,
+        smooth
+    ] {exp(-x/10)*( cos(deg(x)) + sin(deg(x))/10 )};
+
+    \node[label={below:{$A$}}, circle, fill, inner sep=1.51pt]
+        at (axis cs:pi,{-exp(-pi/10)}) {};
+    \node[label={below:{$B$}}, circle, fill, inner sep=1.5pt]
+        at (axis cs:{3*pi},{-exp(-3*pi/10)}) {};
+\end{axis}
+\end{tikzpicture}
+\caption{Possibili soluzioni locali}
+\end{figure}
+
+\noindent
+Nel grafico di cui sopra, se la ricerca partisse da una soluzione \q{vicina} a
+$B$, un algoritmo basato su \emph{ricerca locale} potrebbe convergere sul punto
+$B$, sebbene esso non rappresenti una soluzione ottima globale.
+
+\begin{minicode}{Implementazione generica di un algoritmo basato su ricerca locale}
+\ind\bc{SOL} ricercaLocale()\\
+    \bc{SOL} sol = \{ Una qualsiasi soluzione ammissibile \}\\
+    \indf while ($\exists$S $\in$ I(Sol) migliore di sol) do\\
+        sol = S\\
+    \indf return sol
+\end{minicode}
+
+\section{Problema della ricerca del flusso massimo}
+\begin{definition}[Rete di flusso]
+    Una rete di flusso $G=(V,E,s,t,c)$ è data da un grafo orientato $G=(V,E)$,
+    da due nodi $s,t\in V$, detti rispettivamente sorgente e pozzo, e da una
+    funzione di capacità $c:V\times V\to\mathbb{R}^+$ tale per cui $c(x,y)=0$
+    $\forall (x,y)\notin E$.
+\end{definition}
+\begin{note}
+    Assumiamo che per ogni \emph{nodo} $x\in V$ esista un \emph{cammino} da $s$
+    in $t$ passante per esso, e ignoriamo qualsiasi \emph{nodo} che non goda di
+    questa proprietà.
+\end{note}
+\begin{definition}[Flusso]
+    Un flusso in $G$ è una funzione $f:V\times V\to\mathbb{R}$ che soddisfa le
+    seguenti proprietà:
+    \begin{enumerate}
+        \item Vincolo sulla capacità: $f(x,y)\leq c(x,y)$ $\forall x,y\in V$;
+        \item Antisimmetria: $f(x,y)=-f(x,y)$ $\forall x,y\in V$;
+        \item Conservazione del flusso: $sum_{y\in V}f(x,y)=0$ $\forall x\in V-\{s,t\}$;
+    \end{enumerate}
+\end{definition}
+
+\noindent
+La prima proprietà stabilisce che un \emph{flusso} non può mai eccedere la
+capacità di un \emph{arco}. In particolare, se la capacità di un \emph{arco}
+tra due \emph{nodi} $A$ e $B$ è 7, e $f(A,B)=5$, nei \emph{grafi} useremo la
+seguente notazione:
+
+\begin{figure}[h!]
+    \centering
+    \begin{graph}
+        \node[main] (a) {$A$};
+        \node[main] (b) [right of=a, xshift=15mm] {$B$};
+
+        \path[->]   (a) edge node[above] {$5/7$} (b);
+    \end{graph}
+    \caption{\emph{Vincolo sulla capacità}}
+\end{figure}
+
+\noindent
+La proprietà di \emph{antisimmetria} ci dice invece che il \emph{flusso}
+che attraversa un \emph{arco} in direzione $(x,y)$ è l'opposto del \emph{flusso}
+che attraverso lo stesso \emph{arco} in direzione $(y,x)$.
+
+\begin{figure}[h!]
+    \centering
+    \begin{graph}
+        \node[main] (a) {$A$};
+        \node[main] (b) [right of=a, xshift=15mm] {$B$};
+
+        \path[->]   (a) edge[bend left=25] node[above] {$5$} (b)
+                    (b) edge[bend left=25, dashed] node[above] {$-5$} (a);
+    \end{graph}
+    \caption{\emph{Antisimmetria}}
+\end{figure}
+
+\noindent
+Infine, la proprietà di \emph{conservazione del flusso} ci dice che per ogni
+\emph{nodo} diverso dalla \emph{sorgente} e dal \emph{pozzo}, la somma dei
+\emph{flussi} entranti ed uscenti è sempre pari a $0$.
+
+\begin{figure}[h!]
+    \centering
+    \begin{graph}
+        \node[main] (a) {$A$};
+        \node[main] (c) [below right of=a, xshift=10mm] {$C$};
+        \node[main] (b) [below left of=c, xshift=-10mm] {$B$};
+        \node[main] (d) [above right of=c, xshift=10mm] {$D$};
+        \node[main] (e) [below right of=c, xshift=10mm] {$E$};
+
+        \path[->]   (a) edge[bend left=25] node[above] {$2$} (c)
+                    (c) edge[bend left=25, dashed] node[above] {$-2$} (a)
+                    (c) edge[bend left=25] node[above] {$1$} (d)
+                    (d) edge[bend left=25, dashed] node[above] {$-1 $} (c)
+                    (c) edge[bend left=25] node[above] {$4$} (e)
+                    (e) edge[bend left=25, dashed] node[above] {$-4$} (c)
+                    (b) edge[bend left=25] node[above] {$3$} (c)
+                    (c) edge[bend left=25, dashed] node[above] {$-3$} (b);
+    \end{graph}
+    \caption{\emph{Conservazione del flusso}}
+\end{figure}
+
+\begin{definition}[Valore del flusso]
+    Il valore di un flusso $f$ è definito come:
+    \[|f|=\sum_{(s,x)\in E}f(s,x)\]
+    ovvero come la quantità di flusso uscente da $s$.
+\end{definition}
+
+\noindent
+Date tutte queste definizioni possiamo finalmente enunciare il problema in
+questione.
+
+\begin{problem}[Problema della ricerca del flusso massimo]
+    Data una rete $G=(V,E,s,t,c)$, trovare un flusso che abbia valore massimo
+    fra tutti i flussi associabili alla rete. In particolare, ricercare il flusso
+    $f^*$ tale per cui $|f^*|=\max\{|f|\}$.
+\end{problem}
+
+\subsection{Metodo delle reti residue}
+L'algoritmo che intendiamo realizzare è detto \emph{metodo delle reti residue}
+perché è basato su un approccio additivo. In particolare, partendo da un
+\emph{flusso} $f$ inizialmente nullo, si ripetono le seguenti operazioni:
+\begin{enumerate}
+    \item \q{Sottrazione} del \emph{flusso} $f$ alla rete attuale, ottenendo
+    una \emph{rete residua};
+    \item Ricerca di un secondo \emph{flusso} $g$ all'interno della \emph{rete
+    residua};
+    \item Somma di $g$ ad $f$;
+\end{enumerate}
+fino a quando $g$ non diventa un \emph{flusso} nullo.
+
+\begin{note}
+    Questo particolare algoritmo permette sempre di ottenere il \emph{flusso
+    massimo}, quindi non soffre del problema al quale avevamo accennato
+    inizialmente.
+\end{note}
+
+\noindent
+Diamo ora delle altre definizioni:
+\begin{definition}[Flusso nullo]
+    È definito flusso nullo la funzione $f_0:V\times V\to\mathbb{R^+}$ tale che:
+    \[f(x,y)=0\qquad\forall x,y\in V\]
+\end{definition}
+
+\begin{figure}[h!]
+    \centering
+    \begin{graph}
+        \node[main] (a) [label=above left:{$s$}] {$A$};
+        \node[main] (b) [above right of=a, xshift=10mm] {$B$};
+        \node[main] (c) [below right of=a, xshift=10mm] {$C$};
+        \node[main] (d) [below right of=b, xshift=10mm,
+            label=above right:{$t$}] {$D$};
+
+        \node[] (e) [left of=a, xshift=-10mm] {$|f|=0$};
+
+        \path[->]   (a) edge node[above left] {$0/2$} (b)
+                    (b) edge node[above right] {$0/3$} (d)
+                    (a) edge node[below left] {$0/2$} (c)
+                    (c) edge node[right] {$0/1$} (b)
+                    (c) edge node[below right] {$0/1$} (d);
+    \end{graph}
+    \caption{\emph{Flusso nullo}}
+\end{figure}
+
+\newpage
+\begin{definition}[Somma di flussi]
+    Per ogni coppia di flussi $f_1$ e $f_2$ in $G$, definiamo il flusso somma
+    $g=f_1+f_2$ come un flusso tale che:
+    \[g(x,y)=f_1(x,y)+f_2(x,y)\qquad\forall x,y\in V\]
+\end{definition}
+
+\begin{figure}[h!]
+    \centering
+    \begin{graph}
+        \node[main] (a1) [label=above left:{$s$}] {$A$};
+        \node[main] (b1) [above right of=a1, xshift=10mm] {$B$};
+        \node[main] (c1) [below right of=a1, xshift=10mm] {$C$};
+        \node[main] (d1) [below right of=b1, xshift=10mm,
+            label=above right:{$t$}] {$D$};
+
+        \path[->]   (a1) edge node[above left] {$1/2$} (b1)
+                    (b1) edge node[above right] {$1/3$} (d1)
+                    (a1) edge node[below left] {$1/2$} (c1)
+                    (c1) edge node[right] {$0/1$} (b1)
+                    (c1) edge node[below right] {$1/1$} (d1);
+
+        \node[] (plus) [below of=c1, yshift=10mm] {$+$};
+
+        \node[main] (b2) [below of=plus, yshift=10mm] {$B$};
+        \node[main] (a2) [below left of=b2, xshift=-10mm,
+            label=above left:{$s$}] {$A$};
+        \node[main] (c2) [below right of=a2, xshift=10mm] {$C$};
+        \node[main] (d2) [below right of=b2, xshift=10mm,
+            label=above right:{$t$}] {$D$};
+
+        \path[->]   (a2) edge node[above left] {$1/2$} (b2)
+                    (b2) edge node[above right] {$2/3$} (d2)
+                    (a2) edge node[below left] {$1/2$} (c2)
+                    (c2) edge node[right] {$1/1$} (b2)
+                    (c2) edge node[below right] {$0/1$} (d2);
+
+        \node[] (equals) [right of=plus, xshift=20mm] {$=$};
+
+        \node[main] (a3) [right of=equals, label=above left:{$s$}] {$A$};
+        \node[main] (b3) [above right of=a3, xshift=10mm] {$B$};
+        \node[main] (c3) [below right of=a3, xshift=10mm] {$C$};
+        \node[main] (d3) [below right of=b3, xshift=10mm,
+            label=above right:{$t$}] {$D$};
+
+        \path[->]   (a3) edge node[above left] {$2/2$} (b3)
+                    (b3) edge node[above right] {$3/3$} (d3)
+                    (a3) edge node[below left] {$1/2$} (c3)
+                    (c3) edge node[right] {$1/1$} (b3)
+                    (c3) edge node[below right] {$1/1$} (d3);
+    \end{graph}
+    \caption{\emph{Somma di flussi}}
+\end{figure}
+
+\begin{definition}[Capacità residua]
+    È definita capacità residua di un flusso $f$ in una rete $G=(V,E,s,t,c)$ una
+    funziona $c_f:V\times V\to\mathbb{R^+}$ tale che:
+    \[c_f(x,y)=c(x,y)-f(x,y)\qquad\forall x,y\in V\]
+\end{definition}
+
+\begin{figure}[h!]
+    \centering
+    \begin{graph}
+        \node[main] (a) {$A$};
+        \node[main] (b) [right of=a, xshift=15mm] {$B$};
+
+        \path[->]   (a) edge[bend left=25] node[above] {$5+\underline{2}/7$} (b)
+                    (b) edge[bend left=25, dashed] node[above] {$-5+\underline{5}/0$} (a);
+    \end{graph}
+    \caption{\emph{Capacità residua}}
+\end{figure}
+
+\noindent
+Possiamo notare che gli \emph{archi all'indietro} che avevamo visto enunciando
+la proprietà di \emph{antisimmetria} dei \emph{flussi}, si originano dalla
+definizione di \emph{capacità residua}. Infatti, poiché l'\emph{arco} $(B,A)$
+non esiste, $c(B,A)=0$ e quindi, vale la seguente catena di uguaglianze:
+\[c_f(B,A)\begin{array}[t]{cll}
+    = & c(B,A)-f(B,A) & \quad\text{Dalla definizione di \emph{capacità residua}}\\
+    = & c(B,A)-(-f(A,B)) & \quad\text{Per la proprietà di \hyperref[def:144]
+        {\emph{antisimmetria}}}\\
+    = & 0 - (-5) = 5
+\end{array}\]
+
+\newpage
+\begin{definition}[Rete residua]
+    Data una rete di flusso $G=(V,E,s,t,c)$ e un flusso $f$ su $G$, una rete
+    $G_f=(V,E_f,s,t,c_f)$ è una rete residua di $G$ rispetto ad $f$, se è tale
+    per cui:
+    \[c_f(x,y)>0\qquad\forall x,y\in V\::\:(x,y)\in E_f\]
+\end{definition}
+
+\begin{figure}[h!]
+\centering
+\begin{graph}
+    \node[main] (a) [label=above left:{$s$}] {$A$};
+    \node[main] (b) [above right of=a, xshift=40mm, yshift=10mm] {$B$};
+    \node[main] (c) [below right of=a, xshift=40mm, yshift=-10mm] {$C$};
+    \node[main] (d) [below right of=b, xshift=40mm, yshift=-10mm,
+        label=above right:{$t$}] {$D$};
+
+    \path[->]   (a) edge[bend left=25, dotted] node[above left]
+                    {$2+\underline{0}/2$} (b)
+                (b) edge[bend left=25, dashed] node[above left]
+                    {$-2+\underline{2}/0$} (a)
+                (b) edge[bend left=25] node[above right]
+                    {$2+\underline{1}/3$} (d)
+                (d) edge[bend left=25, dashed] node[above right]
+                    {$-2+\underline{2}/0$} (b)
+                (a) edge[bend right=25] node[below left]
+                    {$1+\underline{1}/2$} (c)
+                (c) edge[bend right=25, dashed] node[below left]
+                    {$-1+\underline{1}/0$} (a)
+                (c) edge[bend left=25] node[left]
+                    {$0+\underline{1}/1$} (b)
+                (b) edge[bend left=25, dashed] node[right]
+                    {$-0+\underline{0}/0$} (c)
+                (c) edge[bend right=25, dotted] node[below right]
+                    {$1+\underline{0}/1$} (d)
+                (d) edge[bend right=25, dashed] node[below right]
+                    {$-1+\underline{1}/0$} (c);
+\end{graph}
+\caption{Rete residua}
+\end{figure}
+
+\noindent
+Gli \emph{archi} $(A,B)$ e $(C,D)$ sono stati saturati, ovvero $f(A,B)=c(A,B)$
+e $f(C,D)=c(C,D)$. Di conseguenza, la loro \emph{capacità residua} è $0$ e
+quindi non fanno parte della \emph{rete residua}.

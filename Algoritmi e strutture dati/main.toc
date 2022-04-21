@@ -316,6 +316,10 @@
 \contentsline {paragraph}{Complessità}{198}{paragraph*.271}%
 \contentsline {subsection}{\numberline {14.6.3}Algoritmo di Prim}{198}{subsection.14.6.3}%
 \contentsline {paragraph}{Complessità}{199}{paragraph*.273}%
-\contentsline {chapter}{\numberline {A}Appendice A}{200}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{200}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{200}{section.1.A.2}%
+\contentsline {chapter}{\numberline {15}Ricerca locale}{200}{chapter.15}%
+\contentsline {section}{\numberline {15.1}Introduzione}{200}{section.15.1}%
+\contentsline {section}{\numberline {15.2}Problema della ricerca del flusso massimo}{201}{section.15.2}%
+\contentsline {subsection}{\numberline {15.2.1}Metodo delle reti residue}{202}{subsection.15.2.1}%
+\contentsline {chapter}{\numberline {A}Appendice A}{205}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{205}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{205}{section.1.A.2}%

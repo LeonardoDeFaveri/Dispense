@@ -162,6 +162,10 @@
 \BOOKMARK [2][-]{subsection.14.6.1}{Approccio generico}{section.14.6}% 162
 \BOOKMARK [2][-]{subsection.14.6.2}{Algoritmo di Kruskal}{section.14.6}% 163
 \BOOKMARK [2][-]{subsection.14.6.3}{Algoritmo di Prim}{section.14.6}% 164
-\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 165
-\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 166
-\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 167
+\BOOKMARK [0][-]{chapter.15}{Ricerca locale}{}% 165
+\BOOKMARK [1][-]{section.15.1}{Introduzione}{chapter.15}% 166
+\BOOKMARK [1][-]{section.15.2}{Problema della ricerca del flusso massimo}{chapter.15}% 167
+\BOOKMARK [2][-]{subsection.15.2.1}{Metodo delle reti residue}{section.15.2}% 168
+\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 169
+\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 170
+\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 171
