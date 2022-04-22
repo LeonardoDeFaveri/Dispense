@@ -379,3 +379,4 @@ leaf
 circle
 ellipse
 draw
+minCap

@@ -407,7 +407,7 @@ $g(x,y)=0$ per tutte le coppie $x,y\notin C$.
 
 \begin{figure}[h!]
 \centering
-\resizebox*{0.48\textwidth}{!}{\subfloat[\emph{Grafo} iniziale]{\begin{graph}
+\subfloat[\emph{Grafo} iniziale]{\resizebox*{0.48\textwidth}{!}{\begin{graph}
     \node[main] (a) [label=above left:{$s$}] {$a$};
     \node[main] (b) [above right of=a, xshift=10mm] {$b$};
     \node[main] (c) [below right of=a, xshift=10mm] {$c$};
@@ -425,7 +425,7 @@ $g(x,y)=0$ per tutte le coppie $x,y\notin C$.
                 (d) edge node[above right] {$3$} (f)
                 (e) edge node[below right] {$4$} (f);
 \end{graph}}}\hfill
-\resizebox*{0.48\textwidth}{!}{\subfloat[Scelta di un \emph{cammino}]{\begin{graph}
+\subfloat[Scelta di un \emph{cammino}]{\resizebox*{0.48\textwidth}{!}{\begin{graph}
     \node[main] (a) [label=above left:{$s$}] {$a$};
     \node[main] (b) [above right of=a, xshift=10mm] {$b$};
     \node[main] (c) [below right of=a, xshift=10mm] {$c$};
@@ -443,7 +443,7 @@ $g(x,y)=0$ per tutte le coppie $x,y\notin C$.
                 (d) edge node[above right] {$3$} (f)
                 (e) edge[line width=1.3pt] node[below right] {$4$} (f);
 \end{graph}}}\\
-\resizebox*{0.48\textwidth}{!}{\subfloat[Definizione del \emph{flusso} $g$]{\begin{graph}
+\subfloat[Definizione del \emph{flusso} $g$]{\resizebox*{0.48\textwidth}{!}{\begin{graph}
     \node[main] (a) [label=above left:{$s$}] {$a$};
     \node[main] (b) [above right of=a, xshift=10mm] {$b$};
     \node[main] (c) [below right of=a, xshift=10mm] {$c$};
@@ -484,3 +484,234 @@ $g(x,y)=0$ per tutte le coppie $x,y\notin C$.
     \indf while (g $\neq$ f$_0$)\\
     \indf return f
 \end{minicode}
+
+\begin{eg}[Esempio d'esecuzione]
+Supponiamo di eseguire l'algoritmo sullo stesso \emph{grafo} di prima:
+
+\begin{figure}[h!]
+\centering
+\subfloat[\emph{Grafo} iniziale e $f=f_0$]{\resizebox*{0.48\textwidth}{!}{\begin{graph}
+    \node[main] (a) [label=above left:{$s$}] {$a$};
+    \node[main] (b) [above right of=a, xshift=10mm] {$b$};
+    \node[main] (c) [below right of=a, xshift=10mm] {$c$};
+    \node[main] (d) [right of=b, xshift=10mm] {$d$};
+    \node[main] (e) [right of=c, xshift=10mm] {$e$};
+    \node[main] (f) [below right of=d, xshift=10mm, label={above right:{$t$}}] {$f$};
+
+    \path[->]   (a) edge node[above left] {$2$} (b)
+                (a) edge node[below left] {$8$} (c)
+                (b) edge node[right] {$2$} (c)
+                (b) edge node[above] {$7$} (d)
+                (b) edge node[above right] {$3$} (e)
+                (c) edge node[below] {$6$} (e)
+                (d) edge node[right] {$2$} (e)
+                (d) edge node[above right] {$3$} (f)
+                (e) edge node[below right] {$4$} (f);
+\end{graph}}}\hfill
+\subfloat[Scelta di un \emph{cammino} in $G_f$]{\resizebox*{0.48\textwidth}{!}{\begin{graph}
+    \node[main] (a) [label=above left:{$s$}] {$a$};
+    \node[main] (b) [above right of=a, xshift=10mm] {$b$};
+    \node[main] (c) [below right of=a, xshift=10mm] {$c$};
+    \node[main] (d) [right of=b, xshift=10mm] {$d$};
+    \node[main] (e) [right of=c, xshift=10mm] {$e$};
+    \node[main] (f) [below right of=d, xshift=10mm, label={above right:{$t$}}] {$f$};
+
+    \path[->]   (a) edge[line width=1.3pt] node[above left] {$2$} (b)
+                (a) edge node[below left] {$8$} (c)
+                (b) edge node[right] {$2$} (c)
+                (b) edge node[above] {$7$} (d)
+                (b) edge[line width=1.3pt] node[above right] {$3$} (e)
+                (c) edge node[below] {$6$} (e)
+                (d) edge node[right] {$2$} (e)
+                (d) edge node[above right] {$3$} (f)
+                (e) edge[line width=1.3pt] node[below right] {$4$} (f);
+\end{graph}}}\\
+\subfloat[Aggiornamento di $f$]{\resizebox*{0.48\textwidth}{!}{\begin{graph}
+    \node[main] (a) [label=above left:{$s$}] {$a$};
+    \node[main] (b) [above right of=a, xshift=10mm] {$b$};
+    \node[main] (c) [below right of=a, xshift=10mm] {$c$};
+    \node[main] (d) [right of=b, xshift=10mm] {$d$};
+    \node[main] (e) [right of=c, xshift=10mm] {$e$};
+    \node[main] (f) [below right of=d, xshift=10mm, label={above right:{$t$}}] {$f$};
+
+    \path[->]   (b) edge[dashed] node[above, xshift=-2mm] {$2$} (a)
+                (a) edge node[below left] {$8$} (c)
+                (b) edge node[right] {$2$} (c)
+                (b) edge node[above] {$7$} (d)
+                (b) edge[bend left=15] node[above right, yshift=-2mm] {$1$} (e)
+                (e) edge[bend left=15, dashed] node[above, xshift=3mm, yshift=-1mm] {$2$} (b)
+                (c) edge node[below] {$6$} (e)
+                (d) edge node[right] {$2$} (e)
+                (d) edge node[above right] {$3$} (f)
+                (e) edge[bend right=15] node[below right, xshift=-1mm] {$2$} (f)
+                (f) edge[bend right=15, dashed] node[below, xshift=2mm, yshift=1mm] {$2$} (e);
+
+    \node[] (l2) [right of=f] {$f(b,e)=2$};
+    \node[] (l1) [above of=l2, yshift=-13mm] {$f(a,b)=2$};
+    \node[] (l3) [below of=l2, yshift=13mm] {$f(e,f)=2$};
+
+    \node[inner sep=0] (0) [below of=c, yshift=9.5mm] {};
+\end{graph}}}
+\hfill
+\subfloat[Scelta di un \emph{cammino} in $G_f$]{\resizebox*{0.48\textwidth}{!}{\begin{graph}
+    \node[main] (a) [label=above left:{$s$}] {$a$};
+    \node[main] (b) [above right of=a, xshift=10mm] {$b$};
+    \node[main] (c) [below right of=a, xshift=10mm] {$c$};
+    \node[main] (d) [right of=b, xshift=10mm] {$d$};
+    \node[main] (e) [right of=c, xshift=10mm] {$e$};
+    \node[main] (f) [below right of=d, xshift=10mm, label={above right:{$t$}}] {$f$};
+
+    \path[->]   (b) edge[dashed] node[above, xshift=-2mm] {$2$} (a)
+                (a) edge[line width=1.3pt] node[below left] {$8$} (c)
+                (b) edge node[right] {$2$} (c)
+                (b) edge node[above] {$7$} (d)
+                (b) edge[bend left=15] node[above right, yshift=-2mm] {$1$} (e)
+                (e) edge[bend left=15, dashed] node[above, xshift=3mm, yshift=-1mm] {$2$} (b)
+                (c) edge[line width=1.3pt] node[below] {$6$} (e)
+                (d) edge node[right] {$2$} (e)
+                (d) edge node[above right] {$3$} (f)
+                (e) edge[bend right=15, line width=1.3pt] node[below right,
+                    xshift=-1mm] {$2$} (f)
+                (f) edge[bend right=15, dashed] node[below, xshift=2mm, yshift=1mm] {$2$} (e);
+\end{graph}}}\\
+\subfloat[Aggiornamento di $f$]{\resizebox*{0.48\textwidth}{!}{\begin{graph}
+    \node[main] (a) [label=above left:{$s$}] {$a$};
+    \node[main] (b) [above right of=a, xshift=10mm] {$b$};
+    \node[main] (c) [below right of=a, xshift=10mm] {$c$};
+    \node[main] (d) [right of=b, xshift=10mm] {$d$};
+    \node[main] (e) [right of=c, xshift=10mm] {$e$};
+    \node[main] (f) [below right of=d, xshift=10mm, label={above right:{$t$}}] {$f$};
+
+    \path[->]   (b) edge[dashed] node[above, xshift=-2mm] {$2$} (a)
+                (a) edge[bend right=15] node[below left,  yshift=1mm] {$6$} (c)
+                (c) edge[bend right=15, dashed] node[below left, yshift=1mm,
+                    xshift=1mm] {$2$} (a)
+                (b) edge node[right] {$2$} (c)
+                (b) edge node[above] {$7$} (d)
+                (b) edge[bend left=15] node[above right, yshift=-2mm] {$1$} (e)
+                (e) edge[bend left=15, dashed] node[above, xshift=3mm, yshift=-1mm] {$2$} (b)
+                (c) edge[bend right=15] node[below] {$4$} (e)
+                (e) edge[bend right=15, dashed] node[below] {$2$} (c)
+                (d) edge node[right] {$2$} (e)
+                (d) edge node[above right] {$3$} (f)
+                (f) edge[dashed] node[below, xshift=2mm, yshift=1mm] {$4$} (e);
+    
+    \node[] (l2) [right of=f] {$f(a,c)=2$};
+    \node[] (l1) [above of=l2, yshift=-13mm] {$f(c,e)=2$};
+    \node[] (l3) [below of=l2, yshift=13mm] {$f(e,f)=\cancel{2}\,4$};
+
+    \node[inner sep=0] (0) [below of=c, yshift=6.5mm] {};
+\end{graph}}}
+\hfill
+\subfloat[Scelta di un \emph{cammino} in $G_f$]{\resizebox*{0.48\textwidth}{!}{\begin{graph}
+    \node[main] (a) [label=above left:{$s$}] {$a$};
+    \node[main] (b) [above right of=a, xshift=10mm] {$b$};
+    \node[main] (c) [below right of=a, xshift=10mm] {$c$};
+    \node[main] (d) [right of=b, xshift=10mm] {$d$};
+    \node[main] (e) [right of=c, xshift=10mm] {$e$};
+    \node[main] (f) [below right of=d, xshift=10mm, label={above right:{$t$}}] {$f$};
+
+    \path[->]   (b) edge[dashed] node[above, xshift=-2mm] {$2$} (a)
+                (a) edge[bend right=15, line width=1.3pt] node[below left,
+                    yshift=1mm] {$6$} (c)
+                (c) edge[bend right=15, dashed] node[below left, yshift=1mm,
+                    xshift=1mm] {$2$} (a)
+                (b) edge node[right] {$2$} (c)
+                (b) edge[line width=1.3pt] node[above] {$7$} (d)
+                (b) edge[bend left=15] node[above right, yshift=-2mm] {$1$} (e)
+                (e) edge[bend left=15, dashed, line width=1.3pt] node[above, xshift=3mm, yshift=-1mm] {$2$} (b)
+                (c) edge[bend right=15, line width=1.3pt] node[below] {$4$} (e)
+                (e) edge[bend right=15, dashed] node[below] {$2$} (c)
+                (d) edge node[right] {$2$} (e)
+                (d) edge[line width=1.3pt] node[above right] {$3$} (f)
+                (f) edge[dashed] node[below, xshift=2mm, yshift=1mm] {$4$} (e);
+\end{graph}}}\\
+\end{figure}
+\newpage
+\begin{figure}[ht!]
+\ContinuedFloat
+\centering
+\subfloat[Aggiornamento di $f$]{\begin{graph}
+    \node[main] (a) [label=above left:{$s$}] {$a$};
+    \node[main] (b) [above right of=a, xshift=10mm] {$b$};
+    \node[main] (c) [below right of=a, xshift=10mm] {$c$};
+    \node[main] (d) [right of=b, xshift=10mm] {$d$};
+    \node[main] (e) [right of=c, xshift=10mm] {$e$};
+    \node[main] (f) [below right of=d, xshift=10mm, label={above right:{$t$}}] {$f$};
+
+    \path[->]   (b) edge[dashed] node[above, xshift=-2mm] {$2$} (a)
+                (a) edge[bend right=15] node[below left,  yshift=1mm] {$4$} (c)
+                (c) edge[bend right=15, dashed] node[below left, yshift=1mm,
+                    xshift=1mm] {$4$} (a)
+                (b) edge node[right] {$2$} (c)
+                (b) edge[bend left=15] node[above] {$5$} (d)
+                (d) edge[bend left=15, dashed] node[above] {$2$} (b)
+                (b) edge node[above right, yshift=-2mm] {$3$} (e)
+                (c) edge[bend right=15] node[below] {$2$} (e)
+                (e) edge[bend right=15, dashed] node[below] {$4$} (c)
+                (d) edge node[right] {$2$} (e)
+                (d) edge[bend left=15] node[above right] {$1$} (f)
+                (f) edge[bend left=15, dashed] node[above right, yshift=-1mm] {$2$} (d)
+                (f) edge[dashed] node[below, xshift=2mm, yshift=1mm] {$4$} (e);
+    
+    \node[] (l3) [right of=f] {$f(b,e)=\cancel{2}\,0$};
+    \node[] (l2) [above of=l3, yshift=-13mm] {$f(c,e)=4$};
+    \node[] (l1) [above of=l2, yshift=-13mm] {$f(a,c)=4$};
+    \node[] (l4) [below of=l3, yshift=13mm] {$f(b,d)=2$};
+    \node[] (l5) [below of=l4, yshift=13mm] {$f(d,f)=2$};
+\end{graph}}
+\end{figure}
+
+\noindent
+Nel passaggio \emph{(f)}, il cammino scelto passa per l'\emph{arco} $(e,b)$
+che però è un arco all'indietro, quindi $f(e,b)=-2$. Il motivo per il quale
+possiamo usarlo è che $c_f(e,b)=c(e,b)-f(e,b)=2$, tuttavia, usarlo significa
+\q{annullare} il precedente flusso attraverso $(b,e)$ e infatti al passo
+\emph{(g)} $f(b,e)=0$. Questo \q{tornare indietro} è caratteristico degli
+algoritmi basati su ricerca locale.
+\end{eg}
+
+\noindent
+Rimane comunque il problema di ricercare un \emph{cammino}, ma per quello
+possiamo usare una \hyperref[code:48]{\emph{visita in ampiezza}} o in
+\hyperref[code:49]{\emph{profondità}}.
+
+\begin{minicode}{Implementazione maxFlow con metodo dei cammini aumentanti}
+\ind\bc{int}[][] maxFlow(\bc{int}[][] c, \bc{int} n, \bc{NODE} s, \bc{NODE} t)\\
+    \bc{int}[][] f = new \bc{int}[1\dots n][1\dots n]\hfill\com{Matrice del \emph{flusso}}
+    \bc{boolean}[] visited = new \bc{int}[1\dots n] = \{false\}\\
+    \com{Rimane nel ciclo fino a quando esistono \emph{cammini} da $s$ a $t$}
+    \indf while (dfs(c, f, n, s, t, visited, $+\infty$) > 0) do\\
+        \indff for (i = 1 to n) do\\
+            visited[i] = false\hfill\com{Resetta il vettore per la \emph{visita} successiva}
+    \indf return f\\
+
+\nl\com{Versione modificata della dfs}
+\rmindent\ind\bc{int} dfs(\bc{int}[][] c, \bc{int}[][] f,  \bc{int} n, \bc{int} s,
+    \bc{int} t, \bc{boolean}[] visited, \bc{int}\:minCap)\\
+    \indf if (s == t) then\\
+        return min\\
+    \indf visited[i] = true\\
+    \indf for (i = 1 to n) do\\
+        \indff if (c[s][i] > 0 and not visited[i]) then\\
+            \bc{int} val = dfs(c, f, n, i, t, visited, min(minCap, c[s][i]))\\
+            \indfff if (val > 0) then\\
+                c[s][i] = c[s][i] - val\hfill\com{Aggiorna la \emph{capacità}
+                dell'\emph{arco} $(s,i)$}
+                c[i][s] = c[i][s] + val\hfill\com{Aggiorna la \emph{capacità}
+                dell'\emph{arco} $(i,s)$}
+                f[s][i] = f[s][i] + val\hfill\com{Aggiorna la \emph{capacità}
+                del \emph{flusso} in $(s,i)$}
+                f[i][s] = f[i][s] - val\hfill\com{Aggiorna la \emph{capacità}
+                del \emph{flusso} in $(i,s)$}
+                return val\\
+    \indf return 0\hfill\com{Se l'esecuzione arriva qui non è stato trovato un
+        \emph{cammino}}
+\end{minicode}
+
+\paragraph{Note sull'implementazione}
+Il \emph{grafo} è definito esclusivamente mediante la \emph{matrice delle
+capacità} e in particolare, esiste un \emph{arco} $(x,y)$ solo se $c[x][y]>0$.
+Il parametro \texttt{n} rappresenta il numero di \emph{nodi}. Nella
+\texttt{dfs}, il parametro \texttt{minCap} indica il più basso valore di
+\emph{capacità} incontrato nella ricerca del \emph{cammino}.
