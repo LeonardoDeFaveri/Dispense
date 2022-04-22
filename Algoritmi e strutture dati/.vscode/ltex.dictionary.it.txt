@@ -373,3 +373,5 @@ bend
 antisimmetria
 equals
 dotted
+maxFlow
+Fulkerson

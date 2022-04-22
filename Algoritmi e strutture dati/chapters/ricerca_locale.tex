@@ -161,7 +161,7 @@ perché è basato su un approccio additivo. In particolare, partendo da un
     residua};
     \item Somma di $g$ ad $f$;
 \end{enumerate}
-fino a quando $g$ non diventa un \emph{flusso} nullo.
+fino a quando $g$ non diventa un \emph{flusso nullo}.
 
 \begin{note}
     Questo particolare algoritmo permette sempre di ottenere il \emph{flusso
@@ -325,3 +325,117 @@ non esiste, $c(B,A)=0$ e quindi, vale la seguente catena di uguaglianze:
 Gli \emph{archi} $(A,B)$ e $(C,D)$ sono stati saturati, ovvero $f(A,B)=c(A,B)$
 e $f(C,D)=c(C,D)$. Di conseguenza, la loro \emph{capacità residua} è $0$ e
 quindi non fanno parte della \emph{rete residua}.
+
+\begin{minicode}{Schema generale dell'algoritmo}
+\ind\bc{int}[][] maxFlow(\bc{GRAPH} G, \bc{NODE} s, \bc{NODE} t, \bc{int}[][] c)\\
+    \bc{FLOW} f = f$_0$\hfill\com{Inizializza $f$ a un \emph{flusso nullo}}
+    \bc{int}[][] c$_f$ = c\hfill\com{Inizialmente la \emph{capacità residua} è
+    pari a quella iniziale}
+    \bc{FLOW} g\\
+    \indf do\\
+        g = \{ trova un \emph{flusso} in c$_f$ tale che $|g|>0$, altrimenti f$_0$ \}\\
+        f = f + g\\
+        c$_f$ = \{ \emph{capacità} della \emph{rete residua} di $G$ rispetto ad $f$ \}\\
+    \indf while (g $\neq$ f$_0$)\\
+    \indf return f
+\end{minicode}
+
+\paragraph{Dimostrazione}
+Per dimostrare la correttezza dell'algoritmo dobbiamo dimostrare il seguente
+lemma:
+
+\begin{definition}[Lemma della somma di flussi]
+    Se $f$ è un flusso in $G$ e $g$ è un flusso in $G_f$, allora anche $f+g$ è
+    un flusso in $G$.
+\end{definition}
+\begin{proof}[Dimostrazione]
+    Dobbiamo dimostrare che $f+g$ rispetta tutte e tre le proprietà dei
+    \emph{flussi}.
+
+    \paragraph{Vincolo sulla capacità}
+    Per ogni coppia di \emph{nodi} $x,y\in V$ vale la seguente catena di
+    disuguaglianze:
+    \[\begin{array}{rcll}
+        g(x,y) & \leq & c_f(x,y) & \quad\text{È vero perché $g$ è un
+            \emph{flusso} in $G_f$}\\
+        f(x,y)+g(x,y) & \leq & c_f(x,y)+f(x,y)\\
+        (f+g)(x,y) &  \leq & c(x,y)-f(x,y)+f(x,y) & \quad\text{Definizione di
+            \hyperref[def:148]{\emph{capacità residua}}}\\
+        (f+g)(x,y) & \leq & c(x,y) & \quad\text{Semplificazione algebrica}
+    \end{array}\]
+
+    \paragraph{Antisimmetria}
+    Per ogni coppia di \emph{nodi} $x,y\in V$ vale la seguente catena di
+    uguaglianze:
+    \[\begin{array}{rcll}
+        f(x,y)+g(x,y) & = & -f(y,x)-g(x,y)\\
+        f(x,y)+g(x,y) & = & -(f(x,y)+g(x,y))\\
+        (f+g)(x,y) & = & -(f+g)(x,y)
+    \end{array}\]
+
+    \paragraph{Conservazione del flusso}
+    Per ogni coppia di \emph{nodi} $x,y\in V$ vale la seguente catena di
+    uguaglianze:
+    \[\sum_{y\in V}(f+g)(x,y)\begin{array}[t]{cl}
+        = & \sum_{y\in V}(f(x,y)+g(x,y))\\
+        = & \sum_{y\in V}f(x,y)+\sum_{y\in V}g(x,y)\\
+        = & 0 + 0\\
+        = & 0
+    \end{array}\]
+\end{proof}
+
+\subsection{Metodo dei cammini aumentanti}
+Quindi l'algoritmo che abbiamo descritto è corretto, tuttavia rimane un problema:
+come facciamo a trovare il \emph{flusso} $g$?
+
+Una soluzione è quella proposta da Ford e Fulkerson nel 1956 che utilizza i
+cosiddetti \emph{cammini aumentanti}. In particolare, viene identificato nella
+\emph{rete residua} $G_f$ un \emph{cammino} $C=(v_0,\dots,v_n)$ tale per cui
+$v_0=s$ e $v_n=t$. Quindi, si definisce la \emph{capacità} del \emph{cammino}
+come la minore tra le \emph{capacità} degli \emph{archi} attraversati, ovvero:
+\[c_f(C)=\min_{i\in\{2,\dots,n\}}c_f(v_{i-1},v_i)\]
+
+\begin{note}
+    La \emph{capacità} di un \emph{cammino} è definibile anche come la
+    \emph{capacità} del suo \q{collo di bottiglia}.
+\end{note}
+
+\begin{figure}[h!]
+\centering
+\subfloat[\emph{Grafo} iniziale]{\begin{graph}
+    \node[main] (a) [label=above left:{$s$}] {$a$};
+    \node[main] (b) [above right of=a, xshift=10mm] {$b$};
+    \node[main] (c) [below right of=a, xshift=10mm] {$c$};
+    \node[main] (d) [right of=b, xshift=10mm] {$d$};
+    \node[main] (e) [right of=c, xshift=10mm] {$e$};
+    \node[main] (f) [below right of=d, xshift=10mm, label={above right:{$t$}}] {$f$};
+
+    \path[->]   (a) edge node[above left] {$2$} (b)
+                (a) edge node[below left] {$8$} (c)
+                (b) edge node[right] {$2$} (c)
+                (b) edge node[above] {$7$} (d)
+                (b) edge node[above right] {$3$} (e)
+                (c) edge node[below] {$6$} (e)
+                (d) edge node[right] {$2$} (e)
+                (d) edge node[above right] {$3$} (f)
+                (e) edge node[below right] {$4$} (f);
+\end{graph}}\hfill
+\subfloat[\emph{Grafo} iniziale]{\begin{graph}
+    \node[main] (a) [label=above left:{$s$}] {$a$};
+    \node[main] (b) [above right of=a, xshift=10mm] {$b$};
+    \node[main] (c) [below right of=a, xshift=10mm] {$c$};
+    \node[main] (d) [right of=b, xshift=10mm] {$d$};
+    \node[main] (e) [right of=c, xshift=10mm] {$e$};
+    \node[main] (f) [below right of=d, xshift=10mm, label={above right:{$t$}}] {$f$};
+
+    \path[->]   (a) edge[line width=1.2pt] node[above left] {$2$} (b)
+                (a) edge node[below left] {$8$} (c)
+                (b) edge node[right] {$2$} (c)
+                (b) edge node[above] {$7$} (d)
+                (b) edge[line width=1.2pt] node[above right] {$3$} (e)
+                (c) edge node[below] {$6$} (e)
+                (d) edge node[right] {$2$} (e)
+                (d) edge node[above right] {$3$} (f)
+                (e) edge[line width=1.2pt] node[below right] {$4$} (f);
+\end{graph}}
+\end{figure}
