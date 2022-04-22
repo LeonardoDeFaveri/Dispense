@@ -400,9 +400,14 @@ come la minore tra le \emph{capacità} degli \emph{archi} attraversati, ovvero:
     \emph{capacità} del suo \q{collo di bottiglia}.
 \end{note}
 
+\noindent
+Infine, il \emph{flusso} addizionale $g$ è definito in modo che $g(v_{i-1},v_i)=
+c_f(C)$, $g(v_i,v_{i-1})=-c_f(C)$ per la proprietà \emph{antisimmetrica} e
+$g(x,y)=0$ per tutte le coppie $x,y\notin C$.
+
 \begin{figure}[h!]
 \centering
-\subfloat[\emph{Grafo} iniziale]{\begin{graph}
+\resizebox*{0.48\textwidth}{!}{\subfloat[\emph{Grafo} iniziale]{\begin{graph}
     \node[main] (a) [label=above left:{$s$}] {$a$};
     \node[main] (b) [above right of=a, xshift=10mm] {$b$};
     \node[main] (c) [below right of=a, xshift=10mm] {$c$};
@@ -419,8 +424,8 @@ come la minore tra le \emph{capacità} degli \emph{archi} attraversati, ovvero:
                 (d) edge node[right] {$2$} (e)
                 (d) edge node[above right] {$3$} (f)
                 (e) edge node[below right] {$4$} (f);
-\end{graph}}\hfill
-\subfloat[\emph{Grafo} iniziale]{\begin{graph}
+\end{graph}}}\hfill
+\resizebox*{0.48\textwidth}{!}{\subfloat[Scelta di un \emph{cammino}]{\begin{graph}
     \node[main] (a) [label=above left:{$s$}] {$a$};
     \node[main] (b) [above right of=a, xshift=10mm] {$b$};
     \node[main] (c) [below right of=a, xshift=10mm] {$c$};
@@ -428,14 +433,54 @@ come la minore tra le \emph{capacità} degli \emph{archi} attraversati, ovvero:
     \node[main] (e) [right of=c, xshift=10mm] {$e$};
     \node[main] (f) [below right of=d, xshift=10mm, label={above right:{$t$}}] {$f$};
 
-    \path[->]   (a) edge[line width=1.2pt] node[above left] {$2$} (b)
+    \path[->]   (a) edge[line width=1.3pt] node[above left] {$2$} (b)
                 (a) edge node[below left] {$8$} (c)
                 (b) edge node[right] {$2$} (c)
                 (b) edge node[above] {$7$} (d)
-                (b) edge[line width=1.2pt] node[above right] {$3$} (e)
+                (b) edge[line width=1.3pt] node[above right] {$3$} (e)
                 (c) edge node[below] {$6$} (e)
                 (d) edge node[right] {$2$} (e)
                 (d) edge node[above right] {$3$} (f)
-                (e) edge[line width=1.2pt] node[below right] {$4$} (f);
-\end{graph}}
+                (e) edge[line width=1.3pt] node[below right] {$4$} (f);
+\end{graph}}}\\
+\resizebox*{0.48\textwidth}{!}{\subfloat[Definizione del \emph{flusso} $g$]{\begin{graph}
+    \node[main] (a) [label=above left:{$s$}] {$a$};
+    \node[main] (b) [above right of=a, xshift=10mm] {$b$};
+    \node[main] (c) [below right of=a, xshift=10mm] {$c$};
+    \node[main] (d) [right of=b, xshift=10mm] {$d$};
+    \node[main] (e) [right of=c, xshift=10mm] {$e$};
+    \node[main] (f) [below right of=d, xshift=10mm, label={above right:{$t$}}] {$f$};
+
+    \path[->]   (a) edge[bend left=25] node[above left] {$2/2$} (b)
+                (b) edge[bend left=25, dashed] node[above, xshift=-2mm] {$-2/0$} (a)
+                (a) edge node[below left] {$8$} (c)
+                (b) edge node[right] {$2$} (c)
+                (b) edge node[above] {$7$} (d)
+                (b) edge[bend left=25] node[above right, yshift=-2mm] {$2/3$} (e)
+                (e) edge[bend left=25, dashed] node[above, xshift=3mm] {$-2/3$} (b)
+                (c) edge node[below] {$6$} (e)
+                (d) edge node[right] {$2$} (e)
+                (d) edge node[above right] {$3$} (f)
+                (e) edge[bend right=25] node[below right] {$2/4$} (f)
+                (f) edge[bend right=25, dashed] node[below, xshift=2mm] {$-2/4$} (e);
+\end{graph}}}
+\caption{\emph{Cammini aumentanti} in generale}
 \end{figure}
+
+\begin{minicode}{Schema generale dell'algoritmo}
+\ind\bc{int}[][] maxFlow(\bc{GRAPH} G, \bc{NODE} s, \bc{NODE} t, \bc{int}[][] c)\\
+    \bc{int}[][] f = new \bc{int}[1\dots G.size()][1\dots G.size()]\hfill\com{\emph{Flusso} parziale}
+    \bc{int}[][] g = new \bc{int}[1\dots G.size()][1\dots G.size()]\hfill
+        \com{\emph{Flusso}\,da\;\emph{cammino\,aumentante}}
+    \bc{int}[][] c$_f$ = new \bc{int}[1\dots G.size()][1\dots G.size()]\hfill\com{\emph{Capacità residua}}
+    \indf foreach (x,y $\in$ G.V()) do\\
+        f[x][y] = 0\hfill\com{Inizializza un \emph{flusso nullo}}
+        c$_f$[x][y] = c[x][y]\\
+    \indf do\\
+        g = \{ \emph{flusso} associato ad un \emph{cammino aumentante} in $c_f$, oppure $f_0$ \}\\
+        \indff foreach (x,y $\in$ G.V()) do\\
+            f[x][y] = f[x][y] + g[x][y]\hfill\com{\emph{Somma dei flussi}:\:$f=f+g$}
+            c$_f$ = c[x][y] - f[x][y]\hfill\com{Aggiorna la \emph{capacità residua}}
+    \indf while (g $\neq$ f$_0$)\\
+    \indf return f
+\end{minicode}

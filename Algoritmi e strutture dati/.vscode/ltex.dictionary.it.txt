@@ -375,3 +375,7 @@ equals
 dotted
 maxFlow
 Fulkerson
+leaf
+circle
+ellipse
+draw

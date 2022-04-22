@@ -94,16 +94,16 @@ $u$ in $v$. Ovviamente, in un \emph{grafo non orientato} la nozione di
     \begin{minipage}{0.48\textwidth}
         \centering
         \begin{graph}
-            \node[main, line width=1.2pt] (0) {$a$};
-            \node[main, line width=1.2pt] (1) [above right of=0, xshift=30] {$b$};
-            \node[main, line width=1.2pt] (2) [below right of=0, xshift=30] {$d$};
+            \node[main, line width=1.3pt] (0) {$a$};
+            \node[main, line width=1.3pt] (1) [above right of=0, xshift=30] {$b$};
+            \node[main, line width=1.3pt] (2) [below right of=0, xshift=30] {$d$};
             \node[main] (3) [right of=1, xshift=30] {$c$};
             \node[main] (4) [right of=2, xshift=30] {$e$};
             \node[main] (5) [below right of=3] {$f$};
         
-            \draw[->, line width=1.2pt] (0) -- (1);
-            \draw[->] (0) edge[bend left=20, line width=1.2pt] (2);
-            \draw[<-] (0) edge[bend right=20, line width=1.2pt] (2);
+            \draw[->, line width=1.3pt] (0) -- (1);
+            \draw[->] (0) edge[bend left=20, line width=1.3pt] (2);
+            \draw[<-] (0) edge[bend right=20, line width=1.3pt] (2);
             \draw[->] (1) -- (3);
             \draw[->] (2) -- (3);
             \draw[->] (2) -- (4);
@@ -199,11 +199,11 @@ Possiamo definire gli \emph{alberi} in funzione dei \emph{grafi}.
         \node[main] (3) [right of=1, xshift=30] {$c$};
         \node[main] (4) [right of=2, xshift=30] {$e$};
     
-        \draw[line width=1.2pt] (0) -- (1);
-        \draw[line width=1.2pt] (1) -- (3);
+        \draw[line width=1.3pt] (0) -- (1);
+        \draw[line width=1.3pt] (1) -- (3);
         \draw (2) -- (3);
-        \draw[line width=1.2pt] (2) -- (4);
-        \draw[line width=1.2pt] (4) -- (3);
+        \draw[line width=1.3pt] (2) -- (4);
+        \draw[line width=1.3pt] (4) -- (3);
     \end{graph}
 \end{minipage}
 \hfill
@@ -953,9 +953,9 @@ in presenza di un \emph{ciclo}.
             \draw[->] (0) -- (1);
             \draw[->] (0) -- (2);
             \draw[->] (1) -- (3);
-            \draw[->, line width=1.2pt] (2) -- (3);
-            \draw[->, line width=1.2pt] (4) -- (2);
-            \draw[->, line width=1.2pt] (3) -- (4);
+            \draw[->, line width=1.3pt] (2) -- (3);
+            \draw[->, line width=1.3pt] (4) -- (2);
+            \draw[->, line width=1.3pt] (3) -- (4);
             \draw[->] (3) -- (5);
             \draw[->] (4) -- (5);
         \end{graph}}
@@ -1429,9 +1429,9 @@ ottenere un corretto \emph{ordinamento topologico}.
             \node[main] (4) [right of=2, xshift=20] {$e$};
             \node[main] (5) [below right of=3, xshift=20, yshift=-10] {$f$};
           
-            \draw[color=red, dashed, line width=1.2pt] (0) circle (0.6);
-            \draw[color=red, dashed, line width=1.2pt] (1) circle (0.6);
-            \draw[color=red, dashed, line width=1.2pt, rotate=35] (4) [yshift=38, xshift=21] ellipse (3.4 and 2.15);
+            \draw[color=red, dashed, line width=1.3pt] (0) circle (0.6);
+            \draw[color=red, dashed, line width=1.3pt] (1) circle (0.6);
+            \draw[color=red, dashed, line width=1.3pt, rotate=35] (4) [yshift=38, xshift=21] ellipse (3.4 and 2.15);
           
             \draw[->] (0) -- (1);
             \draw[->] (0) -- (2);
@@ -1487,13 +1487,13 @@ generico siamo sicuri che:
         \node[main, label=below:{$[4,9]$}] (4) [right of=2, xshift=20] {$e$};
         \node[main, label={$[5,6]$}] (5) [below right of=3, xshift=20, yshift=-10] {$f$};
       
-        \draw[->, color=red, line width=1.2pt] (0) -- (1);
+        \draw[->, color=red, line width=1.3pt] (0) -- (1);
         \draw[->] (0) -- (2);
-        \draw[->, color=red, line width=1.2pt] (1) -- (3);
+        \draw[->, color=red, line width=1.3pt] (1) -- (3);
         \draw[->] (2) -- (3);
-        \draw[->, color=red, line width=1.2pt] (4) -- (2);
-        \draw[->, color=red, line width=1.2pt] (3) -- (4);
-        \draw[->, color=red, line width=1.2pt] (4) -- (5);
+        \draw[->, color=red, line width=1.3pt] (4) -- (2);
+        \draw[->, color=red, line width=1.3pt] (3) -- (4);
+        \draw[->, color=red, line width=1.3pt] (4) -- (5);
         \draw[->] (5) -- (3);
       
         \node[] (6) [below of=2, xshift=35] {\texttt{Stack = \{a, b, c, e, d, f\}}};
@@ -1626,9 +1626,9 @@ successo tutte e tre le \emph{componenti fortemente connesse} del
         \node[main, label=above left:{$[7,8]$}] (4) [right of=2, xshift=20] {$e$};
         \node[main, label={$[6,9]$}] (5) [below right of=3, xshift=20, yshift=-10] {$f$};
       
-        \node[circle, minimum size=12mm, draw, red, dashed, line width=1.2pt] (6) at (0) {};
-        \node[circle, minimum size=12mm, draw, red, dashed, line width=1.2pt] (7) at (1) {};
-        \node[ellipse, draw, red, dashed, line width=1.2pt,
+        \node[circle, minimum size=12mm, draw, red, dashed, line width=1.3pt] (6) at (0) {};
+        \node[circle, minimum size=12mm, draw, red, dashed, line width=1.3pt] (7) at (1) {};
+        \node[ellipse, draw, red, dashed, line width=1.3pt,
             minimum width=4.2cm,
             minimum height=7cm,
             rotate=-55
@@ -1637,11 +1637,11 @@ successo tutte e tre le \emph{componenti fortemente connesse} del
         \draw[<-] (0) -- (1);
         \draw[<-] (0) -- (2);
         \draw[<-] (1) -- (3);
-        \draw[<-, color=red, line width=1.2pt] (2) -- (3);
+        \draw[<-, color=red, line width=1.3pt] (2) -- (3);
         \draw[<-] (4) -- (2);
         \draw[<-] (3) -- (4);
-        \draw[<-, color=red, line width=1.2pt] (4) -- (5);
-        \draw[<-, color=red, line width=1.2pt] (5) -- (3);
+        \draw[<-, color=red, line width=1.3pt] (4) -- (5);
+        \draw[<-, color=red, line width=1.3pt] (5) -- (3);
     \end{graph}
     \caption{\emph{Componenti fortemente connesse} del \emph{grafo}}
 \end{figure}
@@ -1677,17 +1677,17 @@ costo $O(n+m)$ anche la \texttt{scc} ha la stessa \emph{complessità}.
             \node[main] (4) [right of=2, xshift=20] {$e$};
             \node[main] (5) [below right of=3, xshift=20, yshift=-10] {$f$};
           
-            \node[circle, minimum size=12mm, draw, red, dashed, line width=1.2pt] (6) at (0) {};
-            \node[circle, minimum size=12mm, draw, red, dashed, line width=1.2pt] (7) at (1) {};
-            \node[ellipse, draw, red, dashed, line width=1.2pt,
+            \node[circle, minimum size=12mm, draw, red, dashed, line width=1.3pt] (6) at (0) {};
+            \node[circle, minimum size=12mm, draw, red, dashed, line width=1.3pt] (7) at (1) {};
+            \node[ellipse, draw, red, dashed, line width=1.3pt,
                 minimum width=4.2cm,
                 minimum height=7cm,
                 rotate=-55
             ] (8) [above of=4, xshift=-38, yshift=-34] {};
 
-            \draw[->, red] (6) edge[bend left=30, line width=1.2pt] (7);
-            \path[->] (7.45) edge[red, line width=1.2pt, bend left=30] (8.120);
-            \path[->] (6.-75) edge[red, line width=1.2pt, bend right=30] (8.-92);
+            \draw[->, red] (6) edge[bend left=30, line width=1.3pt] (7);
+            \path[->] (7.45) edge[red, line width=1.3pt, bend left=30] (8.120);
+            \path[->] (6.-75) edge[red, line width=1.3pt, bend right=30] (8.-92);
           
             \draw[->] (0) -- (1);
             \draw[->] (0) -- (2);
@@ -1711,17 +1711,17 @@ costo $O(n+m)$ anche la \texttt{scc} ha la stessa \emph{complessità}.
             \node[main] (4) [right of=2, xshift=20] {$e$};
             \node[main] (5) [below right of=3, xshift=20, yshift=-10] {$f$};
           
-            \node[circle, minimum size=12mm, draw, red, dashed, line width=1.2pt] (6) at (0) {};
-            \node[circle, minimum size=12mm, draw, red, dashed, line width=1.2pt] (7) at (1) {};
-            \node[ellipse, draw, red, dashed, line width=1.2pt,
+            \node[circle, minimum size=12mm, draw, red, dashed, line width=1.3pt] (6) at (0) {};
+            \node[circle, minimum size=12mm, draw, red, dashed, line width=1.3pt] (7) at (1) {};
+            \node[ellipse, draw, red, dashed, line width=1.3pt,
                 minimum width=4.2cm,
                 minimum height=7cm,
                 rotate=-55
             ] (8) [above of=4, xshift=-38, yshift=-34] {};
 
-            \draw[<-, red] (6) edge[bend left=30, line width=1.2pt] (7);
-            \path[<-] (7.45) edge[red, line width=1.2pt, bend left=30] (8.120);
-            \path[<-] (6.-75) edge[red, line width=1.2pt, bend right=30] (8.-92);
+            \draw[<-, red] (6) edge[bend left=30, line width=1.3pt] (7);
+            \path[<-] (7.45) edge[red, line width=1.3pt, bend left=30] (8.120);
+            \path[<-] (6.-75) edge[red, line width=1.3pt, bend right=30] (8.-92);
           
             \draw[<-] (0) -- (1);
             \draw[<-] (0) -- (2);
@@ -1773,17 +1773,17 @@ costo $O(n+m)$ anche la \texttt{scc} ha la stessa \emph{complessità}.
             \node[main, label=above left:{$[4,9]$}] (4) [right of=2, xshift=20] {$e$};
             \node[main, label={$[5,6]$}] (5) [below right of=3, xshift=20, yshift=-10] {$f$};
           
-            \node[circle, minimum size=12mm, draw, red, dashed, line width=1.2pt] (6) at (0) {};
-            \node[circle, minimum size=12mm, draw, red, dashed, line width=1.2pt] (7) at (1) {};
-            \node[ellipse, draw, red, dashed, line width=1.2pt,
+            \node[circle, minimum size=12mm, draw, red, dashed, line width=1.3pt] (6) at (0) {};
+            \node[circle, minimum size=12mm, draw, red, dashed, line width=1.3pt] (7) at (1) {};
+            \node[ellipse, draw, red, dashed, line width=1.3pt,
                 minimum width=4.2cm,
                 minimum height=7cm,
                 rotate=-55
             ] (8) [above of=4, xshift=-38, yshift=-34] {};
 
-            \draw[->, red] (6) edge[bend left=30, line width=1.2pt] (7);
-            \path[->] (7.45) edge[red, line width=1.2pt, bend left=30] (8.120);
-            \path[->] (6.-75) edge[red, line width=1.2pt, bend right=30] (8.-92);
+            \draw[->, red] (6) edge[bend left=30, line width=1.3pt] (7);
+            \path[->] (7.45) edge[red, line width=1.3pt, bend left=30] (8.120);
+            \path[->] (6.-75) edge[red, line width=1.3pt, bend right=30] (8.-92);
           
             \draw[->] (0) -- (1);
             \draw[->] (0) -- (2);
@@ -1807,17 +1807,17 @@ costo $O(n+m)$ anche la \texttt{scc} ha la stessa \emph{complessità}.
             \node[main, label=above left:{$[3,6]$}] (4) [right of=2, xshift=20] {$e$};
             \node[main, label={[red]:{$[1,8]$}}] (5) [below right of=3, xshift=20, yshift=-10] {$f$};
           
-            \node[circle, minimum size=12mm, draw, red, dashed, line width=1.2pt] (6) at (0) {};
-            \node[circle, minimum size=12mm, draw, red, dashed, line width=1.2pt] (7) at (1) {};
-            \node[ellipse, draw, red, dashed, line width=1.2pt,
+            \node[circle, minimum size=12mm, draw, red, dashed, line width=1.3pt] (6) at (0) {};
+            \node[circle, minimum size=12mm, draw, red, dashed, line width=1.3pt] (7) at (1) {};
+            \node[ellipse, draw, red, dashed, line width=1.3pt,
                 minimum width=4.2cm,
                 minimum height=7cm,
                 rotate=-55
             ] (8) [above of=4, xshift=-38, yshift=-34] {};
 
-            \draw[<-, red] (6) edge[bend left=30, line width=1.2pt] (7);
-            \path[<-] (7.45) edge[red, line width=1.2pt, bend left=30] (8.120);
-            \path[<-] (6.-75) edge[red, line width=1.2pt, bend right=30] (8.-92);
+            \draw[<-, red] (6) edge[bend left=30, line width=1.3pt] (7);
+            \path[<-] (7.45) edge[red, line width=1.3pt, bend left=30] (8.120);
+            \path[<-] (6.-75) edge[red, line width=1.3pt, bend right=30] (8.-92);
           
             \draw[<-] (0) -- (1);
             \draw[<-] (0) -- (2);

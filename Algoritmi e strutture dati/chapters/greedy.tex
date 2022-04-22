@@ -1049,30 +1049,30 @@ definibili su quel \emph{grafo}.
         \centering
         \subfloat[\emph{Albero di copertura dei cammini minimi}]{
         \begin{graph}
-            \node[main, line width=1.2pt] (a) [label={$d[A]=0$}] {$A$};
+            \node[main, line width=1.3pt] (a) [label={$d[A]=0$}] {$A$};
             \node[main] (b) [right of=a, label={$d[B]=3$}, xshift=10mm] {$B$};
             \node[main] (c) [below of=b, label=below:{$d[C]=4$}, yshift=-10mm] {$C$};
             \node[main] (d) [left of=c, label=below:{$d[D]=3$}, xshift=-10mm] {$D$};
     
             \path[->]
-                        (a) edge[line width=1.2pt] node[above] {$3$} (b)
-                        (b) edge[line width=1.2pt] node[right] {$1$} (c)
-                        (a) edge[line width=1.2pt] node[left] {$3$} (d);
+                        (a) edge[line width=1.3pt] node[above] {$3$} (b)
+                        (b) edge[line width=1.3pt] node[right] {$1$} (c)
+                        (a) edge[line width=1.3pt] node[left] {$3$} (d);
             \path[-]    (d) edge node[below] {$2$} (c);
         \end{graph}
         }
         \hspace{3cm}
         \subfloat[\emph{Albero di copertura di peso minimo}]{
         \begin{graph}
-            \node[main, line width=1.2pt] (a) [label={$d[A]=0$}] {$A$};
+            \node[main, line width=1.3pt] (a) [label={$d[A]=0$}] {$A$};
             \node[main] (b) [right of=a, label={$d[B]=3$}, xshift=10mm] {$B$};
             \node[main] (c) [below of=b, label=below:{$d[C]=4$}, yshift=-10mm] {$C$};
             \node[main] (d) [left of=c, label=below:{$d[D]=6$}, xshift=-10mm] {$D$};
     
             \path[->]
-                        (a) edge[line width=1.2pt] node[above] {$3$} (b)
-                        (b) edge[line width=1.2pt] node[right] {$1$} (c)
-                        (c) edge[line width=1.2pt] node[below] {$2$} (d);
+                        (a) edge[line width=1.3pt] node[above] {$3$} (b)
+                        (b) edge[line width=1.3pt] node[right] {$1$} (c)
+                        (c) edge[line width=1.3pt] node[below] {$2$} (d);
             \path[-]    (a) edge node[left] {$3$} (d);
         \end{graph}
         }
