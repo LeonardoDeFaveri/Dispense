@@ -123,13 +123,13 @@ Infine, la proprietà di \emph{conservazione del flusso} ci dice che per ogni
         \node[main] (e) [below right of=c, xshift=10mm] {$E$};
 
         \path[->]   (a) edge[bend left=25] node[above] {$2$} (c)
-                    (c) edge[bend left=25, dashed] node[above] {$-2$} (a)
+                    (c) edge[bend left=25, dashed] node[above, xshift=1mm] {$-2$} (a)
                     (c) edge[bend left=25] node[above] {$1$} (d)
-                    (d) edge[bend left=25, dashed] node[above] {$-1 $} (c)
+                    (d) edge[bend left=25, dashed] node[above, xshift=-1mm] {$-1 $} (c)
                     (c) edge[bend left=25] node[above] {$4$} (e)
-                    (e) edge[bend left=25, dashed] node[above] {$-4$} (c)
+                    (e) edge[bend left=25, dashed] node[above, xshift=1mm] {$-4$} (c)
                     (b) edge[bend left=25] node[above] {$3$} (c)
-                    (c) edge[bend left=25, dashed] node[above] {$-3$} (b);
+                    (c) edge[bend left=25, dashed] node[above, xshift=-1mm] {$-3$} (b);
     \end{graph}
     \caption{\emph{Conservazione del flusso}}
 \end{figure}
@@ -715,3 +715,267 @@ capacità} e in particolare, esiste un \emph{arco} $(x,y)$ solo se $c[x][y]>0$.
 Il parametro \texttt{n} rappresenta il numero di \emph{nodi}. Nella
 \texttt{dfs}, il parametro \texttt{minCap} indica il più basso valore di
 \emph{capacità} incontrato nella ricerca del \emph{cammino}.
+
+\paragraph{Dimostrazione}
+La dimostrazione di correttezza per l'algoritmo ci richiede di dare delle altre
+definizioni.
+
+\begin{definition}[Taglio]
+    Un taglio $(S,T)$ della rete di flusso $G=(V,E,s,t,c)$ è una partizione di
+    $V$ in due sottoinsiemi disgiunti tali per cui $S=V-T$,$s\in S$ e $t\in T$.
+\end{definition}
+
+\begin{figure}[h!]
+\centering
+\begin{graph}
+    \node[main] (a) [label=above left:{$s$}] {$a$};
+    \node[main] (b) [above right of=a, xshift=10mm] {$b$};
+    \node[main] (c) [below right of=a, xshift=10mm] {$c$};
+    \node[main] (d) [right of=b, xshift=10mm] {$d$};
+    \node[main] (e) [right of=c, xshift=10mm] {$e$};
+    \node[main] (f) [below right of=d, xshift=10mm, label={above right:{$t$}}] {$f$};
+
+    \path[->]   (a) edge node[above left] {$2$} (b)
+                (a) edge node[below left] {$8$} (c)
+                (b) edge node[right] {$2$} (c)
+                (b) edge node[above] {$7$} (d)
+                (b) edge node[above right] {$3$} (e)
+                (c) edge node[below] {$6$} (e)
+                (d) edge node[right] {$2$} (e)
+                (d) edge node[above right] {$3$} (f)
+                (e) edge node[below right] {$4$} (f);
+
+    \node[] (0) at (e) [shift={(-25mm, -7.5mm)}] {};
+    \draw[-, dashed] (d)+(12mm, 2mm) -- (0);
+
+    \node[] (sets) [above right of=f, xshift=10mm] {$\begin{array}{l}
+        S=\{a,b,c,d\}\\
+        T=\{e,f\}
+    \end{array}$};
+\end{graph}
+\caption{\emph{Taglio} di una \emph{rete di flusso}}
+\end{figure}
+
+\begin{definition}[Capacità di un taglio]
+    La capacità $C(S,T)$ attraverso il taglio $(S,T)$ è definita come:
+    \[C(S,T)=\sum_{x\in S,y\in T}c(x,y)\]
+\end{definition}
+
+\begin{figure}[h!]
+\centering
+\begin{graph}
+    \node[main] (a) [label=above left:{$s$}] {$a$};
+    \node[main] (b) [above right of=a, xshift=10mm] {$b$};
+    \node[main] (c) [below right of=a, xshift=10mm] {$c$};
+    \node[main] (d) [right of=b, xshift=10mm] {$d$};
+    \node[main] (e) [right of=c, xshift=10mm] {$e$};
+    \node[main] (f) [below right of=d, xshift=10mm, label={above right:{$t$}}] {$f$};
+
+    \path[->]   (a) edge node[above left] {$2$} (b)
+                (a) edge node[below left] {$8$} (c)
+                (b) edge node[right] {$2$} (c)
+                (b) edge node[above] {$7$} (d)
+                (b) edge[line width=1.3pt] node[above right] {$3$} (e)
+                (c) edge[line width=1.3pt] node[below] {$6$} (e)
+                (d) edge[line width=1.3pt] node[right] {$2$} (e)
+                (d) edge[line width=1.3pt] node[above right] {$3$} (f)
+                (e) edge node[below right] {$4$} (f);
+
+    \node[] (0) at (e) [shift={(-25mm, -7.5mm)}] {};
+    \draw[-, dashed] (d)+(12mm, 2mm) -- (0);
+
+    \node[] (sets) [right of=f, shift={(5mm, 9mm)}] {$\begin{array}[t]{l}
+        S=\{a,b,c,d\}\\
+        T=\{e,f\}\\
+        \\
+        C(S,T)=14
+    \end{array}$};
+\end{graph}
+\caption{\emph{Capacità di un taglio}}
+\end{figure}
+
+\begin{definition}[Flusso netto di un taglio]
+    Se $f$ è un flusso in $G$, il flusso netto $F_f(S,T)$ attraverso $(S,T)$ è:
+    \[F_f(S,T)=\sum_{x\in S,y\in T}f(x,y)\]
+\end{definition}
+
+\newpage
+\begin{figure}[ht!]
+\centering
+\begin{graph}
+    \node[main] (a) [label=above left:{$s$}] {$a$};
+    \node[main] (b) [above right of=a, xshift=10mm] {$b$};
+    \node[main] (c) [below right of=a, xshift=10mm] {$c$};
+    \node[main] (d) [right of=b, xshift=10mm] {$d$};
+    \node[main] (e) [right of=c, xshift=10mm] {$e$};
+    \node[main] (f) [below right of=d, xshift=10mm, label={above right:{$t$}}] {$f$};
+
+    \path[->]   (a) edge node[above left] {$2/2$} (b)
+                (a) edge node[below left] {$4/8$} (c)
+                (b) edge node[right] {$0/2$} (c)
+                (b) edge node[above] {$2/7$} (d)
+                (b) edge[line width=1.3pt] node[above right] {$0/3$} (e)
+                (c) edge[line width=1.3pt] node[below] {$4/6$} (e)
+                (d) edge[line width=1.3pt] node[right] {$0/2$} (e)
+                (d) edge[line width=1.3pt] node[above right] {$2/3$} (f)
+                (e) edge node[below right] {$4/4$} (f);
+
+    \node[] (0) at (e) [shift={(-25mm, -7.5mm)}] {};
+    \draw[-, dashed] (d)+(12mm, 2mm) -- (0);
+
+    \node[] (sets) [right of=f, shift={(5mm, 5mm)}] {$\begin{array}[t]{l}
+        S=\{a,b,c,d\}\\
+        T=\{e,f\}\\
+        \\
+        C(S,T)=14\\
+        F_f(S,T)=6
+    \end{array}$};
+\end{graph}
+\caption{\emph{Flusso netto di un taglio}}
+\end{figure}
+
+\begin{definition}[Lemma del valore del flusso di un taglio]
+    Dati un flusso $f$ e un taglio $(S,T)$, il flusso netto $F_f(S,T)$ che
+    attraverso il taglio è uguale a $|f|$.
+\end{definition}
+
+\begin{figure}[h!]
+\centering
+\begin{graph}
+    \node[main] (a) [label=above left:{$s$}] {$a$};
+    \node[main] (b) [above right of=a, xshift=10mm] {$b$};
+    \node[main] (c) [below right of=a, xshift=10mm] {$c$};
+    \node[main] (d) [right of=b, xshift=10mm] {$d$};
+    \node[main] (e) [right of=c, xshift=10mm] {$e$};
+    \node[main] (f) [below right of=d, xshift=10mm, label={above right:{$t$}}] {$f$};
+
+    \path[->]   (a) edge node[above left] {$2/2$} (b)
+                (a) edge[line width=1.3pt] node[below left] {$4/8$} (c)
+                (b) edge node[right] {$0/2$} (c)
+                (b) edge[line width=1.3pt] node[above] {$2/7$} (d)
+                (b) edge[line width=1.3pt] node[above right] {$0/3$} (e)
+                (c) edge[line width=1.3pt] node[below] {$4/6$} (e)
+                (d) edge[line width=1.3pt] node[right] {$0/2$} (e)
+                (d) edge[line width=1.3pt] node[above right] {$2/3$} (f)
+                (e) edge node[below right] {$4/4$} (f);
+
+    \node[] (0) at (e) [shift={(-25mm, -7.5mm)}] {};
+    \draw[-, dashed] (d)+(12mm, 2mm) -- (0);
+
+    \node[] (1) at (c) [shift={(-12mm, -5mm)}] {};
+    \draw[-, dashed] (b)+(10.5mm, 6mm) -- (1);
+
+    \node[] (sets) [right of=f, shift={(15mm, 5mm)}] {$\begin{array}[t]{l}
+        S=\{a,b,c,d\}, T=\{e,f\}\\
+        S'=\{a,b\}, T'=\{c,d,e,f\}\\
+        \\
+        F_f(S,T)=6\\
+        F_{f}(S',T')=6
+    \end{array}$};
+\end{graph}
+\caption{\emph{Valore del flusso di un taglio}}
+\end{figure}
+
+\begin{proof}[Dimostrazione]
+    Vale la seguente catena di uguaglianze:
+    \[F_f(S,T)\begin{array}[t]{cll}
+        = & \sum_{x\in S,y\in T}f(x,y)\\
+        = & \sum_{x\in S,y\in v}f(x,y) - \sum_{x\in S,y\in S}f(x,y) & \quad T=V-S\\
+        = & \sum_{x\in S,y\in V}f(x,y)-0 & \quad\emph{Antisimmetria}\\
+        = & \sum_{x\in S-\{s\}, y\in V}f(x,y)+\sum_{y\in V}f(s,y) & \quad s\in S\\
+        = & \sum_{x\in S-\{s\}}\left(\sum_{y\in V}f(x,y)\right)+\sum_{y\in V}f(s,y)\\
+        = & \sum_{x\in S-\{s\}} 0+\sum_{y\in V}f(s,y) & \quad\emph{Conservazione del flusso}\\
+        = & \sum_{y\in V} f(s,y)=|f| & \quad\emph{\hyperref[def:145]{Definizione di valore del flusso}}
+    \end{array}\]
+\end{proof}
+
+\begin{definition}[Lemma del limite superiore al flusso massimo]
+    Il flusso massimo è limitato superiormente dalla capacità del taglio minimo,
+    cioè del taglio con minor capacità.
+\end{definition}
+
+\newpage
+\begin{figure}[ht!]
+\centering
+\begin{graph}
+    \node[main] (a) [label=above left:{$s$}] {$a$};
+    \node[main] (b) [above right of=a, xshift=10mm] {$b$};
+    \node[main] (c) [below right of=a, xshift=10mm] {$c$};
+    \node[main] (d) [right of=b, xshift=10mm] {$d$};
+    \node[main] (e) [right of=c, xshift=10mm] {$e$};
+    \node[main] (f) [below right of=d, xshift=10mm, label={above right:{$t$}}] {$f$};
+
+    \path[->]   (a) edge[line width=1.3pt] node[above left] {$2$} (b)
+                (a) edge node[below left] {$8$} (c)
+                (b) edge node[right] {$2$} (c)
+                (b) edge node[above] {$7$} (d)
+                (b) edge node[above right] {$3$} (e)
+                (c) edge node[below] {$6$} (e)
+                (d) edge node[right] {$2$} (e)
+                (d) edge node[above right] {$3$} (f)
+                (e) edge[line width=1.3pt] node[below right] {$4$} (f);
+
+    \node[] (0) at (a) [shift={(-5mm, 10mm)}] {};
+    \draw[-, dashed] (e)+(20mm, 5mm) -- (0);
+
+    \node[] (sets) [right of=f, shift={(5mm, 9mm)}] {$\begin{array}[t]{l}
+        S=\{a,c,e\}\\
+        T=\{d,d,f\}\\
+        \\
+        C(S,T)=6\\
+        F_{f^*}(S,T)\leq 6
+    \end{array}$};
+\end{graph}
+\caption{Limite superiore al \emph{flusso massimo}}
+\end{figure}
+
+\begin{proof}[Dimostrazione]
+    Dobbiamo dimostrare che nessun \emph{flusso netto} supera la \emph{capacità}
+    del \emph{taglio} attraversato. Ovvero, dobbiamo verificare la seguente
+    disuguaglianza:
+    \[F_f(S,T)\leq C(S,T)\quad\forall f\wedge\forall (S,T)\]
+    Per la proprietà del \emph{vincolo sulla capacità} vale quanto segue:
+    \[F_f(S,T)=\sum_{x\in S,y\in T}f((x,y))\leq\sum_{x\in S,y\in T}C(x,y)=C(S,T)\]
+    Inoltre, il \emph{flusso} che attraversa un \emph{taglio} è uguale al
+    \emph{valore del flusso}:
+    \[|f|=F_f(S,T)\quad\forall f\wedge\forall (S,T)\]
+    quindi il \emph{valore del flusso} è limitato superiormente dalla capacità
+    di tutti i possibili \emph{tagli}:
+    \[|f|\leq C(S,T)\quad\forall f\wedge\forall (S,T)\]
+\end{proof}
+
+\begin{definition}[Teorema del taglio minimo-flusso massimo]
+    Le seguenti tre affermazioni sono equivalenti:
+    \begin{enumerate}
+        \item $f$ è un flusso massimo;
+        \item Non esiste alcun cammino aumentante nella rete $G_f$;
+        \item Esiste una taglio minimo $(S,T)$ tale per cui $C(S,T)=|f|$;
+    \end{enumerate}
+\end{definition}
+
+\begin{proof}[Dimostrazione]
+    Procediamo dimostrando circolarmente che ogni punto implica gli altri.
+    
+    \paragraph{\bm{$(1)\Rightarrow(2)$}}
+    Se esistesse un \emph{cammino aumentante}, il \emph{flusso} potrebbe essere
+    aumentato e quindi non sarebbe massimo, generando un assurdo.
+
+    \paragraph{\bm{$(2)\Rightarrow(3)$}}
+    Poiché non esiste alcun \emph{cammino aumentante} nella \emph{rete residua}
+    $G_f$, non esiste un \emph{cammino} da $s$ a $t$. Se $S$ è l'insieme dei
+    \emph{nodi} raggiungibili da $s$ e $T=V-S$, $(S,T)$ è un \emph{taglio}
+    perché $s\in S$ e $t\in T$, ma siccome $t$ non è raggiungibile da $s$,
+    tutti gli \emph{archi} $(x,y)$ con $x\in S$ e $y\in T$ sono saturi, ovvero
+    $f(x,y)=c(x,y)$. Per il \nameref{def:154} vale:
+    \[|f|=\sum_{x\in S,y\in T}f(x,y)\]
+    Ne segue che:
+    \[|f|=\sum_{x\in S,y\in T}f(x,y)=\sum_{x\in S, y\in T}c(S,T)=C(S,T)\]
+    Poiché $|f|=C(S,T)$ e grazie al \nameref{def:155} sappiamo che $|f|\leq
+    C(S',T')$ per ogni \emph{taglio} $(S',T')$, possiamo affermare che $(S,T)$
+    è un \emph{taglio} di \emph{capacità} minima.
+
+    \paragraph{\bm{$(3)\Rightarrow(1)$}}
+    Poiché per ogni \emph{flusso} $f$ e ogni \emph{taglio} $(S,T)$ vale la
+    relazione $|f|\leq C(S,T)$, il \emph{flusso} che soddisfa $|f|=C(S,T)$
+    deve essere massimo.
+\end{proof}

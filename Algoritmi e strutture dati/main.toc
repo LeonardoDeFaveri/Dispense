@@ -326,6 +326,10 @@
 \contentsline {paragraph}{Conservazione del flusso}{205}{paragraph*.286}%
 \contentsline {subsection}{\numberline {15.2.2}Metodo dei cammini aumentanti}{205}{subsection.15.2.2}%
 \contentsline {paragraph}{Note sull'implementazione}{207}{paragraph*.290}%
-\contentsline {chapter}{\numberline {A}Appendice A}{208}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{208}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{208}{section.1.A.2}%
+\contentsline {paragraph}{Dimostrazione}{208}{paragraph*.291}%
+\contentsline {paragraph}{\bm {$(1)\Rightarrow (2)$}}{210}{paragraph*.297}%
+\contentsline {paragraph}{\bm {$(2)\Rightarrow (3)$}}{210}{paragraph*.298}%
+\contentsline {paragraph}{\bm {$(3)\Rightarrow (1)$}}{211}{paragraph*.299}%
+\contentsline {chapter}{\numberline {A}Appendice A}{212}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{212}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{212}{section.1.A.2}%

@@ -380,3 +380,5 @@ circle
 ellipse
 draw
 minCap
+shift
+sets
