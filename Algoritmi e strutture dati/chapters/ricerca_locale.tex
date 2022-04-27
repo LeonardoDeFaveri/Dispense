@@ -388,11 +388,12 @@ lemma:
 Quindi l'algoritmo che abbiamo descritto è corretto, tuttavia rimane un problema:
 come facciamo a trovare il \emph{flusso} $g$?
 
-Una soluzione è quella proposta da Ford e Fulkerson nel 1956 che utilizza i
-cosiddetti \emph{cammini aumentanti}. In particolare, viene identificato nella
-\emph{rete residua} $G_f$ un \emph{cammino} $C=(v_0,\dots,v_n)$ tale per cui
-$v_0=s$ e $v_n=t$. Quindi, si definisce la \emph{capacità} del \emph{cammino}
-come la minore tra le \emph{capacità} degli \emph{archi} attraversati, ovvero:
+Una soluzione è quella proposta da Ford e Fulkerson nel 1956, e raffinata poi
+da Edmonds e Karp nel 1972, che fa uso dei cosiddetti \emph{cammini aumentanti}.
+In particolare, viene identificato nella \emph{rete residua} $G_f$ un
+\emph{cammino} $C=(v_0,\dots,v_n)$ tale per cui $v_0=s$ e $v_n=t$. Quindi, si
+definisce la \emph{capacità} del \emph{cammino} come la minore tra le
+\emph{capacità} degli \emph{archi} attraversati, ovvero:
 \[c_f(C)=\min_{i\in\{2,\dots,n\}}c_f(v_{i-1},v_i)\]
 
 \begin{note}
@@ -966,16 +967,122 @@ definizioni.
     \emph{nodi} raggiungibili da $s$ e $T=V-S$, $(S,T)$ è un \emph{taglio}
     perché $s\in S$ e $t\in T$, ma siccome $t$ non è raggiungibile da $s$,
     tutti gli \emph{archi} $(x,y)$ con $x\in S$ e $y\in T$ sono saturi, ovvero
-    $f(x,y)=c(x,y)$. Per il \nameref{def:154} vale:
+    $f(x,y)=c(x,y)$. Per il \emph{\nameref{def:154}} vale:
     \[|f|=\sum_{x\in S,y\in T}f(x,y)\]
     Ne segue che:
     \[|f|=\sum_{x\in S,y\in T}f(x,y)=\sum_{x\in S, y\in T}c(S,T)=C(S,T)\]
-    Poiché $|f|=C(S,T)$ e grazie al \nameref{def:155} sappiamo che $|f|\leq
-    C(S',T')$ per ogni \emph{taglio} $(S',T')$, possiamo affermare che $(S,T)$
-    è un \emph{taglio} di \emph{capacità} minima.
+    Poiché $|f|=C(S,T)$ e grazie al \emph{\nameref{def:155}} sappiamo che
+    $|f|\leq C(S',T')$ per ogni \emph{taglio} $(S',T')$, possiamo affermare che
+    $(S,T)$ è un \emph{taglio} di \emph{capacità} minima.
 
     \paragraph{\bm{$(3)\Rightarrow(1)$}}
     Poiché per ogni \emph{flusso} $f$ e ogni \emph{taglio} $(S,T)$ vale la
     relazione $|f|\leq C(S,T)$, il \emph{flusso} che soddisfa $|f|=C(S,T)$
     deve essere massimo.
 \end{proof}
+
+\subsection{Complessità}
+\paragraph{Limite superiore nell'Algoritmo di Ford-Fulkerson}
+Nell'\emph{Algoritmo di Ford-Fulkerson} la ricerca del \emph{flusso massimo}
+parte da un \emph{flusso nullo} che viene di volta in volta aumentato fino ad
+arrivare al \emph{flusso massimo}. Poiché ogni incremento può essere unitario,
+il numero di incrementi è $O(|f^*|)$. Ogni incremento richiede una \emph{visita
+del grafo}, la \emph{somma tra due flussi} e la determinazione della \emph{rete
+residua}, e ognuna di queste operazioni costa $O(V+E)$, quindi la
+\emph{complessità} finale del caso peggiore è $O((V+E)|f^*|)$.
+
+\begin{note}
+    Dato che $E=\Omega(V)=O(V^2)$, possiamo esprimere la \emph{complessità} come
+    $O(E|f^*|)$ o $O(V^2|f^*|)$.
+\end{note}
+
+\paragraph{Limite superiore nell'Algoritmo di Edmonds-Karp}
+Edmonds e Karp suggerirono di usare una \emph{visita in ampiezza} invece di una
+\emph{visita generica}. Gli \emph{aumenti di flusso} vengono eseguiti $O(VE)$
+volte e per ognuno di essi si paga il costo $O(V+E)$ di una \emph{visita in
+ampiezza}. La \emph{complessità} finale è quindi $O(VE(V+E))$, ma siccome
+$E=\Omega(V)$ perché ogni \emph{nodo}, ad eccezione di $s$ e $t$, ha almeno
+un \emph{arco entrante} e un \emph{arco uscente}, possiamo semplificare
+scrivendo che la \emph{complessità} è $O(VE^2)$ o $O(V^5)$.
+
+\paragraph{Dimostrazione}
+\begin{definition}[Monotonia]
+    Siano $\delta_f(s,x)$ la distanza minima da $s$ a $x$ in una rete residua
+    $G_f$ e $f'=f+g$ una flusso nella rete iniziale con $g$ non nullo e
+    derivante da un cammino aumentante. Allora, $\delta_{f'}(s,x)\geq\delta_f(s,x)$.
+\end{definition}
+\begin{proof}[Dimostrazione]
+    Questo comportamento è facile da dimostrare in quanto ad ogni aumento di
+    \emph{flusso} alcuni \emph{archi} si \q{spengono} perché la loro
+    \emph{capacità residua} scende a $0$. Poiché quegli \emph{archi} erano
+    utilizzati nei \emph{cammini minimi}, \emph{visite} successive non potranno
+    individuare \emph{cammini} più corti.
+\end{proof}
+
+\noindent
+Dimostrata la \emph{monotonia}, possiamo dimostrare formalmente che il numero
+di aumenti di \emph{flusso} è limitato superiormente da $O(VE)$.
+
+\begin{proof}[Dimostrazione]
+    Siano $G_f$ una \emph{rete residua} e $C$ un \emph{cammino aumentante} di
+    $G_f$. $(x,y)$ è un \emph{arco critico}, o un \emph{collo di bottiglia},
+    in $C$ se:
+    \[c_f(x,y)=\min_{(u,v)\in C}\{c_f(u,v)\}\]
+    Ogni \emph{cammino} contiene almeno un \emph{arco critico} e ogni volta che
+    il \emph{flusso} associato a $C$ viene aggiunto, tutti gli \emph{archi
+    critici} scompaiono dalla \emph{rete residua}.
+
+    \noindent
+    Poiché i \emph{cammini aumentanti} sono \emph{minimi}, abbiamo che:
+    \[\delta_f(s,y)=\delta_f(s,x)+1\]
+    Una volta che l'\emph{arco} $(x,y)$ sarà stato \emph{saturato}, potrà essere
+    riutilizzato soltanto se il \emph{flusso} attraverso quell'\emph{arco}
+    diminuisce. Ovvero, solo se verrà utilizzato l'\emph{arco} $(y,x)$.
+
+    Se $g$ è il \emph{flusso} quando ciò accade, vale:
+    \[\delta_g(s,y)=\delta_g(s,x)+1\]
+    Per la \emph{monotonia} sappiamo anche che $\delta_g(s,y)\geq\delta_f(s,y)$,
+    quindi vale quanto segue:
+    \[\delta_g(s,y)\begin{array}[t]{cl}
+        = & \delta_g(s,x)+1\\
+        \geq & \delta_f(s,y)+1\\
+        = & \delta_f(s,x)+1+1
+    \end{array}\]
+    Questo significa che dal momento in cui un \emph{arco critico} viene
+    \emph{saturato} a quando torna \emph{critico}, il \emph{cammino minimo}
+    passante per esso si è allungato di almeno due passi. Di conseguenza, la
+    lunghezza \emph{massima} del \emph{cammino} fino a $x$, considerando che
+    poi si deve attraversare l'\emph{arco} $(x,y)$ è al massimo $V-2$. Ne
+    consegue che un \emph{arco} può diventare \emph{critico} un massimo di
+    $\frac{V-2}{2}=\frac{V}{2}-1$ volte e, poiché ci sono $O(E)$ \emph{archi}
+    che possono diventare \emph{critici} $O(V)$ volte, il numero massimo di
+    \emph{flussi aumentanti} è $O(VE)$.
+\end{proof}
+
+\paragraph{Riassunto delle complessità}
+\mbox{}\\
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|c|c|p{0.285\textwidth}|}
+    \hline
+    \textbf{Nome} & \textbf{Complessità} & \textbf{Note}\\
+    \hline
+    Ford-Fulkerson & $O(E|f^*|)$ & Converge con valori razionali\\
+    \hline
+    Edmonds-Karp & $O(VE^2)$ & Specializzazione basata su BFS\\
+    \hline
+    Dinic, blocking flow & $O(V^2E)$ & In alcune reti particolari
+    $O(\min(V^{2/3},E^{1/2})E)$\\
+    \hline
+    MPN & $O(V^3)$ & Solo su DAG\\
+    \hline
+    Dinic & $O(VE\log V)$ & Usa Dynamic tree\\
+    \hline
+    Goldberg e Rao & $O(\min(V^{2/3}E^{1/2})E\log(\frac{V^2}{E}+2)\log C)$ &
+    $C=\max_{(x,y)\in E}c(x,y)$\\
+    \hline
+    \makecell[t]{Orlin, King\\Rao, Tarjan} & $O(VE)$ & Pubblicato nel 2013\\
+    \hline
+\end{tabular}
+\end{table}

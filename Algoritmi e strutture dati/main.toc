@@ -330,6 +330,11 @@
 \contentsline {paragraph}{\bm {$(1)\Rightarrow (2)$}}{210}{paragraph*.297}%
 \contentsline {paragraph}{\bm {$(2)\Rightarrow (3)$}}{210}{paragraph*.298}%
 \contentsline {paragraph}{\bm {$(3)\Rightarrow (1)$}}{211}{paragraph*.299}%
-\contentsline {chapter}{\numberline {A}Appendice A}{212}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{212}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{212}{section.1.A.2}%
+\contentsline {subsection}{\numberline {15.2.3}Complessità}{211}{subsection.15.2.3}%
+\contentsline {paragraph}{Limite superiore nell'Algoritmo di Ford-Fulkerson}{211}{paragraph*.300}%
+\contentsline {paragraph}{Limite superiore nell'Algoritmo di Edmonds-Karp}{211}{paragraph*.301}%
+\contentsline {paragraph}{Dimostrazione}{211}{paragraph*.302}%
+\contentsline {paragraph}{Riassunto delle complessità}{212}{paragraph*.303}%
+\contentsline {chapter}{\numberline {A}Appendice A}{213}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{213}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{213}{section.1.A.2}%

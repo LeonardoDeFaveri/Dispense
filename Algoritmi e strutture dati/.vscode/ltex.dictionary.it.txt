@@ -382,3 +382,14 @@ draw
 minCap
 shift
 sets
+Edmonds
+Karp
+blocking
+Dinic
+flow
+dynamic
+Goldberg
+Rao
+Orlin
+King
+Dynamic
