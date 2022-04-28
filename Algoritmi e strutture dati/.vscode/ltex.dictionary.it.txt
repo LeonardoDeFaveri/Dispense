@@ -393,3 +393,8 @@ Rao
 Orlin
 King
 Dynamic
+Backtracking
+backtrack
+backtracking
+force
+superpolinomiale

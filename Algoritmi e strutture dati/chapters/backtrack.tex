@@ -1,0 +1,54 @@
+\chapter{Backtracking}
+\section{Introduzione}
+La tecnica del \emph{backtrack} è usata per risolvere problemi in cui è
+necessario esplorare l'intero spazio delle soluzioni o quando la soluzione
+va ricercata in un insieme molto ampio. Andando maggiormente nello specifico,
+il \emph{backtracking} può essere utilizzato nelle seguenti categorie di
+problemi:
+\begin{itemize}
+    \item \emph{Enumerazioni}: problemi che richiedono di elencare tutte le
+    soluzioni ammissibili;
+    \item \emph{Conteggio}: problemi che richiedono di contare tutte le
+    soluzioni ammissibili;
+    \item \emph{Ricerca}: problemi che richiedono di trovare una soluzione
+    ammissibile in uno spazio delle soluzioni molto grande;
+    \item \emph{Ottimizzazione}: problemi che richiedono di trovare una delle
+    soluzioni ammissibili ottime rispetto ad un certo criterio di valutazione;
+\end{itemize}
+\begin{note}
+    Il \emph{backtracking} è paragonabili alla tecnica del \emph{brute force}.
+\end{note}
+
+\noindent
+Il problema che sorge quando si sceglie di analizzare l'intero spazio delle
+soluzioni è che questo potrebbe avere una dimensione \emph{superpolinomiale}
+e richiedere un tempo inaccettabile per essere esaminato. Per questo motivo,
+è consigliato usare il \emph{backtracking} solo quando è l'unica via possibile.
+
+Ciò che ci interessa però, è che la tecnica del \emph{backtrack} ci fornisce un
+approccio sistematico all'esplorazione di uno spazio di ricerca, utilizzando la
+ricorsione per memorizzare le scelte fatte e consentendoci di \q{ritornare sui
+nostri passi} qualora quelle scelte si rivelassero errate o non ottimali.
+
+\begin{note}
+    Per alcuni problemi è possibile realizzare anche soluzioni iterative
+    unendo approcci \emph{greedy} alla possibilità di annullare le scelte fatte.
+\end{note}
+
+\section{Problema dell'elencazione dei sottoinsiemi}
+\begin{problem}[Problema dell'elencazione dei sottoinsiemi]
+    Dato un insieme $\{1,\dots,n\}$ elencarne tutti i sottoinsiemi.
+\end{problem}
+
+\noindent
+Rappresentiamo una soluzione come un vettore di scelte $S[1\dots n]$ nel quale
+il contenuto di $S[i]$ è preso tra i valori dell'insieme originale
+non ancora scelti. In particolare, l'indice $i$ rappresenta l'indice della
+prossima decisione da prendere e la soluzione parziale $S[1\dots i-1]$
+contiene tutte le decisioni prese finora.
+
+Procedendo in modo ricorsivo possiamo dire che nel caso base $S[1\dots i-1]$ è
+una soluzione ammissibile e quindi può essere processata facendo terminare la
+ricorsione. Altrimenti, calcoliamo l'insieme $C$ delle scelte possibili, quindi,
+per ogni $c\in C$ scriviamo $c$ nella scelta $S[i]$ e continuiamo la ricerca per
+$i+1$.
