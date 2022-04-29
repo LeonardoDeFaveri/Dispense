@@ -398,3 +398,7 @@ backtrack
 backtracking
 force
 superpolinomiale
+enumeration
+accept
+processSolution
+permutations

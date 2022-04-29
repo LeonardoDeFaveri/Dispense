@@ -35,8 +35,8 @@ nostri passi} qualora quelle scelte si rivelassero errate o non ottimali.
     unendo approcci \emph{greedy} alla possibilità di annullare le scelte fatte.
 \end{note}
 
-\section{Problema dell'elencazione dei sottoinsiemi}
-\begin{problem}[Problema dell'elencazione dei sottoinsiemi]
+\section{Problema dell'enumerazione dei sottoinsiemi}
+\begin{problem}[Problema dell'enumerazione dei sottoinsiemi]
     Dato un insieme $\{1,\dots,n\}$ elencarne tutti i sottoinsiemi.
 \end{problem}
 
@@ -52,3 +52,182 @@ una soluzione ammissibile e quindi può essere processata facendo terminare la
 ricorsione. Altrimenti, calcoliamo l'insieme $C$ delle scelte possibili, quindi,
 per ogni $c\in C$ scriviamo $c$ nella scelta $S[i]$ e continuiamo la ricerca per
 $i+1$.
+
+\subsection{Approccio generale}
+Come precedentemente accennato, il \emph{backtracking} ci fornisce un modo
+sistematico di analizzare uno spazio delle soluzioni. Questo si traduce nella
+possibilità di definire, per ogni classe di problema, uno schema generale per
+l'algoritmo risolutivo. Il problema dell'\emph{enumerazione dei sottoinsiemi}
+appartiene alla classe dei \emph{problemi di enumerazione}, e l'algoritmo
+risolutivo segue grosso modo il seguente schema:
+
+\begin{minicode}{Schema generale per algoritmi di enumerazione}
+\ind enumeration($\langle$\emph{dati problema}$\rangle$, \bc{ITEM}[] S,
+    \bc{int} i, $\langle$\emph{dati parziali}$\rangle$)\\
+    \com{Verifica se $S[1\dots i-1]$ contiene una soluzione ammissibile}
+    \indf if (accept($\langle$\emph{dati problema}$\rangle$, S, i,
+        $\langle$\emph{dati parziali}$\rangle$))\\
+        \com{\q{Processa} la soluzione (e.g. stampa, conta, \dots)}
+        processSolution($\langle$\emph{dati problema}$\rangle$, S, i,
+        $\langle$\emph{dati parziali}$\rangle$)\\
+    \indf else\\
+        \com{Calcola l'insieme delle scelte in funzione di $S[1\dots i-1]$}
+        \bc{SET} C = choices($\langle$\emph{dati problema}$\rangle$, S, i,
+        $\langle$\emph{dati parziali}$\rangle$)\\
+        \com{Itera sull'insieme delle scelte}
+        \indff foreach (c $\in$ C) do\\
+            S[i] = c\\
+            \com{Chiamata ricorsiva}
+            enumeration($\langle$\emph{dati problema}$\rangle$, S, i + 1,
+            $\langle$\emph{dati parziali}$\rangle$)
+\end{minicode}
+
+\paragraph{Albero delle decisioni}
+L'uso della ricorsione per esaminare lo spazio delle soluzioni, ci consente di
+rappresentare quest'ultimo come un \emph{albero}, in cui la \emph{radice}
+rappresenta la soluzione parziale vuota, ciascun \emph{nodo} interno è associato
+a una soluzione parziale e, infine, le \emph{foglie} sono le soluzioni ammissibili.
+
+\begin{figure}[h!]
+\centering
+\scalebox{0.9}{\begin{graph}
+    \node[main] (0) [label=above:{$S[0]$}] {};
+    \node[main] (1) [below left of=0, xshift=-40, label=above:{$S[1]$}] {};
+    \node[main] (2) [below right of=0, xshift=40] {};
+    \node[main] (3) [below left of=1, xshift=0, label=above:{$S[2]$}] {};
+    \node[main] (4) [below right of=1, xshift=0] {};
+    \node[main] (5) [below left of=2, xshift=0] {};
+    \node[main] (6) [below right of=2, xshift=0] {};
+    \node[main] (9) [below left of=3, xshift=20,
+        label={[above, xshift=-1.5mm]:{$S[3]$}}] {};
+    \node[main] (10) [below right of=3, xshift=-20,
+        label={[above, xshift=1.5mm]:{$S[3']$}}] {};
+    \node[main] (11) [below left of=4, xshift=20] {};
+    \node[main] (12) [below right of=4, xshift=-20] {};
+    \node[main] (13) [below left of=5, xshift=20] {};
+    \node[main] (14) [below right of=5, xshift=-20] {};
+    \node[main] (15) [below left of=6, xshift=20] {};
+    \node[main] (16) [below right of=6, xshift=-20] {};
+    
+    \path[-]    (0) edge (1)
+                (0) edge (2)
+                (1) edge (3)
+                (1) edge (4)
+                (2) edge (5)
+                (2) edge (6)
+                (3) edge (9)
+                (3) edge (10)
+                (4) edge (11)
+                (4) edge (12)
+                (5) edge (13)
+                (5) edge (14)
+                (6) edge (15)
+                (6) edge (16);
+\end{graph}}
+\caption{Esempio di \emph{albero delle decisioni}}
+\end{figure}
+
+\paragraph{Implementazione ricorsiva}
+\begin{minicode}{Implementazioe ricorsiva della soluzione}
+\ind subset(\bc{int} n)\\
+    \bc{int}[] S = new \bc{int}[1\dots n]\hfill\com{Vettore delle scelte}
+    subsetRec(n, S, 1)\\
+
+\ind subsetRec(\bc{int} n, \bc{int}[] S, \bc{int} i)\\
+    \com{Una soluzione è ammissibile dopo $n$ scelte}
+    \indf if (i > n) then\\
+        print S\\
+    \indf else\\
+        \bc{SET} C = \{0, 1\}\hfill\com{Ogni valore può essere preso o non preso}
+        \indff foreach (c $\in$ C) do\\
+            S[i] = c\\
+            subsetRec(n, S, i + 1)
+\end{minicode}
+
+\paragraph{Complessità}
+Come richiesto dal problema, l'algoritmo esplora tutto lo spazio delle soluzioni
+e quindi la \emph{complessità} è $T(n)=\Theta(n2^n)$.
+
+\paragraph{Implementazione iterativa}
+Per questo particolare problema, a parità di \emph{complessità}, possiamo
+scrivere anche una versione iterativa della soluzione.
+\begin{minicode}{Implementazioe iterativa della soluzione}
+\ind subset(\bc{int} n)\\
+    \indf for (i = 0 to 2$^n$ - 1) do\\
+        print "\{"\hfill\com{Usiamo le parentesi graffe per distinguere i sottoinsiemi}
+        \indff for (j = 0 to n - 1) do\\
+            \indfff if (i \&\& 2$^j$ $\neq$ 0) do\hfill\com{\&\&: operatore di bitwise and}
+                print j, " "\\
+        \indff println $\}$
+\end{minicode}
+
+\section{Problema dell'enumerazione delle permutazioni}
+\begin{problem}[Problema dell'enumerazione delle permutazioni]
+    Dato un insieme $A$, stamparne tutte le permutazioni.
+\end{problem}
+
+\noindent
+Questo è un altro \emph{problema di enumerazione} quindi segue lo stesso schema
+appena visto.
+
+\begin{minicode}{Prima implementazione}
+\ind permutations(\bc{SET} A)\\
+    \bc{int} n = size(A)\\
+    \bc{int}[] S = new \bc{int}[1\dots n]\\
+    permRec(A, S, 1)
+\end{minicode}
+\newpage
+\begin{codecont}
+permRec(\bc{SET} A, \bc{ITEM}[] S, \bc{int} i)\\
+    \ind if (A.isEmpty()) then\hfill\com{Se $A$ è vuoto, $S$ è ammissibile}
+        \indf print S\\
+    \ind else\\
+        \indf\bc{SET} C = copy(A)\hfill\com{Nel ciclo usiamo una copia di $A$}
+        \indf foreach (c $\in$ C) do\\
+            \indff S[i] = c\\
+            \indff A.remove(c)\\
+            \indff permRec(n, S, i + 1)\\
+            \indff A.insert(C)
+\end{codecont}
+
+\begin{eg}[Esempio d'esecuzione]
+Se $A=\{1,2,3\}$, l'albero delle soluzioni associato è il seguente:
+
+\begin{figure}[h!]
+\centering
+\begin{graph}
+    \node[main] (0) {};
+    \node[main] (2) [below of=0, label=above left:{$B$}] {};
+    \node[main] (1) [left of=2, xshift=-30mm, label=above:{$A$}] {};
+    \node[main] (3) [right of=2, xshift=30mm, label=above:{$C$}] {};
+    \node[main] (4) [below left of=1, label=above:{$B$}] {};
+    \node[main] (5) [below right of=1, label=above:{$C$}] {};
+    \node[main] (6) [below left of=2, label=above:{$A$}] {};
+    \node[main] (7) [below right of=2, label=above:{$C$}] {};
+    \node[main] (8) [below left of=3, label=above:{$A$}] {};
+    \node[main] (9) [below right of=3, label=above:{$B$}] {};
+    \node[main] (10) [below of=4, label=above left:{$C$}] {};
+    \node[main] (11) [below of=5, label=above left:{$B$}] {};
+    \node[main] (12) [below of=6, label=above left:{$C$}] {};
+    \node[main] (13) [below of=7, label=above left:{$A$}] {};
+    \node[main] (14) [below of=8, label=above left:{$B$}] {};
+    \node[main] (15) [below of=9, label=above left:{$A$}] {};
+    
+    \path[-]    (0) edge (1)
+                (0) edge (2)
+                (0) edge (3)
+                (1) edge (4)
+                (1) edge (5)
+                (2) edge (6)
+                (2) edge (7)
+                (3) edge (8)
+                (3) edge (9)
+                (4) edge (10)
+                (5) edge (11)
+                (6) edge (12)
+                (7) edge (13)
+                (8) edge (14)
+                (9) edge (15);
+\end{graph}
+\end{figure}
+\end{eg}

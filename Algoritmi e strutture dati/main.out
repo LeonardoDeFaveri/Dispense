@@ -170,7 +170,9 @@
 \BOOKMARK [2][-]{subsection.15.2.3}{Complessit\340}{section.15.2}% 170
 \BOOKMARK [0][-]{chapter.16}{Backtracking}{}% 171
 \BOOKMARK [1][-]{section.16.1}{Introduzione}{chapter.16}% 172
-\BOOKMARK [1][-]{section.16.2}{Problema dell'elencazione dei sottoinsiemi}{chapter.16}% 173
-\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 174
-\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 175
-\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 176
+\BOOKMARK [1][-]{section.16.2}{Problema dell'enumerazione dei sottoinsiemi}{chapter.16}% 173
+\BOOKMARK [2][-]{subsection.16.2.1}{Approccio generale}{section.16.2}% 174
+\BOOKMARK [1][-]{section.16.3}{Problema dell'enumerazione delle permutazioni}{chapter.16}% 175
+\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 176
+\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 177
+\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 178

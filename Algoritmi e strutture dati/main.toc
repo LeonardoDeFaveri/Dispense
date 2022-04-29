@@ -337,7 +337,13 @@
 \contentsline {paragraph}{Riassunto delle complessità}{213}{paragraph*.303}%
 \contentsline {chapter}{\numberline {16}Backtracking}{214}{chapter.16}%
 \contentsline {section}{\numberline {16.1}Introduzione}{214}{section.16.1}%
-\contentsline {section}{\numberline {16.2}Problema dell'elencazione dei sottoinsiemi}{214}{section.16.2}%
-\contentsline {chapter}{\numberline {A}Appendice A}{216}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{216}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{216}{section.1.A.2}%
+\contentsline {section}{\numberline {16.2}Problema dell'enumerazione dei sottoinsiemi}{214}{section.16.2}%
+\contentsline {subsection}{\numberline {16.2.1}Approccio generale}{215}{subsection.16.2.1}%
+\contentsline {paragraph}{Albero delle decisioni}{215}{paragraph*.305}%
+\contentsline {paragraph}{Implementazione ricorsiva}{216}{paragraph*.307}%
+\contentsline {paragraph}{Complessità}{216}{paragraph*.308}%
+\contentsline {paragraph}{Implementazione iterativa}{216}{paragraph*.309}%
+\contentsline {section}{\numberline {16.3}Problema dell'enumerazione delle permutazioni}{216}{section.16.3}%
+\contentsline {chapter}{\numberline {A}Appendice A}{218}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{218}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{218}{section.1.A.2}%
