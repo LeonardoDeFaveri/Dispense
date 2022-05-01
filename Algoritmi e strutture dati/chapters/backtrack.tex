@@ -170,7 +170,7 @@ scrivere anche una versione iterativa della soluzione.
 Questo è un altro \emph{problema di enumerazione} quindi segue lo stesso schema
 appena visto.
 
-\begin{minicode}{Prima implementazione}
+\begin{minicode}{Prima implementazione della soluzione}
 \ind permutations(\bc{SET} A)\\
     \bc{int} n = size(A)\\
     \bc{int}[] S = new \bc{int}[1\dots n]\\
@@ -206,12 +206,18 @@ Se $A=\{1,2,3\}$, l'albero delle soluzioni associato è il seguente:
     \node[main] (7) [below right of=2, label=above:{$C$}] {};
     \node[main] (8) [below left of=3, label=above:{$A$}] {};
     \node[main] (9) [below right of=3, label=above:{$B$}] {};
-    \node[main] (10) [below of=4, label=above left:{$C$}] {};
-    \node[main] (11) [below of=5, label=above left:{$B$}] {};
-    \node[main] (12) [below of=6, label=above left:{$C$}] {};
-    \node[main] (13) [below of=7, label=above left:{$A$}] {};
-    \node[main] (14) [below of=8, label=above left:{$B$}] {};
-    \node[main] (15) [below of=9, label=above left:{$A$}] {};
+    \node[main] (10) [below of=4, label=above left:{$C$},
+        label=below:{$\{A,B,C\}$}] {};
+    \node[main] (11) [below of=5, label=above left:{$B$},
+        label=below:{$\{A,C,B\}$}] {};
+    \node[main] (12) [below of=6, label=above left:{$C$},
+        label=below:{$\{B,A,C\}$}] {};
+    \node[main] (13) [below of=7, label=above left:{$A$},
+        label=below:{$\{B,C,A\}$}] {};
+    \node[main] (14) [below of=8, label=above left:{$B$},
+        label=below:{$\{C,A,B\}$}] {};
+    \node[main] (15) [below of=9, label=above left:{$A$},
+        label=below:{$\{C,B,A\}$}] {};
     
     \path[-]    (0) edge (1)
                 (0) edge (2)
@@ -231,3 +237,285 @@ Se $A=\{1,2,3\}$, l'albero delle soluzioni associato è il seguente:
 \end{graph}
 \end{figure}
 \end{eg}
+
+\paragraph{Complessità}
+Il costo delle copie dell'\emph{insieme} lungo i \emph{cammini radice-foglia}
+è $\sum_{i=1}^nO(i)=O(n^2)$ e poiché il numero di \emph{foglie} è $n!$, la
+\emph{complessità} totale è $T(n)=O(n^2n!)$.
+
+\paragraph{Versione migliorata dell'algoritmo}
+\begin{minicode}{Seconda implementazione della soluzione}
+\ind permutations(\bc{ITEM}[] S, \bc{int} n)\\
+    permRec(S, n)\\
+
+\ind permRec(\bc{ITEM}[] S, \bc{int} i)\\
+    \indf if (i == 1) then\hfill\com{C'è solo una permutazione}
+        println S\\
+    \indf else\\
+        \indff for (j = 1 to i) do\\
+            swap(S, i, j)\\
+            permRec(S, i - 1)\\
+            swap(S, i, j)\\
+\end{minicode}
+
+\noindent
+In questa soluzione, ad ogni iterazione del ciclo \texttt{for} vengono scambiati
+di posizione gli elementi $S[i]$ e $S[j]$, quindi viene continuata ricorsivamente
+l'esecuzione sul sottoinsieme $S[1\dots i - 1]$. Infine, vengono di nuovo
+scambiati gli elementi $S[i]$ e $S[j]$.
+
+\paragraph{Complessità}
+Per ogni permutazione vengono eseguite $2n$ \texttt{swap} e poiché le permutazioni
+sono $n!$, la \emph{complessità} di questa versione è $T(n)=O(n!n)$.
+
+\section[Problema dell'enumerazione dei k-sottoinsiemi]{Problema dell'enumerazione dei \bm{$k$}-sottoinsiemi}
+\begin{problem}[Problema dell'enumerazione dei \bm{$k$}-sottoinsiemi]
+    Dato  un insieme $\{1,\dots,n\}$, elencarne tutti i sottoinsiemi di
+    dimensione $k$.
+\end{problem}
+
+\begin{minicode}{Prima implementazione della soluzione}
+\ind kSubset(\bc{int} n, \bc{int} k)\\
+    \bc{int}[] S = new \bc{int}[1\dots n]\\
+    kssRec(n, k, S, 1)\\
+
+\noindent\com{Conta il numeri di elementi del sottoinsieme}
+\rmindent\ind\bc{int} count(\bc{int}[] S, \bc{int} n)\\
+    \bc{int} count = 0\\
+    \indf for (i = 1 to n) do\\
+        count = count + S[i]\\
+    \indf return count\\
+
+\ind kssRec(\bc{int} n, \bc{int} k, \bc{int}[] S, \bc{int} i)\\
+    \bc{int} size = count(S, n)\\
+    \indf if (i > n and size == k) then\hfill\com{La soluzione trovata è ammissibile}
+        processSolution(S, n)\\
+    \indf else if (i > n and size $\neq$ k) then\hfill\com{La soluzione trovata non è ammissibile}
+        return\\
+    \indf else\\
+        \indff foreach (c $\in$ \{0, 1\}) do\\
+            S[i] = c\\
+            kssRec(n, k S, i + 1)
+\end{minicode}
+
+\noindent
+La \emph{complessità} è $O(2^nn)$ perché ogni elemento può essere incluso oppure
+no in un sottoinsieme e la \texttt{count} costa sempre $O(n)$. Ciò che è
+diverso dai problemi precedenti è che potremmo arrivare ad una soluzione non
+ammissibile. Di conseguenza, possiamo modificare lo \nameref{code:122}
+introducendo un controllo sull'inammissibilità di una soluzione.
+
+\begin{code}{Schema generale completo per algoritmi di enumerazione}
+\noindent\noindent enumeration($\langle$\emph{dati problema}$\rangle$, \bc{ITEM}[] S,
+    \bc{int} i, $\langle$\emph{dati parziali}$\rangle$)\\
+    \indent\com{Verifica se $S[1\dots i-1]$ contiene una soluzione ammissibile}
+    \indent if (accept($\langle$\emph{dati problema}$\rangle$, S, i,
+        $\langle$\emph{dati parziali}$\rangle$))\\
+        \indf\com{\q{Processa} la soluzione (e.g. stampa, conta, \dots)}
+        \indf processSolution($\langle$\emph{dati problema}$\rangle$, S, i,
+        $\langle$\emph{dati parziali}$\rangle$)\\
+    \ind\com{Verifica se $S[1\dots i-1]$ contiene una soluzione non ammissibile}
+    \ind else if (reject($\langle$\emph{dati problema}$\rangle$, S, i,
+    $\langle$\emph{dati parziali}$\rangle$)) then\\
+        \indf return\\
+    \ind else\\
+        \indf\com{Calcola l'insieme delle scelte in funzione di $S[1\dots i-1]$}
+        \indf\bc{SET} C = choices($\langle$\emph{dati problema}$\rangle$, S, i,
+        $\langle$\emph{dati parziali}$\rangle$)\\
+        \indf\com{Itera sull'insieme delle scelte}
+        \indf foreach (c $\in$ C) do\\
+            \indff S[i] = c\\
+            \indff\com{Chiamata ricorsiva}
+            \indff enumeration($\langle$\emph{dati problema}$\rangle$, S, i + 1,
+            $\langle$\emph{dati parziali}$\rangle$)
+\end{code}
+
+\noindent
+Ritornando all'implementazione della soluzione, possiamo eliminare l'invocazione
+alla \texttt{count} e ridurre a $O(2^n)$ la \emph{complessità}.
+
+\begin{minicode}{Seconda implementazione della soluzione}
+\ind kssRec(\bc{int} n, \bc{int} missing, \bc{int}[] S, \bc{int} i)\\
+    \indf if (i > n and missing == 0) then\hfill\com{Se $missing=0$ la soluzione è ammissibile}
+        processSolution(S, n)\\
+    \indf else if (i > n or missing < 0) then\\
+        return\\
+    \indf else\\
+        \indff foreach (c $\in$ \{0, 1\}) do\\
+            S[i] = c\\
+            kssRec(n, missing - c, S, i + 1)
+\end{minicode}
+\begin{note}
+    L'implementazione della funzione wrapper \texttt{kSubset} rimane invariata.
+\end{note}
+
+\noindent
+Il parametro \texttt{missing} tiene traccia del numero di elementi che devono
+ancora essere inseriti nel sottoinsieme per renderlo una soluzione.
+
+\paragraph{Albero delle decisioni}
+Eseguendo l'algoritmo con input $n=3$ e $k=1$, l'\emph{albero delle decisioni}
+risultante è il seguente:
+
+\begin{figure}[h!]
+\centering
+\begin{graph}
+    \tikzset{emph/.style={main, color=red, line width=1.3pt}}
+
+    \node[main] (0) {};
+    \node[main] (1) [below left of=0, xshift=-40] {};
+    \node[emph] (2) [below right of=0, xshift=40] {};
+    \node[main] (3) [below left of=1, xshift=0] {};
+    \node[emph] (4) [below right of=1, xshift=0] {};
+    \node[main] (5) [below left of=2, xshift=0] {};
+    \node[main] (6) [below right of=2, xshift=0] {};
+    \node[main] (9) [below left of=3, xshift=20, yshift=-5mm] {};
+    \node[emph] (10) [below right of=3, xshift=-20, yshift=-5mm] {};
+    \node[main] (11) [below left of=4, xshift=20, yshift=-5mm] {};
+    \node[main] (12) [below right of=4, xshift=-20, yshift=-5mm] {};
+    \node[main] (13) [below left of=5, xshift=20, yshift=-5mm] {};
+    \node[main] (14) [below right of=5, xshift=-20, yshift=-5mm] {};
+    \node[main] (15) [below left of=6, xshift=20, yshift=-5mm] {};
+    \node[main] (16) [below right of=6, xshift=-20, yshift=-5mm] {};
+
+    \path[-]    (0) edge node[above left] {$0$} (1)
+                (0) edge node[above right] {$1$} (2)
+                (1) edge node[above left] {$0$} (3)
+                (1) edge node[above right] {$1$} (4)
+                (2) edge node[above left] {$0$} (5)
+                (2) edge node[above right] {$1$} (6)
+                (3) edge node[left] {$0$} (9)
+                (3) edge node[right] {$1$} (10)
+                (4) edge node[left] {$0$} (11)
+                (4) edge node[right] {$1$} (12)
+                (5) edge node[left] {$0$} (13)
+                (5) edge node[right] {$1$} (14)
+                (6) edge node[left] {$0$} (15)
+                (6) edge node[right] {$1$} (16);
+\end{graph}
+\caption{\emph{Albero delle decisioni}}
+\end{figure}
+
+\noindent
+I \emph{nodi} rossi rappresentano il punto il valore di \texttt{missing}
+arriva a $0$ per la prima nel \emph{cammino radice-foglia}. Continuare la
+ricerca dopo quei \emph{nodi} non ha senso, perché ogni nuovo elemento aggiunto
+al sottoinsieme porterebbe ad una soluzione inammissibile. Questo ci suggerisce
+che l'implementazione potrebbe essere migliorata \q{cancellando} quei
+\emph{sottoalberi} dall'insieme delle soluzioni. Questa operazione prende il
+nome di \emph{pruning}.
+
+\begin{minicode}{Terza implementazione della soluzione con pruning totale}
+\ind kssRec(\bc{int} n, \bc{int} missing, \bc{int}[] S, \bc{int} i)\\
+    \indf if (missing == 0) then\hfill\com{Se $missing=0$ la soluzione è ammissibile}
+        processSolution(S, n)\\
+    \indf else if (i > n or missing < 0 or n - (n - 1) < missing) then\\
+        return\\
+    \indf else\\
+        \indff foreach (c $\in$ \{0, 1\}) do\\
+            S[i] = c\\
+            kssRec(n, missing - c, S, i + 1)
+\end{minicode}
+
+\noindent
+Oltre a rimuovere i \emph{sottoalberi} in eccedenza, possiamo togliere anche
+quelli che di sicuro non porteranno ad alcuna soluzione ammissibile. Per esempio,
+se $k=2$, nell'\emph{albero} precedente avremmo potuto eseguire il \emph{pruning}
+del \emph{sottoalbero} radicato nel \emph{nodo} da sinistra del secondo
+\emph{livello}. Questo perché, anche scegliendo di inserire nel sottoinsieme
+tutti i valori successivi, non si sarebbe potuto arrivare ad annullare il valore
+di \texttt{missing}.
+
+\begin{note}
+    Quando valutiamo se eseguire o meno il \emph{pruning} di un certo
+    \emph{sottoalbero}, prendiamo la decisione in base alla soluzione parziale
+    associata al \emph{nodo radice} del \emph{sottoalbero}.
+\end{note}
+
+\begin{minicode}{Implementazione ripulita della soluzione}
+\ind kssRec(\bc{int} n, \bc{int} missing, \bc{int}[] S, \bc{int} i)\\
+    \indf if (missing == 0) then\hfill\com{Se $missing=0$ la soluzione è ammissibile}
+        processSolution(S, n)\\
+    \indf else if (i $\leq$ n and 0 < missing $\leq$ n - (n - 1)) then\\
+        \indff foreach (c $\in$ \{0, 1\}) do\\
+            S[i] = c\\
+            kssRec(n, missing - c, S, i + 1)
+\end{minicode}
+
+\paragraph{Complessità}
+Sebbene l'introduzione del \emph{pruning} non riduca la \emph{complessità},
+permette comunque di migliorare l'efficienza per valori di $k$ vicini agli
+estremi $1$, $n$. Per quei valori di $k$ infatti, la porzione di \emph{albero}
+che viene eliminata è sostanziale. Viceversa il guadagno è soltanto marginale
+per valori di $k$ vicini a $\frac{n}{2}$.
+
+\section{Problema del subset sum}
+\begin{problem}[Problema del subset sum]
+    Dati un vettore $A$ contenente $n$ interi positivi ed un intero positivo
+    $k$, dire se esiste un sottoinsieme di indice $S\subseteq\{1\dots n\}$ tale
+    per cui $\sum_{i\in S}A[i]=k$.
+\end{problem}
+
+\noindent
+Ad esempio, se $A=[1,4,3,12,7,2,21,55]$ e $k=23$, due possibili soluzioni sono
+$S_1=\{2,4,5\}$ perché $4+12+7=23$, e $S_2=\{6,7\}$ perché $2+21=23$.
+
+\begin{note}
+    Questo problema può essere risolto in tempo $O(kn)$ sfruttando la
+    \emph{programmazione dinamica}, tuttavia qui ne vediamo una soluzione
+    tramite \emph{backtracking} di tempo $O(2^n)$ in cui però interrompiamo
+    l'esecuzione alla prima soluzione trovata.
+\end{note}
+
+\subsection{Approccio generale}
+Lo schema generale è simile a quello usato per l'\emph{enumerazione}, ma alla
+prima soluzione ammissibile trovata, l'algoritmo termina restituendo
+\texttt{true}.
+
+\begin{minicode}{Schema generale completo con interruzione}
+\ind\bc{boolean} enumeration($\langle$\emph{dati problema}$\rangle$, \bc{ITEM}[] S,
+    \bc{int} i, $\langle$\emph{dati parziali}$\rangle$)\\
+    \com{Verifica se $S[1\dots i-1]$ contiene una soluzione ammissibile}
+    \indf if (accept($\langle$\emph{dati problema}$\rangle$, S, i,
+        $\langle$\emph{dati parziali}$\rangle$))\\
+        \com{\q{Processa} la soluzione (e.g. stampa, conta, \dots)}
+        processSolution($\langle$\emph{dati problema}$\rangle$, S, i,
+        $\langle$\emph{dati parziali}$\rangle$)\\
+        return true\\
+    \indf\com{Verifica se $S[1\dots i-1]$ contiene una soluzione non ammissibile}
+    \indf else if (reject($\langle$\emph{dati problema}$\rangle$, S, i,
+    $\langle$\emph{dati parziali}$\rangle$))\\
+        return false\\
+    \indf else\\
+        \com{Calcola l'insieme delle scelte in funzione di $S[1\dots i-1]$}
+        \bc{SET} C = choices($\langle$\emph{dati problema}$\rangle$, S, i,
+        $\langle$\emph{dati parziali}$\rangle$)\\
+        \com{Itera sull'insieme delle scelte}
+        \indff foreach (c $\in$ C) do\\
+            S[i] = c\\
+            \com{Chiamata ricorsiva}
+            \indfff if (enumeration($\langle$\emph{dati problema}$\rangle$, S, i + 1,
+            $\langle$\emph{dati parziali}$\rangle$)) then\\
+                return true\\
+        \indff return false
+\end{minicode}
+
+\paragraph{Implementazione}
+\begin{minicode}{Implementazione della soluzione}
+\ind\bc{boolean} subsetSum(\bc{int}[] A, \bc{int} n, \bc{int} k)\\
+    \bc{int}[] S = new \bc{int}[1\dots n]\\
+    return ssRec(A, n, k, S, 1)\\
+
+\ind\bc{boolean} ssRec(\bc{int}[] A, \bc{int} n, \bc{int} missing, \bc{int}[] S, \bc{int} i)\\
+    \indf if (missing == 0) then\\
+        processSolution(S, i - 1)\hfill\com{Stampa gli indici della soluzione}
+        return true\\
+    \indf else if (i > n or missing < 0) then\\
+        return false\hfill\com{I valori sono terminati o la somma è eccessiva}
+    \indf else\\
+        \indff foreach (c $\in$ \{0, 1\}) do\\
+            S[i] = c\\
+            \indfff if (ssRec(A, n, missing - A[i] $\cdot$ c, S, i + 1)) then\\
+                return true\\
+        \indff return false
+\end{minicode}

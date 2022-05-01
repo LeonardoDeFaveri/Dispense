@@ -402,3 +402,10 @@ enumeration
 accept
 processSolution
 permutations
+count
+reject
+choices
+missing
+pruning
+subset
+sum

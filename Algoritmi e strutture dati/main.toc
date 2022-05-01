@@ -344,6 +344,15 @@
 \contentsline {paragraph}{Complessità}{216}{paragraph*.308}%
 \contentsline {paragraph}{Implementazione iterativa}{216}{paragraph*.309}%
 \contentsline {section}{\numberline {16.3}Problema dell'enumerazione delle permutazioni}{216}{section.16.3}%
-\contentsline {chapter}{\numberline {A}Appendice A}{218}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{218}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{218}{section.1.A.2}%
+\contentsline {paragraph}{Complessità}{217}{paragraph*.311}%
+\contentsline {paragraph}{Versione migliorata dell'algoritmo}{217}{paragraph*.312}%
+\contentsline {paragraph}{Complessità}{218}{paragraph*.313}%
+\contentsline {section}{\numberline {16.4}Problema dell'enumerazione dei k-sottoinsiemi}{218}{section.16.4}%
+\contentsline {paragraph}{Albero delle decisioni}{219}{paragraph*.314}%
+\contentsline {paragraph}{Complessità}{220}{paragraph*.316}%
+\contentsline {section}{\numberline {16.5}Problema del subset sum}{220}{section.16.5}%
+\contentsline {subsection}{\numberline {16.5.1}Approccio generale}{221}{subsection.16.5.1}%
+\contentsline {paragraph}{Implementazione}{221}{paragraph*.317}%
+\contentsline {chapter}{\numberline {A}Appendice A}{222}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{222}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{222}{section.1.A.2}%
