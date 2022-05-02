@@ -296,3 +296,6 @@
 {"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Qboolean subsetSum(int[] A, int n, int k) int[] S = new int[1…\\E$"}
 {"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Qn] return ssRec(A, n, k, S, 1)\\E$"}
 {"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Qboolean ssRec(int[] A, int n, int missing, int[] S, int i) if (missing == 0) then processSolution(S, i - 1) Stampa gli indici della soluzione return true else if (i > n or missing < 0) then return false I valori sono terminati o la somma è eccessiva else foreach (c \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q 0, 1) do S[i] = c if (ssRec(A, n, missing - A[i] \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q c, S, i + 1)) then return true return false\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\Q[bg] (1) [minimum width=70mm, label=[yshift=7mm]-90:\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q] ; [cell] (f) at (1) [xshift=-25mm] \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q; [cell] (a2) at (1) [xshift=25mm] \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q;\\E$"}
+{"rule":"WHITESPACE_PUNCTUATION","sentence":"^\\Q[bg] (1) [minimum width=70mm, label=[yshift=7mm]-90:\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q] ; [cell] (f) at (1) [xshift=-25mm] \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q; [cell] (a2) at (1) [xshift=25mm] \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q;\\E$"}
+{"rule":"WHITESPACE_PUNCTUATION","sentence":"^\\Q[] (0) at (f) [xshift=-35mm] ; [] (1) at (a2) [xshift=35mm] ;\\E$"}

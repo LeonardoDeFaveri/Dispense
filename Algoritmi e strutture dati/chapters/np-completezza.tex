@@ -1,0 +1,108 @@
+\chapter{Problemi intrattabili e teoria dell'NP-completezza}
+\section{Introduzione}
+Finora, con l'unica eccezione della sezione sul \emph{backtracking}, abbiamo
+trattato unicamente problemi con soluzioni in tempo \emph{polinomiale}, ovvero
+problemi le cui soluzioni sono eseguibili in tempo $O(n^k)$ con $k\in\mathbb{R}^+$.
+Esistono anche problemi che richiedono un tempo \emph{esponenziale} o che
+addirittura non sono risolvibili (e.g. halting problem).
+
+Ciò che andremo ad introdurre in questo capitolo invece, sono una serie di
+problemi per i quali non è chiaro se esista una soluzione polinomiale o meno.
+Vedremo anche come tutti questi problemi siano in realtà legati tra loro, in modo
+che se esiste una soluzione \emph{polinomiale} per uno di essi, allora ne
+esiste una anche per gli altri. Viceversa, se si riesce a dimostrare che uno
+di essi non è risolvibile in tempo \emph{polinomiale}, allora non lo è nessuno.
+
+\bigskip\noindent
+Procediamo quindi dando alcune definizioni.
+
+\begin{definition}[Problema astratto]
+    Un problema astratto è una relazione binaria $R\subseteq I\times S$ tra un
+    insieme $I$ di istanze del problema e un insieme $S$ di soluzioni.
+\end{definition}
+\begin{note}
+    Ad esempio, nel problema della \emph{ricerca del cammino minimo tra due
+    nodi}, un'istanza del problema è la tupla $(V,R,u,v)$, mentre una soluzione
+    è una sequenza di \emph{nodi} $(v_1,\dots,v_n)$.
+\end{note}
+
+\noindent
+Come visto nei capitoli scorsi, esistono varie tipologie di problema. Le
+principali sono tre: \emph{ottimizzazione}, \emph{ricerca} e \emph{decisione}.
+
+\begin{definition}[Problema di ottimizzazione]
+    Data un'istanza, trovare la soluzione ottima secondo un insieme di criteri
+    prestabiliti.
+\end{definition}
+\begin{definition}[Problema di ricerca]
+    Data un'istanza, trovare una possibile soluzione tra quelle esistenti.
+\end{definition}
+\begin{definition}[Problema di decisione]
+    Data un'istanza, verificare se soddisfa o meno una data proprietà.
+\end{definition}
+\begin{note}
+    Nei \emph{problemi di decisione}, $R$ è una funzione del tipo $R:I\to\{0,1\}$.
+\end{note}
+
+\noindent
+Informalmente, possiamo dimostrare che i \emph{problemi di ottimizzazione} e di
+\emph{decisione} sono equivalenti.
+
+\begin{proof}[Dimostrazione]
+    Se è possibile risolvere efficientemente un \emph{problema di ottimizzazione},
+    allora è possibile usare la soluzione a quel problema per verificare
+    efficientemente la proprietà interessata dal \emph{problema di decisione}
+    associato.
+
+    Da questa affermazione possiamo derivare la seguente: se non è possibile
+    risolvere efficientemente un \emph{problema di decisione}, allora non è
+    nemmeno possibile risolvere efficientemente \emph{problema di ottimizzazione}
+    associato.
+\end{proof}
+\begin{note}
+    Ad esempio, nel problema della \emph{ricerca del cammino tra due nodi}, se
+    si conosce il \emph{cammino minimo} tra essi, è possibile possibile 
+    risolvere efficientemente un \emph{problema di decisione} nel quale ci si
+    chiede se esiste un \emph{cammino} di lunghezza non superiore a un qualche
+    valore $k$.
+\end{note}
+
+\noindent
+Questa dimostrazione, sebbene informale, ci permette di proseguire la trattazione
+concentrandoci unicamente su \emph{problemi decisionali}, che sono più facili sia
+da definire che da elaborare.
+
+\section{Riduzioni}
+\begin{definition}[Riduzione polinomiale]
+    Dati due problemi decisionali $R_1\subseteq I_1\times\{0,1\}$ e
+    $R_2\subseteq I_2\times\{0,1\}$, diciamo che $R_1$ è riducibile
+    polinomialmente a $R_2$, e scriviamo in simboli $R_1\leq_p R_2$, se esiste
+    una funzione $f:I_1\to I_2$ che sia calcolabile in tempo polinomiale e tale
+    per cui, per ogni istanza $x$ del problema $R_1$ e ogni soluzione $s\in\{0,1\}$,
+    sia vero che $(x,s)\in R_1\Leftrightarrow(f(x), s)\in R_2$.
+\end{definition}
+
+\begin{figure}[h!]
+\centering
+\scalebox{1}{\begin{graph}
+    \definecolor{pink}{RGB}{255, 204, 204}
+    \definecolor{yellow}{RGB}{255, 251, 214}
+    \tikzset{
+        cell/.style={fill=pink, draw, rectangle, minimum size=12mm, inner sep=0},
+        bg/.style={fill=yellow, draw, rectangle, inner sep=0, minimum size=20mm}
+    }
+    
+    \node[bg] (1) [minimum width=70mm, label={[yshift=7mm]-90:{$A_1$}}] {};
+    \node[cell] (f) at (1) [xshift=-25mm] {$f$};
+    \node[cell] (a2) at (1) [xshift=25mm] {$A_2$};
+
+    \node[] (0) at (f) [xshift=-35mm] {};
+    \node[] (1) at (a2) [xshift=35mm] {};
+
+    \draw[->]   (f) edge node[above] {$f(x)\in I_2$} (a2);
+    \draw[->]   (0) edge node[above] {$x\in I_1$} (f);
+    \draw[->]   (a2) edge node[above] {$s\in\{0,1\}$} (1);
+\end{graph}}
+\caption{\emph{Riduzione polinomiale}}
+\end{figure}
+

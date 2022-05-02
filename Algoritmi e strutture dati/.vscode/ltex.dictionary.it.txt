@@ -409,3 +409,7 @@ missing
 pruning
 subset
 sum
+NP-completezza
+halting
+tupla
+polinomialmente

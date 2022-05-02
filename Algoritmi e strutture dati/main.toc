@@ -353,6 +353,9 @@
 \contentsline {section}{\numberline {16.5}Problema del subset sum}{220}{section.16.5}%
 \contentsline {subsection}{\numberline {16.5.1}Approccio generale}{221}{subsection.16.5.1}%
 \contentsline {paragraph}{Implementazione}{221}{paragraph*.317}%
-\contentsline {chapter}{\numberline {A}Appendice A}{222}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{222}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{222}{section.1.A.2}%
+\contentsline {chapter}{\numberline {17}Problemi intrattabili e teoria dell'NP-completezza}{222}{chapter.17}%
+\contentsline {section}{\numberline {17.1}Introduzione}{222}{section.17.1}%
+\contentsline {section}{\numberline {17.2}Riduzioni}{223}{section.17.2}%
+\contentsline {chapter}{\numberline {A}Appendice A}{224}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{224}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{224}{section.1.A.2}%
