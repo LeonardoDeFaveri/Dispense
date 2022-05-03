@@ -128,7 +128,7 @@ a una soluzione parziale e, infine, le \emph{foglie} sono le soluzioni ammissibi
 \end{figure}
 
 \paragraph{Implementazione ricorsiva}
-\begin{minicode}{Implementazioe ricorsiva della soluzione}
+\begin{minicode}{Implementazione ricorsiva della soluzione}
 \ind subset(\bc{int} n)\\
     \bc{int}[] S = new \bc{int}[1\dots n]\hfill\com{Vettore delle scelte}
     subsetRec(n, S, 1)\\
@@ -279,7 +279,7 @@ sono $n!$, la \emph{complessità} di questa versione è $T(n)=O(n!n)$.
     \bc{int}[] S = new \bc{int}[1\dots n]\\
     kssRec(n, k, S, 1)\\
 
-\noindent\com{Conta il numeri di elementi del sottoinsieme}
+\noindent\com{Conta il numero di elementi del sottoinsieme}
 \rmindent\ind\bc{int} count(\bc{int}[] S, \bc{int} n)\\
     \bc{int} count = 0\\
     \indf for (i = 1 to n) do\\
@@ -302,7 +302,7 @@ sono $n!$, la \emph{complessità} di questa versione è $T(n)=O(n!n)$.
 La \emph{complessità} è $O(2^nn)$ perché ogni elemento può essere incluso oppure
 no in un sottoinsieme e la \texttt{count} costa sempre $O(n)$. Ciò che è
 diverso dai problemi precedenti è che potremmo arrivare ad una soluzione non
-ammissibile. Di conseguenza, possiamo modificare lo \nameref{code:122}
+ammissibile e, di conseguenza, possiamo modificare lo \nameref{code:122}
 introducendo un controllo sull'inammissibilità di una soluzione.
 
 \begin{code}{Schema generale completo per algoritmi di enumerazione}
@@ -397,13 +397,13 @@ risultante è il seguente:
 \end{figure}
 
 \noindent
-I \emph{nodi} rossi rappresentano il punto il valore di \texttt{missing}
-arriva a $0$ per la prima nel \emph{cammino radice-foglia}. Continuare la
+I \emph{nodi} rossi rappresentano il punto in cui il valore di \texttt{missing}
+arriva a $0$ per la prima volta nel \emph{cammino radice-foglia}. Continuare la
 ricerca dopo quei \emph{nodi} non ha senso, perché ogni nuovo elemento aggiunto
 al sottoinsieme porterebbe ad una soluzione inammissibile. Questo ci suggerisce
-che l'implementazione potrebbe essere migliorata \q{cancellando} quei
-\emph{sottoalberi} dall'insieme delle soluzioni. Questa operazione prende il
-nome di \emph{pruning}.
+che l'implementazione potrebbe essere migliorata ulteriormente \q{cancellando}
+quei \emph{sottoalberi} dall'insieme delle soluzioni. Questa operazione prende
+il nome di \emph{pruning}.
 
 \begin{minicode}{Terza implementazione della soluzione con pruning totale}
 \ind kssRec(\bc{int} n, \bc{int} missing, \bc{int}[] S, \bc{int} i)\\
@@ -421,7 +421,7 @@ nome di \emph{pruning}.
 Oltre a rimuovere i \emph{sottoalberi} in eccedenza, possiamo togliere anche
 quelli che di sicuro non porteranno ad alcuna soluzione ammissibile. Per esempio,
 se $k=2$, nell'\emph{albero} precedente avremmo potuto eseguire il \emph{pruning}
-del \emph{sottoalbero} radicato nel \emph{nodo} da sinistra del secondo
+del \emph{sottoalbero} radicato nel primo \emph{nodo} da sinistra del secondo
 \emph{livello}. Questo perché, anche scegliendo di inserire nel sottoinsieme
 tutti i valori successivi, non si sarebbe potuto arrivare ad annullare il valore
 di \texttt{missing}.
@@ -452,7 +452,7 @@ per valori di $k$ vicini a $\frac{n}{2}$.
 \section{Problema del subset sum}
 \begin{problem}[Problema del subset sum]
     Dati un vettore $A$ contenente $n$ interi positivi ed un intero positivo
-    $k$, dire se esiste un sottoinsieme di indice $S\subseteq\{1\dots n\}$ tale
+    $k$, dire se esiste un sottoinsieme di indici $S\subseteq\{1\dots n\}$ tale
     per cui $\sum_{i\in S}A[i]=k$.
 \end{problem}
 
