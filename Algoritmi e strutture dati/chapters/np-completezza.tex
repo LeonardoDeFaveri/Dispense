@@ -106,3 +106,194 @@ da definire che da elaborare.
 \caption{\emph{Riduzione polinomiale}}
 \end{figure}
 
+\noindent
+Proseguiamo la trattazione con una carrellata di problemi che, come vedremo,
+possono essere legati tra loro mediante \emph{riduzioni polinomiali}.
+
+\subsection{Colorazione di grafi}
+\begin{definition}[Colorazione di grafi]
+    Dati un grafo non orientato $G=(V,E)$ e un insieme di colori $C$, una
+    colorazione dei vertici è una funzione $f:V\to C$ che assegna ad ogni nodo
+    uno dei colori in $C$ in maniera tale per cui nessuna coppia di nodi adiacenti
+    ha lo stesso colore
+\end{definition}
+\begin{problem}[Colorabilità di un grafo (GRAPH-COLORING)]
+    Dato un grafo non orientato $G=(V,E)$ e un valore $k$, determinare se
+    esiste una colorazione di $G$ con $k$ colori.
+\end{problem}
+
+\subsection{Sudoku}
+\begin{problem}[Risolvibilità di un sudoku (SUDOKU)]
+    Data una matrice $n^2\times n^2$ con alcuni numeri già inseriti, determinare
+    se esiste un modo per assegnare i numeri restanti in modo coerente con le
+    regole dei Sodoku.
+\end{problem}
+
+\noindent
+Il problema sulla \emph{risolvibilità di un sudoku} può essere \emph{ridotto
+polinomialmente} al problema sulla \emph{colorabilità di un grafo}. In
+particolare, è possibile tradurre la matrice del sudoku in un \emph{grafo} in
+cui ogni valore della matrice diventa un \emph{nodo} del \emph{grafo} e in cui
+tra due \emph{nodi} esiste un \emph{arco} soltanto se, all'interno della matrice,
+quei \emph{nodi} sono sulla stessa riga, sulla stessa colonna o sulla stessa
+diagonale. Formalmente gli insiemi dei \emph{nodi} e degli \emph{archi} sono
+definiti come segue:
+\[V=\left\{(x,y):1\leq x\leq n^2, 1\leq y\leq n^2\right\}\]
+\[E=\left\{[(x,y),(x',y')]: x=x' \vee y=y' \vee \left(
+    \left\lceil\frac{x}{n}\right\rceil =
+    \left\lceil\frac{x'}{n}\right\rceil \wedge
+    \left\lceil\frac{y}{n}\right\rceil = \left\lceil\frac{y'}{n}\right\rceil
+\right)\right\}\]
+L'insieme dei colori è $C=\{1,\dots,n\}$.
+
+\begin{figure}[h!]
+\centering
+
+\resizebox*{0.98\textwidth}{!}{
+    \begin{graph}
+        \definecolor{r}{rgb}{0.9, 0.17, 0.31}
+        \definecolor{y}{rgb}{0.93, 0.53, 0.18}
+        \definecolor{g}{rgb}{0, 0.42, 0.24}
+        \definecolor{b}{rgb}{0, 0, 0 0}
+        \definecolor{lavendergray}{rgb}{0.77, 0.76, 0.82}
+        \def\numbers{%
+            1 2 3 4
+            3 4 1 2
+            2 3 4 1
+            4 1 2 3
+        }
+        \readarray\numbers\num[4,4]
+        \def\colors{%
+            r y g b
+            g b r y
+            y b b r
+            b r y g
+        }
+        \readarray\colors\col[4,4]
+
+        \tikzset{
+          noder/.style={circle, draw, minimum size=5mm, fill=r},
+          nodey/.style={circle, draw, minimum size=5mm, fill=y},
+          nodeg/.style={circle, draw, minimum size=5mm, fill=g},
+          nodeb/.style={circle, draw, minimum size=5mm, fill=b},
+          empty/.style={inner sep=0em, minimum size=10mm},
+          cell/.style={rectangle, draw=lavendergray, minimum size=10mm, font=\large},
+          square/.style={rectangle, draw, minimum size=20mm},
+          node distance=15mm
+        }
+
+        \foreach \x in {1,...,4}
+            \foreach \y in {1,...,4}
+            {
+                \node[cell] (m\x\y) at (\x-1,-\y-1) [text={\col[\y,\x]}] {$\num[\y,\x]$};
+            }
+
+        \node[square] (q1) at (m11) [xshift=5mm, yshift=-5mm, label=above left:{$A$}] {};
+        \node[square] (q2) at (m13) [xshift=5mm, yshift=-5mm, label=below left:{$C$}] {};
+        \node[square] (q3) at (m31) [xshift=5mm, yshift=-5mm, label=above right:{$B$}] {};
+        \node[square] (q4) at (m33) [xshift=5mm, yshift=-5mm, label=below right:{$D$}] {};
+
+        \node[empty] (arrow) [right of=m43, yshift=5mm] {$\Longrightarrow$};
+        \node[empty] (0) [right of=arrow, xshift=55mm] {};
+        \node[empty] (w) [left of=0, xshift=-25mm] {};
+        \node[empty] (e) [right of=0, xshift=25mm] {};
+        \node[empty] (s) [below of=0, yshift=-25mm] {};
+        \node[empty] (n) [above of=0, yshift=25mm] {};
+
+        \node[nodeg] (w1) [above of=w] {};
+        \node[nodey] (w2) [above left of=w, yshift=-5mm] {};
+        \node[noder] (w3) [below left of=w, yshift=5mm] {};
+        \node[nodeb] (w4) [below of=w] {};
+
+        \node[noder] (n1) [left of=n] {};
+        \node[nodey] (n2) [above left of=n, xshift=5mm] {};
+        \node[nodeg] (n3) [above right of=n, xshift=-5mm] {};
+        \node[nodeb] (n4) [right of=n] {};
+
+        \node[nodeg] (e1) [above of=e] {};
+        \node[nodeb] (e2) [above right of=e, yshift=-5mm] {};
+        \node[noder] (e3) [below right of=e, yshift=5mm] {};
+        \node[nodey] (e4) [below of=e] {};
+
+        \node[nodey] (s1) [right of=s] {};
+        \node[nodeg] (s2) [below right of=s, xshift=-5mm] {};
+        \node[nodeb] (s3) [below left of=s, xshift=5mm] {};
+        \node[noder] (s4) [left of=s] {};
+
+        % Archi tra nodi della stessa matrice nxn: solo archi dritti
+        \path[-]    (w1) edge (w2)
+                    (w2) edge (w3)
+                    (w3) edge (w4)
+                    (n1) edge (n2)
+                    (n2) edge (n3)
+                    (n3) edge (n4)
+                    (e1) edge (e2)
+                    (e2) edge (e3)
+                    (e3) edge (e4)
+                    (s1) edge (s2)
+                    (s2) edge (s3)
+                    (s3) edge (s4);
+
+        \path[-, bend right=10]
+                    (w3) edge (w1)
+                    (w4) edge (w1)
+                    (w4) edge (w2)
+                    (n1) edge (n3)
+                    (n1) edge (n4)
+                    (n2) edge (n4)
+                    (e1) edge (e3)
+                    (e1) edge (e4)
+                    (e2) edge (e4)
+                    (s1) edge (s3)
+                    (s1) edge (s4)
+                    (s2) edge (s4);
+
+        \path[-, bend right=10]
+                    (w1) edge (n4)
+                    (n4) edge (e4)
+                    (e4) edge (s4)
+                    (s4) edge (w1)
+                    (w2) edge (n3)
+                    (n3) edge (e3)
+                    (e3) edge (s3)
+                    (s3) edge (w2)
+                    (w3) edge (n2)
+                    (n2) edge (e2)
+                    (e2) edge (s2)
+                    (s2) edge (w3)
+                    (w4) edge (n1)
+                    (n1) edge (e1)
+                    (e1) edge (s1)
+                    (s1) edge (w4);
+
+        % Archi orizzontanti e verticali
+        \path[-]    (w1) edge (e4)
+                    (w2) edge (e3)
+                    (w3) edge (e2)
+                    (w4) edge (e1)
+                    (n1) edge (s1)
+                    (n2) edge (s2)
+                    (n3) edge (s3)
+                    (n4) edge (s4);
+
+        \draw[-] (w1)+(0,5mm) arc(90:270:1.5cm and 2cm) node[midway, left] {$D$};
+        \draw[-] (n1)+(-5mm,0) arc(180:0:2cm and 1.5cm) node[midway, above] {$A$};
+        \draw[-] (e1)+(0,5mm) arc(90:270:-1.5cm and 2cm) node[midway, right] {$B$};
+        \draw[-] (s1)+(5mm,0) arc(0:180:2cm and -1.5cm) node[midway, below] {$C$};
+    \end{graph}
+}
+\caption{Trasformazione \emph{matrice-grafo}}
+\end{figure}
+
+\noindent
+Questo significa che $\text{SUDOKU}\leq_p\text{GRAPH-COLORING}$, quindi una
+soluzione al problema della colorazione può essere usata per risolvere il
+problema del sudoku.
+
+\subsection{Insieme indipendente}
+\begin{definition}[Insieme indipendente]
+    Dato un grafo orientato $G=(V,E)$, un insieme $S\subseteq V$ è un insieme
+    indipendente se e solo se nessun arco in $E$ unisce due nodi in $S$. Ovvero,
+    $S$ è un insieme indipendente se vale la seguente relazione:
+    \[x\notin S\vee y\notin S\quad\forall(x,y)\in E\]
+\end{definition}

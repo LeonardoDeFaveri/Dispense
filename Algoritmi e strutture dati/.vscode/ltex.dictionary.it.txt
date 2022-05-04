@@ -413,3 +413,11 @@ NP-completezza
 halting
 tupla
 polinomialmente
+Sudoku
+Sodoku
+sudoku
+colorabilità
+text
+matrice-grafo
+square
+arc
