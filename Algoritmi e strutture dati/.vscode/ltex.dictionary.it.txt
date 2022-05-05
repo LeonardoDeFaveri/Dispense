@@ -421,3 +421,7 @@ text
 matrice-grafo
 square
 arc
+Soddisfacibilità
+padding
+Turing-equivalente
+nodo-colore

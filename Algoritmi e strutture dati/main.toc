@@ -359,6 +359,12 @@
 \contentsline {subsection}{\numberline {17.2.1}Colorazione di grafi}{223}{subsection.17.2.1}%
 \contentsline {subsection}{\numberline {17.2.2}Sudoku}{224}{subsection.17.2.2}%
 \contentsline {subsection}{\numberline {17.2.3}Insieme indipendente}{224}{subsection.17.2.3}%
-\contentsline {chapter}{\numberline {A}Appendice A}{226}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{226}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{226}{section.1.A.2}%
+\contentsline {subsection}{\numberline {17.2.4}Copertura di vertici}{225}{subsection.17.2.4}%
+\contentsline {paragraph}{\bm {$S$} insieme indipendente \bm {$\Rightarrow $} \bm {$V-S$} copertura di vertici}{226}{paragraph*.322}%
+\contentsline {paragraph}{\bm {$V-S$} copertura di vertici \bm {$\Rightarrow $} \bm {$S$} insieme indipendente}{226}{paragraph*.323}%
+\contentsline {subsection}{\numberline {17.2.5}Soddisfacibilità di formule booleane}{226}{subsection.17.2.5}%
+\contentsline {paragraph}{Relazione tra SAT, 3-SAT e INDIPENDENT-SET}{227}{paragraph*.326}%
+\contentsline {section}{\numberline {17.3}Classi di problemi}{228}{section.17.3}%
+\contentsline {chapter}{\numberline {A}Appendice A}{230}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{230}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{230}{section.1.A.2}%

@@ -292,8 +292,305 @@ problema del sudoku.
 
 \subsection{Insieme indipendente}
 \begin{definition}[Insieme indipendente]
-    Dato un grafo orientato $G=(V,E)$, un insieme $S\subseteq V$ è un insieme
+    Dato un grafo non orientato $G=(V,E)$, un insieme $S\subseteq V$ è un insieme
     indipendente se e solo se nessun arco in $E$ unisce due nodi in $S$. Ovvero,
     $S$ è un insieme indipendente se vale la seguente relazione:
     \[x\notin S\vee y\notin S\quad\forall(x,y)\in E\]
 \end{definition}
+\begin{problem}[Esistenza di un insieme indipendente (INDIPENDENT-SET)]
+    Dati un grafo non orientato $G=(V,E)$ e un valore $k$, dire se esiste un
+    insieme indipendente di dimensione almeno $k$.
+\end{problem}
+
+\begin{figure}[h!]
+    \centering
+    \begin{graph}
+        \node[main] (a) [line width=1.3pt] {$a$};
+        \node[main] (c) [below right of=a] {$c$};
+        \node[main] (b) [above right of=c] {$b$};
+        \node[main] (d) [below left of=c] {$d$};
+        \node[main] (e) [below right of=c, line width=1.3pt] {$e$};
+
+        \node[] (S) [right of=c, xshift=20mm] {$S=\{a,e\}$};
+
+        \path[-]    (a) edge (b)
+                    (a) edge (c)
+                    (a) edge (d)
+                    (b) edge (e)
+                    (b) edge (c)
+                    (c) edge (d)
+                    (c) edge (e)
+                    (d) edge (e);
+    \end{graph}
+    \caption{Esempio di \emph{insieme indipendente} di dimensione $k=2$}
+\end{figure}
+\begin{note}
+    In questo esempio, avremmo anche potuto scegliere $S=\{b,d\}$.
+\end{note}
+
+\subsection{Copertura di vertici}
+\begin{definition}[Copertura di vertici]
+    Dato un grafo non orientato $G=(V,E)$, un insieme $S\subseteq V$ è una
+    copertura di vertici se e solo se ogni arco in $E$ ha almeno un vertice in
+    $S$. Ovvero, $S$ è una copertura di vertici se vale la seguente relazione:
+    \[x\in S\vee y\in S\quad\forall(x,y)\in E\]
+\end{definition}
+\begin{problem}[Esistenza di una copertura di vertici (VERTEX-COVER)]
+    Dati un grafo non orientato $G=(V,E)$ e un valore $k$, dire se esiste una
+    copertura di vertici di dimensione al massimo $k$.
+\end{problem}
+
+\begin{figure}[h!]
+    \centering
+    \begin{graph}
+        \node[main] (a) {$a$};
+        \node[main] (c) [below right of=a, line width=1.3pt] {$c$};
+        \node[main] (b) [above right of=c, line width=1.3pt] {$b$};
+        \node[main] (d) [below left of=c, line width=1.3pt] {$d$};
+        \node[main] (e) [below right of=c] {$e$};
+
+        \node[] (S) [right of=c, xshift=20mm] {$S=\{b,c,d\}$};
+
+        \path[-]    (a) edge (b)
+                    (a) edge (c)
+                    (a) edge (d)
+                    (b) edge (e)
+                    (b) edge (c)
+                    (c) edge (d)
+                    (c) edge (e)
+                    (d) edge (e);
+    \end{graph}
+    \caption{Esempio di \emph{copertura di vertici} di dimensione $k=3$}
+\end{figure}
+\begin{note}
+    In questo esempio, avremmo anche potuto scegliere $S=\{a,c,e\}$.
+\end{note}
+
+\noindent
+Dagli ultimi due esempi fatti risulta particolarmente evidente il legame di
+dualità che sussiste tra un \emph{insieme indipendente} e una \emph{copertura
+di vertici} di uno stesso \emph{grafo}. Infatti, se $S\subseteq V$ è un
+\emph{insieme indipendente}, $V-S$ è una \emph{copertura di vertici} e viceversa.
+
+\bigskip\noindent
+La dimostrazione di quanto detto è banale:
+\begin{proof}[Dimostrazione]
+    Dimostriamo separatamente le due implicazioni:
+
+    \paragraph{\bm{$S$} insieme indipendente \bm{$\Rightarrow$} \bm{$V-S$}
+    copertura di vertici}
+    Se $S$ è un \emph{insieme indipendente}, per definizione, non esistono
+    \emph{archi} $(x,y)\in E$ che abbiano entrambi i \emph{vertici} in $S$.
+    Di conseguenza, almeno uno dei due \emph{vertici} deve appartenere a $V-S$.
+
+    \paragraph{\bm{$V-S$} copertura di vertici \bm{$\Rightarrow$} \bm{$S$}
+    insieme indipendente}
+    Se supponiamo per assurdo che $S$ non sia un \emph{insieme indipendente},
+    allora dovrebbe esistere un \emph{arco} $(x,y)$ tale per cui $x,y\in S$.
+    Se così fosse però, né $x$, né $y$ apparterrebbero a $V-S$ e quindi $V-S$
+    non potrebbe essere una \emph{copertura di vertici}, generando un assurdo.
+\end{proof}
+
+\noindent
+Con questa dimostrazione abbiamo dimostrato che i due problemi sono equivalenti,
+e quindi valgono le seguenti relazioni di \emph{riducibilità polinomiale}:
+\[\text{VERTEX-COVER}\leq_p\text{INDIPENDENTE-SET}\]
+\[\text{INDIPENDENTE-SET}\leq_p\text{VERTEX-COVER}\]
+
+\subsection{Soddisfacibilità di formule booleane}
+\begin{definition}[Forma normale congiuntiva per formule booleane]
+    Dato un insieme $V$ contenente $n$ variabili booleane si definisce letterale
+    una variabile $v$ o il suo negato $\bar{v}$. Una disgiunzione di letterali,
+    ovvero un insieme di letterali separati dall'operatore \bc{or}, costituisce
+    una clausola. Infine, una formula booleana si dice essere in forma normale
+    congiuntiva se è costituita da una congiunzione di clausole, ovvero da un
+    insieme di clausole separate dall'operatore \bc{and}.
+\end{definition}
+\begin{problem}[Soddisfacibilità di formule booleane (SAT)]
+    Data un'espressione in forma normale congiuntiva, stabilire se esiste
+    un'assegnazione di valori di verità alle variabili che renda vera l'espressione.
+\end{problem}
+\begin{eg}[Esempio]
+    Se $V=\{w,x,y,z\}$ e l'espressione da valutare è la seguente:
+    \[(x\vee\bar{y}\vee z)\wedge(\bar{x}\vee w)\wedge y\]
+    Alcune assegnazioni che rendono vera l'espressione sono:
+    \begin{itemize}
+        \item $w=x=y=z=\bc{true}$;
+        \item $w=x=y=\bc{true}$, $z=\bc{false}$;
+    \end{itemize}
+\end{eg}
+\begin{problem}[Soddisfacibilità di formule booleane con 3 letterali (3-SAT)]
+    Data un'espressione in forma normale congiuntiva in cui ciascuna clausola ha
+    esattamente 3 letterali, stabilire se esiste un'assegnazione di valori di
+    verità alle variabili che renda vera l'espressione.
+\end{problem}
+
+\noindent
+Ciò che vogliamo fare ora è dimostrare che $\text{3-SAT}\leq_p\text{INDIPENDENT-SET}$.
+Per farlo, \emph{riduciamo polinomialmente} 3-SAT a INDIPENDENT-SET trasformando
+l'espressione booleana in un \emph{grafo} nel quale, per ogni \emph{clausola},
+viene aggiunto un trio di \emph{nodi} collegati tra loro da \emph{archi}.
+Inoltre, viene aggiunto un \emph{arco} anche tra ogni \emph{letterale} e il
+suo negato.
+
+\bigskip\noindent
+Ad esempio, il \emph{grafo} associato all'espressione $(x\vee\bar{y}\vee z)\wedge
+(\bar{x}\vee\bar{y}\vee\bar{z})\wedge(\bar{x}\vee y\vee z)$ è il seguente:
+\begin{figure}[h!]
+    \centering
+    \begin{graph}
+        \node[main] (x1) {$x$};
+        \node[main] (z1) [above right of=x1, yshift=5mm] {$z$};
+        \node[main] (y1) [below right of=z1, yshift=-5mm] {$\bar{y}$};
+
+        \node[main] (x2) [right of=y1, xshift=5mm] {$\bar{x}$};
+        \node[main] (z2) [above right of=x2, yshift=5mm] {$\bar{z}$};
+        \node[main] (y2) [below right of=z2, yshift=-5mm] {$\bar{y}$};
+
+        \node[main] (x3) [right of=y2, xshift=5mm] {$\bar{x}$};
+        \node[main] (z3) [above right of=x3, yshift=5mm] {$z$};
+        \node[main] (y3) [below right of=z3, yshift=-5mm] {$y$};
+
+        \path[-]    (x1) edge (y1)
+                    (x1) edge (z1)
+                    (z1) edge (y1)
+                    (x2) edge (y2)
+                    (x2) edge (z2)
+                    (z2) edge (y2)
+                    (x3) edge (y3)
+                    (x3) edge (z3)
+                    (z3) edge (y3);
+        \path[-, bend left=20]
+                    (z1) edge (z2)
+                    (z2) edge (z3)
+                    (y3) edge (y2)
+                    (y3) edge (y1)
+                    (x3) edge (x1)
+                    (x2) edge (x1);
+    \end{graph}
+    \caption{\emph{Grafo} associato a una formula 3-SAT}
+\end{figure}
+
+\noindent
+Costruito il \emph{grafo}, la formula è soddisfacibile se e solo se è possibile
+trovare un \emph{insieme indipendente} composto da tanti elementi quante sono
+le \emph{clausole} dell'espressione booleana.
+
+\bigskip\noindent
+Nell'esempio che stiamo considerando, la soluzione è la seguente:
+\begin{figure}[h!]
+    \centering
+    \begin{graph}
+        \node[main] (x1) [line width=1.3pt] {$x$};
+        \node[main] (z1) [above right of=x1, yshift=5mm] {$z$};
+        \node[main] (y1) [below right of=z1, yshift=-5mm] {$\bar{y}$};
+
+        \node[main] (x2) [right of=y1, xshift=5mm] {$\bar{x}$};
+        \node[main] (z2) [above right of=x2, yshift=5mm] {$\bar{z}$};
+        \node[main] (y2) [below right of=z2, yshift=-5mm, line width=1.3pt] {$\bar{y}$};
+
+        \node[main] (x3) [right of=y2, xshift=5mm] {$\bar{x}$};
+        \node[main] (z3) [above right of=x3, yshift=5mm, line width=1.3pt] {$z$};
+        \node[main] (y3) [below right of=z3, yshift=-5mm] {$y$};
+
+        \path[-]    (x1) edge (y1)
+                    (x1) edge (z1)
+                    (z1) edge (y1)
+                    (x2) edge (y2)
+                    (x2) edge (z2)
+                    (z2) edge (y2)
+                    (x3) edge (y3)
+                    (x3) edge (z3)
+                    (z3) edge (y3);
+        \path[-, bend left=20]
+                    (z1) edge (z2)
+                    (z2) edge (z3)
+                    (y3) edge (y2)
+                    (y3) edge (y1)
+                    (x3) edge (x1)
+                    (x2) edge (x1);
+    \end{graph}
+    \caption{Possibile soluzione}
+\end{figure}
+\noindent
+L'insieme che abbiamo individuato ci dice quali \emph{letterali} devono
+essere posti a \texttt{true}.
+
+\paragraph{Relazione tra SAT, 3-SAT e INDIPENDENT-SET}
+Ovviamente $\text{3-SAT}\leq_p\text{SAT}$ perché il primo è un caso particolare
+del secondo. Tuttavia, è possibile dimostrare anche la relazione inversa in
+quanto ogni espressione SAT può essere trasformata in una 3-SAT applicando delle
+semplici trasformazioni:
+\begin{itemize}
+    \item Se la \emph{clausola} è contiene più di 3 \emph{letterali}, si
+    introduce una nuova variabile e si spezza la precedente \emph{clausola}:
+    \[(a\vee b\vee c\vee d)\equiv(a\vee b\vee z)\wedge(\bar{z}\vee c\vee d)\]
+    \item Se la \emph{clausola} è contiene meno di 3 \emph{letterali}, si fa
+    il \q{padding}, ovvero si ripete più volte uno stesso \emph{letterale}
+    all'interno della stessa \emph{clausola}:
+    \[(a\vee b)\equiv(a\vee a\vee b)\]
+\end{itemize}
+
+\noindent
+Riassumendo i rapporti di \emph{riducibilità polinomiale} riscontrati finora
+otteniamo la seguente catena:
+\[\text{SAT}\leq_p\text{3-SAT}\leq_p\text{INDIPENDENT-SET}\leq_p\text{VERTEX-COVER}\]
+
+\section{Classi di problemi}
+\begin{definition}[Algoritmo]
+    Dati un problema decisionale $R$ e un algoritmo $A$ (scritto in un modello
+    di calcolo Turing-equivalente) che lavora in tempo $f_t(n)$ e spazio $f_s(n)$,
+    diciamo che $A$ risolve $R$ se restituisce una $s$ su un'istanza $x$ se e solo
+    se $(x,s)\in R$.
+\end{definition}
+\begin{definition}[Classi di complessità]
+    Data una qualunque funzione $f(n)$, chiamiamo $\mathbb{TIME}(f(n))$ e
+    $\mathbb{SPACE}(f(n))$ l'insieme dei problemi decisionali risolvibili da un
+    algoritmo che lavora rispettivamente in tempo e spazio $O(f(n))$.
+\end{definition}
+\begin{definition}[Classe $\mathbb{P}$]
+    La classe $\mathbb{P}$ comprende tutti i problemi decisionali che sono
+    risolvibili in tempo polinomiale rispetto alla dimensione $n$ dell'istanza
+    d'ingresso. Ovvero, l'insieme $\mathbb{P}$ è definito come:
+    \[\mathbb{P}=\bigcup_{c=0}^{+\infty}\mathbb{TIME}(n^c)\]
+\end{definition}
+\begin{definition}[Classe $\mathbb{PSPACE}$]
+    La classe $\mathbb{PSPACE}$ comprende tutti i problemi decisionali che sono
+    risolvibili in spazio polinomiale rispetto alla dimensione $n$ dell'istanza
+    d'ingresso. Ovvero, l'insieme $\mathbb{PSPACE}$ è definito come:
+    \[\mathbb{PSPACE}=\bigcup_{c=0}^{+\infty}\mathbb{SPACE}(n^c)\]
+\end{definition}
+\begin{note}
+    La \emph{classe} $\mathbb{P}$ è un sottoinsieme della \emph{classe}
+    $\mathbb{PSPACE}$, ovvero $\mathbb{P}\subseteq\mathbb{PSPACE}$.
+\end{note}
+
+\begin{definition}[Certificato]
+    Dati un problema decisionale $R$ e un'istanza $x$ di input tale per cui
+    $(x,\bc{true})\in R$, un certificato è un insieme di informazioni che
+    permette provare che $(x,\bc{true})\in R$.
+\end{definition}
+
+\noindent
+Ad esempio, nel problema SAT, un \emph{certificato} è un assegnamento di
+valori di verità alle variabili della formula, in GRAPH-COLORING è un'associazione
+\emph{nodo-colore} $f:V\to C$ e in INDIPENDENT-SET è un sottoinsieme $S\subseteq V$
+di $k$ elementi.
+\begin{note}
+    Tutti questi \emph{certificati} hanno dimensione \emph{polinomiale}
+    rispetto alla dimensione dell'input.
+\end{note}
+
+\noindent
+È facile convincersi che la verifica di tutti i \emph{certificati} citati sia
+possibile in tempo \emph{polinomiale} e questa caratteristica è distintiva dei
+problemi appartenenti alla \emph{classe} $\mathbb{NP}$.
+
+\begin{definition}[Classe $\mathbb{NP}$]
+    La classe $\mathbb{NP}$ comprende tutti i problemi decisionali che ammettono
+    un certificato verificabile in tempo polinomiale.
+\end{definition}
+\begin{note}
+    Non è detto che tutti i \emph{certificati} siano verificabili in tempo
+    \emph{polinomiale}.
+\end{note}
