@@ -759,9 +759,84 @@ $\mathbb{NP}\textit{-completi}$.
 \caption{Esempio di soluzione per CLIQUE}
 \end{figure}
 
+\begin{problem}[Programmazione lineare \bm{$0/1$}]
+    Data una matrice $A$ di elementi interi e di dimensione $m\times n$, ed un
+    vettore $b$ di $m$ interi, dire se esiste un vettore $x$ di valori $0/1$
+    tale per cui $Ax\leq b$.
+\end{problem}
+\begin{eg}[Esempio di soluzione]
+    Per $A$ e $b$ definiti come segue:
+    \[\overbrace{\begin{array}[t]{ccccccc}
+        x_1 & + & x_2 & + & x_3 & + & x_4\\
+        x_1 & - & x_2 & - & x_3 & + & x_4\\
+        x_1 &   &    & + & x_3 & + & x_4\\
+    \end{array}}^{A}\begin{array}[]{c}
+        \\
+        \\
+        \leq\\
+        \leq\\
+        \leq\\
+    \end{array}\overbrace{\begin{array}[t]{c}
+        2\\
+        0\\
+        1\\
+    \end{array}}^{b}\]
+    il sistema è verificato per $x_1=x_2=1$ e $x_3=x_4=0$.
+\end{eg}
+
 \begin{problem}[Commesso viaggiatore (TSP)]
     Date $n$ città, le distanze tra esse ed un valore $k\in\mathbb{N}$, dire se
     è possibile definire un percorso che parta da una città, visiti tutte le
     altre esattamente una volta e ritorni alla città di partenza, che abbia
     una lunghezza totale non superiore a $k$.
+\end{problem}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{commesso-viaggiatore.png}
+    \caption{Esempio di soluzione per TSP}
+\end{figure}
+
+\begin{problem}[Copertura esatta di insiemi (EXACT-COVER)]
+    Dati un insieme $X$ e una collezione $\mathcal{Y}=\{Y_1,\dots,Y_n\}$ di
+    sottoinsiemi di $X$, dire se esiste una sottocollezione $\mathcal{Z}\subseteq
+    \mathcal{Y}$ che partizioni $X$.
+\end{problem}
+\begin{eg}[Esempio di soluzione]
+    Siano $X$ e $\mathcal{Y}$ definiti come segue:
+    \[\begin{array}{lr}
+        X=\{1,2,3,4,5,6,7\} & \mathcal{Y}=\{A,B,C,D,E,F\}
+    \end{array}\]
+    e siano gli elementi di $\mathcal{Y}$ i seguenti sottoinsiemi:
+    \[\begin{array}{llllll}
+        A=\{1,4,7\} & B=\{1,4\} & C=\{4,5,7\} & 
+        D=\{3,5,6\} & E=\{2,3,6,7\} & F=\{2,7\}
+    \end{array}\]
+    Una partizione di $X$ è data da $\mathcal{Z}=\{B,D,F\}$. Un insieme
+    $\mathcal{Z}$ è una partizione di $X$ in quanto $B\cap D\cap F=\emptyset$ e
+    $B\cup D\cup F=X$.
+\end{eg}
+
+\begin{problem}[Partizione (PARTITION)]
+    Dato un insieme $A$ contenente $n$ interi positivi, dire se esiste un
+    sottoinsieme $S\subseteq\{1,\dots,n\}$ tale per cui $\sum_{i\in S}A[i]=
+    \sum_{i\notin S}A[i]$.
+\end{problem}
+
+\begin{problem}[Somma di sottoinsieme (SUBSET-SUM)]
+    Dati un vettore $A$ contenente $n$ interi positivi ed un intero positivo $k$,
+    dire se esiste un sottoinsieme $S\subseteq\{1,\dots,n\}$ tale per cui
+    $\sum_{i\in S}A[i]=k$.
+\end{problem}
+
+\begin{problem}[Zaino (KNAPSACK)]
+    Dati un intero positivo $C$ e un insieme di $n$ oggetti tali per cui
+    ciascun oggetto $i$ è caratterizzato da un peso $w[i]\in\mathbb{Z}$ e da un
+    profitto $p[i]\in\mathbb{Z}$, dire se esiste un sottoinsieme $S\subseteq
+    \{1,\dots,n\}$ tale che il peso totale $w(S)=\sum_{i\in S}w[i]\leq C$ e il
+    profitto totale $p(S)=\sum_{i\in S}p[i]\geq k$ con $k\in\mathbb{Z}$.
+\end{problem}
+
+\begin{problem}[Circuito hamiltoniano (HAMILTONIAN-CIRCUIT)]
+    Dato un grafo non orientato $G$, dire se esiste un cammino che attraversi
+    ogni nodo una sola volta.
 \end{problem}

@@ -430,3 +430,5 @@ point
 black
 lightblue
 cycle
+sottocollezione
+hamiltoniano
