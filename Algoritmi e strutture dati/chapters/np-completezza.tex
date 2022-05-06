@@ -594,3 +594,73 @@ problemi appartenenti alla \emph{classe} $\mathbb{NP}$.
     Non è detto che tutti i \emph{certificati} siano verificabili in tempo
     \emph{polinomiale}.
 \end{note}
+
+\begin{definition}[Trasitività dell'appartenenza alla classe $\mathbb{P}$]
+    Dati due problemi decisionali $R_1$ e $R_2$ tali per cui $R_1\leq_p R_2$,
+    se $R_2\in\mathbb{P}$ allora anche $R_1\in\mathbb{P}$.
+\end{definition}
+\begin{proof}[Dimostrazione]
+    Sia $T_f(n)=O(n^{k_f})$ il tempo necessario per trasformare un input di $R_1$
+    in un input di $R_2$ tramite una funzione $f$ e sia $T_2(n)=O(n^{k_2})$ il
+    tempo necessario per risolvere $R_2$.
+
+    Poiché la funzione $f$ può prendere un input di dimensione $n$ e trasformarlo
+    in un input di dimensione $O(n^{k_f})$ per $R_2$, il tempo necessario per
+    risolvere $R_1$ attraverso $R_2$ è $T_1(n)=O(n^{k_fk_2})$ che è un
+    tempo \emph{polinomiale}.
+\end{proof}
+
+\begin{definition}[Problema $\mathbb{NP}\textit{-arduo}$]
+    Un problema decisionale $R$ si dice essere $\mathbb{NP}\textit{-arduo}$ se
+    ogni problema $Q\in\mathbb{NP}$ è riducibile polinomialmente ad $R$, ovvero
+    se $Q\leq_p R\quad\forall Q\in\mathbb{NP}$.
+\end{definition}
+\begin{definition}[Problema $\mathbb{NP}\textit{-completo}$]
+    Un problema decisionale $R$ si dice essere $\mathbb{NP}\textit{-completo}$ se
+    appartiene a $\mathbb{NP}$ ed è $\mathbb{NP}\textit{-arduo}$.
+\end{definition}
+
+\noindent
+Se ogni \emph{problema decisionale} in $\mathbb{NP}\textit{-completo}$ 
+appartenesse anche alla \emph{classe} $\mathbb{P}$, allora risulterebbe
+$\mathbb{P}=\mathbb{NP}$. Tuttavia, ad oggi non siamo ancora riusciti a
+dimostrare se quell'uguaglianza sia vera o falsa.
+
+\begin{figure}[h!]
+\centering
+\begin{graph}
+    \node[ellipse, draw, dashed] (p) [minimum height=15.9mm, minimum width=30mm] {$\mathbb{P}$};
+    \node[circle, draw] (np) [above of=p, minimum size=50mm, yshift=-3mm,
+        label={[yshift=-13mm]above:{$\mathbb{NP}\textit{-completo}$}},
+        label={[yshift=-5mm]below:{$\mathbb{P}\neq\mathbb{NP}$}}] {$\mathbb{NP}$};
+    \draw[-] (np)+(-30mm,+46mm) arc(180:0:30mm and -40mm) node[midway, above,
+        yshift=25mm] {$\mathbb{NP}\textit{-arduo}$};
+
+    \node[inner sep=0] (0) at (np) [shift={(40mm, 46mm)}] {};
+    \node[inner sep=0] (1) at (p) [shift={(40mm, -10mm)}] {};
+    \draw[->] (1) edge node[midway, left] {\rotatebox{90}{\emph{Complessità}}} (0);
+
+    \draw[-] (0)+(10mm,0) arc(180:0:40mm and -71mm) node[midway, above,
+        yshift=56mm] {$\mathbb{NP}\textit{-arduo}$};
+    \node[circle, draw] (np1) [right of=np, xshift=70mm, minimum size=50mm,
+        label={[yshift=-5mm]below:{$\mathbb{P}=\mathbb{NP}$}}]
+        {$\mathbb{P}=\mathbb{NP}=\mathbb{NP}\textit{-completo}$};
+\end{graph}
+\caption{$\mathbb{P}$ VS $\mathbb{NP}$}
+\end{figure}
+
+\noindent
+Ora però ci troviamo di fronte a un problema: come facciamo a dimostrare che
+un problema è $\mathbb{NP}\textit{-completo}$ se non conosciamo tutti i problemi
+in $\mathbb{NP}$?
+
+La dimostrazione che $Q\leq_p R\quad\forall Q\in\mathbb{NP}$ sembra apparentemente
+impossibile in quanto non conosciamo l'intero insieme $\mathbb{NP}$, tuttavia,
+con una dimostrazione molto complessa, si è riuscito a dimostrare il \emph{teorema
+di Cook-Levin} secondo il quale SAT è un problema $\mathbb{NP}\textit{-completo}$.
+Di conseguenza, partendo dalle \emph{riduzioni} viste in precedenza e utilizzando
+il \emph{teorema di Cook-Levin} otteniamo:
+\[\text{SAT}\leq_p\text{3-SAT}\leq_p\text{INDIPENDENT-SET}\leq_p\text{VERTEX-COVER}
+\leq_p\text{SAT}\]
+Da qui, deriviamo che anche 3-SAT, INDIPENDENT-SET e VERTEX-COVER sono problemi
+$\mathbb{NP}\textit{-completi}$.
