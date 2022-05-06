@@ -432,3 +432,4 @@ lightblue
 cycle
 sottocollezione
 hamiltoniano
+from

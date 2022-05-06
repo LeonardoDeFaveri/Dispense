@@ -532,7 +532,7 @@ semplici trasformazioni:
 \end{itemize}
 
 \noindent
-Riassumendo i rapporti di \emph{riducibilità polinomiale} riscontrati finora
+Riassumendo i rapporti di \emph{riducibilità polinomiale} riscontrati finora,
 otteniamo la seguente catena:
 \[\text{SAT}\leq_p\text{3-SAT}\leq_p\text{INDIPENDENT-SET}\leq_p\text{VERTEX-COVER}\]
 
@@ -766,17 +766,15 @@ $\mathbb{NP}\textit{-completi}$.
 \end{problem}
 \begin{eg}[Esempio di soluzione]
     Per $A$ e $b$ definiti come segue:
-    \[\overbrace{\begin{array}[t]{ccccccc}
+    \[\overbrace{\begin{array}[b]{ccccccc}
         x_1 & + & x_2 & + & x_3 & + & x_4\\
         x_1 & - & x_2 & - & x_3 & + & x_4\\
         x_1 &   &    & + & x_3 & + & x_4\\
-    \end{array}}^{A}\begin{array}[]{c}
-        \\
-        \\
+    \end{array}}^{A}\begin{array}[b]{c}
         \leq\\
         \leq\\
         \leq\\
-    \end{array}\overbrace{\begin{array}[t]{c}
+    \end{array}\overbrace{\begin{array}[b]{c}
         2\\
         0\\
         1\\
@@ -840,3 +838,56 @@ $\mathbb{NP}\textit{-completi}$.
     Dato un grafo non orientato $G$, dire se esiste un cammino che attraversi
     ogni nodo una sola volta.
 \end{problem}
+
+\begin{figure}[h!]
+\centering
+\begin{graph}
+    \tikzset{
+        pos/.style args={#1:#2 from #3}{
+          at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+        },
+        point/.style={main, fill=red, minimum size=2mm, inner sep=0},
+        empty/.style={inner sep=0}
+    }
+
+    \node[point] (0) {};
+    \node[point] (1) [pos=-90+54:40mm from 0] {};
+    \node[point] (2) [pos=-90-54:40mm from 0] {};
+    \node[point] (3) [pos=36-108:40mm from 2] {};
+    \node[point] (4) [pos=0:40mm from 3] {};
+
+    \node[point] (5) [pos=-90:10mm from 0] {};
+    \node[point] (6) [pos=-90-54:13mm from 5] {};
+    \node[point] (7) [pos=36-180:13mm from 6] {};
+    \node[point] (8) [pos=36-108:13mm from 7] {};
+    \node[point] (9) [pos=108-180:13mm from 8] {};
+    \node[point] (10) [pos=0:13mm from 9] {};
+    \node[point] (11) [pos=0:13mm from 10] {};
+    \node[point] (12) [pos=-180-108:13mm from 11] {};
+    \node[point] (13) [pos=-108+180:13mm from 12] {};
+    \node[point] (14) [pos=-90+54:13mm from 5] {};
+    
+    \node[point] (15) [pos=90:7.5mm from 10] {};
+    \node[point] (16) [pos=90+54:11mm from 15] {};
+    \node[point] (17) [pos=90-54:11mm from 15] {};
+    \node[point] (18) [pos=-36+108:11mm from 16] {};
+    \node[point] (19) [pos=0:11mm from 18] {};
+
+    \draw[-, line width=1.3pt]
+        (3) -- (2) -- (0) -- (1) -- (4) -- (11) -- (10) --
+        (15) -- (16) -- (18) -- (19) -- (17) -- (12) -- (13) --
+        (14) -- (5) -- (6) -- (7) -- (8) -- (9) -- (3);
+    \draw[-, dashed]
+        (3) -- (4)
+        (9) -- (10)
+        (6) -- (18)
+        (14) -- (19)
+        (15) -- (17)
+        (0) -- (5)
+        (1) -- (13)
+        (2) -- (7)
+        (11) -- (12)
+        (8) -- (16);
+\end{graph}
+\caption{Esempio di \emph{circuito hamiltoniano}}
+\end{figure}
