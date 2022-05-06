@@ -664,3 +664,104 @@ il \emph{teorema di Cook-Levin} otteniamo:
 \leq_p\text{SAT}\]
 Da qui, deriviamo che anche 3-SAT, INDIPENDENT-SET e VERTEX-COVER sono problemi
 $\mathbb{NP}\textit{-completi}$.
+
+\section[Alcuni problemi NP-completi]{Alcuni problemi $\mathbb{NP}\text{-completi}$}
+\begin{problem}[Cricca (CLIQUE)]
+    Dati un grafo non orientato ed un valore $k\in\mathbb{N}$, dire se esiste
+    un sottoinsieme di almeno $k$ nodi mutualmente adiacenti.
+\end{problem}
+
+\begin{figure}[h!]
+\centering
+\begin{graph}
+    \definecolor{blue}{RGB}{0, 96, 182}
+    \definecolor{lightblue}{RGB}{129, 208, 226}
+    \tikzset{
+        point/.style={main, fill, minimum size=1mm, inner sep=0},
+        empty/.style={inner sep=0},
+        node distance=10mm
+    }
+    \node[point] (0) {};
+    \node[empty] (1) [below right of=0] {};
+    \node[point] (2) [below left of=1] {};
+    \node[point] (3) [right of=1] {};
+
+    \node[point] (4) [above right of=3, yshift=5mm] {};
+    \node[point] (5) [below right of=3, yshift=-5mm] {};
+
+    \node[point] (6) [above of=4] {};
+    \node[point] (7) [right of=4, yshift=-3mm] {};
+    \node[point] (8) [above right of=7] {};
+
+    \path[-, fill=blue, draw]
+        (0.center) -- (1.center) -- (2.center) -- cycle
+        (0.center) -- (1.center) -- (3.center) -- cycle
+        (1.center) -- (2.center) -- (3.center) -- cycle;
+    \node[point] (1v) at (1) {};
+
+    \begin{scope}[transparency group]
+        \begin{scope}[blend mode=multiply]
+          \path[-, fill=lightblue, draw]
+            (6.center) -- (4.center) -- (7.center) -- cycle;
+          \path[-, fill=lightblue, draw=black]
+            (4.center) -- (8.center) -- (7.center) -- cycle;
+        \end{scope}
+    \end{scope}
+
+    \draw[-]    (3) edge (4)
+                (3) edge (5);
+
+    \node[point] (9) [right of=8, shift={(7mm, -1mm)}] {};
+    \node[point] (10) [below left of=9] {};
+    \path[-, fill=lightblue, draw] (8.center) -- (9.center) -- (10.center) -- cycle;
+
+    \node[point] (11) [right of=9, shift={(8mm, -2mm)}] {};
+    \node[point] (12) at (11) [shift={(3mm, -4mm)}] {};
+    \node[point] (13) [below of=11, shift={(-4mm, -2mm)}] {};
+
+    \path[-, fill=lightblue, draw] (9.center) -- (13.center) -- (10.center) -- cycle;
+    \path[-, fill=blue, draw] (9.center) -- (11.center) -- (12.center) -- (13.center) -- cycle;
+    \draw[-]    (9) -- (12)
+                (11) -- (13);
+
+    \node[point] (14) [right of=5, xshift=10mm] {};
+    \node[point] (15) [right of=14, xshift=10mm] {};
+    \node[point] (16) [above left of=14] {};
+    \node[point] (17) [below of=5] {};
+    \node[point] (18) [below of=14] {};
+    \node[point] (19) [below of=15] {};
+    \node[point] (20) [below left of=18] {};
+    \node[point] (21) [below right of=18, yshift=-3mm] {};
+    \node[point] (22) [below right of=19, yshift=-3mm] {};
+
+    \begin{scope}[transparency group]
+        \begin{scope}[blend mode=multiply]
+          \path[-, fill=lightblue, draw]
+            (5.center) -- (14.center) -- (16.center) -- cycle;
+        \path[-, fill=lightblue, draw]
+            (16.center) -- (14.center) -- (18.center) -- cycle;
+        \path[-, fill=lightblue, draw]
+            (20.center) -- (18.center) -- (14.center) -- cycle;
+        \path[-, fill=lightblue, draw]
+            (17.center) -- (18.center) -- (20.center) -- cycle;
+        \end{scope}
+    \end{scope}
+
+    \path[-, fill=lightblue, draw]
+        (18.center) -- (20.center) -- (21.center) -- cycle
+        (18.center) -- (19.center) -- (21.center) -- cycle
+        (19.center) -- (21.center) -- (22.center) -- cycle;
+
+    \draw[-]    (14) -- (15) -- (19)
+                (15) -- (13)
+                (5) -- (17);
+\end{graph}
+\caption{Esempio di soluzione per CLIQUE}
+\end{figure}
+
+\begin{problem}[Commesso viaggiatore (TSP)]
+    Date $n$ città, le distanze tra esse ed un valore $k\in\mathbb{N}$, dire se
+    è possibile definire un percorso che parta da una città, visiti tutte le
+    altre esattamente una volta e ritorni alla città di partenza, che abbia
+    una lunghezza totale non superiore a $k$.
+\end{problem}

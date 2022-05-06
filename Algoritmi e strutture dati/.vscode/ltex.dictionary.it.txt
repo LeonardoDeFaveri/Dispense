@@ -425,3 +425,8 @@ Soddisfacibilità
 padding
 Turing-equivalente
 nodo-colore
+center
+point
+black
+lightblue
+cycle
