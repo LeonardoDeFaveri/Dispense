@@ -1,0 +1,368 @@
+\chapter{Cloud networking}
+\section{Data centers networks}
+Unquestionably, networking is the core of \emph{cloud computing}, in fact, it
+has been made feasible by the continuous evolution of internet connectivity.
+Historically, networks have been classified into three layers:
+\begin{itemize}
+    \item \emph{Tier 1}: core part of network infrastructure that allows all
+    other networks on the internet to communicate each other;
+    \item \emph{Tier 2}: portions of \emph{tier 1} infrastructure which is
+    bought by internet service providers which then sold access to it to customers;
+    \item \emph{Tier 3}: part of the network infrastructure that allows final
+    users to gain access to other networks;
+\end{itemize}
+\begin{note}
+    \emph{Tier 2} networks communicated each other as peers through special nodes
+    called Internet Exchange Points (IXP).
+\end{note}
+
+\begin{figure}[h!]
+    \centering
+    \img{network-tiers.png}{0.4}
+    \caption{Internet infrastructure}
+\end{figure}
+
+\noindent
+The transformation of the internet experience, with the shift towards web only
+services (e.g. web applications instead of desktop applications), resulted in
+a significant increase in volumes of shared data and required bandwidth. To
+address this increase in bandwidth demand, cloud providers introduced Content
+Delivery Networks (CDN) whose function is to bring service providers closer
+to the final users. A secondo step was made with the spread of IoT and
+decentralized computing paradigms such as \emph{fog computing}.
+
+\begin{figure}[ht!]
+    \centering
+    \subfloat[Traditional infrastructure]{\img{traditional-network.png}{0.48}}
+    \hfill
+    \subfloat[Modern infrastructure]{\img{modern-network.png}{0.48}}\\
+    \subfloat[Today's infrastructure]{\img{todays-network.png}{0.48}}\\
+\end{figure}
+
+\subsection{Characteristics of data center networks}
+Data centers are huge structures with tons of servers, so they demand high
+bandwidth with the outside and a very low RTT within their premises. Also,
+each data center is a signle administrative domain, meaning that its
+administrators have full control over its intern network infrastructure, 
+endpoints and protocols. This allows them to deviate from standards and adopt
+each kind of custom solutions, as long as the services they host are reachable.
+
+This liberty becames relavant as soon as we realize that most of the traffic
+in a data center is created by machine-to-machine communications, leaving
+user-to-machine traffic a small percentage of the total amount. 
+
+\begin{figure}[h!]
+    \centering
+    \img{data-center-traffic}{0.5}
+    \caption{Traffic within a data center}
+\end{figure}
+
+\noindent
+This means that the performance of the networks inside the data centers, which
+are called \emph{interconnection networks}, are critical.
+
+\paragraph{Interconnetion networks}
+An \emph{interconnection network} is composed of node and link or communication
+channels. Nodes can be servers, memory units or even processors. Then, each node
+has an interface connecting it to the network, and the number of link the node
+is connected defines its degree. The interconnection fabric is made of
+switches\footnotemark and links. Switches receive packes, and look inside them
+to determine the way toward their final destination. An $n$-way switch is a
+switch with $n$ ports that can be connected to $n$ links. The interconnection
+fabric determines whether the \emph{interconnection network} is \emph{blocking}
+or not. It is \emph{non-blocking} if any permutation of source and destination
+nodes can connect each other at any time. It is \emph{blocking} if this is not
+true.
+
+\footnotetext{We're refering to a generic switching device without saying if
+is a layer 2 or layer 3 one}
+
+\emph{Interconnection networks} can be distinguished by three parameters:
+\begin{itemize}
+    \item \emph{Topology}: defines the way nodes are interconnected;
+    \item \emph{Routing}: defines how a message gets from source to destination;
+    \item \emph{Flow control}: negotiates how the buffer space is allocated;
+\end{itemize}
+The \emph{topology} also determines the \emph{network diameter} and
+\emph{bisection width}.
+
+\begin{definition}[Network diameter]
+    Network diameter is defined as the average distance between pairs of
+    nodes.
+\end{definition}
+\begin{definition}[Bisection width]
+    Bisection width is defined as the minimum number of links that have to be
+    cut to partition the interconnection network into two halves.
+\end{definition}
+
+\noindent
+When an \emph{interconnection network} is partitioned into two networks of
+them same size, the bisection bandwidth measures the communication bandwidth
+between the two. We talk about full bisection bandwidth when one half of nodes
+can communicate simultaneously with the other half.
+
+\paragraph{Topologies}
+There are two main types of \emph{topologies}:
+\begin{itemize}
+    \item \emph{Static networks}: servers are connected through direct connections;
+    \item \emph{Switched networks}: servers are connected through switches;
+\end{itemize}
+
+\begin{figure}[h!]
+\centering
+\subfloat[\emph{Bus topology}]{\resizebox*{0.48\textwidth}{!}{\begin{graph}
+    \tikzset{
+        rect/.style={rectangle, draw, inner sep=5mm},
+    }
+    \node[rect] (0) {Memory};
+    \node[rect] (1) [right of=0, xshift=20mm] {Memory};
+    \node[rect] (2) [right of=1, xshift=20mm] {Memory};
+    \node[rect] (3) [right of=2, xshift=20mm] {Memory};
+
+    \node[rect] (4) [below left of=0, yshift=-20mm] {Cache};
+    \node[rect] (5) [right of=4, xshift=20mm] {Cache};
+    \node[rect] (6) [right of=5, xshift=20mm] {Cache};
+    \node[rect] (7) [right of=6, xshift=20mm] {Cache};
+
+    \node[rect] (8) [below of=4, yshift=4.5mm, minimum width=20.9mm,
+        minimum height=18mm] {Proc};
+    \node[rect] (9) [below of=5, yshift=4.5mm, minimum width=20.9mm,
+        minimum height=18mm] {Proc};
+    \node[rect] (10) [below of=6, yshift=4.5mm, minimum width=20.9mm,
+        minimum height=18mm] {Proc};
+    \node[rect] (11) [below of=7, yshift=4.5mm, minimum width=20.9mm,
+        minimum height=18mm] {Proc};
+
+    \node[empty] (a) [below of=0, yshift=3mm] {};
+    \node[empty] (b) [right of=a, xshift=20mm] {};
+    \node[empty] (c) [right of=b, xshift=20mm] {};
+    \node[empty] (d) [right of=c, xshift=20mm] {};
+    \node[empty] (e) [right of=d, xshift=10mm] {};
+    \node[empty] (f) [left of=a, xshift=-10mm] {};
+    
+    \node[empty] (g) [above of=8, yshift=12.6mm] {};
+    \node[empty] (h) [right of=g, xshift=20mm] {};
+    \node[empty] (i) [right of=h, xshift=20mm] {};
+    \node[empty] (j) [right of=i, xshift=20mm] {};
+
+    \draw[-]    (0) -- (a)
+                (1) -- (b)
+                (2) -- (c)
+                (3) -- (d);
+
+    \draw[-]    (4) -- (g)
+                (5) -- (h)
+                (6) -- (i)
+                (7) -- (j);
+    
+    \draw[-, line width=1.3pt] (f) -- (e);
+
+    \node[empty] (z) [below of=j, yshift=-45.5mm] {};
+\end{graph}}}
+\hfill
+\subfloat[\emph{Hypercube topology}]{\resizebox*{0.48\textwidth}{!}{\begin{graph}
+    \tikzset{
+        rect/.style={rectangle, draw, fill, minimum size=3mm, inner sep=0},
+        point/.style={circle, draw=gray, fill=gray, minimum size=2mm, inner sep=0},
+        every path/.style={draw=gray}
+    }
+    
+    \foreach \x in {0,3}
+        \foreach \y in {0,-3}
+        {
+            \node[point] (a\x\y) at (\x, \y) {};
+            \node[rect] (r\x\y) [below right of=a\x\y, shift={(-6mm, 6mm)}] {};
+            \node[point] (b\x\y) [below left of=a\x\y, shift={(2mm, 2mm)}] {};
+            \node[rect] (r1\x\y) [below right of=b\x\y, shift={(-6mm, 6mm)}] {};
+
+            \draw[-]    (a\x\y) -- (b\x\y)
+                        (a\x\y) -- (r\x\y)
+                        (b\x\y) -- (r1\x\y);
+        }
+
+    \draw[-] (a00) -- (a30) -- (a3-3) -- (a0-3) -- (a00);
+    \draw[-] (b00) -- (b30) -- (b3-3) -- (b0-3) -- (b00);
+
+    \foreach \x in {6,9}
+        \foreach \y in {0,-3}
+        {
+            \node[point] (c\x\y) at (\x, \y) {};
+            \node[rect] (r2\x\y) [below right of=c\x\y, shift={(-6mm, 6mm)}] {};
+            \node[point] (d\x\y) [below left of=c\x\y, shift={(2mm, 2mm)}] {};
+            \node[rect] (r3\x\y) [below right of=d\x\y, shift={(-6mm, 6mm)}] {};
+
+            \draw[-]    (c\x\y) -- (d\x\y)
+                        (c\x\y) -- (r2\x\y)
+                        (d\x\y) -- (r3\x\y);
+        }
+
+    \draw[-] (c60) -- (c90) -- (c9-3) -- (c6-3) -- (c60);
+    \draw[-] (d60) -- (d90) -- (d9-3) -- (d6-3) -- (d60);
+    \draw[-, bend left=25]
+        (a00) edge (c60)
+        (a30) edge (c90)
+        (b00) edge (d60)
+        (b30) edge (d90);
+    \draw[-, bend right=25]
+        (a0-3) edge (c6-3)
+        (a3-3) edge (c9-3)
+        (b0-3) edge (d6-3)
+        (b3-3) edge (d9-3);
+\end{graph}}}
+\end{figure}
+\newpage
+\begin{figure}[ht!]
+\ContinuedFloat
+\centering
+\subfloat[\emph{2D-mesh topology}]{\resizebox*{0.48\textwidth}{!}{\begin{graph}
+    \tikzset{
+        rect/.style={rectangle, draw, fill, minimum size=3mm, inner sep=0},
+        point/.style={circle, draw=gray, fill=gray, minimum size=2mm, inner sep=0},
+        every path/.style={draw=gray}
+    }
+    
+    \foreach \x in {0, 3, 6, 9}
+        \foreach \y in {0,-3, -6, -9}
+        {
+            \node[point] (a\x\y) at (\x, \y) {};
+            \node[rect] (r\x\y) [below right of=a\x\y, shift={(-6mm, 6mm)}] {};
+
+            \draw[-] (a\x\y) -- (r\x\y);
+        }
+
+    \foreach \x in {0, 3, 6}
+        \foreach \y in {1, ..., 4}
+        {
+            \FPeval{\res}{clip(\x+3)}
+            \ifthenelse{\y = 1}{
+                \draw[-] (a\x0) -- (a\res0);
+                \draw[-] (a\x0) -- (a\x-3);
+            }{
+                \ifthenelse{\y = 2}{
+                    \draw[-] (a\x-3) -- (a\res-3);
+                    \draw[-] (a\x-3) -- (a\x-6);
+                }{
+                    \ifthenelse{\y = 3}{
+                        \draw[-] (a\x-6) -- (a\res-6);
+                        \draw[-] (a\x-6) -- (a\x-9);
+                    }{
+                        \draw[-] (a\x-9) -- (a\res-9);
+                    }
+                }
+            }
+        }
+    \draw[-]    (a90) -- (a9-3) -- (a9-6) -- (a9-9);
+\end{graph}}}
+\hfill
+\subfloat[\emph{Torus topology}]{\resizebox*{0.48\textwidth}{!}{\begin{graph}
+    \tikzset{
+        rect/.style={rectangle, draw, fill, minimum size=3mm, inner sep=0},
+        point/.style={circle, draw=gray, fill=gray, minimum size=2mm, inner sep=0},
+        curve/.style={rounded rectangle, draw, minimum height=15mm,
+            minimum width=105mm, shift={(15mm, 7.5mm)}},
+        rcurve/.style={rounded rectangle, draw, minimum height=15mm,
+            minimum width=105mm, rotate=-90, shift={(15mm, -7.5mm)}},
+        every path/.style={draw=gray}
+    }
+    
+    \foreach \x in {0, 3, 6, 9}
+        \foreach \y in {0,-3, -6, -9}
+        {
+            \node[point] (a\x\y) at (\x, \y) {};
+            \node[rect] (r\x\y) [below right of=a\x\y, shift={(-6mm, 6mm)}] {};
+
+            \draw[-] (a\x\y) -- (r\x\y);
+        }
+
+    \foreach \x in {0, 3, 6}
+        \foreach \y in {1, ..., 4}
+        {
+            \FPeval{\res}{clip(\x+3)}
+            \ifthenelse{\y = 1}{
+                \draw[-] (a\x0) -- (a\res0);
+                \draw[-] (a\x0) -- (a\x-3);
+            }{
+                \ifthenelse{\y = 2}{
+                    \draw[-] (a\x-3) -- (a\res-3);
+                    \draw[-] (a\x-3) -- (a\x-6);
+                }{
+                    \ifthenelse{\y = 3}{
+                        \draw[-] (a\x-6) -- (a\res-6);
+                        \draw[-] (a\x-6) -- (a\x-9);
+                    }{
+                        \draw[-] (a\x-9) -- (a\res-9);
+                    }
+                }
+            }
+        }
+    \draw[-]    (a90) -- (a9-3) -- (a9-6) -- (a9-9);
+
+    \node[curve] (r1) at (a30) {};
+    \node[curve] (r2) at (a3-3) {};
+    \node[curve] (r3) at (a3-6) {};
+    \node[curve] (r4) at (a3-9) {};
+
+    \node[rcurve] (r5) at (a0-3) {};
+    \node[rcurve] (r6) at (a3-3) {};
+    \node[rcurve] (r7) at (a6-3) {};
+    \node[rcurve] (r8) at (a9-3) {};
+
+    \node[empty] (z) [below of=a0-9, yshift=-3.5mm] {};
+\end{graph}}}
+\caption{\emph{Static networks topologies}}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \subfloat[\emph{Crossbar switch topology}]{\img{crossbar-switch.png}{0.48}}
+    \hfill
+    \subfloat[\emph{Omega switch topology}]{\img{omega-switch.png}{0.48}}      
+    \caption{\emph{Switched network topologie}}
+\end{figure}
+
+\noindent
+Up to this point, we can say that an \emph{interconnection network} must be
+scalable, provide a high bandwidth with low latency e must guarantee what is
+called \emph{location transparent communication}, meaning that every server
+should communicate with the others with similar speed and latency. In simple
+terms, the position of a server in the data center shouldn't have an impact on
+its networking performance. This latter requirement, translates in the
+impossibility of adopting a hierarchical organization of servers.
+
+Costs, also comes in hand when designing an \emph{interconnection network}. Both
+servers and network apparatus costs are relevant, but talking about networking,
+the choice of routers and switches often requires a compromised between latency
+and costs. For example, based on the number of ports of a router we can have
+low-radix and high-ridix routers. The former has a few ports, while the latter
+has more; thus bandwidth is divided into a smaller number of wide ports and
+a larger number of narrow ports respectively.
+
+\bigskip\noindent
+In general, data centers networks are designed around the following schema:
+\begin{figure}[h!]
+    \centering
+    \img{general-schema.png}{0.6}
+    \caption{Generale \emph{interconnetion network} schema}
+\end{figure}
+
+\noindent
+Layer 2 and layer 3 has pros and cons that have to balanced to guarantee ease
+of configuration, administration and problem-solving.
+
+Layer 2, that is the ethernet switching part of the infrastructure, is easy to
+configure, thanks to autoconfiguration protocols such as DHCP, and allow the
+addition of servers in a plug \& play way, but it's important to limit broadcast
+domains to avoid link saturarion due to broadcast frames, and dealing with the
+Spanning Tree Protocol might be a struggle.
+
+On the other hand, IP routing on layer 3 makes scalability easy thanks to
+hieranchical addressing and allows to obtain multipath routing with equal-cost
+multipath\footnote{We will see more about this later in this section}. However,
+its confiuration in more complex and migration requires changing the IP addresses.
+
+\begin{note}
+    At the end of the day, the entire \emph{interconnection network} will look
+    like a giant switch that allows all the servers to communicate one another.
+\end{note}
+
+\subsection{Topologies more in depth}

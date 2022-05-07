@@ -71,3 +71,9 @@
 \contentsline {paragraph}{Docker network management}{28}{paragraph*.46}%
 \contentsline {paragraph}{Docker file system management}{28}{paragraph*.48}%
 \contentsline {paragraph}{Automatic build}{29}{paragraph*.51}%
+\contentsline {chapter}{\numberline {4}Cloud networking}{31}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Data centers networks}{31}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Characteristics of data center networks}{32}{subsection.4.1.1}%
+\contentsline {paragraph}{Interconnetion networks}{32}{paragraph*.55}%
+\contentsline {paragraph}{Topologies}{33}{paragraph*.56}%
+\contentsline {subsection}{\numberline {4.1.2}Topologies more in depth}{35}{subsection.4.1.2}%

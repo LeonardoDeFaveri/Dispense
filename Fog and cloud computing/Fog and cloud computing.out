@@ -40,3 +40,7 @@
 \BOOKMARK [2][-]{subsection.3.6.4}{Linux containers}{section.3.6}% 40
 \BOOKMARK [2][-]{subsection.3.6.5}{Docker}{section.3.6}% 41
 \BOOKMARK [2][-]{subsection.3.6.6}{Docker usage in general}{section.3.6}% 42
+\BOOKMARK [0][-]{chapter.4}{Cloud networking}{}% 43
+\BOOKMARK [1][-]{section.4.1}{Data centers networks}{chapter.4}% 44
+\BOOKMARK [2][-]{subsection.4.1.1}{Characteristics of data center networks}{section.4.1}% 45
+\BOOKMARK [2][-]{subsection.4.1.2}{Topologies more in depth}{section.4.1}% 46

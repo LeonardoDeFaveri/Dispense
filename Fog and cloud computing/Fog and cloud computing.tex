@@ -139,8 +139,10 @@
 
 \newcommand{\rmindent}{\rmbreak\hspace*{0pt}\hangindent=\customindent}
 
+\usepackage{ifthen}
+\usepackage{calc}
 \usepackage{tikz}
-\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{shapes.geometric, shapes.misc}
 \usetikzlibrary{positioning}
 \usetikzlibrary{backgrounds}
 \newenvironment{graph}{\begin{tikzpicture}[
@@ -179,5 +181,6 @@
 \include{chapters/introduction}
 \include{chapters/cloud_ecosystem}
 \include{chapters/virtualization}
+\include{chapters/cloud_networking}
 
 \end{document}
