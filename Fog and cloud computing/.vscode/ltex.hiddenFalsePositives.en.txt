@@ -67,3 +67,6 @@
 {"rule":"THE_PUNCT","sentence":"^\\Qin 0,3 in 0,-3 [point] (a) at (, ) ; [rect] (r) [below right of=a, shift=(-6mm, 6mm)] ; [point] (b) [below left of=a, shift=(2mm, 2mm)] ; [rect] (r1) [below right of=b, shift=(-6mm, 6mm)] ;\\E$"}
 {"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Qin 6,9 in 0,-3 [point] (c) at (, ) ; [rect] (r2) [below right of=c, shift=(-6mm, 6mm)] ; [point] (d) [below left of=c, shift=(2mm, 2mm)] ; [rect] (r3) [below right of=d, shift=(-6mm, 6mm)] ;\\E$"}
 {"rule":"NON_STANDARD_WORD","sentence":"^\\Qin 6,9 in 0,-3 [point] (c) at (, ) ; [rect] (r2) [below right of=c, shift=(-6mm, 6mm)] ; [point] (d) [below left of=c, shift=(2mm, 2mm)] ; [rect] (r3) [below right of=d, shift=(-6mm, 6mm)] ;\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qfat-tree.png 0.6 Tipical fat tree topology\\E$"}
+{"rule":"SUBJECT_VERB_AGREEMENT_PLURAL","sentence":"^\\QThis configuration results in an infrastructure that has \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q servers, actually, \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q racks with \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q on-top-of-rack switches, \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q switches and a total of \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q paths connecting each pairs of servers.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qtb-2.png 0.4\\E$"}

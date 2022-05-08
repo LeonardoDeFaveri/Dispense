@@ -366,3 +366,140 @@ its confiuration in more complex and migration requires changing the IP addresse
 \end{note}
 
 \subsection{Topologies more in depth}
+In the \emph{butterfly network topology} data always travel through the most
+efficient route, but two packets attempting to reach the same port at the same
+time would couse a collision, so this is a \emph{blocking topology}.
+\begin{note}
+    The name comes from the pattern of inverted triangles created by the
+    interconnections, which look like butterfly wings.
+\end{note}
+\emph{Clos networks} is a \emph{non-blocking topology} that consists of two
+\emph{butterfly networks} in which the last stage of the output is fused to the
+first stage of the output. This way, all packet sent, overshoot their destination
+and then hop back to it. However, this overshoot is mostly unnecessary and
+increases the latency because each packet takes twice as many hops as it need.
+A solution to this, is the \emph{folded clos topology} which is obtained by
+making input and output nodes share the same switch devices. Such networks are
+also called \emph{fat trees} and the \emph{topology} is also called
+\emph{fat tree topology}.
+
+\begin{figure}[ht!]
+    \centering
+    \subfloat[\emph{Clos topology} made of two \emph{3-stage butterfly
+    networs} and radix-2 routers]{\img{clos-network.png}{0.48}}
+    \hspace{1.5cm}
+    \subfloat[\emph{Folded clos topology}]{\img{folded-clos-network.png}{0.3}}
+    \caption{\emph{Clos} VS \emph{folded clos topology}}
+\end{figure}
+
+\paragraph{Fat tree topology}
+In a \emph{fat tree} network, servers are placed at the leafs, while internal
+and root nodes are switches. To increase bandwidth, additional links are also
+added to near-root nodes. The advantage of such \emph{topology} is that all the
+switching elements are identical and this allows costs reductions. Another,
+already named, characteristic is the presence of multiple equal-cost path that
+both allow for load splitting and \emph{location trasparent communication.}
+
+\begin{figure}[h!]
+    \centering
+    \img{fat-tree.png}{0.6}
+    \caption{Tipical \emph{fat tree topology}}
+\end{figure}
+
+\noindent
+A \emph{fat tree} made of $k$ pods has two layers and $k/2$ switches for each
+pod. Each switch at the lower layer is directly connected to $k/2$ servers
+and $k/2$ switches of the upper layer.
+
+\begin{note}
+    From the lower to the upper, layers are also called \emph{edge},
+    \emph{aggregation} and \emph{core} respectively.
+\end{note}
+
+\noindent
+Similarly, each \emph{aggregation layer} switch is connected to $k/2$ \emph{core
+layer} switches which also have $k/2$ more connections to other aggregation
+switches, one for each pod. This configuration results in an infrastructure
+that has $4$ servers, actually, $4$ racks with $4$ on-top-of-rack switches,
+$k(k+1)$ switches and a total of $(k/2)^2$ paths connecting each pairs of
+servers.
+
+When it comes to IP assignment, switches are numbered left-to-right and
+bottom-to-top as $base.pod.switch.1$ (in the previous image, $base=87$).
+\emph{Core layer} switches instead, are numbered as $base.k.i.j$ where $k$ is
+the number of pods and $i,j$ denotates the coordinates of the switch in the
+grid, starting from top-left. Finally, servers IPs are in the form
+$base.pod.switch.serverID$ and $serverID$ is assigned from left-to-right.
+
+\subsection{Open issues}
+Existing \emph{topologies}, including \emph{Fat trees}, still fail to address
+workload balancing and TCP-related issues.
+
+\begin{note}
+    TCP retransmission and congestiona avoidance policies causes a degradation
+    of throughput, so new protocols are currently being developed to displace
+    TCP (e.g. QUIC).
+\end{note}
+
+\noindent
+When it comes to workload, we distinguish between small and large flows. As the
+names suggests, the first denotates small flows of data which require low
+latency, while the second regards bigger flows which should benefit a higher
+throughput.
+
+\begin{note}
+    Small and large flows are also called mice and elephants flow respectively.
+\end{note}
+
+\begin{eg}[Traffic balancing problems]
+Let's assume to be in the following situation and to have many flows going from
+$S$ to $D$:
+
+\begin{figure}[h!]
+    \centering
+    \img{tb-1.png}{0.4}
+\end{figure}
+
+\noindent
+We want to assign each flow to a path in the most efficient way. We could just
+use the Equal-Cost Multipath routing (ECMP) to randomly assign a path to each
+flow. This would be a simple approch, but it would also be totally agnostic to
+available resources; thus we could experience long-lasting collisions between
+elephant flows.
+
+\begin{figure}[h!]
+    \centering
+    \img{tb-2.png}{0.4}
+\end{figure}
+
+\noindent
+The problem complicates when we have more source and destination nodes to
+connect. Ideally, we would like paths to not intersect each other, like in the
+above picture:
+
+\begin{figure}[h!]
+    \centering
+    \img{tb-3.png}{0.4}
+\end{figure}
+
+\noindent
+Wrong choices might cause collision in both upward and downward paths:
+\begin{figure}[ht!]
+    \centering
+    \subfloat[Upward path congested]{\img{tb-4.png}{0.4}}
+    \subfloat[Downward path congested]{\img{tb-5.png}{0.4}}
+\end{figure}
+\end{eg}
+
+\paragraph{Proposed solutions}
+Up to now, various solutions have been proposed, but none of them solves complety
+all the issues. For example, an idea was to detect elephant flows by putting
+a threshold on link capacity (e.g. 10\%), compute non-conflicting path for
+each flow over the limit and using plain ECMP for mice flows.
+
+Other proposals where to reroute flows based on link utilization on queue
+occupancy. However, the first favors mice flows vice versa, the second tends to
+promote elephant flows. We could even try to spread all packets evenly, but that
+would make congestion control hard to implement.
+
+\section{Networking in virtualised environments}
