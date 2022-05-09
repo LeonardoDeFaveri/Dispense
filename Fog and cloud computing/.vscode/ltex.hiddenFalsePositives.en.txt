@@ -72,3 +72,7 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qtb-2.png 0.4\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qnsew-1.png 0.48\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qnsew-2.png 0.25\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QHost-based switching: using a virtual switch in the Hypervisor or directly in the Host OS; NIC switching: using virtual queues int the NIC; Haipin switching: passing through the external switch; nsew-3-ways.png 0.48\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qnsew-2.png 0.45\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qnsew-3.png 0.48\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qtraditional-network-2.png 0.4 bridged-network.png 0.4 Traditional VS bridged network\\E$"}

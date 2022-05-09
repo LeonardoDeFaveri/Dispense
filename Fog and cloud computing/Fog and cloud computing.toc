@@ -82,6 +82,10 @@
 \contentsline {paragraph}{Proposed solutions}{38}{paragraph*.68}%
 \contentsline {section}{\numberline {4.2}Networking in virtualised environments}{38}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}North/south and east/west communication on a single server}{38}{subsection.4.2.1}%
-\contentsline {paragraph}{Host-based switching}{39}{paragraph*.71}%
-\contentsline {paragraph}{Hairpin switching}{39}{paragraph*.72}%
-\contentsline {paragraph}{NIC switching}{40}{paragraph*.74}%
+\contentsline {paragraph}{Host-based switching}{39}{paragraph*.70}%
+\contentsline {paragraph}{Hairpin switching}{39}{paragraph*.71}%
+\contentsline {paragraph}{NIC switching}{39}{paragraph*.72}%
+\contentsline {paragraph}{Hardware VS software solutions}{40}{paragraph*.73}%
+\contentsline {section}{\numberline {4.3}Software bridges in Linux}{40}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Linuxbridge}{41}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Macvlan}{41}{subsection.4.3.2}%

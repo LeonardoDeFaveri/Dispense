@@ -487,6 +487,7 @@ Wrong choices might cause collision in both upward and downward paths:
 \begin{figure}[ht!]
     \centering
     \subfloat[Upward path congested]{\img{tb-4.png}{0.4}}
+    \hspace{1.5cm}
     \subfloat[Downward path congested]{\img{tb-5.png}{0.4}}
 \end{figure}
 \end{eg}
@@ -531,17 +532,21 @@ switch and then connect the virtual switch to the physical NIC.
 \subsection{North/south and east/west communication on a single server}
 Although we suggested that a virtual switch might be the solution to virtual
 environments networking, in fact, three main options exists:
-\begin{enumerate}
-    \item Virtual switch in the \emph{Host OS}/\emph{Hypervisor};
-    \item Virtual queues' int the NIC;
-    \item Through the external switch;
-\end{enumerate}
 
-\begin{figure}[h!]
+\noindent
+\begin{minipage}{0.48\textwidth}
+\begin{enumerate}
+    \item \emph{Host-based switching}: using a virtual switch in the
+    \emph{Hypervisor} or directly in the \emph{Host OS};
+    \item \emph{NIC switching}: using virtual queues int the NIC;
+    \item \emph{Haipin switching}: passing through the external switch;
+\end{enumerate}
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
     \centering
-    \img{nsew-3-ways.png}{0.25}
-    \caption{Three possible implementations}
-\end{figure}
+    \img{nsew-3-ways.png}{0.48}
+\end{minipage}
 
 \paragraph{Host-based switching}
 Historically, this is the first solution used and is also called \emph{software
@@ -571,22 +576,99 @@ be dropped.
 
 \paragraph{Hairpin switching}
 This solution uses the physical switch, allowing us to leverage its power thus
-reducing CPU cycles consumption. However, this is not necessarily a good thing
-because PCI bandwidth is smaller thant CPU-to-Mem one, thus is might be saturated
-quickly. Another problem is that traffic always need to pass through all the
-intermediate components (e.g. \emph{VMM}, NIC, physical link) and, in case of
-VM-to-VM communications data crossed those components twice. For all of these
-resons, this solution is no longer used.
+reducing CPU cycles consumption.
+
+\bigskip\noindent
+\begin{minipage}{0.48\textwidth}
+    However, this is not necessarily a good thing because PCI bandwidth is
+    smaller than CPU-to-Mem bandwidth, thus is might be saturated quickly. Another
+    problem is that traffic always need to pass through all the intermediate
+    components (e.g. \emph{VMM}, NIC, physical link) and, in case of VM-to-VM
+    communications data crossed those components twice. For all of these resons,
+    this solution is no longer used.
+\end{minipage}
+\begin{minipage}{0.48\textwidth}
+    \centering
+    \img{nsew-2.png}{0.45}
+\end{minipage}
 
 \bigskip\noindent
 Again, it's worth mentioning that to use the existing hardware it has to be
 compatible with \emph{hairpin switching} because, by default, switches don't
 forward traffic on the same port on which it has arrived.
 
-\newpage
-\begin{figure}[ht!]
+\paragraph{NIC switching}
+\emph{NIC switching} is an intermediate solution between the previous two, both
+conceptually and in terms of performance.
+
+\bigskip\noindent
+\begin{minipage}{0.48\textwidth}
+    Again, passing through the NIC means reducing CPU consumption for networkig
+    related tasks, but we still have to rely on PIC bandwidth. Since data doesn't
+    leave the machine unless it's necessary, we still manage to get improved
+    performance in comparison to \emph{hairpin switching}. However, to be able
+    to enforce complex or advanced networking policies, a standard NIC might not
+    be enught. When that's the case we could opt for a Smart NIC, that is a
+    normal NIC with increased computing power.
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
     \centering
-    \img{nsew-2.png}{0.25}
+    \img{nsew-3.png}{0.48}
+\end{minipage}
+
+\bigskip\noindent
+Smart NIC are expensive, so their use must be weighed with the characteristics
+of the actual infrastructure. For example, if the amount of CPU spent due to
+networking tasks is so large that it leaves little or no time left for
+applications, it might be worth considering smart NIC adoption. Otherwise, a
+\emph{host-based} solution could be enough.
+
+\begin{note}
+    For instance, networking may become computationally relevant when using
+    overlay tunneling protocol or DDoS detection and prevention algorithms.
+\end{note}
+
+\paragraph{Hardware VS software solutions}
+Software switches provides better performances when local VM-to-VM traffic is
+predominant, but alse when we're dealing with untrusted sources or over-subscribed
+links (i.e. tipical cloud service provider situations), or when we need a
+fine-grained control over passing data. To get all of this we pay in terms of
+CPU consumption reducing resources available to VMs or containers.
+
+Hardware switches instead, are good when most of the traffic is between different
+servers and when we're applying similar policies to all nodes in the data center.
+
+Currently, software solutions are the most used.
+
+\section{Software bridges in Linux}
+Linux allows creating a bridge across many interfaces and one unique virtual
+interface that is valid for the entire host.
+
+\begin{figure}[h!]
+    \centering
+    \subfloat{\img{traditional-network-2.png}{0.4}}
+    \hspace{1.5cm}
+    \subfloat{\img{bridged-network.png}{0.4}}
+    \caption{Traditional VS bridged network}
 \end{figure}
 
-\paragraph{NIC switching}
+\noindent
+In the pase, the setup of a bridging process in Linux was a way to have an 802.1D
+bridge, running in software, that was part of a bigger network, thus allowing
+us to modify the bridge code and play with it without having to buy a physical
+device. Now, it became a way to overcome the limitations of the IP protocol who
+requires each interface to have a unique address. Linux offers three ways to
+create a software bridge: \emph{Linuxbridge}, \emph{macvlan} and \emph{Open
+vSwitch}.
+
+\subsection{Linuxbridge}
+This is the most common kind of bridge, and it behaves exactly like a physical
+one. To receive packets intended for virtual hosts, it requires NICs to work in
+promiscuous mode. In fact, packets intended for virtual hosts will have the MAC
+address of \texttt{br0} virtual device as destination. Then, traffic can be
+sent from both physical and virtual interfaces and the IP address configured in
+the bridge is reachable from both interfaces (i.e. it works like a sort of
+loopback address).
+
+\subsection{Macvlan}
