@@ -672,3 +672,132 @@ the bridge is reachable from both interfaces (i.e. it works like a sort of
 loopback address).
 
 \subsection{Macvlan}
+\emph{Macvlan} implements a VLAN-line behaviour by using MAC addresses instead
+of 802.1Q tags. Each virtual environment can be assigned to a differenct
+\emph{macvlan interface}, and each interface has its own MAC address and a
+distinc IP. \emph{Macvlan} supports four operating modes: \emph{private},
+\emph{VEPA}, \emph{bridge} and \emph{pass-through}. For all of these, except
+for the latter, supporting NIC can be configured to filter unicast packets
+based on their MAC address instead of running in promiscuous mode.
+
+\paragraph{Private mode}
+\emph{Macvlan} in \emph{private mode} mimics exactly the behaviour of VLANs,
+meaning that \emph{inter-macvlan} traffic is forbidden and different
+\emph{macvlans} can communicate only by passing through a router.
+
+\paragraph{VEPA mode}
+In the case of \emph{VEPA mode}, which stands for \emph{Virtual Ethernet Port
+Aggregator}, $A$ and $B$ can't communicate directly each other, instead, they
+need to send their frames to a physical switch out of the server (actually, it
+may also be a layer 2 switch on the NIC), and when the frame is sent back into
+the server, the \emph{macvlan} drivers can deliver the data correctly.
+
+\begin{figure}[hb!]
+    \centering
+    \subfloat[\emph{Macvlan} overview]{\img{macvlan-1.png}{0.24}}
+    \hspace{1.5cm}
+    \subfloat[\emph{Macvlan private mode}]{\img{macvlan-private.png}{0.24}}
+    \hspace{1.5cm}
+    \subfloat[\emph{Macvlan VEPA mode}]{\img{macvlan-vepa.png}{0.24}}
+\end{figure}
+\newpage
+\begin{figure}[h!]
+    \ContinuedFloat
+    \centering
+    \subfloat[\emph{Macvlan bridge mode}]{\img{macvlan-bridge.png}{0.24}}
+    \hspace{1.5cm}
+    \subfloat[\emph{Macvlan pass-through mode}]{\img{macvlan-pass-through.png}{0.24}}
+    \caption{\emph{Macvlan} modes}
+\end{figure}
+
+\noindent
+The problem is that the external switch can't be a traditional 802.1D bridge, for
+the same reason we've already talked about: switches don't sent data back to
+the same port on which it was received. However, \emph{VEPA mode} is the default
+one.
+
+\paragraph{Bridge mode}
+\emph{Bridge mode} emulates a simple bridge, that is a bridge with just one
+uplink, no filtering database (i.e. no MAC learning) and no Spanning Tree
+Protocol. By means of that, it can forward all kind of traffic, without
+necessarily going out of the server and then back into it.
+
+\paragraph{Pass-through mode}
+This mode supports only one \emph{macvlan} device, that is to say it can handle
+a single VM, for instance. This way, all traffic can be sent to the upstream
+component (e.g. the traffic can be sent directly to a VM), and said component
+can use any MAC address because, nor the \emph{macvlan} drivers, now the NIC
+do any MAC filtering; it will be the VM virtual NIC who will take charge of that.
+In fact, MAC $A$ is no longer used. Of cource the physical NIC needs to work in
+promiscuous mode.
+
+\begin{note}
+    \emph{Pass-through mode} behaves like if the physical NIC were directly
+    assigned to the virtual environment.
+\end{note}
+
+\paragraph{Linuxbridge VS macvlan}
+\emph{Linuxbridge} drivers behaves as a traditional hardware bridge, so they can
+handle complex situations in which, for instance, hosts on the same physical
+domain (layer 2 network) resides both on the same host and outside it. They're
+also usefull when more VMs or containers on the same host need to communicate,
+or when advanced functions (e.g. flood control) are needed.
+
+\emph{Macvlan} drivers instead, are both simpler and less CPU consuming, because
+they emulate a trivial bridge with basic functionalities. Therefore, they're
+recommended when you just need to provide egress connection to the physical
+network to virtual machines or containers.
+
+\subsection{Open vSwitch}
+\emph{Open vSwitch} (\emph{OVS}) is a software implementation of a virtual
+multilayer network switch, designed to enable effective network automation
+through programmatic extensions. It can operate both as a software-based network
+switch running within a \emph{VMM} and a control stack for dedicated switching
+hardware. Talking about its implementation, it is implemente into the Linux
+Kernel, and it's designed to support both standard management interfaces and
+protocols (e.g. NetFlow, sFlow, \dots) and transparent distribution across
+multiple physical servers by enabling creation of cross-server switches in a way
+that abstracts out the underlying server architecture.
+
+\begin{note}
+    \emph{Open vSwitch} is often implemented into cloud computing software
+    platforms and virtualization management systems (e.g. OpenStack, OpenNebula).
+\end{note}
+
+\begin{figure}[h!]
+    \centering
+    \img{ovs.png}{1}
+    \caption{\emph{Open vSwitch} general implementation schema}
+\end{figure}
+
+\section{Other problems in single server virtual networking}
+\paragraph{IP assignment}
+The first problem is about deciding who should assign IP addresses to VMs and
+containers and also which addressed should be assigned. The first option could
+be to use the same addresses of the physical (meaning non virtualised) network
+so that inboud and outbound connections toward VMs or containers don't differe.
+However, this approch would require the coordination of the physical network
+manager, thus limiting virtualization agility.
+
+The alternative, would be to use private addressed and then connect to the
+internet through a NAT, and this would be good because IP assignment wouldn't
+be limited by public IP limits, and it wouldn't require coordination with the
+physical network manager. Of course, we would have to define static rules to
+support inbound connectivity and virtual environment would be reached by
+different IP addresses depending on wheter the sender is inside or outside the
+private network.
+
+\begin{note}
+    The first solution proposed is also called \emph{direct routing}.
+\end{note}
+
+\newpage
+\begin{figure}[ht!]
+    \centering
+    \subfloat[\emph{Direct routing}]{\img{ip-problem-1.png}{0.38}}
+    \hspace{2cm}
+    \subfloat[\emph{NATted routing}]{\img{ip-problem-2.png}{0.2}}
+    \caption{Solutions to IP assignent}
+\end{figure}
+
+\paragraph{Providing feature-rich network connectivity}

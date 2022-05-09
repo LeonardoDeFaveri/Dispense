@@ -50,3 +50,5 @@
 \BOOKMARK [1][-]{section.4.3}{Software bridges in Linux}{chapter.4}% 50
 \BOOKMARK [2][-]{subsection.4.3.1}{Linuxbridge}{section.4.3}% 51
 \BOOKMARK [2][-]{subsection.4.3.2}{Macvlan}{section.4.3}% 52
+\BOOKMARK [2][-]{subsection.4.3.3}{Open vSwitch}{section.4.3}% 53
+\BOOKMARK [1][-]{section.4.4}{Other problems in single server virtual networking}{chapter.4}% 54
