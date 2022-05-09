@@ -81,3 +81,7 @@
 \contentsline {subsection}{\numberline {4.1.3}Open issues}{37}{subsection.4.1.3}%
 \contentsline {paragraph}{Proposed solutions}{38}{paragraph*.68}%
 \contentsline {section}{\numberline {4.2}Networking in virtualised environments}{38}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}North/south and east/west communication on a single server}{38}{subsection.4.2.1}%
+\contentsline {paragraph}{Host-based switching}{39}{paragraph*.71}%
+\contentsline {paragraph}{Hairpin switching}{39}{paragraph*.72}%
+\contentsline {paragraph}{NIC switching}{40}{paragraph*.74}%

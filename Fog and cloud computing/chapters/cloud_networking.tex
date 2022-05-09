@@ -503,3 +503,90 @@ promote elephant flows. We could even try to spread all packets evenly, but that
 would make congestion control hard to implement.
 
 \section{Networking in virtualised environments}
+Virtualization introduces additional complexity for networking, because we need
+to deliver traffic between VMs or containers and the outer world and also grant
+communication between virtualised environment within the same physical machine.
+We also need to decide how to assign IP addresses to VMs and containers and
+how to provide advanced features such as load balancing, firewall, etc.
+
+\begin{note}
+    From a networking perspective there is no difference between VMs and
+    containers.
+\end{note}
+
+\noindent
+The first idea would be to imitate what we have in the physical world. So, as
+we have many servers connected to a switch who's also connected to a backbone,
+in a virtualised environment, we might connect each environment to a virtual
+switch and then connect the virtual switch to the physical NIC.
+
+\begin{figure}[h!]
+    \centering
+    \subfloat[Physical world]{\img{physical-world.png}{0.4}}
+    \hspace{1.5cm}
+    \subfloat[Virtual world]{\img{virtual-world.png}{0.4}}
+    \caption{Copy-paste approch}
+\end{figure}
+
+\subsection{North/south and east/west communication on a single server}
+Although we suggested that a virtual switch might be the solution to virtual
+environments networking, in fact, three main options exists:
+\begin{enumerate}
+    \item Virtual switch in the \emph{Host OS}/\emph{Hypervisor};
+    \item Virtual queues' int the NIC;
+    \item Through the external switch;
+\end{enumerate}
+
+\begin{figure}[h!]
+    \centering
+    \img{nsew-3-ways.png}{0.25}
+    \caption{Three possible implementations}
+\end{figure}
+
+\paragraph{Host-based switching}
+Historically, this is the first solution used and is also called \emph{software
+bridge} o \emph{softswitch}.
+
+\bigskip\noindent
+\begin{minipage}{0.48\textwidth}
+    This solution grants both high bandwidth and reduced overhead for inter-VM
+    traffic. Plus, it allows enforcing policies (e.g. firewall rules) directly
+    on the virtual switch as if it was a physical one, so the features are the
+    same. However, this introduces an additional component to configure (i.e. the
+    switch itself has to be configured) and also an additional processing
+    overhead because every message has to pass throught the said switch.
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+    \centering
+    \img{nsew-1.png}{0.48}
+\end{minipage}
+
+\bigskip\noindent
+It's worth mentioning that this solution requires the physical NIC to operate in
+promiscuous mode. That's because, since virtual environments MAC addresses are
+different from the physical NIC one and, by default, each NIC doesn't process
+packets whose destination MACs are different from its own, those packets would
+be dropped.
+
+\paragraph{Hairpin switching}
+This solution uses the physical switch, allowing us to leverage its power thus
+reducing CPU cycles consumption. However, this is not necessarily a good thing
+because PCI bandwidth is smaller thant CPU-to-Mem one, thus is might be saturated
+quickly. Another problem is that traffic always need to pass through all the
+intermediate components (e.g. \emph{VMM}, NIC, physical link) and, in case of
+VM-to-VM communications data crossed those components twice. For all of these
+resons, this solution is no longer used.
+
+\bigskip\noindent
+Again, it's worth mentioning that to use the existing hardware it has to be
+compatible with \emph{hairpin switching} because, by default, switches don't
+forward traffic on the same port on which it has arrived.
+
+\newpage
+\begin{figure}[ht!]
+    \centering
+    \img{nsew-2.png}{0.25}
+\end{figure}
+
+\paragraph{NIC switching}

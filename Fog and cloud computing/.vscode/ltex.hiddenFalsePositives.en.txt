@@ -70,3 +70,5 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qfat-tree.png 0.6 Tipical fat tree topology\\E$"}
 {"rule":"SUBJECT_VERB_AGREEMENT_PLURAL","sentence":"^\\QThis configuration results in an infrastructure that has \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q servers, actually, \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q racks with \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q on-top-of-rack switches, \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q switches and a total of \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q paths connecting each pairs of servers.\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qtb-2.png 0.4\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qnsew-1.png 0.48\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qnsew-2.png 0.25\\E$"}
