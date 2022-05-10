@@ -42,7 +42,7 @@ non essere la migliore possibile.
 \noindent
 Nel grafico di cui sopra, se la ricerca partisse da una soluzione \q{vicina} a
 $B$, un algoritmo basato su \emph{ricerca locale} potrebbe convergere sul punto
-$B$, sebbene esso non rappresenti una soluzione ottima globale.
+$B$, sebbene esso non rappresenti una soluzione globalmente ottima.
 
 \begin{minicode}{Implementazione generica di un algoritmo basato su ricerca locale}
 \ind\bc{SOL} ricercaLocale()\\
@@ -61,7 +61,7 @@ $B$, sebbene esso non rappresenti una soluzione ottima globale.
 \end{definition}
 \begin{note}
     Assumiamo che per ogni \emph{nodo} $x\in V$ esista un \emph{cammino} da $s$
-    in $t$ passante per esso, e ignoriamo qualsiasi \emph{nodo} che non goda di
+    in $t$ passante per esso e ignoriamo qualsiasi \emph{nodo} che non goda di
     questa proprietà.
 \end{note}
 \begin{definition}[Flusso]
@@ -69,8 +69,8 @@ $B$, sebbene esso non rappresenti una soluzione ottima globale.
     seguenti proprietà:
     \begin{enumerate}
         \item Vincolo sulla capacità: $f(x,y)\leq c(x,y)$ $\forall x,y\in V$;
-        \item Antisimmetria: $f(x,y)=-f(x,y)$ $\forall x,y\in V$;
-        \item Conservazione del flusso: $sum_{y\in V}f(x,y)=0$ $\forall x\in V-\{s,t\}$;
+        \item Antisimmetria: $f(x,y)=-f(y,x)$ $\forall x,y\in V$;
+        \item Conservazione del flusso: $\sum_{y\in V}f(x,y)=0$ $\forall x\in V-\{s,t\}$;
     \end{enumerate}
 \end{definition}
 
@@ -155,8 +155,8 @@ L'algoritmo che intendiamo realizzare è detto \emph{metodo delle reti residue}
 perché è basato su un approccio additivo. In particolare, partendo da un
 \emph{flusso} $f$ inizialmente nullo, si ripetono le seguenti operazioni:
 \begin{enumerate}
-    \item \q{Sottrazione} del \emph{flusso} $f$ alla rete attuale, ottenendo
-    una \emph{rete residua};
+    \item \q{Sottrazione} del \emph{flusso} $f$ alla rete attuale e acquisizione
+    di una \emph{rete residua};
     \item Ricerca di un secondo \emph{flusso} $g$ all'interno della \emph{rete
     residua};
     \item Somma di $g$ ad $f$;
@@ -173,7 +173,7 @@ fino a quando $g$ non diventa un \emph{flusso nullo}.
 Diamo ora delle altre definizioni:
 \begin{definition}[Flusso nullo]
     È definito flusso nullo la funzione $f_0:V\times V\to\mathbb{R^+}$ tale che:
-    \[f(x,y)=0\qquad\forall x,y\in V\]
+    \[f_0(x,y)=0\qquad\forall x,y\in V\]
 \end{definition}
 
 \begin{figure}[h!]
@@ -185,7 +185,7 @@ Diamo ora delle altre definizioni:
         \node[main] (d) [below right of=b, xshift=10mm,
             label=above right:{$t$}] {$D$};
 
-        \node[] (e) [left of=a, xshift=-10mm] {$|f|=0$};
+        \node[] (e) [left of=a, xshift=-10mm] {$|f_0|=0$};
 
         \path[->]   (a) edge node[above left] {$0/2$} (b)
                     (b) edge node[above right] {$0/3$} (d)
@@ -251,7 +251,7 @@ Diamo ora delle altre definizioni:
 \end{figure}
 
 \begin{definition}[Capacità residua]
-    È definita capacità residua di un flusso $f$ in una rete $G=(V,E,s,t,c)$ una
+    È definita capacità residua di un flusso $f$ in una rete $G=(V,E,s,t,c)$, la
     funziona $c_f:V\times V\to\mathbb{R^+}$ tale che:
     \[c_f(x,y)=c(x,y)-f(x,y)\qquad\forall x,y\in V\]
 \end{definition}
@@ -269,7 +269,7 @@ Diamo ora delle altre definizioni:
 \end{figure}
 
 \noindent
-Possiamo notare che gli \emph{archi all'indietro} che avevamo visto enunciando
+Possiamo notare che gli \emph{archi all'indietro}, che avevamo visto enunciando
 la proprietà di \emph{antisimmetria} dei \emph{flussi}, si originano dalla
 definizione di \emph{capacità residua}. Infatti, poiché l'\emph{arco} $(B,A)$
 non esiste, $c(B,A)=0$ e quindi, vale la seguente catena di uguaglianze:
@@ -359,7 +359,7 @@ lemma:
         g(x,y) & \leq & c_f(x,y) & \quad\text{È vero perché $g$ è un
             \emph{flusso} in $G_f$}\\
         f(x,y)+g(x,y) & \leq & c_f(x,y)+f(x,y)\\
-        (f+g)(x,y) &  \leq & c(x,y)-f(x,y)+f(x,y) & \quad\text{Definizione di
+        (f+g)(x,y) &  \leq & (c(x,y)-f(x,y))+f(x,y) & \quad\text{Definizione di
             \hyperref[def:148]{\emph{capacità residua}}}\\
         (f+g)(x,y) & \leq & c(x,y) & \quad\text{Semplificazione algebrica}
     \end{array}\]
@@ -368,9 +368,9 @@ lemma:
     Per ogni coppia di \emph{nodi} $x,y\in V$ vale la seguente catena di
     uguaglianze:
     \[\begin{array}{rcll}
-        f(x,y)+g(x,y) & = & -f(y,x)-g(x,y)\\
-        f(x,y)+g(x,y) & = & -(f(x,y)+g(x,y))\\
-        (f+g)(x,y) & = & -(f+g)(x,y)
+        f(x,y)+g(x,y) & = & -f(y,x)-g(y,x)\\
+        f(x,y)+g(x,y) & = & -(f(y,x)+g(y,x))\\
+        (f+g)(x,y) & = & -(f+g)(y,x)
     \end{array}\]
 
     \paragraph{Conservazione del flusso}
@@ -391,7 +391,7 @@ come facciamo a trovare il \emph{flusso} $g$?
 Una soluzione è quella proposta da Ford e Fulkerson nel 1956, e raffinata poi
 da Edmonds e Karp nel 1972, che fa uso dei cosiddetti \emph{cammini aumentanti}.
 In particolare, viene identificato nella \emph{rete residua} $G_f$ un
-\emph{cammino} $C=(v_0,\dots,v_n)$ tale per cui $v_0=s$ e $v_n=t$. Quindi, si
+\emph{cammino} $C=(v_0,\dots,v_n)$, tale per cui $v_0=s$ e $v_n=t$. Quindi, si
 definisce la \emph{capacità} del \emph{cammino} come la minore tra le
 \emph{capacità} degli \emph{archi} attraversati, ovvero:
 \[c_f(C)=\min_{i\in\{2,\dots,n\}}c_f(v_{i-1},v_i)\]
@@ -404,7 +404,7 @@ definisce la \emph{capacità} del \emph{cammino} come la minore tra le
 \noindent
 Infine, il \emph{flusso} addizionale $g$ è definito in modo che $g(v_{i-1},v_i)=
 c_f(C)$, $g(v_i,v_{i-1})=-c_f(C)$ per la proprietà \emph{antisimmetrica} e
-$g(x,y)=0$ per tutte le coppie $x,y\notin C$.
+$g(x,y)=0$ per tutte le coppie $(x,y)$ in cui $x\notin C$ o $y\notin C$.
 
 \begin{figure}[h!]
 \centering
@@ -481,7 +481,7 @@ $g(x,y)=0$ per tutte le coppie $x,y\notin C$.
         g = \{ \emph{flusso} associato ad un \emph{cammino aumentante} in $c_f$, oppure $f_0$ \}\\
         \indff foreach (x,y $\in$ G.V()) do\\
             f[x][y] = f[x][y] + g[x][y]\hfill\com{\emph{Somma dei flussi}:\:$f=f+g$}
-            c$_f$ = c[x][y] - f[x][y]\hfill\com{Aggiorna la \emph{capacità residua}}
+            c$_f$[x][y] = c[x][y] - f[x][y]\hfill\com{Aggiorna la \emph{capacità residua}}
     \indf while (g $\neq$ f$_0$)\\
     \indf return f
 \end{minicode}
@@ -712,7 +712,7 @@ possiamo usare una \hyperref[code:48]{\emph{visita in ampiezza}} o in
 
 \paragraph{Note sull'implementazione}
 Il \emph{grafo} è definito esclusivamente mediante la \emph{matrice delle
-capacità} e in particolare, esiste un \emph{arco} $(x,y)$ solo se $c[x][y]>0$.
+capacità}. In particolare, esiste un \emph{arco} $(x,y)$ solo se $c[x][y]>0$.
 Il parametro \texttt{n} rappresenta il numero di \emph{nodi}. Nella
 \texttt{dfs}, il parametro \texttt{minCap} indica il più basso valore di
 \emph{capacità} incontrato nella ricerca del \emph{cammino}.
@@ -723,7 +723,7 @@ definizioni.
 
 \begin{definition}[Taglio]
     Un taglio $(S,T)$ della rete di flusso $G=(V,E,s,t,c)$ è una partizione di
-    $V$ in due sottoinsiemi disgiunti tali per cui $S=V-T$,$s\in S$ e $t\in T$.
+    $V$ in due sottoinsiemi disgiunti tali per cui $S=V-T$, $s\in S$ e $t\in T$.
 \end{definition}
 
 \begin{figure}[h!]
@@ -881,7 +881,7 @@ definizioni.
     Vale la seguente catena di uguaglianze:
     \[F_f(S,T)\begin{array}[t]{cll}
         = & \sum_{x\in S,y\in T}f(x,y)\\
-        = & \sum_{x\in S,y\in v}f(x,y) - \sum_{x\in S,y\in S}f(x,y) & \quad T=V-S\\
+        = & \sum_{x\in S,y\in V}f(x,y) - \sum_{x\in S,y\in S}f(x,y) & \quad T=V-S\\
         = & \sum_{x\in S,y\in V}f(x,y)-0 & \quad\emph{Antisimmetria}\\
         = & \sum_{x\in S-\{s\}, y\in V}f(x,y)+\sum_{y\in V}f(s,y) & \quad s\in S\\
         = & \sum_{x\in S-\{s\}}\left(\sum_{y\in V}f(x,y)\right)+\sum_{y\in V}f(s,y)\\
@@ -936,7 +936,7 @@ definizioni.
     disuguaglianza:
     \[F_f(S,T)\leq C(S,T)\quad\forall f\wedge\forall (S,T)\]
     Per la proprietà del \emph{vincolo sulla capacità} vale quanto segue:
-    \[F_f(S,T)=\sum_{x\in S,y\in T}f((x,y))\leq\sum_{x\in S,y\in T}C(x,y)=C(S,T)\]
+    \[F_f(S,T)=\sum_{x\in S,y\in T}f(x,y)\leq\sum_{x\in S,y\in T}C(x,y)=C(S,T)\]
     Inoltre, il \emph{flusso} che attraversa un \emph{taglio} è uguale al
     \emph{valore del flusso}:
     \[|f|=F_f(S,T)\quad\forall f\wedge\forall (S,T)\]
@@ -1038,7 +1038,6 @@ di aumenti di \emph{flusso} è limitato superiormente da $O(VE)$.
     Una volta che l'\emph{arco} $(x,y)$ sarà stato \emph{saturato}, potrà essere
     riutilizzato soltanto se il \emph{flusso} attraverso quell'\emph{arco}
     diminuisce. Ovvero, solo se verrà utilizzato l'\emph{arco} $(y,x)$.
-
     Se $g$ è il \emph{flusso} quando ciò accade, vale:
     \[\delta_g(s,y)=\delta_g(s,x)+1\]
     Per la \emph{monotonia} sappiamo anche che $\delta_g(s,y)\geq\delta_f(s,y)$,
@@ -1052,7 +1051,7 @@ di aumenti di \emph{flusso} è limitato superiormente da $O(VE)$.
     \emph{saturato} a quando torna \emph{critico}, il \emph{cammino minimo}
     passante per esso si è allungato di almeno due passi. Di conseguenza, la
     lunghezza \emph{massima} del \emph{cammino} fino a $x$, considerando che
-    poi si deve attraversare l'\emph{arco} $(x,y)$ è al massimo $V-2$. Ne
+    poi si deve attraversare l'\emph{arco} $(x,y)$, è al massimo $V-2$. Ne
     consegue che un \emph{arco} può diventare \emph{critico} un massimo di
     $\frac{V-2}{2}=\frac{V}{2}-1$ volte e, poiché ci sono $O(E)$ \emph{archi}
     che possono diventare \emph{critici} $O(V)$ volte, il numero massimo di

@@ -799,7 +799,8 @@ In alcune applicazioni (e.g. ricerca delle \emph{componenti connesse} di un
 S_n\}$ di \emph{insiemi dinamici disgiunti}, ovvero tali per cui:
 \[S_i\cap S_j=\emptyset\quad\forall i,j : i\neq j\]
 \[\bigcup_{1=1}^n S_i=S\quad\text{con}\ n=\left|S\right|\]
-Definiamo quindi la struttura dati \emph{merge-find set} con le seguenti primitive:
+Definiamo quindi un \emph{merge-find set} come una struttura dati con le
+seguenti primitive:
 \begin{itemize}
     \item Creazione di $n$ \emph{insiemi disgiunti} composti da un elemento
     ciascuno;
@@ -903,8 +904,7 @@ invocazioni di \texttt{merge}.
 
 \begin{note}
     Questa versione dell'algoritmo è particolarmente indicata nel caso di
-    \emph{grafi dinamici} ovvero \emph{grafi} nei quali vengono spesso aggiunti
-    nuovi \emph{archi}.
+    \emph{grafi dinamici}, nei quali vengono spesso aggiunti nuovi \emph{archi}.
 \end{note}
 
 \bigskip\noindent
@@ -919,8 +919,8 @@ ciascun elemento, oltre al proprio valore, contiene un puntatore all'elemento
 successivo e un puntatore al \emph{rappresentante}. Il \emph{rappresentate} è
 il primo elemento della lista.
 
-La primitiva \texttt{find} è banale, perché dato un \emph{elemento} è sufficiente
-restituire il valore del puntatore al \emph{rappresentante}, quindi richiede un
+La primitiva \texttt{find} è banale, perché dato un \emph{elemento}, è sufficiente
+restituire il valore del puntatore al \emph{rappresentante}, e quindi richiede un
 tempo $O(1)$. Per la \texttt{merge}, si prende il \emph{rappresentate} del secondo
 parametro, lo si \q{appende} alla \emph{lista} del primo e si aggiornano tutti i
 \emph{rappresentati} della \emph{lista} \q{appesa}. Nel caso pessimo, eseguire
@@ -964,12 +964,11 @@ al \emph{nodo} stesso.
 \end{figure}
 
 \noindent
-In questo caso, nel \texttt{find} si risale l'intero \emph{albero} fino alla
-\emph{radice} e, nel caso pessimo, questo costa $O(n)$. Per fare la
-\texttt{merge} invece, è sufficiente cambiare il puntatore al \emph{padre}
-della \emph{radice} in uno dei due \emph{alberi} in modo che punti all'altra
-\emph{radice}. Il costo, se non consideriamo quello per la ricerca dei
-\emph{rappresentanti}, è $O(1)$.
+In questo caso la \texttt{find} risale \emph{albero} fino alla \emph{radice} e
+nel caso pessimo, questo costa $O(n)$. Per fare la \texttt{merge} invece, è
+sufficiente cambiare il puntatore al \emph{padre} della \emph{radice} in uno
+dei due \emph{alberi} in modo che punti all'altra \emph{radice}. Il costo, se
+non consideriamo quello per la ricerca dei \emph{rappresentanti}, è $O(1)$.
 
 \subsection{Implementazioni con tecniche euristiche}
 Possiamo migliorare le implementazioni viste sfruttando qualche piccolo
@@ -999,11 +998,11 @@ $O(1)$ ed è possibile dimostrare che in questo tipo di implementazione il
 
 \paragraph{Euristica sul rango}
 Abbiamo detto che per gli \emph{alberi} conviene cercare di minimizzare le
-\emph{altezze}. Quindi, associamo ad ogni \emph{nodo} $k$ il proprio
+\emph{altezze}, quindi associamo ad ogni \emph{nodo} $k$ il proprio
 \emph{rango}, $rank[k]$, definito come segue:
 
 \begin{definition}[Rango di un nodo]
-    È definito rango di un nodo, il numero di archi del più lungo cammino tra
+    È definito rango di un nodo il numero di archi del più lungo cammino tra
     quel nodo e una delle proprie foglie.
 \end{definition}
 \begin{note}
@@ -1012,8 +1011,8 @@ Abbiamo detto che per gli \emph{alberi} conviene cercare di minimizzare le
 \end{note}
 
 \noindent
-A questo punto, per ridurre il costo della \texttt{find} è sufficiente
-modificare la \texttt{merge} in modo che nel caso di \emph{alberi} di con
+A questo punto, per ridurre il costo della \texttt{find}, è sufficiente
+modificare la \texttt{merge} in modo che, nel caso di \emph{alberi} con
 \emph{ranghi} diversi, sia l'\emph{albero} con \emph{rango} minore ad essere
 \q{agganciato} all'altro. In questa situazione, l'\emph{altezza}
 dell'\emph{albero} con \emph{rango} maggiore non cambia, ma se invece i due
@@ -1063,12 +1062,12 @@ Detto questo, la \emph{complessità} della primitiva \texttt{find} è $O(\log n)
 Poiché il costo della \texttt{find} è legato all'\emph{altezza} degli
 \emph{alberi}, se tutti avessero \emph{altezza} pari a $1$, cioè se il
 \emph{padre} di ogni \emph{nodo} fosse la \emph{radice}, riusciremmo a ridurre
-il costo di ogni invocazione a $O(1)$. Per raggiungere questo obiettivo, possiamo
-modificare l'implementazione della \texttt{find} in modo che quando risaliamo
+il costo di ogni invocazione a $O(1)$. Per raggiungere questo obiettivo possiamo
+modificare l'implementazione della \texttt{find} in modo che, quando risaliamo
 l'\emph{albero}, ogni \emph{nodo} modifichi il proprio puntatore al \emph{padre}
 indicando il \emph{padre} del proprio \emph{padre}. In questo modo, la prima
-invocazione di \texttt{find} costa $O(\log n)$, mentre ricerche successivo
-su \emph{nodi} già visitati, costeranno $O(1)$.
+invocazione di \texttt{find} costa $O(\log n)$, mentre ricerche successive
+su \emph{nodi} già visitati costeranno $O(1)$.
 
 \begin{figure}[h!]
     \centering

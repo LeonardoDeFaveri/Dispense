@@ -385,12 +385,12 @@ sono già ordinati, $O(n\log n)$ altrimenti.
                         (32.west) edge[line width=1.5pt, dashed]      (42.east)
                         (03.west) edge[line width=1.5pt, dashed]      (53.east)
                         (54.west) edge[line width=1.5pt] (74.east)
-                        (35.west) edge[line width=1.5pt]      (75.east)
+                        (35.west) edge[line width=1.5pt, dashed]      (75.east)
                         (56.west) edge[line width=1.5pt]      (86.east)
                         (67.west) edge[line width=1.5pt]      (97.east)
                         (88.west) edge[line width=1.5pt] (108.east)
                         (89.west) edge[line width=1.5pt]      (119.east)
-                        (210.west) edge[line width=1.5pt]     (1210.east)
+                        (210.west) edge[line width=1.5pt, dashed]     (1210.east)
                         (1211.west) edge[line width=1.5pt] (1311.east);;
           \end{graph}
     }
@@ -439,7 +439,7 @@ sono già ordinati, $O(n\log n)$ altrimenti.
                         (67.west) edge[line width=1.5pt, dashed]      (97.east)
                         (88.west) edge[line width=1.5pt] (108.east)
                         (89.west) edge[line width=1.5pt]      (119.east)
-                        (210.west) edge[line width=1.5pt]     (1210.east)
+                        (210.west) edge[line width=1.5pt, dashed]     (1210.east)
                         (1211.west) edge[line width=1.5pt] (1311.east);;
           \end{graph}
     }
@@ -1324,5 +1324,4 @@ otteniamo la seguente tabella dei costi:
 \end{table}\noindent
 La \emph{complessità} totale è:
 \[T(n)=O(n+n\log n+m\log n)=O(m\log n)\]
-Quindi, l'\emph{Algoritmo di Prim} e l'\emph{Algoritmo di Kruskal} sono
-asintoticamente uguali.
+Gli algoritmi di \emph{Prim} e \emph{Kruskal} sono quindi asintoticamente uguali.
