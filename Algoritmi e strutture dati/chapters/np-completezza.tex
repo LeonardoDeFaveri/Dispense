@@ -7,11 +7,12 @@ Esistono anche problemi che richiedono un tempo \emph{esponenziale} o che
 addirittura non sono risolvibili (e.g. halting problem).
 
 Ciò che andremo ad introdurre in questo capitolo invece, sono una serie di
-problemi per i quali non è chiaro se esista una soluzione \emph{polinomiale} o
-meno. Vedremo anche come tutti questi problemi siano in realtà legati tra loro,
-in modo che se esiste una soluzione \emph{polinomiale} per uno di essi, allora ne
-esiste una anche per gli altri. Viceversa, se si riesce a dimostrare che uno
-di essi non è risolvibile in tempo \emph{polinomiale}, allora non lo è nessuno.
+problemi per i quali non è chiaro se esista o meno una soluzione
+\emph{polinomiale}. Vedremo anche come tutti questi problemi siano in realtà
+legati tra loro, in modo che se esiste una soluzione \emph{polinomiale} per uno
+di essi, allora ne esiste una anche per gli altri. Viceversa, se si riesce a
+dimostrare che uno di essi non è risolvibile in tempo \emph{polinomiale}, allora
+non lo è nessuno.
 
 \bigskip\noindent
 Procediamo dando alcune definizioni.
@@ -61,10 +62,9 @@ Informalmente, possiamo dimostrare che i \emph{problemi di ottimizzazione} e di
 \end{proof}
 \begin{note}
     Ad esempio, nel problema della \emph{ricerca del cammino tra due nodi}, se
-    si conosce il \emph{cammino minimo} tra essi, è possibile possibile 
-    risolvere efficientemente un \emph{problema di decisione} nel quale ci si
-    chiede se esista un \emph{cammino} di lunghezza non superiore a un qualche
-    valore $k$.
+    si conosce il \emph{cammino minimo} tra essi, è possibile risolvere
+    efficientemente un \emph{problema di decisione} nel quale ci si chiede se
+    esista un \emph{cammino} di lunghezza non superiore a un qualche valore $k$.
 \end{note}
 
 \noindent
@@ -107,7 +107,7 @@ da definire che da elaborare.
 \end{figure}
 
 \noindent
-Proseguiamo la trattazione con una carrellata di problemi che, come vedremo,
+Proseguiamo la trattazione con una carrellata di problemi che, vedremo,
 possono essere legati tra loro mediante \emph{riduzioni polinomiali}.
 
 \subsection{Colorazione di grafi}
@@ -370,7 +370,7 @@ problema del sudoku.
 Dagli ultimi due esempi fatti risulta particolarmente evidente il legame di
 dualità che sussiste tra un \emph{insieme indipendente} e una \emph{copertura
 di vertici} di uno stesso \emph{grafo}. Infatti, se $S\subseteq V$ è un
-\emph{insieme indipendente}, $V-S$ è una \emph{copertura di vertici} e viceversa.
+\emph{insieme indipendente}, $V-S$ è una \emph{copertura di vertici}, e viceversa.
 
 \bigskip\noindent
 La dimostrazione di quanto detto è banale:
@@ -428,7 +428,7 @@ e quindi valgono le seguenti relazioni di \emph{riducibilità polinomiale}:
 \noindent
 Ciò che vogliamo fare ora è dimostrare che $\text{3-SAT}\leq_p\text{INDIPENDENT-SET}$.
 Per farlo, \emph{riduciamo polinomialmente} 3-SAT a INDIPENDENT-SET trasformando
-l'espressione booleana in un \emph{grafo} nel quale, per ogni \emph{clausola},
+l'espressione booleana in un \emph{grafo}, nel quale, per ogni \emph{clausola}
 viene aggiunto un trio di \emph{nodi} collegati tra loro da \emph{archi}.
 Inoltre, viene aggiunto un \emph{arco} anche tra ogni \emph{letterale} e il
 suo negato.
@@ -478,6 +478,7 @@ le \emph{clausole} dell'espressione booleana.
 
 \bigskip\noindent
 Nell'esempio che stiamo considerando, la soluzione è la seguente:
+
 \begin{figure}[h!]
     \centering
     \begin{graph}
@@ -518,8 +519,8 @@ essere posti a \texttt{true}.
 
 \paragraph{Relazione tra SAT, 3-SAT e INDIPENDENT-SET}
 Ovviamente $\text{3-SAT}\leq_p\text{SAT}$ perché il primo è un caso particolare
-del secondo. Tuttavia, è possibile dimostrare anche la relazione inversa in
-quanto ogni espressione SAT può essere trasformata in una 3-SAT applicando delle
+del secondo. Tuttavia, è possibile dimostrare anche la relazione inversa, in
+quanto, ogni espressione SAT può essere trasformata in una 3-SAT applicando delle
 semplici trasformazioni:
 \begin{itemize}
     \item Se la \emph{clausola} è contiene più di 3 \emph{letterali}, si
@@ -540,8 +541,8 @@ otteniamo la seguente catena:
 \begin{definition}[Algoritmo]
     Dati un problema decisionale $R$ e un algoritmo $A$ (scritto in un modello
     di calcolo Turing-equivalente) che lavora in tempo $f_t(n)$ e spazio $f_s(n)$,
-    diciamo che $A$ risolve $R$ se restituisce una $s$ su un'istanza $x$ se e solo
-    se $(x,s)\in R$.
+    diciamo che $A$ risolve $R$ se restituisce una soluzione $s$ su un'istanza
+    $x$ se e solo se $(x,s)\in R$.
 \end{definition}
 \begin{definition}[Classi di complessità]
     Data una qualunque funzione $f(n)$, chiamiamo $\mathbb{TIME}(f(n))$ e
@@ -610,14 +611,14 @@ problemi appartenenti alla \emph{classe} $\mathbb{NP}$.
     tempo \emph{polinomiale}.
 \end{proof}
 
-\begin{definition}[Problema $\mathbb{NP}\textit{-arduo}$]
-    Un problema decisionale $R$ si dice essere $\mathbb{NP}\textit{-arduo}$ se
+\begin{definition}[Problema $\mathbb{NP}$-arduo]
+    Un problema decisionale $R$ si dice essere $\mathbb{NP}$-arduo se
     ogni problema $Q\in\mathbb{NP}$ è riducibile polinomialmente ad $R$, ovvero
     se $Q\leq_p R\quad\forall Q\in\mathbb{NP}$.
 \end{definition}
-\begin{definition}[Problema $\mathbb{NP}\textit{-completo}$]
-    Un problema decisionale $R$ si dice essere $\mathbb{NP}\textit{-completo}$ se
-    appartiene a $\mathbb{NP}$ ed è $\mathbb{NP}\textit{-arduo}$.
+\begin{definition}[Problema $\mathbb{NP}$-completo]
+    Un problema decisionale $R$ si dice essere $\mathbb{NP}$-completo se
+    appartiene a $\mathbb{NP}$ ed è $\mathbb{NP}$-arduo.
 \end{definition}
 
 \noindent
@@ -651,13 +652,13 @@ dimostrare se quell'uguaglianza sia vera o falsa.
 
 \noindent
 Ora però ci troviamo di fronte a un problema: come facciamo a dimostrare che
-un problema è $\mathbb{NP}\textit{-completo}$ se non conosciamo tutti i problemi
+un problema è $\mathbb{NP}\emph{-completo}$ se non conosciamo tutti i problemi
 in $\mathbb{NP}$?
 
 La dimostrazione che $Q\leq_p R\quad\forall Q\in\mathbb{NP}$ sembra apparentemente
 impossibile in quanto non conosciamo l'intero insieme $\mathbb{NP}$, tuttavia,
 con una dimostrazione molto complessa, si è riuscito a dimostrare il \emph{teorema
-di Cook-Levin} secondo il quale SAT è un problema $\mathbb{NP}\textit{-completo}$.
+di Cook-Levin} secondo il quale SAT è un problema $\mathbb{NP}\emph{-completo}$.
 Di conseguenza, partendo dalle \emph{riduzioni} viste in precedenza e utilizzando
 il \emph{teorema di Cook-Levin} otteniamo:
 \[\text{SAT}\leq_p\text{3-SAT}\leq_p\text{INDIPENDENT-SET}\leq_p\text{VERTEX-COVER}

@@ -1,7 +1,7 @@
 \chapter{Soluzioni per problemi intrattabili}
 A questo punto è chiaro che per alcuni problemi non è sempre possibile trovare
 la soluzione ottima in tempo \emph{polinomiale}. Per arrivare comunque ad una
-soluzione, siamo quindi costretti a rinunciare a qualcosa, e questo significa
+soluzione siamo dunque costretti a rinunciare a qualcosa, e questo significa
 perdere una o più delle seguenti caratteristiche:
 \begin{itemize}
     \item \emph{Generalità}: potremmo accettare di definire un algoritmo che
@@ -24,8 +24,42 @@ però proviamo risolverlo di nuovo con una soluzione basata su
 due soluzioni ottenute.
 
 \subsection{Problema del subset sum}
+\paragraph{Soluzione con programmazione dinamica}
+Come al solito, definiamo una \emph{tabella delle soluzioni}
+$DP[0\dots n][0\dots k]$ tale per cui $DP[i][r]$ è \texttt{true} se esiste un
+sottoinsieme dei primi $i$ valori di $A$ la cui somma sia esattamente $r$,
+\texttt{false} altrimenti:
+\[DP[i][r]=\begin{cases}
+    \texttt{true} & r=0\\
+    \texttt{false} & r>0\wedge i=0\\
+    DP[i-1][r] & r>0\wedge i>0\wedge A[i]>r\\
+    DP[i-1][r] or DP[i-1][r-A[i]] & r>0\wedge i>0\wedge A[i]\leq r
+\end{cases}\]
+Le prime due clausole di questa definizione fanno sì che i valori della prima
+colonna della tabella siano tutti \texttt{true} e quelli della prima riga, ad
+eccezione del primo, siano tutti \texttt{false}. È giusto che sia così perché
+se $r=0$ è sufficiente considerare l'insieme vuoto, mentre se $i=0$ e $r>0$
+non è possibile definire alcun sottoinsieme diverso da quello vuoto.
+
+\begin{minicode}{Soluzione basata su programmazione dinamica}
+\ind\bc{boolean} subsetSum(\bc{int}[] A, \bc{int} n, \bc{int} k)\\
+    \bc{boolean}[][] DP = new \bc{boolean}[0\dots n][0\dots k] = \{false\}\\
+    \indf for (i = 0 to n) do\hfill\com{Prima colonna}
+        DP[i][0] = true\hfill\com{Obiettivo raggiunto}
+    \indf for (r = 1 to k) do\hfill\com{Prima riga}
+        DP[0][r] = false\hfill\com{Valori terminati}
+    \indf for (i = 1 to n) do\\
+        \indff for (r = 1 to A[i] - 1) do\hfill\com{$r<A[i]$}
+            DP[i][r] = DP[i - 1][r]\\
+        \indff for (r = A[i] to k) do\hfill\com{$r\geq A[i]$}
+            DP[i][r] = DP[i - 1][r] or DP[i - 1][r - A[i]]\\
+    \indf return DP[n][k]
+\end{minicode}
+\noindent
+La \emph{complessità} di questa soluzione è $\Theta(nk)$ perché $DP$ ha quella
+dimensione.
+
 \paragraph{Soluzione con backtracking}
-Iniziamo rivedendo la soluzione con \emph{backtracking}.
 \begin{minicode}{Soluzione basata su backtracking}
 \ind\bc{boolean} ssRec(\bc{int}[] A, \bc{int} i, \bc{int} r)\\
     \indf if (r == 0) then\hfill\com{Obiettivo raggiunto}
@@ -42,44 +76,9 @@ Iniziamo rivedendo la soluzione con \emph{backtracking}.
 Poiché nel caso peggiore vengono eseguite 2 chiamate ricorsive per ogni livello,
 la \emph{complessità} è $O(2^n)$.
 
-\paragraph{Soluzione con programmazione dinamica}
-Come al solito, definiamo una \emph{tabella delle soluzioni}
-$DP[0\dots n][0\dots k]$ tale per cui $DP[i][r]$ è \texttt{true} se esiste un
-sottoinsieme dei primi $i$ valori di $A$, la cui somma sia esattamente $r$,
-\texttt{false} altrimenti:
-\[DP[i][r]=\begin{cases}
-    \texttt{true} & r=0\\
-    \texttt{false} & r>0\wedge i=0\\
-    DP[i-1][r] & r>0\wedge i>0\wedge A[i]>r\\
-    DP[i-1][r] or DP[i-1][r-A[i]] & r>0\wedge i>0\wedge A[i]\leq r
-\end{cases}\]
-Le prime due clausole di questa definizione fanno sì che i valori della prima
-colonna della tabella siano tutti \texttt{true} e quelli della prima riga, ad
-eccezione del primo, siano tutti \texttt{false}. È giusto che sia così perché
-se $r=0$ è sufficiente considerare l'insieme vuoto, mentre se $i=0$ e $r>0$
-non è possibile definire alcuni sottoinsieme diverso da quello vuoto.
-
-\begin{minicode}{Soluzione basata su programmazione dinamica}
-\ind\bc{boolean} subsetSum(\bc{int}[] A, \bc{int} n, \bc{int} k)\\
-    \bc{boolean}[][] DP = new \bc{boolean}[0\dots n][0\dots k] = \{false\}\\
-    \indf for (i = 0 to n) do\hfill\com{Prima colonna}
-        DP[i][0] = true\hfill\com{Obiettivo raggiunto}
-    \indf for (r= 1 to k) do\hfill\com{Prima riga}
-        DP[0][r] = false\hfill\com{Valori terminati}
-    \indf for (i = 1 to n) do\\
-        \indff for (r = 1 to A[i] - 1) do\hfill\com{$r<A[i]$}
-            DP[i][r] = DP[i - 1][r]\\
-        \indff for (r = A[i] to k) do\hfill\com{$r\geq A[i]$}
-            DP[i][r] = DP[i - 1][r] or DP[i - 1][r - A[i]]\\
-    \indf return DP[n][k]
-\end{minicode}
-\noindent
-La \emph{complessità} di questa soluzione è $\Theta(nk)$ perché $DP$ ha quella
-dimensione.
-
 \paragraph{Soluzione con memoization}
 Possiamo scrivere una soluzione basata su \emph{memoization} in cui, per non
-dover inizializzare l'intera tabella, usiamo un \emph{dizionario}.
+dover inizializzare l'intera tabella, memorizziamo le soluzioni in un \emph{dizionario}.
 
 \begin{minicode}{Soluzione basata su backtracking}
     \ind\bc{boolean} ssRec(\bc{int}[] A, \bc{int} i, \bc{int} r, \bc{DICTIONARY} DP)\\
@@ -88,12 +87,12 @@ dover inizializzare l'intera tabella, usiamo un \emph{dizionario}.
         \indf else if (i == 0) then\hfill\com{Valori terminati}
             return false\\
         \indf else\\
-            \bc{boolean} res = DP.lookup($\langle$ i, r$\rangle$)\\
+            \bc{boolean} res = DP.lookup($\langle$i, r$\rangle$)\\
             \indff if (res == nil) then\hfill\com{La soluzione non è ancora stata calcolata}
                 res = ssRec(A, i - 1, r, DP)\hfill\com{Valore non preso}
-                \indfff if (A[i] < r) then\\
+                \indfff if (A[i] $\leq$ r) then\\
                     res = res or ssRec(A, i - 1, r - A[i], DP)\hfill\com{Valore preso}
-                \indfff DP.insert($\langle$ i, r$\rangle$, res)\\
+                \indfff DP.insert($\langle$i, r$\rangle$, res)\\
             \indff return res
 \end{minicode}
 
@@ -103,7 +102,7 @@ $O(2^n)$. Il primo limite dipende dal fatto che, nel caso peggiore, il
 \emph{dizionario} viene popolato con tutti gli $nk$ valori come avviene nella
 soluzione con \emph{programmazione dinamica} classica.
 
-Se invece, il vettore $A$ fosse popolato interamente di $1$, ad ogni livello
+Se invece il vettore $A$ fosse popolato interamente di $1$, ad ogni livello
 della ricorsione si realizzerebbero due chiamate, portando quindi la complessità
 a $O(2^n)$. Di conseguenza, la \emph{complessità} della soluzione con
 \emph{memoization} è $O(\min(nk, 2^n))$.
@@ -113,17 +112,17 @@ La \emph{complessità} $O(nk)$ è \emph{polinomiale}?
 
 Precedentemente abbiamo già risposto a questa domanda, dicendo che no, non è
 una \emph{complessità polinomiale}, bensì \emph{pseudo-polinomiale}. Il motivo è
-che $k$ non è la dimensione dell'input, è parte dell'input. In particolare, $k$
-viene rappresentato da $t=\lceil\log k\rceil$ cifre binarie, quindi $O(nk)$ può
-anche essere scritto come $O(n2^t)$ che è una \emph{complessità esponenziale}.
+che $k$ è parte dell'input e non una sua dimensione. In particolare, $k$ viene
+rappresentato da $t=\lceil\log k\rceil$ cifre binarie, quindi $O(nk)$ può anche
+essere scritto come $O(n2^t)$ che è una \emph{complessità esponenziale}.
 
 \subsection[Problemi fortemente e debolmente NP-completi]
 {Problemi fortemente e debolmente $\mathbb{NP}$-completi}
-Per continuare la discussione sul tema della \emph{pseudo-polinomialità} facciamo
-una digressione sui \emph{problemi fortemente e debolmente $\mathbb{NP}$-completi}.
+Per continuare la discussione sul tema della \emph{pseudo-polinomialità}
+introduciamo i \emph{problemi fortemente e debolmente $\mathbb{NP}$-completi}.
 
 \begin{definition}[Dimensioni del problema]
-    Dati un problem decisionale $R$ e una istanza $I$, chiamiamo $d$ la lunghezza
+    Dati un problema decisionale $R$ e un'istanza $I$, chiamiamo $d$ la lunghezza
     della stringa binaria che codifica $I$ e definiamo il valore $\#$ come il
     più grande numero che appare in $I$.
 \end{definition}
@@ -158,7 +157,7 @@ e dalla dimensione di ciascuna sua componente.
 
 Da qui,  nel problema SUBSET-SUM, $d$ è definito come $O(n\log\#)$ perché
 l'input è composto da $n+2$ valori: $n$, $k$ e gli $n$ valori del vettore $A$.
-Ciascuno di quegli elementi poi richiede $\#$ bit per essere rappresentato e
+Ciascuno di quegli elementi poi, richiede $\#$ bit per essere rappresentato, e
 nel \emph{criterio di costo uniforme} tutto ciò si traduce in una
 \emph{complessità} di $O(n\log\#)$.
 
@@ -222,8 +221,8 @@ $\mathbb{NP}$-completo} e ammette una soluzione di costo \emph{pseudo-polinomial
     \emph{debolmente $\mathbb{NP}$-completo} è esso stesso \emph{debolmente
     $\mathbb{NP}$-completo}. Ad esempio, \hyperref[prob:32]{PARTITION} può
     essere ridotto a SUBSET-SUM scegliendo come $k$ la meta della somma di tutti
-    i valori presenti e, siccome SUBSET-SUM è \emph{debolmente $\mathbb{NP}$-completo},
-    lo è anche PARTITION.
+    i valori presenti, e siccome SUBSET-SUM è \emph{debolmente
+    $\mathbb{NP}$-completo}, lo è anche PARTITION.
 \end{note}
 
 \section{Algoritmi di approssimazione}
@@ -232,9 +231,10 @@ di approssimazione} consideriamo \emph{problemi di ottimizzazione} invece di
 \emph{problemi decisionali}.
 
 \begin{definition}[Algoritmo di approssimazione]
-    Se è possibile dimostrare che un limite superiore o inferiore al rapporto
-    tra la soluzione trovata e la soluzione ottima, allora l'algoritmo usato
-    per ricavare la soluzione non ottima è detto algoritmo di approssimazione.
+    Se è possibile dimostrare che esiste un limite superiore o inferiore al
+    rapporto tra la soluzione trovata e la soluzione ottima, allora l'algoritmo
+    usato per ricavare la soluzione non ottima è detto essere un algoritmo di
+    approssimazione.
 \end{definition}
 \begin{definition}[Algoritmo di \bm{$\alpha(n)$}-approssimazione]
     Dato un problema di ottimizzazione sul quale è definita una funzione di costo
@@ -256,7 +256,7 @@ di approssimazione} è tale se soddisfa una delle seguenti relazioni:
 
 \begin{note}
     Il fattore $\alpha(n)$ può dipendere da $n$ o essere una costante, in ogni
-    caso, dimostrare il valore scelto sia rispettato dall'algoritmo è ciò che
+    caso, dimostrare che il valore scelto sia rispettato dall'algoritmo è ciò che
     rende quell'algoritmo un \emph{algoritmo di approssimazione}.
 \end{note}
 
@@ -270,7 +270,7 @@ di approssimazione} è tale se soddisfa una delle seguenti relazioni:
     per ogni insieme $S$ della partizione.
 \end{problem}
 \begin{note}
-    In pratica, si vuole capire come distribuire $n$ oggetti in delle scatole,
+    In pratica, si vuole capire come distribuire $n$ oggetti in delle scatole
     in modo che il numero di scatole totali sia minimo.
 \end{note}
 
@@ -281,12 +281,13 @@ Il primo cerca di piazzare ogni oggetto nella scatola in cui la capacità residu
 dopo l'inserimento è minima. Il secondo invece, prende un oggetto alla volta e
 lo inserisce nella prima scatola con capacità sufficiente per contenerlo.
 
+\bigskip\noindent
 Consideriamo l'algoritmo \emph{first fit} e proviamo a vedere se è un
 \emph{algoritmo di approssimazione}.
 
 \begin{proof}[Dimostrazione]
-    Sia $N$ il numero di scatole usata dall'algoritmo \emph{first fit}. Il numero
-    minimo di scatole utilizzabili è limitato inferiormente da:
+    Sia $N$ il numero di scatole usate dall'algoritmo \emph{first fit}. Il numero
+    minimo di scatole utilizzabili $N^*$ è limitato inferiormente da:
     \[N^*\geq\frac{\sum_{i=1}^nA[i]}{k}\]
     Poiché non possono esserci due scatole riempite per meno della metà\footnotemark,
     $N$ è limitato superiormente da:
@@ -298,7 +299,7 @@ Consideriamo l'algoritmo \emph{first fit} e proviamo a vedere se è un
 \begin{note}
     È anche possibile dimostrare limiti più stretti, ma quello che ci importa è
     aver dimostrato con successo che \emph{first fit} è un \emph{algoritmo di
-    approssimazione} per il problema del \emph{bin packaging}.
+    approssimazione} per il problema del \emph{bin packing}.
 \end{note}
 
 \footnotetext{Non possono esserci due scatole riempite per meno della metà perché
@@ -308,9 +309,9 @@ il contenuto di una di quelle due sarebbe stato messo nell'altra}
 \begin{problem}[Commesso viaggiatore con disuguaglianze triangolari ($\bc{\Delta}$-TSP)]
     Date $n$ città e una matrice $d$ delle distanze tra esse tale per cui:
     \[d[i][j]\leq d[i][k]+d[k][j]\quad\forall i,j,k: 1\leq i,j,k\leq n\]
-    trovare un percorso che, parta da una città, visiti tutte le altre
+    trovare un percorso che parta da una città, visiti tutte le altre
     esattamente una volta e ritorni alla città di partenza, in modo che la
-    distanza percorsa complessiva sia minima
+    distanza complessiva percorsa sia minima.
 \end{problem}
 \begin{note}
     Le distanze tra le città devono rispettare la cosiddetta \q{disuguaglianza
