@@ -1,0 +1,349 @@
+\chapter{Soluzioni per problemi intrattabili}
+A questo punto è chiaro che per alcuni problemi non è sempre possibile trovare
+la soluzione ottima in tempo \emph{polinomiale}. Per arrivare comunque ad una
+soluzione, siamo quindi costretti a rinunciare a qualcosa, e questo significa
+perdere una o più delle seguenti caratteristiche:
+\begin{itemize}
+    \item \emph{Generalità}: potremmo accettare di definire un algoritmo che
+    sia efficiente solo per alcuni casi dell'input;
+    \item \emph{Ottimalità}: potremmo accettare di ottenere soluzioni \q{vicine}
+    a quella ottima;
+    \item \emph{Formalità}: potremmo accettare di definire un algoritmo che
+    sperimentalmente dimostri fornire risultati buoni;
+    \item \emph{Efficienza}: potremmo accettare di perdere in efficienza, ma
+    ottenere la soluzione globalmente ottima;
+\end{itemize}
+Come vedremo in questo capitolo, ciascuno di questi punti è associato ad una
+particolare categoria di algoritmi.
+
+\section{Algoritmi pseudo-polinomiali}
+Partiamo con un problema ormai noto: \hyperref[prob:33]{SUBSET-SUM}.
+Abbiamo già risolto questo problema utilizzando il \emph{backtracking}, ora
+però proviamo risolverlo di nuovo con una soluzione basata su
+\emph{programmazione dinamica} per poi confrontare le \emph{complessità} delle
+due soluzioni ottenute.
+
+\subsection{Problema del subset sum}
+\paragraph{Soluzione con backtracking}
+Iniziamo rivedendo la soluzione con \emph{backtracking}.
+\begin{minicode}{Soluzione basata su backtracking}
+\ind\bc{boolean} ssRec(\bc{int}[] A, \bc{int} i, \bc{int} r)\\
+    \indf if (r == 0) then\hfill\com{Obiettivo raggiunto}
+        return true\\
+    \indf else if (i == 0) then\hfill\com{Valori terminati}
+        return false\\
+    \indf else if (A[i] > r) then\\
+        return ssRec(A, i - 1, r)\\
+    \indf else \\
+        return ssRec(A, i - 1, r) or ssRec(A, i - 1, r - A[i])
+\end{minicode}
+
+\noindent
+Poiché nel caso peggiore vengono eseguite 2 chiamate ricorsive per ogni livello,
+la \emph{complessità} è $O(2^n)$.
+
+\paragraph{Soluzione con programmazione dinamica}
+Come al solito, definiamo una \emph{tabella delle soluzioni}
+$DP[0\dots n][0\dots k]$ tale per cui $DP[i][r]$ è \texttt{true} se esiste un
+sottoinsieme dei primi $i$ valori di $A$, la cui somma sia esattamente $r$,
+\texttt{false} altrimenti:
+\[DP[i][r]=\begin{cases}
+    \texttt{true} & r=0\\
+    \texttt{false} & r>0\wedge i=0\\
+    DP[i-1][r] & r>0\wedge i>0\wedge A[i]>r\\
+    DP[i-1][r] or DP[i-1][r-A[i]] & r>0\wedge i>0\wedge A[i]\leq r
+\end{cases}\]
+Le prime due clausole di questa definizione fanno sì che i valori della prima
+colonna della tabella siano tutti \texttt{true} e quelli della prima riga, ad
+eccezione del primo, siano tutti \texttt{false}. È giusto che sia così perché
+se $r=0$ è sufficiente considerare l'insieme vuoto, mentre se $i=0$ e $r>0$
+non è possibile definire alcuni sottoinsieme diverso da quello vuoto.
+
+\begin{minicode}{Soluzione basata su programmazione dinamica}
+\ind\bc{boolean} subsetSum(\bc{int}[] A, \bc{int} n, \bc{int} k)\\
+    \bc{boolean}[][] DP = new \bc{boolean}[0\dots n][0\dots k] = \{false\}\\
+    \indf for (i = 0 to n) do\hfill\com{Prima colonna}
+        DP[i][0] = true\hfill\com{Obiettivo raggiunto}
+    \indf for (r= 1 to k) do\hfill\com{Prima riga}
+        DP[0][r] = false\hfill\com{Valori terminati}
+    \indf for (i = 1 to n) do\\
+        \indff for (r = 1 to A[i] - 1) do\hfill\com{$r<A[i]$}
+            DP[i][r] = DP[i - 1][r]\\
+        \indff for (r = A[i] to k) do\hfill\com{$r\geq A[i]$}
+            DP[i][r] = DP[i - 1][r] or DP[i - 1][r - A[i]]\\
+    \indf return DP[n][k]
+\end{minicode}
+\noindent
+La \emph{complessità} di questa soluzione è $\Theta(nk)$ perché $DP$ ha quella
+dimensione.
+
+\paragraph{Soluzione con memoization}
+Possiamo scrivere una soluzione basata su \emph{memoization} in cui, per non
+dover inizializzare l'intera tabella, usiamo un \emph{dizionario}.
+
+\begin{minicode}{Soluzione basata su backtracking}
+    \ind\bc{boolean} ssRec(\bc{int}[] A, \bc{int} i, \bc{int} r, \bc{DICTIONARY} DP)\\
+        \indf if (r == 0) then\hfill\com{Obiettivo raggiunto}
+            return true\\
+        \indf else if (i == 0) then\hfill\com{Valori terminati}
+            return false\\
+        \indf else\\
+            \bc{boolean} res = DP.lookup($\langle$ i, r$\rangle$)\\
+            \indff if (res == nil) then\hfill\com{La soluzione non è ancora stata calcolata}
+                res = ssRec(A, i - 1, r, DP)\hfill\com{Valore non preso}
+                \indfff if (A[i] < r) then\\
+                    res = res or ssRec(A, i - 1, r - A[i], DP)\hfill\com{Valore preso}
+                \indfff DP.insert($\langle$ i, r$\rangle$, res)\\
+            \indff return res
+\end{minicode}
+
+\noindent
+In questo caso l'algoritmo è limitato superiormente sia da $O(nk)$ che da
+$O(2^n)$. Il primo limite dipende dal fatto che, nel caso peggiore, il
+\emph{dizionario} viene popolato con tutti gli $nk$ valori come avviene nella
+soluzione con \emph{programmazione dinamica} classica.
+
+Se invece, il vettore $A$ fosse popolato interamente di $1$, ad ogni livello
+della ricorsione si realizzerebbero due chiamate, portando quindi la complessità
+a $O(2^n)$. Di conseguenza, la \emph{complessità} della soluzione con
+\emph{memoization} è $O(\min(nk, 2^n))$.
+
+\bigskip\noindent
+La \emph{complessità} $O(nk)$ è \emph{polinomiale}?
+
+Precedentemente abbiamo già risposto a questa domanda, dicendo che no, non è
+una \emph{complessità polinomiale}, bensì \emph{pseudo-polinomiale}. Il motivo è
+che $k$ non è la dimensione dell'input, è parte dell'input. In particolare, $k$
+viene rappresentato da $t=\lceil\log k\rceil$ cifre binarie, quindi $O(nk)$ può
+anche essere scritto come $O(n2^t)$ che è una \emph{complessità esponenziale}.
+
+\subsection[Problemi fortemente e debolmente NP-completi]
+{Problemi fortemente e debolmente $\mathbb{NP}$-completi}
+Per continuare la discussione sul tema della \emph{pseudo-polinomialità} facciamo
+una digressione sui \emph{problemi fortemente e debolmente $\mathbb{NP}$-completi}.
+
+\begin{definition}[Dimensioni del problema]
+    Dati un problem decisionale $R$ e una istanza $I$, chiamiamo $d$ la lunghezza
+    della stringa binaria che codifica $I$ e definiamo il valore $\#$ come il
+    più grande numero che appare in $I$.
+\end{definition}
+
+\noindent
+Ad esempio, per i problemi SUBSET-SUM, \hyperref[prob:28]{CLIQUE} e
+\hyperref[prob:30]{TSP}, i valori $d$ ed $\#$ sono i seguenti:
+
+\begin{table}[h!]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \bc{Problema} & \bm{$I$} & \bm{$\#$} & \bm{$d$}\\
+        \hline
+        SUBSET-SUM & $\{n, k, A\}$ & $\max\{n, k, \max(A)\}$ & $O(n \log\#)$\\
+        \hline
+        CLIQUE & $\{n,m,k,G\}$ & $\max\{n,m,k\}$ & $O(n+m+\log\#)$\\
+        \hline
+        TSP & $\{n,k,d\}$ & $\max\{n,k,\max(d)\}$ & $O(n^2\log\#)$\\
+        \hline
+    \end{tabular}
+\end{table}
+
+\noindent
+L'idea dietro il valore $\#$ è che se tutti i valori sono codificati nello
+stesso modo (e.g. tutti i valori di $A$ sono interi a 32 bit), il valore maggiore
+definisce la dimensione minima della stringa di codifica per ciascun valore di
+quell'insieme. Conseguentemente, poiché $d$ descrive la dimensione della stringa
+di codifica dell'intero input, il suo valore dipende dalla numerosità dell'input
+e dalla dimensione di ciascuna sua componente.
+
+Da qui,  nel problema SUBSET-SUM, $d$ è definito come $O(n\log\#)$ perché
+l'input è composto da $n+2$ valori: $n$, $k$ e gli $n$ valori del vettore $A$.
+Ciascuno di quegli elementi poi richiede $\#$ bit per essere rappresentato e
+nel \emph{criterio di costo uniforme} tutto ciò si traduce in una
+\emph{complessità} di $O(n\log\#)$.
+
+\begin{definition}[Problema fortemenete $\mathbb{NP}$-completo]
+    Sia $R_{pol}$ il problema $R$ ristretto ai dati di input per i quali $\#$
+    è limitato superiormente da $T_p(d)$, con $T_p$ funzione polinomiale di $d$.
+    $R$ è fortemente $\mathbb{NP}$-completo se e solo se $R_{pol}$ è
+    $\mathbb{NP}$-completo.
+\end{definition}
+
+\begin{definition}[Problema debolmente $\mathbb{NP}$-completo]
+    Se un problema $\mathbb{NP}$-completo non è fortemente $\mathbb{NP}$-completo,
+    allora è debolmente $\mathbb{NP}$-completo.
+\end{definition}
+
+\paragraph{Dimostrazione che SUBSET-SUM è debolmente $\mathbb{NP}$-completo}
+\begin{proof}[Dimostrazione]
+    Supponiamo che $A[i]\leq k\quad\forall i\in\{1,\dots,n\}$, perché in ogni
+    caso valori più grandi di $k$ non potrebbero essere parte della soluzione.
+    Se $k=O(n^c)$, allora il valore $\#$ è definito come $\#=\max\{n, k, a_1,
+    \dots, a_n\}=O(n^c)$. Ora, la soluzione basata su \emph{programmazione
+    dinamica} ha \emph{complessità} $O(nk)=O(n^{c+1})$ che è \emph{polinomiale},
+    e quindi appartenente a $\mathbb{P}$, quindi SUBSET-SUM non è \emph{fortemente
+    $\mathbb{NP}$-completo}.
+\end{proof}
+
+\begin{definition}[Complessità pseduo-polinomiale]
+    Un algoritmo ha complessità pseudo-polinomiale se risolve un certo problema
+    $R$, per qualsiasi input $I$, in tempo $T_p(\#,d)$, con $T_p$ funzione
+    con tempo polinomiale non costante in $\#$.
+\end{definition}
+\begin{definition}[Legame tra $\mathbb{NP}$-completezza e pseudo-polinomialità]
+    Nessun problema fortemente $\mathbb{NP}$-completo è risolvibile da un
+    algoritmo pseudo-polinomiale, a meno che non valga $\mathbb{P}=\mathbb{NP}$.
+\end{definition}
+\begin{note}
+    Gli algoritmi per SUBSET-SUM e \hyperref[prob:34]{KNAPSACK} sono
+    \emph{pseudo-polinomiali}.
+\end{note}
+
+\paragraph{Dimostrazione che CLIQUE è fortemente $\mathbb{NP}$-completo}
+\begin{proof}[Dimostrazione]
+    Possiamo supporre $k\leq n$, perché altrimenti la risposta sarebbe
+    sicuramente \texttt{false}. Se è così, il valore $\#$ è definito come
+    $\#=\max\{n,m,k\}=\max\{n,m\}$. Conseguentemente, $d$ vale $O(n+m+\log\#)=
+    O(n+m)$. Ora, siccome $\#$ definito in questo modo è già limitato superiormente
+    da $O(n+m)$, il problema ristretto è uguale alla versione completa di CLIQUE
+    che è \emph{$\mathbb{NP}$-completo}, quindi CLIQUE è un problema
+    \emph{fortemente $\mathbb{NP}$-completo}.
+\end{proof}
+
+\noindent
+L'idea alla base di questo tipo di dimostrazioni è quella di considerare
+un sottoinsieme degli input, calcolare $\#$ e $d$ a partire dall'input
+ridotto e, se la versione ridotta del problema ha \emph{complessità
+polinomiale}, allora il problema originale è \emph{debolmente
+$\mathbb{NP}$-completo} e ammette una soluzione di costo \emph{pseudo-polinomiale}.
+
+\begin{note}
+    Ovviamente, qualsiasi problema che è riducibile ad un problema
+    \emph{debolmente $\mathbb{NP}$-completo} è esso stesso \emph{debolmente
+    $\mathbb{NP}$-completo}. Ad esempio, \hyperref[prob:32]{PARTITION} può
+    essere ridotto a SUBSET-SUM scegliendo come $k$ la meta della somma di tutti
+    i valori presenti e, siccome SUBSET-SUM è \emph{debolmente $\mathbb{NP}$-completo},
+    lo è anche PARTITION.
+\end{note}
+
+\section{Algoritmi di approssimazione}
+Diversamente da quanto fatto finora, per la trattazione degli \emph{algoritmi
+di approssimazione} consideriamo \emph{problemi di ottimizzazione} invece di
+\emph{problemi decisionali}.
+
+\begin{definition}[Algoritmo di approssimazione]
+    Se è possibile dimostrare che un limite superiore o inferiore al rapporto
+    tra la soluzione trovata e la soluzione ottima, allora l'algoritmo usato
+    per ricavare la soluzione non ottima è detto algoritmo di approssimazione.
+\end{definition}
+\begin{definition}[Algoritmo di \bm{$\alpha(n)$}-approssimazione]
+    Dato un problema di ottimizzazione sul quale è definita una funzione di costo
+    non negativa $c$, un algoritmo si dice essere di $\alpha(n)$-approssimazione
+    se fornisce una soluzione ammissibile $x$, il cui costo $c(x)$ non si discosti
+    dal costo $c(x^*)$ della soluzione ottima $x^*$ per più di un fattore
+    $\alpha(n)$, per qualunque input di dimensione $n$.
+\end{definition}
+
+\noindent
+I \emph{problemi di ottimizzazione} si dividono in due sotto-categorie:
+\emph{problemi di massimizzazione} e \emph{problemi di minimizzazione}.
+A seconda della sotto-categoria di appartenenza del problema, un \emph{algoritmo
+di approssimazione} è tale se soddisfa una delle seguenti relazioni:
+\[\begin{array}{rccclll}
+    \alpha(n)c(x^*) & \leq & c(x) & \leq & c(x^*) & \quad\alpha(n)<1 & \quad\emph{Problema di massimizzazione}\\
+    c(x^*) & \leq & c(x) & \leq & \alpha(n)c(x^*) & \quad\alpha(n)>1 & \quad\emph{Problema di minimizzazione}
+\end{array}\]
+
+\begin{note}
+    Il fattore $\alpha(n)$ può dipendere da $n$ o essere una costante, in ogni
+    caso, dimostrare il valore scelto sia rispettato dall'algoritmo è ciò che
+    rende quell'algoritmo un \emph{algoritmo di approssimazione}.
+\end{note}
+
+\subsection{Problema del bin packing approssimato}
+\begin{problem}[Problema del bin packing]
+    Dato un vettore $A$ contenente $n$ interi positivi, rappresentanti ciascuno il
+    volume di un oggetto, e un intero positivo $k$, rappresentante la capacità di
+    una scatola e tale per cui $A[i]\leq k\quad\forall i\in\{1,\dots,n\}$,
+    trovare una partizione dell'insieme di indici $\{1,\dots,n\}$ che minimizzi
+    il numero di sottoinsiemi disgiunti tali che $\sum_{i\in S}A[i]\leq k$
+    per ogni insieme $S$ della partizione.
+\end{problem}
+\begin{note}
+    In pratica, si vuole capire come distribuire $n$ oggetti in delle scatole,
+    in modo che il numero di scatole totali sia minimo.
+\end{note}
+
+\noindent
+Questo problema può essere approcciato in una quantità di modi, i primi che
+potrebbero venire in mente sono il \emph{best fit} e il \emph{first fit}.
+Il primo cerca di piazzare ogni oggetto nella scatola in cui la capacità residua
+dopo l'inserimento è minima. Il secondo invece, prende un oggetto alla volta e
+lo inserisce nella prima scatola con capacità sufficiente per contenerlo.
+
+Consideriamo l'algoritmo \emph{first fit} e proviamo a vedere se è un
+\emph{algoritmo di approssimazione}.
+
+\begin{proof}[Dimostrazione]
+    Sia $N$ il numero di scatole usata dall'algoritmo \emph{first fit}. Il numero
+    minimo di scatole utilizzabili è limitato inferiormente da:
+    \[N^*\geq\frac{\sum_{i=1}^nA[i]}{k}\]
+    Poiché non possono esserci due scatole riempite per meno della metà\footnotemark,
+    $N$ è limitato superiormente da:
+    \[N\leq\frac{\sum_{i=1}^nA[i]}{k/2}\]
+    Se è così, vale quanto segue:
+    \[N\leq\frac{\sum_{i=1}^nA[i]}{k/2}=2\frac{\sum_{i=1}^nA[i]}{k}\leq 2N^*\]
+    Da qui risulta che il fattore $\alpha(n)$ vale $2$.
+\end{proof}
+\begin{note}
+    È anche possibile dimostrare limiti più stretti, ma quello che ci importa è
+    aver dimostrato con successo che \emph{first fit} è un \emph{algoritmo di
+    approssimazione} per il problema del \emph{bin packaging}.
+\end{note}
+
+\footnotetext{Non possono esserci due scatole riempite per meno della metà perché
+il contenuto di una di quelle due sarebbe stato messo nell'altra}
+
+\subsection{Problema del commesso viaggiatore modificato}
+\begin{problem}[Commesso viaggiatore con disuguaglianze triangolari ($\bc{\Delta}$-TSP)]
+    Date $n$ città e una matrice $d$ delle distanze tra esse tale per cui:
+    \[d[i][j]\leq d[i][k]+d[k][j]\quad\forall i,j,k: 1\leq i,j,k\leq n\]
+    trovare un percorso che, parta da una città, visiti tutte le altre
+    esattamente una volta e ritorni alla città di partenza, in modo che la
+    distanza percorsa complessiva sia minima
+\end{problem}
+\begin{note}
+    Le distanze tra le città devono rispettare la cosiddetta \q{disuguaglianza
+    triangolare}.
+\end{note}
+\begin{figure}[h!]
+    \centering
+    \subfloat[Con disuguaglianza triangolare]{\begin{graph}
+        \tikzset{node distance=35mm}
+
+        \node[main] (b) {$b$};
+        \node[main] (a) [below left of=b] {$a$};
+        \node[main] (c) [below right of=b] {$c$};
+
+        \node[] (d) [below of=b] {$d[a][c]\leq d[a][b]+d[b][c]$};
+
+        \path[-]    (a) edge node[above left] {$3$} (b)
+                    (a) edge node[above] {$5$} (c)
+                    (b) edge node[above right] {$3$} (c);
+    \end{graph}}
+    \hspace{1.5cm}
+    \subfloat[Senza disuguaglianza triangolare]{\begin{graph}
+        \tikzset{node distance=35mm}
+
+        \node[main] (b) {$b$};
+        \node[main] (a) [below left of=b] {$a$};
+        \node[main] (c) [below right of=b] {$c$};
+
+        \node[] (d) [below of=b] {$d[a][c]\geq d[a][b]+d[b][c]$};
+
+        \path[-]    (a) edge node[above left] {$2$} (b)
+                    (a) edge node[above] {$5$} (c)
+                    (b) edge node[above right] {$2$} (c);
+    \end{graph}}
+    \caption{\emph{Grafo} con e senza disuguaglianza triangolare}
+\end{figure}

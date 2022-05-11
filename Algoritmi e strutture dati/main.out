@@ -187,6 +187,12 @@
 \BOOKMARK [1][-]{section.17.3}{Classi di problemi}{chapter.17}% 187
 \BOOKMARK [1][-]{section.17.4}{Alcuni problemi NP-completi}{chapter.17}% 188
 \BOOKMARK [0][-]{chapter.18}{Soluzioni per problemi intrattabili}{}% 189
-\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 190
-\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 191
-\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 192
+\BOOKMARK [1][-]{section.18.1}{Algoritmi pseudo-polinomiali}{chapter.18}% 190
+\BOOKMARK [2][-]{subsection.18.1.1}{Problema del subset sum}{section.18.1}% 191
+\BOOKMARK [2][-]{subsection.18.1.2}{Problemi fortemente e debolmente NP-completi}{section.18.1}% 192
+\BOOKMARK [1][-]{section.18.2}{Algoritmi di approssimazione}{chapter.18}% 193
+\BOOKMARK [2][-]{subsection.18.2.1}{Problema del bin packing approssimato}{section.18.2}% 194
+\BOOKMARK [2][-]{subsection.18.2.2}{Problema del commesso viaggiatore modificato}{section.18.2}% 195
+\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 196
+\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 197
+\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 198

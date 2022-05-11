@@ -367,6 +367,17 @@
 \contentsline {section}{\numberline {17.3}Classi di problemi}{228}{section.17.3}%
 \contentsline {section}{\numberline {17.4}Alcuni problemi NP-completi}{230}{section.17.4}%
 \contentsline {chapter}{\numberline {18}Soluzioni per problemi intrattabili}{233}{chapter.18}%
-\contentsline {chapter}{\numberline {A}Appendice A}{234}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{234}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{234}{section.1.A.2}%
+\contentsline {section}{\numberline {18.1}Algoritmi pseudo-polinomiali}{233}{section.18.1}%
+\contentsline {subsection}{\numberline {18.1.1}Problema del subset sum}{233}{subsection.18.1.1}%
+\contentsline {paragraph}{Soluzione con backtracking}{233}{paragraph*.331}%
+\contentsline {paragraph}{Soluzione con programmazione dinamica}{234}{paragraph*.332}%
+\contentsline {paragraph}{Soluzione con memoization}{234}{paragraph*.333}%
+\contentsline {subsection}{\numberline {18.1.2}Problemi fortemente e debolmente NP-completi}{235}{subsection.18.1.2}%
+\contentsline {paragraph}{Dimostrazione che SUBSET-SUM è debolmente $\mathbb {NP}$-completo}{236}{paragraph*.335}%
+\contentsline {paragraph}{Dimostrazione che CLIQUE è fortemente $\mathbb {NP}$-completo}{236}{paragraph*.336}%
+\contentsline {section}{\numberline {18.2}Algoritmi di approssimazione}{236}{section.18.2}%
+\contentsline {subsection}{\numberline {18.2.1}Problema del bin packing approssimato}{237}{subsection.18.2.1}%
+\contentsline {subsection}{\numberline {18.2.2}Problema del commesso viaggiatore modificato}{238}{subsection.18.2.2}%
+\contentsline {chapter}{\numberline {A}Appendice A}{239}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{239}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{239}{section.1.A.2}%

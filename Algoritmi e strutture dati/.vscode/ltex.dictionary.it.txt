@@ -434,3 +434,12 @@ sottocollezione
 hamiltoniano
 from
 
+pseudo-polinomiali
+pseudo-polinomialità
+-completo
+sotto-categorie
+sotto-categoria
+packing
+fit
+best
+packaging
