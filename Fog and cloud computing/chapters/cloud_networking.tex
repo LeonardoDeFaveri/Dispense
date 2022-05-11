@@ -770,7 +770,7 @@ that abstracts out the underlying server architecture.
     \caption{\emph{Open vSwitch} general implementation schema}
 \end{figure}
 
-\section{Other problems in single server virtual networking}
+\section{Single server networking services}
 \paragraph{IP assignment}
 The first problem is about deciding who should assign IP addresses to VMs and
 containers and also which addressed should be assigned. The first option could
@@ -801,3 +801,7 @@ private network.
 \end{figure}
 
 \paragraph{Providing feature-rich network connectivity}
+Up to this point it results evident that providing additional network services
+may require connecting VMs or containers to the physical infrastructure. For
+example, if private IPs are used for VMs, the \emph{hypervisor} must also provide
+a router, NAT and a DHCP service. To do this, 

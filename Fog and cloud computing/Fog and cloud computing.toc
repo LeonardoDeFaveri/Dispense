@@ -95,6 +95,6 @@
 \contentsline {paragraph}{Pass-through mode}{42}{paragraph*.80}%
 \contentsline {paragraph}{Linuxbridge VS macvlan}{42}{paragraph*.81}%
 \contentsline {subsection}{\numberline {4.3.3}Open vSwitch}{42}{subsection.4.3.3}%
-\contentsline {section}{\numberline {4.4}Other problems in single server virtual networking}{43}{section.4.4}%
+\contentsline {section}{\numberline {4.4}Single server networking services}{43}{section.4.4}%
 \contentsline {paragraph}{IP assignment}{43}{paragraph*.83}%
 \contentsline {paragraph}{Providing feature-rich network connectivity}{44}{paragraph*.85}%
