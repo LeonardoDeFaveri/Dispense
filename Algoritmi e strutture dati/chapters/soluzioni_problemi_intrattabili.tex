@@ -348,3 +348,275 @@ il contenuto di una di quelle due sarebbe stato messo nell'altra}
     \end{graph}}
     \caption{\emph{Grafo} con e senza disuguaglianza triangolare}
 \end{figure}
+
+\paragraph{$\mathbb{NP}$-completezza di \bm{$\Delta$}-TSP}
+Possiamo dimostrare che $\Delta$-TSP è \emph{riducibile polinomialmente} a
+\hyperref[prob:35]{HAMILTONIAN-CIRCUIT} e poiché questo è
+\emph{$\mathbb{NP}$-completo}, lo è anche $\Delta$-TSP.
+
+\begin{proof}[Dimostrazione]
+    Sia $G=(V,E)$ un \emph{grafo non orientato} avente un \emph{nodo} per ognuna
+    delle $n$ città, e definiamo a partire da esso una matrice delle distanze
+    tale per cui:
+    \[d[i][j]=\begin{cases}
+        1 & (i,j)\in E\\
+        2 & (i,j)\notin E
+    \end{cases}\]
+    Poiché valgono le disuguaglianze triangolari, per ogni coppia di \emph{nodi}
+    $i$, $j$ vale $d[i][j]\leq 2\leq d[i][k]+d[k[j]]$. A questo punto, $G$ ha
+    un circuito hamiltoniano se e solo se esiste un \emph{cammino} in $d$ di
+    lunghezza $n$ e passante per ogni \emph{nodo}.
+\end{proof}
+\begin{note}
+    La matrice $d$ definisce il costo dell'arco tra ogni coppia di \emph{nodi},
+    quindi ci permette di trattare $G$ come se fosse un \emph{grafo completo}.
+\end{note}
+
+\noindent
+In generale possiamo sempre interpretare TSP o $\Delta$-TSP come il problema di
+ricercare il circuito hamiltoniano di peso minimo su un \emph{grafo pesato
+completo}.
+
+\paragraph{Algoritmo in generale}
+Per definire un \emph{algoritmo di approssimazione} per $\Delta$-TSP
+partiamo proprio da questa interpretazione. In particolare, consideriamo un
+circuito hamiltoniano e ne cancelliamo un \emph{arco} in modo da ottenere un
+\emph{albero di copertura}.
+
+\begin{definition}[Lemma sul costo dell'albero di copertura di peso minimo]
+    Qualunque circuito hamiltoniano $\pi$ ha un costo $c(\pi)$ che è superiore
+    al costo $mst$ di un albero di copertura di peso minimo dello stesso grafo.
+    Ovvero, per ogni circuito hamiltoniano $\pi$ vale $mst<c(\pi)$.
+\end{definition}
+
+\begin{figure}[ht!]
+\centering
+\scalebox{1}{\begin{graph}
+    \tikzset{
+        cell/.style={rectangle, draw, minimum size=10mm, font=\large},
+        empty/.style={inner sep=0},
+        pos/.style args={#1:#2 from #3}{
+          at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+        }
+    }
+
+    \def\labels{1 2 3 4 5}
+    \def\numbers{%
+        0 3 4 2 7
+        3 0 4 6 3
+        4 4 0 5 8
+        2 6 5 0 6
+        7 3 8 6 0
+    }
+    \readarray\labels\la[1,5]
+    \readarray\numbers\num[5,5]
+
+    \foreach \x in {1,...,5}
+        \foreach \y in {1,...,5}
+        {
+            \ifthenelse{\x = 1\and\y=1}{
+                \node[cell] (\x\y) at (\x-1,-\y+1) [label=above:{$\la[1,1]$},
+                label=left:{$\la[1,1]$}] {};
+            }{
+                \ifthenelse{\x=1}{
+                    \node[cell] (\x\y) at (\x-1,-\y+1) [label=left:{$\la[1,\y]$}]
+                    {$\num[\x,\y]$};
+                }{
+                    \ifthenelse{\y = 1}{
+                        \node[cell] (\x\y) at (\x-1,-\y+1)[label=above:{$\la[1,\x]$}]
+                        {$\num[\x,\y]$};
+                    }{
+                        \ifthenelse{\num[\x,\y]=0}{
+                            \node[cell] (\x\y) at (\x-1,-\y+1) {};
+                        }{
+                            \node[cell] (\x\y) at (\x-1,-\y+1) {$\num[\x,\y]$};
+                        }
+                    }
+                }    
+            }
+        }
+
+    \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+    \node[main]     (1) [pos=90:20mm from 0] {$1$};
+    \node[main]     (2) [pos=18:20mm from 0] {$2$};
+    \node[main]     (3) [pos=-54:20mm from 0] {$3$};
+    \node[main]     (4) [pos=-126:20mm from 0] {$4$};
+    \node[main]     (5) [pos=-198:20mm from 0] {$5$};
+
+    \path[-,dashed] (1) edge node[fill=white] {$3$} (2)
+                    (1) edge node[fill=white] {$7$} (5)
+                    (2) edge node[fill=white] {$6$} (4)
+                    (3) edge node[fill=white] {$8$} (5)
+                    (3) edge node[fill=white] {$5$} (4);
+
+    \path[-]
+                    (1) edge[line width=1.3pt] node[fill=white] {$4$} (3)
+                    (1) edge[line width=1.3pt] node[fill=white] {$2$} (4)
+                    (2) edge[line width=1.3pt] node[fill=white] {$3$} (5)
+                    (2) edge[line width=1.3pt] node[fill=white] {$4$} (3)
+                    (5) edge[line width=1.3pt] node[fill=white] {$6$} (4);
+\end{graph}}
+\caption{Interpretazione di $\Delta$-TSP come circuito hamiltoniano pesato}
+\end{figure}
+
+\begin{proof}[Dimostrazione]
+    Supponiamo per assurdo che esista un circuito hamiltoniano $\pi$ di costo
+    $c(\pi)\leq mst$. Se eliminiamo un \emph{arco} di $\pi$ otteniamo un altro
+    \emph{albero di copertura} $mst'$ di costo $mst'<c(\pi)\leq mst$. Questo
+    genera una contraddizione in quanto avevo supposto che $mst$ fosse il costo
+    dell'\emph{albero di copertura di peso minimo}.
+\end{proof}
+
+\noindent
+Quindi, se individuiamo un \emph{albero di copertura} di peso $mst$ e ne
+percorriamo ogni \emph{arco} due volte, prima in un senso e poi nell'altro,
+otteniamo un circuito di costo $2\cdot mst$ nel quale ogni \emph{nodo} viene
+visitato una o due volte. Ovviamente questo non è un circuito hamiltoniano, ma
+se saltiamo i \emph{nodi} già visitati e passiamo direttamente a quelli non
+visitati, poiché valgono le disuguaglianze triangolare, il costo del circuito
+$\pi$ così ottenuto è inferiore o uguale a $2\cdot mst$.
+
+\bigskip\noindent
+Di conseguenza, vale:
+\[c(\pi)\leq 2\cdot mst\leq 2\cdot c(\pi^*)\]
+dove $c(\pi^*)$ è il costo del circuito hamiltoniano di peso minimo e $2$ corrisponde
+anche al valore del fattore $\alpha(n)$.
+
+\begin{eg}[Esempio d'esecuzione]
+    Consideriamo il seguente grafo completo sul quale abbiamo individuato
+    un albero di copertura di peso minimo:
+    
+    \begin{figure}[h!]
+        \centering
+        \scalebox{0.95}{\begin{graph}
+            \node[main] (1) {$1$};
+            \node[main] (2) [below right of=1, shift={(15mm, 3mm)}] {$2$};
+            \node[main] (3) [below of=2, shift={(3mm, 0mm)}] {$3$};
+            \node[main] (4) [left of=3, shift={(-20mm, -1mm)}] {$4$};
+            \node[main] (5) [right of=3, shift={(20mm, 7mm)}] {$5$};
+            \node[main] (6) [below right of=5, shift={(6mm, 6mm)}] {$6$};
+            \node[main] (7) [above of=6, shift={(5mm, 10mm)}] {$7$};
+
+            \path[-]    (1) edge[line width=1.3pt] (2)
+                        (2) edge[line width=1.3pt] (3)
+                        (3) edge[line width=1.3pt] (4)
+                        (3) edge[line width=1.3pt] (5)
+                        (5) edge[line width=1.3pt] (6)
+                        (5) edge[line width=1.3pt] (7);
+
+            \draw[, dashed]
+                        (1) edge[bend left=5] (7)
+                        (7) edge[bend left=5] (6)
+                        (6) edge[bend left=10] (4)
+                        (6) edge[bend left=10] (3)
+                        (4) edge[bend left=5] (1)
+                        (3) edge[bend left=5] (1)
+                        (3) edge[bend left=5] (7)
+                        (4) edge[bend left=5] (2)
+                        (4) edge[bend left=8] (5)
+                        (4) edge (7)
+                        (2) edge (7)
+                        (2) edge (5)
+                        (2) edge[bend left=25] (6)
+                        (1) edge[bend left=25] (6)
+                        (1) edge[bend right=15] (5);
+        \end{graph}}
+    \end{figure}
+
+    \noindent
+    Se adesso percorressimo ogni arco dell'albero di copertura individuato in
+    entrambi i sensi, otterremmo il seguente circuito:
+
+    \begin{figure}[h!]
+        \centering
+        \scalebox{1}{\begin{graph}
+            \node[main] (1) {$1$};
+            \node[main] (2) [below right of=1, shift={(15mm, 3mm)}] {$2$};
+            \node[main] (3) [below of=2, shift={(3mm, 0mm)}] {$3$};
+            \node[main] (4) [left of=3, shift={(-20mm, -1mm)}] {$4$};
+            \node[main] (5) [right of=3, shift={(20mm, 7mm)}] {$5$};
+            \node[main] (6) [below right of=5, shift={(6mm, 6mm)}] {$6$};
+            \node[main] (7) [above of=6, shift={(5mm, 10mm)}] {$7$};
+
+            \path[->, bend left=15]
+                        (1) edge (2)
+                        (2) edge (3)
+                        (3) edge (4)
+                        (3) edge (5)
+                        (5) edge (6)
+                        (5) edge (7);
+
+            \path[<-, bend right=15]
+                        (1) edge (2)
+                        (2) edge (3)
+                        (3) edge (4)
+                        (3) edge (5)
+                        (5) edge (6)
+                        (5) edge (7);
+        \end{graph}}
+    \end{figure}
+
+    \noindent
+    A questo punto, sfruttando le disuguaglianze triangolari, otteniamo che,
+    per esempio, per passare dal nodo $7$ al nodo $6$ conviene usare l'arco
+    $(7,6)$ invece che tornare indietro sul nodo $5$ già visitato:
+
+    \begin{figure}[h!]
+        \centering
+        \scalebox{1}{\begin{graph}
+            \node[main] (1) {$1$};
+            \node[main] (2) [below right of=1, shift={(15mm, 3mm)}] {$2$};
+            \node[main] (3) [below of=2, shift={(3mm, 0mm)}] {$3$};
+            \node[main] (4) [left of=3, shift={(-20mm, -1mm)}] {$4$};
+            \node[main] (5) [right of=3, shift={(20mm, 7mm)}] {$5$};
+            \node[main] (6) [below right of=5, shift={(6mm, 6mm)}] {$6$};
+            \node[main] (7) [above of=6, shift={(5mm, 10mm)}] {$7$};
+
+            \path[->, bend left=15]
+                        (5) edge (7)
+                        (7) edge (6);
+
+            \path[->, bend left=15, dashed]
+                        (7) edge (5)
+                        (5) edge (6);
+        \end{graph}}
+    \end{figure}
+
+    \noindent
+    Applicando la stessa nozione a tutti gli altri nodi, otteniamo finalmente
+    un circuito hamiltoniano:
+
+    \begin{figure}[h!]
+        \centering
+        \scalebox{1}{\begin{graph}
+            \node[main] (1) {$1$};
+            \node[main] (2) [below right of=1, shift={(15mm, 3mm)}] {$2$};
+            \node[main] (3) [below of=2, shift={(3mm, 0mm)}] {$3$};
+            \node[main] (4) [left of=3, shift={(-20mm, -1mm)}] {$4$};
+            \node[main] (5) [right of=3, shift={(20mm, 7mm)}] {$5$};
+            \node[main] (6) [below right of=5, shift={(6mm, 6mm)}] {$6$};
+            \node[main] (7) [above of=6, shift={(5mm, 10mm)}] {$7$};
+
+            \path[->, bend left=15]
+                        (1) edge (5)
+                        (5) edge (7)
+                        (7) edge (6)
+                        (6) edge (3)
+                        (3) edge (4)
+                        (4) edge (2)
+                        (2) edge (1);
+        \end{graph}}
+    \end{figure}    
+\end{eg}
+
+\paragraph{Complessità}
+L'algoritmo proposto sfrutta l'\emph{Algoritmo di Kruskal} per la ricerca
+dell'\emph{albero di copertura di peso minimo} e una \emph{visita in
+profondità}. L'\emph{Algoritmo di Kruskal} costa $O(n^2\log n)$, la \emph{vista}
+$O(n)$, quindi la \emph{complessità} totale è $T(n)=O(n^2\log n)$.
+
+\begin{definition}[Teorema di non approssimabilità di TSP]
+    Non esiste alcun algoritmo di $\alpha(n)$-approssimazione per TSP tale
+    che $c(x')\leq s\cdot c(x^*)$, con $s\in\mathbb{N}$, a meno che non valga
+    $\mathbb{P}=\mathbb{NP}$.
+\end{definition}

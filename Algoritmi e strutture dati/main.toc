@@ -378,6 +378,9 @@
 \contentsline {section}{\numberline {18.2}Algoritmi di approssimazione}{236}{section.18.2}%
 \contentsline {subsection}{\numberline {18.2.1}Problema del bin packing approssimato}{237}{subsection.18.2.1}%
 \contentsline {subsection}{\numberline {18.2.2}Problema del commesso viaggiatore modificato}{238}{subsection.18.2.2}%
-\contentsline {chapter}{\numberline {A}Appendice A}{239}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{239}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{239}{section.1.A.2}%
+\contentsline {paragraph}{$\mathbb {NP}$-completezza di \bm {$\Delta $}-TSP}{238}{paragraph*.338}%
+\contentsline {paragraph}{Algoritmo in generale}{238}{paragraph*.339}%
+\contentsline {paragraph}{Complessità}{240}{paragraph*.345}%
+\contentsline {chapter}{\numberline {A}Appendice A}{241}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{241}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{241}{section.1.A.2}%
