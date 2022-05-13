@@ -620,3 +620,767 @@ $O(n)$, quindi la \emph{complessità} totale è $T(n)=O(n^2\log n)$.
     che $c(x')\leq s\cdot c(x^*)$, con $s\in\mathbb{N}$, a meno che non valga
     $\mathbb{P}=\mathbb{NP}$.
 \end{definition}
+
+\section{Algoritmi euristici}
+Come abbiamo già visto in precedenza, gli \emph{algoritmi euristici} permettono
+di ottenere delle soluzioni ammissibili per problemi complessi, che però possono
+non essere né soluzioni ottime né soluzioni approssimate. Spesso le soluzioni
+euristiche vengono definite a partire da intuizioni per \emph{algoritmi greedy}
+oppure sfruttano di tecniche tipiche della \emph{ricerca locale}. 
+
+\bigskip\noindent
+Continuiamo la trattazione continuando a parlare di TSP e vediamo due soluzioni
+euristiche di tipo \emph{greedy} e una di \emph{ricerca locale}.
+
+\subsection{Prima soluzione greedy - Arco di costo minimo}
+Un'idea potrebbe essere quella di ordinare gli \emph{archi} per pesi non
+decrescenti e di aggiungere un \emph{arco} alla volta alla soluzione, prendendo
+di volta in volta quello di peso minore. Ovviamente la frase precedente non è
+formalmente corretta, in quanto non possiamo prendere un \emph{arco} se uno dei
+suoi estremi è già raggiunto da due \emph{archi} della soluzione. Inoltre,
+dobbiamo anche evitare che si formino circuiti, e per questo sfruttiamo i
+\emph{merge-find set}. Infine, se $n$ è il numero di \emph{nodi}, l'$n$-esimo
+\emph{arco} deve essere per forza l'\emph{arco} che collega gli ultimi due
+\emph{nodi} estremi della catena.
+\begin{note}
+    Un circuito hamiltoniano privo di un \emph{arco} è semplicemente una
+    \q{catena} di \emph{nodi}.
+\end{note}
+
+\begin{eg}[Esempio d'esecuzione]
+Consideriamo lo stesso grafo completo dell'esempio precedente:
+
+\begin{figure}[h!]
+    \centering
+    \scalebox{0.85}{\begin{graph}
+        \tikzset{
+            cell/.style={rectangle, draw, minimum size=10mm, font=\large},
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+    
+        \def\labels{1 2 3 4 5}
+        \def\numbers{%
+            0 3 4 2 7
+            3 0 4 6 3
+            4 4 0 5 8
+            2 6 5 0 6
+            7 3 8 6 0
+        }
+        \readarray\labels\la[1,5]
+        \readarray\numbers\num[5,5]
+    
+        \foreach \x in {1,...,5}
+            \foreach \y in {1,...,5}
+            {
+                \ifthenelse{\x = 1\and\y=1}{
+                    \node[cell] (\x\y) at (\x-1,-\y+1) [label=above:{$\la[1,1]$},
+                    label=left:{$\la[1,1]$}] {};
+                }{
+                    \ifthenelse{\x=1}{
+                        \node[cell] (\x\y) at (\x-1,-\y+1) [label=left:{$\la[1,\y]$}]
+                        {$\num[\x,\y]$};
+                    }{
+                        \ifthenelse{\y = 1}{
+                            \node[cell] (\x\y) at (\x-1,-\y+1)[label=above:{$\la[1,\x]$}]
+                            {$\num[\x,\y]$};
+                        }{
+                            \ifthenelse{\num[\x,\y]=0}{
+                                \node[cell] (\x\y) at (\x-1,-\y+1) {};
+                            }{
+                                \node[cell] (\x\y) at (\x-1,-\y+1) {$\num[\x,\y]$};
+                            }
+                        }
+                    }    
+                }
+            }
+    
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main]     (1) [pos=90:20mm from 0] {$1$};
+        \node[main]     (2) [pos=18:20mm from 0] {$2$};
+        \node[main]     (3) [pos=-54:20mm from 0] {$3$};
+        \node[main]     (4) [pos=-126:20mm from 0] {$4$};
+        \node[main]     (5) [pos=-198:20mm from 0] {$5$};
+    
+        \path[-] (1) edge node[fill=white] {$3$} (2)
+                        (1) edge node[fill=white] {$7$} (5)
+                        (2) edge node[fill=white] {$6$} (4)
+                        (3) edge node[fill=white] {$8$} (5)
+                        (3) edge node[fill=white] {$5$} (4)
+                        (1) edge node[fill=white] {$4$} (3)
+                        (1) edge node[fill=white] {$2$} (4)
+                        (2) edge node[fill=white] {$3$} (5)
+                        (2) edge node[fill=white] {$4$} (3)
+                        (5) edge node[fill=white] {$6$} (4);
+    \end{graph}}
+\end{figure}
+
+\noindent
+Passo dopo passo, l'algoritmo opera le seguenti scelte:
+
+\begin{figure}[h!]
+    \centering
+    \subfloat[Prima scelta]{\resizebox*{0.3\textwidth}{!}{\begin{graph}
+        \tikzset{
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main]     (1) [pos=90:20mm from 0] {$1$};
+        \node[main]     (2) [pos=18:20mm from 0] {$2$};
+        \node[main]     (3) [pos=-54:20mm from 0] {$3$};
+        \node[main]     (4) [pos=-126:20mm from 0] {$4$};
+        \node[main]     (5) [pos=-198:20mm from 0] {$5$};
+
+        \path[-]    (1) edge node[fill=white] {$3$} (2)
+                    (1) edge node[fill=white] {$7$} (5)
+                    (2) edge node[fill=white] {$6$} (4)
+                    (3) edge node[fill=white] {$8$} (5)
+                    (3) edge node[fill=white] {$5$} (4)
+                    (1) edge node[fill=white] {$4$} (3)
+                    (1) edge[line width=1.3pt] node[fill=white] {$2$} (4)
+                    (2) edge node[fill=white] {$3$} (5)
+                    (2) edge node[fill=white] {$4$} (3)
+                    (5) edge node[fill=white] {$6$} (4);
+    \end{graph}}}
+    \hspace{5mm}
+    \subfloat[Seconda scelta]{\resizebox*{0.3\textwidth}{!}{\begin{graph}
+        \tikzset{
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main]     (1) [pos=90:20mm from 0] {$1$};
+        \node[main]     (2) [pos=18:20mm from 0] {$2$};
+        \node[main]     (3) [pos=-54:20mm from 0] {$3$};
+        \node[main]     (4) [pos=-126:20mm from 0] {$4$};
+        \node[main]     (5) [pos=-198:20mm from 0] {$5$};
+
+        \path[-]    (1) edge node[fill=white] {$3$} (2)
+                    (1) edge node[fill=white] {$7$} (5)
+                    (2) edge node[fill=white] {$6$} (4)
+                    (3) edge node[fill=white] {$8$} (5)
+                    (3) edge node[fill=white] {$5$} (4)
+                    (1) edge node[fill=white] {$4$} (3)
+                    (1) edge[line width=1.3pt] node[fill=white] {$2$} (4)
+                    (2) edge[line width=1.3pt] node[fill=white] {$3$} (5)
+                    (2) edge node[fill=white] {$4$} (3)
+                    (5) edge node[fill=white] {$6$} (4);
+    \end{graph}}}
+    \hspace{5mm}
+    \subfloat[Terza scelta]{\resizebox*{0.3\textwidth}{!}{\begin{graph}
+        \tikzset{
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main]     (1) [pos=90:20mm from 0] {$1$};
+        \node[main]     (2) [pos=18:20mm from 0] {$2$};
+        \node[main]     (3) [pos=-54:20mm from 0] {$3$};
+        \node[main]     (4) [pos=-126:20mm from 0] {$4$};
+        \node[main]     (5) [pos=-198:20mm from 0] {$5$};
+
+        \path[-]    (1) edge[line width=1.3pt] node[fill=white] {$3$} (2)
+                    (1) edge node[fill=white] {$7$} (5)
+                    (2) edge node[fill=white] {$6$} (4)
+                    (3) edge node[fill=white] {$8$} (5)
+                    (3) edge node[fill=white] {$5$} (4)
+                    (1) edge node[fill=white] {$4$} (3)
+                    (1) edge[line width=1.3pt] node[fill=white] {$2$} (4)
+                    (2) edge[line width=1.3pt] node[fill=white] {$3$} (5)
+                    (2) edge node[fill=white] {$4$} (3)
+                    (5) edge node[fill=white] {$6$} (4);
+    \end{graph}}}
+\end{figure}
+\newpage
+\begin{figure}[ht!]
+    \ContinuedFloat
+    \centering
+    \subfloat[Quarta scelta]{\resizebox*{0.3\textwidth}{!}{\begin{graph}
+        \tikzset{
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main]     (1) [pos=90:20mm from 0] {$1$};
+        \node[main]     (2) [pos=18:20mm from 0] {$2$};
+        \node[main]     (3) [pos=-54:20mm from 0] {$3$};
+        \node[main]     (4) [pos=-126:20mm from 0] {$4$};
+        \node[main]     (5) [pos=-198:20mm from 0] {$5$};
+
+        \path[-]    (1) edge[line width=1.3pt] node[fill=white] {$3$} (2)
+                    (1) edge node[fill=white] {$7$} (5)
+                    (2) edge node[fill=white] {$6$} (4)
+                    (3) edge node[fill=white] {$8$} (5)
+                    (3) edge[line width=1.3pt] node[fill=white] {$5$} (4)
+                    (1) edge[dashed] node[fill=white] {$4$} (3)
+                    (1) edge[line width=1.3pt] node[fill=white] {$2$} (4)
+                    (2) edge[line width=1.3pt] node[fill=white] {$3$} (5)
+                    (2) edge[dashed] node[fill=white] {$4$} (3)
+                    (5) edge node[fill=white] {$6$} (4);
+    \end{graph}}}
+    \hspace{15mm}
+    \subfloat[Ultima scelta]{\resizebox*{0.3\textwidth}{!}{\begin{graph}
+        \tikzset{
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main]     (1) [pos=90:20mm from 0] {$1$};
+        \node[main]     (2) [pos=18:20mm from 0] {$2$};
+        \node[main]     (3) [pos=-54:20mm from 0] {$3$};
+        \node[main]     (4) [pos=-126:20mm from 0] {$4$};
+        \node[main]     (5) [pos=-198:20mm from 0] {$5$};
+
+        \path[-]    (1) edge[line width=1.3pt] node[fill=white] {$3$} (2)
+                    (1) edge[dashed] node[fill=white] {$7$} (5)
+                    (2) edge[dashed] node[fill=white] {$6$} (4)
+                    (3) edge[line width=1.3pt] node[fill=white] {$8$} (5)
+                    (3) edge[line width=1.3pt] node[fill=white] {$5$} (4)
+                    (1) edge[dashed] node[fill=white] {$4$} (3)
+                    (1) edge[line width=1.3pt] node[fill=white] {$2$} (4)
+                    (2) edge[line width=1.3pt] node[fill=white] {$3$} (5)
+                    (2) edge[dashed] node[fill=white] {$4$} (3)
+                    (5) edge[dashed] node[fill=white] {$6$} (4);
+    \end{graph}}}
+\end{figure}
+
+\noindent
+Dopo la terza scelta vengono estratti i due archi di peso $4$, ma poiché i nodi
+$1$ e $2$ sono già collegati a due archi nell'insieme della soluzione, i due
+archi da $4$ non possono essere selezionati. Alla fine invece, l'ultimo arco
+scelto è proprio quello più costoso per cui tutti gli i precedenti archi sono
+stati estratti e ignorati.
+
+\bigskip\noindent Il costo del circuito individuato è $21$ e noi già sappiamo
+che quello di costo minimo ha un costo di $19$, quindi, come ci aspettavamo,
+la soluzione trovata non è ottimale.
+\end{eg}
+\begin{note}
+    Sarebbe possibile interrompere l'estrazione degli \emph{archi} dopo
+    l'$(n-1)$-esimo, ma questo tipo di accorgimenti non cambiano le dinamiche
+    generali dell'algoritmo, e soprattutto non ne modificano la \emph{complessità}.
+\end{note}
+
+\begin{minicode}{Implementazione prima soluzione greedy}
+\ind\bc{SET} greedyTsp(\bc{GRAPH} G)\\
+    \bc{SET} result = Set()\hfill\com{Insieme della soluzione}
+    \bc{MFSET} M = Mfset(G.size())\\
+    \bc{int}[] edges = new \bc{int}[1\dots G.size()] = \{0\}\hfill\com{\emph{Archi} collegati a ogni \emph{nodo}}
+    \bc{int}[] A = \{ Ordina gli archi per peso non decrescente \}\\
+    \indf foreach ($\langle$u, v$\rangle$ $\in$ A) do\\
+        \indff if (edges[u] < 2 and edges[v] < 2 and M.find(u) $\neq$ M.find(v)) then\\
+            result.insert($\langle$u, v$\rangle$)\\
+            edges[u] = edges[u] + 1\\
+            edges[v] = edges[v] + 1\\
+            M.merge(u, v)\\
+    \indf\com{Cerca le due estremità della catena per determinare l'\emph{arco} mancante}
+    \indf\bc{int} u = 1\\
+    \indf while (edges[u] $\neq$ 1) do\\
+        u = u + 1\\
+    \indf\bc{int} v = u + 1\\
+    \indf while (edges[v] $\neq$ 1) do\\
+            v = v + 1\\
+    \indf result.insert($\langle$u, v$\rangle$)\\
+    \indf return result
+\end{minicode}
+
+\paragraph{Complessità}
+L'ordinamento degli \emph{archi} costa $O(m\log m)$, ma poiché stiamo lavorano
+con \emph{grafi completi} $m=O(n^2)$, quindi la \emph{complessità} diventa
+$O(n^2\log n)$.
+
+\subsection{Seconda soluzione greedy - Vicino più vicino}
+Un'altra possibilità è quella di partire da un \emph{nodo} e di muoversi di
+volta in volta verso il \emph{nodo adiacente} più vicino, cioè quello collegato
+con l'\emph{arco} di peso minore. Una visitati tutti i \emph{nodi}, si seleziona
+l'\emph{arco} di peso minimo verso il \emph{nodo} di partenza.
+
+\begin{eg}[Esempio d'esecuzione]
+Continuiamo a considerare sempre lo stesso grafo completo:
+
+\begin{figure}[h!]
+    \centering
+    \scalebox{0.85}{\begin{graph}
+        \tikzset{
+            cell/.style={rectangle, draw, minimum size=10mm, font=\large},
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+    
+        \def\labels{1 2 3 4 5}
+        \def\numbers{%
+            0 3 4 2 7
+            3 0 4 6 3
+            4 4 0 5 8
+            2 6 5 0 6
+            7 3 8 6 0
+        }
+        \readarray\labels\la[1,5]
+        \readarray\numbers\num[5,5]
+    
+        \foreach \x in {1,...,5}
+            \foreach \y in {1,...,5}
+            {
+                \ifthenelse{\x = 1\and\y=1}{
+                    \node[cell] (\x\y) at (\x-1,-\y+1) [label=above:{$\la[1,1]$},
+                    label=left:{$\la[1,1]$}] {};
+                }{
+                    \ifthenelse{\x=1}{
+                        \node[cell] (\x\y) at (\x-1,-\y+1) [label=left:{$\la[1,\y]$}]
+                        {$\num[\x,\y]$};
+                    }{
+                        \ifthenelse{\y = 1}{
+                            \node[cell] (\x\y) at (\x-1,-\y+1)[label=above:{$\la[1,\x]$}]
+                            {$\num[\x,\y]$};
+                        }{
+                            \ifthenelse{\num[\x,\y]=0}{
+                                \node[cell] (\x\y) at (\x-1,-\y+1) {};
+                            }{
+                                \node[cell] (\x\y) at (\x-1,-\y+1) {$\num[\x,\y]$};
+                            }
+                        }
+                    }    
+                }
+            }
+    
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main]     (1) [pos=90:20mm from 0] {$1$};
+        \node[main]     (2) [pos=18:20mm from 0] {$2$};
+        \node[main]     (3) [pos=-54:20mm from 0] {$3$};
+        \node[main]     (4) [pos=-126:20mm from 0] {$4$};
+        \node[main]     (5) [pos=-198:20mm from 0] {$5$};
+    
+        \path[-] (1) edge node[fill=white] {$3$} (2)
+                        (1) edge node[fill=white] {$7$} (5)
+                        (2) edge node[fill=white] {$6$} (4)
+                        (3) edge node[fill=white] {$8$} (5)
+                        (3) edge node[fill=white] {$5$} (4)
+                        (1) edge node[fill=white] {$4$} (3)
+                        (1) edge node[fill=white] {$2$} (4)
+                        (2) edge node[fill=white] {$3$} (5)
+                        (2) edge node[fill=white] {$4$} (3)
+                        (5) edge node[fill=white] {$6$} (4);
+    \end{graph}}
+\end{figure}
+
+\noindent
+Passo dopo passo, l'algoritmo opera le seguenti scelte:
+
+\begin{figure}[h!]
+    \centering
+    \subfloat[Prima scelta]{\resizebox*{0.3\textwidth}{!}{\begin{graph}
+        \tikzset{
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main, line width=1.3pt] (1) [pos=90:20mm from 0] {$1$};
+        \node[main]     (2) [pos=18:20mm from 0] {$2$};
+        \node[main]     (3) [pos=-54:20mm from 0] {$3$};
+        \node[main]     (4) [pos=-126:20mm from 0] {$4$};
+        \node[main]     (5) [pos=-198:20mm from 0] {$5$};
+    
+        \path[-]    (1) edge node[fill=white] {$3$} (2)
+                    (1) edge node[fill=white] {$7$} (5)
+                    (2) edge node[fill=white] {$6$} (4)
+                    (3) edge node[fill=white] {$8$} (5)
+                    (3) edge node[fill=white] {$5$} (4)
+                    (1) edge node[fill=white] {$4$} (3)
+                    (1) edge node[fill=white] {$2$} (4)
+                    (2) edge node[fill=white] {$3$} (5)
+                    (2) edge node[fill=white] {$4$} (3)
+                    (5) edge node[fill=white] {$6$} (4);
+    \end{graph}}}
+    \hspace{5mm}
+    \subfloat[Seconda scelta]{\resizebox*{0.3\textwidth}{!}{\begin{graph}
+        \tikzset{
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main, line width=1.3pt] (1) [pos=90:20mm from 0] {$1$};
+        \node[main]     (2) [pos=18:20mm from 0] {$2$};
+        \node[main]     (3) [pos=-54:20mm from 0] {$3$};
+        \node[main, line width=1.3pt] (4) [pos=-126:20mm from 0] {$4$};
+        \node[main]     (5) [pos=-198:20mm from 0] {$5$};
+    
+        \path[-]    (1) edge[dashed] node[fill=white] {$3$} (2)
+                    (1) edge[dashed] node[fill=white] {$7$} (5)
+                    (2) edge node[fill=white] {$6$} (4)
+                    (3) edge node[fill=white] {$8$} (5)
+                    (3) edge node[fill=white] {$5$} (4)
+                    (1) edge[dashed] node[fill=white] {$4$} (3)
+                    (1) edge[line width=1.3pt] node[fill=white] {$2$} (4)
+                    (2) edge node[fill=white] {$3$} (5)
+                    (2) edge node[fill=white] {$4$} (3)
+                    (5) edge node[fill=white] {$6$} (4);
+    \end{graph}}}
+    \hspace{5mm}
+    \subfloat[Terza scelta]{\resizebox*{0.3\textwidth}{!}{\begin{graph}
+        \tikzset{
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main, line width=1.3pt] (1) [pos=90:20mm from 0] {$1$};
+        \node[main]     (2) [pos=18:20mm from 0] {$2$};
+        \node[main, line width=1.3pt] (3) [pos=-54:20mm from 0] {$3$};
+        \node[main, line width=1.3pt] (4) [pos=-126:20mm from 0] {$4$};
+        \node[main]     (5) [pos=-198:20mm from 0] {$5$};
+    
+        \path[-]    (1) edge[dashed] node[fill=white] {$3$} (2)
+                    (1) edge[dashed] node[fill=white] {$7$} (5)
+                    (2) edge[dashed] node[fill=white] {$6$} (4)
+                    (3) edge node[fill=white] {$8$} (5)
+                    (3) edge[line width=1.3pt] node[fill=white] {$5$} (4)
+                    (1) edge[dashed] node[fill=white] {$4$} (3)
+                    (1) edge[line width=1.3pt] node[fill=white] {$2$} (4)
+                    (2) edge node[fill=white] {$3$} (5)
+                    (2) edge node[fill=white] {$4$} (3)
+                    (5) edge[dashed] node[fill=white] {$6$} (4);
+    \end{graph}}}\\
+    \subfloat[Quarta scelta]{\resizebox*{0.3\textwidth}{!}{\begin{graph}
+        \tikzset{
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main, line width=1.3pt] (1) [pos=90:20mm from 0] {$1$};
+        \node[main, line width=1.3pt] (2) [pos=18:20mm from 0] {$2$};
+        \node[main, line width=1.3pt] (3) [pos=-54:20mm from 0] {$3$};
+        \node[main, line width=1.3pt] (4) [pos=-126:20mm from 0] {$4$};
+        \node[main]     (5) [pos=-198:20mm from 0] {$5$};
+    
+        \path[-]    (1) edge[dashed] node[fill=white] {$3$} (2)
+                    (1) edge[dashed] node[fill=white] {$7$} (5)
+                    (2) edge[dashed] node[fill=white] {$6$} (4)
+                    (3) edge[dashed] node[fill=white] {$8$} (5)
+                    (3) edge[line width=1.3pt] node[fill=white] {$5$} (4)
+                    (1) edge[dashed] node[fill=white] {$4$} (3)
+                    (1) edge[line width=1.3pt] node[fill=white] {$2$} (4)
+                    (2) edge node[fill=white] {$3$} (5)
+                    (2) edge[line width=1.3pt] node[fill=white] {$4$} (3)
+                    (5) edge[dashed] node[fill=white] {$6$} (4);
+    \end{graph}}}
+    \hspace{5mm}
+    \subfloat[Quinta scelta]{\resizebox*{0.3\textwidth}{!}{\begin{graph}
+        \tikzset{
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main, line width=1.3pt] (1) [pos=90:20mm from 0] {$1$};
+        \node[main, line width=1.3pt] (2) [pos=18:20mm from 0] {$2$};
+        \node[main, line width=1.3pt] (3) [pos=-54:20mm from 0] {$3$};
+        \node[main, line width=1.3pt] (4) [pos=-126:20mm from 0] {$4$};
+        \node[main, line width=1.3pt] (5) [pos=-198:20mm from 0] {$5$};
+    
+        \path[-]    (1) edge[dashed] node[fill=white] {$3$} (2)
+                    (1) edge[dashed] node[fill=white] {$7$} (5)
+                    (2) edge[dashed] node[fill=white] {$6$} (4)
+                    (3) edge[dashed] node[fill=white] {$8$} (5)
+                    (3) edge[line width=1.3pt] node[fill=white] {$5$} (4)
+                    (1) edge[dashed] node[fill=white] {$4$} (3)
+                    (1) edge[line width=1.3pt] node[fill=white] {$2$} (4)
+                    (2) edge[line width=1.3pt] node[fill=white] {$3$} (5)
+                    (2) edge[line width=1.3pt] node[fill=white] {$4$} (3)
+                    (5) edge[dashed] node[fill=white] {$6$} (4);
+    \end{graph}}}
+    \hspace{5mm}
+    \subfloat[Ultima scelta]{\resizebox*{0.3\textwidth}{!}{\begin{graph}
+        \tikzset{
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main, line width=1.3pt] (1) [pos=90:20mm from 0] {$1$};
+        \node[main, line width=1.3pt] (2) [pos=18:20mm from 0] {$2$};
+        \node[main, line width=1.3pt] (3) [pos=-54:20mm from 0] {$3$};
+        \node[main, line width=1.3pt] (4) [pos=-126:20mm from 0] {$4$};
+        \node[main, line width=1.3pt] (5) [pos=-198:20mm from 0] {$5$};
+    
+        \path[-]    (1) edge[dashed] node[fill=white] {$3$} (2)
+                    (1) edge[dashed] node[fill=white] {$7$} (5)
+                    (2) edge[dashed] node[fill=white] {$6$} (4)
+                    (3) edge[line width=1.3pt] node[fill=white] {$8$} (5)
+                    (3) edge[line width=1.3pt] node[fill=white] {$5$} (4)
+                    (1) edge[dashed] node[fill=white] {$4$} (3)
+                    (1) edge[line width=1.3pt] node[fill=white] {$2$} (4)
+                    (2) edge[line width=1.3pt] node[fill=white] {$3$} (5)
+                    (2) edge[line width=1.3pt] node[fill=white] {$4$} (3)
+                    (5) edge[dashed] node[fill=white] {$6$} (4);
+    \end{graph}}}
+\end{figure}
+
+\noindent
+Il circuito ottenuto costa $21$ come il precedente.
+\end{eg}
+
+\paragraph{Complessità}
+Per quanto riguarda la \emph{complessità}, questa soluzione si comporta meglio
+della precedente, in quanto scegliere l'\emph{arco} uscente di peso minimo
+per $n-1$ \emph{nodi} di un \emph{grafo completo} costa $O(n^2)$.
+
+\section{Soluzione con ricerca locale}
+L'idea è quella che se $\pi$ è un qualche circuito hamiltoniano del \emph{grafo},
+possiamo modificare $\pi$ e ottenere un circuito di costo minore. In particolare,
+possiamo scegliere due \emph{archi} non consecutivi in $\pi$ e sostituirli con
+altri due \emph{archi} non già inclusi in $\pi$. Quindi, il nuovo circuito $\pi'$
+ottenuto è un intorno di $\pi$ nel quale abbiamo cambiato due \emph{archi}.
+
+Il processo di sostituzione termina quando non è più possibile ridurre il
+costo del circuito, ovvero quando si arriva ad un minimo locale, che come
+abbiamo già visto, potrebbe non coincidere con il minimo globale.
+
+\begin{figure}[h!]
+    \centering
+    \scalebox{0.85}{\begin{graph}
+        \node[main] (a1) {$a_1$};
+        \node[main] (a2) [right of=a1, xshift=10mm] {$a_2$};
+        \node[main] (b1) [below of=a1] {$b_1$};
+        \node[main] (b2) [right of=b1, xshift=10mm] {$b_2$};
+
+        \draw[-, dashed] (a1.180) edge[bend right=90] (b1.180);
+        \draw[-, dashed] (a2.0) edge[bend left=90] (b2.0);
+
+        \path[-]    (a1) edge (a2)
+                    (b1) edge (b2);
+        
+        \node[] (f) [below right of=a2, shift={(20mm,3mm)}] {$\Longrightarrow$};
+
+        \node[main] (a11) [above right of=f, shift={(20mm,-3mm)}] {$a_1$};
+        \node[main] (a21) [right of=a11, xshift=10mm] {$a_2$};
+        \node[main] (b11) [below of=a11] {$b_1$};
+        \node[main] (b21) [right of=b11, xshift=10mm] {$b_2$};
+
+        \draw[-, dashed] (a11.180) edge[bend right=90] (b11.180);
+        \draw[-, dashed] (a21.0) edge[bend left=90] (b21.0);
+
+        \path[-]    (a11) edge (b21)
+                    (b11) edge (a21);
+    \end{graph}}
+    \caption{Esempio di sostituzione}
+\end{figure}
+
+\noindent
+Scelti i due \emph{archi} $(a_1,a_2)$ e $(b_1,b_2)$ da sostituire, l'unico modo
+per richiudere il circuito senza riutilizzare quegli stessi \emph{archi}, è
+quello di sostituirli con gli \emph{archi} $(a_1,b_1)$ e $(a_2,b_2)$.
+
+\begin{eg}[Esempio d'esecuzione]
+Riprendiamo il solito grafo completo:
+
+\begin{figure}[h!]
+    \centering
+    \scalebox{0.85}{\begin{graph}
+        \tikzset{
+            cell/.style={rectangle, draw, minimum size=10mm, font=\large},
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+    
+        \def\labels{1 2 3 4 5}
+        \def\numbers{%
+            0 3 4 2 7
+            3 0 4 6 3
+            4 4 0 5 8
+            2 6 5 0 6
+            7 3 8 6 0
+        }
+        \readarray\labels\la[1,5]
+        \readarray\numbers\num[5,5]
+    
+        \foreach \x in {1,...,5}
+            \foreach \y in {1,...,5}
+            {
+                \ifthenelse{\x = 1\and\y=1}{
+                    \node[cell] (\x\y) at (\x-1,-\y+1) [label=above:{$\la[1,1]$},
+                    label=left:{$\la[1,1]$}] {};
+                }{
+                    \ifthenelse{\x=1}{
+                        \node[cell] (\x\y) at (\x-1,-\y+1) [label=left:{$\la[1,\y]$}]
+                        {$\num[\x,\y]$};
+                    }{
+                        \ifthenelse{\y = 1}{
+                            \node[cell] (\x\y) at (\x-1,-\y+1)[label=above:{$\la[1,\x]$}]
+                            {$\num[\x,\y]$};
+                        }{
+                            \ifthenelse{\num[\x,\y]=0}{
+                                \node[cell] (\x\y) at (\x-1,-\y+1) {};
+                            }{
+                                \node[cell] (\x\y) at (\x-1,-\y+1) {$\num[\x,\y]$};
+                            }
+                        }
+                    }    
+                }
+            }
+    
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main]     (1) [pos=90:20mm from 0] {$1$};
+        \node[main]     (2) [pos=18:20mm from 0] {$2$};
+        \node[main]     (3) [pos=-54:20mm from 0] {$3$};
+        \node[main]     (4) [pos=-126:20mm from 0] {$4$};
+        \node[main]     (5) [pos=-198:20mm from 0] {$5$};
+    
+        \path[-] (1) edge node[fill=white] {$3$} (2)
+                        (1) edge node[fill=white] {$7$} (5)
+                        (2) edge node[fill=white] {$6$} (4)
+                        (3) edge node[fill=white] {$8$} (5)
+                        (3) edge node[fill=white] {$5$} (4)
+                        (1) edge node[fill=white] {$4$} (3)
+                        (1) edge node[fill=white] {$2$} (4)
+                        (2) edge node[fill=white] {$3$} (5)
+                        (2) edge node[fill=white] {$4$} (3)
+                        (5) edge node[fill=white] {$6$} (4);
+    \end{graph}}
+\end{figure}
+
+\noindent
+Partendo da un circuito hamiltoniano qualsiasi, l'algoritmo si comporta come
+segue:
+
+\begin{figure}[h!]
+    \centering
+    \subfloat[Circuito iniziale]{\resizebox*{0.3\textwidth}{!}{\begin{graph}
+        \tikzset{
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main]     (1) [pos=90:20mm from 0] {$1$};
+        \node[main]     (2) [pos=18:20mm from 0] {$2$};
+        \node[main]     (3) [pos=-54:20mm from 0] {$3$};
+        \node[main]     (4) [pos=-126:20mm from 0] {$4$};
+        \node[main]     (5) [pos=-198:20mm from 0] {$5$};
+    
+        \path[-]    (1) edge[line width=1.3pt] node[fill=white] {$3$} (2)
+                    (1) edge[line width=1.3pt] node[fill=white] {$7$} (5)
+                    (2) edge node[fill=white] {$6$} (4)
+                    (3) edge node[fill=white] {$8$} (5)
+                    (3) edge[line width=1.3pt] node[fill=white] {$5$} (4)
+                    (1) edge node[fill=white] {$4$} (3)
+                    (1) edge node[fill=white] {$2$} (4)
+                    (2) edge node[fill=white] {$3$} (5)
+                    (2) edge[line width=1.3pt] node[fill=white] {$4$} (3)
+                    (5) edge[line width=1.3pt] node[fill=white] {$6$} (4);
+        
+        \node[]     (l) [pos=-90:25mm from 0] {$c(\pi)=25$};
+    \end{graph}}}
+    \hspace{5mm}
+    \subfloat[Prima sostituzione]{\resizebox*{0.3\textwidth}{!}{\begin{graph}
+        \tikzset{
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main]     (1) [pos=90:20mm from 0] {$1$};
+        \node[main]     (2) [pos=18:20mm from 0] {$2$};
+        \node[main]     (3) [pos=-54:20mm from 0] {$3$};
+        \node[main]     (4) [pos=-126:20mm from 0] {$4$};
+        \node[main]     (5) [pos=-198:20mm from 0] {$5$};
+    
+        \path[-]    (1) edge[line width=1.3pt] node[fill=white] {$3$} (2)
+                    (1) edge[dashed] node[fill=white] {$7$} (5)
+                    (2) edge node[fill=white] {$6$} (4)
+                    (3) edge[line width=1.3pt] node[fill=white] {$8$} (5)
+                    (3) edge[dashed] node[fill=white] {$5$} (4)
+                    (1) edge node[fill=white] {$4$} (3)
+                    (1) edge[line width=1.3pt] node[fill=white] {$2$} (4)
+                    (2) edge node[fill=white] {$3$} (5)
+                    (2) edge[line width=1.3pt] node[fill=white] {$4$} (3)
+                    (5) edge[line width=1.3pt] node[fill=white] {$6$} (4);
+        
+        \node[]     (l) [pos=-90:25mm from 0] {$c(\pi)=23$};
+    \end{graph}}}
+    \hspace{5mm}
+    \subfloat[Seconda sostituzione]{\resizebox*{0.3\textwidth}{!}{\begin{graph}
+        \tikzset{
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main]     (1) [pos=90:20mm from 0] {$1$};
+        \node[main]     (2) [pos=18:20mm from 0] {$2$};
+        \node[main]     (3) [pos=-54:20mm from 0] {$3$};
+        \node[main]     (4) [pos=-126:20mm from 0] {$4$};
+        \node[main]     (5) [pos=-198:20mm from 0] {$5$};
+    
+        \path[-]    (1) edge[dashed] node[fill=white] {$3$} (2)
+                    (1) edge node[fill=white] {$7$} (5)
+                    (2) edge node[fill=white] {$6$} (4)
+                    (3) edge[dashed] node[fill=white] {$8$} (5)
+                    (3) edge node[fill=white] {$5$} (4)
+                    (1) edge[line width=1.3pt] node[fill=white] {$4$} (3)
+                    (1) edge[line width=1.3pt] node[fill=white] {$2$} (4)
+                    (2) edge[line width=1.3pt] node[fill=white] {$3$} (5)
+                    (2) edge[line width=1.3pt] node[fill=white] {$4$} (3)
+                    (5) edge[line width=1.3pt] node[fill=white] {$6$} (4);
+        
+        \node[]     (l) [pos=-90:25mm from 0] {$c(\pi)=19$};
+    \end{graph}}}
+\end{figure}
+
+\noindent
+Dopo due sostituzioni siamo arrivati a un minimo locale, che in questo caso è
+anche globale visto che il costo del circuito finale è minimo.
+\end{eg}
+
+\paragraph{Complessità}
+La \emph{complessità} di questo algoritmo dipende sia dal costo che paghiamo per
+definire il circuito di partenza $\pi$ che dal costo che paghiamo per ricercare
+una soluzione migliore nell'intorno di $\pi$. Nel primo caso possiamo usare uno
+degli \emph{algoritmi greedy} appena descritti, mentre per esaminare l'intorno
+paghiamo $O(n^2)$ perché il numero di coppia di \emph{archi} di un circuito è
+$n(n-1)/2$ e di questi $n$ sono consecutivi. Di conseguenza, $|I_2(\pi)|
+=n(n-1)/2-n=O(n^2)$.
+
+\section{Algoritmi branch-\&-bound}

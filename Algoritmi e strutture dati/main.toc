@@ -381,6 +381,14 @@
 \contentsline {paragraph}{$\mathbb {NP}$-completezza di \bm {$\Delta $}-TSP}{238}{paragraph*.338}%
 \contentsline {paragraph}{Algoritmo in generale}{238}{paragraph*.339}%
 \contentsline {paragraph}{Complessità}{240}{paragraph*.345}%
-\contentsline {chapter}{\numberline {A}Appendice A}{241}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{241}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{241}{section.1.A.2}%
+\contentsline {section}{\numberline {18.3}Algoritmi euristici}{240}{section.18.3}%
+\contentsline {subsection}{\numberline {18.3.1}Prima soluzione greedy - Arco di costo minimo}{241}{subsection.18.3.1}%
+\contentsline {paragraph}{Complessità}{242}{paragraph*.349}%
+\contentsline {subsection}{\numberline {18.3.2}Seconda soluzione greedy - Vicino più vicino}{243}{subsection.18.3.2}%
+\contentsline {paragraph}{Complessità}{243}{paragraph*.352}%
+\contentsline {section}{\numberline {18.4}Soluzione con ricerca locale}{244}{section.18.4}%
+\contentsline {paragraph}{Complessità}{245}{paragraph*.356}%
+\contentsline {section}{\numberline {18.5}Algoritmi branch-\&-bound}{245}{section.18.5}%
+\contentsline {chapter}{\numberline {A}Appendice A}{246}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{246}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{246}{section.1.A.2}%

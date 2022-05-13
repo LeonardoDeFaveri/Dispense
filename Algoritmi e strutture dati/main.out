@@ -193,6 +193,11 @@
 \BOOKMARK [1][-]{section.18.2}{Algoritmi di approssimazione}{chapter.18}% 193
 \BOOKMARK [2][-]{subsection.18.2.1}{Problema del bin packing approssimato}{section.18.2}% 194
 \BOOKMARK [2][-]{subsection.18.2.2}{Problema del commesso viaggiatore modificato}{section.18.2}% 195
-\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 196
-\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 197
-\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 198
+\BOOKMARK [1][-]{section.18.3}{Algoritmi euristici}{chapter.18}% 196
+\BOOKMARK [2][-]{subsection.18.3.1}{Prima soluzione greedy - Arco di costo minimo}{section.18.3}% 197
+\BOOKMARK [2][-]{subsection.18.3.2}{Seconda soluzione greedy - Vicino pi\371 vicino}{section.18.3}% 198
+\BOOKMARK [1][-]{section.18.4}{Soluzione con ricerca locale}{chapter.18}% 199
+\BOOKMARK [1][-]{section.18.5}{Algoritmi branch-\046-bound}{chapter.18}% 200
+\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 201
+\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 202
+\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 203
