@@ -898,13 +898,14 @@ requested logical view.
 Tenents may want to have a vannilla layer 2 connectivity that spans amongs all of
 its services across the data center. This is the case in which tenants want to
 take IP addressing under their own responsibility. The solution to this kind of
-request is the creation of tunnels between servers.
+request is the creation of tunnels between servers. What will se are tunnels
+managed by GRE (General Router Encapsulation).
 
 \newpage
 \begin{figure}[ht!]
     \centering
     \img{layer2.png}{0.8}
-    \caption{Characteristics required by a layer 2 connectivity}
+    \caption{Characteristics required by layer 2 connectivity}
 \end{figure}
 
 \begin{figure}[h!]
@@ -952,3 +953,107 @@ Could we have used VLAN instead of tunnels?
 Short answers: no. The reason is that it would require cooperation with the
 physical network manager. Also, VLANs are limited to 4096 and setting up
 everything would be trickier than what we've done for tunnels.
+
+\subsection{Providing layer 3 connectivity}
+With layer 3 connectivity, tenants rely on cloud service provider for IP
+assignment and management, and this can be achieved in two modalities:
+\emph{tunneling} and \emph{direct routing}.
+
+\begin{figure}[h!]
+    \centering
+    \img{layer3.png}{0.8}
+    \caption{Characteristics required by layer 3 connectivity}
+\end{figure}
+
+\begin{eg}[Example of communication using tunnels]
+    Let's consider the same case as before: a packet sent by VM2 to VM3:
+
+    \begin{figure}[h!]
+        \centering
+        \img{layer3-t-details-1.png}{0.8}
+    \end{figure}
+
+    \noindent
+    This time the tunnel interface connected to the Linux virtual router. Once
+    the packet reaches that interface it is again encapsulated into the same
+    packet as before, and then sent back to the router who forwards it outside
+    and up to the other server.
+
+    \newpage
+    \begin{figure}[ht!]
+        \centering
+        \img{layer3-t-details-2.png}{0.8}
+    \end{figure}
+
+    \noindent
+    Once the packed has reached the destination server it reached the other
+    side of the tunnel, the original packet is decapsulated and sent up to VM3.
+\end{eg}
+\begin{note}
+    VM2 and VM3 are on different private networks.
+\end{note}
+
+\begin{eg}[Example of communication using direct routing]
+    Let's consider the same situation as before, but with direct routing instead
+    of tunneling:
+
+    \begin{figure}[h!]
+        \centering
+        \img{layer-3-dr-1.png}{0.8}
+    \end{figure}
+
+    \noindent
+    This time packet is sent directly out of the server without any
+    modifications, and it reached router \texttt{R1}. The router know, because
+    it has been configured, that the destination network \texttt{10.0.2.0/24},
+    that is network to which VM3 is connected, is reachable via \texttt{30.0.0.0/24}
+    network. So, the packet is forward out of the interface with IP
+    \texttt{30.0.0.254} with next hop address set to \texttt{30.0.0.1}, that is
+    the address of the second physical server.
+
+    \bigskip\noindent
+    When the packet reaches the destination server, it can go directly up to
+    VM3 as a normal package.
+
+    \newpage
+    \begin{figure}[ht!]
+        \centering
+        \img{layer-3-dr-2.png}{0.8}
+    \end{figure}
+\end{eg}
+
+\begin{note}
+    Is easy to understand the route of every packet if the behaviour of every
+    component is considered alone.
+\end{note}
+\begin{note}
+    Even if we've proceded in our discussion considering inconvinient any
+    solution that required to manage directly physical hardware, \emph{layer 3
+    connectivity} through \emph{direct routing} is often used, and is made
+    convenient by the possibility to configure routers via a set of REST APIs.
+\end{note}
+
+\paragraph{Tunnels in practice}
+For the sake of semplcity with considered a single tunnel between a pair of
+servers, but this obviously is difficult to handle on a large scale because
+it would require a full mesh of connections. This is therefore the reason for
+which tunneling technologies such as GRE (Generic Routing Encapsulation) are
+often replaced by others. In particular, \emph{VxLAN} allows providing both a
+trasparent full mesh solution, with a single endpoint for all the hosts
+belonging to the same VxLAN domain, and a way of distributing traffic across
+multiple parallel links through layer 4 ports.
+
+\begin{figure}[h!]
+    \centering
+    \img{layer-4.png}{0.5}
+    \caption{\emph{VxLAN network}}
+\end{figure}
+
+\paragraph{Tunneling VS direct routing}
+\emph{Tunneling} enables the deployment of tenant services without any
+interaction with the infrastructure provider and becomes useful in case of
+public datacenters. However, it may trigger some performance problems due to
+the reduced MTU on the tunnel: since packets are being encpasulated, the maximum
+size of the original packets must be reduced. \emph{Direct routing} on the other
+hand, doesn't require changing the MTU, but the infrastructure provider has to
+cooperate.

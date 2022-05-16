@@ -104,3 +104,7 @@
 \contentsline {paragraph}{Putting all together}{45}{paragraph*.92}%
 \contentsline {section}{\numberline {4.5}Data center-wide networking services}{46}{section.4.5}%
 \contentsline {subsection}{\numberline {4.5.1}Providing layer 2 connectivity}{46}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Providing layer 3 connectivity}{48}{subsection.4.5.2}%
+\contentsline {paragraph}{Tunnels in practice}{50}{paragraph*.103}%
+\contentsline {paragraph}{Tunneling VS direct routing}{50}{paragraph*.105}%
+\contentsline {chapter}{\numberline {5}Cloud storage}{51}{chapter.5}%

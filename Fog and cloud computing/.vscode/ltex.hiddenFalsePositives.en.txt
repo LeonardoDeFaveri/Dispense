@@ -86,3 +86,8 @@
 {"rule":"FIRST_OF_ALL","sentence":"^\\QFirst of all, we have to distinguish between tenant and cloud manager view.\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlayer2.png 0.8 Characteristics required by a layer 2 connectivity\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\QvTUN0 is the interface associated with the tunnel and its remote IP tells what is the IP to which that packet has to be sent.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlayer3-t-details-2.png 0.8\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlayer3.png 0.8 Characteristics required by layer 3 connectivity\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlayer2.png 0.8 Characteristics required by layer 2 connectivity\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlayer-3-dr-2.png 0.8\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlayer-4.png 0.5 VxLAN network\\E$"}
