@@ -78,3 +78,11 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qtraditional-network-2.png 0.4 bridged-network.png 0.4 Traditional VS bridged network\\E$"}
 {"rule":"CD_NN","sentence":"^\\QLinuxbridge drivers behaves as a traditional hardware bridge, so they can handle complex situations in which, for instance, hosts on the same physical domain (layer 2 network) resides both on the same host and outside it.\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qovs.png 1 Open vSwitch general implementation schema\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qmulti-tenancy.png 0.4 Multi-tenancy\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qtenant-defined-network-services.png 0.4 Tenant-defined network services\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qvirtual-and-host-services.png 0.4 Virtual and host services co-existence\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qtenant-defined-network-services.png 0.3 Tenant-defined network services\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qvirtual-and-host-services.png 0.3 Virtual and host services co-existence\\E$"}
+{"rule":"FIRST_OF_ALL","sentence":"^\\QFirst of all, we have to distinguish between tenant and cloud manager view.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlayer2.png 0.8 Characteristics required by a layer 2 connectivity\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\QvTUN0 is the interface associated with the tunnel and its remote IP tells what is the IP to which that packet has to be sent.\\E$"}

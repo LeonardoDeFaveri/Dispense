@@ -98,3 +98,9 @@
 \contentsline {section}{\numberline {4.4}Single server networking services}{43}{section.4.4}%
 \contentsline {paragraph}{IP assignment}{43}{paragraph*.83}%
 \contentsline {paragraph}{Providing feature-rich network connectivity}{44}{paragraph*.85}%
+\contentsline {paragraph}{Multi-tenancy}{44}{paragraph*.86}%
+\contentsline {paragraph}{Tenant-defined network services}{44}{paragraph*.88}%
+\contentsline {paragraph}{Co-existence of virtual services and host applications}{45}{paragraph*.90}%
+\contentsline {paragraph}{Putting all together}{45}{paragraph*.92}%
+\contentsline {section}{\numberline {4.5}Data center-wide networking services}{46}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Providing layer 2 connectivity}{46}{subsection.4.5.1}%
