@@ -1159,7 +1159,7 @@ Per quanto riguarda la \emph{complessità}, questa soluzione si comporta meglio
 della precedente, in quanto scegliere l'\emph{arco} uscente di peso minimo
 per $n-1$ \emph{nodi} di un \emph{grafo completo} costa $O(n^2)$.
 
-\section{Soluzione con ricerca locale}
+\subsection{Soluzione con ricerca locale}
 L'idea è quella che se $\pi$ è un qualche circuito hamiltoniano del \emph{grafo},
 possiamo modificare $\pi$ e ottenere un circuito di costo minore. In particolare,
 possiamo scegliere due \emph{archi} non consecutivi in $\pi$ e sostituirli con
@@ -1384,3 +1384,145 @@ $n(n-1)/2$ e di questi $n$ sono consecutivi. Di conseguenza, $|I_2(\pi)|
 =n(n-1)/2-n=O(n^2)$.
 
 \section{Algoritmi branch-\&-bound}
+Gli \emph{algoritmi branch-\&-bound} sono molto simili agli \emph{algoritmi
+backtrack}, ma introducono delle accortezze che permettono di ottenere
+\q{potare} una parte più consistente dell'\emph{albero delle soluzioni}.
+
+\begin{note}
+    Per semplificare la trattazione, ipotizziamo che ogni sequenza di scelte
+    abbia un costo non negativo e che quindi non sia possibile ridurre il costo
+    di una soluzione parziale aggiungendo un'altra scelta alla sequenza.
+    Inoltre, ci concentriamo solo su \emph{problemi di minimizzazione}.
+\end{note}
+
+\noindent
+Lo strumento che questa tipologia di algoritmi usano per decidere che rami potare
+è costituito dalle funzioni di \emph{upper bound} e \emph{lower bound}. Nei
+\emph{problemi di minimizzazione}, l'\emph{upper bound} è definito come il
+costo della soluzione ammissibile nota migliore. Il \emph{lower bound} è invece
+calcolato mediante una funzione $lb$ con la seguente firma:
+\[lb(\langle\emph{dati problema}\rangle,S,i,\langle\emph{dati parziali}\rangle)\]
+Tale funzione deve essere definita in modo che il proprio valore dipenda dalla
+sequenza $S[1\dots i]$ di scelte fatte e che il costo tutte le scelte
+ammissibili generabili da quella sequenza sia maggiore di quello calcolato.
+
+Se il \emph{lower bound} calcolato per una soluzione parziale è maggiore o
+uguale all'\emph{upper bound}, l'\emph{albero} radicato in quella soluzione può
+essere potato in quanto il suo costo sarà maggiore di quello della soluzione
+ottimale.
+
+\begin{note}
+    È importante esplicitare che l'utilizzo di tecniche di potatura di questo
+    tipo non abbassa la \emph{complessità} della soluzione, ma ne riduce
+    comunque il tempo d'esecuzione. Ovviamente, maggiore è l'accuratezza di
+    $lb$, maggiore è la porzione di \emph{albero} ad essere potata.
+\end{note}
+
+\subsection{Schema generale}
+\begin{minicode}{Schema generale per algoritmi branch-\&-bound}
+\ind branch\&bound($\langle$dati problema$\rangle$, \bc{ITEM}[] S, \bc{int} i, $\langle$dati parziali$\rangle$)\\
+    \bc{SET} C = choices($\langle$dati problema$\rangle$, S, i, $\langle$dati parziali$\rangle$)\\
+    \indf foreach (c $\in$ C) do\\
+        S[i] = c\\
+        \bc{int} lb = lb($\langle$dati problema$\rangle$, S, i, $\langle$dati parziali$\rangle$)\\
+        \indff if (lb < minCost) then\hfill\com{Se false, pota l'\emph{albero}}
+            \indfff if (i < n) then\\
+                branch\&bound($\langle$dati problema$\rangle$, S, i + 1, $\langle$dati parziali$\rangle$)\\
+            \indfff else\hfill\com{Valuta il costo della soluzione ammissibile trovata}
+                \indffff if (cost(S, i) < minCost) then\\
+                    minSol = S\hfill\com{Variabile globale}
+                    minCost = cost(s, i)\hfill\com{Variabile globale}
+\end{minicode}
+
+\subsection{Problema del commesso viaggiatore}
+Se $n$ sono le città da visitare e $d[h][k]$ è la distanza tra $h$ e $k$ espressa
+come valore naturale, al passo $i$-esimo sono state fatte le scelte $S[1\dots i]$,
+ovvero sono state visitate $i$ città prese dall'insieme $\{1,\dots,n\}$.
+
+\bigskip\noindent
+Ciò che dobbiamo fare adesso è trovare un'implementazione di $lb$ che ci
+permetta di potare il più possibile.
+
+\paragraph{Lower bound come costo effettivo della soluzione parziale}
+\begin{definition}[Costo effettivo della soluzione parziale]
+    Definiamo $cost[i]$ come la somma del peso degli archi percorsi nei primi
+    $i$ passi, ovvero:
+    \[cost[i]=\sum_{h=2}^id[S[h-1]][S[h]]\]
+\end{definition}
+\noindent
+La cosa più facile è definire $lb$ come:
+\[lb(d,S,i)=cost[i]\]
+
+\begin{figure}[h!]
+    \centering
+    \scalebox{0.9}{\begin{graph}
+        \tikzset{
+            cell/.style={rectangle, draw, minimum size=15mm, inner sep=0},
+            tips=proper
+        }
+
+        \def\labels{1 2 {\dots} i-1 i}
+        \readarray\labels\la[1,5]
+
+        \node[cell] (1) at (1,0) [label=above:{$\la[1,1]$}, label=left:{$S$}] {};
+        \foreach \x in {2,...,5} {
+            \FPeval{\p}{clip(\x+0.5*(\x-1))}
+            \node[cell] (\x) at (\p,0) [label=above:{$\la[1,\x]$}] {};
+            \ifthenelse{\x > 2}{
+                \FPeval{\p}{clip(\x-1)}
+                \draw[->] (\p.center) -- ++(0:14mm);
+            }{
+                \draw[->] (1.center) edge node[midway, below, xshift=-0.6mm]
+                    {$d[S[1]][S[2]]$} ++(0:14mm);
+            }
+        }
+
+        \path (1.south west)
+        edge[decorate,decoration={brace,mirror,raise=.15cm}, line width=1pt]
+        node[below=6pt] {$cost[i]$} (1.south west -| 5.south east);
+    \end{graph}}
+    \caption{Costo effettivo della soluzione parziale}
+\end{figure}
+
+\paragraph{Lower bound come costo per uscire dall'ultimo nodo}
+\begin{definition}[Costo per uscire dall'ultimo nodo]
+    Definiamo $out[S[i]]$ come il minimo fra i pesi degli archi che escono da
+    $S[i]$ e vanno in uno dei nodi non ancora scelti, ovvero:
+    \[out[S[i]]=\min_{k\notin s[1\dots i]}d[S[i]][k]\]
+\end{definition}
+
+\noindent
+Noto il valore $out[S[i]]$, $lb$ può essere definito come:
+\[lb(d,S,i)=cost[i]+out[S[i]]\]
+
+\newpage
+\begin{figure}[ht!]
+    \centering
+    \scalebox{0.9}{\begin{graph}
+        \tikzset{
+            cell/.style={rectangle, draw, minimum size=15mm, inner sep=0},
+            tips=proper
+        }
+
+        \def\labels{1 2 {\dots} i-1 i}
+        \readarray\labels\la[1,5]
+
+        \node[cell] (1) at (1,0) [label=above:{$\la[1,1]$}, label=left:{$S$}] {};
+        \foreach \x in {2,...,5} {
+            \FPeval{\p}{clip(\x+0.5*(\x-1))}
+            \node[cell] (\x) at (\p,0) [label=above:{$\la[1,\x]$}] {};
+            \ifthenelse{\x > 2}{
+                \FPeval{\p}{clip(\x-1)}
+                \draw[->] (\p.center) -- ++(0:14mm);
+            }{
+                \draw[->] (1.center) edge node[midway, below, xshift=-0.6mm]
+                    {$d[S[1]][S[2]]$} ++(0:14mm);
+            }
+        }
+
+        \path (1.south west)
+        edge[decorate,decoration={brace,mirror,raise=.15cm}, line width=1pt]
+        node[below=6pt] {$cost[i]$} (1.south west -| 5.south east);
+    \end{graph}}
+    \caption{Costo per uscire da un nodo}
+\end{figure}

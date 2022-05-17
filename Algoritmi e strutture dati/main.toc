@@ -386,9 +386,13 @@
 \contentsline {paragraph}{Complessità}{242}{paragraph*.349}%
 \contentsline {subsection}{\numberline {18.3.2}Seconda soluzione greedy - Vicino più vicino}{243}{subsection.18.3.2}%
 \contentsline {paragraph}{Complessità}{243}{paragraph*.352}%
-\contentsline {section}{\numberline {18.4}Soluzione con ricerca locale}{244}{section.18.4}%
+\contentsline {subsection}{\numberline {18.3.3}Soluzione con ricerca locale}{244}{subsection.18.3.3}%
 \contentsline {paragraph}{Complessità}{245}{paragraph*.356}%
-\contentsline {section}{\numberline {18.5}Algoritmi branch-\&-bound}{245}{section.18.5}%
-\contentsline {chapter}{\numberline {A}Appendice A}{246}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{246}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{246}{section.1.A.2}%
+\contentsline {section}{\numberline {18.4}Algoritmi branch-\&-bound}{245}{section.18.4}%
+\contentsline {subsection}{\numberline {18.4.1}Schema generale}{245}{subsection.18.4.1}%
+\contentsline {subsection}{\numberline {18.4.2}Problema del commesso viaggiatore}{246}{subsection.18.4.2}%
+\contentsline {paragraph}{Lower bound come costo effettivo della soluzione parziale}{246}{paragraph*.357}%
+\contentsline {paragraph}{Lower bound come costo per uscire dall'ultimo nodo}{246}{paragraph*.359}%
+\contentsline {chapter}{\numberline {A}Appendice A}{248}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{248}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{248}{section.1.A.2}%

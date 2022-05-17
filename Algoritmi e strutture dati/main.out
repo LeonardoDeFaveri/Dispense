@@ -196,8 +196,10 @@
 \BOOKMARK [1][-]{section.18.3}{Algoritmi euristici}{chapter.18}% 196
 \BOOKMARK [2][-]{subsection.18.3.1}{Prima soluzione greedy - Arco di costo minimo}{section.18.3}% 197
 \BOOKMARK [2][-]{subsection.18.3.2}{Seconda soluzione greedy - Vicino pi\371 vicino}{section.18.3}% 198
-\BOOKMARK [1][-]{section.18.4}{Soluzione con ricerca locale}{chapter.18}% 199
-\BOOKMARK [1][-]{section.18.5}{Algoritmi branch-\046-bound}{chapter.18}% 200
-\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 201
-\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 202
-\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 203
+\BOOKMARK [2][-]{subsection.18.3.3}{Soluzione con ricerca locale}{section.18.3}% 199
+\BOOKMARK [1][-]{section.18.4}{Algoritmi branch-\046-bound}{chapter.18}% 200
+\BOOKMARK [2][-]{subsection.18.4.1}{Schema generale}{section.18.4}% 201
+\BOOKMARK [2][-]{subsection.18.4.2}{Problema del commesso viaggiatore}{section.18.4}% 202
+\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 203
+\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 204
+\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 205

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.26)  13 MAY 2022 23:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.26)  17 MAY 2022 16:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -756,22 +756,22 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 ) (./main.aux (./chapters/analisi_di_algoritmi.aux) (./chapters/notazione_asintotica.aux) (./chapters/funzioni_di_ricorrenza.aux) (./chapters/strutture_dati.aux) (./chapters/alberi.aux) (./chapters/alberi_binari_di_ricerca.aux) (./chapters/grafi.aux) (./chapters/hashing.aux) (./chapters/analisi_ammortizata.aux) (./chapters/divide_et_impera.aux) (./chapters/strutture_specializzate.aux) (./chapters/programmazione_dinamica.aux) (./chapters/scelta_della_struttura_dati.aux) (./chapters/greedy.aux) (./chapters/ricerca_locale.aux) (./chapters/backtrack.aux) (./chapters/np-completezza.aux) (./chapters/soluzioni_problemi_intrattabili.aux) (./chapters/appendices/appendix_a.aux))
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 164.
-LaTeX Font Info:    ... okay on input line 164.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 164.
-LaTeX Font Info:    ... okay on input line 164.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 164.
-LaTeX Font Info:    ... okay on input line 164.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 164.
-LaTeX Font Info:    ... okay on input line 164.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 164.
-LaTeX Font Info:    ... okay on input line 164.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 164.
-LaTeX Font Info:    ... okay on input line 164.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 164.
-LaTeX Font Info:    ... okay on input line 164.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 164.
-LaTeX Font Info:    ... okay on input line 164.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 165.
+LaTeX Font Info:    ... okay on input line 165.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 165.
+LaTeX Font Info:    ... okay on input line 165.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 165.
+LaTeX Font Info:    ... okay on input line 165.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 165.
+LaTeX Font Info:    ... okay on input line 165.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 165.
+LaTeX Font Info:    ... okay on input line 165.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 165.
+LaTeX Font Info:    ... okay on input line 165.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 165.
+LaTeX Font Info:    ... okay on input line 165.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 165.
+LaTeX Font Info:    ... okay on input line 165.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -827,7 +827,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 \AtBeginShipoutBox=\box71
-Package hyperref Info: Link coloring ON on input line 164.
+Package hyperref Info: Link coloring ON on input line 165.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -837,9 +837,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count353
 )
-LaTeX Info: Redefining \ref on input line 164.
-LaTeX Info: Redefining \pageref on input line 164.
-LaTeX Info: Redefining \nameref on input line 164.
+LaTeX Info: Redefining \ref on input line 165.
+LaTeX Info: Redefining \pageref on input line 165.
+LaTeX Info: Redefining \nameref on input line 165.
  (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
@@ -850,11 +850,11 @@ Package caption Info: End \AtBeginDocument code.
  ABD: EveryShipout initializing macros
 Package pgfplots notification 'compat/show suggested version=true': document has been generated with the most recent feature set (\pgfplotsset{compat=1.16}).
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 166.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 167.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 166.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 167.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
@@ -882,13 +882,13 @@ LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 86
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ) [7] [8] [9]
-<./images/schema-theta.png, id=1115, 909.3975pt x 662.475pt>
+<./images/schema-theta.png, id=1125, 909.3975pt x 662.475pt>
 File: ./images/schema-theta.png Graphic file (type png)
 <use ./images/schema-theta.png>
 Package pdftex.def Info: ./images/schema-theta.png  used on input line 280.
 (pdftex.def)             Requested size: 483.69684pt x 352.36354pt.
  [10 <./images/schema-theta.png>] [11]
-<./images/schema-esempio-theta.png, id=1137, 903.375pt x 655.44875pt>
+<./images/schema-esempio-theta.png, id=1147, 903.375pt x 655.44875pt>
 File: ./images/schema-esempio-theta.png Graphic file (type png)
 <use ./images/schema-esempio-theta.png>
 Package pdftex.def Info: ./images/schema-esempio-theta.png  used on input line 360.
@@ -921,60 +921,60 @@ Chapter 4.
 
 
 ] [39] [40] [41] [42]
-<./images/tipi-liste.png, id=1436, 873.2625pt x 600.2425pt>
+<./images/tipi-liste.png, id=1446, 873.2625pt x 600.2425pt>
 File: ./images/tipi-liste.png Graphic file (type png)
 <use ./images/tipi-liste.png>
 Package pdftex.def Info: ./images/tipi-liste.png  used on input line 306.
 (pdftex.def)             Requested size: 435.32419pt x 299.22293pt.
  [43 <./images/tipi-liste.png>] [44]
-<./images/pila-lista.png, id=1452, 312.16624pt x 330.23375pt>
+<./images/pila-lista.png, id=1462, 312.16624pt x 330.23375pt>
 File: ./images/pila-lista.png Graphic file (type png)
 <use ./images/pila-lista.png>
 Package pdftex.def Info: ./images/pila-lista.png  used on input line 423.
 (pdftex.def)             Requested size: 193.47577pt x 204.67729pt.
-<./images/pila-vettore.png, id=1453, 310.15875pt x 199.74625pt>
+<./images/pila-vettore.png, id=1463, 310.15875pt x 199.74625pt>
 File: ./images/pila-vettore.png Graphic file (type png)
 <use ./images/pila-vettore.png>
 Package pdftex.def Info: ./images/pila-vettore.png  used on input line 425.
 (pdftex.def)             Requested size: 193.47577pt x 124.60031pt.
  [45 <./images/pila-lista.png> <./images/pila-vettore.png>] [46]
-<./images/coda-es-1.png, id=1475, 723.70375pt x 581.17125pt>
+<./images/coda-es-1.png, id=1485, 723.70375pt x 581.17125pt>
 File: ./images/coda-es-1.png Graphic file (type png)
 <use ./images/coda-es-1.png>
 Package pdftex.def Info: ./images/coda-es-1.png  used on input line 521.
 (pdftex.def)             Requested size: 241.84842pt x 194.21692pt.
-<./images/coda-es-2.png, id=1476, 715.67375pt x 572.1375pt>
+<./images/coda-es-2.png, id=1486, 715.67375pt x 572.1375pt>
 File: ./images/coda-es-2.png Graphic file (type png)
 <use ./images/coda-es-2.png>
 Package pdftex.def Info: ./images/coda-es-2.png  used on input line 522.
 (pdftex.def)             Requested size: 241.84842pt x 193.33687pt.
-<./images/coda-es-3.png, id=1477, 718.685pt x 569.12625pt>
+<./images/coda-es-3.png, id=1487, 718.685pt x 569.12625pt>
 File: ./images/coda-es-3.png Graphic file (type png)
 <use ./images/coda-es-3.png>
 Package pdftex.def Info: ./images/coda-es-3.png  used on input line 523.
 (pdftex.def)             Requested size: 241.84842pt x 191.52037pt.
-<./images/coda-es-4.png, id=1478, 722.7pt x 561.09625pt>
+<./images/coda-es-4.png, id=1488, 722.7pt x 561.09625pt>
 File: ./images/coda-es-4.png Graphic file (type png)
 <use ./images/coda-es-4.png>
 Package pdftex.def Info: ./images/coda-es-4.png  used on input line 524.
 (pdftex.def)             Requested size: 241.84842pt x 187.76506pt.
  [47 <./images/coda-es-1.png> <./images/coda-es-2.png> <./images/coda-es-3.png> <./images/coda-es-4.png>]
-<./images/coda-es-5.png, id=1493, 717.68124pt x 567.11874pt>
+<./images/coda-es-5.png, id=1503, 717.68124pt x 567.11874pt>
 File: ./images/coda-es-5.png Graphic file (type png)
 <use ./images/coda-es-5.png>
 Package pdftex.def Info: ./images/coda-es-5.png  used on input line 528.
 (pdftex.def)             Requested size: 241.84842pt x 191.10442pt.
-<./images/coda-es-6.png, id=1494, 715.67375pt x 563.10374pt>
+<./images/coda-es-6.png, id=1504, 715.67375pt x 563.10374pt>
 File: ./images/coda-es-6.png Graphic file (type png)
 <use ./images/coda-es-6.png>
 Package pdftex.def Info: ./images/coda-es-6.png  used on input line 529.
 (pdftex.def)             Requested size: 241.84842pt x 190.2842pt.
-<./images/coda-es-7.png, id=1495, 705.63625pt x 563.10374pt>
+<./images/coda-es-7.png, id=1505, 705.63625pt x 563.10374pt>
 File: ./images/coda-es-7.png Graphic file (type png)
 <use ./images/coda-es-7.png>
 Package pdftex.def Info: ./images/coda-es-7.png  used on input line 530.
 (pdftex.def)             Requested size: 241.84842pt x 192.99934pt.
-<./images/coda-es-8.png, id=1496, 718.685pt x 558.085pt>
+<./images/coda-es-8.png, id=1506, 718.685pt x 558.085pt>
 File: ./images/coda-es-8.png Graphic file (type png)
 <use ./images/coda-es-8.png>
 Package pdftex.def Info: ./images/coda-es-8.png  used on input line 531.
@@ -989,23 +989,23 @@ Chapter 5.
 
 
 ] [51]
-<./images/memorizzazione-albero-binario.png, id=1532, 803.0pt x 356.33125pt>
+<./images/memorizzazione-albero-binario.png, id=1543, 803.0pt x 356.33125pt>
 File: ./images/memorizzazione-albero-binario.png Graphic file (type png)
 <use ./images/memorizzazione-albero-binario.png>
 Package pdftex.def Info: ./images/memorizzazione-albero-binario.png  used on input line 195.
 (pdftex.def)             Requested size: 338.5863pt x 150.25075pt.
  [52 <./images/memorizzazione-albero-binario.png>] [53] [54] [55]
-<./images/vettore-dei-figli.png, id=1562, 1093.08376pt x 361.35pt>
+<./images/vettore-dei-figli.png, id=1572, 1093.08376pt x 361.35pt>
 File: ./images/vettore-dei-figli.png Graphic file (type png)
 <use ./images/vettore-dei-figli.png>
 Package pdftex.def Info: ./images/vettore-dei-figli.png  used on input line 432.
 (pdftex.def)             Requested size: 232.17241pt x 76.75139pt.
-<./images/vettore-dei-fratelli.png, id=1563, 996.72375pt x 497.86pt>
+<./images/vettore-dei-fratelli.png, id=1573, 996.72375pt x 497.86pt>
 File: ./images/vettore-dei-fratelli.png Graphic file (type png)
 <use ./images/vettore-dei-fratelli.png>
 Package pdftex.def Info: ./images/vettore-dei-fratelli.png  used on input line 434.
 (pdftex.def)             Requested size: 232.17241pt x 115.96396pt.
-<./images/vettore-dei-padri.png, id=1564, 192.72pt x 476.78125pt>
+<./images/vettore-dei-padri.png, id=1574, 192.72pt x 476.78125pt>
 File: ./images/vettore-dei-padri.png Graphic file (type png)
 <use ./images/vettore-dei-padri.png>
 Package pdftex.def Info: ./images/vettore-dei-padri.png  used on input line 453.
@@ -1029,33 +1029,33 @@ Chapter 7.
 
 
 ] [77] [78] [79]
-<./images/matrice-di-adiacenza-esempio-1.png, id=1789, 520.94624pt x 478.78876pt>
+<./images/matrice-di-adiacenza-esempio-1.png, id=1799, 520.94624pt x 478.78876pt>
 File: ./images/matrice-di-adiacenza-esempio-1.png Graphic file (type png)
 <use ./images/matrice-di-adiacenza-esempio-1.png>
 Package pdftex.def Info: ./images/matrice-di-adiacenza-esempio-1.png  used on input line 359.
 (pdftex.def)             Requested size: 232.17241pt x 213.38542pt.
-<./images/lista-di-adiacenza-esempio-1.png, id=1790, 584.1825pt x 598.235pt>
+<./images/lista-di-adiacenza-esempio-1.png, id=1800, 584.1825pt x 598.235pt>
 File: ./images/lista-di-adiacenza-esempio-1.png Graphic file (type png)
 <use ./images/lista-di-adiacenza-esempio-1.png>
 Package pdftex.def Info: ./images/lista-di-adiacenza-esempio-1.png  used on input line 361.
 (pdftex.def)             Requested size: 232.17241pt x 237.7562pt.
  [80 <./images/matrice-di-adiacenza-esempio-1.png> <./images/lista-di-adiacenza-esempio-1.png>]
-<./images/matrice-di-adiacenza-esempio-1n.png, id=1802, 514.92375pt x 469.755pt>
+<./images/matrice-di-adiacenza-esempio-1n.png, id=1812, 514.92375pt x 469.755pt>
 File: ./images/matrice-di-adiacenza-esempio-1n.png Graphic file (type png)
 <use ./images/matrice-di-adiacenza-esempio-1n.png>
 Package pdftex.def Info: ./images/matrice-di-adiacenza-esempio-1n.png  used on input line 401.
 (pdftex.def)             Requested size: 232.17241pt x 211.80353pt.
-<./images/lista-di-adiacenza-esempio-1n.png, id=1803, 578.16pt x 437.635pt>
+<./images/lista-di-adiacenza-esempio-1n.png, id=1813, 578.16pt x 437.635pt>
 File: ./images/lista-di-adiacenza-esempio-1n.png Graphic file (type png)
 <use ./images/lista-di-adiacenza-esempio-1n.png>
 Package pdftex.def Info: ./images/lista-di-adiacenza-esempio-1n.png  used on input line 403.
 (pdftex.def)             Requested size: 232.17241pt x 175.73871pt.
-<./images/matrice-di-adiacenza-esempio-1np.png, id=1804, 459.7175pt x 376.40625pt>
+<./images/matrice-di-adiacenza-esempio-1np.png, id=1814, 459.7175pt x 376.40625pt>
 File: ./images/matrice-di-adiacenza-esempio-1np.png Graphic file (type png)
 <use ./images/matrice-di-adiacenza-esempio-1np.png>
 Package pdftex.def Info: ./images/matrice-di-adiacenza-esempio-1np.png  used on input line 445.
 (pdftex.def)             Requested size: 232.17241pt x 190.098pt.
-<./images/lista-di-adiacenza-esempio-1np.png, id=1805, 555.07375pt x 406.51875pt>
+<./images/lista-di-adiacenza-esempio-1np.png, id=1815, 555.07375pt x 406.51875pt>
 File: ./images/lista-di-adiacenza-esempio-1np.png Graphic file (type png)
 <use ./images/lista-di-adiacenza-esempio-1np.png>
 Package pdftex.def Info: ./images/lista-di-adiacenza-esempio-1np.png  used on input line 447.
@@ -1078,31 +1078,31 @@ Chapter 8.
 
 
 ] [102] [103] [104]
-<./images/metodo-moltiplicazione.png, id=2024, 1123.7985pt x 568.67456pt>
+<./images/metodo-moltiplicazione.png, id=2034, 1123.7985pt x 568.67456pt>
 File: ./images/metodo-moltiplicazione.png Graphic file (type png)
 <use ./images/metodo-moltiplicazione.png>
 Package pdftex.def Info: ./images/metodo-moltiplicazione.png  used on input line 289.
 (pdftex.def)             Requested size: 386.95894pt x 195.81113pt.
  [105 <./images/metodo-moltiplicazione.png>]
-<./images/liste-di-trabocco1.png, id=2034, 552.0625pt x 490.83376pt>
+<./images/liste-di-trabocco1.png, id=2044, 552.0625pt x 490.83376pt>
 File: ./images/liste-di-trabocco1.png Graphic file (type png)
 <use ./images/liste-di-trabocco1.png>
 Package pdftex.def Info: ./images/liste-di-trabocco1.png  used on input line 318.
 (pdftex.def)             Requested size: 290.22105pt x 258.04358pt.
  [106 <./images/liste-di-trabocco1.png>]
-<./images/sequenza-ispezione-1.png, id=2042, 1063.975pt x 302.12875pt>
+<./images/sequenza-ispezione-1.png, id=2052, 1063.975pt x 302.12875pt>
 File: ./images/sequenza-ispezione-1.png Graphic file (type png)
 <use ./images/sequenza-ispezione-1.png>
 Package pdftex.def Info: ./images/sequenza-ispezione-1.png  used on input line 394.
 (pdftex.def)             Requested size: 483.69684pt x 137.34892pt.
  [107] [108 <./images/sequenza-ispezione-1.png>] [109]
-<./images/sequenza-ispezione-2.png, id=2067, 1073.00874pt x 324.21124pt>
+<./images/sequenza-ispezione-2.png, id=2077, 1073.00874pt x 324.21124pt>
 File: ./images/sequenza-ispezione-2.png Graphic file (type png)
 <use ./images/sequenza-ispezione-2.png>
 Package pdftex.def Info: ./images/sequenza-ispezione-2.png  used on input line 518.
 (pdftex.def)             Requested size: 483.69684pt x 146.14601pt.
  [110 <./images/sequenza-ispezione-2.png>]
-<./images/complessita-hash-table.png, id=2074, 1039.885pt x 628.3475pt>
+<./images/complessita-hash-table.png, id=2084, 1039.885pt x 628.3475pt>
 File: ./images/complessita-hash-table.png Graphic file (type png)
 <use ./images/complessita-hash-table.png>
 Package pdftex.def Info: ./images/complessita-hash-table.png  used on input line 552.
@@ -1129,12 +1129,12 @@ Chapter 10.
 
 
 ] [125]
-<./images/quicksort1.png, id=2177, 690.58pt x 170.6375pt>
+<./images/quicksort1.png, id=2187, 690.58pt x 170.6375pt>
 File: ./images/quicksort1.png Graphic file (type png)
 <use ./images/quicksort1.png>
 Package pdftex.def Info: ./images/quicksort1.png  used on input line 124.
 (pdftex.def)             Requested size: 338.5863pt x 83.66257pt.
-<./images/quicksort2.png, id=2178, 526.96875pt x 88.33pt>
+<./images/quicksort2.png, id=2188, 526.96875pt x 88.33pt>
 File: ./images/quicksort2.png Graphic file (type png)
 <use ./images/quicksort2.png>
 Package pdftex.def Info: ./images/quicksort2.png  used on input line 133.
@@ -1149,7 +1149,7 @@ Chapter 11.
 
 
 ] [131] [132] [133] [134] [135] [136] [137] [138] [139] [140] [141]
-<./images/merge-find-liste.png, id=2314, 1062.97125pt x 320.19624pt>
+<./images/merge-find-liste.png, id=2324, 1062.97125pt x 320.19624pt>
 File: ./images/merge-find-liste.png Graphic file (type png)
 <use ./images/merge-find-liste.png>
 Package pdftex.def Info: ./images/merge-find-liste.png  used on input line 932.
@@ -1236,7 +1236,7 @@ Missing character: There is no 0 in font nullfont!
 Missing character: There is no 0 in font nullfont!
 Missing character: There is no 0 in font nullfont!
  [224] [225] [226] [227] [228] [229] [230]
-<./images/commesso-viaggiatore.png, id=3098, 571.13374pt x 370.38374pt>
+<./images/commesso-viaggiatore.png, id=3108, 571.13374pt x 370.38374pt>
 File: ./images/commesso-viaggiatore.png Graphic file (type png)
 <use ./images/commesso-viaggiatore.png>
 Package pdftex.def Info: ./images/commesso-viaggiatore.png  used on input line 794.
@@ -1270,40 +1270,40 @@ l.1313     \subfloat
 <to be read again> 
                    \relax 
 l.1342     \subfloat
-                    [Seconda sostituzione]{\resizebox*{0.3\textwidth}{!}{\be... [244]) [245]
+                    [Seconda sostituzione]{\resizebox*{0.3\textwidth}{!}{\be... [244] [245] [246]) [247]
 \openout2 = `chapters/appendices/appendix_a.aux'.
 
  (./chapters/appendices/appendix_a.tex
 Appendix A.
-) [246
+) [248
 
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 189.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 189.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 190.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 190.
  (./main.aux (./chapters/analisi_di_algoritmi.aux) (./chapters/notazione_asintotica.aux) (./chapters/funzioni_di_ricorrenza.aux) (./chapters/strutture_dati.aux) (./chapters/alberi.aux) (./chapters/alberi_binari_di_ricerca.aux) (./chapters/grafi.aux) (./chapters/hashing.aux) (./chapters/analisi_ammortizata.aux) (./chapters/divide_et_impera.aux) (./chapters/strutture_specializzate.aux) (./chapters/programmazione_dinamica.aux) (./chapters/scelta_della_struttura_dati.aux) (./chapters/greedy.aux) (./chapters/ricerca_locale.aux) (./chapters/backtrack.aux) (./chapters/np-completezza.aux) (./chapters/soluzioni_problemi_intrattabili.aux) (./chapters/appendices/appendix_a.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 189.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 189.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 190.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 190.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 8016403276D940E286D8AD09DFE15D82;15796.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 189.
+(rerunfilecheck)             Checksum: 3AC112533685952274C4BDD6678AE5CE;15965.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 190.
  ) 
 Here is how much of TeX's memory you used:
- 39344 strings out of 483172
- 851859 string characters out of 5965816
- 1502309 words of memory out of 5000000
- 52068 multiletter control sequences out of 15000+600000
+ 39365 strings out of 483172
+ 852412 string characters out of 5965816
+ 1502520 words of memory out of 5000000
+ 52078 multiletter control sequences out of 15000+600000
  575455 words of font info for 138 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  78i,38n,136p,784b,2165s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{prop:elimcost} has been referenced but does not exist, replaced by a fixed one
 
  </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti0800.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1440.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecit1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1728.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (247 pages, 2864582 bytes).
+Output written on main.pdf (249 pages, 2872289 bytes).
 PDF statistics:
- 4509 PDF objects out of 5155 (max. 8388607)
- 3327 compressed objects within 34 object streams
- 1437 named destinations out of 1440 (max. 500000)
- 1809 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 4539 PDF objects out of 5155 (max. 8388607)
+ 3353 compressed objects within 34 object streams
+ 1448 named destinations out of 1728 (max. 500000)
+ 1825 words of extra memory for PDF output out of 10000 (max. 10000000)
 

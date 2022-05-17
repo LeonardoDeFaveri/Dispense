@@ -445,3 +445,13 @@ best
 packaging
 approssimabilità
 branch-&-bound
+upper
+bound
+lower
+branch&bound
+lb
+minCost
+minSol
+cost
+Lower
+south
