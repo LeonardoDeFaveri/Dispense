@@ -1523,6 +1523,177 @@ Noto il valore $out[S[i]]$, $lb$ può essere definito come:
         \path (1.south west)
         edge[decorate,decoration={brace,mirror,raise=.15cm}, line width=1pt]
         node[below=6pt] {$cost[i]$} (1.south west -| 5.south east);
+
+        \draw[->] (5.20) -- ++(20:14mm);
+        \draw[->] (5.10) -- ++(10:14mm);
+        \draw[->] (5.0) -- ++(0:14mm);
+        \draw[->] (5.-10) edge[line width=1.3pt] ++(-10:14mm);
+        \draw[->] (5.-20) edge node[midway, below, yshift=-4.6mm] {$out[S[i]]$} ++(-20:14mm);
     \end{graph}}
-    \caption{Costo per uscire da un nodo}
+    \caption{Costo per uscire da un \emph{nodo}}
+\end{figure}
+
+\paragraph{Lower bound come costo per uscire da tutti i nodi rimasti}
+\begin{definition}[Costo per uscire da tutti i nodi rimasti]
+    Per ogni nodo $h$ non ancora scelto, sommiamo il minimo tra i pesi degli
+    archi che escono da esso e vanno in $S[1]$ o in un nodo non ancora scelto,
+    ovvero:
+    \[out[h]=\min_{k\notin S[2\dots i]}d[h][k]\quad\forall k\notin S[1\dots i]\]
+\end{definition}
+
+\noindent
+Noto il valore $out[S[i]]$, $lb$ può essere definito come:
+\[lb(d,S,i)=cost[i]+out[S[i]]+\sum_{h\notin S[1\dots i]}out[h]\]
+
+\begin{figure}[ht!]
+    \centering
+    \resizebox{\textwidth}{!}{\begin{graph}
+        \tikzset{
+            cell/.style={rectangle, draw, minimum size=15mm, inner sep=0},
+            tips=proper
+        }
+
+        \def\labels{1 2 {\dots} i-1 i}
+        \readarray\labels\la[1,5]
+
+        \node[cell] (1) at (1,0) [label=above:{$\la[1,1]$}, label=left:{$S$}] {};
+        \foreach \x in {2,...,5} {
+            \FPeval{\p}{clip(\x+0.5*(\x-1))}
+            \node[cell] (\x) at (\p,0) [label=above:{$\la[1,\x]$}] {};
+            \ifthenelse{\x > 2}{
+                \FPeval{\p}{clip(\x-1)}
+                \draw[->] (\p.center) -- ++(0:14mm);
+            }{
+                \draw[->] (1.center) edge node[midway, below, xshift=-0.6mm]
+                    {$d[S[1]][S[2]]$} ++(0:14mm);
+            }
+        }
+
+        \path (1.south west)
+        edge[decorate,decoration={brace,mirror,raise=.15cm}, line width=1pt]
+        node[below=6pt] {$cost[i]$} (1.south west -| 5.south east);
+
+        \draw[->] (5.20) -- ++(20:14mm);
+        \draw[->] (5.10) -- ++(10:14mm);
+        \draw[->] (5.0) -- ++(0:14mm);
+        \draw[->] (5.-10) edge[line width=1.3pt] ++(-10:14mm);
+        \draw[->] (5.-20) edge node[midway, below, yshift=-4.6mm] {$out[S[i]]$} ++(-20:14mm);
+
+        \def\hs{h_1 h_2 {\dots} h_{n-1}}
+        \readarray\hs\h[1, 4]
+        \def\modules{3 2 1 5}
+        \readarray\modules\m[1, 4]
+        \def\degrees{20 10 0 -10 -20}
+        \readarray\degrees\de[1, 5]
+        
+        \foreach \x in {1,...,4} {
+            \FPeval{\n}{clip(\x+5)}
+            \FPeval{\p}{clip(5+\x*2+0.5*(5+\x*2-1))}
+            \node[cell] (\n) at (\p,0) {$\h[1,\x]$};
+
+            \foreach \edge in {1,...,5} {
+                \ifthenelse{\edge = \m[1,\x]}{
+                    \ifthenelse{\de[1,\edge] = -20}{
+                        \draw[->] (\n.\de[1,\edge]) edge[line width=1.3pt]
+                        node[midway, below, yshift=-4.6mm] {$out[S[\h[1,\x]]]$} ++(\de[1,\edge]:14mm);
+                    }{
+                        \draw[->] (\n.\de[1,\edge]) edge[line width=1.3pt] ++(\de[1,\edge]:14mm);
+                    }
+                }{
+                    \ifthenelse{\de[1,\edge] = -20}{
+                        \draw[->] (\n.\de[1,\edge]) edge node[midway, below, yshift=-4.6mm]
+                        {$out[S[\h[1,\x]]]$} ++(\de[1,\edge]:14mm);
+                    }{
+                        \draw[->] (\n.\de[1,\edge]) -- ++(\de[1,\edge]:14mm);
+                    }
+                }
+            }
+        }
+    \end{graph}}
+    \caption{Costo per uscire da tutti i \emph{nodi} rimasti}
+\end{figure}
+
+\paragraph{Lower bound come costo per attraversare i nodi non ancora scelti}
+\begin{definition}[Costo per attraversare i nodi non ancora scelti]
+    Per ogni non $h$ non ancora scelto, calcoliamo il costo di attraversamento
+    $transfer[h]$ come la somma tra i pesi minimi di due archi $(p,h)$ e $(h,q)$
+    che entrano ed escono da $h$ andando in $S[1]$ un in nodo non ancora scelto.
+    La definizione di $transfer[h]$ è quindi la seguente:
+    \[transfer[h]=\min{}_{p\notin S[1\dots i-1],q\notin S[2\dots i]\::\:p\neq
+    q\neq h}\{d[p][h]+d[h][q]\}\]
+\end{definition}
+\begin{definition}[Costo per tornare al primo nodo]
+    Definiamo il valore $last$ come il minimo tra i pesi degli archi che vanno
+    da uno dei nodi non ancora scelti in $S[1]$, ovvero:
+    \[last=\min_{h\notin S[1\dots n]}d[h][S[1]]\]
+\end{definition}
+
+\noindent
+A questo punto, definiamo $lb$ come:
+\[lb(d,S,i)=cost[i]+\lceil\frac{out[i]+\sum_{h\notin S}transfer[h]+last}{2}\rceil\]
+Stiamo dividendo per $2$ perché il peso di ogni \emph{arco} viene contato due volte:
+in ingresso e in uscita.
+
+\begin{figure}[ht!]
+    \centering
+    \resizebox{\textwidth}{!}{\begin{graph}
+        \tikzset{
+            cell/.style={rectangle, draw, minimum size=15mm, inner sep=0},
+            tips=proper
+        }
+
+        \def\labels{1 2 {\dots} i-1 i}
+        \readarray\labels\la[1,5]
+
+        \node[cell] (1) at (1,0) [label=above:{$\la[1,1]$}, label=left:{$S$}] {};
+        \foreach \x in {2,...,5} {
+            \FPeval{\p}{clip(\x+0.5*(\x-1))}
+            \node[cell] (\x) at (\p,0) [label=above:{$\la[1,\x]$}] {};
+            \ifthenelse{\x > 2}{
+                \FPeval{\p}{clip(\x-1)}
+                \draw[->] (\p.center) -- ++(0:14mm);
+            }{
+                \draw[->] (1.center) edge node[midway, below, xshift=-0.6mm]
+                    {$d[S[1]][S[2]]$} ++(0:14mm);
+            }
+        }
+
+        \path (1.south west)
+        edge[decorate,decoration={brace,mirror,raise=.15cm}, line width=1pt]
+        node[below=6pt] {$cost[i]$} (1.south west -| 5.south east);
+
+        \draw[->] (5.20) -- ++(20:14mm);
+        \draw[->] (5.10) -- ++(10:14mm);
+        \draw[->] (5.0) -- ++(0:14mm);
+        \draw[->] (5.-10) edge[line width=1.3pt] ++(-10:14mm);
+        \draw[->] (5.-20) edge node[midway, below, yshift=-4.6mm] {$out[S[i]]$} ++(-20:14mm);
+
+        \FPeval{\p}{clip(7+0.5*(6))}
+        \node[rectangle, minimum size=15mm] (6) at (\p,0) {\dots};
+        \FPeval{\p}{clip(9+0.5*(8))}
+        \node[cell] (7) at (\p,0) [label={[yshift=-2.5mm]below:{$transfer[h]$}}] {$h$};
+        \FPeval{\p}{clip(11+0.5*(10))}
+        \node[rectangle, minimum size=15mm] (8) at (\p,0) {\dots};
+        \FPeval{\p}{clip(13+0.5*(12))}
+        \node[cell] (9) at (\p,0) [label={[yshift=-2.5mm]below:{$last$}}] {$S[1]$};
+
+        \draw[->] (7.20) -- ++(20:14mm);
+        \draw[->] (7.10) -- ++(10:14mm);
+        \draw[->] (7.0) -- ++(0:14mm);
+        \draw[->] (7.-10) edge[line width=1.3pt] ++(-10:14mm);
+        \draw[->] (7.-20) -- ++(-20:14mm);
+
+        \draw[<-] (7.150) -- ++(160:14mm);
+        \draw[<-] (7.165) edge[line width=1.3pt] ++(170:14mm);
+        \draw[<-] (7.180) -- ++(180:14mm);
+        \draw[<-] (7.195) -- ++(190:14mm);
+        \draw[<-] (7.210) -- ++(200:14mm);
+
+        \draw[<-] (9.150) -- ++(160:14mm);
+        \draw[<-] (9.165) -- ++(170:14mm);
+        \draw[<-] (9.180) edge[line width=1.3pt] ++(180:14mm);
+        \draw[<-] (9.195) -- ++(190:14mm);
+        \draw[<-] (9.210) -- ++(200:14mm);
+    \end{graph}}
+    \caption{Costo per attraversare tutti i \emph{nodi} rimasti}
 \end{figure}

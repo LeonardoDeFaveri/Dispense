@@ -393,6 +393,8 @@
 \contentsline {subsection}{\numberline {18.4.2}Problema del commesso viaggiatore}{246}{subsection.18.4.2}%
 \contentsline {paragraph}{Lower bound come costo effettivo della soluzione parziale}{246}{paragraph*.357}%
 \contentsline {paragraph}{Lower bound come costo per uscire dall'ultimo nodo}{246}{paragraph*.359}%
-\contentsline {chapter}{\numberline {A}Appendice A}{248}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{248}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{248}{section.1.A.2}%
+\contentsline {paragraph}{Lower bound come costo per uscire da tutti i nodi rimasti}{247}{paragraph*.361}%
+\contentsline {paragraph}{Lower bound come costo per attraversare i nodi non ancora scelti}{247}{paragraph*.363}%
+\contentsline {chapter}{\numberline {A}Appendice A}{249}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{249}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{249}{section.1.A.2}%
