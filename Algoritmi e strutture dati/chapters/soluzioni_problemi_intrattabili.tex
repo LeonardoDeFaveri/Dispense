@@ -1630,7 +1630,7 @@ Noto il valore $out[S[i]]$, $lb$ può essere definito come:
 
 \noindent
 A questo punto, definiamo $lb$ come:
-\[lb(d,S,i)=cost[i]+\lceil\frac{out[i]+\sum_{h\notin S}transfer[h]+last}{2}\rceil\]
+\[lb(d,S,i)=cost[i]+\left\lceil\frac{out[S[i]]+\sum_{h\notin S}transfer[h]+last}{2}\right\rceil\]
 Stiamo dividendo per $2$ perché il peso di ogni \emph{arco} viene contato due volte:
 in ingresso e in uscita.
 
@@ -1697,3 +1697,183 @@ in ingresso e in uscita.
     \end{graph}}
     \caption{Costo per attraversare tutti i \emph{nodi} rimasti}
 \end{figure}
+
+\begin{minicode}{Implementazione delle soluzione}
+\ind bbTsp(\bc{ITEM}[] S, \bc{int} cost, \bc{SET} R, \bc{int} n, \bc{int} i)\\
+    \bc{SET} choices = copy(R)\\
+    \indf foreach (c $\in$ choices) do\\
+        S[i] = c\\
+        R.remove(c)\\
+        \indff if (i < n) then\\
+            \{ Calcola $out$, $last$ e $transfer[h]$ per ogni $h\in R$ \}\\
+            \bc{int} lb = cost[i] + $\lceil$(out + $\sum_{h\notin S}$transfer[h] + last) / 2$\rceil$\\
+            \indfff if (lb < minCost) then\\
+                bbTsp(S, cost + d[S[i - 1]][S[i]], R, n, i + 1)\\
+        \indff else\\
+            cost = cost + d[S[i]][S[1]]\\
+            \indfff if (cost < minCost) then\\
+                minSol = S\\
+                minCost = cost\\
+        \indff R.insert(c)
+\end{minicode}
+
+\noindent
+Invece di inizializzare la variabile globale \texttt{minCost} a $+\infty$,
+possiamo partire da una permutazione qualsiasi dei \emph{nodi}. Inoltre, per
+evitare di generare più volte lo stesso circuito, possiamo decidere di iniziare
+sempre dello stesso \emph{nodo}.
+
+\paragraph{Complessità}
+Come accennato all'inizio della sezione, l'utilizzo delle funzioni \emph{upper
+bound} e \emph{lower bound} non migliorano la \emph{complessità}, che rimane
+quella di una soluzione con \emph{backtracking}.
+
+\begin{eg}[Esempio d'esecuzione]
+Consideriamo lo stesso grafo completo degli esempi precedenti e scegliamo un
+circuito iniziale che parte da $1$, per esempio:
+\[S=\{1,2,5,3,4\}\]
+Il costo di questo percorso è $21$, quindi $minCost=21$ costituisce il nostro
+primo upper bound.
+
+\newpage
+\begin{figure}[ht!]
+    \centering
+    \scalebox{0.85}{\begin{graph}
+        \tikzset{
+            cell/.style={rectangle, draw, minimum size=10mm, font=\large},
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+    
+        \def\labels{1 2 3 4 5}
+        \def\numbers{%
+            0 3 4 2 7
+            3 0 4 6 3
+            4 4 0 5 8
+            2 6 5 0 6
+            7 3 8 6 0
+        }
+        \readarray\labels\la[1,5]
+        \readarray\numbers\num[5,5]
+    
+        \foreach \x in {1,...,5}
+            \foreach \y in {1,...,5}
+            {
+                \ifthenelse{\x = 1\and\y=1}{
+                    \node[cell] (\x\y) at (\x-1,-\y+1) [label=above:{$\la[1,1]$},
+                    label=left:{$\la[1,1]$}] {};
+                }{
+                    \ifthenelse{\x=1}{
+                        \node[cell] (\x\y) at (\x-1,-\y+1) [label=left:{$\la[1,\y]$}]
+                        {$\num[\x,\y]$};
+                    }{
+                        \ifthenelse{\y = 1}{
+                            \node[cell] (\x\y) at (\x-1,-\y+1)[label=above:{$\la[1,\x]$}]
+                            {$\num[\x,\y]$};
+                        }{
+                            \ifthenelse{\num[\x,\y]=0}{
+                                \node[cell] (\x\y) at (\x-1,-\y+1) {};
+                            }{
+                                \node[cell] (\x\y) at (\x-1,-\y+1) {$\num[\x,\y]$};
+                            }
+                        }
+                    }    
+                }
+            }
+    
+        \node[empty]    (0) [right of=53, shift={(30mm,-2.5mm)}] {};
+        \node[main]     (1) [pos=90:20mm from 0] {$1$};
+        \node[main]     (2) [pos=18:20mm from 0] {$2$};
+        \node[main]     (3) [pos=-54:20mm from 0] {$3$};
+        \node[main]     (4) [pos=-126:20mm from 0] {$4$};
+        \node[main]     (5) [pos=-198:20mm from 0] {$5$};
+    
+        \path[-]    (1) edge[line width=1.3pt] node[fill=white] {$3$} (2)
+                    (1) edge node[fill=white] {$7$} (5)
+                    (2) edge node[fill=white] {$6$} (4)
+                    (3) edge[line width=1.3pt] node[fill=white] {$8$} (5)
+                    (3) edge[line width=1.3pt] node[fill=white] {$5$} (4)
+                    (1) edge node[fill=white] {$4$} (3)
+                    (1) edge[line width=1.3pt] node[fill=white] {$2$} (4)
+                    (2) edge[line width=1.3pt] node[fill=white] {$3$} (5)
+                    (2) edge node[fill=white] {$4$} (3)
+                    (5) edge node[fill=white] {$6$} (4);
+    \end{graph}}
+\end{figure}
+
+\noindent
+Proviamo a vedere quali rami dell'albero delle soluzioni vengono potati con
+questi parametri iniziali:
+
+\begin{figure}[h!]
+\centering
+\resizebox*{\textwidth}{!}{\begin{graph}
+    \newcommand{\cont}[2]{\shortstack{$#1$\\\\$#2$}}
+    \tikzset{
+        cell/.style={ellipse, draw, minimum width=10mm, minimum height=15mm}
+    }
+    \node[cell] (0) [label=above:{$1$}] {\cont{21}{18}};
+
+    \node[cell] (l) [right of=0, xshift=50mm] {\cont{UB}{LB}};
+
+    \node[cell] (1) [below of=0, yshift=-5mm, xshift=-70mm] {\cont{21}{18}};
+    \node[cell] (2) [below of=0, yshift=-5mm, xshift=-7.5mm] {\cont{21}{18}};
+    \node[cell] (3) [below of=0, yshift=-5mm, xshift=45mm] {\cont{19}{18}};
+    \node[cell] (4) [below of=0, yshift=-5mm, xshift=75mm] {\cont{19}{18}};
+
+    \node[cell] (5) [below of=1, yshift=-5mm, xshift=-15mm] {\cont{21}{21}};
+    \node[cell] (6) [below of=1, yshift=-5mm] {\cont{21}{22}};
+    \node[cell] (7) [below of=1, yshift=-5mm, xshift=15mm] {\cont{21}{18}};
+
+    \node[cell] (8) [below of=7, yshift=-5mm, xshift=-7.5mm] {\cont{21}{21}};
+    \node[cell] (9) [below of=7, yshift=-5mm, xshift=7.5mm] {\cont{21}{21}};
+
+    \node[cell] (10) [below of=2, yshift=-5mm, xshift=-15mm] {\cont{21}{19}};
+    \node[cell] (11) [below of=2, yshift=-5mm] {\cont{19}{21}};
+    \node[cell] (12) [below of=2, yshift=-5mm, xshift=15mm] {\cont{19}{21}};
+
+    \node[cell] (13) [below of=10, yshift=-5mm, xshift=-7.5mm] {\cont{21}{25}};
+    \node[cell] (14) [below of=10, yshift=-5mm, xshift=7.5mm] {\cont{21}{19}};
+
+    \node[cell] (15) [below of=14, yshift=-5mm, label=right:{$minCost=19$}] {\cont{19}{19}};
+
+    \node[cell] (16) [below of=3, yshift=-5mm, xshift=-20mm] {\cont{19}{20}};
+    \node[cell] (17) [below of=3, yshift=-5mm, xshift=-5mm] {\cont{19}{18}};
+    \node[cell] (18) [below of=3, yshift=-5mm, xshift=25mm] {\cont{19}{18}};
+
+    \node[cell] (19) [below of=17, yshift=-5mm, xshift=-7.5mm] {\cont{19}{21}};
+    \node[cell] (20) [below of=17, yshift=-5mm, xshift=7.5mm] {\cont{19}{21}};
+
+    \node[cell] (21) [below of=18, yshift=-5mm, xshift=-7.5mm] {\cont{19}{19}};
+    \node[cell] (22) [below of=18, yshift=-5mm, xshift=7.5mm] {\cont{19}{24}};
+
+    \path[-]    (0)     edge node[midway, above] {$2$} (1)
+                (0)     edge node[midway, right] {$3$} (2)
+                (0)     edge node[midway, above, shift={(2.5mm,-2mm)}] {$4$} (3)
+                (0)     edge node[midway, above] {$5$} (4)
+                (1)     edge node[midway, left] {$3$} (5)
+                (1)     edge node[midway, right] {$4$} (6)
+                (1)     edge node[midway, right] {$5$} (7)
+                (7)     edge node[midway, left] {$3$} (8)
+                (7)     edge node[midway, right] {$4$} (9)
+                (2)     edge node[midway, left] {$2$} (10)
+                (2)     edge node[midway, right] {$4$} (11)
+                (2)     edge node[midway, right] {$5$} (12)
+                (10)     edge node[midway, left] {$4$} (13)
+                (10)     edge node[midway, right] {$5$} (14)
+                (14)     edge node[midway, left] {$4$} (15)
+                (3)     edge node[midway, left] {$2$} (16)
+                (3)     edge node[midway, right] {$3$} (17)
+                (3)     edge node[midway, right, xshift=1mm] {$5$} (18)
+                (17)     edge node[midway, left] {$2$} (19)
+                (17)     edge node[midway, right] {$5$} (20)
+                (18)     edge node[midway, left] {$2$} (21)
+                (18)     edge node[midway, right] {$3$} (22);
+\end{graph}}
+\end{figure}
+
+\noindent
+In questo caso siamo riusciti a potare $42$ nodi su un totale di $65$.
+\end{eg}
