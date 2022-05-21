@@ -200,6 +200,14 @@
 \BOOKMARK [1][-]{section.18.4}{Algoritmi branch-\046-bound}{chapter.18}% 200
 \BOOKMARK [2][-]{subsection.18.4.1}{Schema generale}{section.18.4}% 201
 \BOOKMARK [2][-]{subsection.18.4.2}{Problema del commesso viaggiatore}{section.18.4}% 202
-\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 203
-\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 204
-\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 205
+\BOOKMARK [0][-]{chapter.19}{Algoritmi di ordinamento}{}% 203
+\BOOKMARK [1][-]{section.19.1}{Algoritmi basati su confronti}{chapter.19}% 204
+\BOOKMARK [1][-]{section.19.2}{Algoritmi non basati su confronti}{chapter.19}% 205
+\BOOKMARK [2][-]{subsection.19.2.1}{Spaghetti sort}{section.19.2}% 206
+\BOOKMARK [2][-]{subsection.19.2.2}{Counting sort}{section.19.2}% 207
+\BOOKMARK [2][-]{subsection.19.2.3}{Pigeonhole sort}{section.19.2}% 208
+\BOOKMARK [2][-]{subsection.19.2.4}{Bucket sort}{section.19.2}% 209
+\BOOKMARK [1][-]{section.19.3}{Propriet\340 degli algoritmi di ordinamento}{chapter.19}% 210
+\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 211
+\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 212
+\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 213

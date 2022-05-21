@@ -396,6 +396,17 @@
 \contentsline {paragraph}{Lower bound come costo per uscire da tutti i nodi rimasti}{247}{paragraph*.361}%
 \contentsline {paragraph}{Lower bound come costo per attraversare i nodi non ancora scelti}{247}{paragraph*.363}%
 \contentsline {paragraph}{Complessità}{248}{paragraph*.365}%
-\contentsline {chapter}{\numberline {A}Appendice A}{250}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{250}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{250}{section.1.A.2}%
+\contentsline {chapter}{\numberline {19}Algoritmi di ordinamento}{250}{chapter.19}%
+\contentsline {section}{\numberline {19.1}Algoritmi basati su confronti}{250}{section.19.1}%
+\contentsline {section}{\numberline {19.2}Algoritmi non basati su confronti}{251}{section.19.2}%
+\contentsline {subsection}{\numberline {19.2.1}Spaghetti sort}{251}{subsection.19.2.1}%
+\contentsline {subsection}{\numberline {19.2.2}Counting sort}{251}{subsection.19.2.2}%
+\contentsline {paragraph}{Complessità}{252}{paragraph*.369}%
+\contentsline {subsection}{\numberline {19.2.3}Pigeonhole sort}{252}{subsection.19.2.3}%
+\contentsline {paragraph}{Complessità}{252}{paragraph*.371}%
+\contentsline {subsection}{\numberline {19.2.4}Bucket sort}{252}{subsection.19.2.4}%
+\contentsline {paragraph}{Complessità}{252}{paragraph*.373}%
+\contentsline {section}{\numberline {19.3}Proprietà degli algoritmi di ordinamento}{253}{section.19.3}%
+\contentsline {chapter}{\numberline {A}Appendice A}{254}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{254}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{254}{section.1.A.2}%

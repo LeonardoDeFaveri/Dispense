@@ -1,0 +1,233 @@
+\chapter{Algoritmi di ordinamento}
+Nel corso della trattazione abbiamo già parlato più volte di algoritmi di
+ordinamento, tuttavia, poiché il problema di ordinare in modo efficiente un
+insieme di valori è molto comune, è doveroso affrontare dedicare all'argomento
+una propria sezione.
+
+\section{Algoritmi basati su confronti}
+Tutti gli algoritmi di ordinamento che abbiamo visto finora si basano su
+confronti (i.e. $<$, $=$, $>$) tra coppie di valori e gli algoritmi migliori
+avevano una \emph{complessità} pari a $O(n\log n)$.
+
+\bigskip\noindent
+Possiamo fare meglio di così?
+
+Sta volta la risposta è no, perché il limite inferiore alla \emph{complessità}
+di qualsiasi algoritmo basato su confronti è $\Omega(n\log n)$. Questo limite
+deriva dal seguente teorema:
+
+\begin{definition}[Limite inferiore alla complessità per soluzioni basate su confronti]
+    Dato un qualsiasi algoritmo di ordinamento basato su confronti, nel caso
+    peggiore, ordinare $n$ elementi costa $\Omega(n\log n)$.
+\end{definition}
+\begin{note}
+    Per la dimostrazione del teorema assumiamo che tutti i valori dell'insieme
+    siano distinti e che i confronti eseguiti dal generico algoritmo considerato
+    siano rappresentabili tramite un \emph{albero binario}.
+\end{note}
+
+\begin{proof}[Dimostrazione]
+    Se supponiamo di dover ordinare $3$ valori, l'\emph{albero binario} dei
+    confronti è il seguente:
+
+    \begin{figure}[h!]
+        \centering
+        \begin{graph}
+            \tikzset{
+                test/.style={ellipse, draw, minimum width=20mm, minimum height=10mm},
+                leaf/.style={rectangle, rounded corners=2.5mm, draw, minimum width=20mm, minimum height=10mm}
+            }
+            \node[test] (0) {$1<2$};
+            \node[test] (1) [below left of=0, xshift=-25mm] {$2<3$};
+            \node[test] (2) [below right of=0, xshift=25mm] {$1<3$};
+            \node[leaf] (3) [below left of=1, xshift=-5mm, yshift=-2.5mm] {$1,2,3$};
+            \node[test] (4) [below right of=1, xshift=5mm, yshift=-2.5mm] {$1<3$};
+            \node[leaf] (5) [below left of=4, xshift=0mm, yshift=-2.5mm] {$1,3,2$};
+            \node[leaf] (6) [below right of=4, xshift=0mm, yshift=-2.5mm] {$3,1,2$};
+            \node[leaf] (7) [below left of=2, xshift=-5mm, yshift=-2.5mm] {$2,1,3$};
+            \node[test] (8) [below right of=2, xshift=5mm, yshift=-2.5mm] {$2<3$};
+            \node[leaf] (9) [below left of=8, xshift=0mm, yshift=-2.5mm] {$2,3,1$};
+            \node[leaf] (10) [below right of=8, xshift=0mm, yshift=-2.5mm] {$3,2,1$};
+
+            \path[-]    (0) edge node[above, xshift=-2mm] {$1<2$} (1)
+                        (0) edge node[above, xshift=2mm] {$1>2$} (2)
+                        (1) edge node[above left, yshift=-2mm] {$2<3$} (3)
+                        (1) edge node[above right, yshift=-2mm] {$2>3$} (4)
+                        (4) edge node[above left, shift={(0,-2mm)}] {$1<3$} (5)
+                        (4) edge node[above right, shift={(0,-2mm)}] {$1>3$} (6)
+                        (2) edge node[above left, shift={(0,-2mm)}] {$1<3$} (7)
+                        (2) edge node[above right, shift={(0,-2mm)}] {$1>3$} (8)
+                        (8) edge node[above left, shift={(0,-2mm)}] {$2<3$} (9)
+                        (8) edge node[above right, shift={(0,-2mm)}] {$2>3$} (10);
+        \end{graph}
+    \end{figure}
+    
+    \noindent
+    In un \emph{albero} di questo tipo, ciascun \emph{cammino radice-foglia}
+    rappresenta una sequenza di confronti eseguiti dall'algoritmo e l'\emph{altezza}
+    dell'\emph{albero} corrisponde al numero di confronti eseguiti nel caso
+    pessimo.
+
+    Se consideriamo tutti gli \emph{alberi} ottenibili da algoritmi di
+    ordinamento basati su confronti, notiamo che se $n$ è il numero di elementi
+    da ordinare, valgono le due seguenti proprietà:
+    \begin{enumerate}
+        \item L'\emph{albero} possiede almeno $n!$ \emph{foglie};
+        \item Se ogni \emph{nodo} dell'\emph{albero} ha esattamente due \emph{figli}
+        e $k$ è il numero di \emph{foglie}, l'\emph{altezza} dell'\emph{albero} è
+        almeno $\log k$, ovvero $\Omega(\log k)$;
+    \end{enumerate}
+    Poiché $n!$ può essere approssimato a $n^n$ e $\log n^n=n\log n$, nel caso
+    pessimo, il numero di confronti eseguiti è $O(n\log n)$.
+\end{proof}
+
+\section{Algoritmi non basati su confronti}
+\subsection{Spaghetti sort}
+L'idea è molto semplice: ogni valore da ordinare viene associato ad uno spaghetto
+di lunghezza pari al valore stesso. Tutti gli spaghetti vengono poi appoggiati
+verticalmente su una superficie orizzontale e, uno per volta, vengono rimossi
+dal tavolo in ordine decrescente di altezza. Per ordinare i valori in senso
+crescente è sufficiente che l'altezza di ogni spaghetto rimosso venga scritta
+nell'ultima cella libera del vettore.
+
+\bigskip\noindent
+Se $n$ sono i valori da ordinare, la \emph{complessità} è $\Theta(n)$.
+
+\begin{note}
+    Come risulterà ovvio, lo \emph{spaghetti sort} è pensato unicamente come
+    descrizione astratta per algoritmi di ordinamento in tempo lineare, e non
+    può quindi essere utilizzato in pratica.
+\end{note}
+
+\subsection{Counting sort}
+Senza perdere generalità, possiamo assumere che i valori da ordinare siano
+inclusi in un intervallo $[1,\dots,k]$. Il \emph{counting sort} costruisce un
+vettore $B[1\dots k]$ e lo usa per contare il numero di volte che un valore
+compreso in $[1,\dots,k]$ compare nel vettore originale. A quel punto, per ogni
+indice $i\in[1,\dots,k]$, $i$ viene inserito nel vettore originale tante volte
+quanto vale $B[i]$.
+
+\begin{minicode}{Implementazione counting sort}
+\ind countingSort(\bc{int}[] A, \bc{int} n, \bc{int} k)\\
+    \bc{int}[] B = new \bc{int}[1\dots k]\\
+    \indf for (i = 1 to k) do\\
+        B[i] = 0\\
+    \indf for (j = 1 to n) do\\
+        B[A[j]] = B[A[j]] + 1\\
+    \indf\bc{int} j = 1\hfill\com{$A$ viene popolato a partire dalla prima cella}
+    \indf for (i = 1 to k) do\\
+        \indff while (B[i] > 0) do\\
+            A[j] = i\\
+            j = j + 1\\
+            B[i] = B[i] - 1
+\end{minicode}
+
+\paragraph{Complessità}
+La \emph{complessità} è $O(n+k)$ che è una \emph{complessità pseudo-polinomiale}
+perché $k$ non descrive la dimensione dell'input. In ogni caso, se $k=O(n)$, il
+\emph{counting sort} opera in tempo lineare. La \emph{complessità spaziale} è
+$O(k)$ perché viene allocato un nuovo vettore.
+
+\subsection{Pigeonhole sort}
+Chiaramente \emph{counting sort} può ordinare soltanto vettori di interi, quindi,
+per esempio, non lo potremmo usare per ordinare record associati ad una chiave.
+Il \emph{pigeonhole sort} è una variante del \emph{counting sort} in cui invece
+di contare il numero di occorrenze di ciascuna chiave, sfruttiamo delle
+\emph{liste concatenate}.
+
+\begin{figure}[h!]
+\centering
+\begin{graph}
+    \tikzset{
+        cell/.style={rectangle, draw, minimum width=10mm},
+        record/.style={rectangle, draw, minimum width=7mm, minimum height=5mm}
+    }
+
+    \foreach \c in {1,...,5} {
+        \FPeval{\p}{clip(2*\c-1)}
+        \node[cell] (\c) at (\p,0) {$\c$};
+    }
+    
+    \node[record] (r11) at (1) [yshift=-10mm] {};
+    \node[record] (r12) at (1) [yshift=-20mm] {};
+
+    \node[record] (r21) at (2) [yshift=-10mm] {};
+    \node[record] (r22) at (2) [yshift=-20mm] {};
+    \node[record] (r23) at (2) [yshift=-30mm] {};
+
+    \node[record] (r31) at (3) [yshift=-10mm] {};
+
+    \node[record] (r51) at (5) [yshift=-10mm] {};
+    \node[record] (r52) at (5) [yshift=-20mm] {};
+    \node[record] (r53) at (5) [yshift=-30mm] {};
+
+    \draw[-] (1) -- (2) -- (3) -- (4) -- (5);
+    \draw[-]    (1) -- (r11) -- (r12)
+                (2) -- (r21) -- (r22) -- (r23)
+                (3) -- (r31)
+                (5) -- (r51) -- (r52) -- (r53); 
+\end{graph}
+\caption{\emph{Pigeonhole sort}}
+\end{figure}
+
+\paragraph{Complessità}
+Essendo una variante del \emph{counting sort}, la \emph{complessità temporale}
+rimane $O(n+k)$, mentre la \emph{complessità spaziale} sale a $O(n+k)$.
+
+\subsection{Bucket sort}
+Il \emph{bucket sort} è un'altra variante del \emph{counting sort} in cui l'input
+viene normalizzato, ovvero viene manipolato in modo che ciascun valore venga
+associato univocamente ad un numero nell'intervallo $[0,1)$. Quest'intervallo
+viene poi diviso in $n$ sotto-intervalli di dimensione $1/n$, detti \emph{bucket}.
+I valori da ordinare vengono distribuiti nei \emph{bucket} allo stesso modo del
+\emph{pigeonhole sort}, ma se i valori sono uniformemente distribuiti, per
+effetto della normalizzazione, ciascun \emph{bucket} conterrà un solo valore.
+Proprio perché sono pochi, i valori all'interno di un \emph{bucket} possono
+essere ordinati tra loro usando un algoritmo come l'\emph{insertion sort}.
+
+\begin{note}
+    L'operazione di normalizzazione garantisce sempre un certo livello di
+    uniformità nella distribuzione, ma non è detto che sia perfetta.
+\end{note}
+
+\begin{figure}[h!]
+\centering
+\begin{graph}
+    \tikzset{
+        cell/.style={rectangle, draw, minimum width=10mm},
+        record/.style={rectangle, draw, minimum width=7mm, minimum height=5mm}
+    }
+
+    \def\labels{0.2 0.4 0.6 0.8 1.0}
+    \readarray\labels\la[1,5]
+
+    \foreach \c in {1,...,5} {
+        \FPeval{\p}{clip(2*\c-1)}
+        \node[cell] (\c) at (\p,0) {$\la[1,\c]$};
+    }
+    
+    \node[record] (r11) at (1) [yshift=-10mm] {};
+    \node[record] (r21) at (2) [yshift=-10mm] {};
+    \node[record] (r31) at (3) [yshift=-10mm] {};
+    \node[record] (r32) at (3) [yshift=-20mm] {};
+    \node[record] (r51) at (5) [yshift=-10mm] {};
+
+    \draw[-] (1) -- (2) -- (3) -- (4) -- (5);
+    \draw[-]    (1) -- (r11)
+                (2) -- (r21)
+                (3) -- (r31) -- (r32)
+                (5) -- (r51); 
+\end{graph}
+\caption{\emph{Bucket sort}}
+\end{figure}
+
+\paragraph{Complessità}
+Il fatto che ciascun \emph{bucket} contenga circa un solo valore rende la
+\emph{complessità} e media $O(n)$, anche se il costo del caso peggiore rimane
+$O(n+k)$. A livello di spazio, la \emph{complessità} è $O(n)$.
+
+\section{Proprietà degli algoritmi di ordinamento}
+\begin{definition}[Stabilità]
+    Un algoritmo di ordinamento è detto essere stabile se preserva l'ordine
+    iniziale tra due elementi con la stessa chiave.
+\end{definition}

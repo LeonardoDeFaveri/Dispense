@@ -414,7 +414,6 @@ halting
 tupla
 polinomialmente
 Sudoku
-Sodoku
 sudoku
 colorabilità
 text
@@ -456,3 +455,10 @@ cost
 Lower
 south
 copy
+Counting
+counting
+Pigeonhole
+pigeonhole
+sotto-intervalli
+Bucket
+bucket
