@@ -560,8 +560,63 @@ verificare che i rimanenti $n-2$ punti stiano dalla \q{stessa parte}.
 
 \subsection{Algoritmo di Jarvis}
 Anche detto \emph{Gift Packing}, l'\emph{Algoritmo di Jarvis} parte dal punto
-più a sinistra dell'insieme, ovvero dal punto $p_0$ con ordinata minore. A quel
-punto, viene calcolato l'angolo di inclinazione delle rette passanti per $p_0$ e
-ogni altro punto rispetto alla verticale. Il punto $p_1$ associato alla retta con
-angolo minore viene selezionato come vertice del poligono. Il tutto viene ripetuto
-fino a quando non viene selezionato di nuovo come vertice il punto $p_0$.
+più a sinistra dell'insieme, ovvero dal punto $p_0$ con ordinata minore. Quindi,
+viene calcolato l'angolo d'inclinazione delle rette passanti per $p_0$ e
+ogni altro punto rispetto alla verticale. 
+
+\smallskip\noindent
+\begin{minipage}{0.48\textwidth}
+Il punto $p_1$ associato alla retta con angolo minore viene selezionato come
+vertice del poligono. Successivamente, si considera la retta $r$ passante per
+$p_{i-1}$ e $p_{i-2}$ e si confrontano gli angoli che le rette passanti per
+$p_{i-1}$ e tutti i punti rimanenti formano con $r$. Ad essere selezionato come
+vertice è il punto $p_i$ associato all'angolo minore. Il tutto viene ripetuto
+fino a quando ad essere selezionato non è di nuovo $p_0$.
+\end{minipage}\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{graph}
+    \tikzset{
+        point/.style={circle, fill, minimum width=4pt, inner sep=0},
+        empty/.style={inner sep=0},
+        pos/.style args={#1:#2 from #3}{
+          at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+        }
+    }
+    \node[point] (0) [label=right:$p_0$] {};
+    \node[point] (1) [pos=65:18mm from 0, label=right:$p_1$] {};
+    \node[point] (2) [pos=45:15mm from 1, label=below:$p_2$] {};
+    \node[point] (3) [pos=-20:30mm from 2, label=right:$p_3$] {};
+    \node[point] (4) [pos=20:10mm from 1] {};
+    \node[point] (5) [pos=-18:10mm from 1] {};
+    \node[point] (6) [pos=20:38mm from 0] {};
+    \node[point] (7) [pos=12:44mm from 0] {};
+    \node[point] (8) [pos=6:55mm from 0] {};
+    \node[point] (9) [pos=-3:25mm from 0] {};
+    \node[point] (9) [pos=-5:47mm from 0] {};
+    \node[point] (10) [pos=-25:25mm from 0] {};
+
+    \node[empty] (e1) [pos=90:35mm from 0] {};
+    \node[empty] (e2) [pos=-90:12mm from 0] {};
+
+    \draw[->] (0)+(0, -0.5cm) arc (270:65:0.5cm);
+    \node[empty] (e3) [pos=65:13.5mm from 0] {};
+    \draw[->] (e3) arc (245:45:0.5cm);
+    \node[empty] (e4) [pos=45:10.5mm from 1] {};
+    \draw[->] (e4) arc (225:-20:0.5cm);
+
+    \path[-]    (0) edge (1)
+                (1) edge (2)
+                (2) edge (3);
+            
+    \draw[-, dashed] (e1) -- (e2);
+\end{graph}
+\end{minipage}
+
+\paragraph{Complessità}
+La selezione del punto $p_0$ costa $O(n)$ e la ricerca dello spigolo successivo
+costa di nuovo $O(n)$ perché viene considerato ogni punto rimanente. Alla fine,
+se i vertici del poligono sono $h$, l'algoritmo ha una \emph{complessità} totale
+di $O(nh)$.
+
+\subsection{Algoritmo di Graham}

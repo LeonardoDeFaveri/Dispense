@@ -737,8 +737,8 @@ $T[2][3]=3$ e $T[1][3]=2$.
 
 \begin{minicode}{Algoritmo di Floyd-Warshall}
 \ind$\langle$\bc{int}[][], \bc{int}[][]$\rangle$ floydWarshall(\bc{GRAPH} G)\\
-    \bc{int}[][] d = new \bc{int}[1\dots G.size()][1\dots G.size()]\\
     \bc{int}[][] T = new \bc{int}[1\dots G.size()][1\dots G.size()]\\
+    \bc{int}[][] d = new \bc{int}[1\dots G.size()][1\dots G.size()]\\
 \end{minicode}
 \newpage
 \begin{codecont}
@@ -756,7 +756,7 @@ $T[2][3]=3$ e $T[1][3]=2$.
             \indfff if (d[u][k] + d[k][v] < d[u][v]) then\\
                 \indffff d[u][v] = d[u][k] + d[k][v]\\
                 \indffff T[u][v] = T[k][v]\\
-\indent return $\langle$d, T$\rangle$
+\indent return $\langle$T, d$\rangle$
 \end{codecont}
 
 \paragraph{Complessità}
