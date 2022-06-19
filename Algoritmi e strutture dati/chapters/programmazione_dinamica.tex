@@ -131,7 +131,7 @@ Se invece posizionassimo la tessera in orizzontale otterremmo una figura compost
 da un rettangolo $2\times(n-2)$ e da un altro rettangolo più piccolo di
 dimensione $1\times2$. Chiaramente, il rettangolo più piccolo corrisponde ad una
 tessera orizzontale posta sopra o sotto quella che abbiamo già messo e, di
-conseguenza, arriviamo alla conclusione che qual'ora si disponga una tessera in
+conseguenza, arriviamo alla conclusione che qualora si disponga una tessera in
 orizzontale se ne debba sempre aggiungere anche una seconda sopra o sotto la prima.
 
 \noindent
@@ -247,7 +247,7 @@ invece la \emph{programmazione dinamica}, con conseguente costruzione di una
 \emph{tabella delle soluzioni}. In particolare, tale tabella conterrà un elemento
 per ogni sotto-problema da risolvere.
 
-Poiché, per ogni $n\in\mathbb{N}$ il calcolo della soluzione si basa su i due
+Poiché per ogni $n\in\mathbb{N}$ il calcolo della soluzione si basa su i due
 valori precedenti di $n$, ci troviamo in una situazione in cui tutti i
 sotto-problemi devono essere risolti e quindi procediamo con la
 \emph{programmazione dinamica} classica o bottom-up. Ciò significa che per
@@ -264,8 +264,8 @@ fino ad $n$.
         \indf return DP[n]
 \end{minicode}
 \begin{note}
-    Sebbene finora avessimo parlato soltanto di soluzioni ricorsive, nulla ci
-    vieta di realizzarne di iterative se queste sono estensionalmente equivalenti.
+    Sebbene finora abbiamo parlato soltanto di soluzioni ricorsive, nulla ci
+    vieta di realizzarne di iterative, se queste sono estensionalmente equivalenti.
 \end{note}\noindent
 L'aumento in efficienza è evidente in quanto la \emph{complessità} si è ridotta
 a $\Theta(n)$, tuttavia, l'utilizzo di una \emph{tabella delle soluzioni} ci
@@ -277,7 +277,7 @@ memorizziamo i valori in un vettore di dimensione $n+1$, quindi la
 \bigskip\noindent Possiamo fare meglio di così?
 
 Da un punto di vista temporale no, ma da quello spaziale si. Se consideriamo bene
-la funzione ci rendiamo facilmente conto del fatto che, ad ogni iterazione,
+la funzione ci rendiamo facilmente conto del fatto che ad ogni iterazione
 utilizziamo soltanto i valori delle due posizioni precedenti. Di conseguenza,
 potremmo eliminare il vettore e utilizzare delle semplici variabili.
 
@@ -296,12 +296,11 @@ Ora, la \emph{complessità spaziale} si è ridotta a $\Theta(1)$.
 
 \paragraph{Criterio di costo logaritmico}
 Le \emph{complessità} calcolate finora sono tali fino a quando ci basiamo su
-un \emph{criterio di costo uniforme}, nel quale consideriamo soltanto il
-numero di elementi. Ora però, proviamo a chiederci come cambierebbero le
-\emph{complessità} se utilizzassimo un \emph{criterio di costo logaritmico}.
+un \emph{criterio di costo uniforme} nel quale consideriamo soltanto il
+numero di elementi. Se utilizzassimo un \emph{criterio di costo logaritmico},
+dovremmo ragionare sul modo in cui crescono i numeri della serie di Fibonacci.
 
 \noindent
-Iniziamo ragionando sul modo in cui crescono i numeri della serie di Fibonacci.
 Se $F(n)$ è l'$n$-esimo numero della serie, vale la \emph{formula di Binet}:
 \[F(n)=\frac{\phi^n}{\sqrt{5}}-\frac{(1-\phi)^n}{\sqrt{5}}\quad\text{con}
 \quad\phi=\frac{1+\sqrt{5}}{2}=1.6180339887\dots\footnotemark\]
@@ -373,7 +372,7 @@ quella di $i-1$, perciò $HV(i)=HV(i-2)\cup\{i\}$.
 \noindent
 Per decidere se accettare o meno la donazione di $i$ è sufficiente vedere
 quale scelta permette di raccogliere più fondi. Se $highest$ è una
-funzione che, dati due insiemi, seleziona quello che garantisce una donazione
+funzione che dati due insiemi seleziona quello che garantisce una donazione
 più alta, $HV(i)$ diventa:
 \[HV(i)=highest\left(HV(i-1),HV(i-2)\cup\{i\}\right)\]
 Ciò che abbiamo detto finora è vero secondo quanto affermato dal seguente teorema:
@@ -424,8 +423,8 @@ possiamo scartare subito qualunque soluzione basata su \emph{divide-et-impera}.
 
 \subsection{Approccio basato su programmazione dinamica}
 La \emph{programmazione dinamica} ci richiede di costruire una \emph{tabella
-delle soluzioni}. Proviamo a costruire tale tabella partendo da un esempio:
-sia il vettore delle donazioni $D$ definito come segue:
+delle soluzioni}. Proviamo a costruire tale tabella partendo da un esempio.
+Sia il vettore delle donazioni $D$ definito come segue:
 \[D=[10,5,5,8,4,7,12]\]
 
 \newpage\noindent
@@ -450,7 +449,7 @@ insiemi in una tabella.
 
 Per risolvere entrambi i problemi in una volta potremmo definire il valore delle
 soluzioni come la quantità di fondi che vengono raccolti. Definiamo quindi una
-funzione $DP$ tale che $DP[i]$ è la massima quantità di fondi che si possono
+funzione $DP$ tale per cui $DP[i]$ sia la massima quantità di fondi che si possono
 ottenere dalle prime $i$ case di Hateville. Partendo da $HV$ possiamo definire
 $DP$ come segue:
 \[DP[i]=\begin{cases}
@@ -489,7 +488,7 @@ riducendo a $\Theta(1)$ la \emph{complessità spaziale}.
 A questo punto abbiamo risolto la prima richiesta del problema. Per quanto
 riguarda la seconda, dobbiamo riuscire a ricostruire l'insieme di indici a
 partire dalla \emph{tabella delle soluzioni}. Grazie al teorema sulla
-\emph{\nameref{def:107}} possiamo fare le seguenti assunzioni:
+\emph{\nameref{def:111}} possiamo fare le seguenti assunzioni:
 \begin{itemize}
     \item Se la casa $i$ non è stata selezionata, $i\notin S_i$ e quindi $S_i=S_
     {i-1}$. Questo, riflesso sulla \emph{tabella delle soluzioni}, garantisce che

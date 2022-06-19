@@ -176,38 +176,40 @@
 \BOOKMARK [1][-]{section.16.4}{Problema dell'enumerazione dei k-sottoinsiemi}{chapter.16}% 176
 \BOOKMARK [1][-]{section.16.5}{Problema del subset sum}{chapter.16}% 177
 \BOOKMARK [2][-]{subsection.16.5.1}{Approccio generale}{section.16.5}% 178
-\BOOKMARK [0][-]{chapter.17}{Problemi intrattabili e teoria dell'NP-completezza}{}% 179
-\BOOKMARK [1][-]{section.17.1}{Introduzione}{chapter.17}% 180
-\BOOKMARK [1][-]{section.17.2}{Riduzioni}{chapter.17}% 181
-\BOOKMARK [2][-]{subsection.17.2.1}{Colorazione di grafi}{section.17.2}% 182
-\BOOKMARK [2][-]{subsection.17.2.2}{Sudoku}{section.17.2}% 183
-\BOOKMARK [2][-]{subsection.17.2.3}{Insieme indipendente}{section.17.2}% 184
-\BOOKMARK [2][-]{subsection.17.2.4}{Copertura di vertici}{section.17.2}% 185
-\BOOKMARK [2][-]{subsection.17.2.5}{Soddisfacibilit\340 di formule booleane}{section.17.2}% 186
-\BOOKMARK [1][-]{section.17.3}{Classi di problemi}{chapter.17}% 187
-\BOOKMARK [1][-]{section.17.4}{Alcuni problemi NP-completi}{chapter.17}% 188
-\BOOKMARK [0][-]{chapter.18}{Soluzioni per problemi intrattabili}{}% 189
-\BOOKMARK [1][-]{section.18.1}{Algoritmi pseudo-polinomiali}{chapter.18}% 190
-\BOOKMARK [2][-]{subsection.18.1.1}{Problema del subset sum}{section.18.1}% 191
-\BOOKMARK [2][-]{subsection.18.1.2}{Problemi fortemente e debolmente NP-completi}{section.18.1}% 192
-\BOOKMARK [1][-]{section.18.2}{Algoritmi di approssimazione}{chapter.18}% 193
-\BOOKMARK [2][-]{subsection.18.2.1}{Problema del bin packing approssimato}{section.18.2}% 194
-\BOOKMARK [2][-]{subsection.18.2.2}{Problema del commesso viaggiatore modificato}{section.18.2}% 195
-\BOOKMARK [1][-]{section.18.3}{Algoritmi euristici}{chapter.18}% 196
-\BOOKMARK [2][-]{subsection.18.3.1}{Prima soluzione greedy - Arco di costo minimo}{section.18.3}% 197
-\BOOKMARK [2][-]{subsection.18.3.2}{Seconda soluzione greedy - Vicino pi\371 vicino}{section.18.3}% 198
-\BOOKMARK [2][-]{subsection.18.3.3}{Soluzione con ricerca locale}{section.18.3}% 199
-\BOOKMARK [1][-]{section.18.4}{Algoritmi branch-\046-bound}{chapter.18}% 200
-\BOOKMARK [2][-]{subsection.18.4.1}{Schema generale}{section.18.4}% 201
-\BOOKMARK [2][-]{subsection.18.4.2}{Problema del commesso viaggiatore}{section.18.4}% 202
-\BOOKMARK [0][-]{chapter.19}{Algoritmi di ordinamento}{}% 203
-\BOOKMARK [1][-]{section.19.1}{Algoritmi basati su confronti}{chapter.19}% 204
-\BOOKMARK [1][-]{section.19.2}{Algoritmi non basati su confronti}{chapter.19}% 205
-\BOOKMARK [2][-]{subsection.19.2.1}{Spaghetti sort}{section.19.2}% 206
-\BOOKMARK [2][-]{subsection.19.2.2}{Counting sort}{section.19.2}% 207
-\BOOKMARK [2][-]{subsection.19.2.3}{Pigeonhole sort}{section.19.2}% 208
-\BOOKMARK [2][-]{subsection.19.2.4}{Bucket sort}{section.19.2}% 209
-\BOOKMARK [1][-]{section.19.3}{Propriet\340 degli algoritmi di ordinamento}{chapter.19}% 210
-\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 211
-\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 212
-\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 213
+\BOOKMARK [1][-]{section.16.6}{Problema dell'inviluppo convesso}{chapter.16}% 179
+\BOOKMARK [2][-]{subsection.16.6.1}{Algoritmo di Jarvis}{section.16.6}% 180
+\BOOKMARK [0][-]{chapter.17}{Problemi intrattabili e teoria dell'NP-completezza}{}% 181
+\BOOKMARK [1][-]{section.17.1}{Introduzione}{chapter.17}% 182
+\BOOKMARK [1][-]{section.17.2}{Riduzioni}{chapter.17}% 183
+\BOOKMARK [2][-]{subsection.17.2.1}{Colorazione di grafi}{section.17.2}% 184
+\BOOKMARK [2][-]{subsection.17.2.2}{Sudoku}{section.17.2}% 185
+\BOOKMARK [2][-]{subsection.17.2.3}{Insieme indipendente}{section.17.2}% 186
+\BOOKMARK [2][-]{subsection.17.2.4}{Copertura di vertici}{section.17.2}% 187
+\BOOKMARK [2][-]{subsection.17.2.5}{Soddisfacibilit\340 di formule booleane}{section.17.2}% 188
+\BOOKMARK [1][-]{section.17.3}{Classi di problemi}{chapter.17}% 189
+\BOOKMARK [1][-]{section.17.4}{Alcuni problemi NP-completi}{chapter.17}% 190
+\BOOKMARK [0][-]{chapter.18}{Soluzioni per problemi intrattabili}{}% 191
+\BOOKMARK [1][-]{section.18.1}{Algoritmi pseudo-polinomiali}{chapter.18}% 192
+\BOOKMARK [2][-]{subsection.18.1.1}{Problema del subset sum}{section.18.1}% 193
+\BOOKMARK [2][-]{subsection.18.1.2}{Problemi fortemente e debolmente NP-completi}{section.18.1}% 194
+\BOOKMARK [1][-]{section.18.2}{Algoritmi di approssimazione}{chapter.18}% 195
+\BOOKMARK [2][-]{subsection.18.2.1}{Problema del bin packing approssimato}{section.18.2}% 196
+\BOOKMARK [2][-]{subsection.18.2.2}{Problema del commesso viaggiatore modificato}{section.18.2}% 197
+\BOOKMARK [1][-]{section.18.3}{Algoritmi euristici}{chapter.18}% 198
+\BOOKMARK [2][-]{subsection.18.3.1}{Prima soluzione greedy - Arco di costo minimo}{section.18.3}% 199
+\BOOKMARK [2][-]{subsection.18.3.2}{Seconda soluzione greedy - Vicino pi\371 vicino}{section.18.3}% 200
+\BOOKMARK [2][-]{subsection.18.3.3}{Soluzione con ricerca locale}{section.18.3}% 201
+\BOOKMARK [1][-]{section.18.4}{Algoritmi branch-\046-bound}{chapter.18}% 202
+\BOOKMARK [2][-]{subsection.18.4.1}{Schema generale}{section.18.4}% 203
+\BOOKMARK [2][-]{subsection.18.4.2}{Problema del commesso viaggiatore}{section.18.4}% 204
+\BOOKMARK [0][-]{chapter.19}{Algoritmi di ordinamento}{}% 205
+\BOOKMARK [1][-]{section.19.1}{Algoritmi basati su confronti}{chapter.19}% 206
+\BOOKMARK [1][-]{section.19.2}{Algoritmi non basati su confronti}{chapter.19}% 207
+\BOOKMARK [2][-]{subsection.19.2.1}{Spaghetti sort}{section.19.2}% 208
+\BOOKMARK [2][-]{subsection.19.2.2}{Counting sort}{section.19.2}% 209
+\BOOKMARK [2][-]{subsection.19.2.3}{Pigeonhole sort}{section.19.2}% 210
+\BOOKMARK [2][-]{subsection.19.2.4}{Bucket sort}{section.19.2}% 211
+\BOOKMARK [1][-]{section.19.3}{Propriet\340 degli algoritmi di ordinamento}{chapter.19}% 212
+\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 213
+\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 214
+\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 215

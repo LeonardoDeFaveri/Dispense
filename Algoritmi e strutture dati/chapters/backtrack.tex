@@ -519,3 +519,49 @@ prima soluzione ammissibile trovata, l'algoritmo termina restituendo
                 return true\\
         \indff return false
 \end{minicode}
+
+\section{Problema dell'inviluppo convesso}
+\begin{definition}[Poligono convesso]
+    Un poligono nel piano è detto essere convesso se ogni segmento di retta
+    che congiunge due punti del poligono rimane sempre dentro il poligono
+    stesso.
+\end{definition}
+\begin{problem}[Problema dell'inviluppo convesso]
+    Dati $n$ punti $p_1,\dots,p_n$ nel piano, con $n\geq 3$, determinare
+    l'inviluppo convesso, ovvero il poligono convesso di superficie minima
+    contenente tutti gli $n$ punti.
+\end{problem}
+
+\noindent
+Intuitivamente, poiché stiamo cercando il \emph{poligono convesso} di superficie
+minima, i vertici di quel poligono dovranno coincidere con alcuni o tutti i
+punti del piano. In particolare, presi due punti, il segmento che li congiunge è
+un lato del poligono se tutti i rimanenti $n-2$ punti stanno dalla \q{stessa
+parte}. Per verificare la condizione usiamo la seguente funzione:
+
+\begin{minicode}{Implementazione sameSide}
+\ind\bc{boolean} sameSime(\bc{POINT} p$_1$, \bc{POINT} p$_2$, \bc{POINT} p, \bc{POINT} q)\\
+    \bc{float} dx = p$_2$.x - p$_1$.x\\
+    \bc{float} dy = p$_2$.y - p$_1$.y\\
+    \bc{float} dx$_1$ = p.x - p$_1$.x\\
+    \bc{float} dy$_1$ = p.y - p$_1$.y\\
+    \bc{float} dx$_2$ = q.x - p$_2$.x\\
+    \bc{float} dy$_2$ = q.y - p$_2$.y\\
+    \com{Restituisce \bc{true} se $p$ e $q$ stanno dalla stessa parte della retta
+    tra $p_1$\,e\,$p_2$}
+    return ((dx $\cdot$ dy$_1$ - dy $\cdot$ dx$_1$) $\cdot$
+    (dx $\cdot$ dy$_2$ - dy $\cdot$ dx$_2$) $\geq$ 0)
+\end{minicode}
+
+\noindent
+Questa soluzione è intuitiva e facile da implementare, ma la \emph{complessità}
+è $O(n^3)$, perché le possibili coppie di punti sono $O(n^2)$ e per ognuna bisogna
+verificare che i rimanenti $n-2$ punti stiano dalla \q{stessa parte}.
+
+\subsection{Algoritmo di Jarvis}
+Anche detto \emph{Gift Packing}, l'\emph{Algoritmo di Jarvis} parte dal punto
+più a sinistra dell'insieme, ovvero dal punto $p_0$ con ordinata minore. A quel
+punto, viene calcolato l'angolo di inclinazione delle rette passanti per $p_0$ e
+ogni altro punto rispetto alla verticale. Il punto $p_1$ associato alla retta con
+angolo minore viene selezionato come vertice del poligono. Il tutto viene ripetuto
+fino a quando non viene selezionato di nuovo come vertice il punto $p_0$.

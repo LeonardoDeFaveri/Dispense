@@ -462,3 +462,7 @@ pigeonhole
 sotto-intervalli
 Bucket
 bucket
+sameSime
+dy
+Jarvis
+Gift

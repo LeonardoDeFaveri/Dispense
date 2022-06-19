@@ -33,7 +33,7 @@ sottoinsieme dei primi $i$ valori di $A$ la cui somma sia esattamente $r$,
     \texttt{true} & r=0\\
     \texttt{false} & r>0\wedge i=0\\
     DP[i-1][r] & r>0\wedge i>0\wedge A[i]>r\\
-    DP[i-1][r] or DP[i-1][r-A[i]] & r>0\wedge i>0\wedge A[i]\leq r
+    DP[i-1][r]\vee DP[i-1][r-A[i]] & r>0\wedge i>0\wedge A[i]\leq r
 \end{cases}\]
 Le prime due clausole di questa definizione fanno sì che i valori della prima
 colonna della tabella siano tutti \texttt{true} e quelli della prima riga, ad
@@ -80,7 +80,7 @@ la \emph{complessità} è $O(2^n)$.
 Possiamo scrivere una soluzione basata su \emph{memoization} in cui, per non
 dover inizializzare l'intera tabella, memorizziamo le soluzioni in un \emph{dizionario}.
 
-\begin{minicode}{Soluzione basata su backtracking}
+\begin{minicode}{Soluzione basata su memoization}
     \ind\bc{boolean} ssRec(\bc{int}[] A, \bc{int} i, \bc{int} r, \bc{DICTIONARY} DP)\\
         \indf if (r == 0) then\hfill\com{Obiettivo raggiunto}
             return true\\
@@ -1698,7 +1698,7 @@ in ingresso e in uscita.
     \caption{Costo per attraversare tutti i \emph{nodi} rimasti}
 \end{figure}
 
-\begin{minicode}{Implementazione delle soluzione}
+\begin{minicode}{Implementazione della soluzione}
 \ind bbTsp(\bc{ITEM}[] S, \bc{int} cost, \bc{SET} R, \bc{int} n, \bc{int} i)\\
     \bc{SET} choices = copy(R)\\
     \indf foreach (c $\in$ choices) do\\
