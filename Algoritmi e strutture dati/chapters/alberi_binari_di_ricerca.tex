@@ -1,7 +1,7 @@
 \chapter{Alberi binari di ricerca e alberi bilanciati}
 \section{Alberi binari di ricerca}
 Precedentemente abbiamo accennato al concetto di \hyperref[def:39]
-{\emph{Dizionario}}, ovvero una \emph{struttura dati} costituita da coppie
+{\emph{dizionario}}, ovvero una \emph{struttura dati} costituita da coppie
 chiave-valore. Un \emph{dizionario} può essere implementato in molteplici modi e
 come abbiamo visto, implementazioni diverse possono comportare \emph{complessità}
 diverse per le singole operazioni che agiscono su quella \emph{struttura}.
@@ -27,18 +27,16 @@ tre possibili implementazioni:
 \begin{note}
     La \emph{complessità} delle operazioni di \texttt{insert} e \texttt{remove}
     per le implementazioni con \emph{vettore e lista non ordinati} è $O(1)$
-    solo se ipotizza che, nella \texttt{insert} non si debba verificare se
+    solo se si ipotizza che, nella \texttt{insert} non si debba verificare se
     l'elemento è già presente o meno, e nella \texttt{remove}, che si conosca
-    già la posizione dell'elemento da rimuovere.
-
-    Se non si fanno queste ipotesi, la \emph{complessità} diventa $O(n)$.
+    già la posizione dell'elemento da rimuovere. Se non si fanno queste
+    ipotesi, la \emph{complessità} diventa $O(n)$.
 \end{note}\noindent
 A questo punto ci chiediamo se non sia possibile implementare un \emph{dizionario}
 sfruttando gli \emph{alberi binari}. Supponiamo che ogni \emph{nodo}
 contenga una coppia formata da una chiave e un valore. E ipotizziamo anche che
 le chiavi appartengano ad un insieme totalmente ordinato, cioè che sia sempre
 possibile stabile se una chiave precede o meno un'altra.
-
 L'implementazione di un \emph{nodo} dell'\emph{albero} potrebbe quindi essere:
 \begin{code}{Nodo albero}
     \bc{TREE} parent\\
@@ -58,7 +56,7 @@ $u$ valgano le seguenti due proprietà:
     Le proprietà appena definite permettono di realizzare un algoritmo di
     ricerca dicotomica.
 \end{note}\noindent
-Giunti a questo punto possiamo definire una regola generale:\
+Definiamo una regola generale:\
 \begin{definition}[Albero binario di ricerca (ABR)]
     Un albero binario di ricerca è un albero binario nel quale per ogni nodo $u$
     vale:
@@ -453,7 +451,7 @@ troppo \q{\emph{sbilanciati}}.
 \section{Alberi binari di ricerca bilanciati}
 Abbiamo terminato l'ultima sezione discutendo brevemente il modo in cui
 l'\emph{altezza} di un \emph{albero} determini il costo delle operazioni. In
-particolare, abbiamo accennato al fatto nel caso pessimo tutti i \emph{nodi}
+particolare, abbiamo accennato al fatto che nel caso pessimo tutti i \emph{nodi}
 sono posizionati come in una \emph{lista}, mentre nel caso migliore
 l'\emph{albero} gode una struttura più simmetrica rispetto alla \emph{radice}.
 
@@ -484,7 +482,7 @@ Esistono diversi algoritmi di \emph{bilanciamento}, quali ad esempio:
     merge e split, distribuisce i \emph{nodi} su \emph{alberi} con due o tre
     \emph{figli};
 \end{itemize}
-Noi, in questa trattazione, analizzeremo un quarto tipo di \emph{alberi}, gli
+In questa trattazione analizzeremo un quarto tipo di \emph{alberi}, gli
 \emph{Alberi Red-Black}, ideati da Guibas e Sedgewick nel 1978.
 
 \section{Alberi Red-Black}
@@ -492,7 +490,6 @@ Noi, in questa trattazione, analizzeremo un quarto tipo di \emph{alberi}, gli
     Gli Alberi Red-Black sono alberi binari di ricerca nei quali ogni nodo è
     colorato di rosso oppure di nero. Le chiavi vengono mantenute soltanto nei
     nodi interni e le foglie sono costituite da nodi speciali con valore Nil.
-
     Inoltre, vengono rispettati i seguenti vincoli:
     \begin{enumerate}
         \item La radice è nera;
@@ -534,12 +531,6 @@ Noi, in questa trattazione, analizzeremo un quarto tipo di \emph{alberi}, gli
             \node[nil] (15) [below left of=4, xshift=7] {Nil};
             \node[nil] (16) [below right of=4, xshift=-7] {Nil};
         
-            \node[nil] (17) [below left of=14, xshift=25, yshift=-3] {Nil};
-            \node[nil] (18) [below right of=14, xshift=-25, yshift=-3] {Nil};
-            \node[nil] (19) [below left of=15, xshift=25, yshift=-3] {Nil};
-            \node[nil] (20) [below right of=15, xshift=-25, yshift=-3] {Nil};
-            \node[nil] (21) [below left of=16, xshift=25, yshift=-3] {Nil};
-            \node[nil] (22) [below right of=16, xshift=-25, yshift=-3] {Nil};
             \node[nil] (23) [below left of=9, xshift=25, yshift=-5] {Nil};
             \node[nil] (24) [below right of=9, xshift=-25, yshift=-5] {Nil};
             \node[nil] (25) [below left of=10, xshift=25, yshift=-5] {Nil};
@@ -571,12 +562,6 @@ Noi, in questa trattazione, analizzeremo un quarto tipo di \emph{alberi}, gli
             \path[-]  (3) edge (14)
                       (4) edge (15)
                       (4) edge (16)
-                      (14) edge (17)
-                      (14) edge (18)
-                      (15) edge (19)
-                      (15) edge (20)
-                      (16) edge (21)
-                      (16) edge (22)
                       (9) edge (23)
                       (9) edge (24)
                       (10) edge (25)
@@ -884,7 +869,7 @@ l'\emph{albero} era stata colorata di rosso.
     Ogni \emph{nodo} inserito viene in automatico colorato di rosso perché in
     questo modo c'è la possibilità che non sia necessario ribilanciare
     l'\emph{albero}. Al contrario, l'inserimento di un \emph{nodo} nero
-    comporta sempre un ribilanciamento in quanto viene modificata
+    comporta sempre un ribilanciamento perché viene modificata
     l'\emph{altezza nera} dell'\emph{albero}.
 \end{note}
 

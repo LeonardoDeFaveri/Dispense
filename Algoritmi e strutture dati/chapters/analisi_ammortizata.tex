@@ -84,7 +84,6 @@ In generale, il \emph{costo ammortizzato} di un'operazione è pari a:
     a_i & = & c_i + (\Phi(S_i)-\Phi(S_{i-1}))
 \end{array}\]
 dove $S_i$ è lo stato associato all'$i$-esima operazione.
-
 Se proviamo a calcolare il \emph{costo ammortizzato} di una sequenza di $n$
 operazioni, vale quanto segue:
 \[A\begin{array}[t]{cl}
@@ -171,7 +170,7 @@ eseguire $n$ operazioni in sequenza.
 
 Inizialmente potremmo notare che per rappresentare $n$ in binario servono
 $k=\lceil\log(n+1)\rceil$ bit. Un'invocazione di \texttt{increment} nel caso
-pessimo richiede un tempo $O(k)$, quindi $n$ invocazioni costano $T(n)=O(nxk)$.
+pessimo richiede un tempo $O(k)$, quindi $n$ invocazioni costano $T(n)=O(nk)$.
 A questo punto, il costo ammortizzato di ogni operazione è $T(n)/n=O(nk)/n=O(k)=O(\log n)$.
 
 Se però notiamo che il costo per eseguire l'intera sequenza è proporzionale al
@@ -228,7 +227,7 @@ numero di bit che sono stati modificati.
 Guardando l'ultima riga possiamo notare che il bit in posizione $A[0]$ viene
 modificato ad ogni incremento, quello in $A[1]$ ogni due, quello in $A[2]$ ogni
 4 e così via. Di conseguenza, il costo $T(n)$ è una funzione di questo tipo:
-\[T(n)=\sum_{i=0}^{k-1}\lfloor\frac{n}{2^i}\rfloor\leq n\sum_{i=0}^{k-1}\frac
+\[T(n)=\sum_{i=0}^{k-1}\left\lfloor\frac{n}{2^i}\right\rfloor\leq n\sum_{i=0}^{k-1}\frac
 {1}{2^i}\leq n\sum_{i=0}^{+\infty}\left(\frac{1}{2}\right)^i=2n\]
 e quindi il costo ammortizzato vale:
 \[\frac{T(n)}{n}\leq\frac{2n}{n}=2=O(1)\]
@@ -254,7 +253,7 @@ incontrati diventano 0 e il primo bit a 0 diventa 1. Quindi, se allo stato $S_i$
 $\Phi(S_i)=t$, allo stato $S_{i+1}$ $\Phi(S_{i+1})=1$ e, conseguentemente, la
 variazione di potenziale tra lo stato $S_{i+1}$ e lo stato $S_i$ vale:
 \[\Phi(S_{i+1})-\Phi(S_i)=1-t\]
-Il costo ammortizzato di un'invocazione della \texttt{insert}, allora, vale:
+Il costo ammortizzato di un'invocazione della \texttt{increment}, allora, vale:
 \[\emph{Costo ammortizzato}\begin{array}[t]{cl}
     = & \emph{Costo effettivo}+\emph{Variazione di potenziale}\\
     = & (1+t)+(1-t)\\
@@ -271,10 +270,10 @@ Possiamo utilizzare le tecniche di \emph{analisi ammortizzata} per stimare la
 con ridimensionamento dinamico della dimensione.
 
 Prima però vediamo brevemente cosa significa \q{ridimensionamento dinamico della
-dimensione}. Quando si implementa una \emph{\hyperref[def:27]{Sequenza}}
+dimensione}. Quando si implementa una \emph{\hyperref[def:27]{sequenza}}
 utilizzando un vettore, se ne specifica una dimensione iniziale detta
 \emph{capacità}. Ovviamente, non è sempre nota a priori la quantità di elementi
-che dovranno essere inseriti nella struttura e quindi la \emph{capacità} iniziale
+che dovranno essere inseriti nella struttura, e quindi la \emph{capacità} iniziale
 può rivelarsi insufficiente. I \emph{vettori dinamici} risolvono questo problema
 allocando un nuovo vettore con una capacità maggiore e ricopiando in esso tutti
 i valori presenti nel vettore originale, che poi può essere eliminato.
@@ -439,7 +438,7 @@ quando il \emph{fattore di carico} $\alpha=\frac{\emph{Dim}}
 in dato momento sono presenti nella struttura}
 
 L'operazione di riduzione della \emph{capacità} è detta \emph{contrazione} e,
-similmente a quanto avviene con l'estensione, prevede che venga allocato un nuovo
+similmente a quanto avviene con l'\emph{espansione}, prevede che venga allocato un nuovo
 vettore di dimensione inferiore a quella attuale, che vi vengano copiati i
 valori del vettore originale e che quindi quest'ultimo venga eliminato.
 
@@ -529,10 +528,12 @@ a confronto diverse implementazioni di un \emph{\hyperref[def:28]{insieme}}.
 \subsection{Insieme come vettore di booleani}
 Quando si a che fare con $m$ valori ordinabili e consecutivi è possibile
 implementare un \emph{insieme} per quei valori come un vettore di booleani di
-dimensione $m$. Ogni posizione del vettore vale \texttt{true} l'elemento associato
-appartiene all'insieme, altrimenti vale \texttt{false}.
+dimensione $m$. Ogni posizione del vettore vale \texttt{true} se l'elemento
+associato appartiene all'insieme, altrimenti vale \texttt{false}.
 
+\bigskip\noindent
 Vediamone l'implementazione:
+
 \begin{code}{Insieme come vettore di booleani}
 \begin{minipage}[t]{0.48\textwidth}
 \bc{boolean}[] V\hfill\com{Vettore di booleani}
@@ -698,9 +699,9 @@ unione, intersezione e differenza il cui costo si riduce a $O(n)$.
 \end{codecont}
 \begin{note}
     Il costo dell'implementazione come vettore ordinato è equivalente
-    all'implementazione come \emph{lista} ordinata, tranne la funzione di
-    \texttt{contains} che ha costo $O(\log n)$ in quanto su un vettore ordinato
-    è possibile usare un algoritmo di ricerca dicotomica.
+    all'implementazione come \emph{lista} ordinata, tranne per la funzione
+    \texttt{contains} che nel vettore ha costa $O(\log n)$ in quanto è
+    possibile usare un algoritmo di ricerca dicotomica.
 \end{note}
 
 \subsection{Confronto generale}
