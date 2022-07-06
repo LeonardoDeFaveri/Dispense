@@ -1,17 +1,17 @@
 \chapter{Analisi di algoritmi}
 
 \section{Studio degli algoritmi}
-Studiare gli algoritmi significa studiarne la \emph{complessità} e, l'obiettivo
-di quest'analisi, è quello di realizzare nuove versioni di quegli stessi
+Studiare gli algoritmi significa studiarne la \emph{complessità} e l'obiettivo
+di quest'analisi è quello di realizzare nuove versioni di quegli stessi
 algoritmi che godano di una \emph{complessità} minore e siano quindi più
 efficienti.
 
 \begin{definition}[Complessità di un algoritmo]
     Studiare la complessità di un algoritmo significa fare l'analisi delle risorse
-    impiegate da un algoritmo per risolvere un problema, in funzione della
+    da esso impiegate per risolvere un problema, in funzione della
     dimensione e della tipologia di input.
 \end{definition}\noindent
-A questo punto la \emph{complessità} si misura con una funzione del tipo:
+La \emph{complessità} si misura con una funzione del tipo:
 \[\text{Complessità}:\text{"Dimensione dell'input"}\rightarrow
 \text{"Tempo di esecuzione"}\]
 Ma cosa si intende con \emph{dimensione dell'input}?
@@ -28,8 +28,8 @@ E con \emph{tipologia di input}?
 Questo aspetto non impatta su tutti gli algoritmi allo stesso modo. Il caso in
 cui è più facile comprenderne le conseguenze è quello dell'ordinamento di array.
 L'algoritmo \emph{insertion sort}, per esempio, si adatta più efficientemente
-a situazioni in cui gli elementi vengono forniti uno per volta e l'algoritmo
-\emph{selection sort} invece, è preferibile quando si hanno già tutti gli elementi
+a situazioni in cui gli elementi vengono forniti uno per volta, mentre l'algoritmo
+\emph{selection sort} è preferibile quando si hanno già tutti gli elementi
 da ordinare\footnote{La complessità di questi algoritmi verrà discussa più nel
 dettaglio nel corso di questo capitolo}.
 
@@ -44,15 +44,15 @@ Il \emph{tempo di esecuzione} coincide con il numero di istruzioni elementari.
 \newpage
 \subsection{Modello di calcolo}
 Nello studio degli algoritmi, un parametro da tenere in considerazione è il
-\emph{modello di calcolo} utilizzato in quanto modelli diversi potrebbero
-cambiare, in meglio o in peggio, la \emph{complessità} e l'efficienza di un
-algoritmo.
+\emph{modello di calcolo} utilizzato, in quanto, modelli diversi potrebbero
+cambiare, in meglio o in peggio, la \emph{complessità} e quindi l'efficienza di
+un algoritmo.
 
 \begin{definition}[Modello di calcolo]
     Un modello di calcolo è una rappresentazione astratta di un calcolatore.
 \end{definition}\noindent
-Analizziamo nel dettaglio questa definizione per capire quali caratteristiche
-debba avere un \emph{modello di calcolo}:
+Da questa definizione deriviamo le caratteristiche che un generico \emph{modello
+di calcolo} deve soddisfare:
 \begin{itemize}
     \item \emph{Astrazione}: deve nascondere i dettagli tecnico-operativi;
     \item \emph{Realismo}: deve riflettere la situazione reale del sistema di
@@ -61,7 +61,7 @@ debba avere un \emph{modello di calcolo}:
     \emph{formali} sul costo;
 \end{itemize}
 Esistono molteplici \emph{modelli di calcolo} e il modello della \emph{Macchina
-di Turing} ne è un esempio. Tuttavia, nel corso della trattazione faremo
+di Turing} ne è un esempio. Nel corso di questa trattazione faremo
 riferimento al \emph{Modello RAM}\footnote{\emph{RAM: Random Access Machine}}
 caratterizzato da:
 \begin{itemize}
@@ -107,14 +107,14 @@ dimensione $n$.
 
 \paragraph{Analisi del costo}
 Analizziamo il costo di questo algoritmo. Ogni operazione elementare ha un tempo
-costante di esecuzione che indicheremo con $c_i$ e ogni istruzione viene eseguita
+di esecuzione costante che indicheremo con $c_i$ e ogni istruzione viene eseguita
 un certo numero di volte.
 
 \newpage\noindent
 Indichiamo con $T(n)$ la \emph{funzione di costo} dell'algoritmo,
-ovvero la funzione che ne traccia il tempo di esecuzione. Calcoliamo $T(n)$
-sommando il tempo di esecuzione di ogni istruzione considerando anche il numero
-di volte che ogni istruzione viene eseguita.
+ovvero la funzione che ne traccia il tempo di esecuzione al variare del valore $n$.
+Calcoliamo $T(n)$ sommando il tempo di esecuzione di ogni istruzione considerando
+anche il numero di volte che ogni istruzione viene eseguita.
 \[T(n)\begin{array}[t]{cl}
     = & c_1+c_2n+c_3(n-1)+c_4(n-1)+c_5\\
     = & (c_2+c_3+c_4)n+(c_1+c_5-c_3-c_4)\\
@@ -162,7 +162,7 @@ destro e sinistro della porzione di array all'interno della quale ricercare
 l'elemento\footnote{All'inizio indicano rispettivamente l'indice del primo e
 dell'ultimo elemento}.
 
-Nell'algoritmo sono presenti delle selezioni, che "modificano" il costo in
+Nell'algoritmo sono presenti delle selezioni che \q{modificano} il costo in
 termini di tempo dell'algoritmo. Viene selezione un elemento \q{centrale}
 nell'array e, se non è l'elemento cercato, si applica ricorsivamente l'algoritmo
 alla parte di sinistra, se l'elemento cercato è minore di quello analizzato,
@@ -172,12 +172,12 @@ parte di sinistra ha dimensione $(n-1)/2$, mentre quella di destra $n/2$.
 \bigskip\noindent
 Analizziamo il caso pessimo, cioè quello in cui l'elemento cercato non è presente
 e quindi viene controllato l'intero array. Scegliamo di agire in questo modo così
-da poter dare una stima del tempo massimo di esecuzione. Per lo stesso motivo,
+da poter dare una stima del tempo massimo d'esecuzione. Per lo stesso motivo,
 ipotizziamo che l'elemento cercato sia maggiore di ogni elemento presente
 nell'array e che quindi la chiamata ricorsiva venga effettuata sempre sulla parte
 di destra che ha una dimensione maggiore.
 
-Inoltre, per semplicità, assumiamo che l'array contenga un numero $2^k$ di
+Inoltre, per semplicità assumiamo che l'array contenga un numero $2^k$ di
 elementi e assegniamo ad ogni istruzione elementare un costo $c_i$.
 
 \bigskip\noindent
@@ -187,7 +187,7 @@ Nella stima del costo dell'algoritmo abbiamo due casi:
     \item $i\leq j$ per $n > 0$ quindi $T(n) = T(n/2)+c_1+\dots+c_7=
     T(n/2) + d$;
 \end{itemize}
-Possiamo vedere il tutto come una funzione che determina il costo dell'algoritmo:
+Possiamo vedere il tutto come una funzione definita per casi:
 
 \[T(n)=\begin{cases}
     T(n/2) & n\geq 1\\
@@ -195,7 +195,7 @@ Possiamo vedere il tutto come una funzione che determina il costo dell'algoritmo
 \end{cases}\]
 Poiché $T(n/2)$ rappresenta una chiamata ricorsiva, possiamo analizzare le varie
 chiamate:
-\[T(n)=\begin{array}[t]{cll}
+\[T(n)\begin{array}[t]{cll}
     = & T(n/2)+d\\
     = & T(n/4)+2d\\
     = & T(n/8)+3d\\
@@ -233,9 +233,9 @@ complessità} e la tabella sottostante ne riassume i principali.
 
 \section{Notazione asintotica}
 Abbiamo quindi introdotto il concetto di \emph{ordine di complessità} come metro
-di misura del costo di un algoritmo. Ora andremo ad introdurre uno strumento, la
-\emph{notazione asintotica}, che ci permetterà di descrivere in maniera più
-formale il costo di un algoritmo.
+di misura del costo di un algoritmo. Ora andremo ad introdurre lo strumento della
+\emph{notazione asintotica}, che ci permetterà di descrivere quel costo in
+maniera più formale.
 
 Quelle che andremo ad introdurre in realtà sono tre notazioni, indicate
 rispettivamente dalle lettere $O$, $\Omega$, $\Theta$.
@@ -253,7 +253,7 @@ al più come $g(n)$.\newpage
 \begin{definition}[Notazione $\Omega$]
     Sia $g(n)$ una funzione di costo. Si indica con $\Omega(g(n))$ l'insieme
     delle funzioni $f(n)$ tali per cui:
-    \[\exists\,c>0,\,\exists\,m\geq0:f(n)\geq c\cdot g(n)\quad\forall\,n\geq m\]
+    \[\exists\,d>0,\,\exists\,m\geq0:f(n)\geq d\cdot g(n)\quad\forall\,n\geq m\]
 \end{definition}\noindent
 Le funzioni $f(n)$ che rispettano questa disuguaglianza sono dette essere
 \emph{$\Omega$-grandi} di $g(n)$ e si scrive in simboli $f(n)=\Omega(g(n))$.
@@ -261,7 +261,7 @@ $g(n)$ è un \emph{limite asintotico inferiore} di $f(n)$, ciò significa che $f
 cresce almeno come $g(n)$.
 
 \begin{definition}[Notazione $\Theta$]
-    Sia $g(n)$ una funzione di costo, Si indica con $\Theta(g(n))$ l'insieme
+    Sia $g(n)$ una funzione di costo. Si indica con $\Theta(g(n))$ l'insieme
     delle funzioni $f(n)$ tali per cui: 
     \[\exists\,c_1>0,\,\exists\,c_2>0,\,\exists\,m\geq0:
     c_1\cdot g(n)\leq f(n)\leq c_2\cdot g(n)\quad\forall\,n\geq m\]
@@ -301,7 +301,7 @@ della porzione di grafico disegnata dalle due curve di $g(n)$.
         =   &   13n^3
     \end{array}\]
     A questo punto ci chiediamo se esistono un valore $c>0$ e un
-    valore $m\geq 0$ tali che:
+    valore $m\geq 0$ tali per cui:
     \[13n^3\leq c\cdot n^3\]
     La risposta è banale poiché basta prendere $c\geq13$ e
     $m\geq1\geq\sqrt[3]{7}$, ad esempio, $m=2$.
@@ -411,7 +411,7 @@ Questo algoritmo segue un approccio molto intuitivo: cerca il minimo tra tutti g
 elementi, lo ordina e poi ripete il tutto per i restanti elementi.
 
 \begin{code}{Implementazione algoritmo Selection Sort}
-\noindent\rmbreak SelectionSort(\bc{ITEM}[] A, \bc{int} n)\\
+\noindent\rmbreak\ind SelectionSort(\bc{ITEM}[] A, \bc{int} n)\\
     \ind for (i = 1 to n - 1) do\\
         \indf\bc{int} min = min(A, i, n)\\
         \indf A[i] $\leftrightarrow$ A[min]\hfill\com{Scambia il minimo attuale e l'elemento $A[i]$}    
@@ -443,10 +443,10 @@ Questo vale per tutti i casi, quindi l'algoritmo \emph{insertion sort} ha un
 costo $\Theta(n^2)$.
 
 \subsection{Algoritmo Insertion sort}
-Vediamo ora un approccio diverso al problema nel quale proviamo a prendere un
-elemento per volta e a metterlo nella posizione giusta.
+Vediamo ora un approccio nel quale proviamo a prendere un elemento per volta e
+a metterlo nella posizione giusta.
 
-In particolare, ad ogni iterazione viene preso un valore e confrontato
+In particolare, ad ogni iterazione viene preso un valore e viene confrontato
 progressivamente con i valori precedenti. Se viene trovato un valore minore di
 quello preso, quest'ultimo viene salvato nella penultima cella
 controllata.
@@ -474,7 +474,7 @@ falso e quindi la funzione di costo è:
 
 \hypertarget{sec:merge_sort}{\subsection{Algoritmo Merge sort}}
 Questo algoritmo è basato sulla tecnica del \emph{divide-et-impera}, cioè procede
-suddividendo l'array in due metà che vengono poi ordinate separatamente e quindi
+suddividendo l'array in due metà che vengono ordinate separatamente e quindi
 ricombinate per ottenere l'array di partenza ordinato.
 
 Come sarà facile intuire, questo algoritmo sfrutta la ricorsione per suddividere
@@ -495,7 +495,7 @@ sottoarray di $A$. Una volta riempito, tutti i valori di $B$ vengono ricopiati
 di nuovo su $A$.
 \begin{code}{Implementazione funzione merge}
 \noindent\rmbreak\ind merge(\bc{ITEM}[] A, \bc{int} first, \bc{int} last, \bc{int} mid)\\
-    \bc{int} i, j, k, h\\
+    \bc{int} i, j, k\\
     i = first\\
     j = mid + 1\\
     k = first\hfill\com{Indice delle posizioni nell'array di appoggio}

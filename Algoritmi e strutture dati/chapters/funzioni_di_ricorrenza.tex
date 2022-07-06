@@ -94,8 +94,8 @@ costo ai vari livelli della ricorsione.
         = & n + 2n + 4n + 8n + \dots + 2^{\log(n)-1}n + 4^{\log n}T(1)\\
         = & \left(\sum_{i=0}^{\log(n)-1}2^i\right)\cdot n+4^{\log n}
     \end{array}\]
-    A questo punto, possiamo sfruttare la \hyperlink{ser:2}{\emph{serie geometrica
-    finita}} e riscrivere la funzione come:
+    A questo punto, possiamo sfruttare la \hyperlink{ser:2}{serie geometrica
+    finita} e riscrivere la funzione come:
     \[T(n)\begin{array}[t]{cll}
         = & \left(\sum_{i=0}^{\log(n)-1}2^i\right)\cdot n+4^{\log n}\\
         = & \left(\frac{2^{\log n}-1}{2 - 1}\right)\cdot n + 4^{\log n} & \quad\hyperlink{ser:2}{\text{Serie geometrica finita}}\\
@@ -173,7 +173,7 @@ costo ai vari livelli della ricorsione.
         \hline
         \dots & \dots & \dots & \dots & \dots\\
         \hline
-        $i$ & $n/2^1$ & $(n/2^i)^3$ & $4^i$ & $4^i(n/2^i)^3$\\
+        $i$ & $n/2^i$ & $(n/2^i)^3$ & $4^i$ & $4^i(n/2^i)^3$\\
         \hline
         \dots & \dots & \dots & \dots & \dots\\
         \hline
@@ -199,7 +199,7 @@ costo ai vari livelli della ricorsione.
     Giunti a questo punto abbiamo:
     \[T(n)\leq\left(\sum_{i=0}^{+\infty}\left(\frac{1}{2}\right)^i\right)\cdot n^3 + n^2\]
     Tuttavia, possiamo riconoscere nella sommatoria la \hyperlink{ser:4}
-    {\emph{serie geometrica infinita decrescente}} e riscrivere $T(n)$ come:
+    {serie geometrica infinita decrescente} e riscrivere $T(n)$ come:
     \[T(n)\begin{array}[t]{cl}
         \leq & \frac{1}{1-\frac{1}{2}}n^3+n^2\\
         \leq & 2n^3+n^2
