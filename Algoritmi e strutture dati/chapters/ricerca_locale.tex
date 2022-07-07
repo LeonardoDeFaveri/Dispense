@@ -3,7 +3,7 @@
 La \emph{ricerca locale} è una tecnica risolutiva che, partendo da una soluzione
 ammissibile qualunque, ricerca una soluzione migliore nelle \q{vicinanze} di
 quella nota. Questo processo continua fino ad arrivare a una soluzione localmente
-ottima. La particolarità di questa tecnica è che la soluzione trovata potrebbe
+ottima. La particolarità di questo approccio è che la soluzione trovata potrebbe
 non essere la migliore possibile.
 
 \begin{figure}[h!]
@@ -41,7 +41,7 @@ non essere la migliore possibile.
 
 \noindent
 Nel grafico di cui sopra, se la ricerca partisse da una soluzione \q{vicina} a
-$B$, un algoritmo basato su \emph{ricerca locale} potrebbe convergere sul punto
+$B$, un algoritmo basato su \emph{ricerca locale} convergerebbe sul punto
 $B$, sebbene esso non rappresenti una soluzione globalmente ottima.
 
 \begin{minicode}{Implementazione generica di un algoritmo basato su ricerca locale}
@@ -692,7 +692,7 @@ possiamo usare una \hyperref[code:48]{\emph{visita in ampiezza}} o in
     \bc{int} t, \bc{boolean}[] visited, \bc{int}\:minCap)\\
     \indf if (s == t) then\\
         return min\\
-    \indf visited[i] = true\\
+    \indf visited[s] = true\\
     \indf for (i = 1 to n) do\\
         \indff if (c[s][i] > 0 and not visited[i]) then\\
             \bc{int} val = dfs(c, f, n, i, t, visited, min(minCap, c[s][i]))\\
@@ -936,7 +936,7 @@ definizioni.
     disuguaglianza:
     \[F_f(S,T)\leq C(S,T)\quad\forall f\wedge\forall (S,T)\]
     Per la proprietà del \emph{vincolo sulla capacità} vale quanto segue:
-    \[F_f(S,T)=\sum_{x\in S,y\in T}f(x,y)\leq\sum_{x\in S,y\in T}C(x,y)=C(S,T)\]
+    \[F_f(S,T)=\sum_{x\in S,y\in T}f(x,y)\leq\sum_{x\in S,y\in T}c(x,y)=C(S,T)\]
     Inoltre, il \emph{flusso} che attraversa un \emph{taglio} è uguale al
     \emph{valore del flusso}:
     \[|f|=F_f(S,T)\quad\forall f\wedge\forall (S,T)\]
@@ -1008,7 +1008,7 @@ scrivendo che la \emph{complessità} è $O(VE^2)$ o $O(V^5)$.
 \paragraph{Dimostrazione}
 \begin{definition}[Monotonia]
     Siano $\delta_f(s,x)$ la distanza minima da $s$ a $x$ in una rete residua
-    $G_f$ e $f'=f+g$ una flusso nella rete iniziale con $g$ non nullo e
+    $G_f$ e $f'=f+g$ un flusso nella rete iniziale con $g$ non nullo e
     derivante da un cammino aumentante. Allora, $\delta_{f'}(s,x)\geq\delta_f(s,x)$.
 \end{definition}
 \begin{proof}[Dimostrazione]
@@ -1039,11 +1039,11 @@ di aumenti di \emph{flusso} è limitato superiormente da $O(VE)$.
     riutilizzato soltanto se il \emph{flusso} attraverso quell'\emph{arco}
     diminuisce. Ovvero, solo se verrà utilizzato l'\emph{arco} $(y,x)$.
     Se $g$ è il \emph{flusso} quando ciò accade, vale:
-    \[\delta_g(s,y)=\delta_g(s,x)+1\]
+    \[\delta_g(s,x)=\delta_g(s,y)+1\]
     Per la \emph{monotonia} sappiamo anche che $\delta_g(s,y)\geq\delta_f(s,y)$,
     quindi vale quanto segue:
-    \[\delta_g(s,y)\begin{array}[t]{cl}
-        = & \delta_g(s,x)+1\\
+    \[\delta_g(s,x)\begin{array}[t]{cl}
+        = & \delta_g(s,y)+1\\
         \geq & \delta_f(s,y)+1\\
         = & \delta_f(s,x)+1+1
     \end{array}\]

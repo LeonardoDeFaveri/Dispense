@@ -1027,9 +1027,9 @@ compresi nell'\emph{albero di copertura} $T$ possono essere classificati in tre 
 \end{figure}\noindent
 Nella figura si vede l'\emph{albero di copertura} ottenuto dopo aver effettuato una
 \emph{visita in profondità} partendo dal \emph{nodo} $a$. Gli \emph{archi} rossi
-sono gli \emph{archi dell'albero di copertura}, mentre gli \emph{archi} $(a,c)$
-e $(c,a)$ sono, rispettivamente, un \emph{arco in avanti} e un \emph{arco
-all'indietro}. Infine, gli \emph{archi} uscenti da $d$ sono \emph{archi di
+sono gli \emph{archi dell'albero di copertura}, mentre gli \emph{archi} $(a,d)$
+e $(d,a)$ sono, rispettivamente, un \emph{arco in avanti} e un \emph{arco
+all'indietro}. Infine, gli \emph{archi} uscenti da $c$ sono \emph{archi di
 attraversamento}.
 
 \begin{code}{Implementazione dfs\_schema per la classificazione degli archi}
@@ -1150,11 +1150,13 @@ un \emph{ciclo}.
     in un grafo orientato}
 \ind\bc{boolean} hasCycle(\bc{GRAPH} G, \bc{NODE} u, \bc{int} \&time, \bc{int}[] dt, \bc{int}[] ft)\\
     time = time + 1\\
+    dt[u] = time\\
     \indf foreach (v $\in$ G.adj(u)) do\\
         \indff if (dt[v] == 0) then\\
-            return hasCycle(G, v, time, dt, ft)\\
-    \indff else if (dt[u] > dt[v] and ft[v] $\neq$ 0) then\\
-        return true\\
+            \indfff if (hasCycle(G, v, time, dt, ft)) then\\
+                return true\\
+        \indff else if (dt[u] > dt[v] and ft[v] == 0) then\\
+            return true\\
     \indf time = time + 1\\
     \indf ft[u] = time\\
     \indf return false
