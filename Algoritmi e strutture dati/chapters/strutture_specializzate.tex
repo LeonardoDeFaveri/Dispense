@@ -193,7 +193,7 @@ le seguenti tre proprietà:
 Un \emph{albero heap} può essere rappresentato mediante un \emph{vettore heap},
 cioè un vettore nel quale, se la \emph{radice} è in posizione 1, il \emph{padre}
 e i \emph{figli sinistro} e \emph{destro} di un \emph{nodo} in posizione $i$ si
-trovano rispettivamente alle posizioni $p(i)=\lfloor i/2\rfloor$, $l(i)=2i$ e $r(i)=2i+i$.
+trovano rispettivamente alle posizioni $p(i)=\lfloor i/2\rfloor$, $l(i)=2i$ e $r(i)=2i+1$.
 
 Se invece la \emph{radice} è in posizione 0, gli indici del \emph{padre} e dei
 \emph{figli} diventano rispettivamente $p(i)=\lfloor(i-1)/2\rfloor$, $l(i)=2i+1$
@@ -327,7 +327,7 @@ Vediamo quindi l'algoritmo \emph{HeapSort} per l'ordinamento in senso crescente
 di un vettore.
 
 L'algoritmo ordina un vettore \q{in-place}, costruendo prima su di esso un
-\emph{albero max-heap} e poi spostando progressivamente in fondo gli elemento massimi.
+\emph{albero max-heap} e poi spostando progressivamente in fondo gli elementi massimi.
 Ad ogni spostamento vengono ripristinate le proprietà degli \emph{alberi max-heap}.
 
 Le funzioni utilizzate sono due:
@@ -484,9 +484,9 @@ l'\emph{albero binario} con radice $i$ sia un \emph{albero max-heap}.
 \begin{minicode}{Implementazione maxHeapRestore}
     \ind maxHeapRestore(\bc{ITEM}[] A, \bc{int} i, \bc{int} dim)\\
         \bc{int} max = i\hfill\com{Sceglie la \emph{radice}}
-        \indf if (l(i) $\leq$ dim A[l(i)] > A[max]) then\\
+        \indf if (l(i) $\leq$ and dim A[l(i)] > A[max]) then\\
             max = l(i)\\
-        \indf if (r(i) $\leq$ dim A[r(i)] > A[max]) then\\
+        \indf if (r(i) $\leq$ and dim A[r(i)] > A[max]) then\\
             max = r(i)\\
         \indf if (i $\neq$ max) then\hfill\com{Se $i == max$ l'\emph{albero} è apposto}
             swap(A, i, max)\hfill\com{Scambia la \emph{radice} e il maggiore tra i suoi \emph{figli}}
@@ -591,13 +591,13 @@ $A[\lfloor n/2\rfloor]$, e risalendo fino alla \emph{radice}.
     sia una \emph{foglia} e che quindi abbia almeno il \emph{figlio sinistro}.
     Se così fosse, il \emph{figlio} dovrebbe trovarsi alla posizione $2(\lfloor
     n/2\rfloor+1)=2\lfloor n/2\rfloor+2$, ma ciò sarebbe assurdo perché le posizioni
-    $n+1$ e $n+2$ eccedono la dimensione massima che $n$. La stessa dimostrazione
+    $n+1$ e $n+2$ eccedono la dimensione massima $n$. La stessa dimostrazione
     vale anche per tutti gli indici successivi.
     \paragraph{Conservazione}
-    È possibile applicare \texttt{maxHeapRestore} a ogni \emph{nodo} $i\in[\lfloor
-    n/2\rfloor+1\dots n]$ perché entrambi i \emph{nodi} alle posizioni $2i<2i+1\leq
-    n$ sono \emph{radici} di \emph{alberi heap}. Al termine di ogni iterazioni,
-    i \emph{nodi} $[i\dots n]$ sono \emph{radici} di \emph{alberi heap}.
+    È possibile applicare \texttt{maxHeapRestore} a ogni \emph{nodo} $i$ perché
+    entrambi i \emph{nodi} alle posizioni $2i<2i+1\leq n$ sono \emph{radici}
+    di \emph{alberi heap}. Al termine di ogni iterazioni, i \emph{nodi}
+    $[i\dots n]$ sono \emph{radici} di \emph{alberi heap}.
     \paragraph{Conclusione} Al termine, $i=0$ e quindi il \emph{nodo} $1$ è
     \emph{radice} di un \emph{albero heap}.
 \end{proof}
@@ -648,7 +648,7 @@ Se questo è vero, possiamo scrivere la \emph{funzione di ricorrenza} come:
         heapBuild(A, n)\\
         \indf for (i = n downto 2) do\\
             swap(A, 1, i)\hfill\com{L'elemento massimo viene spostato in fondo}
-            maxHeapRestore(A, 1, n - 1)\hfill\com{Ripristina le proprietà}
+            maxHeapRestore(A, 1, i - 1)\hfill\com{Ripristina le proprietà}
 \end{minicode}\noindent
 In pratica, l'\emph{HeapSort} inizia costruendo un \emph{albero max-heap} sul
 vettore da ordinare. Ad ogni ciclo il primo elemento sarà sicuramente il
@@ -1048,7 +1048,8 @@ incrementata di 1.
 \noindent
 Dal teorema appena dimostrato possiamo ricavare il seguente corollario:
 \begin{definition}[Corollario]
-    Un albero MFSET con radice $r$ e $n$ nodi ha un altezza inferiore a $\log n$.
+    Un albero MFSET con radice $r$ e $n$ nodi ha un altezza minore o uguale di
+    $\log n$.
 \end{definition}
 \begin{proof}[Dimostrazione]
     Vale la seguente relazione:

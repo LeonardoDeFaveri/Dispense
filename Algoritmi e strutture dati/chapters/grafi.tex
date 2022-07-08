@@ -1588,7 +1588,7 @@ stabilito in base all'ordine in cui questi sono stati inseriti nella
         \indf\bc{NODE} u = S.pop()\\
         if (id[u] == 0) then\\
             \indff counter = counter + 1\\
-            ccdfs(G, counter, u, id)\\
+            \indff ccdfs(G, counter, u, id)\\
     \ind return id\\
 
 \nl\com{L'implementazione della funzione ausiliaria non cambia}
@@ -1644,9 +1644,17 @@ successo tutte e tre le \emph{componenti fortemente connesse} del
         \draw[<-] (3) -- (4);
         \draw[<-, color=red, line width=1.3pt] (4) -- (5);
         \draw[<-, color=red, line width=1.3pt] (5) -- (3);
+
+        \node[] (9) [below of=2, xshift=35] {\texttt{Stack = \{a, b, c, f, e, d\}}};
     \end{graph}
     \caption{\emph{Componenti fortemente connesse} del \emph{grafo}}
 \end{figure}
+
+\begin{note}
+    Per quanto riguarda i \emph{nodi} della \emph{componente fortemente
+    connessa} contenente $c$, l'ordine di estrazione dei \emph{nodi} di
+    quella \emph{componente} non ha importanza.
+\end{note}
 
 \paragraph{Costo computazionale}
 Poiché tutte e tre le funzioni che vengono richiamate dalla \texttt{scc} hanno
@@ -1759,9 +1767,10 @@ costo $O(n+m)$ anche la \texttt{scc} ha la stessa \emph{complessità}.
     orientato $G=(V,E)$. Se esiste un arco $(C,C')\in E_C$, allora $ft(C)>ft(C')$.
 \end{definition}
 \begin{note}
-    Ovviamente nel \emph{grafo trasposto} $G_T$, le relazioni d'ordine sui
-    \emph{finish time} sono invertite.
+    Le \emph{componenti fortemente connesse} vengono visitate in ordine
+    decrescente di tempo di fine.
 \end{note}
+
 \begin{figure}[h!]
     \centering
     \subfloat[\emph{Componenti} nel \emph{grafo} originale]
@@ -1834,17 +1843,16 @@ costo $O(n+m)$ anche la \texttt{scc} ha la stessa \emph{complessità}.
     \caption{\emph{Discovery} e \emph{finish time} delle \emph{componenti}}
 \end{figure}
 \begin{note}
-    Quanti si considera un \emph{arco} tra due \emph{componenti fortemente
+    Quando si considera un \emph{arco} tra due \emph{componenti fortemente
     connesse}, in realtà, bisogna considerare l'\emph{arco} che collega i due
     \emph{nodi} appartenenti ad una e all'altra \emph{componente}.
 \end{note}\noindent
 Nelle immagini sopra si vede bene come le \emph{componenti} banali $a$ e $b$
 siano collegate dall'\emph{arco} $(a,b)$ nel \emph{grafo} originale e da
-$(b,a)$ nel \emph{grafo trasposto}. Quindi, nel primo caso $C$ e $C'$ sono
-rispettivamente le \emph{componenti} $a$ e $b$ e infatti vale $ft(a)>ft(b)$.
-Nel \emph{trasposto} invece, $C$ e $C'$ sono invertite, ovvero $C'$ contiene
-$a$ e $C$ contiene $b$. Di conseguenza, la relazione d'ordine sui \emph{finish
-time} è invertita: $ft(C)<ft(C')$.
+$(b,a)$ nel \emph{grafo trasposto}. Quindi, se $C_a$ è la \emph{componente}
+che contiene $a$ e $C_b$ è la \emph{componente} che contiene $b$, vale
+$ft(C_a)>ft(C_b)$. Equivalentemente, possiamo dire che nel \emph{grafo
+trasposto} vale $ft(C_b)<ft(C_a)$.
 
 \bigskip\noindent A questo punto abbiamo tutti gli strumenti per dimostrare la
 correttezza dell'\emph{Algoritmo di Kosaraju}.
@@ -1852,9 +1860,9 @@ correttezza dell'\emph{Algoritmo di Kosaraju}.
     Se le \emph{componenti} $C_x$ e $C_y$ sono connesse mediante un \emph{arco}
     $(x,y)\in E_T$, sicuramente $ft(C_x)<ft(C_y)$. Di conseguenza, la visita di
     $C_y$ inizierà prima di quella di $C_x$. Inoltre, poiché non esistono
-    \emph{cammini} da $C_y$ a $C_x$, perché altrimenti il \emph{grafo} sarebbe
-    \emph{ciclico}, la visita di $C_y$ non raggiungerà mai \emph{nodi} appartenenti
-    a $C_x$.
+    \emph{cammini} da $C_y$ a $C_x$ in $C(G)$, perché altrimenti il \emph{grafo}
+    sarebbe \emph{ciclico}, la visita di $C_y$ non raggiungerà mai \emph{nodi}
+    appartenenti a $C_x$.
 
     In altre parole, la funzione \texttt{cc} assegnerà correttamente tutti gli
     identificatori delle \emph{componenti}.
