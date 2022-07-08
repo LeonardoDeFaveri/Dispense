@@ -1502,9 +1502,8 @@ la loro \emph{altezza} il numero di noi \emph{nodi} che contengono.
 \end{proof}
 
 \begin{definition}[Lunghezza massima dei cammini semplici]
-    In un \emph{Albero Red-Black}, dati due \emph{cammini semplici}, dalla
-    \emph{radice} a due \emph{foglie}, non è possibile che uno sia lungo più
-    del doppio dell'altro.
+    In un Albero Red-Black, dati due cammini semplici, dalla radice a due
+    foglie, non è possibile che uno sia lungo più del doppio dell'altro.
 \end{definition}
 \begin{proof}[Dimostrazione]
     Per il quarto \emph{vincolo di bilanciamento}, tutti i \emph{cammini} da
@@ -1517,15 +1516,15 @@ la loro \emph{altezza} il numero di noi \emph{nodi} che contengono.
 \end{proof}
 
 \begin{definition}[Altezza massima di un Albero Red-Black]
-    L'\emph{altezza} massima di un \emph{Albero Red-Black} con $n$ \emph{nodi
-    interni} è al più $2\log(n+1)$.
+    L'altezza massima di un Albero Red-Black con $n$ nodi interni è al più
+    $2\log(n+1)$.
 \end{definition}
 \begin{proof}[Dimostrazione]
     Vale quanto segue:
     \[n\geq2^{bh(u)}-1\begin{array}[t]{cll}
         \Leftrightarrow & n\geq2^{h/2}-1 & \quad\hyperref[def:52]{\emph{Quota nera minima}}\\
         \Leftrightarrow & n+1\geq2^{h/2}\\
-        \Leftrightarrow & \log(n+1)\geq h^2 & \quad\emph{Applicazione logaritmo ai termini}\\
+        \Leftrightarrow & \log(n+1)\geq\frac{h}{2} & \quad\emph{Applicazione logaritmo ai termini}\\
         \Leftrightarrow & h\leq2\log(n+1)
     \end{array}\]
 \end{proof}
