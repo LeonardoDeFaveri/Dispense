@@ -1463,7 +1463,7 @@ la loro \emph{altezza} il numero di noi \emph{nodi} che contengono.
     Procediamo per induzione sull'altezza del nodo $u$.
     \paragraph{Caso base} Dimostro la disequazione per $h=0$:
 
-    se $h=0$, $u$ è una \emph{foglia} \texttt{Nil} e quindi il \emph{sottoalbero}
+    Se $h=0$, $u$ è una \emph{foglia} \texttt{Nil} e quindi il \emph{sottoalbero}
     con \emph{radice} $u$ non può contenere \emph{nodi interni}, quindi $n$ deve
     per forza valere $0$. Poiché:
     \[n\geq2^{bh(u)}-1=2^0-1=1-1=0\]
@@ -1473,19 +1473,17 @@ la loro \emph{altezza} il numero di noi \emph{nodi} che contengono.
     \emph{albero} con \emph{radice} $u$ e \emph{altezza} $h\leq1$. Dimostro la
     disequazione per $h>1$:
 
-    se $h>1$, $u$ è certamente un \emph{nodo interno} e quindi ha due \emph{figli}.
+    Se $h>1$, $u$ è certamente un \emph{nodo interno} e quindi ha due \emph{figli}.
     Ogni \emph{figlio} di $u$ ha un \emph{altezza nera} che è pari a $bh(u)$ se
     è rosso e $bh(u)-1$ se è nero. Ogni \emph{sottoalbero} con \emph{radice} uno
     dei \emph{figli} di $u$ ha \emph{altezza} $h-1$ e quindi, per ipotesi induttiva,
     so che ognuno di quei sottoalberi ha almeno $2^{bh(u)-1}-1$ \emph{nodi interni}.
-
     Allora, per il \emph{sottoalbero} con \emph{radice} $u$ vale:
     \[n\geq2\cdot\left(2^{bh(u)-1}-1\right)+1\]
     cioè, il numero di \emph{nodi interni} del \emph{sottoalbero} con \emph{radice}
     $u$ è pari, almeno, alla somma dei limiti inferiori al numero di \emph{nodi
     interni} dei \emph{sottoalberi} che hanno come \emph{radice} un \emph{figlio}
     di $u$, più $1$, perché bisogna contare anche il \emph{nodo} $u$ stesso.
-
     Poiché vale seguente catena di uguaglianze:
     \[n\geq2\cdot\left(2^{bh(u)-1}-1\right)+1=2\cdot\left(\frac{2^{bh(u)}}{2}-1
     \right)+1=2^{bh(u)}-2+1=2^{bh(u)}-1\]
