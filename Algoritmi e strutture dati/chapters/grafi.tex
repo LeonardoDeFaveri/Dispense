@@ -1859,10 +1859,10 @@ correttezza dell'\emph{Algoritmo di Kosaraju}.
 \begin{proof}[Dimostrazione]
     Se le \emph{componenti} $C_x$ e $C_y$ sono connesse mediante un \emph{arco}
     $(x,y)\in E_T$, sicuramente $ft(C_x)<ft(C_y)$. Di conseguenza, la visita di
-    $C_y$ inizierà prima di quella di $C_x$. Inoltre, poiché non esistono
-    \emph{cammini} da $C_y$ a $C_x$ in $C(G)$, perché altrimenti il \emph{grafo}
-    sarebbe \emph{ciclico}, la visita di $C_y$ non raggiungerà mai \emph{nodi}
-    appartenenti a $C_x$.
+    $C_y$ inizierà prima di quella di $C_x$. Inoltre, poiché in $C(G)$ esiste
+    l'\emph{arco} $(C_x,C_y)$ non può esistere un \emph{cammino} da $C_y$ a
+    $C_x$, perché altrimenti il \emph{grafo} sarebbe \emph{ciclico} e quindi
+    la visita di $C_y$ non raggiungerà mai \emph{nodi} appartenenti a $C_x$.
 
     In altre parole, la funzione \texttt{cc} assegnerà correttamente tutti gli
     identificatori delle \emph{componenti}.
