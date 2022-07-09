@@ -78,7 +78,7 @@ deriva dal seguente teorema:
         almeno $\log k$, ovvero $\Omega(\log k)$;
     \end{enumerate}
     Poiché $n!$ può essere approssimato a $n^n$ e $\log n^n=n\log n$, nel caso
-    pessimo, il numero di confronti eseguiti è $O(n\log n)$.
+    pessimo, il numero di confronti eseguiti è $\Omega(n\log n)$.
 \end{proof}
 
 \section{Algoritmi non basati su confronti}
@@ -223,7 +223,7 @@ essere ordinati tra loro usando un algoritmo come l'\emph{insertion sort}.
 
 \paragraph{Complessità}
 Il fatto che ciascun \emph{bucket} contenga circa un solo valore rende la
-\emph{complessità} e media $O(n)$, anche se il costo del caso peggiore rimane
+\emph{complessità} media $O(n)$, anche se il costo del caso peggiore rimane
 $O(n+k)$. A livello di spazio, la \emph{complessità} è $O(n)$.
 
 \section{Proprietà degli algoritmi di ordinamento}
@@ -231,3 +231,11 @@ $O(n+k)$. A livello di spazio, la \emph{complessità} è $O(n)$.
     Un algoritmo di ordinamento è detto essere stabile se preserva l'ordine
     iniziale tra due elementi con la stessa chiave.
 \end{definition}
+
+\noindent
+Le definizione appena enunciata afferma che nel caso in cui, ad esempio, si
+stia ordinando per anno di corso una lista di studenti già ordinata
+alfabeticamente, un metodo \emph{stabile} produce una lista in cui gli alunni
+dello stesso anno sono ancora in ordine alfabetico, mentre un ordinamento
+\emph{non stabile} probabilmente produrrà una lista senza più alcuna traccia
+del precedente ordinamento.

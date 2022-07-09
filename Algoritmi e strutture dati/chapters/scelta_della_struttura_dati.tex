@@ -12,7 +12,7 @@ e da sorgente multipla.
 
 \section{Ricerca dei cammini minimi da sorgente singola}
 \begin{problem}[Ricerca dei cammini minimi da sorgente singola]
-    Dati un grafo orientato $G=(V,E)$, una funzione di peso $w=E\to R$ e un
+    Dati un grafo orientato $G=(V,E)$, una funzione di peso $w=E\to\mathbb{R}$ e un
     nodo sorgente $s$, trovare un cammino da $s$ a $u$, per ogni $u\in V$, il
     cui costo sia minimo, ovvero minore o uguale al costo di ogni altro cammino
     da $s$ a $u$.
@@ -214,13 +214,14 @@ perché $d[D]>d[A]+w(A,D)$.
     \end{itemize}
 
     \paragraph{Parte 2}
-    Supponiamo per assurdo che $T$ non sia una \emph{soluzione ottima}. Se così
-    fosse, esisterebbe un \emph{cammino non ottimo} $C$ da $s$ a un altro
-    \emph{nodo} $u$ in $T$. Quindi, esisterebbe anche un \emph{albero di
-    copertura} $T'$, in cui il \emph{cammino} $C'$ da $s$ a $u$ abbia distanza
-    $d'[u]<d[u]$ dove $d'$ è il vettore delle distanze associato a $T'$.
+    Supponiamo per assurdo che $T$ rispetti le condizioni del teorema, ma che
+    non sia una \emph{soluzione ottima}. Se così fosse, esisterebbe un
+    \emph{cammino non ottimo} $C$ da $s$ a un altro \emph{nodo} $u$ in $T$.
+    Quindi, esisterebbe anche un \emph{albero di copertura} $T'$, in cui il
+    \emph{cammino} $C'$ da $s$ a $u$ abbia distanza $d'[u]<d[u]$, dove $d'$ è
+    il vettore delle distanze associato a $T'$.
 
-    Poiché, $d'[s]=d[s]=0$, ma $d'[u]<d[u]$, esiste un \emph{arco} $(h,k)$ in
+    Poiché $d'[s]=d[s]=0$, ma $d'[u]<d[u]$, esiste un \emph{arco} $(h,k)$ in
     $C'$ tale che $d'[h]=d[h]$ e $d'[k]<d[k]$. La situazione sarebbe dunque la
     seguente:
 
@@ -238,11 +239,11 @@ perché $d[D]>d[A]+w(A,D)$.
     \end{graph}
     \end{figure*}
 
-    \noindent Per costruzione, $d'[h]=d[h]$ e $d'[k]=d'[h]+w(h,k)$, mentre, per
-    ipotesi, vale $d[k]\leq d[h]+w(h,k)$. Combinando queste due relazioni
-    si ottiene:
+    \noindent Per costruzione, $d'[h]=d[h]$ e $d'[k]=d'[h]+w(h,k)$. Per ipotesi
+    invece, $T$ rispetta le condizioni del teorema e quindi vale $d[k]\leq
+    d[h]+w(h,k)$. Combinando queste due relazioni si ottiene:
     \[d'[k]=d'[h]+w(h,k)=d[h]+w(h,k)\geq d[k]\]
-    Da ciò seguirebbe $d'[k]\geq d[k]$ che contraddice la relazione $d'[k]<d[k]$
+    Da ciò seguirebbe $d'[k]\geq d[k]$ che però contraddice la relazione $d'[k]<d[k]$
     trovata in precedenza.
 \end{proof}
 
@@ -315,7 +316,7 @@ i pesi sono positivi.
     \indf T[s] = nil\\
     \indf d[s] = 0\\
     \indf b[s] = true\\
-    \indf\bc{PRIORITYQUEUE} Q = PrioriryQueue()\\
+    \indf\bc{PRIORITYQUEUE} Q = MinPriorityQueue()\hfill\com{Quello che in precedenza era $S$}
     \indf Q.insert(s, 0)\hfill\com{La \emph{priorità} di $s$ è 0}
     \indf while (not Q.isEmpty()) do\\
         \bc{int} u = Q.deleteMin()\hfill\com{A ogni ciclo viene estratto il \emph{nodo} più vicino}
@@ -327,8 +328,8 @@ i pesi sono positivi.
                     b[v] = true\\
                 \indffff else\\
                     Q.decrease(v, d[u] + G.w(u, v))\hfill\com{Riduco la \emph{priorità} di $v$ da $s$}
-            \indfff T[v] = u\\
-            \indfff d[v] = d[u] + G.w(u, v)\\
+            \indffff T[v] = u\\
+            \indffff d[v] = d[u] + G.w(u, v)\\
     \indf return $\langle$T, d$\rangle$
 \end{minicode}\noindent
 L'idea alla base di questa soluzione è quella di usare la distanza di un nodo
@@ -339,7 +340,7 @@ estrarre il \emph{nodo} con la \emph{priorità} minore significa estrarre il
 Quando viene estratto un \emph{nodo} e l'esecuzione dell'algoritmo ricade nel
 ramo \texttt{else} del controllo sul valore $b[v]$, significa che dal \emph{nodo}
 $u$ è possibile raggiungere $v$ con costo minore a quello che stiamo pagando
-attualmente. Di conseguenza, aggiorniamo il valore di popolarità di $v$ indicando
+attualmente. Di conseguenza, aggiorniamo la \emph{priorità} di $v$ indicando
 il costo del nuovo \emph{cammino}.
 
 \begin{eg}[Esempio d'esecuzione]
@@ -482,8 +483,8 @@ nell'\emph{albero} $T$}
             \indffff if (not b[v]) then\\
                 Q.enqueue(v)\\
                 b[v] = true\\
-        \indfff T[v] = u\\
-        \indfff d[v] = d[u] + G.w(u, v)\\
+            \indffff T[v] = u\\
+            \indffff d[v] = d[u] + G.w(u, v)\\
 \indf return $\langle$T, d$\rangle$
 \end{minicode}
 
@@ -733,7 +734,7 @@ Detto questo, possiamo esprimere la \emph{distanza $k$-vincolata} con la seguent
 Oltre alla matrice $d$ dei costi, definiamo anche una matrice $T$ dei \emph{padri},
 dove $T[x][y]$ rappresenta il \emph{predecessore} di $y$ nel \emph{cammino
 minimo} tra $x$ e $y$. Nell'esempio di prima avremmo avuto $T[1][2]=1$,
-$T[2][3]=3$ e $T[1][3]=2$.
+$T[2][3]=2$ e $T[1][3]=2$.
 
 \begin{minicode}{Algoritmo di Floyd-Warshall}
 \ind$\langle$\bc{int}[][], \bc{int}[][]$\rangle$ floydWarshall(\bc{GRAPH} G)\\

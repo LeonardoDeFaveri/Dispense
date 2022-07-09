@@ -962,7 +962,7 @@ La codifica ottenuta è quindi:
     \indf for (i = 1 to n - 1) do\\
         z$_1$ = Q.deleteMin()\\
         z$_2$ = Q.deleteMin()\\
-        z = Tree(z$_1$.f, z$_2$.f, nil)\hfill\com{Crea il \emph{nodo} fittizio}
+        z = Tree(z$_1$.f + z$_2$.f, nil)\hfill\com{Crea il \emph{nodo} fittizio}
         z.insertLeft(z$_1$)\\
         z.insertRight(z$_2$)\\
         Q.insert(z.f, z)\hfill\com{Rimette il \emph{nodo} fittizio nella \emph{coda}}
@@ -1010,14 +1010,16 @@ nel seguente teorema:
         = & \left(f[x]d_T(x)-f[a]d_{T}(a)\right)-\left(f[x]d_{T'}(x)-
         f[a]d_{T'}(a)\right)\\
         = & \left(f[x]d_T(x)-f[a]d_{T}(a)\right)-\left(f[x]d_{T}(a)-
-        f[a]d_{T}(x)\right)\\
+        f[a]d_{T}(x)\right)\footnotemark\\
         = & \left(f[a]-f[x]\right)\cdot\left(d_T(a)-d_T(x)\right)\\
-        \leq & 0
+        \geq & 0
     \end{array}\]
     Allo stesso modo possiamo dimostrare che $C(f,T')-C(f,T'')\geq 0$, ma
     poiché $T$ è ottimo deve valere anche $C(f,T)\leq C(f,T'')$ e quindi anche
     $T''$ è una soluzione ottima.
 \end{proof}
+\footnotetext{Siccome $T'$ è ottenuto da $T$ scambiando le codifiche di $x$ e
+$a$, vale che $d_T(x)=d_{T'}(a)$ e $d_T(a)=d_{T'}(x)$}
 
 \section{Ricerca degli alberi di copertura di peso minimo}
 \begin{problem}[Ricerca dell'albero di copertura di peso minimo]
@@ -1027,15 +1029,15 @@ nel seguente teorema:
 \end{problem}
 \begin{note}
     Questo tipo di \emph{alberi} prende anche il nome di \emph{minimum spanning
-    tree} e \emph{alberi di connessione di peso minimo}.
+    tree} o \emph{alberi di connessione di peso minimo}.
 \end{note}
 
 \noindent
 La funzione di peso $w$ può essere meglio definita dicendo che se $(u,v)\in E$,
 allora $w(u,v)$ sarà pari al peso dell'\emph{arco} da $u$ a $v$. Altrimenti,
 assume valore $+\infty$. Inoltre, poiché il \emph{grafo} è \emph{non orientato},
-$w(u,v)=w(v,u)$. Poiché ricerchiamo l'\emph{albero di peso minimo}, il peso totale
-della soluzione $T$, definito come:
+$w(u,v)=w(v,u)$. Inoltre, siccome stiamo ricercando l'\emph{albero di peso
+minimo}, il peso totale della soluzione $T$, definito come:
 \[w(T)=\sum_{(u,v)\in E_T}w(u,v)\]
 deve essere minimo rispetto al peso di tutti gli altri \emph{alberi di copertura}
 definibili su quel \emph{grafo}.
@@ -1047,8 +1049,9 @@ definibili su quel \emph{grafo}.
 
     \begin{figure}[h!]
         \centering
+        
         \subfloat[\emph{Albero di copertura dei cammini minimi}]{
-        \begin{graph}
+        \scalebox{0.9}{\begin{graph}
             \node[main, line width=1.3pt] (a) [label={$d[A]=0$}] {$A$};
             \node[main] (b) [right of=a, label={$d[B]=3$}, xshift=10mm] {$B$};
             \node[main] (c) [below of=b, label=below:{$d[C]=4$}, yshift=-10mm] {$C$};
@@ -1059,11 +1062,11 @@ definibili su quel \emph{grafo}.
                         (b) edge[line width=1.3pt] node[right] {$1$} (c)
                         (a) edge[line width=1.3pt] node[left] {$3$} (d);
             \path[-]    (d) edge node[below] {$2$} (c);
-        \end{graph}
+        \end{graph}}
         }
         \hspace{3cm}
         \subfloat[\emph{Albero di copertura di peso minimo}]{
-        \begin{graph}
+        \scalebox{0.9}{\begin{graph}
             \node[main, line width=1.3pt] (a) [label={$d[A]=0$}] {$A$};
             \node[main] (b) [right of=a, label={$d[B]=3$}, xshift=10mm] {$B$};
             \node[main] (c) [below of=b, label=below:{$d[C]=4$}, yshift=-10mm] {$C$};
@@ -1074,7 +1077,7 @@ definibili su quel \emph{grafo}.
                         (b) edge[line width=1.3pt] node[right] {$1$} (c)
                         (c) edge[line width=1.3pt] node[below] {$2$} (d);
             \path[-]    (a) edge node[left] {$3$} (d);
-        \end{graph}
+        \end{graph}}
         }
         \caption{\emph{Albero di copertura dei cammini minimi e di peso minimo}}
     \end{figure}
@@ -1115,8 +1118,7 @@ copertura di peso minimo}.
 \end{definition}
 \begin{definition}[Arco leggero]
     Un arco che attraversa un taglio è detto essere leggero, se il suo peso è
-    minimo tra il peso di tutti gli archi che potrebbero attraversano lo stesso
-    taglio.
+    minimo tra il peso di tutti gli archi che attraversano lo stesso taglio.
 \end{definition}
 
 \begin{figure}[h!]
@@ -1278,7 +1280,7 @@ dove $V_A$ è l'insieme di \emph{nodi} raggiunti dagli \emph{archi} in $A$.
 L'algoritmo viene implementato facendo uso di una \emph{coda a priorità} $Q$
 nella quale vengono mantenuti tutti i \emph{nodi} non ancora raggiunti e sono
 ordinati in base a una \emph{priorità}, definita come il peso minimo di un
-\emph{arco} che collega un \emph{nodo} a un \emph{nodo} dell'\emph{albero} o
+\emph{arco} che collega un \emph{nodo} in $Q$ a un \emph{nodo} dell'\emph{albero} o
 $+\infty$ se tale \emph{arco} non esiste. Inoltre, implementando l'\emph{albero}
 usando il \emph{vettore dei padri}, ogni \emph{nodo} $v$ mantiene un puntatore
 al proprio \emph{padre} $p[v]$ e quindi l'insieme $A$ è mantenuto implicitamente:
