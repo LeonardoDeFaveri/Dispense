@@ -1,0 +1,4 @@
+strassen
+controllare tabella Bellman-Ford
+controllare il NB dopo i predecessori (p. 171)
+Algoritmo di Graham

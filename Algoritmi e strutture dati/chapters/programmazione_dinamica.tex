@@ -2,7 +2,7 @@
 \section{Introduzione}
 Finora, l'unica tecnica di risoluzione di problemi, o di ricerca di algoritmi,
 che abbiamo visto è il \nameref{chap:divide-et-impera}. La \emph{programmazione
-dinamica} è un'altra tecnica basata su un approccio molto simile.
+dinamica} è un'altra tecnica che però si basa su un approccio molto simile.
 
 Entrambe prevedono di spezzare il problema di partenza in sotto-problemi più
 semplici e di ricostruire la soluzione del problema originale a partire dalle
@@ -393,8 +393,9 @@ Ciò che abbiamo detto finora è vero secondo quanto affermato dal seguente teor
     dovrebbe esistere una soluzione $S'_{i-1}$ per il problema $P_{i-1}$ tale
     che $S'_{i-1}=highest\left(S'_{i-1}, S_i\right)$. Cioè, la soluzione $S'_{i-1}$
     dovrebbe garantire una donazione maggiore di quella di $S_i$. Ma, se fosse
-    così, $S'_{i-1}$ dovrebbe essere anche la soluzione di $P_i$, generando un
-    assurdo.
+    così, $S'_{i-1}$ dovrebbe essere anche la soluzione di $P_i$, ma ciò sarebbe
+    assurdo dato che abbiamo supposto che $S_i$ fosse una soluzione ottima per
+    $P_i$.
 
     \paragraph{Caso 2: \bm{$i\in S_i$}}
     Se $i\in S_i$, $i-1\notin S_i$, altrimenti non sarebbe una soluzione
@@ -1019,7 +1020,7 @@ della sottostruttura ottima}.
     \mathcal{LCS}(T(n),U(m))$ valgono i seguenti tre casi:
     \begin{enumerate}
         \item Se $t_n=u_m$, allora $x_k=t_n=u_m$ e $X(k-1)\in\mathcal{LCS}(T(n-1),
-        (U(m-1)))$;
+        U(m-1))$;
         \item Se $t_n\neq u_m$ e $x_k\neq t_n$, allora $X\in\mathcal{LCS}(T(n-1),U(m))$;
         \item Se $t_n\neq u_m$ e $x_k\neq u_m$, allora $X\in\mathcal{LCS}(T(n),U(m-1))$;
     \end{enumerate}
@@ -1261,7 +1262,7 @@ semplicemente cambiando la posizione delle parentesi, cioè modificando la
 \begin{definition}[Parentesizzazione]
     Una parentesizzazione $P_{i,j}$ del prodotto $A_i\cdot\ldots\cdot A_j$
     consiste nella matrice $A_i$ se $i=j$ e nel prodotto di due
-    parentesizzazioni $(P_{i,k}\cdot P_{i+1,k})$ altrimenti.
+    parentesizzazioni $(P_{i,k}\cdot P_{k+1,j})$ altrimenti.
 \end{definition}
 \begin{definition}[Parentesizzazione ottima]
     La parentesizzazione che minimizza il numero di prodotti scalari è detta
@@ -1405,7 +1406,7 @@ Quali sono le caratteristiche delle sue \emph{sotto-parentesizzazioni}?
         \emph{parentesizzazione ottima} di $A[i\dots j]$ con costo inferiore a
         $P[i\dots j]$, generando un assurdo;
         \item Se supponessimo esistesse una \emph{parentesizzazione ottima}
-        $P'[k+1\dots j]$ di $A[k+1\dots k]$ con costo inferiore a $P[k+1\dots j]$,
+        $P'[k+1\dots j]$ di $A[k+1\dots j]$ con costo inferiore a $P[k+1\dots j]$,
         allora $P[i\dots k]\cdot P'[k+1\dots j]$ sarebbe una
         \emph{parentesizzazione ottima} di $A[i\dots j]$ con costo inferiore a
         $P[i\dots j]$, generando un assurdo;
@@ -1445,11 +1446,11 @@ Traducendo quella formula in codice otteniamo la seguente funzione:
     \indf if (i == j) then\\
         return 0\\
     \indf\bc{int} minSoFar = $+\infty$\\
-        \indff for (k = i to j - 1) do\\
-            \bc{int} val = recPar(c, i, k) + recPar(c, k + 1, j)\\
-            val = val + c[i - 1] $\cdot$ c[k] $\cdot$ c[j]\\
-            \indfff if (val < minSoFar) then\\
-                minSoFar = val\\
+    \indf for (k = i to j - 1) do\\
+        \bc{int} val = recPar(c, i, k) + recPar(c, k + 1, j)\\
+        val = val + c[i - 1] $\cdot$ c[k] $\cdot$ c[j]\\
+        \indff if (val < minSoFar) then\\
+            minSoFar = val\\
     \indf return minSoFar
 \end{minicode}\noindent
 Il parametro $c$ è un vettore con indici da $0$ a $n$ contenente le dimensioni di
@@ -1746,7 +1747,7 @@ Un modo per calcolare i predecessori è il seguente:
     \bc{int}[] pred = new \bc{int}[0\dots n]\\
     pred[0] = 0\\
     \indf for (i = 1 to n) do\\
-        j = i - 1\\
+        \bc{int} j = i - 1\\
         \indff while (j > 0 and b[j] > a[i]) do\\
             j = j - 1\\
         \indff pred[i] = j\\

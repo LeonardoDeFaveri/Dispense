@@ -24,11 +24,11 @@ In particolare, abbiamo osservato le seguenti \emph{complessità}:
     \end{tabular}
 \end{table}\noindent
 Esiste una \emph{struttura dati} che ci permetta di fare meglio di così?
+
 La risposta è sì e si chiama \emph{hash table} (o \emph{tabella hash}) e ci
 consente di ottenere \emph{complessità} $O(1)$ in tutte le operazioni (tranne
-ovviamente nel \texttt{foreach}).
-
-Vediamo quindi che cos'è una \emph{tabella hash}.
+ovviamente nel \texttt{foreach}). Vediamo quindi che cos'è una \emph{tabella
+hash}.
 \begin{definition}[Tabella hash]
     Una tabella hash è una struttura dati dinamica che permette di memorizzare
     associazioni chiave-valore. L'insieme delle possibili chiavi è rappresentato
@@ -67,7 +67,7 @@ e definire una \emph{tabella hash} di dimensione $m=u$.
 
 In situazioni di questo tipo, ovviamente, non si genereranno mai \emph{collisioni},
 ma purtroppo non sono quasi mai praticabili perché se $u$ è molto grande è
-richiesto uno spazio eccessivo, mentre se vengono usate poche delle possibili
+richiesto uno spazio eccessivo s se vengono usate poche delle possibili
 chiavi si va a sprecare memoria.
 
 \section{Caratteristiche e implementazioni di funzioni hash}
@@ -107,7 +107,7 @@ gli stessi problemi di prima: insieme delle chiavi sconosciuto in principio.
 Per questo motivo, nella realtà si usano tecniche \q{euristiche}.
 
 \subsection{Realizzare una funzione hash}
-Assumiamo che ogni chiave sia traducibile in valori numeri interpretando la
+Assumiamo che ogni chiave sia traducibile in valori numerici interpretando la
 propria rappresentazione in memoria come un valore intero.
 
 Ad esempio, ipotizziamo di avere a disposizione le seguenti funzioni per
@@ -199,7 +199,7 @@ possono generare lo stesso valore.
     Sia $m=2^p=2^{16}$.\\
     \begin{minipage}[t]{0.48\textwidth}
         \vspace{-0.75cm}
-        \[bin(\text{\q{Montreson}})=
+        \[bin(\text{\q{Montresor}})=
         \hspace{-2.5cm}\begin{array}[t]{lccl}
             \\
             & 01101101 & 01101111 & \oplus\\
@@ -256,7 +256,7 @@ che sia \q{distante} da potenze di 2 o di 10.
 \subsection{Metodo della moltiplicazione}
 Per questo metodo scegliamo un $m$ qualsiasi, ma è meglio se è una potenza di due.
 Definiamo poi una costante reale $C$ compresa tra 0 e 1 (estremi esclusi). A questo
-punto, se $i=bin(k)$, la \emph{funzione hash} è definita come $h(k)=\lfloor m
+punto, se $i=int(k)$, la \emph{funzione hash} è definita come $h(k)=\lfloor m
 (C\cdot i-\lfloor C\cdot i\rfloor)\rfloor$.
 
 Notiamo che $C\cdot i-\lfloor C\cdot i\rfloor$ estrae la componente decimale di
