@@ -116,7 +116,7 @@ $hi$ tali che $1\leq lo\leq hi\leq n$.
 
 Nella fase di \emph{divide} viene scelto un valore $p\in A[lo\dots hi]$ detto
 \emph{perno} o \emph{pivot}. Quindi, tutti gli elementi del vettore vengono
-permutati in modo da portare tutti i valori più piccoli del \emph{pivot} alla sua
+permutati in modo da portare i valori più piccoli del \emph{pivot} alla sua
 sinistra e gli altri alla sua destra.
 
 \begin{figure}[h!]
@@ -167,11 +167,11 @@ Per studiare il costo della funzione principale \texttt{quicksort} analizziamo
 le funzioni ausiliarie. La \texttt{swap} è banale e ha un costo
 $\Theta(1)$, mentre la \texttt{pivot} costa $\Theta(n)$ perché va a confrontare
 il \emph{pivot} con ogni elemento dell'array. Per il costo della
-\texttt{quicksort} consideriamo separatamente il caso pessimo il caso migliore.
+\texttt{quicksort} consideriamo separatamente il caso pessimo e il caso migliore.
 
 \bigskip\noindent
-Il caso pessimo è quello in cui la scelta del \emph{pivot} porta sempre ad avere
-due sottoarray di dimensione $0$ e $n-1$ e conseguentemente induce una
+Il caso pessimo è quello in cui la scelta del \emph{pivot} porti sempre ad avere
+due sottoarray di dimensione $0$ e $n-1$ e ciò induce una
 \emph{funzione di ricorrenza} di questo tipo:
 \[T(n)=T(n-1)+T(0)+\Theta(n)=T(n-1)+\Theta(n)=\Theta(n^2)\]
 Nel caso migliore invece, il vettore viene sempre diviso in due sottoarray di

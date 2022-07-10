@@ -508,7 +508,7 @@ di nuovo su $A$.
             j = j + 1\\
         \indf k = k + 1\\
     \ind j = last\\
-    for (h = mid downto i) do\\
+    for (h = mid downto i) do\hfill\com{Sposta alla fine di $A$ il resto di $A[i\dots mid]$}
         \indf A[j] = A[h]\\
         \indf j = j - 1\\
     \ind for (j = first to k - 1) do\hfill\com{Copia di $B$ su $A$}
