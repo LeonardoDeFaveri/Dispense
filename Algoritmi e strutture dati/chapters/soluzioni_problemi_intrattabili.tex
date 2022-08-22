@@ -363,7 +363,7 @@ Possiamo dimostrare che $\Delta$-TSP è \emph{riducibile polinomialmente} a
         2 & (i,j)\notin E
     \end{cases}\]
     Poiché valgono le disuguaglianze triangolari, per ogni coppia di \emph{nodi}
-    $i$, $j$ vale $d[i][j]\leq 2\leq d[i][k]+d[k[j]]$. A questo punto, $G$ ha
+    $i$, $j$ vale $d[i][j]\leq 2\leq d[i][k]+d[k][j]$. A questo punto, $G$ ha
     un circuito hamiltoniano se e solo se esiste un \emph{cammino} in $d$ di
     lunghezza $n$ e passante per ogni \emph{nodo}.
 \end{proof}
@@ -557,7 +557,7 @@ anche al valore del fattore $\alpha(n)$.
     \end{figure}
 
     \noindent
-    A questo punto, sfruttando le disuguaglianze triangolari, otteniamo che,
+    A questo punto, sfruttando le disuguaglianze triangolari, otteniamo che
     per esempio, per passare dal nodo $7$ al nodo $6$ conviene usare l'arco
     $(7,6)$ invece che tornare indietro sul nodo $5$ già visitato:
 
@@ -612,8 +612,8 @@ anche al valore del fattore $\alpha(n)$.
 \paragraph{Complessità}
 L'algoritmo proposto sfrutta l'\emph{Algoritmo di Kruskal} per la ricerca
 dell'\emph{albero di copertura di peso minimo} e una \emph{visita in
-profondità}. L'\emph{Algoritmo di Kruskal} costa $O(n^2\log n)$, la \emph{vista}
-$O(n)$, quindi la \emph{complessità} totale è $T(n)=O(n^2\log n)$.
+profondità}. L'\emph{Algoritmo di Kruskal} costa $O(n^2\log n)$ e la
+\emph{vista} $O(n)$, quindi la \emph{complessità} totale è $T(n)=O(n^2\log n)$.
 
 \begin{definition}[Teorema di non approssimabilità di TSP]
     Non esiste alcun algoritmo di $\alpha(n)$-approssimazione per TSP tale

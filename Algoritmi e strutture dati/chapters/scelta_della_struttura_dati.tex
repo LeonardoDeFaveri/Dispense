@@ -506,7 +506,7 @@ Consideriamo il seguente grafo:
 
         \path[->]   (a) edge node[above left] {$2$} (c)
                     (a) edge node[below left] {$1$} (b)
-                    (b) edge node[below] {$2$} (e)
+                    (b) edge node[below] {$3$} (e)
                     (b) edge node[above left] {$4$} (d)
                     (e) edge node[below right] {$3$} (f)
                     (e) edge node[left] {$-1$} (d)
@@ -523,34 +523,36 @@ Eseguendo l'algoritmo partendo da $A$ otteniamo la seguente tabella:
 \begin{table}[ht!]
     \centering
     \renewcommand{\arraystretch}{1.2}
-    \begin{tabular}{|c|c|c|cc|ccc|ccc|c|c|}
-        \cline{3-13}
-        \multicolumn{2}{c|}{} & \multicolumn{11}{c|}{\textbf{Passate}}\\
+    \begin{adjustbox}{max width=0.98\textwidth}
+    \begin{tabular}{|c|c|c|cc|ccc|ccc|cc|c|}
+        \cline{3-14}
+        \multicolumn{2}{c|}{} & \multicolumn{12}{c|}{\textbf{Passate}}\\
         \hline
         \multirow{2}{*}{\textbf{Nodo}} & \multirow{2}{*}{\textbf{Inizio}} &
         \bm{$0$} & \multicolumn{2}{c|}{\bm{$1$}} & \multicolumn{3}{c|}{\bm{$2$}} &
-        \multicolumn{3}{c|}{\bm{$3$}} & \bm{$4$} & \bm{$5$}\\
-        \cline{3-13}
+        \multicolumn{3}{c|}{\bm{$3$}} & \multicolumn{2}{c|}{\bm{$4$}} & \bm{$5$}\\
+        \cline{3-14}
         & & \bm{$A$} & \bm{$B$} & \bm{$C$} & \bm{$D$} & \bm{$E$} & \bm{$B$} & \bm{$F$}
-        & \bm{$D$} & \bm{$E$} & \bm{$D$} & \bm{$F$}\\
+        & \bm{$D$} & \bm{$E$} & \bm{$F$} & \bm{$D$} & \bm{$F$}\\
         \hline
-        \bm{$A$} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+        \bm{$A$} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
         \hline
-        \bm{$B$} & $+\infty$ & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+        \bm{$B$} & $+\infty$ & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
         \hline
-        \bm{$C$} & $+\infty$ & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2\\
+        \bm{$C$} & $+\infty$ & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2\\
         \hline
-        \bm{$D$} & $+\infty$ & $+\infty$ & 5 & 5 & 5 & 3 & 3 & 3 & 3 & 2 & 2 & 2\\
+        \bm{$D$} & $+\infty$ & $+\infty$ & 5 & 5 & 5 & 3 & 3 & 3 & 3 & 2 & 2 & 2 & 2\\
         \hline
-        \bm{$E$} & $+\infty$ & $+\infty$ & 4 & 4 & 4 & 4 & 3 & 3 & 3 & 3 & 3 & 3\\
+        \bm{$E$} & $+\infty$ & $+\infty$ & 4 & 4 & 4 & 4 & 3 & 3 & 3 & 3 & 3 & 3 & 3\\
         \hline
         \bm{$F$} & $+\infty$ & $+\infty$ & $+\infty$ & $+\infty$ & 6 & 6 & 6 & 6 &
-        4 & 4 & 3 & 3\\
+        4 & 4 & 4 & 3 & 3\\
         \hline
         \textbf{Coda} & $A$ & $BC$ & $CDE$ & $DEB$ & $EBF$ & $BFD$ & $FDE$ & $DE$
-        & $E$ & $D$ & $F$ & \\
+        & $EF$ & $FD$ & $D$ & $F$ & \\
         \hline
     \end{tabular}
+    \end{adjustbox}
 \end{table}
 
 \noindent
@@ -751,7 +753,7 @@ $T[2][3]=2$ e $T[1][3]=2$.
     \indf foreach (v $\in$ G.adj(u)) do\hfill\com{Inizializza i valori per \emph{nodi adiacenti}}
             \indff d[u][v] = G.w(u, v)\\
             \indff T[u][v] = u\\
-\ind for (k=1 to n) do\\
+\ind for (k = 1 to n) do\\
     \indf foreach (u $\in$ G.V()) do\\
         \indff foreach (v $\in$ G.V()) do\\
             \indfff if (d[u][k] + d[k][v] < d[u][v]) then\\

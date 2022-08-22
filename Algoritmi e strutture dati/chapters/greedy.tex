@@ -715,7 +715,7 @@ quel tipo di scelta sia corretta.
 \begin{proof}[Dimostrazione]
     Assumiamo che gli oggetti siano ordinati per \emph{profitto specifico
     decrescente}. Sia $x$ una soluzione ottima e supponiamo che $x[1]<\min\left(
-    \frac{C}{w[i]}, 1\right)<1$. Allora, possiamo costruire una nuova soluzione
+    \frac{C}{w[i]}, 1\right)\leq1$. Allora, possiamo costruire una nuova soluzione
     in cui $x'[1]=\min\left(\frac{C}{w[i]}, 1\right)$ e la porzione di uno o
     più oggetti è ridotta di conseguenza. La soluzione $x'$ è sicuramente di
     profitto uguale o maggiore rispetto ad $x$ perché il \emph{profitto
@@ -761,7 +761,7 @@ $x$ è la sua rappresentazione binaria.
             \texttt{111} & \texttt{1101} & \texttt{1100} & 2.24n\\
             \hline
         \end{tabular}
-    \end{adjustbox}
+        \end{adjustbox}
     \end{table}
     
     \noindent
@@ -1205,7 +1205,7 @@ A questo punto, possiamo definire il seguente corollario:
     Dato $G=(V,E)$ un grafo non orientato e connesso sul quale è definita una
     funzione di costo $w:V\times V\to\mathbb{R}$, si considerino un insieme
     $A\subseteq E$ contenuto in qualche albero di copertura minimo di $G$ e una
-    componente connessa della foresta $G_A(V,A)$. Se $(u,v)$ è un arco leggero
+    componente connessa della foresta $G_A=(V,A)$. Se $(u,v)$ è un arco leggero
     che connette $C$ a qualche altra componente connessa in $G_A$, l'arco $(u,v)$
     è sicuro per $A$.
 \end{definition}
@@ -1280,10 +1280,11 @@ dove $V_A$ è l'insieme di \emph{nodi} raggiunti dagli \emph{archi} in $A$.
 L'algoritmo viene implementato facendo uso di una \emph{coda a priorità} $Q$
 nella quale vengono mantenuti tutti i \emph{nodi} non ancora raggiunti e sono
 ordinati in base a una \emph{priorità}, definita come il peso minimo di un
-\emph{arco} che collega un \emph{nodo} in $Q$ a un \emph{nodo} dell'\emph{albero} o
-$+\infty$ se tale \emph{arco} non esiste. Inoltre, implementando l'\emph{albero}
-usando il \emph{vettore dei padri}, ogni \emph{nodo} $v$ mantiene un puntatore
-al proprio \emph{padre} $p[v]$ e quindi l'insieme $A$ è mantenuto implicitamente:
+\emph{arco} che collega un \emph{nodo} dell'\emph{albero} a un \emph{nodo} in
+$Q$ o $+\infty$ se tale \emph{arco} non esiste. Inoltre, implementando
+l'\emph{albero} usando il \emph{vettore dei padri}, ogni \emph{nodo} $v$
+mantiene un puntatore al proprio \emph{padre} $p[v]$ e quindi l'insieme $A$
+è mantenuto implicitamente:
 \[A=\left\{(v,p[v])\,|\,v\in V-Q-\{r\}\right\}\]
 
 \begin{minicode}{Implementazione Algoritmo di Prim}

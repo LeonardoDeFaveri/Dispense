@@ -508,7 +508,6 @@ prima soluzione ammissibile trovata, l'algoritmo termina restituendo
 
 \ind\bc{boolean} ssRec(\bc{int}[] A, \bc{int} n, \bc{int} missing, \bc{int}[] S, \bc{int} i)\\
     \indf if (missing == 0) then\\
-        processSolution(S, i - 1)\hfill\com{Stampa gli indici della soluzione}
         return true\\
     \indf else if (i > n or missing < 0) then\\
         return false\hfill\com{I valori sono terminati o la somma è eccessiva}
