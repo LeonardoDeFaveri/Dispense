@@ -539,7 +539,7 @@ un lato del poligono se tutti i rimanenti $n-2$ punti stanno dalla \q{stessa
 parte}. Per verificare la condizione usiamo la seguente funzione:
 
 \begin{minicode}{Implementazione sameSide}
-\ind\bc{boolean} sameSime(\bc{POINT} p$_1$, \bc{POINT} p$_2$, \bc{POINT} p, \bc{POINT} q)\\
+\ind\bc{boolean} sameSide(\bc{POINT} p$_1$, \bc{POINT} p$_2$, \bc{POINT} p, \bc{POINT} q)\\
     \bc{float} dx = p$_2$.x - p$_1$.x\\
     \bc{float} dy = p$_2$.y - p$_1$.y\\
     \bc{float} dx$_1$ = p.x - p$_1$.x\\
@@ -592,8 +592,8 @@ fino a quando ad essere selezionato non è di nuovo $p_0$.
     \node[point] (7) [pos=12:44mm from 0] {};
     \node[point] (8) [pos=6:55mm from 0] {};
     \node[point] (9) [pos=-3:25mm from 0] {};
-    \node[point] (9) [pos=-5:47mm from 0] {};
-    \node[point] (10) [pos=-25:25mm from 0] {};
+    \node[point] (10) [pos=-5:47mm from 0] {};
+    \node[point] (11) [pos=-25:25mm from 0] {};
 
     \node[empty] (e1) [pos=90:35mm from 0] {};
     \node[empty] (e2) [pos=-90:12mm from 0] {};
@@ -619,3 +619,305 @@ se i vertici del poligono sono $h$, l'algoritmo ha una \emph{complessità} total
 di $O(nh)$.
 
 \subsection{Algoritmo di Graham}
+L'\emph{Algoritmo di Graham} inserisce nell'\emph{inviluppo convesso} il punto di
+ordinata minima e ordina i rimanenti in base all'angolo formato dalla retta
+passante per ciascun punto e il punto di ordinata minima e la retta orizzontale.
+Il primo punto dell'ordinamento viene aggiunto all'\emph{inviluppo}.
+
+A questo punto, siano $p_j$ e $p_{j-1}$ l'ultimo e il penultimo punto
+dell'\emph{inviluppo}. Per tutti i punti $p_i$, con $i\in[3,n]$, se $p_1$ e
+$p_i$ non si trovano dalla stessa parte rispetto alla retta passante per $p_j$
+e $p_{j-1}$, il punto $p_j$ viene rimosso dall'\emph{inviluppo}. Se invece
+la scansione dei punti termina senza che $p_j$ debba essere rimosso, $p_i$
+viene aggiunto all'\emph{inviluppo}.
+
+\begin{minicode}{Implementazione Algoritmo di Graham}
+\ind\bc{STACK} graham(\bc{POINT}[] p, \bc{int} n)\\
+    \bc{int} min = 1\\
+    \indf for (i = 2 to n) do\\
+        \indff if (p[i].y < p[min].y) then\\
+            min = i\\
+    \indf p[1] $\leftrightarrow$ p[min]\hfill\com{Sposta all'inizio il punto
+    di ordinata minima}
+    \indf\{ Ordina $p[2,\dots, n]$ in base all'angolo formato con all'asse
+    orizzontale \}\\
+    \indf\{ Elimina i punti allineati mantenendo solo quello più distante
+    da $p_1$ \}\\
+    \indf\{ Aggiorna $n$ riducendolo del numero di punti eliminati \}\\
+    \indf\bc{STACK} S = Stack()\\
+    \indf S.push(p[1])\\
+    \indf S.push(p[2])\\
+    \indf for (i = 3 to n) do\\
+        \indff while (not sameSide(S.top(), S.top2(), p[1], p[i])) do\\
+            S.pop()\\
+        \indff S.push(p[i])\\
+    \indf return S
+\end{minicode}
+
+\begin{eg}[Esempio d'esecuzione]
+    Consideriamo il seguente insieme di punti:
+    \begin{figure}[h!]
+    \centering
+    \subfloat[Insieme iniziale grezzo]{
+    \begin{graph}
+        \tikzset{
+            point/.style={circle, fill, minimum width=4pt, inner sep=0},
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+              at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+        \node[point] (0) {};
+        \node[point] (1) [pos=65:18mm from 0] {};
+        \node[point] (2) [pos=45:15mm from 1] {};
+        \node[point] (3) [pos=-20:30mm from 2] {};
+        \node[point] (4) [pos=20:10mm from 1] {};
+        \node[point] (5) [pos=-18:10mm from 1] {};
+        \node[point] (6) [pos=20:38mm from 0] {};
+        \node[point] (7) [pos=12:44mm from 0] {};
+        \node[point] (8) [pos=6:55mm from 0] {};
+        \node[point] (9) [pos=-3:25mm from 0] {};
+        \node[point] (10) [pos=-5:47mm from 0] {};
+        \node[point] (11) [pos=-25:25mm from 0] {};
+
+        \node[empty] (e) at (11) [yshift=-6.25mm] {};
+    \end{graph}}
+    \hspace{1.5cm}
+    \subfloat[Insieme ordinato]{
+    \begin{graph}
+        \tikzset{
+            point/.style={circle, fill, minimum width=4pt, inner sep=0},
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+              at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+        \node[point] (0) [label=left:{$12$}] {};
+        \node[point] (1) [pos=65:18mm from 0, label=left:{$11$}] {};
+        \node[point] (2) [pos=45:15mm from 1, label=above:{$8$}] {};
+        \node[point] (3) [pos=-20:30mm from 2, label=above left:{$5$}] {};
+        \node[point] (4) [pos=20:10mm from 1, label=above left:{$9$}] {};
+        \node[point] (5) [pos=-18:10mm from 1, label=above left:{$10$}] {};
+        \node[point] (6) [pos=20:38mm from 0, label=above:{$6$}] {};
+        \node[point] (7) [pos=12:44mm from 0, label=right:{$4$}] {};
+        \node[point] (8) [pos=6:55mm from 0, label=above:{$3$}] {};
+        \node[point] (9) [pos=-3:25mm from 0, label=above:{$7$}] {};
+        \node[point] (10) [pos=-5:47mm from 0, label=right:{$2$}] {};
+        \node[point] (11) [pos=-25:25mm from 0, label=below:{$1$}] {};
+
+        \path[-, dashed]
+                    (11) edge (0)
+                    (11) edge (1)
+                    (11) edge (2)
+                    (11) edge (3)
+                    (11) edge (4)
+                    (11) edge (5)
+                    (11) edge (6)
+                    (11) edge (7)
+                    (11) edge (8)
+                    (11) edge (9)
+                    (11) edge (10);
+            
+        \node[empty] (e1) at (11) [xshift=-35mm] {};
+        \node[empty] (e2) at (11) [xshift=35mm] {};
+        
+        \draw[-, dashed] (e1) edge (e2);
+        \draw[-] (11)+(14.5mm,0) arc[
+            start angle=0,
+            end angle=16,
+            radius=15mm
+        ];
+        \node[empty] (alpha) [pos=8:15mm from 11] {$\alpha$};
+    \end{graph}}
+    \end{figure}
+
+    \noindent
+    L'Algoritmo di Graham inserisce nell'inviluppo convesso i punti $1$ e
+    $2$. Poi, a partire dal terzo, controlla che ogni punto stia dalla stessa
+    parte del primo rispetto all'ultimo lato dell'inviluppo.
+
+    \newpage
+    \begin{figure}[ht]
+    \ContinuedFloat
+    \centering
+    \subfloat[$i=3$]{
+    \begin{graph}
+        \tikzset{
+            point/.style={circle, fill, minimum width=4pt, inner sep=0},
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+        \node[point] (0) [label=left:{$12$}] {};
+        \node[point] (1) [pos=65:18mm from 0, label=left:{$11$}] {};
+        \node[point] (2) [pos=45:15mm from 1, label=above:{$8$}] {};
+        \node[point] (3) [pos=-20:30mm from 2, label=above left:{$5$}] {};
+        \node[point] (4) [pos=20:10mm from 1, label=above left:{$9$}] {};
+        \node[point] (5) [pos=-18:10mm from 1, label=above left:{$10$}] {};
+        \node[point] (6) [pos=20:38mm from 0, label=above:{$6$}] {};
+        \node[point] (7) [pos=12:44mm from 0, label=right:{$4$}] {};
+        \node[point] (8) [pos=6:55mm from 0, label=above:{$3$}] {};
+        \node[point] (9) [pos=-3:25mm from 0, label=above:{$7$}] {};
+        \node[point] (10) [pos=-5:47mm from 0, label=right:{$2$}] {};
+        \node[point] (11) [pos=-25:25mm from 0, label=below:{$1$}] {};
+
+        \path[-]    (11) edge (10)
+                    (10) edge (8);
+    \end{graph}}
+    \hspace{1.5cm}
+    \subfloat[$i=4$]{
+    \begin{graph}
+        \tikzset{
+            point/.style={circle, fill, minimum width=4pt, inner sep=0},
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+        \node[point] (0) [label=left:{$12$}] {};
+        \node[point] (1) [pos=65:18mm from 0, label=left:{$11$}] {};
+        \node[point] (2) [pos=45:15mm from 1, label=above:{$8$}] {};
+        \node[point] (3) [pos=-20:30mm from 2, label=above left:{$5$}] {};
+        \node[point] (4) [pos=20:10mm from 1, label=above left:{$9$}] {};
+        \node[point] (5) [pos=-18:10mm from 1, label=above left:{$10$}] {};
+        \node[point] (6) [pos=20:38mm from 0, label=above:{$6$}] {};
+        \node[point] (7) [pos=12:44mm from 0, label=right:{$4$}] {};
+        \node[point] (8) [pos=6:55mm from 0, label=above:{$3$}] {};
+        \node[point] (9) [pos=-3:25mm from 0, label=above:{$7$}] {};
+        \node[point] (10) [pos=-5:47mm from 0, label=right:{$2$}] {};
+        \node[point] (11) [pos=-25:25mm from 0, label=below:{$1$}] {};
+
+        \path[-]    (11) edge (10)
+                    (10) edge (8)
+                    (8) edge (7);
+    \end{graph}}\\
+    \subfloat[$i=5$]{
+    \begin{graph}
+        \tikzset{
+            point/.style={circle, fill, minimum width=4pt, inner sep=0},
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+        \node[point] (0) [label=left:{$12$}] {};
+        \node[point] (1) [pos=65:18mm from 0, label=left:{$11$}] {};
+        \node[point] (2) [pos=45:15mm from 1, label=above:{$8$}] {};
+        \node[point] (3) [pos=-20:30mm from 2, label=above left:{$5$}] {};
+        \node[point] (4) [pos=20:10mm from 1, label=above left:{$9$}] {};
+        \node[point] (5) [pos=-18:10mm from 1, label=above left:{$10$}] {};
+        \node[point] (6) [pos=20:38mm from 0, label=above:{$6$}] {};
+        \node[point] (7) [pos=12:44mm from 0, label=right:{$4$}] {};
+        \node[point] (8) [pos=6:55mm from 0, label=above:{$3$}] {};
+        \node[point] (9) [pos=-3:25mm from 0, label=above:{$7$}] {};
+        \node[point] (10) [pos=-5:47mm from 0, label=right:{$2$}] {};
+        \node[point] (11) [pos=-25:25mm from 0, label=below:{$1$}] {};
+
+        \node[empty] (e) at (7) {\scalebox{1.5}{\bm{$\times$}}};
+
+        \path[-]    (11) edge (10)
+                    (10) edge (8)
+                    (8) edge[dashed] (7)
+                    (8) edge (3);
+    \end{graph}}
+    \hspace{1.5cm}
+    \subfloat[$i=6$]{
+    \begin{graph}
+        \tikzset{
+            point/.style={circle, fill, minimum width=4pt, inner sep=0},
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+        \node[point] (0) [label=left:{$12$}] {};
+        \node[point] (1) [pos=65:18mm from 0, label=left:{$11$}] {};
+        \node[point] (2) [pos=45:15mm from 1, label=above:{$8$}] {};
+        \node[point] (3) [pos=-20:30mm from 2, label=above left:{$5$}] {};
+        \node[point] (4) [pos=20:10mm from 1, label=above left:{$9$}] {};
+        \node[point] (5) [pos=-18:10mm from 1, label=above left:{$10$}] {};
+        \node[point] (6) [pos=20:38mm from 0, label=above:{$6$}] {};
+        \node[point] (7) [pos=12:44mm from 0, label=right:{$4$}] {};
+        \node[point] (8) [pos=6:55mm from 0, label=above:{$3$}] {};
+        \node[point] (9) [pos=-3:25mm from 0, label=above:{$7$}] {};
+        \node[point] (10) [pos=-5:47mm from 0, label=right:{$2$}] {};
+        \node[point] (11) [pos=-25:25mm from 0, label=below:{$1$}] {};
+
+        \path[-]    (11) edge (10)
+                    (10) edge (8)
+                    (8) edge (3)
+                    (3) edge (6);
+    \end{graph}}\\
+    \subfloat[$i=7$]{
+    \begin{graph}
+        \tikzset{
+            point/.style={circle, fill, minimum width=4pt, inner sep=0},
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+        \node[point] (0) [label=left:{$12$}] {};
+        \node[point] (1) [pos=65:18mm from 0, label=left:{$11$}] {};
+        \node[point] (2) [pos=45:15mm from 1, label=above:{$8$}] {};
+        \node[point] (3) [pos=-20:30mm from 2, label=above left:{$5$}] {};
+        \node[point] (4) [pos=20:10mm from 1, label=above left:{$9$}] {};
+        \node[point] (5) [pos=-18:10mm from 1, label=above left:{$10$}] {};
+        \node[point] (6) [pos=20:38mm from 0, label=above:{$6$}] {};
+        \node[point] (7) [pos=12:44mm from 0, label=right:{$4$}] {};
+        \node[point] (8) [pos=6:55mm from 0, label=above:{$3$}] {};
+        \node[point] (9) [pos=-3:25mm from 0, label=above:{$7$}] {};
+        \node[point] (10) [pos=-5:47mm from 0, label=right:{$2$}] {};
+        \node[point] (11) [pos=-25:25mm from 0, label=below:{$1$}] {};
+
+        \path[-]    (11) edge (10)
+                    (10) edge (8)
+                    (8) edge (3)
+                    (3) edge (6)
+                    (6) edge (9);
+    \end{graph}}
+    \hspace{1.5cm}
+    \subfloat[$i=8$]{
+    \begin{graph}
+        \tikzset{
+            point/.style={circle, fill, minimum width=4pt, inner sep=0},
+            empty/.style={inner sep=0},
+            pos/.style args={#1:#2 from #3}{
+                at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+            }
+        }
+        \node[point] (0) [label=left:{$12$}] {};
+        \node[point] (1) [pos=65:18mm from 0, label=left:{$11$}] {};
+        \node[point] (2) [pos=45:15mm from 1, label=above:{$8$}] {};
+        \node[point] (3) [pos=-20:30mm from 2, label=above left:{$5$}] {};
+        \node[point] (4) [pos=20:10mm from 1, label=above left:{$9$}] {};
+        \node[point] (5) [pos=-18:10mm from 1, label=above left:{$10$}] {};
+        \node[point] (6) [pos=20:38mm from 0, label=above:{$6$}] {};
+        \node[point] (7) [pos=12:44mm from 0, label=right:{$4$}] {};
+        \node[point] (8) [pos=6:55mm from 0, label=above:{$3$}] {};
+        \node[point] (9) [pos=-3:25mm from 0, label=above:{$7$}] {};
+        \node[point] (10) [pos=-5:47mm from 0, label=right:{$2$}] {};
+        \node[point] (11) [pos=-25:25mm from 0, label=below:{$1$}] {};
+
+        \node[empty] (e1) at (6) {\scalebox{1.5}{\bm{$\times$}}};
+        \node[empty] (e2) at (9) {\scalebox{1.5}{\bm{$\times$}}};
+
+        \path[-]    (11) edge (10)
+                    (10) edge (8)
+                    (8) edge (3)
+                    (3) edge[dashed] (6)
+                    (6) edge[dashed] (9)
+                    (3) edge (2);
+    \end{graph}}
+    \end{figure}
+
+    \noindent
+    L'algoritmo continua in questo modo provando tutti i punti.
+\end{eg}
+
+\paragraph{Complessità}
+Il calcolo degli angoli tra le rette e la rimozione dei punti allineati
+costa $O(n)$ e l'ordinamento costa $O(n\log n)$. Una volta ordinati, i punti
+vengono aggiunti e rimossi dall'\emph{inviluppo} al massimo una volta
+ciascuno, quindi la \emph{complessità} finale è $T(n)=O(n\log n)$.

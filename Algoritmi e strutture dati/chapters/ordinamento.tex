@@ -239,3 +239,39 @@ alfabeticamente, un metodo \emph{stabile} produce una lista in cui gli alunni
 dello stesso anno sono ancora in ordine alfabetico, mentre un ordinamento
 \emph{non stabile} probabilmente produrrà una lista senza più alcuna traccia
 del precedente ordinamento.
+
+\section{Confronto tra algoritmi di ordinamento}
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{|c|c|p{0.55\textwidth}|}
+    \hline
+    \textbf{Algoritmo} & \textbf{Complessità} & \textbf{Caratteristiche}\\
+    \hline
+    Insertion sort & $\Omega(n)$, $O(n^2)$ & Stabile, sul posto, iterativo
+    e ottimo per sequenze quasi ordinate\\
+    \hline
+    Merge sort & $\Theta(n\log n)$ & Stabile, ricorsivo, richiede $O(n)$ di
+    spazio aggiuntivo, buona performance in cache e buona parallelizzazione\\
+    \hline
+    Heap sort & $\Theta(n\log n)$ & Non stabile, sul posto, iterativo, 
+    cattiva performance in cache e cattiva parallelizzazione\\
+    \hline
+    Quick sort & $O(n\log n)$, $O(n^2)$ & Non stabile, ricorsivo, buona
+    performance in cache, buona parallelizzazione e buoni fattori
+    moltiplicativi\\
+    \hline
+    Counting sort & $\Theta(n+k)$ & Richiede $O(k)$ di memoria aggiuntiva,
+    iterativo e molto veloce quando $k=O(n)$\\
+    \hline
+    Pidgeonhole sort & $\Theta(n+k)$ & Richiede $O(k)$ di memoria aggiuntiva,
+    iterativo e molto veloce quando $k=O(n)$\\
+    \hline
+    Bucket sort & $O(n)$, $O(n+k)$ & Stabile e richiede $O(n)$ di spazio
+    aggiuntivo\\
+    \hline
+    Shell sort & $O(n\sqrt{n})$ & Stabile, adatto per piccoli valori e
+    per sequenze quasi ordinate\\
+    \hline
+\end{tabular}
+\end{table}

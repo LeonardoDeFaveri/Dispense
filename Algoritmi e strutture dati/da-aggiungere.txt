@@ -1,7 +1,7 @@
-- Strassen
+- Strassen 
 - Controllare tabella Bellman-Ford (OK)
 - Controllare il NB dopo i predecessori (p. 171) (OK)
-- Algoritmo di Graham
+- Algoritmo di Graham (OK)
 - Rendere corretto l'uso della funzione decrease nel Bellman-Ford (vedi Prim)
 - Controllare dimostrazione transitività della classe P (p. 231) (OK)
 - Controllare la parte sul Delta-TSP (OK)

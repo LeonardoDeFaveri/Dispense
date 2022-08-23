@@ -1,0 +1,95 @@
+\chapter{Algoritmi probabilistici}
+L'ultima categoria di algoritmi che ci rimane da affrontare sono i
+cosiddetti \emph{algoritmi probabilistici}, ovvero algoritmi che applicano
+il calcolo delle probabilità ai dati di output. Distinguiamo questi
+algoritmi in due categorie: gli algoritmi la cui correttezza è probabilistica
+e gli algoritmi che sono corretti, ma hanno un tempo di funzionamento
+probabilistico. I primi vengono chiamati \emph{Algoritmi di Montecarlo},
+i secondi invece, sono detti \emph{Algoritmi di Las Vegas}.
+
+\section{Algoritmi di Montecarlo}
+\subsection{Test di primalità}
+\begin{problem}[Test di primalità]
+    Dato un valore intero $n$, stabilire se è primo oppure no.
+\end{problem}
+
+\noindent
+L'algritmo naïf per questo problema prova tutti i numeri in $[2,\lfloor
+\sqrt{n}\rfloor]$ e se nessuno di essi è un divisore di $n$, allora $n$
+è certamente primo.
+
+\begin{minicode}{Algoritmo naïf}
+\ind\bc{boolean} isPrime(\bc{int} n)\\
+    \indf for (i = 2 to $\lfloor\sqrt{n}\rfloor$) do\\
+        \indff if (n / i == $\lfloor$n / i$\rfloor$) then\\
+            return false\\
+    \indf return true
+\end{minicode}
+
+\noindent
+Questa prima soluzione è certamente corretta, ma terribilmente inefficiente.
+
+\paragraph{Soluzione basata sul Piccolo Teorema di Fermat}
+\begin{definition}[Piccolo Teorema di Fermat]
+    Se $n\in\mathbb{N}$ è primo, allora vale:
+    \[b^{n-1}\Mod{n}\equiv 1\quad\forall b\in\mathbb{N}\ t.c.\ 2\leq b<n\]
+\end{definition}
+
+\begin{minicode}{Prima implementazione della soluzione}
+\ind\bc{boolean} isPrime(\bc{int} n)\\
+    \bc{int} b = random(2, n - 1)\hfill\com{Restituisce un numero in $[2,n-1]$}
+    \indf if (b$^{n - 1}$ mod n $\neq$ 1) then\\
+        return false\\
+    \indf return true
+\end{minicode}
+
+\noindent
+Il \emph{Piccolo Teorema di Fermat} è tale per cui se esiste un valore di $b$
+per il quale la condizione non è verificata, $n$ certamente non è primo.
+Tuttavia, esistono numeri composti per i quali esiste un $b\in[2,n-1]$ tale
+per cui $b^{n-1}\Mod{n}\equiv 1$. Questi numeri si chiamano pseudo-primi e
+la loro esistenza fa sì che la soluzione che abbiamo realizzato possa
+restituire dei falsi positivi.
+
+Per mitigare il rischio di falsi positivi è possibile applicare più volte
+la condizione del \emph{Piccolo Teorema di Fermat}.
+
+\begin{minicode}{Seconda implementazione della soluzione}
+\ind\bc{boolean} isPrime(\bc{int} n)\\
+    \indf for (i = 1 to k) do\\
+        \bc{int} b = random(2, n - 1)\hfill\com{Restituisce un numero in $[2,n-1]$}
+        \indff if (b$^{n - 1}$ mod n $\neq$ 1) then\\
+            return false\\
+    \indf return true
+\end{minicode}
+
+\noindent
+Questa versione è migliore della precedente, ma per via dei \emph{numeri di
+Carmichael}, numeri composti che soddisfano la condizone del
+\emph{Piccolo Teorema di Fermat}, la probabilità di ottenere falsi positivi
+rimane alta.
+
+\paragraph{Algoritmo di Miller-Rabin}
+Questo algoritmo si basa sul seguente teorema:
+\begin{definition}[Teorema di Miller-Rabin]
+    Se $n\in\mathbb{N}$ è primo, allora per ogni intero $b$ con $2\leq b<n$
+    valgono entrambe le seguenti condizioni:
+    \begin{enumerate}
+        \item $mcd(n,b)=1$
+        \item $b^m\Mod{n}\equiv 1\ \vee\ \exists\; i\in\mathbb{N}\::\:0\leq
+        i<v$ per cui $b^{m2^i}\Mod{n}\equiv n-1$
+    \end{enumerate}
+    per $m$ dispari e $n-1=m2^v$.
+\end{definition}
+
+\begin{note}
+    La scrittura $n-1=m2^v$ ci dice che la rappresentazione di $n-1$ in
+    binario è pari a quella di $m$ seguita da $v$ zeri.
+\end{note}
+
+\noindent
+Quello che l'\emph{Algoritmo di Miller-Rabin} fa è scegliere casualmente un
+valore di $b$ e provare a vedere se almeno una delle proprietà risulta
+falsa. Se è così, il numero $n$ sicuramente non è primo. Il problema di
+questa strategia è che per alcuni numeri composti esistono valori di $b$
+che verificano le due proprietà.

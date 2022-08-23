@@ -357,60 +357,67 @@
 \contentsline {subsection}{\numberline {16.6.1}Algoritmo di Jarvis}{222}{subsection.16.6.1}%
 \contentsline {paragraph}{Complessità}{222}{paragraph*.318}%
 \contentsline {subsection}{\numberline {16.6.2}Algoritmo di Graham}{223}{subsection.16.6.2}%
-\contentsline {chapter}{\numberline {17}Problemi intrattabili e teoria dell'NP-completezza}{224}{chapter.17}%
-\contentsline {section}{\numberline {17.1}Introduzione}{224}{section.17.1}%
-\contentsline {section}{\numberline {17.2}Riduzioni}{225}{section.17.2}%
-\contentsline {subsection}{\numberline {17.2.1}Colorazione di grafi}{225}{subsection.17.2.1}%
-\contentsline {subsection}{\numberline {17.2.2}Sudoku}{226}{subsection.17.2.2}%
-\contentsline {subsection}{\numberline {17.2.3}Insieme indipendente}{226}{subsection.17.2.3}%
-\contentsline {subsection}{\numberline {17.2.4}Copertura di vertici}{227}{subsection.17.2.4}%
-\contentsline {paragraph}{\bm {$S$} insieme indipendente \bm {$\Rightarrow $} \bm {$V-S$} copertura di vertici}{228}{paragraph*.323}%
-\contentsline {paragraph}{\bm {$V-S$} copertura di vertici \bm {$\Rightarrow $} \bm {$S$} insieme indipendente}{228}{paragraph*.324}%
-\contentsline {subsection}{\numberline {17.2.5}Soddisfacibilità di formule booleane}{228}{subsection.17.2.5}%
-\contentsline {paragraph}{Relazione tra SAT, 3-SAT e INDIPENDENT-SET}{229}{paragraph*.327}%
-\contentsline {section}{\numberline {17.3}Classi di problemi}{230}{section.17.3}%
-\contentsline {section}{\numberline {17.4}Alcuni problemi NP-completi}{232}{section.17.4}%
-\contentsline {chapter}{\numberline {18}Soluzioni per problemi intrattabili}{235}{chapter.18}%
-\contentsline {section}{\numberline {18.1}Algoritmi pseudo-polinomiali}{235}{section.18.1}%
-\contentsline {subsection}{\numberline {18.1.1}Problema del subset sum}{235}{subsection.18.1.1}%
-\contentsline {paragraph}{Soluzione con programmazione dinamica}{235}{paragraph*.332}%
-\contentsline {paragraph}{Soluzione con backtracking}{236}{paragraph*.333}%
-\contentsline {paragraph}{Soluzione con memoization}{236}{paragraph*.334}%
-\contentsline {subsection}{\numberline {18.1.2}Problemi fortemente e debolmente NP-completi}{237}{subsection.18.1.2}%
-\contentsline {paragraph}{Dimostrazione che SUBSET-SUM è debolmente $\mathbb {NP}$-completo}{238}{paragraph*.336}%
-\contentsline {paragraph}{Dimostrazione che CLIQUE è fortemente $\mathbb {NP}$-completo}{238}{paragraph*.337}%
-\contentsline {section}{\numberline {18.2}Algoritmi di approssimazione}{238}{section.18.2}%
-\contentsline {subsection}{\numberline {18.2.1}Problema del bin packing approssimato}{239}{subsection.18.2.1}%
-\contentsline {subsection}{\numberline {18.2.2}Problema del commesso viaggiatore modificato}{240}{subsection.18.2.2}%
-\contentsline {paragraph}{$\mathbb {NP}$-completezza di \bm {$\Delta $}-TSP}{240}{paragraph*.339}%
-\contentsline {paragraph}{Algoritmo in generale}{240}{paragraph*.340}%
-\contentsline {paragraph}{Complessità}{242}{paragraph*.346}%
-\contentsline {section}{\numberline {18.3}Algoritmi euristici}{242}{section.18.3}%
-\contentsline {subsection}{\numberline {18.3.1}Prima soluzione greedy - Arco di costo minimo}{243}{subsection.18.3.1}%
-\contentsline {paragraph}{Complessità}{244}{paragraph*.350}%
-\contentsline {subsection}{\numberline {18.3.2}Seconda soluzione greedy - Vicino più vicino}{245}{subsection.18.3.2}%
+\contentsline {paragraph}{Complessità}{224}{paragraph*.321}%
+\contentsline {chapter}{\numberline {17}Problemi intrattabili e teoria dell'NP-completezza}{225}{chapter.17}%
+\contentsline {section}{\numberline {17.1}Introduzione}{225}{section.17.1}%
+\contentsline {section}{\numberline {17.2}Riduzioni}{226}{section.17.2}%
+\contentsline {subsection}{\numberline {17.2.1}Colorazione di grafi}{226}{subsection.17.2.1}%
+\contentsline {subsection}{\numberline {17.2.2}Sudoku}{227}{subsection.17.2.2}%
+\contentsline {subsection}{\numberline {17.2.3}Insieme indipendente}{227}{subsection.17.2.3}%
+\contentsline {subsection}{\numberline {17.2.4}Copertura di vertici}{228}{subsection.17.2.4}%
+\contentsline {paragraph}{\bm {$S$} insieme indipendente \bm {$\Rightarrow $} \bm {$V-S$} copertura di vertici}{229}{paragraph*.326}%
+\contentsline {paragraph}{\bm {$V-S$} copertura di vertici \bm {$\Rightarrow $} \bm {$S$} insieme indipendente}{229}{paragraph*.327}%
+\contentsline {subsection}{\numberline {17.2.5}Soddisfacibilità di formule booleane}{229}{subsection.17.2.5}%
+\contentsline {paragraph}{Relazione tra SAT, 3-SAT e INDIPENDENT-SET}{230}{paragraph*.330}%
+\contentsline {section}{\numberline {17.3}Classi di problemi}{231}{section.17.3}%
+\contentsline {section}{\numberline {17.4}Alcuni problemi NP-completi}{233}{section.17.4}%
+\contentsline {chapter}{\numberline {18}Soluzioni per problemi intrattabili}{236}{chapter.18}%
+\contentsline {section}{\numberline {18.1}Algoritmi pseudo-polinomiali}{236}{section.18.1}%
+\contentsline {subsection}{\numberline {18.1.1}Problema del subset sum}{236}{subsection.18.1.1}%
+\contentsline {paragraph}{Soluzione con programmazione dinamica}{236}{paragraph*.335}%
+\contentsline {paragraph}{Soluzione con backtracking}{237}{paragraph*.336}%
+\contentsline {paragraph}{Soluzione con memoization}{237}{paragraph*.337}%
+\contentsline {subsection}{\numberline {18.1.2}Problemi fortemente e debolmente NP-completi}{238}{subsection.18.1.2}%
+\contentsline {paragraph}{Dimostrazione che SUBSET-SUM è debolmente $\mathbb {NP}$-completo}{239}{paragraph*.339}%
+\contentsline {paragraph}{Dimostrazione che CLIQUE è fortemente $\mathbb {NP}$-completo}{239}{paragraph*.340}%
+\contentsline {section}{\numberline {18.2}Algoritmi di approssimazione}{239}{section.18.2}%
+\contentsline {subsection}{\numberline {18.2.1}Problema del bin packing approssimato}{240}{subsection.18.2.1}%
+\contentsline {subsection}{\numberline {18.2.2}Problema del commesso viaggiatore modificato}{241}{subsection.18.2.2}%
+\contentsline {paragraph}{$\mathbb {NP}$-completezza di \bm {$\Delta $}-TSP}{241}{paragraph*.342}%
+\contentsline {paragraph}{Algoritmo in generale}{241}{paragraph*.343}%
+\contentsline {paragraph}{Complessità}{243}{paragraph*.349}%
+\contentsline {section}{\numberline {18.3}Algoritmi euristici}{243}{section.18.3}%
+\contentsline {subsection}{\numberline {18.3.1}Prima soluzione greedy - Arco di costo minimo}{244}{subsection.18.3.1}%
 \contentsline {paragraph}{Complessità}{245}{paragraph*.353}%
-\contentsline {subsection}{\numberline {18.3.3}Soluzione con ricerca locale}{246}{subsection.18.3.3}%
-\contentsline {paragraph}{Complessità}{247}{paragraph*.357}%
-\contentsline {section}{\numberline {18.4}Algoritmi branch-\&-bound}{247}{section.18.4}%
-\contentsline {subsection}{\numberline {18.4.1}Schema generale}{247}{subsection.18.4.1}%
-\contentsline {subsection}{\numberline {18.4.2}Problema del commesso viaggiatore}{248}{subsection.18.4.2}%
-\contentsline {paragraph}{Lower bound come costo effettivo della soluzione parziale}{248}{paragraph*.358}%
-\contentsline {paragraph}{Lower bound come costo per uscire dall'ultimo nodo}{248}{paragraph*.360}%
-\contentsline {paragraph}{Lower bound come costo per uscire da tutti i nodi rimasti}{249}{paragraph*.362}%
-\contentsline {paragraph}{Lower bound come costo per attraversare i nodi non ancora scelti}{249}{paragraph*.364}%
-\contentsline {paragraph}{Complessità}{250}{paragraph*.366}%
-\contentsline {chapter}{\numberline {19}Algoritmi di ordinamento}{252}{chapter.19}%
-\contentsline {section}{\numberline {19.1}Algoritmi basati su confronti}{252}{section.19.1}%
-\contentsline {section}{\numberline {19.2}Algoritmi non basati su confronti}{253}{section.19.2}%
-\contentsline {subsection}{\numberline {19.2.1}Spaghetti sort}{253}{subsection.19.2.1}%
-\contentsline {subsection}{\numberline {19.2.2}Counting sort}{253}{subsection.19.2.2}%
-\contentsline {paragraph}{Complessità}{254}{paragraph*.370}%
-\contentsline {subsection}{\numberline {19.2.3}Pigeonhole sort}{254}{subsection.19.2.3}%
-\contentsline {paragraph}{Complessità}{254}{paragraph*.372}%
-\contentsline {subsection}{\numberline {19.2.4}Bucket sort}{254}{subsection.19.2.4}%
-\contentsline {paragraph}{Complessità}{254}{paragraph*.374}%
-\contentsline {section}{\numberline {19.3}Proprietà degli algoritmi di ordinamento}{255}{section.19.3}%
-\contentsline {chapter}{\numberline {A}Appendice A}{256}{appendix.1.A}%
-\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{256}{section.1.A.1}%
-\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{256}{section.1.A.2}%
+\contentsline {subsection}{\numberline {18.3.2}Seconda soluzione greedy - Vicino più vicino}{246}{subsection.18.3.2}%
+\contentsline {paragraph}{Complessità}{246}{paragraph*.356}%
+\contentsline {subsection}{\numberline {18.3.3}Soluzione con ricerca locale}{247}{subsection.18.3.3}%
+\contentsline {paragraph}{Complessità}{248}{paragraph*.360}%
+\contentsline {section}{\numberline {18.4}Algoritmi branch-\&-bound}{248}{section.18.4}%
+\contentsline {subsection}{\numberline {18.4.1}Schema generale}{248}{subsection.18.4.1}%
+\contentsline {subsection}{\numberline {18.4.2}Problema del commesso viaggiatore}{249}{subsection.18.4.2}%
+\contentsline {paragraph}{Lower bound come costo effettivo della soluzione parziale}{249}{paragraph*.361}%
+\contentsline {paragraph}{Lower bound come costo per uscire dall'ultimo nodo}{249}{paragraph*.363}%
+\contentsline {paragraph}{Lower bound come costo per uscire da tutti i nodi rimasti}{250}{paragraph*.365}%
+\contentsline {paragraph}{Lower bound come costo per attraversare i nodi non ancora scelti}{250}{paragraph*.367}%
+\contentsline {paragraph}{Complessità}{251}{paragraph*.369}%
+\contentsline {chapter}{\numberline {19}Algoritmi di ordinamento}{253}{chapter.19}%
+\contentsline {section}{\numberline {19.1}Algoritmi basati su confronti}{253}{section.19.1}%
+\contentsline {section}{\numberline {19.2}Algoritmi non basati su confronti}{254}{section.19.2}%
+\contentsline {subsection}{\numberline {19.2.1}Spaghetti sort}{254}{subsection.19.2.1}%
+\contentsline {subsection}{\numberline {19.2.2}Counting sort}{254}{subsection.19.2.2}%
+\contentsline {paragraph}{Complessità}{255}{paragraph*.373}%
+\contentsline {subsection}{\numberline {19.2.3}Pigeonhole sort}{255}{subsection.19.2.3}%
+\contentsline {paragraph}{Complessità}{255}{paragraph*.375}%
+\contentsline {subsection}{\numberline {19.2.4}Bucket sort}{255}{subsection.19.2.4}%
+\contentsline {paragraph}{Complessità}{255}{paragraph*.377}%
+\contentsline {section}{\numberline {19.3}Proprietà degli algoritmi di ordinamento}{256}{section.19.3}%
+\contentsline {section}{\numberline {19.4}Confronto tra algoritmi di ordinamento}{256}{section.19.4}%
+\contentsline {chapter}{\numberline {20}Algoritmi probabilistici}{257}{chapter.20}%
+\contentsline {section}{\numberline {20.1}Algoritmi di Montecarlo}{257}{section.20.1}%
+\contentsline {subsection}{\numberline {20.1.1}Test di primalità}{257}{subsection.20.1.1}%
+\contentsline {paragraph}{Soluzione basata sul Piccolo Teorema di Fermat}{257}{paragraph*.379}%
+\contentsline {paragraph}{Algoritmo di Miller-Rabin}{258}{paragraph*.380}%
+\contentsline {chapter}{\numberline {A}Appendice A}{259}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{259}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{259}{section.1.A.2}%
