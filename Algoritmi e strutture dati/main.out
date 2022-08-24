@@ -213,8 +213,11 @@
 \BOOKMARK [1][-]{section.19.3}{Propriet\340 degli algoritmi di ordinamento}{chapter.19}% 213
 \BOOKMARK [1][-]{section.19.4}{Confronto tra algoritmi di ordinamento}{chapter.19}% 214
 \BOOKMARK [0][-]{chapter.20}{Algoritmi probabilistici}{}% 215
-\BOOKMARK [1][-]{section.20.1}{Algoritmi di Montecarlo}{chapter.20}% 216
+\BOOKMARK [1][-]{section.20.1}{Algoritmi Montecarlo}{chapter.20}% 216
 \BOOKMARK [2][-]{subsection.20.1.1}{Test di primalit\340}{section.20.1}% 217
-\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 218
-\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 219
-\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 220
+\BOOKMARK [2][-]{subsection.20.1.2}{Identificazione di espressioni polinomiali nulle}{section.20.1}% 218
+\BOOKMARK [1][-]{section.20.2}{Algoritmi Las Vegas}{chapter.20}% 219
+\BOOKMARK [2][-]{subsection.20.2.1}{Problema della selezione}{section.20.2}% 220
+\BOOKMARK [0][-]{appendix.1.A}{Appendice A}{}% 221
+\BOOKMARK [1][-]{section.1.A.1}{Propriet\340 dei logaritmi}{appendix.1.A}% 222
+\BOOKMARK [1][-]{section.1.A.2}{Serie matematiche convergenti}{appendix.1.A}% 223

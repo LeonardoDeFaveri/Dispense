@@ -4,10 +4,10 @@ cosiddetti \emph{algoritmi probabilistici}, ovvero algoritmi che applicano
 il calcolo delle probabilità ai dati di output. Distinguiamo questi
 algoritmi in due categorie: gli algoritmi la cui correttezza è probabilistica
 e gli algoritmi che sono corretti, ma hanno un tempo di funzionamento
-probabilistico. I primi vengono chiamati \emph{Algoritmi di Montecarlo},
-i secondi invece, sono detti \emph{Algoritmi di Las Vegas}.
+probabilistico. I primi vengono chiamati \emph{Algoritmi Montecarlo},
+i secondi invece, sono detti \emph{Algoritmi Las Vegas}.
 
-\section{Algoritmi di Montecarlo}
+\section{Algoritmi Montecarlo}
 \subsection{Test di primalità}
 \begin{problem}[Test di primalità]
     Dato un valore intero $n$, stabilire se è primo oppure no.
@@ -92,4 +92,245 @@ Quello che l'\emph{Algoritmo di Miller-Rabin} fa è scegliere casualmente un
 valore di $b$ e provare a vedere se almeno una delle proprietà risulta
 falsa. Se è così, il numero $n$ sicuramente non è primo. Il problema di
 questa strategia è che per alcuni numeri composti esistono valori di $b$
-che verificano le due proprietà.
+che verificano le due proprietà. I valori di $b$ per i quali $n$ risulta
+composto sono chiamati \emph{testimoni} e Rabin ha dimostrato che
+per ogni numero composto $n$, ci sono almeno $\frac{3}{4}(n-1)$
+\emph{testimoni} in $[2,n-1]$. Di conseguenza, il \emph{test di primalità}
+ha una probabilità inferiore a $\frac{1}{4}$ di restituire un falso positivo.
+Come per l'altro algoritmo, possiamo ridurre la propabilità di errore
+ripetendo più volte il test. Il risultato è un algoritmo come il seguente:
+
+\begin{minicode}{Implementazione della soluzione}
+\ind\bc{boolean} isPrime(\bc{int} n)\\
+    \indf for (i = 1 to k) do\\
+        \bc{int} b = random(2, n - 1)\\
+        \indff if (isComposite(n, b)) then\hfill\com{Testa le condizioni di compostezza}
+            return false\\
+    \indf return true
+\end{minicode}
+
+\paragraph{Complessità}
+L'\emph{Algoritmo di Miller-Rabin} ha una probabilità di errore di
+$\left(\frac{1}{4}\right)^k$ e una \emph{complessità} pari a
+$O(k\log^2 n\log\log n\log\log\log n)$.
+
+\subsection{Identificazione di espressioni polinomiali nulle}
+\begin{problem}[Identificazione di espressioni polinomiali nulle]
+    Data un'espressione algebrica polinomiale $p(x_1,\dots,x_n)$ in $n$
+    variabili, stabilire se $p$ è identificamente nulla oppure no.
+\end{problem}
+
+\noindent
+Questo problema può essere risolto semplificando il polinomio, ma soluzioni
+di questo tipo sono molto complesse. Un'alternativa probabilistica è quella
+di generare una $n$-upla di valori $v_1,\dots,v_n$. Quindi si risolve
+l'equazione $x=p(v_1,\dots,v_n)$ e, se $x\neq 0$, il polinomio certamente
+non è identicamente nullo. Altrimeni, potrebbe esserlo.
+
+È dimostrato che se ogni $v_i$ è un valore intero compreso tra $1$ e $2d$,
+dove $d$ è il grado del polinomio, la probabilità di falsi positivi non
+supera $\frac{1}{2}$. Quindi ripetendo l'algoritmo $k$ volte, la
+probabilità di errore si riduce a $\left(\frac{1}{2}\right)^k$.
+
+\section{Algoritmi Las Vegas}
+\subsection{Problema della selezione}
+\begin{problem}[Problema della selezione]
+    Dato un vettore $A$ contenente $n$ valori e un valore $1\leq k\leq n$,
+    trovare l'elemento che occuperebbe la posizione $k$ se il vettore fosse
+    ordinato.
+\end{problem}
+\begin{note}
+    Il problema del calcolo della mediana è un sottobroblema della
+    \emph{selezione} con $k=\left\lfloor\frac{n}{2}\right\rfloor$.
+\end{note}
+
+\noindent
+Una soluzione banale è quella di ordinare il vettore pagando $O(n\log n)$ e
+cercare il valore in posizione $k$. Possiamo fare meglio di così?
+
+\paragraph{Approccio basato su Heap}
+\begin{minicode}{Implementazione soluzione basata su Heap}
+\ind\bc{ITEM} heapSelect(\bc{ITEM}[] A, \bc{int} n, \bc{int} k)\\
+    buildHeap(A)\\
+    \indf for (i = 1 to k - 1) do\\
+        deleteMin(A, n)\\
+    \indf return deleteMin(A, n)
+\end{minicode}
+
+\paragraph{Complessità}
+Le funzioni \texttt{heapBuild} e \texttt{deleteMin} costano rispettivamente
+$O(n)$ e $O(\log n)$ e poiché la \texttt{deleteMin} viene invocata $k$ volte,
+il costo totale è $O(n+k\log n)$. Se $k=O\left(\frac{n}{\log n}\right)$, la
+\emph{complessità} si riduce a $O(n)$, ma se $k=\frac{n}{2}$, si attesta a
+$O(n+n\log n)=O(n\log n)$. Da questo deduciamo che la soluzione proposta è
+conveniente solo se i valori di $k$ sono molto piccoli. Possono andare bene
+anche valori molto vicini a $n$, ma l'algoritmo va modificato in modo che
+utilizzi un \emph{albero max-heap} e rimuova ogni volta il valore massimo.
+
+\paragraph{Approccio basato su Quicksort}
+\begin{minicode}{Implementazione della soluzione basata su Quicksort}
+\ind\bc{ITEM} selection(\bc{ITEM}[] A, \bc{int} first, \bc{int} last, \bc{int} k)\\
+    \indf if (first == last) then\\
+        return A[first]\\
+
+    \indf\bc{int} j = pivot(A, first, last)\\
+    \indf\bc{int} q = j - first + 1\hfill\com{Indice del valore ricercato rispetto al sottovettore}
+    \indf if (k == q) then\\
+        return A[j]\\
+    \indf else if (k < q) then\\
+        return selection(A, first, j - 1, k)\\
+    \indf else\\
+        return selection(A, j + 1, last, k - q)
+\end{minicode}
+
+\noindent
+Questo algoritmo si comporta come il \emph{\hyperlink{sec:quick_sort}{Quicksort}}
+perché sceglie un valore detto \emph{pivot} e sposta alla sua sinistra o alla
+sua destra tutti gli elementi del sottovettore con valore inferiore o superiore.
+Fatto questo, esprime $k$ rispetto all'indice di inizio del sottovettore che sta
+considerando e, se il valore di $k$ coincide con quello appena calcolato, allora
+il valore cercato si trova nella posizione del \emph{pivot}. Se $k$ è più piccolo,
+la ricerca continua in maniera ricorsiva nel sottovettore sinistro rispetto al
+\emph{pivot}, oppure continua in quello destro se $k$ è maggiore. In quest'ultimo,
+caso il valore di $k$ viene ridotto in modo da mantenerlo coerente con i limiti
+del sottovettore.
+
+\begin{figure}[h!]
+\centering
+\begin{graph}
+    \definecolor{lightblue}{RGB}{129, 208, 226}
+    \tikzset{
+        cell/.style={rectangle, draw, minimum size=10mm},
+        empty/.style={minimum size=10mm}
+    }
+
+    \foreach \i in {0,...,15} {
+        \ifthenelse{\i = 7}{
+            \node[cell, fill=Dandelion] (\i) at (\i, 0) {};
+        }{
+            \ifthenelse{\i > 2 \and \i < 12}{
+                \node[cell, fill=leaf] (\i) at (\i, 0) {};
+            }{
+                \node[cell] (\i) at (\i, 0) {};
+            }
+            
+        }
+    }
+
+    \node[empty] (j) at (7,0) [label=above:{$j$}] {};
+    \node[empty] (f) at (3,0) [label=above:{\emph{first}}] {};
+    \node[empty] (f) at (11,0) [label=above:{\emph{last}}] {};
+
+    \node[inner sep=0] (i3) at (3,-1) {};
+    \node[inner sep=0] (ij) at (7,-1) {};
+
+    \draw[<->] (i3) edge[line width=1.2pt] node[midway, below] {$q$} (ij);
+\end{graph}
+\end{figure}
+
+\paragraph{Complessità}
+La similitudine con il \emph{Quicksort} si ripresenta anche nella
+\emph{complessità} perché, se il vettore è ordinato e di volta in volta
+viene scelto come \emph{pivot} il primo elemento del sottovettore,
+l'\emph{equazione di ricorrenza} assume la seguente forma:
+\[T(n)=\begin{cases}
+    1 & n\leq 1\\
+    T(n-1)+n & n>1
+\end{cases}\]
+Per il \emph{\nameref{def:21}}, la \emph{forma chiusa} è $T(n)=O(n^2)$.
+
+Allo stesso modo, se ad ogni scelta del \emph{pivot} il sottovettore viene
+diviso in due metà, rientriamo nel caso ottimo e l'\emph{equazione di ricorrenza}
+vale:
+\[T(n)=\begin{cases}
+    1 & n\leq 1\\
+    T(n/2)+n & n>1
+\end{cases}\]
+Per il \emph{\nameref{def:19}}, la \emph{forma chiusa} è $T(n)=O(n)$.
+
+\bigskip\noindent
+Come si comporta l'algoritmo nel caso medio?
+
+Per rispondere a questa domanda proviamo ad assumere che la funzione
+\texttt{pivot} restituisca con la stessa probabilità una qualsiasi posizione
+del vettore $A$. In questo modo, la \emph{funzione di ricorrenza} diventa
+$n$ più la media fra il costo di tutte le possibili scelte del \emph{pivot},
+ovvero:
+\[\begin{array}{rcll}
+    T(n) & = & n+\frac{1}{n}\sum_{q=1}^n T(\max\{q-1,n-q\}) & \quad\text{Media su $n$ casi}\\
+    & \leq & n+\frac{1}{n}\sum_{q=\lfloor n/2\rfloor}^{n-1}2T(q) & \quad n>1\\
+    & \leq & n+\frac{1}{n}\sum_{q=\lfloor n/2\rfloor}^{n-1}2cq & \quad\text{Sostituzione}\\
+    & \leq & n+\frac{2c}{n}\sum_{q=\lfloor n/2\rfloor}^{n-1}q & \quad\text{Raccoglimento $2c$}\\
+    & = & n+\frac{2c}{n}\left(\sum_{q=1}^{n-1}q-\sum_{q=1}^{\lfloor n/2\rfloor-1}q\right) & \quad\text{Sottrazione prima parte}\\
+    & = & n+\frac{2c}{n}\left(\frac{n(n-1)}{2}-\frac{\lfloor n/2\rfloor
+    \left(\lfloor n/2\rfloor -1\right)}{2}\right)\\
+    & \leq & n+\frac{2c}{n}\left(\frac{n(n-1)}{2}-\frac{n/2\left(n/2-2\right)}{2}
+    \right) & \quad\text{Rimozione limite inferiore}\\
+    & = & n+\frac{2c}{n}\frac{\left(n^2-n-\left(\frac{1}{4}n^2-\frac{3}{2}n+2\right)\right)}{2}\\
+    & = & n+\frac{c}{n}\left(n^2-n-\left(\frac{1}{4}n^2-\frac{3}{2}n+2\right)\right) & \quad\text{Semplificazione del $2$}\\
+    & = & n+\frac{c}{n}\left(\frac{3}{4}n^2+\frac{1}{2}n-2\right)\\
+    & \leq & n+\frac{c}{n}\left(\frac{3}{4}n^2+\frac{1}{2}n\right) & \quad\text{Rimozione del $-2$}\\
+    & = &n+\frac{3}{4}cn+\frac{1}{2}c\\
+    & \leq & cn
+\end{array}\]
+L'ultima disequazione è vera per $c>4$ e $n\geq\frac{2c}{c-4}$, quindi la \emph{complessità}
+del caso medio è $T(n)=O(n)$. Questa soluzione è probabilistica perché il tempo
+d'esecuzione dipende dalla selezione dei \emph{pivot}.
+
+\begin{note}
+    Per forzare la funzione \texttt{pivot} a sceglire equiprobabilisticamente
+    tutti i valori compresi in $[1,n]$, possiamo forzare la cosa scambiando Il
+    valore in una posizione casuale con il primo: \texttt{A[random(first, last)]
+    $\leftrightarrow$ A[first]}\footnotemark.
+\end{note}
+
+\footnotetext{L'implementazione di \texttt{pivot} sceglie sempre l'elemento
+in prima posizione}
+
+\paragraph{Approccio deterministico}
+Se supponessimo di avere a disposizione una funzione in grado di restituire in
+tempo $O(n)$ un valore che dista al più $\frac{3}{10}n$ dal mediano di un vettore,
+potremmo usare quella funzione per risolvere il \emph{problema della selezione}.
+
+L'idea sarebbe poi quella di dividere gli $n$ valori in gruppi di $5$. Quindi,
+per ogni gruppo $S_i$ con $i\in[1,\lceil n/5\rceil]$, usare la suddetta funzione
+per ricavare il mediano $M_i$. A quel punto, usando la stessa funzione si può
+ricavare il mediano $m$ delle mediane $[M_1,\dots,M_{\rceil n/5\rceil}]$, e usare
+quell'$m$ come \emph{pivot} per poi richiamare ricorsivamente l'algoritmo
+sul sottovettore opportuno, seguendo lo stesso approccio seguito nella soluzione
+basata su \emph{Quicksort}. Una volta raggiunto un sottovettore sufficientemente
+piccolo si potrebbe usare un algoritmo di ordinamento per determinare l'ultimo
+mediano.
+
+\newpage
+\begin{minicode}{Implementazione soluzione deterministica}
+\ind\bc{ITEM} select(\bc{ITEM}[] A, \bc{int} first, \bc{int} last, \bc{int} k)\\
+    \com{Se la dimensione è inferiore a 10, ordina il vettore e resituisce}
+    \com{il $k$-esimo elemento di $A[first\dots last]$}
+    \indf if (last - first + 1 $\leq$ 10) then\\
+        insertionSort(A, first, last)\hfill\com{Ordina unicamente il sottovettore}
+        return A[first + k - 1]\\
+    \indf\com{Divide $A$ in $\lceil n/5\rceil$ sottovettori di dimensione $5$ e
+    ne calcola la mediana}
+    \indf\bc{ITEM}[] M = new \bc{ITEM}[1\dots$\lceil$n / 5$\rceil$]\\
+    \indf for (i = 1 to $\lceil$n / 5$\rceil$) do\\
+        M[i] = median(A, first + (i - 1) $\cdot$ 5, last)\\
+    \indf\com{Individua la mediana delle mediane e la usa come \emph{pivot}}
+    \indf\bc{ITEM} m = select(M, 1, $\lceil$n / 5$\rceil$, $\lceil\lceil$n / 5$\rceil$ / 2$\rceil$)\\
+    \indf\bc{int} j = pivot(A, first, last, m)\\
+    \indf\bc{int} q = j - first + 1\hfill\com{Indice del valore ricercato rispetto al sottovettore}
+    \indf if (k == q) then\\
+        return A[j]\\
+    \indf else if (k < q) then\\
+        return selection(A, first, j - 1, k)\\
+    \indf else\\
+        return selection(A, j + 1, last, k - q)
+\end{minicode}
+
+\paragraph{Complessità}
+Il calcolo dei mediani $M_i$ richiede al più $6\lceil n/5\rceil$ confronti, la
+prima invocazione di \texttt{select} opera su $\lceil n/5\rceil$ elementi, mentre
+la seconda su un massimo di $\frac{7n}{10}$ o, più esattamente, su $n-3\cdot\lceil
+\lceil n/5\rceil/2\rceil$ elementi. Quindi, nel caso pessimo, la \texttt{select}
+esegue $O(n)$ confronti. La \emph{funzione di ricorrenza} è dunque la seguente:
+\[T(n)=T(n/5)+T(7n/10)+\frac{11}{5}n=O(n)\]
