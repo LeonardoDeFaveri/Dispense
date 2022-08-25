@@ -1,11 +1,11 @@
 \chapter{Algoritmi probabilistici}
-L'ultima categoria di algoritmi che ci rimane da affrontare sono i
-cosiddetti \emph{algoritmi probabilistici}, ovvero algoritmi che applicano
-il calcolo delle probabilità ai dati di output. Distinguiamo questi
-algoritmi in due categorie: gli algoritmi la cui correttezza è probabilistica
+L'ultimo argomento che ci rimane da affrontare riguarda i
+cosiddetti \emph{algoritmi probabilistici}, ovvero quel genere di algoritmi
+che applicano il calcolo delle probabilità ai dati di output. Possiamo
+distinguere due categoria: gli algoritmi la cui correttezza è probabilistica
 e gli algoritmi che sono corretti, ma hanno un tempo di funzionamento
 probabilistico. I primi vengono chiamati \emph{Algoritmi Montecarlo},
-i secondi invece, sono detti \emph{Algoritmi Las Vegas}.
+i secondi \emph{Algoritmi Las Vegas}.
 
 \section{Algoritmi Montecarlo}
 \subsection{Test di primalità}
@@ -51,8 +51,8 @@ per cui $b^{n-1}\Mod{n}\equiv 1$. Questi numeri si chiamano pseudo-primi e
 la loro esistenza fa sì che la soluzione che abbiamo realizzato possa
 restituire dei falsi positivi.
 
-Per mitigare il rischio di falsi positivi è possibile applicare più volte
-la condizione del \emph{Piccolo Teorema di Fermat}.
+Per mitigare il rischio di falsi positivi è possibile verificare più volte
+la condizione del \emph{Piccolo Teorema di Fermat} per diversi valori di $b$.
 
 \begin{minicode}{Seconda implementazione della soluzione}
 \ind\bc{boolean} isPrime(\bc{int} n)\\
@@ -66,8 +66,8 @@ la condizione del \emph{Piccolo Teorema di Fermat}.
 \noindent
 Questa versione è migliore della precedente, ma per via dei \emph{numeri di
 Carmichael}, numeri composti che soddisfano la condizone del
-\emph{Piccolo Teorema di Fermat}, la probabilità di ottenere falsi positivi
-rimane alta.
+\emph{Piccolo Teorema di Fermat} per ogni $b$, la probabilità di ottenere falsi
+positivi rimane alta.
 
 \paragraph{Algoritmo di Miller-Rabin}
 Questo algoritmo si basa sul seguente teorema:
@@ -95,9 +95,9 @@ questa strategia è che per alcuni numeri composti esistono valori di $b$
 che verificano le due proprietà. I valori di $b$ per i quali $n$ risulta
 composto sono chiamati \emph{testimoni} e Rabin ha dimostrato che
 per ogni numero composto $n$, ci sono almeno $\frac{3}{4}(n-1)$
-\emph{testimoni} in $[2,n-1]$. Di conseguenza, il \emph{test di primalità}
-ha una probabilità inferiore a $\frac{1}{4}$ di restituire un falso positivo.
-Come per l'altro algoritmo, possiamo ridurre la propabilità di errore
+\emph{testimoni} nell'intervallo $[2,n-1]$. Di conseguenza, il \emph{test di
+primalità} ha una probabilità inferiore a $\frac{1}{4}$ di restituire un falso
+positivo. Come per l'altro algoritmo, possiamo ridurre la propabilità di errore
 ripetendo più volte il test. Il risultato è un algoritmo come il seguente:
 
 \begin{minicode}{Implementazione della soluzione}
@@ -123,7 +123,7 @@ $O(k\log^2 n\log\log n\log\log\log n)$.
 \noindent
 Questo problema può essere risolto semplificando il polinomio, ma soluzioni
 di questo tipo sono molto complesse. Un'alternativa probabilistica è quella
-di generare una $n$-upla di valori $v_1,\dots,v_n$. Quindi si risolve
+di generare una $n$-upla di valori $v_1,\dots,v_n$. Quindi, si risolve
 l'equazione $x=p(v_1,\dots,v_n)$ e, se $x\neq 0$, il polinomio certamente
 non è identicamente nullo. Altrimeni, potrebbe esserlo.
 
@@ -159,7 +159,7 @@ cercare il valore in posizione $k$. Possiamo fare meglio di così?
 
 \paragraph{Complessità}
 Le funzioni \texttt{heapBuild} e \texttt{deleteMin} costano rispettivamente
-$O(n)$ e $O(\log n)$ e poiché la \texttt{deleteMin} viene invocata $k$ volte,
+$O(n)$ e $O(\log n)$ e, poiché la \texttt{deleteMin} viene invocata $k$ volte,
 il costo totale è $O(n+k\log n)$. Se $k=O\left(\frac{n}{\log n}\right)$, la
 \emph{complessità} si riduce a $O(n)$, ma se $k=\frac{n}{2}$, si attesta a
 $O(n+n\log n)=O(n\log n)$. Da questo deduciamo che la soluzione proposta è
@@ -168,22 +168,6 @@ anche valori molto vicini a $n$, ma l'algoritmo va modificato in modo che
 utilizzi un \emph{albero max-heap} e rimuova ogni volta il valore massimo.
 
 \paragraph{Approccio basato su Quicksort}
-\begin{minicode}{Implementazione della soluzione basata su Quicksort}
-\ind\bc{ITEM} selection(\bc{ITEM}[] A, \bc{int} first, \bc{int} last, \bc{int} k)\\
-    \indf if (first == last) then\\
-        return A[first]\\
-
-    \indf\bc{int} j = pivot(A, first, last)\\
-    \indf\bc{int} q = j - first + 1\hfill\com{Indice del valore ricercato rispetto al sottovettore}
-    \indf if (k == q) then\\
-        return A[j]\\
-    \indf else if (k < q) then\\
-        return selection(A, first, j - 1, k)\\
-    \indf else\\
-        return selection(A, j + 1, last, k - q)
-\end{minicode}
-
-\noindent
 Questo algoritmo si comporta come il \emph{\hyperlink{sec:quick_sort}{Quicksort}}
 perché sceglie un valore detto \emph{pivot} e sposta alla sua sinistra o alla
 sua destra tutti gli elementi del sottovettore con valore inferiore o superiore.
@@ -228,6 +212,21 @@ del sottovettore.
 \end{graph}
 \end{figure}
 
+\begin{minicode}{Implementazione della soluzione basata su Quicksort}
+\ind\bc{ITEM} selection(\bc{ITEM}[] A, \bc{int} first, \bc{int} last, \bc{int} k)\\
+    \indf if (first == last) then\\
+        return A[first]\\
+
+    \indf\bc{int} j = pivot(A, first, last)\\
+    \indf\bc{int} q = j - first + 1\hfill\com{Indice del valore ricercato rispetto al sottovettore}
+    \indf if (k == q) then\\
+        return A[j]\\
+    \indf else if (k < q) then\\
+        return selection(A, first, j - 1, k)\\
+    \indf else\\
+        return selection(A, j + 1, last, k - q)
+\end{minicode}
+
 \paragraph{Complessità}
 La similitudine con il \emph{Quicksort} si ripresenta anche nella
 \emph{complessità} perché, se il vettore è ordinato e di volta in volta
@@ -264,7 +263,7 @@ ovvero:
     & = & n+\frac{2c}{n}\left(\sum_{q=1}^{n-1}q-\sum_{q=1}^{\lfloor n/2\rfloor-1}q\right) & \quad\text{Sottrazione prima parte}\\
     & = & n+\frac{2c}{n}\left(\frac{n(n-1)}{2}-\frac{\lfloor n/2\rfloor
     \left(\lfloor n/2\rfloor -1\right)}{2}\right)\\
-    & \leq & n+\frac{2c}{n}\left(\frac{n(n-1)}{2}-\frac{n/2\left(n/2-2\right)}{2}
+    & \leq & n+\frac{2c}{n}\left(\frac{n(n-1)}{2}-\frac{\left(n/2-1\right)\left(n/2-2\right)}{2}
     \right) & \quad\text{Rimozione limite inferiore}\\
     & = & n+\frac{2c}{n}\frac{\left(n^2-n-\left(\frac{1}{4}n^2-\frac{3}{2}n+2\right)\right)}{2}\\
     & = & n+\frac{c}{n}\left(n^2-n-\left(\frac{1}{4}n^2-\frac{3}{2}n+2\right)\right) & \quad\text{Semplificazione del $2$}\\
@@ -279,7 +278,7 @@ d'esecuzione dipende dalla selezione dei \emph{pivot}.
 
 \begin{note}
     Per forzare la funzione \texttt{pivot} a sceglire equiprobabilisticamente
-    tutti i valori compresi in $[1,n]$, possiamo forzare la cosa scambiando Il
+    tutti i valori compresi in $[1,n]$, possiamo forzare la cosa scambiando il
     valore in una posizione casuale con il primo: \texttt{A[random(first, last)]
     $\leftrightarrow$ A[first]}\footnotemark.
 \end{note}
@@ -293,14 +292,14 @@ tempo $O(n)$ un valore che dista al più $\frac{3}{10}n$ dal mediano di un vetto
 potremmo usare quella funzione per risolvere il \emph{problema della selezione}.
 
 L'idea sarebbe poi quella di dividere gli $n$ valori in gruppi di $5$. Quindi,
-per ogni gruppo $S_i$ con $i\in[1,\lceil n/5\rceil]$, usare la suddetta funzione
+per ogni gruppo $S_i$, con $i\in[1,\lceil n/5\rceil]$, usare la suddetta funzione
 per ricavare il mediano $M_i$. A quel punto, usando la stessa funzione si può
-ricavare il mediano $m$ delle mediane $[M_1,\dots,M_{\rceil n/5\rceil}]$, e usare
+ricavare il mediano $m$ delle mediane $[M_1,\dots,M_{\lceil n/5\rceil}]$, e usare
 quell'$m$ come \emph{pivot} per poi richiamare ricorsivamente l'algoritmo
-sul sottovettore opportuno, seguendo lo stesso approccio seguito nella soluzione
+sul sottovettore opportuno, seguendo lo stesso approccio della soluzione
 basata su \emph{Quicksort}. Una volta raggiunto un sottovettore sufficientemente
-piccolo si potrebbe usare un algoritmo di ordinamento per determinare l'ultimo
-mediano.
+piccolo si potrebbe usare un algoritmo di ordinamento per determinare il valore
+ricercato.
 
 \begin{figure}[h!]
 \centering
@@ -352,49 +351,47 @@ mediano.
     ne calcola la mediana}
     \indf\bc{ITEM}[] M = new \bc{ITEM}[1\dots$\lceil$n / 5$\rceil$]\\
     \indf for (i = 1 to $\lceil$n / 5$\rceil$) do\\
-        M[i] = median(A, first + (i - 1) $\cdot$ 5, last)\\
+        M[i] = median5(A, first + (i - 1) $\cdot$ 5, last)\\
     \indf\com{Individua la mediana delle mediane e la usa come \emph{pivot}}
     \indf\bc{ITEM} m = select(M, 1, $\lceil$n / 5$\rceil$, $\lceil\lceil$n / 5$\rceil$ / 2$\rceil$)\\
-    \indf\bc{int} j = pivot(A, first, last, m)\\
+    \indf\bc{int} j = pivot(A, first, last, m)\hfill\com{$m$ è il \emph{pivot} e $j$ ne è l'indice}
     \indf\bc{int} q = j - first + 1\hfill\com{Indice del valore ricercato rispetto al sottovettore}
     \indf if (k == q) then\\
-        return A[j]\\
+        return m\\
     \indf else if (k < q) then\\
-        return selection(A, first, j - 1, k)\\
+        return select(A, first, j - 1, k)\\
     \indf else\\
-        return selection(A, j + 1, last, k - q)
+        return select(A, j + 1, last, k - q)
 \end{minicode}
 
 \paragraph{Complessità}
 Il calcolo dei mediani $M_i$ richiede al più $6\lceil n/5\rceil$ confronti, la
 prima invocazione di \texttt{select} opera su $\lceil n/5\rceil$ elementi, mentre
-la seconda su un massimo di $\frac{7n}{10}$ o, più esattamente, su $n-3\cdot\lceil
-\lceil n/5\rceil/2\rceil$ elementi. Quindi, nel caso pessimo, la \texttt{select}
-esegue $O(n)$ confronti. La \emph{funzione di ricorrenza} è dunque la seguente:
+la seconda su un massimo di $\frac{7}{10}n$ o, più esattamente, su $n-3\cdot\lceil
+\lceil n/5\rceil/2\rceil$ elementi. Quindi, la \texttt{select} esegue $O(n)$
+confronti nel caso pessimo. La \emph{funzione di ricorrenza} è la seguente:
 \[T(n)=T(n/5)+T(7n/10)+\frac{11}{5}n=O(n)\]
 
 \section{Bloom filter}
-Concludiamo il capitolo esaminando una i \emph{bloom filters}, una \emph{struttura
-dati probabilistica}. Un \emph{bloom filter} è una \emph{struttura dati} ottenuta
-unendo i \emph{bit set} alle \emph{tabelle hash}. Il risultato è quindi una
-\emph{struttura dinamica} che utilizza pochi bit (e.g. 10 bit) per ogni oggetto,
-non memorizza i dati e quindi non consente cancellazioni e ha, come preannunciato,
-una risposta probabilistica nelle letture.
+Concludiamo il capitolo esaminando i \emph{bloom filters}, una \emph{struttura
+dati probabilistica} ottenuta unendo i \emph{bit set} alle \emph{tabelle hash}. Il
+risultato è quindi una \emph{struttura dinamica} che utilizza pochi bit (e.g. 10
+bit) per ogni oggetto, non memorizza i dati e quindi non consente cancellazioni e
+ha, come preannunciato, una risposta probabilistica nelle letture.
 
 \paragraph{Specifica}
 \begin{code}{Bloom filter}
     \com{Inserisce l'elemento $k$ nella \emph{struttura}}
     insert(\bc{ITEM} k)
     \nl\com{Controlla se $k$ è presente o meno nella struttura}
-    \com{Se restituisce \textbf{false}, $k$ è certamente assente, ma se
-    restituisce \textbf{true},}
-    \com{l'elemento potrebbe essere presente oppure no}
+    \com{Se restituisce \textbf{false}, $k$ è certamente assente, altrimenti}
+    \com{potrebbe essere presente oppure no}
     \bc{boolean} container(\bc{ITEM} k)
 \end{code}
 
 \noindent
 La probabilità di ottenere falsi positivi diminuisce all'aumentare dei bit usati
-per ogni oggetto. In ogni implementazione è quindi importante trovare un
+per ogni oggetto. In ogni implementazione è quindi importante raggiungere un
 trade-off tra occupazione di memoria e probabilità di errore. In particolare,
 se $\epsilon$ è la probabilità di errore che si vuole garantire, il numero di
 bit che devono essere usati per ogni oggetto è $1.44\log(\frac{1}{\epsilon})$.
@@ -407,8 +404,8 @@ Ciascuna funzione restituisce una posizione e il bit corrispondente viene
 impostato a $1$. Similmente, per la verifica di esistenza, si controllano i
 bit nelle posizioni in cui dovrebbe trovarsi l'elemento e, se almeno uno è $0$,
 l'elemento è certamente assente. Caso contrario, potrebbe essere presente o
-potrebbe essere un falso positivo. Quest'ultimo caso è dovuto al fatto che
-elementi diversi potrebbero condividere parte dei bit.
+potrebbe essere un falso positivo. Quest'ultima possibilità è dovuto al fatto
+che elementi diversi potrebbero condividere parte dei bit.
 
 \begin{minicode}{Bloom filter}
 \ind insert(\bc{ITEM} k)\\
@@ -461,27 +458,7 @@ elementi diversi potrebbero condividere parte dei bit.
                 (k3) edge[out=-90, in=90, looseness=1] (11)
                 (k3) edge[out=-90, in=90, looseness=1] (12);
 \end{graph}}}\\
-\subfloat[Test di esistenza per elemento non presente]{
-\resizebox{0.48\textwidth}{!}{\begin{graph}
-    \tikzset{
-        cell/.style={rectangle, draw, minimum size=10mm}
-    }
-
-    \def\numbers{0 1 0 1 0 1 0 0 1 1 1 1 1 0}
-    \readarray\numbers\num[1,12]
-
-    \foreach \i in {1,...,12} {
-        \node[cell] (\i) [xshift=10mm*(\i-1)] {$\num[1,\i]$};
-    }
-    
-    \node[cell] (k4) [above of=6, yshift=10mm] {$k_4$};
-
-    \path[->]   (k4) edge[out=-90, in=90, looseness=1] (1)
-                (k4) edge[out=-90, in=90, looseness=1] (7)
-                (k4) edge[out=-90, in=90, looseness=1] (9);
-\end{graph}}}
-\hfill
-\subfloat[Test di esistenza per elemento presente]{
+\subfloat[Test di esistenza per un elemento presente]{
 \resizebox{0.48\textwidth}{!}{\begin{graph}
     \tikzset{
         cell/.style={rectangle, draw, minimum size=10mm}
@@ -499,8 +476,28 @@ elementi diversi potrebbero condividere parte dei bit.
     \path[->]   (k2) edge[out=-90, in=90, looseness=1] (4)
                 (k2) edge[out=-90, in=90, looseness=1] (6)
                 (k2) edge[out=-90, in=90, looseness=1] (9);
+\end{graph}}}
+\hfill
+\subfloat[Test di esistenza per un elemento non presente]{
+\resizebox{0.48\textwidth}{!}{\begin{graph}
+    \tikzset{
+        cell/.style={rectangle, draw, minimum size=10mm}
+    }
+
+    \def\numbers{0 1 0 1 0 1 0 0 1 1 1 1 1 0}
+    \readarray\numbers\num[1,12]
+
+    \foreach \i in {1,...,12} {
+        \node[cell] (\i) [xshift=10mm*(\i-1)] {$\num[1,\i]$};
+    }
+    
+    \node[cell] (k4) [above of=6, yshift=10mm] {$k_4$};
+
+    \path[->]   (k4) edge[out=-90, in=90, looseness=1] (1)
+                (k4) edge[out=-90, in=90, looseness=1] (7)
+                (k4) edge[out=-90, in=90, looseness=1] (9);
 \end{graph}}}\\
-\subfloat[Test di esistenza per falso positivo]{
+\subfloat[Test di esistenza per un falso positivo]{
 \resizebox{0.48\textwidth}{!}{\begin{graph}
     \tikzset{
         cell/.style={rectangle, draw, minimum size=10mm}
