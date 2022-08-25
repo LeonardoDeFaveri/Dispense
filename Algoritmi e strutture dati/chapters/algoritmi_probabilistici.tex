@@ -372,3 +372,177 @@ la seconda su un massimo di $\frac{7n}{10}$ o, più esattamente, su $n-3\cdot\lc
 \lceil n/5\rceil/2\rceil$ elementi. Quindi, nel caso pessimo, la \texttt{select}
 esegue $O(n)$ confronti. La \emph{funzione di ricorrenza} è dunque la seguente:
 \[T(n)=T(n/5)+T(7n/10)+\frac{11}{5}n=O(n)\]
+
+\section{Bloom filter}
+Concludiamo il capitolo esaminando una i \emph{bloom filters}, una \emph{struttura
+dati probabilistica}. Un \emph{bloom filter} è una \emph{struttura dati} ottenuta
+unendo i \emph{bit set} alle \emph{tabelle hash}. Il risultato è quindi una
+\emph{struttura dinamica} che utilizza pochi bit (e.g. 10 bit) per ogni oggetto,
+non memorizza i dati e quindi non consente cancellazioni e ha, come preannunciato,
+una risposta probabilistica nelle letture.
+
+\paragraph{Specifica}
+\begin{code}{Bloom filter}
+    \com{Inserisce l'elemento $k$ nella \emph{struttura}}
+    insert(\bc{ITEM} k)
+    \nl\com{Controlla se $k$ è presente o meno nella struttura}
+    \com{Se restituisce \textbf{false}, $k$ è certamente assente, ma se
+    restituisce \textbf{true},}
+    \com{l'elemento potrebbe essere presente oppure no}
+    \bc{boolean} container(\bc{ITEM} k)
+\end{code}
+
+\noindent
+La probabilità di ottenere falsi positivi diminuisce all'aumentare dei bit usati
+per ogni oggetto. In ogni implementazione è quindi importante trovare un
+trade-off tra occupazione di memoria e probabilità di errore. In particolare,
+se $\epsilon$ è la probabilità di errore che si vuole garantire, il numero di
+bit che devono essere usati per ogni oggetto è $1.44\log(\frac{1}{\epsilon})$.
+
+\paragraph{Implementazione}
+L'idea è che inizialmente la struttura sia costituita da un vettore di bit
+inizializzati $0$. Quando un valore deve essere inserito, vengono calcolate le
+posizioni dei bit che rappresentano l'oggetto utilizzando $H$ funzioni hash.
+Ciascuna funzione restituisce una posizione e il bit corrispondente viene
+impostato a $1$. Similmente, per la verifica di esistenza, si controllano i
+bit nelle posizioni in cui dovrebbe trovarsi l'elemento e, se almeno uno è $0$,
+l'elemento è certamente assente. Caso contrario, potrebbe essere presente o
+potrebbe essere un falso positivo. Quest'ultimo caso è dovuto al fatto che
+elementi diversi potrebbero condividere parte dei bit.
+
+\begin{minicode}{Bloom filter}
+\ind insert(\bc{ITEM} k)\\
+    \indf for (i = 1 to H) do\\
+        A[h$_i$(k)] = true
+\nl\ind\bc{boolean} contains(\bc{ITEM} k)\\
+    \indf for (i = 1 to H) do\\
+        \indff if (A[h$_i$(k)] == false) then\\
+            return false\\
+    \indf return true
+\end{minicode}
+
+\begin{figure}[h!]
+\centering
+\subfloat[Situazione iniziale]{
+\resizebox{0.48\textwidth}{!}{\begin{graph}
+    \tikzset{
+        cell/.style={rectangle, draw, minimum size=10mm}
+    }
+
+    \foreach \i in {0,...,11} {
+        \node[cell] (\i) [xshift=10mm*\i] {$0$};
+    }
+\end{graph}}}
+\hfill
+\subfloat[Situazione dopo 3 inserimenti]{
+\resizebox{0.48\textwidth}{!}{\begin{graph}
+    \tikzset{
+        cell/.style={rectangle, draw, minimum size=10mm}
+    }
+
+    \def\numbers{0 1 0 1 0 1 0 0 1 1 1 1 1 0}
+    \readarray\numbers\num[1,12]
+
+    \foreach \i in {1,...,12} {
+        \node[cell] (\i) [xshift=10mm*(\i-1)] {$\num[1,\i]$};
+    }
+    
+    \node[cell] (k1) [above of=3, yshift=10mm] {$k_1$};
+    \node[cell] (k2) [above of=6, yshift=10mm] {$k_2$};
+    \node[cell] (k3) [above of=9, yshift=10mm] {$k_3$};
+
+    \path[->]   (k1) edge[out=-90, in=90, looseness=1] (2)
+                (k1) edge[out=-90, in=90, looseness=1] (6)
+                (k1) edge[out=-90, in=90, looseness=1] (10)
+                (k2) edge[out=-90, in=90, looseness=1] (4)
+                (k2) edge[out=-90, in=90, looseness=1] (6)
+                (k2) edge[out=-90, in=90, looseness=1] (9)
+                (k3) edge[out=-90, in=90, looseness=1] (9)
+                (k3) edge[out=-90, in=90, looseness=1] (11)
+                (k3) edge[out=-90, in=90, looseness=1] (12);
+\end{graph}}}\\
+\subfloat[Test di esistenza per elemento non presente]{
+\resizebox{0.48\textwidth}{!}{\begin{graph}
+    \tikzset{
+        cell/.style={rectangle, draw, minimum size=10mm}
+    }
+
+    \def\numbers{0 1 0 1 0 1 0 0 1 1 1 1 1 0}
+    \readarray\numbers\num[1,12]
+
+    \foreach \i in {1,...,12} {
+        \node[cell] (\i) [xshift=10mm*(\i-1)] {$\num[1,\i]$};
+    }
+    
+    \node[cell] (k4) [above of=6, yshift=10mm] {$k_4$};
+
+    \path[->]   (k4) edge[out=-90, in=90, looseness=1] (1)
+                (k4) edge[out=-90, in=90, looseness=1] (7)
+                (k4) edge[out=-90, in=90, looseness=1] (9);
+\end{graph}}}
+\hfill
+\subfloat[Test di esistenza per elemento presente]{
+\resizebox{0.48\textwidth}{!}{\begin{graph}
+    \tikzset{
+        cell/.style={rectangle, draw, minimum size=10mm}
+    }
+
+    \def\numbers{0 1 0 1 0 1 0 0 1 1 1 1 1 0}
+    \readarray\numbers\num[1,12]
+
+    \foreach \i in {1,...,12} {
+        \node[cell] (\i) [xshift=10mm*(\i-1)] {$\num[1,\i]$};
+    }
+    
+    \node[cell] (k2) [above of=6, yshift=10mm] {$k_2$};
+
+    \path[->]   (k2) edge[out=-90, in=90, looseness=1] (4)
+                (k2) edge[out=-90, in=90, looseness=1] (6)
+                (k2) edge[out=-90, in=90, looseness=1] (9);
+\end{graph}}}\\
+\subfloat[Test di esistenza per falso positivo]{
+\resizebox{0.48\textwidth}{!}{\begin{graph}
+    \tikzset{
+        cell/.style={rectangle, draw, minimum size=10mm}
+    }
+
+    \def\numbers{0 1 0 1 0 1 0 0 1 1 1 1 1 0}
+    \readarray\numbers\num[1,12]
+
+    \foreach \i in {1,...,12} {
+        \node[cell] (\i) [xshift=10mm*(\i-1)] {$\num[1,\i]$};
+    }
+    
+    \node[cell] (k5) [above of=6, yshift=10mm] {$k_5$};
+
+    \path[->]   (k4) edge[out=-90, in=90, looseness=1] (2)
+                (k4) edge[out=-90, in=90, looseness=1] (6)
+                (k4) edge[out=-90, in=90, looseness=1] (9);
+\end{graph}}}
+\caption{Esempio di evoluzione di un \emph{bloom filter}}
+\end{figure}
+
+\paragraph{Alcune formule}
+\begin{definition}[Probabilità di errore]
+    In un bloom filter costruito su $m$ bit totali e $H$ funzioni hash e
+    che contiene $n$ elementi, la probabilità $\epsilon$ di ottenere un falso
+    positivo è:
+    \[\epsilon=\left(1-e^{\frac{-Hn}{m}}\right)^H\]    
+\end{definition}
+\begin{definition}[Numero ottimale di funzioni hash]
+    In un bloom filter costruito su $m$ bit totali e contenente $n$
+    elementi, il numero ottimale di funzioni hash è:
+    \[H=\frac{m}{n}\ln 2\]
+\end{definition}
+\begin{definition}[Numero di bit totali richiesti]
+    In un bloom filter contenente $n$ elementi e caratterizzato da una probabilità
+    d'errore $\epsilon$, il numero di bit totali $m$ richiesti è:
+    \[m=-\frac{n\ln\epsilon}{(\ln 2)^2}\]
+\end{definition}
+
+\paragraph{Casi d'uso}
+Questo tipo di \emph{struttura dati} è molto utilizzato dai browser per
+memorizzare gli URL pericolosi. In particolare, ad ogni richiesta il browser
+verifica l'esistenza dell'URL cercato nella struttura e, se è presente,
+probabilmente si tratta di una destinazione pericolosa e quindi è necessario
+agire di conseguenza. Se invece non è presente, la destinazione è sicura.

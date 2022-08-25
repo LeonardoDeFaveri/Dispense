@@ -1,0 +1,438 @@
+\contentsline {chapter}{\numberline {1}Analisi di algoritmi}{7}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Studio degli algoritmi}{7}{section.1.1}%
+\contentsline {paragraph}{Dimensione dell'input}{7}{paragraph*.2}%
+\contentsline {paragraph}{Tempo di esecuzione}{7}{paragraph*.3}%
+\contentsline {subsection}{\numberline {1.1.1}Modello di calcolo}{8}{subsection.1.1.1}%
+\contentsline {section}{\numberline {1.2}Studio di alcuni algoritmi}{8}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Minimo di un array}{8}{subsection.1.2.1}%
+\contentsline {paragraph}{Analisi del costo}{8}{paragraph*.4}%
+\contentsline {subsection}{\numberline {1.2.2}Ricerca binaria ricorsiva}{9}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Ordini di complessità}{10}{subsection.1.2.3}%
+\contentsline {section}{\numberline {1.3}Notazione asintotica}{10}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Complessità degli algoritmi e dei problemi}{13}{section.1.4}%
+\contentsline {paragraph}{Notazione asintotica per gli algoritmi e per i problemi}{13}{paragraph*.8}%
+\contentsline {section}{\numberline {1.5}Ordinamento degli array in senso crescente}{14}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}Algoritmo Selection sort}{14}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.5.2}Algoritmo Insertion sort}{14}{subsection.1.5.2}%
+\contentsline {subsection}{\numberline {1.5.3}Algoritmo Merge sort}{15}{subsection.1.5.3}%
+\contentsline {chapter}{\numberline {2}Notazione asintotica}{18}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Proprietà della notazione asintotica}{19}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Altre notazioni}{21}{section.2.2}%
+\contentsline {paragraph}{Osservazioni}{21}{paragraph*.10}%
+\contentsline {section}{\numberline {2.3}Classificazione delle funzioni di costo}{22}{section.2.3}%
+\contentsline {chapter}{\numberline {3}Funzioni di ricorrenza}{23}{chapter.3}%
+\contentsline {paragraph}{Soluzione}{24}{paragraph*.11}%
+\contentsline {section}{\numberline {3.1}Studio delle equazioni di ricorrenza}{24}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Metodo dell'albero di ricorsione}{24}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Metodo della sostituzione}{27}{subsection.3.1.2}%
+\contentsline {paragraph}{Caso base}{28}{paragraph*.14}%
+\contentsline {paragraph}{Passo induttivo}{28}{paragraph*.15}%
+\contentsline {paragraph}{Caso base}{28}{paragraph*.16}%
+\contentsline {paragraph}{Passo induttivo}{28}{paragraph*.17}%
+\contentsline {paragraph}{Caso base}{29}{paragraph*.18}%
+\contentsline {paragraph}{Passo induttivo}{29}{paragraph*.19}%
+\contentsline {paragraph}{Caso base}{30}{paragraph*.21}%
+\contentsline {paragraph}{Passo induttivo}{30}{paragraph*.22}%
+\contentsline {paragraph}{Caso base}{31}{paragraph*.23}%
+\contentsline {paragraph}{Passo induttivo}{31}{paragraph*.24}%
+\contentsline {paragraph}{Caso base}{31}{paragraph*.25}%
+\contentsline {paragraph}{Passo induttivo}{31}{paragraph*.26}%
+\contentsline {paragraph}{Caso base}{32}{paragraph*.27}%
+\contentsline {paragraph}{Passo induttivo}{32}{paragraph*.28}%
+\contentsline {subsection}{\numberline {3.1.3}Metodo delle ricorrenze comuni}{32}{subsection.3.1.3}%
+\contentsline {paragraph}{Ricorrenze lineari con partizione bilanciata}{33}{paragraph*.29}%
+\contentsline {paragraph}{Caso \bm {$\alpha >\beta $}}{34}{paragraph*.31}%
+\contentsline {paragraph}{Caso \bm {$\alpha =\beta $}}{34}{paragraph*.32}%
+\contentsline {paragraph}{Caso \bm {$\alpha <\beta $}}{34}{paragraph*.33}%
+\contentsline {paragraph}{Ricorrenze lineari di ordine costante}{37}{paragraph*.37}%
+\contentsline {chapter}{\numberline {4}Strutture dati}{39}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduzione}{39}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Strutture di dati astratte}{40}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Sequenze}{40}{subsection.4.2.1}%
+\contentsline {paragraph}{Operazioni ammesse}{40}{paragraph*.42}%
+\contentsline {paragraph}{Specifica}{40}{paragraph*.43}%
+\contentsline {subsection}{\numberline {4.2.2}Insiemi}{41}{subsection.4.2.2}%
+\contentsline {paragraph}{Operazioni ammesse}{41}{paragraph*.44}%
+\contentsline {paragraph}{Specifica}{42}{paragraph*.45}%
+\contentsline {subsection}{\numberline {4.2.3}Dizionari}{42}{subsection.4.2.3}%
+\contentsline {paragraph}{Operazioni ammesse}{42}{paragraph*.46}%
+\contentsline {paragraph}{Specifica}{42}{paragraph*.47}%
+\contentsline {subsection}{\numberline {4.2.4}Grafi e alberi}{43}{subsection.4.2.4}%
+\contentsline {paragraph}{Operazioni ammesse}{43}{paragraph*.49}%
+\contentsline {subsection}{\numberline {4.2.5}Criticità nell'implementazione di strutture dati astratte}{43}{subsection.4.2.5}%
+\contentsline {section}{\numberline {4.3}Strutture di dati elementari}{44}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Liste}{44}{subsection.4.3.1}%
+\contentsline {paragraph}{Implementazione del tipo di dato POS}{45}{paragraph*.51}%
+\contentsline {paragraph}{Implementazione di una lista bidirezionale con sentinella}{45}{paragraph*.52}%
+\contentsline {subsection}{\numberline {4.3.2}Pile}{46}{subsection.4.3.2}%
+\contentsline {paragraph}{Specifica}{46}{paragraph*.53}%
+\contentsline {paragraph}{Implementazione di una pila basata su vettore}{47}{paragraph*.55}%
+\contentsline {subsection}{\numberline {4.3.3}Code}{47}{subsection.4.3.3}%
+\contentsline {paragraph}{Specifica}{47}{paragraph*.56}%
+\contentsline {paragraph}{Implementazione di una coda basata su vettore circolare}{48}{paragraph*.57}%
+\contentsline {chapter}{\numberline {5}Alberi binari e alberi generici}{51}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Introduzione}{51}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Terminologia}{51}{subsection.5.1.1}%
+\contentsline {section}{\numberline {5.2}Alberi binari}{52}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Specifica}{53}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Memorizzazione di un albero binario}{53}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Implementazione di un albero binario}{54}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Visite di un albero binario}{54}{subsection.5.2.4}%
+\contentsline {paragraph}{Implementazione delle visite}{55}{paragraph*.63}%
+\contentsline {paragraph}{Esempi di visite}{55}{paragraph*.64}%
+\contentsline {section}{\numberline {5.3}Alberi generici}{56}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Specifica}{56}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Memorizzazione di un albero generico}{56}{subsection.5.3.2}%
+\contentsline {paragraph}{Tecniche di memorizzazione a confronto}{57}{paragraph*.65}%
+\contentsline {subsection}{\numberline {5.3.3}Implementazione di un albero generico}{57}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Visite di un albero generico}{58}{subsection.5.3.4}%
+\contentsline {paragraph}{Implementazione delle visite}{58}{paragraph*.67}%
+\contentsline {chapter}{\numberline {6}Alberi binari di ricerca e alberi bilanciati}{59}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Alberi binari di ricerca}{59}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Specifica}{60}{subsection.6.1.1}%
+\contentsline {paragraph}{Implementazione dizionario}{61}{paragraph*.69}%
+\contentsline {subsection}{\numberline {6.1.2}Ricerca}{61}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Massimo e minimo}{62}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.1.4}Successore e predecessore}{62}{subsection.6.1.4}%
+\contentsline {paragraph}{Ricerca del successore}{62}{paragraph*.70}%
+\contentsline {paragraph}{Ricerca del predecessore}{63}{paragraph*.71}%
+\contentsline {subsection}{\numberline {6.1.5}Inserimento}{63}{subsection.6.1.5}%
+\contentsline {subsection}{\numberline {6.1.6}Cancellazione}{64}{subsection.6.1.6}%
+\contentsline {subsection}{\numberline {6.1.7}Costo computazionale delle operazioni}{66}{subsection.6.1.7}%
+\contentsline {section}{\numberline {6.2}Alberi binari di ricerca bilanciati}{66}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Alberi Red-Black}{67}{section.6.3}%
+\contentsline {paragraph}{Foglie come nodi Nil}{68}{paragraph*.74}%
+\contentsline {paragraph}{Definizione di un nodo in un Albero Red-Black}{68}{paragraph*.75}%
+\contentsline {subsection}{\numberline {6.3.1}Rotazioni}{68}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Inserimento}{69}{subsection.6.3.2}%
+\contentsline {paragraph}{Caso 1 - Il nuovo nodo non ha padre}{70}{paragraph*.78}%
+\contentsline {paragraph}{Caso 2 - Il padre di \bm {$t$} è nero}{71}{paragraph*.80}%
+\contentsline {paragraph}{Caso 3 - Sia \bm {$t$} che il padre e lo zio sono rossi}{71}{paragraph*.82}%
+\contentsline {paragraph}{Caso 4 - Sia \bm {$t$} che il padre sono rossi e lo zio è nero}{72}{paragraph*.84}%
+\contentsline {paragraph}{Caso 5 - Sia \bm {$t$} che il padre sono rossi e lo zio è nero}{72}{paragraph*.86}%
+\contentsline {paragraph}{Complessità della balanceInsert}{73}{paragraph*.88}%
+\contentsline {subsection}{\numberline {6.3.3}Altezza degli Alberi Red-Black}{74}{subsection.6.3.3}%
+\contentsline {paragraph}{Caso base}{74}{paragraph*.89}%
+\contentsline {paragraph}{Passo induttivo}{74}{paragraph*.90}%
+\contentsline {paragraph}{Complessità funzione insertNode}{75}{paragraph*.91}%
+\contentsline {subsection}{\numberline {6.3.4}Cancellazione}{75}{subsection.6.3.4}%
+\contentsline {paragraph}{Complessità della funzione removeNode}{76}{paragraph*.92}%
+\contentsline {chapter}{\numberline {7}Grafi}{77}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Introduzione}{77}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Dimensioni dei grafi}{78}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Casi speciali}{79}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Cammini e gradi dei nodi}{79}{subsection.7.1.3}%
+\contentsline {paragraph}{NB}{79}{paragraph*.95}%
+\contentsline {subsection}{\numberline {7.1.4}Specifica}{80}{subsection.7.1.4}%
+\contentsline {subsection}{\numberline {7.1.5}Memorizzare un grafo}{81}{subsection.7.1.5}%
+\contentsline {paragraph}{Memorizzazione di un grafo orientato}{81}{paragraph*.97}%
+\contentsline {paragraph}{Memorizzazione di un grafo non orientato}{82}{paragraph*.99}%
+\contentsline {paragraph}{Memorizzazione di un grafo pesato}{82}{paragraph*.101}%
+\contentsline {paragraph}{Dettagli sull'implementazione}{83}{paragraph*.103}%
+\contentsline {paragraph}{Matrici di adiacenza}{84}{paragraph*.104}%
+\contentsline {paragraph}{Liste di adiacenza}{84}{paragraph*.105}%
+\contentsline {section}{\numberline {7.2}Visite di un grafo}{84}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Visita in ampiezza}{84}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Visita in profondità}{86}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}Complessità delle visite}{87}{subsection.7.2.3}%
+\contentsline {section}{\numberline {7.3}Problemi sui grafi risolubili con visite in ampiezza}{87}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}Calcolo della distanza tra nodi}{87}{subsection.7.3.1}%
+\contentsline {subsection}{\numberline {7.3.2}Ricerca del cammino più breve fra due nodi}{87}{subsection.7.3.2}%
+\contentsline {paragraph}{Complessità}{88}{paragraph*.106}%
+\contentsline {section}{\numberline {7.4}Problemi sui grafi risolubili con visite in profondità}{88}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Ricerca delle componenti connesse}{88}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Verifica di esistenza di cicli nei grafi non orientati}{90}{subsection.7.4.2}%
+\contentsline {subsection}{\numberline {7.4.3}Verifica di esistenza di cicli nei grafi orientati}{91}{subsection.7.4.3}%
+\contentsline {subsection}{\numberline {7.4.4}Realizzare un ordinamento topologico di un grafo orientato}{94}{subsection.7.4.4}%
+\contentsline {paragraph}{Approccio naive}{95}{paragraph*.112}%
+\contentsline {paragraph}{Approccio efficiente}{96}{paragraph*.115}%
+\contentsline {subsection}{\numberline {7.4.5}Ricerca delle componenti fortemente connesse}{97}{subsection.7.4.5}%
+\contentsline {paragraph}{Utilizzo della topsort}{97}{paragraph*.118}%
+\contentsline {paragraph}{Utilizzo della traspose}{98}{paragraph*.120}%
+\contentsline {paragraph}{Utilizzo della cc}{99}{paragraph*.122}%
+\contentsline {paragraph}{Costo computazionale}{100}{paragraph*.124}%
+\contentsline {paragraph}{Dimostrazione di correttezza}{100}{paragraph*.125}%
+\contentsline {chapter}{\numberline {8}Hashing}{102}{chapter.8}%
+\contentsline {paragraph}{Tabelle ad accesso diretto}{103}{paragraph*.129}%
+\contentsline {section}{\numberline {8.1}Caratteristiche e implementazioni di funzioni hash}{103}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}Realizzare una funzione hash}{104}{subsection.8.1.1}%
+\contentsline {subsection}{\numberline {8.1.2}Metodo dell'estrazione}{104}{subsection.8.1.2}%
+\contentsline {subsection}{\numberline {8.1.3}Metodo dello XOR}{105}{subsection.8.1.3}%
+\contentsline {subsection}{\numberline {8.1.4}Metodo della divisione}{105}{subsection.8.1.4}%
+\contentsline {subsection}{\numberline {8.1.5}Metodo della moltiplicazione}{106}{subsection.8.1.5}%
+\contentsline {section}{\numberline {8.2}Gestione delle collisioni}{107}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}Liste di trabocco}{107}{subsection.8.2.1}%
+\contentsline {paragraph}{Complessità}{107}{paragraph*.132}%
+\contentsline {subsection}{\numberline {8.2.2}Indirizzamento aperto}{108}{subsection.8.2.2}%
+\contentsline {paragraph}{Ispezione lineare}{109}{paragraph*.134}%
+\contentsline {paragraph}{Ispezione quadratica}{109}{paragraph*.135}%
+\contentsline {paragraph}{Doppio hashing}{110}{paragraph*.136}%
+\contentsline {subsection}{\numberline {8.2.3}Complessità delle diverse implementazioni}{112}{subsection.8.2.3}%
+\contentsline {paragraph}{Conclusioni}{112}{paragraph*.140}%
+\contentsline {chapter}{\numberline {9}Analisi ammortizzata}{113}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Metodi per l'analisi ammortizzata}{113}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Esempio di analisi ammortizzata}{115}{section.9.2}%
+\contentsline {paragraph}{Metodo dell'aggregazione}{116}{paragraph*.142}%
+\contentsline {paragraph}{Metodo degli accantonamenti}{116}{paragraph*.144}%
+\contentsline {paragraph}{Metodo del potenziale}{117}{paragraph*.145}%
+\contentsline {section}{\numberline {9.3}Vettori dinamici}{117}{section.9.3}%
+\contentsline {subsection}{\numberline {9.3.1}Inserimento}{117}{subsection.9.3.1}%
+\contentsline {paragraph}{Incremento fisso}{117}{paragraph*.146}%
+\contentsline {paragraph}{Incremento dinamico}{118}{paragraph*.148}%
+\contentsline {subsection}{\numberline {9.3.2}Cancellazione}{119}{subsection.9.3.2}%
+\contentsline {paragraph}{Analisi del costo}{120}{paragraph*.150}%
+\contentsline {section}{\numberline {9.4}Discussione sugli insiemi}{121}{section.9.4}%
+\contentsline {subsection}{\numberline {9.4.1}Insieme come vettore di booleani}{121}{subsection.9.4.1}%
+\contentsline {subsection}{\numberline {9.4.2}Insieme come lista non ordinata}{122}{subsection.9.4.2}%
+\contentsline {subsection}{\numberline {9.4.3}Insieme come lista ordinata}{123}{subsection.9.4.3}%
+\contentsline {subsection}{\numberline {9.4.4}Confronto generale}{124}{subsection.9.4.4}%
+\contentsline {chapter}{\numberline {10}Divide-et-impera}{125}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Introduzione}{125}{section.10.1}%
+\contentsline {paragraph}{Convenienza degli algoritmi Divide-et-impera}{126}{paragraph*.152}%
+\contentsline {section}{\numberline {10.2}Algoritmo Quicksort}{127}{section.10.2}%
+\contentsline {subsection}{\numberline {10.2.1}Principi di funzionamento}{127}{subsection.10.2.1}%
+\contentsline {subsection}{\numberline {10.2.2}Implementazione}{128}{subsection.10.2.2}%
+\contentsline {subsection}{\numberline {10.2.3}Costo computazionale}{128}{subsection.10.2.3}%
+\contentsline {paragraph}{Funzione euristica per la selezione del pivot}{129}{paragraph*.155}%
+\contentsline {section}{\numberline {10.3}Esercizio di applicazione del Divide-et-impera}{129}{section.10.3}%
+\contentsline {paragraph}{Caso base}{130}{paragraph*.156}%
+\contentsline {paragraph}{Passo induttivo}{130}{paragraph*.157}%
+\contentsline {chapter}{\numberline {11}Strutture dati specializzate}{131}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Code a priorità}{131}{section.11.1}%
+\contentsline {paragraph}{Specifica}{131}{paragraph*.158}%
+\contentsline {subsection}{\numberline {11.1.1}Heap}{132}{subsection.11.1.1}%
+\contentsline {paragraph}{Memorizzazione}{134}{paragraph*.163}%
+\contentsline {subsection}{\numberline {11.1.2}Algoritmo HeapSort}{134}{subsection.11.1.2}%
+\contentsline {paragraph}{Implementazione}{136}{paragraph*.166}%
+\contentsline {paragraph}{Complessità}{136}{paragraph*.167}%
+\contentsline {paragraph}{Dimostrazione di correttezza}{136}{paragraph*.168}%
+\contentsline {paragraph}{Caso base}{136}{paragraph*.169}%
+\contentsline {paragraph}{Passo induttivo}{136}{paragraph*.170}%
+\contentsline {paragraph}{Implementazione}{137}{paragraph*.171}%
+\contentsline {paragraph}{Dimostrazione di correttezza}{137}{paragraph*.173}%
+\contentsline {paragraph}{Inizializzazione}{137}{paragraph*.174}%
+\contentsline {paragraph}{Conservazione}{137}{paragraph*.175}%
+\contentsline {paragraph}{Conclusione}{137}{paragraph*.176}%
+\contentsline {paragraph}{Complessità}{138}{paragraph*.177}%
+\contentsline {paragraph}{Implementazione}{138}{paragraph*.179}%
+\contentsline {paragraph}{Complessità}{138}{paragraph*.180}%
+\contentsline {paragraph}{Dimostrazione di correttezza}{139}{paragraph*.181}%
+\contentsline {paragraph}{Inizializzazione}{139}{paragraph*.182}%
+\contentsline {paragraph}{Conservazione}{139}{paragraph*.183}%
+\contentsline {paragraph}{Conclusione}{139}{paragraph*.184}%
+\contentsline {subsection}{\numberline {11.1.3}Implementazione di code a priorità}{139}{subsection.11.1.3}%
+\contentsline {paragraph}{Complessità}{141}{paragraph*.185}%
+\contentsline {section}{\numberline {11.2}Insiemi disgiunti}{141}{section.11.2}%
+\contentsline {paragraph}{Specifica}{141}{paragraph*.187}%
+\contentsline {subsection}{\numberline {11.2.1}Implementazione basata su insiemi di liste}{143}{subsection.11.2.1}%
+\contentsline {subsection}{\numberline {11.2.2}Implementazione basata su insiemi di alberi}{143}{subsection.11.2.2}%
+\contentsline {subsection}{\numberline {11.2.3}Implementazioni con tecniche euristiche}{143}{subsection.11.2.3}%
+\contentsline {paragraph}{Euristica sul peso}{144}{paragraph*.191}%
+\contentsline {paragraph}{Euristica sul rango}{144}{paragraph*.192}%
+\contentsline {paragraph}{Caso base: \bm {$rank[r]=0$}}{144}{paragraph*.193}%
+\contentsline {paragraph}{Passo induttivo: \bm {$rank[r]>0$}}{144}{paragraph*.194}%
+\contentsline {paragraph}{Euristica di compressione dei cammini}{145}{paragraph*.195}%
+\contentsline {paragraph}{Complessità}{145}{paragraph*.197}%
+\contentsline {paragraph}{Implementazione}{146}{paragraph*.198}%
+\contentsline {subsection}{\numberline {11.2.4}Complessità}{146}{subsection.11.2.4}%
+\contentsline {chapter}{\numberline {12}Programmazione dinamica}{147}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Introduzione}{147}{section.12.1}%
+\contentsline {subsection}{\numberline {12.1.1}Approccio generale}{147}{subsection.12.1.1}%
+\contentsline {section}{\numberline {12.2}Gioco del domino}{148}{section.12.2}%
+\contentsline {subsection}{\numberline {12.2.1}Approccio basato su divide-et-impera}{148}{subsection.12.2.1}%
+\contentsline {subsection}{\numberline {12.2.2}Approccio basato su programmazione dinamica}{150}{subsection.12.2.2}%
+\contentsline {paragraph}{Criterio di costo logaritmico}{150}{paragraph*.202}%
+\contentsline {section}{\numberline {12.3}Problema di Hateville}{151}{section.12.3}%
+\contentsline {subsection}{\numberline {12.3.1}Approccio basato su divide-et-impera}{151}{subsection.12.3.1}%
+\contentsline {paragraph}{Caso 1: \bm {$i\notin S_i$}}{152}{paragraph*.204}%
+\contentsline {paragraph}{Caso 2: \bm {$i\in S_i$}}{152}{paragraph*.205}%
+\contentsline {subsection}{\numberline {12.3.2}Approccio basato su programmazione dinamica}{152}{subsection.12.3.2}%
+\contentsline {paragraph}{Ricostruire la soluzione}{153}{paragraph*.207}%
+\contentsline {section}{\numberline {12.4}Problema dello zaino}{154}{section.12.4}%
+\contentsline {subsection}{\numberline {12.4.1}Approccio basato su programmazione dinamica}{155}{subsection.12.4.1}%
+\contentsline {paragraph}{Complessità}{156}{paragraph*.209}%
+\contentsline {subsection}{\numberline {12.4.2}Approccio basato su memoization}{157}{subsection.12.4.2}%
+\contentsline {paragraph}{Complessità}{157}{paragraph*.210}%
+\contentsline {section}{\numberline {12.5}Problema dello zaino senza limiti}{158}{section.12.5}%
+\contentsline {paragraph}{Complessità}{160}{paragraph*.212}%
+\contentsline {section}{\numberline {12.6}Ricerca della sottosequenza comune massimale}{160}{section.12.6}%
+\contentsline {subsection}{\numberline {12.6.1}Approccio basato su programmazione dinamica}{161}{subsection.12.6.1}%
+\contentsline {paragraph}{Caso 1: \bm {$t_i=u_j$}}{162}{paragraph*.213}%
+\contentsline {paragraph}{Caso 2: \bm {$t_i\neq u_j$}}{162}{paragraph*.214}%
+\contentsline {paragraph}{Caso 1: \bm {$t_n=u_m$}}{162}{paragraph*.215}%
+\contentsline {paragraph}{Caso 2: \bm {$t_n\neq u_m$} e \bm {$x_k\neq t_n$}}{162}{paragraph*.216}%
+\contentsline {paragraph}{Caso 3: \bm {$t_n\neq u_m$} e \bm {$x_k\neq u_m$}}{162}{paragraph*.217}%
+\contentsline {paragraph}{Complessità}{163}{paragraph*.218}%
+\contentsline {section}{\numberline {12.7}Problema dello string matching approssimato}{164}{section.12.7}%
+\contentsline {section}{\numberline {12.8}Problema del prodotto a catena di matrici}{166}{section.12.8}%
+\contentsline {subsection}{\numberline {12.8.1}Approccio basato su divide-et-impera}{169}{subsection.12.8.1}%
+\contentsline {paragraph}{Complessità}{169}{paragraph*.222}%
+\contentsline {subsection}{\numberline {12.8.2}Approccio basato su programmazione dinamica}{169}{subsection.12.8.2}%
+\contentsline {paragraph}{Complessità}{170}{paragraph*.224}%
+\contentsline {section}{\numberline {12.9}Ricerca dell'insieme indipendente di peso massimo}{170}{section.12.9}%
+\contentsline {paragraph}{Complessità}{173}{paragraph*.227}%
+\contentsline {chapter}{\numberline {13}Scelta della struttura dati}{174}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Ricerca dei cammini minimi da sorgente singola}{174}{section.13.1}%
+\contentsline {paragraph}{Parte 1}{176}{paragraph*.231}%
+\contentsline {paragraph}{Parte 2}{176}{paragraph*.232}%
+\contentsline {subsection}{\numberline {13.1.1}Prototipo di algoritmo}{177}{subsection.13.1.1}%
+\contentsline {subsection}{\numberline {13.1.2}Algoritmo di Dijkstra}{177}{subsection.13.1.2}%
+\contentsline {paragraph}{Dimostrazione di correttezza per pesi positivi}{179}{paragraph*.236}%
+\contentsline {paragraph}{Caso base: \bm {$k=0$}}{179}{paragraph*.237}%
+\contentsline {paragraph}{Passo induttivo: \bm {$k>0$}}{179}{paragraph*.238}%
+\contentsline {paragraph}{Complessità}{179}{paragraph*.239}%
+\contentsline {subsection}{\numberline {13.1.3}Algoritmo di Bellman-Ford-Moore}{180}{subsection.13.1.3}%
+\contentsline {paragraph}{Complessità}{181}{paragraph*.242}%
+\contentsline {subsection}{\numberline {13.1.4}Ricerca dei cammini minimi sui grafi DAG}{181}{subsection.13.1.4}%
+\contentsline {subsection}{\numberline {13.1.5}Casi d'uso delle soluzioni}{182}{subsection.13.1.5}%
+\contentsline {section}{\numberline {13.2}Ricerca dei cammini minimi da sorgente multipla}{182}{section.13.2}%
+\contentsline {subsection}{\numberline {13.2.1}Algoritmo di Floyd-Warshall}{182}{subsection.13.2.1}%
+\contentsline {paragraph}{Complessità}{184}{paragraph*.245}%
+\contentsline {chapter}{\numberline {14}Programmazione greedy}{185}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Problema del resto}{185}{section.14.1}%
+\contentsline {subsection}{\numberline {14.1.1}Approccio basato su programmazione dinamica}{185}{subsection.14.1.1}%
+\contentsline {paragraph}{Complessità}{186}{paragraph*.246}%
+\contentsline {subsection}{\numberline {14.1.2}Approccio basato su programmazione greedy}{186}{subsection.14.1.2}%
+\contentsline {paragraph}{Complessità}{186}{paragraph*.247}%
+\contentsline {section}{\numberline {14.2}Insieme indipendente massimale di intervalli}{187}{section.14.2}%
+\contentsline {subsection}{\numberline {14.2.1}Approccio basato su programmazione dinamica}{188}{subsection.14.2.1}%
+\contentsline {paragraph}{Punto 1 - \bm {$S[i$}\dots \bm {$ j]=\emptyset $}}{189}{paragraph*.249}%
+\contentsline {paragraph}{Complessità}{190}{paragraph*.251}%
+\contentsline {section}{\numberline {14.3}Problema dello scheduling}{190}{section.14.3}%
+\contentsline {section}{\numberline {14.4}Problema dello zaino frazionario}{192}{section.14.4}%
+\contentsline {paragraph}{Ordinamento per profitto decrescente}{192}{paragraph*.257}%
+\contentsline {paragraph}{Ordinamento per peso crescente}{192}{paragraph*.258}%
+\contentsline {paragraph}{Ordinamento per profitto specifico decrescente}{192}{paragraph*.259}%
+\contentsline {paragraph}{Complessità}{193}{paragraph*.260}%
+\contentsline {section}{\numberline {14.5}Problema della compressione}{193}{section.14.5}%
+\contentsline {subsection}{\numberline {14.5.1}Algoritmo di Huffman}{194}{subsection.14.5.1}%
+\contentsline {paragraph}{Numero di bit necessari a codificare un file}{194}{paragraph*.263}%
+\contentsline {paragraph}{Principi dell'Algoritmo di Huffman}{195}{paragraph*.264}%
+\contentsline {paragraph}{Complessità}{196}{paragraph*.267}%
+\contentsline {section}{\numberline {14.6}Ricerca degli alberi di copertura di peso minimo}{197}{section.14.6}%
+\contentsline {subsection}{\numberline {14.6.1}Approccio generico}{197}{subsection.14.6.1}%
+\contentsline {paragraph}{Definizioni necessarie}{198}{paragraph*.269}%
+\contentsline {subsection}{\numberline {14.6.2}Algoritmo di Kruskal}{199}{subsection.14.6.2}%
+\contentsline {paragraph}{Complessità}{200}{paragraph*.271}%
+\contentsline {subsection}{\numberline {14.6.3}Algoritmo di Prim}{200}{subsection.14.6.3}%
+\contentsline {paragraph}{Complessità}{201}{paragraph*.273}%
+\contentsline {chapter}{\numberline {15}Ricerca locale}{202}{chapter.15}%
+\contentsline {section}{\numberline {15.1}Introduzione}{202}{section.15.1}%
+\contentsline {section}{\numberline {15.2}Problema della ricerca del flusso massimo}{203}{section.15.2}%
+\contentsline {subsection}{\numberline {15.2.1}Metodo delle reti residue}{204}{subsection.15.2.1}%
+\contentsline {paragraph}{Dimostrazione}{206}{paragraph*.283}%
+\contentsline {paragraph}{Vincolo sulla capacità}{206}{paragraph*.284}%
+\contentsline {paragraph}{Antisimmetria}{207}{paragraph*.285}%
+\contentsline {paragraph}{Conservazione del flusso}{207}{paragraph*.286}%
+\contentsline {subsection}{\numberline {15.2.2}Metodo dei cammini aumentanti}{207}{subsection.15.2.2}%
+\contentsline {paragraph}{Note sull'implementazione}{209}{paragraph*.290}%
+\contentsline {paragraph}{Dimostrazione}{210}{paragraph*.291}%
+\contentsline {paragraph}{\bm {$(1)\Rightarrow (2)$}}{212}{paragraph*.297}%
+\contentsline {paragraph}{\bm {$(2)\Rightarrow (3)$}}{212}{paragraph*.298}%
+\contentsline {paragraph}{\bm {$(3)\Rightarrow (1)$}}{213}{paragraph*.299}%
+\contentsline {subsection}{\numberline {15.2.3}Complessità}{213}{subsection.15.2.3}%
+\contentsline {paragraph}{Limite superiore nell'Algoritmo di Ford-Fulkerson}{213}{paragraph*.300}%
+\contentsline {paragraph}{Limite superiore nell'Algoritmo di Edmonds-Karp}{213}{paragraph*.301}%
+\contentsline {paragraph}{Dimostrazione}{213}{paragraph*.302}%
+\contentsline {paragraph}{Riassunto delle complessità}{214}{paragraph*.303}%
+\contentsline {chapter}{\numberline {16}Backtracking}{215}{chapter.16}%
+\contentsline {section}{\numberline {16.1}Introduzione}{215}{section.16.1}%
+\contentsline {section}{\numberline {16.2}Problema dell'enumerazione dei sottoinsiemi}{215}{section.16.2}%
+\contentsline {subsection}{\numberline {16.2.1}Approccio generale}{216}{subsection.16.2.1}%
+\contentsline {paragraph}{Albero delle decisioni}{216}{paragraph*.305}%
+\contentsline {paragraph}{Implementazione ricorsiva}{217}{paragraph*.307}%
+\contentsline {paragraph}{Complessità}{217}{paragraph*.308}%
+\contentsline {paragraph}{Implementazione iterativa}{217}{paragraph*.309}%
+\contentsline {section}{\numberline {16.3}Problema dell'enumerazione delle permutazioni}{217}{section.16.3}%
+\contentsline {paragraph}{Complessità}{218}{paragraph*.311}%
+\contentsline {paragraph}{Versione migliorata dell'algoritmo}{218}{paragraph*.312}%
+\contentsline {paragraph}{Complessità}{219}{paragraph*.313}%
+\contentsline {section}{\numberline {16.4}Problema dell'enumerazione dei k-sottoinsiemi}{219}{section.16.4}%
+\contentsline {paragraph}{Albero delle decisioni}{220}{paragraph*.314}%
+\contentsline {paragraph}{Complessità}{221}{paragraph*.316}%
+\contentsline {section}{\numberline {16.5}Problema del subset sum}{221}{section.16.5}%
+\contentsline {subsection}{\numberline {16.5.1}Approccio generale}{222}{subsection.16.5.1}%
+\contentsline {paragraph}{Implementazione}{222}{paragraph*.317}%
+\contentsline {section}{\numberline {16.6}Problema dell'inviluppo convesso}{223}{section.16.6}%
+\contentsline {subsection}{\numberline {16.6.1}Algoritmo di Jarvis}{223}{subsection.16.6.1}%
+\contentsline {paragraph}{Complessità}{223}{paragraph*.318}%
+\contentsline {subsection}{\numberline {16.6.2}Algoritmo di Graham}{224}{subsection.16.6.2}%
+\contentsline {paragraph}{Complessità}{225}{paragraph*.321}%
+\contentsline {chapter}{\numberline {17}Problemi intrattabili e teoria dell'NP-completezza}{226}{chapter.17}%
+\contentsline {section}{\numberline {17.1}Introduzione}{226}{section.17.1}%
+\contentsline {section}{\numberline {17.2}Riduzioni}{227}{section.17.2}%
+\contentsline {subsection}{\numberline {17.2.1}Colorazione di grafi}{227}{subsection.17.2.1}%
+\contentsline {subsection}{\numberline {17.2.2}Sudoku}{228}{subsection.17.2.2}%
+\contentsline {subsection}{\numberline {17.2.3}Insieme indipendente}{228}{subsection.17.2.3}%
+\contentsline {subsection}{\numberline {17.2.4}Copertura di vertici}{229}{subsection.17.2.4}%
+\contentsline {paragraph}{\bm {$S$} insieme indipendente \bm {$\Rightarrow $} \bm {$V-S$} copertura di vertici}{230}{paragraph*.326}%
+\contentsline {paragraph}{\bm {$V-S$} copertura di vertici \bm {$\Rightarrow $} \bm {$S$} insieme indipendente}{230}{paragraph*.327}%
+\contentsline {subsection}{\numberline {17.2.5}Soddisfacibilità di formule booleane}{230}{subsection.17.2.5}%
+\contentsline {paragraph}{Relazione tra SAT, 3-SAT e INDIPENDENT-SET}{231}{paragraph*.330}%
+\contentsline {section}{\numberline {17.3}Classi di problemi}{232}{section.17.3}%
+\contentsline {section}{\numberline {17.4}Alcuni problemi NP-completi}{234}{section.17.4}%
+\contentsline {chapter}{\numberline {18}Soluzioni per problemi intrattabili}{237}{chapter.18}%
+\contentsline {section}{\numberline {18.1}Algoritmi pseudo-polinomiali}{237}{section.18.1}%
+\contentsline {subsection}{\numberline {18.1.1}Problema del subset sum}{237}{subsection.18.1.1}%
+\contentsline {paragraph}{Soluzione con programmazione dinamica}{237}{paragraph*.335}%
+\contentsline {paragraph}{Soluzione con backtracking}{238}{paragraph*.336}%
+\contentsline {paragraph}{Soluzione con memoization}{238}{paragraph*.337}%
+\contentsline {subsection}{\numberline {18.1.2}Problemi fortemente e debolmente NP-completi}{239}{subsection.18.1.2}%
+\contentsline {paragraph}{Dimostrazione che SUBSET-SUM è debolmente $\mathbb {NP}$-completo}{240}{paragraph*.339}%
+\contentsline {paragraph}{Dimostrazione che CLIQUE è fortemente $\mathbb {NP}$-completo}{240}{paragraph*.340}%
+\contentsline {section}{\numberline {18.2}Algoritmi di approssimazione}{240}{section.18.2}%
+\contentsline {subsection}{\numberline {18.2.1}Problema del bin packing approssimato}{241}{subsection.18.2.1}%
+\contentsline {subsection}{\numberline {18.2.2}Problema del commesso viaggiatore modificato}{242}{subsection.18.2.2}%
+\contentsline {paragraph}{$\mathbb {NP}$-completezza di \bm {$\Delta $}-TSP}{242}{paragraph*.342}%
+\contentsline {paragraph}{Algoritmo in generale}{242}{paragraph*.343}%
+\contentsline {paragraph}{Complessità}{244}{paragraph*.349}%
+\contentsline {section}{\numberline {18.3}Algoritmi euristici}{244}{section.18.3}%
+\contentsline {subsection}{\numberline {18.3.1}Prima soluzione greedy - Arco di costo minimo}{245}{subsection.18.3.1}%
+\contentsline {paragraph}{Complessità}{246}{paragraph*.353}%
+\contentsline {subsection}{\numberline {18.3.2}Seconda soluzione greedy - Vicino più vicino}{247}{subsection.18.3.2}%
+\contentsline {paragraph}{Complessità}{247}{paragraph*.356}%
+\contentsline {subsection}{\numberline {18.3.3}Soluzione con ricerca locale}{248}{subsection.18.3.3}%
+\contentsline {paragraph}{Complessità}{249}{paragraph*.360}%
+\contentsline {section}{\numberline {18.4}Algoritmi branch-\&-bound}{249}{section.18.4}%
+\contentsline {subsection}{\numberline {18.4.1}Schema generale}{249}{subsection.18.4.1}%
+\contentsline {subsection}{\numberline {18.4.2}Problema del commesso viaggiatore}{250}{subsection.18.4.2}%
+\contentsline {paragraph}{Lower bound come costo effettivo della soluzione parziale}{250}{paragraph*.361}%
+\contentsline {paragraph}{Lower bound come costo per uscire dall'ultimo nodo}{250}{paragraph*.363}%
+\contentsline {paragraph}{Lower bound come costo per uscire da tutti i nodi rimasti}{251}{paragraph*.365}%
+\contentsline {paragraph}{Lower bound come costo per attraversare i nodi non ancora scelti}{251}{paragraph*.367}%
+\contentsline {paragraph}{Complessità}{252}{paragraph*.369}%
+\contentsline {chapter}{\numberline {19}Algoritmi di ordinamento}{254}{chapter.19}%
+\contentsline {section}{\numberline {19.1}Algoritmi basati su confronti}{254}{section.19.1}%
+\contentsline {section}{\numberline {19.2}Algoritmi non basati su confronti}{255}{section.19.2}%
+\contentsline {subsection}{\numberline {19.2.1}Spaghetti sort}{255}{subsection.19.2.1}%
+\contentsline {subsection}{\numberline {19.2.2}Counting sort}{255}{subsection.19.2.2}%
+\contentsline {paragraph}{Complessità}{256}{paragraph*.373}%
+\contentsline {subsection}{\numberline {19.2.3}Pigeonhole sort}{256}{subsection.19.2.3}%
+\contentsline {paragraph}{Complessità}{256}{paragraph*.375}%
+\contentsline {subsection}{\numberline {19.2.4}Bucket sort}{256}{subsection.19.2.4}%
+\contentsline {paragraph}{Complessità}{256}{paragraph*.377}%
+\contentsline {section}{\numberline {19.3}Proprietà degli algoritmi di ordinamento}{257}{section.19.3}%
+\contentsline {section}{\numberline {19.4}Confronto tra algoritmi di ordinamento}{257}{section.19.4}%
+\contentsline {chapter}{\numberline {20}Algoritmi probabilistici}{258}{chapter.20}%
+\contentsline {section}{\numberline {20.1}Algoritmi Montecarlo}{258}{section.20.1}%
+\contentsline {subsection}{\numberline {20.1.1}Test di primalità}{258}{subsection.20.1.1}%
+\contentsline {paragraph}{Soluzione basata sul Piccolo Teorema di Fermat}{258}{paragraph*.379}%
+\contentsline {paragraph}{Algoritmo di Miller-Rabin}{259}{paragraph*.380}%
+\contentsline {paragraph}{Complessità}{260}{paragraph*.381}%
+\contentsline {subsection}{\numberline {20.1.2}Identificazione di espressioni polinomiali nulle}{260}{subsection.20.1.2}%
+\contentsline {section}{\numberline {20.2}Algoritmi Las Vegas}{260}{section.20.2}%
+\contentsline {subsection}{\numberline {20.2.1}Problema della selezione}{260}{subsection.20.2.1}%
+\contentsline {paragraph}{Approccio basato su Heap}{260}{paragraph*.382}%
+\contentsline {paragraph}{Complessità}{261}{paragraph*.383}%
+\contentsline {paragraph}{Approccio basato su Quicksort}{261}{paragraph*.384}%
+\contentsline {paragraph}{Complessità}{261}{paragraph*.386}%
+\contentsline {paragraph}{Approccio deterministico}{262}{paragraph*.387}%
+\contentsline {paragraph}{Complessità}{263}{paragraph*.389}%
+\contentsline {section}{\numberline {20.3}Bloom filter}{263}{section.20.3}%
+\contentsline {paragraph}{Specifica}{263}{paragraph*.390}%
+\contentsline {paragraph}{Implementazione}{264}{paragraph*.391}%
+\contentsline {paragraph}{Alcune formule}{265}{paragraph*.393}%
+\contentsline {paragraph}{Casi d'uso}{265}{paragraph*.394}%
+\contentsline {chapter}{\numberline {A}Appendice A}{266}{appendix.1.A}%
+\contentsline {section}{\numberline {A.1}Proprietà dei logaritmi}{266}{section.1.A.1}%
+\contentsline {section}{\numberline {A.2}Serie matematiche convergenti}{266}{section.1.A.2}%
