@@ -302,6 +302,44 @@ basata su \emph{Quicksort}. Una volta raggiunto un sottovettore sufficientemente
 piccolo si potrebbe usare un algoritmo di ordinamento per determinare l'ultimo
 mediano.
 
+\begin{figure}[h!]
+\centering
+\begin{graph}
+    \tikzset{
+        cell/.style={rectangle, draw, minimum size=10mm},
+        separator/.style={rectangle, draw, minimum height=10mm, minimum width=1mm, inner sep=0}
+    }
+
+    \def\numbers{1 4 7 10 13 2 5 8 11 14 3 6 9 12 15}
+    \readarray\numbers\num[1,15]
+
+    \foreach \i in {1,...,5} {
+        \ifthenelse{\i = 3}{
+            \node[cell] (\i) at (\i) {\bm{$\num[1,\i]$}};
+        }{
+            \node[cell] (\i) at (\i) {$\num[1,\i]$};
+        }
+    }
+    \node[separator] (s1) at (5) [xshift=5.52mm] {};
+    \foreach \i in {6,...,10} {
+        \ifthenelse{\i = 8}{
+            \node[cell] (\i) at (\i) [xshift=1mm] {\bm{$\num[1,\i]$}};
+        }{
+            \node[cell] (\i) at (\i) [xshift=1mm] {$\num[1,\i]$};
+        }
+    }
+    \node[separator] (s1) at (9) [xshift=15.52mm] {};
+    \foreach \i in {11,...,15} {
+        \ifthenelse{\i = 13}{
+            \node[cell] (\i) at (\i) [xshift=2mm] {\bm{$\num[1,\i]$}};
+        }{
+            \node[cell] (\i) at (\i) [xshift=2mm] {$\num[1,\i]$};
+        }
+    }
+\end{graph}
+\caption{La mediana delle mediane è $8$ che è anche la mediana dell'intero vettore}
+\end{figure}
+
 \newpage
 \begin{minicode}{Implementazione soluzione deterministica}
 \ind\bc{ITEM} select(\bc{ITEM}[] A, \bc{int} first, \bc{int} last, \bc{int} k)\\
