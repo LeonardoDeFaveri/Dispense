@@ -109,7 +109,7 @@ l'algoritmo ottenuto è più complicato di quello che già conoscevamo.
 All'inizio della trattazione abbiamo già esaminato un algoritmo di ordinamento
 basato sul \emph{Divide-et-impera}: l'algoritmo \emph{merge sort}.
 
-\subsection{Principi di funzionamento}
+\subsection{Principio di funzionamento}
 Il \emph{Quicksort} è un altro algoritmo di ordinamento, basato anch'esso su
 \emph{Divide-et-impera}, che riceve in input un vettore $A[1\dots n]$ e due indici $lo$ e
 $hi$ tali che $1\leq lo\leq hi\leq n$.
@@ -120,18 +120,52 @@ permutati in modo da portare i valori più piccoli del \emph{pivot} alla sua
 sinistra e gli altri alla sua destra.
 
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.7\textwidth]{quicksort1.png}
-    \caption{Posizionamento dei valori dopo la scelta del \emph{pivot}}
+\centering
+\begin{graph}
+    \definecolor{pink}{RGB}{255, 204, 204}
+    \definecolor{yellow}{RGB}{255, 251, 214}
+    \tikzset{
+        cell/.style={draw, rectangle, minimum size=10mm}
+    }
+    \def\numbers{13 14 15 12 20 27 29 30 21 25 28}
+    \readarray\numbers\num[1, 11]
+
+    \foreach \i in {1,...,4} {
+        \node[cell, fill=pink] (\i) at (\i, 0) {$\num[1,\i]$};
+    }
+    \node[label=below:{\shortstack[l]{$A[lo\dots j-1]$\\$A[i]<A[j]$}}] (l1) at (1) [shift={(7mm, -3.1mm)}] {};
+    \node[cell, fill=leaf, label=below:{\shortstack{$j$\\$p=A[j]$}}] (5) at (5, 0) {$\num[1,5]$};
+    \foreach \i in {6,...,11} {
+        \node[cell, fill=yellow] (\i) at (\i, 0) {$\num[1,\i]$};
+    }
+    \node[label=below:{\shortstack[r]{$A[j+1\dots hi]$\\$A[i]>A[j]$}}] (l2) at (11) [shift={(-7mm, -3.1mm)}] {};
+\end{graph}
+\caption{Posizionamento dei valori dopo la scelta del \emph{pivot}}
 \end{figure}\noindent
 Nella fase di \emph{Impera} vengono ordinati i due sottoarray $A[lo\dots j-1]$
 e $A[j+1\dots hi]$ e infine nella fare di \emph{Combina} non serve fare nulla in
 quanto il vettore risulta già ordinato.
 
 \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.7\textwidth]{quicksort2.png}
-    \caption{Vettore ordinato al termine della fase di \emph{Impera}}
+\centering
+\begin{graph}
+    \definecolor{pink}{RGB}{255, 204, 204}
+    \definecolor{yellow}{RGB}{255, 251, 214}
+    \tikzset{
+        cell/.style={draw, rectangle, minimum size=10mm}
+    }
+    \def\numbers{13 14 15 12 20 27 29 30 21 25 28}
+    \readarray\numbers\num[1, 11]
+
+    \foreach \i in {1,...,4} {
+        \node[cell, fill=pink] (\i) at (\i, 0) {$\num[1,\i]$};
+    }
+    \node[cell, fill=leaf, label=below:$j$] (5) at (5, 0) {$\num[1,5]$};
+    \foreach \i in {6,...,11} {
+        \node[cell, fill=yellow] (\i) at (\i, 0) {$\num[1,\i]$};
+    }
+\end{graph}
+\caption{Vettore ordinato al termine della fase di \emph{Impera}}
 \end{figure}
 
 \newpage

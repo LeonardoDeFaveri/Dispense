@@ -190,7 +190,7 @@
 \contentsline {section}{\numberline {10.1}Introduzione}{125}{section.10.1}%
 \contentsline {paragraph}{Convenienza degli algoritmi Divide-et-impera}{126}{paragraph*.152}%
 \contentsline {section}{\numberline {10.2}Algoritmo Quicksort}{127}{section.10.2}%
-\contentsline {subsection}{\numberline {10.2.1}Principi di funzionamento}{127}{subsection.10.2.1}%
+\contentsline {subsection}{\numberline {10.2.1}Principio di funzionamento}{127}{subsection.10.2.1}%
 \contentsline {subsection}{\numberline {10.2.2}Implementazione}{128}{subsection.10.2.2}%
 \contentsline {subsection}{\numberline {10.2.3}Costo computazionale}{128}{subsection.10.2.3}%
 \contentsline {paragraph}{Funzione euristica per la selezione del pivot}{129}{paragraph*.155}%

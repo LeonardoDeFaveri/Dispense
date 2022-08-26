@@ -105,7 +105,7 @@
 \BOOKMARK [0][-]{chapter.10}{Divide-et-impera}{}% 105
 \BOOKMARK [1][-]{section.10.1}{Introduzione}{chapter.10}% 106
 \BOOKMARK [1][-]{section.10.2}{Algoritmo Quicksort}{chapter.10}% 107
-\BOOKMARK [2][-]{subsection.10.2.1}{Principi di funzionamento}{section.10.2}% 108
+\BOOKMARK [2][-]{subsection.10.2.1}{Principio di funzionamento}{section.10.2}% 108
 \BOOKMARK [2][-]{subsection.10.2.2}{Implementazione}{section.10.2}% 109
 \BOOKMARK [2][-]{subsection.10.2.3}{Costo computazionale}{section.10.2}% 110
 \BOOKMARK [1][-]{section.10.3}{Esercizio di applicazione del Divide-et-impera}{chapter.10}% 111
