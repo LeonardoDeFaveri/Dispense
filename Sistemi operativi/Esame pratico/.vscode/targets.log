@@ -1,0 +1,351 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.2.1
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Fri Jun 17 08:35:00 2022
+
+# Variables
+
+# 'override' directive
+GNUMAKEFLAGS := 
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# environment
+PAPERSIZE = a4
+# environment
+DESKTOP_SESSION = zorin
+# default
+.SHELLFLAGS := -c
+# environment
+XDG_SESSION_CLASS = user
+# environment
+SNAP_COMMON = /var/snap/code/common
+# environment
+XDG_SESSION_TYPE = x11
+# environment
+VSCODE_LOG_NATIVE = false
+# makefile (from 'Makefile', line 1)
+DEST := .
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# environment
+IM_CONFIG_PHASE = 1
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+XAUTHORITY = /run/user/1000/gdm/Xauthority
+# environment
+GDMSESSION = zorin
+# environment
+XMODIFIERS = @im=ibus
+# makefile
+CURDIR := /home/leonardo/Desktop/217805
+# makefile
+SHELL = /bin/sh
+# environment
+SNAP_DATA = /var/snap/code/99
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
+# environment
+JOURNAL_STREAM = 8:53038
+# environment
+XDG_CONFIG_DIRS = /etc/xdg/xdg-zorin:/etc/xdg
+# environment
+SNAP_INSTANCE_NAME = code
+# environment
+SNAP_ARCH = amd64
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# automatic
+@F = $(notdir $@)
+# environment
+GIO_LAUNCHED_DESKTOP_FILE = /var/lib/snapd/desktop/applications/code_code.desktop
+# environment
+OMF_PATH = /home/leonardo/.local/share/omf
+# environment
+USERNAME = leonardo
+# environment
+MAKELEVEL := 0
+# environment
+XDG_DATA_DIRS = /usr/share/zorin:/home/leonardo/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+MANAGERPID = 2089
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-9c908c84-f736-4036-b277-02b2e89256f1.sock
+# environment
+LC_NAME = it_IT.UTF-8
+# environment
+VSCODE_CWD = /home/leonardo
+# environment
+QT_STYLE_OVERRIDE = adwaita
+# environment
+GSETTINGS_SCHEMA_DIR = /snap/code/99/usr/share/glib-2.0/schemas
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# environment
+PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+# environment
+GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
+# environment
+SESSION_MANAGER = local/leonardo:@/tmp/.ICE-unix/2334,unix/leonardo:/tmp/.ICE-unix/2334
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# environment
+GDK_PIXBUF_MODULE_FILE = /home/leonardo/snap/code/common/.cache/gdk-pixbuf-loaders.cache
+# environment
+SNAP = /snap/code/99
+# environment
+SNAP_VERSION = 30d9c6cd
+# environment
+XDG_MENU_PREFIX = gnome-
+# environment
+VSCODE_LOG_STACK = false
+# environment
+DISABLE_WAYLAND = 1
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+INVOCATION_ID = 4acd8bfcb1f344faa4e9316a487bdc4f
+# environment
+GDK_PIXBUF_MODULEDIR = /snap/code/99/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# environment
+LS_COLORS = tw=3;38;2;235;219;178;48;2;69;133;136:rs=0:ow=1;38;2;184;187;38:sg=0;38;2;40;40;40;48;2;214;93;14:do=1;38;2;211;134;155:di=0;38;2;69;133;136:cd=3;38;2;250;189;47:ex=1;38;2;184;187;38:pi=0;38;2;177;98;134:ca=0;38;2;40;40;40;48;2;204;36;29:so=1;38;2;177;98;134:no=0;38;2;235;219;178;48;2;40;40;40:bd=1;38;2;215;153;33:*~=3;38;2;102;92;84:or=3;38;2;251;73;52:mh=1:ln=3;38;2;131;165;152:su=0;38;2;235;219;178;48;2;204;36;29:mi=0;38;2;235;219;178;48;2;251;73;52:fi=0;38;2;235;219;178;48;2;40;40;40:st=0;38;2;235;219;178;48;2;69;133;136:*.d=0;38;2;152;151;26:*.t=0;38;2;152;151;26:*.r=0;38;2;152;151;26:*.c=0;38;2;152;151;26:*.z=0;38;2;214;93;14:*.o=3;38;2;102;92;84:*.p=0;38;2;152;151;26:*.h=0;38;2;152;151;26:*.a=1;38;2;184;187;38:*.m=0;38;2;152;151;26:*.mn=0;38;2;152;151;26:*.so=1;38;2;184;187;38:*.cr=0;38;2;152;151;26:*.sh=0;38;2;152;151;26:*.ll=0;38;2;152;151;26:*.gz=0;38;2;214;93;14:*.rs=0;38;2;152;151;26:*.wv=0;38;2;104;157;106:*.el=0;38;2;152;151;26:*.md=0;38;2;215;153;33:*.hi=3;38;2;102;92;84:*.pm=0;38;2;152;151;26:*.rm=1;38;2;142;192;124:*.ui=0;38;2;250;189;47:*.nb=0;38;2;152;151;26:*.cc=0;38;2;152;151;26:*.di=0;38;2;152;151;26:*.ts=0;38;2;152;151;26:*.la=3;38;2;102;92;84:*.pl=0;38;2;152;151;26:*.ex=0;38;2;152;151;26:*.pp=0;38;2;152;151;26:*.kt=0;38;2;152;151;26:*.bz=0;38;2;214;93;14:*.vb=0;38;2;152;151;26:*.go=0;38;2;152;151;26:*.fs=0;38;2;152;151;26:*.hs=0;38;2;152;151;26:*.cs=0;38;2;152;151;26:*.hh=0;38;2;152;151;26:*.gv=0;38;2;152;151;26:*.jl=0;38;2;152;151;26:*.js=0;38;2;152;151;26:*.as=0;38;2;152;151;26:*.bc=3;38;2;102;92;84:*.ps=1;38;2;131;165;152:*.td=0;38;2;152;151;26:*.cp=0;38;2;152;151;26:*.ko=1;38;2;184;187;38:*.xz=0;38;2;214;93;14:*.rb=0;38;2;152;151;26:*.py=0;38;2;152;151;26:*.7z=0;38;2;214;93;14:*.lo=3;38;2;102;92;84:*.ml=0;38;2;152;151;26:*css=0;38;2;152;151;26:*.vim=0;38;2;152;151;26:*.htc=0;38;2;152;151;26:*.pps=1;38;2;131;165;152:*.bin=1;38;2;254;128;25:*.pod=0;38;2;152;151;26:*.tmp=3;38;2;102;92;84:*.mov=1;38;2;142;192;124:*.otf=0;38;2;104;157;106:*.txt=0;38;2;235;219;178:*.out=3;38;2;102;92;84:*.tml=0;38;2;250;189;47:*.bag=0;38;2;214;93;14:*.erl=0;38;2;152;151;26:*.pkg=0;38;2;214;93;14:*.hxx=0;38;2;152;151;26:*.bbl=3;38;2;102;92;84:*.ttf=0;38;2;104;157;106:*.ilg=3;38;2;102;92;84:*.ods=1;38;2;131;165;152:*.sql=0;38;2;152;151;26:*.h++=0;38;2;152;151;26:*.xlr=1;38;2;131;165;152:*.gvy=0;38;2;152;151;26:*.csx=0;38;2;152;151;26:*.img=1;38;2;254;128;25:*.csv=0;38;2;215;153;33:*.dox=3;38;2;184;187;38:*.fsx=0;38;2;152;151;26:*.exs=0;38;2;152;151;26:*.aux=3;38;2;102;92;84:*.avi=1;38;2;142;192;124:*.iso=1;38;2;254;128;25:*.eps=0;38;2;104;157;106:*.doc=1;38;2;131;165;152:*.sxi=1;38;2;131;165;152:*.dmg=1;38;2;254;128;25:*.wmv=1;38;2;142;192;124:*.bmp=0;38;2;104;157;106:*.pdf=1;38;2;131;165;152:*.mp3=0;38;2;104;157;106:*.pid=3;38;2;102;92;84:*.tar=0;38;2;214;93;14:*.sxw=1;38;2;131;165;152:*.jar=0;38;2;214;93;14:*.pgm=0;38;2;104;157;106:*.apk=0;38;2;214;93;14:*.ps1=0;38;2;152;151;26:*.m4a=0;38;2;104;157;106:*.fsi=0;38;2;152;151;26:*.elm=0;38;2;152;151;26:*.psd=0;38;2;104;157;106:*.rpm=0;38;2;214;93;14:*.ipp=0;38;2;152;151;26:*.sty=3;38;2;102;92;84:*.mkv=1;38;2;142;192;124:*.zsh=0;38;2;152;151;26:*.mli=0;38;2;152;151;26:*.inl=0;38;2;152;151;26:*.rst=0;38;2;215;153;33:*.xmp=0;38;2;250;189;47:*.bib=0;38;2;250;189;47:*.kex=1;38;2;131;165;152:*.swp=3;38;2;102;92;84:*.asa=0;38;2;152;151;26:*.dot=0;38;2;152;151;26:*.ogg=0;38;2;104;157;106:*.mir=0;38;2;152;151;26:*.pbm=0;38;2;104;157;106:*.rar=0;38;2;214;93;14:*.ico=0;38;2;104;157;106:*.bsh=0;38;2;152;151;26:*.fnt=0;38;2;104;157;106:*.dpr=0;38;2;152;151;26:*.fls=3;38;2;102;92;84:*.exe=1;38;2;184;187;38:*.cgi=0;38;2;152;151;26:*.yml=0;38;2;250;189;47:*.png=0;38;2;104;157;106:*.pyo=3;38;2;102;92;84:*.odp=1;38;2;131;165;152:*.tex=0;38;2;152;151;26:*.tgz=0;38;2;214;93;14:*.mid=0;38;2;104;157;106:*.pro=3;38;2;184;187;38:*.tbz=0;38;2;214;93;14:*.swf=1;38;2;142;192;124:*hgrc=3;38;2;184;187;38:*.epp=0;38;2;152;151;26:*.svg=0;38;2;104;157;106:*.fon=0;38;2;104;157;106:*.kts=0;38;2;152;151;26:*.blg=3;38;2;102;92;84:*.lua=0;38;2;152;151;26:*.cxx=0;38;2;152;151;26:*.ics=1;38;2;131;165;152:*.xls=1;38;2;131;165;152:*.odt=1;38;2;131;165;152:*.mpg=1;38;2;142;192;124:*.c++=0;38;2;152;151;26:*.clj=0;38;2;152;151;26:*.inc=0;38;2;152;151;26:*.tcl=0;38;2;152;151;26:*.ppm=0;38;2;104;157;106:*.ppt=1;38;2;131;165;152:*.bcf=3;38;2;102;92;84:*.tsx=0;38;2;152;151;26:*.m4v=1;38;2;142;192;124:*TODO=0;38;2;184;187;38:*.htm=0;38;2;215;153;33:*.zst=0;38;2;214;93;14:*.arj=0;38;2;214;93;14:*.php=0;38;2;152;151;26:*.toc=3;38;2;102;92;84:*.vcd=1;38;2;254;128;25:*.flv=1;38;2;142;192;124:*.awk=0;38;2;152;151;26:*.cpp=0;38;2;152;151;26:*.pyd=3;38;2;102;92;84:*.idx=3;38;2;102;92;84:*.sbt=0;38;2;152;151;26:*.log=3;38;2;102;92;84:*.rtf=1;38;2;131;165;152:*.git=3;38;2;102;92;84:*.pyc=3;38;2;102;92;84:*.bz2=0;38;2;214;93;14:*.bat=1;38;2;184;187;38:*.nix=0;38;2;250;189;47:*.wav=0;38;2;104;157;106:*.xcf=0;38;2;104;157;106:*.ini=0;38;2;250;189;47:*.gif=0;38;2;104;157;106:*.ind=3;38;2;102;92;84:*.xml=0;38;2;215;153;33:*.cfg=0;38;2;250;189;47:*.com=1;38;2;184;187;38:*.wma=0;38;2;104;157;106:*.dll=1;38;2;184;187;38:*.bak=3;38;2;102;92;84:*.deb=0;38;2;214;93;14:*.aif=0;38;2;104;157;106:*.jpg=0;38;2;104;157;106:*.mp4=1;38;2;142;192;124:*.bst=0;38;2;250;189;47:*.pas=0;38;2;152;151;26:*.vob=1;38;2;142;192;124:*.zip=0;38;2;214;93;14:*.hpp=0;38;2;152;151;26:*.def=0;38;2;152;151;26:*.ltx=0;38;2;152;151;26:*.tif=0;38;2;104;157;106:*.make=3;38;2;184;187;38:*.rlib=3;38;2;102;92;84:*.webm=1;38;2;142;192;124:*.flac=0;38;2;104;157;106:*.diff=0;38;2;152;151;26:*.h264=1;38;2;142;192;124:*.html=0;38;2;215;153;33:*.bash=0;38;2;152;151;26:*.opus=0;38;2;104;157;106:*.less=0;38;2;152;151;26:*.docx=1;38;2;131;165;152:*.epub=1;38;2;131;165;152:*.orig=3;38;2;102;92;84:*.java=0;38;2;152;151;26:*.tbz2=0;38;2;214;93;14:*.psd1=0;38;2;152;151;26:*.jpeg=0;38;2;104;157;106:*.fish=0;38;2;152;151;26:*.lock=3;38;2;102;92;84:*.hgrc=3;38;2;184;187;38:*.yaml=0;38;2;250;189;47:*.psm1=0;38;2;152;151;26:*.conf=0;38;2;250;189;47:*.purs=0;38;2;152;151;26:*.xlsx=1;38;2;131;165;152:*.dart=0;38;2;152;151;26:*.json=0;38;2;250;189;47:*.lisp=0;38;2;152;151;26:*.mpeg=1;38;2;142;192;124:*.pptx=1;38;2;131;165;152:*.toml=0;38;2;250;189;47:*.tiff=0;38;2;104;157;106:*.shtml=0;38;2;215;153;33:*.class=3;38;2;102;92;84:*.patch=0;38;2;152;151;26:*.mdown=0;38;2;215;153;33:*.toast=1;38;2;254;128;25:*README=1;38;2;250;189;47:*.swift=0;38;2;152;151;26:*.cache=3;38;2;102;92;84:*.dyn_o=3;38;2;102;92;84:*.xhtml=0;38;2;215;153;33:*.ipynb=0;38;2;152;151;26:*.scala=0;38;2;152;151;26:*.cmake=3;38;2;184;187;38:*passwd=0;38;2;250;189;47:*shadow=0;38;2;250;189;47:*.cabal=0;38;2;152;151;26:*.dyn_hi=3;38;2;102;92;84:*.ignore=3;38;2;184;187;38:*TODO.md=0;38;2;184;187;38:*LICENSE=3;38;2;235;219;178:*.gradle=0;38;2;152;151;26:*.config=0;38;2;250;189;47:*.groovy=0;38;2;152;151;26:*COPYING=3;38;2;235;219;178:*.matlab=0;38;2;152;151;26:*.flake8=3;38;2;184;187;38:*INSTALL=1;38;2;250;189;47:*.desktop=0;38;2;250;189;47:*Doxyfile=3;38;2;184;187;38:*TODO.txt=0;38;2;184;187;38:*setup.py=3;38;2;184;187;38:*.gemspec=3;38;2;184;187;38:*Makefile=3;38;2;184;187;38:*COPYRIGHT=3;38;2;235;219;178:*.markdown=0;38;2;215;153;33:*configure=3;38;2;184;187;38:*.cmake.in=3;38;2;184;187;38:*README.md=1;38;2;250;189;47:*.rgignore=3;38;2;184;187;38:*.fdignore=3;38;2;184;187;38:*.DS_Store=3;38;2;102;92;84:*.kdevelop=3;38;2;184;187;38:*.localized=3;38;2;102;92;84:*.gitconfig=3;38;2;184;187;38:*.scons_opt=3;38;2;102;92;84:*CODEOWNERS=3;38;2;184;187;38:*.gitignore=3;38;2;184;187;38:*INSTALL.md=1;38;2;250;189;47:*README.txt=1;38;2;250;189;47:*SConscript=3;38;2;184;187;38:*Dockerfile=0;38;2;250;189;47:*SConstruct=3;38;2;184;187;38:*Makefile.in=3;38;2;102;92;84:*.synctex.gz=3;38;2;102;92;84:*LICENSE-MIT=3;38;2;235;219;178:*.travis.yml=0;38;2;131;165;152:*.gitmodules=3;38;2;184;187;38:*Makefile.am=3;38;2;184;187;38:*INSTALL.txt=1;38;2;250;189;47:*MANIFEST.in=3;38;2;184;187;38:*configure.ac=3;38;2;184;187;38:*.applescript=0;38;2;152;151;26:*appveyor.yml=0;38;2;131;165;152:*CONTRIBUTORS=1;38;2;250;189;47:*.fdb_latexmk=3;38;2;102;92;84:*.clang-format=3;38;2;184;187;38:*.gitattributes=3;38;2;184;187;38:*CMakeCache.txt=3;38;2;102;92;84:*LICENSE-APACHE=3;38;2;235;219;178:*CMakeLists.txt=3;38;2;184;187;38:*CONTRIBUTORS.md=1;38;2;250;189;47:*.sconsign.dblite=3;38;2;102;92;84:*CONTRIBUTORS.txt=1;38;2;250;189;47:*requirements.txt=3;38;2;184;187;38:*package-lock.json=3;38;2;102;92;84:*.CFUserTextEncoding=3;38;2;102;92;84
+# environment
+XDG_SESSION_DESKTOP = zorin
+# environment
+SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
+# environment
+GIO_LAUNCHED_DESKTOP_FILE_PID = 64634
+# automatic
+%F = $(notdir $%)
+# environment
+DISPLAY = :0
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+SNAP_INSTANCE_KEY = 
+# environment
+PWD = /home/leonardo/Desktop/217805
+# environment
+QT_QPA_PLATFORMTHEME = gtk3
+# default
+.LOADED := 
+# environment
+SSH_AGENT_PID = 2297
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = zorin:GNOME
+# environment
+GTK_MODULES = gail:atk-bridge
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/leonardo
+# environment
+VSCODE_CLI = 1
+# environment
+VSCODE_CODE_CACHE_PATH = /home/leonardo/.config/Code/CachedData/30d9c6cd9483b2cc586687151bcbcd635f373630
+# environment
+LOGNAME = leonardo
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
+# environment
+SNAP_CONTEXT = F-0PmJn0Td9deqrW79HnedxJ6tBRtgC8pMPB_cBmS1FHCGvmq2zh
+# automatic
++F = $(notdir $+)
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+SNAP_USER_COMMON = /home/leonardo/snap/code/common
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# environment
+GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+LC_TIME = it_IT.UTF-8
+# environment
+SNAP_REAL_HOME = /home/leonardo
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+QT_IM_MODULE = ibus
+# environment
+SNAP_USER_DATA = /home/leonardo/snap/code/99
+# environment
+SHLVL = 1
+# environment
+GNOME_SHELL_SESSION_MODE = zorin
+# default
+MAKE_VERSION := 4.2.1
+# environment
+USER = leonardo
+# environment
+SNAP_REVISION = 99
+# environment
+LC_MONETARY = it_IT.UTF-8
+# makefile
+.DEFAULT_GOAL := target
+# environment
+XDG_CURRENT_DESKTOP = zorin:GNOME
+# environment
+OMF_CONFIG = /home/leonardo/.config/omf
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+LC_TELEPHONE = it_IT.UTF-8
+# default
+MAKE_COMMAND := make
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# environment
+LANGUAGE = en_GB:en
+# environment
+VSCODE_IPC_HOOK = /run/user/1000/vscode-cba099ec-1.68.1-main.sock
+# environment
+BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
+# makefile
+MAKEFLAGS = pqrR
+# environment
+MFLAGS = -pqrR
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+GDK_BACKEND = x11
+# environment
+LC_PAPER = it_IT.UTF-8
+# environment
+LC_IDENTIFICATION = it_IT.UTF-8
+# environment
+QT_ACCESSIBILITY = 1
+# default
+MAKEFILES := 
+# environment
+SNAP_COOKIE = F-0PmJn0Td9deqrW79HnedxJ6tBRtgC8pMPB_cBmS1FHCGvmq2zh
+# environment
+LC_NUMERIC = it_IT.UTF-8
+# automatic
+<F = $(notdir $<)
+# environment
+LC_MEASUREMENT = it_IT.UTF-8
+# environment
+SNAP_NAME = code
+# environment
+LC_ALL = C
+# environment
+GJS_DEBUG_TOPICS = JS ERROR;JS LOG
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# environment
+SNAP_REEXEC = 
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# environment
+WINDOWPATH = 2
+# default
+ 
+make: *** No rule to make target 'all'.  Stop.
+
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# environment
+GJS_DEBUG_OUTPUT = stderr
+# default
+.RECIPEPREFIX := 
+# environment
+LC_ADDRESS = it_IT.UTF-8
+# environment
+LANG = C
+# environment
+VSCODE_PID = 64686
+# variable set hash-table stats:
+# Load=133/1024=13%, Rehash=0, Collisions=21/160=13%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 66306, inode 11012074): 6 files, no impossibilities.
+
+# 6 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+.:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 8):
+	@mkdir -p $(DEST)
+
+# Not a target:
+all:
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-15 13:17:09.520262087
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+target: .
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 4):
+	@gcc -o $(DEST)/coda -std=gnu90 ./main.c
+
+# files hash-table stats:
+# Load=6/1024=1%, Rehash=0, Collisions=0/18=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 12 / storage = 96 B / avg = 8 B
+# current buf: size = 8162 B / used = 96 B / count = 12 / avg = 8 B
+
+# strcache performance: lookups = 20 / hit rate = 40%
+# hash-table stats:
+# Load=12/8192=0%, Rehash=0, Collisions=1/20=5%
+# Finished Make data base on Fri Jun 17 08:35:00 2022
+
+ 

@@ -1,0 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/leonardo/Desktop/217805'
+mkdir -p .
+gcc -o ./coda -std=gnu90 ./main.c
+make: Leaving directory '/home/leonardo/Desktop/217805'
+ 
