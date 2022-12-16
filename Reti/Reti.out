@@ -1,0 +1,136 @@
+\BOOKMARK [0][-]{chapter.1}{Introduzione}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Struttura di internet}{chapter.1}% 2
+\BOOKMARK [2][-]{subsection.1.1.1}{Nucleo della rete}{section.1.1}% 3
+\BOOKMARK [2][-]{subsection.1.1.2}{Periferia della rete}{section.1.1}% 4
+\BOOKMARK [1][-]{section.1.2}{Mezzi trasmissivi}{chapter.1}% 5
+\BOOKMARK [2][-]{subsection.1.2.1}{Doppini intrecciati}{section.1.2}% 6
+\BOOKMARK [1][-]{section.1.3}{Tecniche di commutazione}{chapter.1}% 7
+\BOOKMARK [2][-]{subsection.1.3.1}{Commutazione di circuito}{section.1.3}% 8
+\BOOKMARK [2][-]{subsection.1.3.2}{Commutazione a pacchetto}{section.1.3}% 9
+\BOOKMARK [1][-]{section.1.4}{Protocolli di comunicazione}{chapter.1}% 10
+\BOOKMARK [0][-]{chapter.2}{Livello Applicativo}{}% 11
+\BOOKMARK [1][-]{section.2.1}{Applicazioni di rete}{chapter.2}% 12
+\BOOKMARK [2][-]{subsection.2.1.1}{Architetture di applicazioni di rete}{section.2.1}% 13
+\BOOKMARK [1][-]{section.2.2}{Comunicazione in rete tra processi}{chapter.2}% 14
+\BOOKMARK [2][-]{subsection.2.2.1}{Socket}{section.2.2}% 15
+\BOOKMARK [1][-]{section.2.3}{Protocolli del livello Applicativo}{chapter.2}% 16
+\BOOKMARK [2][-]{subsection.2.3.1}{Protocollo HTTP}{section.2.3}% 17
+\BOOKMARK [2][-]{subsection.2.3.2}{Protocollo FTP}{section.2.3}% 18
+\BOOKMARK [2][-]{subsection.2.3.3}{Protocolli per la posta elettronica}{section.2.3}% 19
+\BOOKMARK [2][-]{subsection.2.3.4}{Protocollo DNS}{section.2.3}% 20
+\BOOKMARK [0][-]{chapter.3}{Livello Trasporto}{}% 21
+\BOOKMARK [1][-]{section.3.1}{Caratteristiche dei servizi offerti}{chapter.3}% 22
+\BOOKMARK [2][-]{subsection.3.1.1}{Multiplexing e demultiplexing}{section.3.1}% 23
+\BOOKMARK [2][-]{subsection.3.1.2}{Numeri di porta}{section.3.1}% 24
+\BOOKMARK [1][-]{section.3.2}{Protocollo UDP}{chapter.3}% 25
+\BOOKMARK [2][-]{subsection.3.2.1}{Controllo degli errori}{section.3.2}% 26
+\BOOKMARK [1][-]{section.3.3}{Trasferimento dati affidabile}{chapter.3}% 27
+\BOOKMARK [2][-]{subsection.3.3.1}{Protocollo Stop-and-Wait}{section.3.3}% 28
+\BOOKMARK [2][-]{subsection.3.3.2}{Finestre di trasmissione e acknowledgement}{section.3.3}% 29
+\BOOKMARK [2][-]{subsection.3.3.3}{Protocollo Go-back-N}{section.3.3}% 30
+\BOOKMARK [2][-]{subsection.3.3.4}{Protocollo Selective repeat}{section.3.3}% 31
+\BOOKMARK [1][-]{section.3.4}{Protocollo TCP}{chapter.3}% 32
+\BOOKMARK [2][-]{subsection.3.4.1}{Instaurazione di una connessione TCP}{section.3.4}% 33
+\BOOKMARK [2][-]{subsection.3.4.2}{Dimensione dei segmenti}{section.3.4}% 34
+\BOOKMARK [2][-]{subsection.3.4.3}{Chiusura di una connessione TCP}{section.3.4}% 35
+\BOOKMARK [2][-]{subsection.3.4.4}{Stimare l'RTT e scegliere l'RTO}{section.3.4}% 36
+\BOOKMARK [2][-]{subsection.3.4.5}{Controllo di flusso}{section.3.4}% 37
+\BOOKMARK [1][-]{section.3.5}{Gestione della congestione}{chapter.3}% 38
+\BOOKMARK [2][-]{subsection.3.5.1}{Modelli per sistemi a coda}{section.3.5}% 39
+\BOOKMARK [2][-]{subsection.3.5.2}{Cause della congestione}{section.3.5}% 40
+\BOOKMARK [1][-]{section.3.6}{Controllo della congestione in TCP}{chapter.3}% 41
+\BOOKMARK [2][-]{subsection.3.6.1}{Protocollo AIMD}{section.3.6}% 42
+\BOOKMARK [1][-]{section.3.7}{Versioni moderne del TCP}{chapter.3}% 43
+\BOOKMARK [2][-]{subsection.3.7.1}{Protocollo CUBIC}{section.3.7}% 44
+\BOOKMARK [2][-]{subsection.3.7.2}{Protocollo BBR}{section.3.7}% 45
+\BOOKMARK [2][-]{subsection.3.7.3}{Protocollo QUIC}{section.3.7}% 46
+\BOOKMARK [0][-]{chapter.4}{Livello Rete}{}% 47
+\BOOKMARK [1][-]{section.4.1}{Funzioni del livello Rete}{chapter.4}% 48
+\BOOKMARK [1][-]{section.4.2}{Struttura e funzionamento di un router}{chapter.4}% 49
+\BOOKMARK [2][-]{subsection.4.2.1}{Porte di ingresso}{section.4.2}% 50
+\BOOKMARK [2][-]{subsection.4.2.2}{Sistemi di commutazione}{section.4.2}% 51
+\BOOKMARK [2][-]{subsection.4.2.3}{Conseguenze dei ritardi di commutazione}{section.4.2}% 52
+\BOOKMARK [2][-]{subsection.4.2.4}{Porte di uscita}{section.4.2}% 53
+\BOOKMARK [1][-]{section.4.3}{Protocollo IP}{chapter.4}% 54
+\BOOKMARK [2][-]{subsection.4.3.1}{Struttura dei pacchetti}{section.4.3}% 55
+\BOOKMARK [2][-]{subsection.4.3.2}{Frammentazione dei pacchetti}{section.4.3}% 56
+\BOOKMARK [2][-]{subsection.4.3.3}{Indirizzamento}{section.4.3}% 57
+\BOOKMARK [2][-]{subsection.4.3.4}{Indirizzi privati e NAT}{section.4.3}% 58
+\BOOKMARK [2][-]{subsection.4.3.5}{Indirizzi speciali}{section.4.3}% 59
+\BOOKMARK [1][-]{section.4.4}{Protocollo ARP}{chapter.4}% 60
+\BOOKMARK [2][-]{subsection.4.4.1}{Cenni sul livello 2}{section.4.4}% 61
+\BOOKMARK [2][-]{subsection.4.4.2}{Principi dell'ARP}{section.4.4}% 62
+\BOOKMARK [2][-]{subsection.4.4.3}{Messaggi ARP}{section.4.4}% 63
+\BOOKMARK [2][-]{subsection.4.4.4}{ARP caching}{section.4.4}% 64
+\BOOKMARK [2][-]{subsection.4.4.5}{Proxy ARP}{section.4.4}% 65
+\BOOKMARK [1][-]{section.4.5}{Protocollo ICMP}{chapter.4}% 66
+\BOOKMARK [2][-]{subsection.4.5.1}{Messaggi ICMP}{section.4.5}% 67
+\BOOKMARK [2][-]{subsection.4.5.2}{Ping tramite ICMP}{section.4.5}% 68
+\BOOKMARK [2][-]{subsection.4.5.3}{Traceroute tramite ICMP}{section.4.5}% 69
+\BOOKMARK [1][-]{section.4.6}{Protocollo DHCP}{chapter.4}% 70
+\BOOKMARK [2][-]{subsection.4.6.1}{Principio di funzionamento}{section.4.6}% 71
+\BOOKMARK [2][-]{subsection.4.6.2}{Gestione dei prestiti}{section.4.6}% 72
+\BOOKMARK [2][-]{subsection.4.6.3}{Messaggi DHCP}{section.4.6}% 73
+\BOOKMARK [2][-]{subsection.4.6.4}{Reti senza DHCP}{section.4.6}% 74
+\BOOKMARK [1][-]{section.4.7}{Il viaggio di un pacchetto attraverso la rete}{chapter.4}% 75
+\BOOKMARK [1][-]{section.4.8}{Protocollo IPv6}{chapter.4}% 76
+\BOOKMARK [2][-]{subsection.4.8.1}{Struttura dei pacchetti IPv6}{section.4.8}% 77
+\BOOKMARK [2][-]{subsection.4.8.2}{Tunneling tramite IPv4}{section.4.8}% 78
+\BOOKMARK [2][-]{subsection.4.8.3}{Struttura e tipologia di indirizzi IPv6}{section.4.8}% 79
+\BOOKMARK [0][-]{chapter.5}{Metodi e protocolli di instradamento}{}% 80
+\BOOKMARK [1][-]{section.5.1}{Principi generali}{chapter.5}% 81
+\BOOKMARK [2][-]{subsection.5.1.1}{Rappresentazione delle reti come grafi non orientati}{section.5.1}% 82
+\BOOKMARK [2][-]{subsection.5.1.2}{Tipi di algoritmi di routing}{section.5.1}% 83
+\BOOKMARK [1][-]{section.5.2}{Algoritmo di Dijkstra}{chapter.5}% 84
+\BOOKMARK [2][-]{subsection.5.2.1}{Complessit\340 e problemi dell'algoritmo}{section.5.2}% 85
+\BOOKMARK [1][-]{section.5.3}{Protocollo OSPF}{chapter.5}% 86
+\BOOKMARK [2][-]{subsection.5.3.1}{Autonomous system}{section.5.3}% 87
+\BOOKMARK [2][-]{subsection.5.3.2}{Funzionamento del protocollo}{section.5.3}% 88
+\BOOKMARK [2][-]{subsection.5.3.3}{OSPF gerarchico}{section.5.3}% 89
+\BOOKMARK [2][-]{subsection.5.3.4}{Traffic engineering}{section.5.3}% 90
+\BOOKMARK [1][-]{section.5.4}{Algoritmo di Bellman-Ford}{chapter.5}% 91
+\BOOKMARK [2][-]{subsection.5.4.1}{Logica di funzionamento}{section.5.4}% 92
+\BOOKMARK [2][-]{subsection.5.4.2}{Problema del count-to-infinity}{section.5.4}% 93
+\BOOKMARK [1][-]{section.5.5}{Protocollo RIP}{chapter.5}% 94
+\BOOKMARK [1][-]{section.5.6}{Confronto tra algoritmi link state e distance vector}{chapter.5}% 95
+\BOOKMARK [1][-]{section.5.7}{Protocollo BGP}{chapter.5}% 96
+\BOOKMARK [2][-]{subsection.5.7.1}{Principi di funzionamento}{section.5.7}% 97
+\BOOKMARK [2][-]{subsection.5.7.2}{Messaggi BGP}{section.5.7}% 98
+\BOOKMARK [2][-]{subsection.5.7.3}{Gestione delle rotte}{section.5.7}% 99
+\BOOKMARK [0][-]{chapter.6}{Livello Data Link}{}% 100
+\BOOKMARK [1][-]{section.6.1}{Introduzione}{chapter.6}% 101
+\BOOKMARK [2][-]{subsection.6.1.1}{Servizi del livello Data Link}{section.6.1}% 102
+\BOOKMARK [2][-]{subsection.6.1.2}{Implementazione dei servizi Data Link}{section.6.1}% 103
+\BOOKMARK [1][-]{section.6.2}{Rilevamento e correzione di errori}{chapter.6}% 104
+\BOOKMARK [2][-]{subsection.6.2.1}{Bit di parit\340}{section.6.2}% 105
+\BOOKMARK [2][-]{subsection.6.2.2}{Ridondanza e interleaving}{section.6.2}% 106
+\BOOKMARK [2][-]{subsection.6.2.3}{Cyclic Redundancy Check}{section.6.2}% 107
+\BOOKMARK [1][-]{section.6.3}{Gestione degli accessi multipli ai canali}{chapter.6}% 108
+\BOOKMARK [2][-]{subsection.6.3.1}{Protocolli a ripartizione di risorse}{section.6.3}% 109
+\BOOKMARK [2][-]{subsection.6.3.2}{Protocolli ad accesso casuale}{section.6.3}% 110
+\BOOKMARK [2][-]{subsection.6.3.3}{Protocolli a turni intelligenti}{section.6.3}% 111
+\BOOKMARK [1][-]{section.6.4}{Protocollo Ethernet}{chapter.6}% 112
+\BOOKMARK [2][-]{subsection.6.4.1}{Organizzazione delle reti Ethernet}{section.6.4}% 113
+\BOOKMARK [2][-]{subsection.6.4.2}{Struttura dei frame Ethernet}{section.6.4}% 114
+\BOOKMARK [2][-]{subsection.6.4.3}{Caratteristiche del protocollo Ethernet}{section.6.4}% 115
+\BOOKMARK [1][-]{section.6.5}{Ethernet switching}{chapter.6}% 116
+\BOOKMARK [2][-]{subsection.6.5.1}{Domini di collisione}{section.6.5}% 117
+\BOOKMARK [2][-]{subsection.6.5.2}{Domini di broadcast}{section.6.5}% 118
+\BOOKMARK [2][-]{subsection.6.5.3}{Funzionamento degli switch}{section.6.5}% 119
+\BOOKMARK [2][-]{subsection.6.5.4}{Protocollo STP}{section.6.5}% 120
+\BOOKMARK [2][-]{subsection.6.5.5}{Organizzazione logica delle LAN}{section.6.5}% 121
+\BOOKMARK [1][-]{section.6.6}{Organizzazione e funzionamento delle reti wireless}{chapter.6}% 122
+\BOOKMARK [2][-]{subsection.6.6.1}{Elementi di una rete wireless}{section.6.6}% 123
+\BOOKMARK [2][-]{subsection.6.6.2}{Architettura di riferimento}{section.6.6}% 124
+\BOOKMARK [2][-]{subsection.6.6.3}{Protocolli per le comunicazioni wireless}{section.6.6}% 125
+\BOOKMARK [2][-]{subsection.6.6.4}{Collision avoidance nelle reti wireless}{section.6.6}% 126
+\BOOKMARK [2][-]{subsection.6.6.5}{Problema del terminale nascosto}{section.6.6}% 127
+\BOOKMARK [0][-]{appendix.1.A}{Simboli e formule}{}% 128
+\BOOKMARK [1][-]{section.1.A.1}{Simboli}{appendix.1.A}% 129
+\BOOKMARK [1][-]{section.1.A.2}{Formule}{appendix.1.A}% 130
+\BOOKMARK [2][-]{subsection.1.A.2.1}{Ritardo di trasmissione}{section.1.A.2}% 131
+\BOOKMARK [2][-]{subsection.1.A.2.2}{Ritardo di propagazione}{section.1.A.2}% 132
+\BOOKMARK [2][-]{subsection.1.A.2.3}{BDP}{section.1.A.2}% 133
+\BOOKMARK [2][-]{subsection.1.A.2.4}{Lunghezza in metri di un bit}{section.1.A.2}% 134
+\BOOKMARK [0][-]{section*.253}{Glossario}{}% 135
+\BOOKMARK [0][-]{section*.255}{Protocolli}{}% 136

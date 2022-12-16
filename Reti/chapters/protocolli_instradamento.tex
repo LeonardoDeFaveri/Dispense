@@ -2,7 +2,7 @@
 \section{Principi generali}
 Finora abbiamo analizzato le procedure di inoltro dei \emph{pacchetti} ipotizzando
 che i \emph{router} fossero già configurati, cioè ci siamo occupati soltanto del
-\emph{data pane}. In questo capitolo ci occuperemo invece del \emph{control pane}
+\emph{data plane}. In questo capitolo ci occuperemo invece del \emph{control plane}
 e in particolare, andremo a vedere quali sono e come funzionano i protocolli che
 permettono ai \emph{router} di costruire le proprie tabelle di inoltro.
 
@@ -31,7 +31,7 @@ dei collegamenti.
     \caption{Rete come grafo}
 \end{figure}\noindent
 Un'altra informazione che ci interessa considerare è il costo di ogni collegamento
-e di ogni percorso. Il costo di un collegamento è definito in base alla seguente
+e di ogni percorso. Il costo di un collegamento è definito dalla seguente
 funzione $c$:
 \[c:N\times N\to\mathbb{N}\]
 Ad esempio, nella figura precedente $c(U,W)=5$. Di nuovo, il costo può essere
@@ -62,17 +62,17 @@ Gli algoritmi basati su informazioni globali partono dall'ipotesi che ogni
 dei collegamenti. D'altra parte, nel caso di informazioni distribuite, ogni
 \emph{router} conosce solo i propri vicini e scambiando informazioni con essi
 riesce a ricostruire i percorsi migliori. La prima tipologia di algoritmi è
-detta essere a \quotes{\emph{link state}},cmentre la seconda a
+detta essere a \quotes{\emph{link state}}, mentre la seconda a
 \quotes{\emph{distance vector}}.
 
 \paragraph{Configurazione statica e dinamica}
 Le tabelle configurate staticamente sono definite manualmente
 dall'amministratore di rete e rimangono invariate a meno di ulteriori interventi.
-In questo caso non vengono neanche usati algoritmi di routing che infatti sono
+In questo caso non vengono neanche usati algoritmi di routing, che, infatti, sono
 necessari solo nel caso di tabelle generate dinamicamente.
 
 \section{Algoritmo di Dijkstra}
-L'algoritmo di Dijkstra è un algoritmo \emph{link state} quindi suppone che ogni
+L'algoritmo di Dijkstra è un algoritmo \emph{link state}, quindi suppone che ogni
 \emph{router} conosca la topologia della rete e il costo dei collegamenti.
 Queste informazioni vengono fatte circolare mediante l'invio in broadcast di
 messaggi.
@@ -192,11 +192,11 @@ tabelle di inoltro in due sotto problemi: gestire il routing all'interno di un
 
 \bigskip\noindent
 Nel contesto dell'\emph{Intra-AS routing} è stato introdotto il protocollo
-\emph{\gls{prot:OSPF}}, un protocollo di tipo \emph{link state} e che si serve
+\emph{\gls{prot:OSPF}}, un protocollo di tipo \emph{link state} che si serve
 dell'algoritmo di \emph{Dijkstra} per il calcolo dei percorsi.
 
 Una particolarità di questo protocollo è che non si serve del \emph{livello di
-trasporto} per consegnare i \emph{pacchetti}, bensì sfrutta l'indirizzo
+trasporto} per consegnare i \emph{pacchetti}, ma sfrutta l'indirizzo
 \emph{multicast} $224.0.0.5$.
 
 \subsection{Funzionamento del protocollo}
