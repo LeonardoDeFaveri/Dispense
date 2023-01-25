@@ -91,3 +91,4 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlayer2.png 0.8 Characteristics required by layer 2 connectivity\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlayer-3-dr-2.png 0.8\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlayer-4.png 0.5 VxLAN network\\E$"}
+{"rule":"EN_A_VS_AN","sentence":"^\\QIn this situation NAT isn't necessary because the resulting packet looks like a packet sent by an host application.\\E$"}

@@ -7,12 +7,12 @@ Historically, networks have been classified into three layers:
     \item \emph{Tier 1}: core part of network infrastructure that allows all
     other networks on the internet to communicate each other;
     \item \emph{Tier 2}: portions of \emph{tier 1} infrastructure which is
-    bought by internet service providers which then sold access to it to customers;
+    bought by internet service providers which then sold access to customers;
     \item \emph{Tier 3}: part of the network infrastructure that allows final
     users to gain access to other networks;
 \end{itemize}
 \begin{note}
-    \emph{Tier 2} networks communicated each other as peers through special nodes
+    \emph{Tier 2} networks communicate each other as peers through special nodes
     called Internet Exchange Points (IXP).
 \end{note}
 
@@ -42,7 +42,7 @@ decentralized computing paradigms such as \emph{fog computing}.
 \subsection{Characteristics of data center networks}
 Data centers are huge structures with tons of servers, so they demand high
 bandwidth with the outside and a very low RTT within their premises. Also,
-each data center is a signle administrative domain, meaning that its
+each data center is a single administrative domain, meaning that its
 administrators have full control over its intern network infrastructure, 
 endpoints and protocols. This allows them to deviate from standards and adopt
 each kind of custom solutions, as long as the services they host are reachable.
@@ -58,15 +58,15 @@ user-to-machine traffic a small percentage of the total amount.
 \end{figure}
 
 \noindent
-This means that the performance of the networks inside the data centers, which
+This means that performances of networks inside the data centers, which
 are called \emph{interconnection networks}, are critical.
 
 \paragraph{Interconnetion networks}
-An \emph{interconnection network} is composed of node and link or communication
+An \emph{interconnection network} is composed of nodes and links, or communication
 channels. Nodes can be servers, memory units or even processors. Then, each node
 has an interface connecting it to the network, and the number of link the node
 is connected defines its degree. The interconnection fabric is made of
-switches\footnotemark and links. Switches receive packes, and look inside them
+switches\footnotemark and links. Switches receive packets, and look inside them
 to determine the way toward their final destination. An $n$-way switch is a
 switch with $n$ ports that can be connected to $n$ links. The interconnection
 fabric determines whether the \emph{interconnection network} is \emph{blocking}
@@ -323,16 +323,16 @@ There are two main types of \emph{topologies}:
 
 \noindent
 Up to this point, we can say that an \emph{interconnection network} must be
-scalable, provide a high bandwidth with low latency e must guarantee what is
+scalable, provide a high bandwidth with low latency and must guarantee what is
 called \emph{location transparent communication}, meaning that every server
 should communicate with the others with similar speed and latency. In simple
-terms, the position of a server in the data center shouldn't have an impact on
-its networking performance. This latter requirement, translates in the
+terms, the position of a server in the data center shouldn't impact
+its networking performance. This latter requirement translates in the
 impossibility of adopting a hierarchical organization of servers.
 
-Costs, also comes in hand when designing an \emph{interconnection network}. Both
+Costs also come in hand when designing an \emph{interconnection network}. Both
 servers and network apparatus costs are relevant, but talking about networking,
-the choice of routers and switches often requires a compromised between latency
+the choice of routers and switches often requires a compromise between latency
 and costs. For example, based on the number of ports of a router we can have
 low-radix and high-ridix routers. The former has a few ports, while the latter
 has more; thus bandwidth is divided into a smaller number of wide ports and
@@ -351,7 +351,7 @@ Layer 2 and layer 3 has pros and cons that have to balanced to guarantee ease
 of configuration, administration and problem-solving.
 
 Layer 2, that is the ethernet switching part of the infrastructure, is easy to
-configure, thanks to autoconfiguration protocols such as DHCP, and allow the
+configure, thanks to autoconfiguration protocols such as DHCP, and allows the
 addition of servers in a plug \& play way, but it's important to limit broadcast
 domains to avoid link saturarion due to broadcast frames, and dealing with the
 Spanning Tree Protocol might be a struggle.
@@ -359,7 +359,7 @@ Spanning Tree Protocol might be a struggle.
 On the other hand, IP routing on layer 3 makes scalability easy thanks to
 hieranchical addressing and allows to obtain multipath routing with equal-cost
 multipath\footnote{We will see more about this later in this section}. However,
-its confiuration in more complex and migration requires changing the IP addresses.
+its configuration is more complex and migration requires changing the IP addresses.
 
 \begin{note}
     At the end of the day, the entire \emph{interconnection network} will look
@@ -367,7 +367,7 @@ its confiuration in more complex and migration requires changing the IP addresse
 \end{note}
 
 \subsection{Topologies more in depth}
-In the \emph{butterfly network topology} data always travel through the most
+In the \emph{butterfly network topology} data always travels through the most
 efficient route, but two packets attempting to reach the same port at the same
 time would couse a collision, so this is a \emph{blocking topology}.
 \begin{note}
@@ -379,7 +379,7 @@ time would couse a collision, so this is a \emph{blocking topology}.
 first stage of the output. This way, all packet sent, overshoot their destination
 and then hop back to it. However, this overshoot is mostly unnecessary and
 increases the latency because each packet takes twice as many hops as it need.
-A solution to this, is the \emph{folded clos topology} which is obtained by
+A solution to this is the \emph{folded clos topology} which is obtained by
 making input and output nodes share the same switch devices. Such networks are
 also called \emph{fat trees} and the \emph{topology} is also called
 \emph{fat tree topology}.
@@ -499,17 +499,17 @@ all the issues. For example, an idea was to detect elephant flows by putting
 a threshold on link capacity (e.g. 10\%), compute non-conflicting path for
 each flow over the limit and using plain ECMP for mice flows.
 
-Other proposals where to reroute flows based on link utilization on queue
-occupancy. However, the first favors mice flows vice versa, the second tends to
-promote elephant flows. We could even try to spread all packets evenly, but that
-would make congestion control hard to implement.
+Other proposals where to reroute flows based on link utilization or queue
+occupancy. However, the first favors mice flows and, vice versa, the second tends
+to promote elephant flows. We could even try to spread all packets evenly, but
+that would make congestion control hard to implement.
 
 \section{Networking in virtualised environments}
 Virtualization introduces additional complexity for networking, because we need
 to deliver traffic between VMs or containers and the outer world and also grant
-communication between virtualised environment within the same physical machine.
+communication between virtualised environments within the same physical machine.
 We also need to decide how to assign IP addresses to VMs and containers and
-how to provide advanced features such as load balancing, firewall, etc.
+how to provide advanced features such as load balancing, firewalls, etc.
 
 \begin{note}
     From a networking perspective there is no difference between VMs and
@@ -539,7 +539,7 @@ environments networking, in fact, three main options exists:
 \begin{enumerate}
     \item \emph{Host-based switching}: using a virtual switch in the
     \emph{Hypervisor} or directly in the \emph{Host OS};
-    \item \emph{NIC switching}: using virtual queues int the NIC;
+    \item \emph{NIC switching}: using virtual queues in the NIC;
     \item \emph{Haipin switching}: passing through the external switch;
 \end{enumerate}
 \end{minipage}
@@ -560,7 +560,7 @@ bridge} o \emph{softswitch}.
     on the virtual switch as if it was a physical one, so the features are the
     same. However, this introduces an additional component to configure (i.e. the
     switch itself has to be configured) and also an additional processing
-    overhead because every message has to pass throught the said switch.
+    overhead because every message has to pass throught said switch.
 \end{minipage}
 \hfill
 \begin{minipage}{0.48\textwidth}
@@ -582,10 +582,10 @@ reducing CPU cycles consumption.
 \bigskip\noindent
 \begin{minipage}{0.48\textwidth}
     However, this is not necessarily a good thing because PCI bandwidth is
-    smaller than CPU-to-Mem bandwidth, thus is might be saturated quickly. Another
+    smaller than CPU-to-Mem bandwidth, thus it might be saturated quickly. Another
     problem is that traffic always need to pass through all the intermediate
     components (e.g. \emph{VMM}, NIC, physical link) and, in case of VM-to-VM
-    communications data crossed those components twice. For all of these resons,
+    communications data crosses those components twice. For all of these reasons,
     this solution is no longer used.
 \end{minipage}
 \begin{minipage}{0.48\textwidth}
@@ -639,7 +639,6 @@ CPU consumption reducing resources available to VMs or containers.
 
 Hardware switches instead, are good when most of the traffic is between different
 servers and when we're applying similar policies to all nodes in the data center.
-
 Currently, software solutions are the most used.
 
 \section{Software bridges in Linux}
@@ -655,7 +654,7 @@ interface that is valid for the entire host.
 \end{figure}
 
 \noindent
-In the pase, the setup of a bridging process in Linux was a way to have an 802.1D
+In the past, the setup of a bridging process in Linux was a way to have an 802.1D
 bridge, running in software, that was part of a bigger network, thus allowing
 us to modify the bridge code and play with it without having to buy a physical
 device. Now, it became a way to overcome the limitations of the IP protocol who
@@ -673,7 +672,7 @@ the bridge is reachable from both interfaces (i.e. it works like a sort of
 loopback address).
 
 \subsection{Macvlan}
-\emph{Macvlan} implements a VLAN-line behaviour by using MAC addresses instead
+\emph{Macvlan} implements a VLAN-like behaviour by using MAC addresses instead
 of 802.1Q tags. Each virtual environment can be assigned to a differenct
 \emph{macvlan interface}, and each interface has its own MAC address and a
 distinc IP. \emph{Macvlan} supports four operating modes: \emph{private},
@@ -774,13 +773,13 @@ that abstracts out the underlying server architecture.
 \section{Single server networking services}
 \paragraph{IP assignment}
 The first problem is about deciding who should assign IP addresses to VMs and
-containers and also which addressed should be assigned. The first option could
+containers and also which addresses should be assigned. The first option could
 be to use the same addresses of the physical (meaning non virtualised) network
 so that inboud and outbound connections toward VMs or containers don't differe.
 However, this approch would require the coordination of the physical network
 manager, thus limiting virtualization agility.
 
-The alternative, would be to use private addressed and then connect to the
+The alternative, would be to use private addresses and then connect to the
 internet through a NAT. This would be good because IP assignment wouldn't
 be limited by public IP limits, and it wouldn't require coordination with the
 physical network manager. Of course, we would have to define static rules to
@@ -807,7 +806,7 @@ may require connecting VMs or containers to the physical infrastructure. For
 example, if private IPs are used for VMs, the \emph{hypervisor} must also provide
 a router, NAT and a DHCP service. To do this, we can exploit functionalities
 provided either by the kernel or by another software such as Docker engine o
-similar. For example, we can handle NAT table using the \texttt{iptables} tool.
+similar. For example, we can handle NAT tables using the \texttt{iptables} tool.
 
 \paragraph{Multi-tenancy}
 Accomplishing \emph{multi-tenancy}, that is to say, accomplishing a strong network
@@ -826,8 +825,8 @@ routers.
 
 \paragraph{Tenant-defined network services}
 Each tenant might require a complex topology. For example a tenent might deploy
-3 VMs who can communicate each other, but just of which one can access the
-internet. Again, we can achived this by simpli using pre-defined functionalities,
+3 VMs who can communicate each other, but just one of which can access the
+internet. Again, we can achieve this by simply using pre-defined functionalities,
 provided either by the kernel or by other pieces of software.
 
 \begin{figure}[ht!]
@@ -847,12 +846,12 @@ they need to co-exist together with all the other virtualised services.
 \end{figure}
 
 \noindent
-In particular, there should be a way to distinguish between traffic direct to
+In particular, there should be a way to distinguish between traffic directed towards
 host applications and VMs or containers. To do so we can exploit the Linux
 networking stack.
 
 \paragraph{Putting all together}
-Putting all together what we've said so fare, obtain the following general schema:
+Putting all together what we've said so far, we obtain the following general schema:
 
 \begin{figure}[h!]
     \centering
@@ -861,7 +860,7 @@ Putting all together what we've said so fare, obtain the following general schem
 \end{figure}
 
 \noindent
-So, virtual router and virtual NAT services are in fact implemented into the
+So, virtual routers and virtual NAT services are in fact implemented into the
 Linux networking stack. Each cluster of VMs or containers is associated to a
 virtual NIC. Each virtual environment has its own MAC address and so the virtual
 NIC. In what we've called \emph{NATted mode}, all frames sent by hosts with
@@ -883,7 +882,7 @@ backward up to its destination.
     So, VM1 sends the packet to its default gateway, which is \texttt{vNIC}. 
     The vNIC receives the packet, it detects that it is not the final recipient,
     so the packet is transferred to the Linux IP forwarding module. Finally,
-    the Linux IP forwarding module forwards the packet the next hop bases on
+    the Linux IP forwarding module forwards the packet to the next hop based on
     the host routing and NAT tables as usual
 \end{eg}
 
@@ -899,7 +898,7 @@ requested logical view.
 Tenents may want to have a vannilla layer 2 connectivity that spans amongs all of
 its services across the data center. This is the case in which tenants want to
 take IP addressing under their own responsibility. The solution to this kind of
-request is the creation of tunnels between servers. What will se are tunnels
+request is the creation of tunnels between servers. What we'll see are tunnels
 managed by GRE (General Router Encapsulation).
 
 \newpage
@@ -929,14 +928,14 @@ managed by GRE (General Router Encapsulation).
     To provide layer 2 connectivity between virtual machines on two different
     physical servers we have created a tunnel (i.e. the red dotted line between
     two virtual NICs). Essentially, what happens is that, when the packet sent
-    by VM2 reaches the virtual switch, is forwars the packed to \texttt{vTUN0}
+    by VM2 reaches the virtual switch, it forwards the packed to \texttt{vTUN0}
     device. \texttt{vTUN0} is the interface associated with the tunnel and its
     remote IP tells what is the IP to which that packet has to be sent. In this
     case it is \texttt{3.0.0.1}, which is the address of the second physical
     server, beacause VM3 resides in it. So, the tunneling protocol wraps the
     original packet with a new IP packet that has destination address
-    \texttt{3.0.0.1} and source \texttt{2.0.0.1} which is the adderss of physical
-    server 1. The packed is finally taken by the Linux networkin stack which
+    \texttt{3.0.0.1} and source \texttt{2.0.0.1} which is the address of physical
+    server 1. The packet is finally taken by the Linux networking stack which
     sends the packet.
 
     The destination server, receives the packet, sends it to the tunnel
@@ -945,19 +944,19 @@ managed by GRE (General Router Encapsulation).
 \end{eg}
 \begin{note}
     In this situation NAT isn't necessary because the resulting packet looks
-    like a packet sent by o host application.
+    like a packet sent by an host application.
 \end{note}
 
 \noindent
 Could we have used VLAN instead of tunnels?
 
-Short answers: no. The reason is that it would require cooperation with the
+Short answer: no. The reason is that it would require cooperation with the
 physical network manager. Also, VLANs are limited to 4096 and setting up
 everything would be trickier than what we've done for tunnels.
 
 \subsection{Providing layer 3 connectivity}
-With layer 3 connectivity, tenants rely on cloud service provider for IP
-assignment and management, and this can be achieved in two modalities:
+With layer 3 connectivity, tenants rely on a cloud service provider for IP
+assignment and management, and this can be achieved in two ways:
 \emph{tunneling} and \emph{direct routing}.
 
 \begin{figure}[h!]
@@ -975,7 +974,7 @@ assignment and management, and this can be achieved in two modalities:
     \end{figure}
 
     \noindent
-    This time the tunnel interface connected to the Linux virtual router. Once
+    This time the tunnel interface is connected to the Linux virtual router. Once
     the packet reaches that interface it is again encapsulated into the same
     packet as before, and then sent back to the router who forwards it outside
     and up to the other server.
@@ -987,7 +986,7 @@ assignment and management, and this can be achieved in two modalities:
     \end{figure}
 
     \noindent
-    Once the packed has reached the destination server it reached the other
+    Once the packet has reached the destination server and has arrived to the other
     side of the tunnel, the original packet is decapsulated and sent up to VM3.
 \end{eg}
 \begin{note}
@@ -1004,17 +1003,17 @@ assignment and management, and this can be achieved in two modalities:
     \end{figure}
 
     \noindent
-    This time packet is sent directly out of the server without any
-    modifications, and it reached router \texttt{R1}. The router know, because
-    it has been configured, that the destination network \texttt{10.0.2.0/24},
-    that is network to which VM3 is connected, is reachable via \texttt{30.0.0.0/24}
-    network. So, the packet is forward out of the interface with IP
+    This time, the packet is sent directly out of the server without any
+    modifications, and it reaches router \texttt{R1}. The router knows, because
+    it has been configured, that the destination network \texttt{10.0.2.0/24}
+    (i.e. the network to which VM3 is connected) is reachable via \texttt{30.0.0.0/24}
+    network. So, the packet is forwarded out of the interface with IP
     \texttt{30.0.0.254} with next hop address set to \texttt{30.0.0.1}, that is
     the address of the second physical server.
 
     \bigskip\noindent
     When the packet reaches the destination server, it can go directly up to
-    VM3 as a normal package.
+    VM3 as a normal packet.
 
     \newpage
     \begin{figure}[ht!]
@@ -1024,7 +1023,7 @@ assignment and management, and this can be achieved in two modalities:
 \end{eg}
 
 \begin{note}
-    Is easy to understand the route of every packet if the behaviour of every
+    It's easy to understand the route of every packet if the behaviour of every
     component is considered alone.
 \end{note}
 \begin{note}
@@ -1035,8 +1034,8 @@ assignment and management, and this can be achieved in two modalities:
 \end{note}
 
 \paragraph{Tunnels in practice}
-For the sake of semplcity with considered a single tunnel between a pair of
-servers, but this obviously is difficult to handle on a large scale because
+For the sake of semplcity we've considered a single tunnel between a pair of
+servers, but this is obviously difficult to handle on a large scale because
 it would require a full mesh of connections. This is therefore the reason for
 which tunneling technologies such as GRE (Generic Routing Encapsulation) are
 often replaced by others. In particular, \emph{VxLAN} allows providing both a

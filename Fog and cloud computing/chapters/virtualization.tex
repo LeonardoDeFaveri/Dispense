@@ -27,9 +27,9 @@ with both advantages and disadvantages.
     easily isolated OSs. Also, different services can run in the same host,
     into different \emph{virtual machines} that could even use different CPU cores;
     \item\emph{Consolidation}: different OSs can run at the same time on the
-    same hardware, thus saving resources and minimysing costs and energy
+    same hardware, thus saving resources and minimising costs and energy
     consumption;
-    \item\emph{Fleibility and agility}: the system admin has complete control
+    \item\emph{Flexibility and agility}: the system admin has complete control
     over \emph{virtual machines} execution, and it can pause and restart them.
     Moreover, it might migrate one to a different host, or duplicated it to address a
     workload peak. Finally, it's easy to recover from a disaster (e.g. restarting
@@ -43,7 +43,7 @@ with both advantages and disadvantages.
     be difficult for the virtualization manager to grant some application access
     to special components;
 \end{itemize}
-Virtualization can be used for both server and dektop virtualization, but its
+Virtualization can be used for both server and desktop virtualization, but its
 main usage is in server virtualization. In fact, since more OSs can
 run on the same physical machine using a configurable amount of resources, it is
 no longer necessary for system admins to buy machines with specific physical
@@ -59,17 +59,17 @@ definitions.
 
 \begin{definition}[Layering]
     Layering is a common approch to manage system complexity which allows
-    to minimize the interactions among the subsystems of a complex system. The
+    to minimise the interactions among the subsystems of a complex system. The
     description of those subsystems is also simplified because each of them is
     abstracted through its interface to the others. Finally, layering allows
     to manage each subsystem individually.
 \end{definition}\noindent
 For example, a computer can be divided into two main layers: hardware and software,
 and software can then be divided into OS, libraries and applications.
-The interfaces between software layers are ISA, ABI and API.
+Examples of interfaces between software layers are ISA, ABI and API.
 
 \begin{definition}[Virtual machine (VM)] Virtual machines are software emulation
-    of a physical machine that executes both OS and applications as if they were
+    of a physical machine that execute both OS and applications as if they were
     executed on a physical machine.
 \end{definition}\noindent
 When taking about \emph{virtual machine} we need to distinguish between two actors:
@@ -82,16 +82,16 @@ When taking about \emph{virtual machine} we need to distinguish between two acto
 
 \begin{definition}[Hypervisor]
     The hypervisor is the software in charge of the virtualization process,
-    meaning that it has to virtualise the hardware resources and this is done by:
+    meaning that it has to virtualise the hardware resources. This is done by:
     \begin{itemize}
         \item Assigning, when possible, a specific set of resources to each
-        virtual machine while garanteeing that each of them doesn't get access
+        virtual machine while granting that each of them doesn't get access
         outside its boundaries;
         \item Arbitring access to shared resources that cannot be partitioned;
     \end{itemize}
 \end{definition}
 \begin{note}
-    The \emph{hypervisors} is often refered to also as \emph{Virtual Machine
+    The \emph{hypervisors} is also often refered to as \emph{Virtual Machine
     Manager} (\emph{VMM}).
 \end{note}
 \noindent
@@ -119,7 +119,7 @@ the two different ISAs, it is too slow to be generally convinient.
 
 Going back to the \emph{VMM}, it must satisfy three characteristics:
 \begin{itemize}
-    \item The execution enviroment exported by it must be identical to the
+    \item The execution enviroment it exportes must be identical to the
     physical one, so that OSs can run unmodified;
     \item It must have complete control over real system resources, so that
     any \emph{guest OS} can access only those components it has been grant access
@@ -128,7 +128,7 @@ Going back to the \emph{VMM}, it must satisfy three characteristics:
 \end{itemize}
 
 \subsection{Some definitions}
-System based on x86 or x64 architecture are usually model into a \emph{privileg
+System based on x86 or x64 architecture are usually modeled into a \emph{privileg
 ring} structure. In particular, there are four privileg levels with decreasing
 privileges as you move away from the center. In fact, \emph{ring 0} is dedicated
 to the OS kerner, and \emph{ring 3} to generic applications.
@@ -143,11 +143,10 @@ to the OS kerner, and \emph{ring 3} to generic applications.
 Virtualization can use \q{ring de-priviledging}, a technique that runs
 \emph{guest OSs} in level greater than \emph{ring 0} so that they have
 limited privileges and therefore can't interfere with each other or with the
-\emph{VMM}. However, there
-are two possible modes:
+\emph{VMM}. The possible models are two:
 \begin{itemize}
     \item\emph{0/1/3}: the \emph{VMM} runs at \emph{ring 0}, \emph{guest OSs}
-    at \emph{ring 1} and applications at \emph{ring 3}. Since, in x86 architeture,
+    at \emph{ring 1} and applications at \emph{ring 3}. Since, in x86 architetures,
     some privileges with respect to memory accesses are granted to \emph{ring 0-2},
     \emph{guest OS} might still interfere with the \emph{VMM};
     \item\emph{0/3/3}: the \emph{VMM} runs at \emph{ring 0}, \emph{guest OSs}
@@ -165,7 +164,7 @@ are two possible modes:
 \end{definition}
 \begin{note}
     \emph{Sensitive instructions} are, for example, those that can read the
-    register in which is stored the currect CPU privileg level.
+    register in which the currect CPU privileg level is stored.
 \end{note}\noindent
 To be virtualizable all CPU's \emph{sensitive instructions} must be
 \emph{privileged}.
@@ -236,13 +235,13 @@ This paradigm allows \emph{full virtualization} and provides that \emph{guest
 OSs} run in an unprivileged enviroment, hence when a \emph{privileged
 instruction} has to be executed, a \emph{trap} is launched by the CPU. Then,
 that \emph{trap} is intercepted by the \emph{VMM} that emulates the effect of
-the \emph{privileged instruction} for the caller (ofcourse only if it's
+the \emph{privileged instruction} for the caller (of course, only if it's
 legitimate) and, at the end, gives control back to \emph{guest OS}.
 
 Actually, when the \emph{VMM} intercepts a \emph{trap} it behaves differently
 based on the event that caused it. If it was causes by an application, then the
 \emph{VMM} passes it direcctly to the \emph{guest OS}. On the other hand, if it
-was caused by the \emph{guest OS} itself, the \emph{MVV} handles it by
+was caused by the \emph{guest OS} itself, the \emph{VMM} handles it by
 modifying the state of the \emph{virtual machine}.
 
 \paragraph{System call handling}
@@ -307,14 +306,14 @@ don't trap when executed in an unprivileged context, hence, these architectures
 are said to be \q{non-virtualizable}.
 
 \paragraph{Possible solutions}
-Therefore, we have some \emph{sensitive instructions} that don't trap and,
+So, we have some \emph{sensitive instructions} that don't trap and,
 consequently, the \emph{VMM} cannot emulate the correcct behavior during the
 execution.
 
 To address this problem we can change virtualization paradigm or introduce
 some code into the \emph{VMM} that parses the instruction stream to detect
 all \emph{sensitive instructions} dynamically. Then, we can both use
-interpretation and binary translation. Interpretation in an old and slow approch
+interpretation and binary translation. Interpretation is an old and slow approch
 in which emulating a single ASM instruction originates an overhead of one order
 of magnitude at least. Binary translation, on the other hand, introduces a
 lower performance overhead.
@@ -338,7 +337,7 @@ are significantly slower than real execution.
 \begin{note}
     Original VMware \emph{VMM} combined \emph{Trap \& emualte} with a system
     level \emph{Dynamic Binary Translation}. \emph{Guest OSs} run at \emph{ring 1}
-    and \emph{VMM} inspected dynamically code to swap non-trappable portions of
+    and \emph{VMM} inspected code dynamically to swap non-trappable portions of
     code with \q{safe} instructions.
 \end{note}
 
@@ -352,7 +351,7 @@ easier to implement.
 In particular, \emph{system calls} and \q{non-virtualizable instructions} are
 replaced with specific \emph{hypervisor calls} (\emph{hypercalls}). Hence,
 they won't trap anymore and all the \emph{trap \& emulate} process is also
-removed. Ofcourse, modifications don't affect the \emph{ABI}, so applications
+removed. Of course, modifications don't affect the \emph{ABI}, so applications
 can be executed without further changes.
 
 \emph{Guest OSs} are explicitly deprivileged meaning that they know they're being
@@ -370,13 +369,13 @@ kernel of efficient mechanisms that ease the communication with the
 Talking about pros and cons in a paravirtualized enviroment, only modifiable
 OSs can be used, because it's necessary to access their source code.
 
-performance are surely higher than those of \emph{Trap \& Emulate paradigm}
-because neither emulation nor translation are required, hence \emph{MVV}
+Performance are surely higher than those of \emph{Trap \& Emulate paradigm}
+because neither emulation nor translation are required, hence \emph{VMM}
 implementation is also simpler and faster.
 
 \subsection{Hardware assisted virtualization}
-Up to this point, we still have two unsolved issues: complex implementati of
-\emph{MVV} and necessity to provide full virtualization for most of x86 and x64
+Up to this point, we still have two unsolved issues: complex implementation of
+\emph{VMMs} and necessity to provide full virtualization for most of x86 and x64
 systems (most of them weren't still modifiable).
 
 \emph{Hardware assisted virtualization} aims at providing a solution to those
@@ -384,10 +383,10 @@ problems by proposing an efficient \emph{Trap \& Emulate} approach to
 virtualization thanks to an additional hardware support.
 
 This is based on the idea of avoiding \emph{sensitive instructions}, either
-because they can be \q{promoted} to \emph{privileged} or bacause the \emph{MVV}
+because they can be \q{promoted} to \emph{privileged} or because the \emph{VMM}
 can dynamically configure which instructions have to be trapped. There are some
 instruction then, that cause \emph{virtual machines} to exit unconditionally
-(e.g. \texttt{INVD} instraction for CPU internal cache invalidation) and therefore
+(e.g. \texttt{INVD} instruction for CPU internal cache invalidation) and therefore
 can never be executed in a virtualised non-root enviroment. Finally, all
 events and some other instructions can be configured to operate conditionally
 using \emph{virtual machine} execution control fields.
@@ -404,7 +403,7 @@ with the usual \emph{privileg ring} structure.
     \caption{\emph{Hardware assisted virtualization} modes}
 \end{figure}\noindent
 The \emph{VMM} runs al \emph{ring 0} in \emph{root-mode}, while \emph{guest OSs}
-run at \emph{ring 0} in \emph{non-root mode}. Ofcourse applications still run
+run at \emph{ring 0} in \emph{non-root mode}. Of course applications still run
 at \emph{ring 3} in \emph{non-root mode}.
 
 \paragraph{VMX instructions}
@@ -462,7 +461,7 @@ pages are, so processes can behave as if their address space were unitary.
 
 Therefore, there is a difference between virtual or logical address that referes
 to pages, and physical addresses that referes to physical memory. Processes
-use only virtual addresses, so when they need to access memory, logical address
+use only virtual addresses, so when they need to access memory, logical addresses
 have to be translated into physical ones. This translation is done by the
 \emph{Memory Management Unit} (\emph{MMU}), a unit that resides in the CPU.
 
@@ -519,7 +518,7 @@ Physical Addresses}. It is invisible from the \emph{guest} point of view
 because is maintained by the \emph{VMM}, who also exposes it to the \emph{MMU}.
 
 Going into more details, the association between \emph{Physical Page Numbers}
-and \emph{Machine Page Numbers} (\emph{MPNs}) is maintained by the \emph{VMM}
+and \emph{Machine Page Numbers} (\emph{MPNs}) it's maintained by the \emph{VMM}
 in internal data structures, while the association between \emph{LPNs} and
 \emph{MPNs} is stored by the \emph{VMM} in the \q{shadow page table} that is
 exposed to the \emph{MMU}.
@@ -539,11 +538,11 @@ Each \emph{Guest OS} maintains the associations between \emph{LPNs} and
 \emph{PPNs} as seen before, but when it tries to access a physical address,
 since it isn't running directly on the hardware, the request is trapped by the
 \emph{VMM}. Then, the \emph{VMM}, who already knows what \emph{MPN} is bound to
-that \emph{PPN}, saves the original \emph{LPN} is the shadow table bounding it
+that \emph{PPN}, saves the original \emph{LPN} in the shadow table bounding it
 to the correct \emph{MPN}.
 
 \paragraph{Problems with shadow page table}
-Ofcource the \emph{VMM} is in charge of keeping the shadow page table
+Of course the \emph{VMM} is in charge of keeping the shadow page table
 synchronized with the \emph{Guest OS} page tables. So, an extra overhead is
 introduced, and it becomes a problem if some applications force \emph{Guest OS} to
 update them frequently (e.g. some apps might couse many page faults).
@@ -601,7 +600,7 @@ to do so, it uses the same drivers used with an equivalent physical device.
 
 This is a simple approch that doesn't require \emph{Guest OSs} to install
 dedicated drivers, and a single physical device could be multiplexed into
-multiple emulated devices. Ofcourse, the \emph{VMM} has to remap the communication
+multiple emulated devices. Of course, the \emph{VMM} has to remap the communication
 with the physical device. Then, I/O operations are generally slower than the
 physical ones and with higher latency, especially in case of devices with high
 I/O (e.g. NIC, disk). Also, since CPU has to emulate each request, its workload
@@ -617,7 +616,7 @@ optimization such as \q{memory balooning}. When creating a virtual machine, the
 \emph{VMM} defines its memory size and allocates it statically. To obtain a
 dynamic and more efficient use of memory, the \emph{VMM} can exploit memory
 balooning paravirtualized drivers installed by \emph{Guest OSs}. Those drivers
-proive the \emph{VMM} with information about current memory occupation of the
+provide the \emph{VMM} with information about current memory occupation of the
 guests, allowing it to change the amont of memory allocated to those VMs and
 providing it to others.
 
@@ -625,7 +624,7 @@ providing it to others.
 With \emph{direct assignment} a device is exclusively assigned to one VM that
 can directly communicate with it without needing any driver apart from the
 traditional ones of the device. The device is totally handled by the \emph{Guest
-OS}; hence it can be multiplexed over several virtual machines.
+OS}; hence it can't be multiplexed over several virtual machines.
 
 Despite seeming very simple, this approch is very complex indeed, because it
 raises critical issues on memory usage. Direct memory access (DMA) has to be
@@ -652,7 +651,7 @@ virtualization process.
 One solution to the memory problem discussed above
 is the introduction of an \emph{Input Output Memory Management Unit}
 (\emph{IOMMU}), an extension that can boost and make direct access to memory
-easier to be implemented in \emph{VMMs}. Like to \emph{MMU}, the \emph{IOMMU}
+easier to be implemented in \emph{VMMs}. Like \emph{MMU}, \emph{IOMMU}
 remaps the addresses accessed by the hardware according to the same table used
 to map \emph{PPNs} to \emph{MPNs}, allowing direct memory access cycles to
 safely access the correct memory locations.
@@ -668,7 +667,7 @@ itself.
 \section{Hypervisors architectures}
 \emph{Hypervisors} can be based upon two architectures that pursue two
 distinc objectives: performance the first and easiness of deployment
-and utilization the second. Ofcourse hybrid implementations exist.
+and utilization the second. Of course hybrid implementations exist.
 
 \subsection{Type 1 architecture}
 The \emph{hypervisor} runs directly on bare metal, so there isn't any extra
@@ -746,8 +745,8 @@ just one: Linux.
 \end{note}
 
 \subsection{Lightweigth virtualization}
-In this context the idea of \emph{lightweight virtualization} was born. It aims
-to the creation of a system in which all the advantages of \emph{full
+This is the context in which the idea of \emph{lightweight virtualization} was
+born. It aims to the creation of a system in which all the advantages of \emph{full
 virtualization} are guaranteed, but resource consumption is much less concerning.
 
 \emph{Lightweigth virtualization} is therefore appropriate when there is no need
@@ -922,7 +921,7 @@ its own process tree, and it doesn't know anything about the originating one.
 
 \begin{note}
     The image above shows us that each process has one PID for each process
-    tree it belong to.
+    tree it belongs to.
 \end{note}
 
 \paragraph{Network namespace}
@@ -932,7 +931,7 @@ firewall rules, \dots). Once a \emph{network namespace} is created, we should
 create an additional \q{virtual} network interface that spans multiple
 \emph{namespaces}. Virtual interfaces, often called \texttt{veth}, are network
 abstractions of wires with two ends. Each end is \q{connected} to a
-\emph{namespace}, thus allowing traffic move between them.
+\emph{namespace}, thus allowing traffic to move between them.
 Finally, routing and bridging protocols in \emph{root namespace} can allow
 traffic to reach its destination (inside or outiside the machine).
 
@@ -962,7 +961,7 @@ traffic to reach its destination (inside or outiside the machine).
 \emph{Linux cgroups} and \emph{namespaces} show some limitations beyond
 process isolation. In fact, they provide a way to accomplish virtualization on
 a single server, but can't be used on an entire datacenter. Then, they're
-flexible, but really hard to use, because they require a lot of commans to
+flexible, but really hard to use, because they require a lot of commands to
 set up a simple isolated environment. Also, they cannot guarantee portability
 because there isn't an easy way to package and move them to another server;
 hence, when it comes to portability, VMs are still preferable. So, \emph{cgroups}
@@ -977,12 +976,12 @@ kernel.
 
 \emph{Containers} can group processes together inside an isolated environment,
 to which different resources can be assigned and, as we said earlier, they share
-the same kernel as the host. From the inside, each \emph{container} look like
-and indipendent machine, while from the outside they're seen as normale processes.
+the same kernel as the host. From the inside, each \emph{container} looks like
+an indipendent machine, while from the outside they're seen as normal processes.
 
 On the other hand, they don't emulate software and can't use a different kernel.
 Also, security isn't guaranteed by the model itself, although an appropriate
-level of security can still be achived.
+level of security can still be achieved.
 
 \begin{figure}[ht!]
     \centering
@@ -1018,8 +1017,8 @@ SELinux profiles that allow them to obtain bettere security performance.
 So, \emph{LXCs} make it easier to create and manage isolated environment, but
 they still lack in resource isolation, because the resource quota of a container
 might be affected by others, checkpointing and migration, because those features
-are not provided by the Linux kernel and third party tools aren't 100\% effective
-yet. Another importan limititantion is on portbility, because they cannot be
+are not provided by the Linux kernel and third party tools aren't 100\% effective,
+yet. Another important limititantion is on portbility, because they cannot be
 transfered across servers without recreating them.
 
 \subsection{Docker}
@@ -1037,7 +1036,7 @@ primitives such as \emph{cgroups} and \emph{namespaces}.
 
 Summarizing, we can say that \emph{Docker} is ment to make applications run
 consistently in different machines regardless of the kernel version, operating
-system distribution (it needs to be a Linux distro tho) and network settings.
+system distribution (it needs to be a Linux distro, tho) and network settings.
 Also, it makes separation of concerns easy: developers can focus on what there
 is inside the container (e.g. libraries, binaries, \q{manifest}, \dots), devOPs
 can focus on the outside (logging, monitoring, remote access, \dots).
