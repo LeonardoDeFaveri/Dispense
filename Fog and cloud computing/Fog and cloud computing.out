@@ -60,3 +60,6 @@
 \BOOKMARK [2][-]{subsection.5.1.1}{Types of storage}{section.5.1}% 60
 \BOOKMARK [1][-]{section.5.2}{Block storage}{chapter.5}% 61
 \BOOKMARK [1][-]{section.5.3}{Distributed file system}{chapter.5}% 62
+\BOOKMARK [2][-]{subsection.5.3.1}{Unix File System}{section.5.3}% 63
+\BOOKMARK [2][-]{subsection.5.3.2}{Network File System}{section.5.3}% 64
+\BOOKMARK [2][-]{subsection.5.3.3}{General Parallel File System}{section.5.3}% 65

@@ -92,3 +92,5 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlayer-3-dr-2.png 0.8\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlayer-4.png 0.5 VxLAN network\\E$"}
 {"rule":"EN_A_VS_AN","sentence":"^\\QIn this situation NAT isn't necessary because the resulting packet looks like a packet sent by an host application.\\E$"}
+{"rule":"PHRASE_REPETITION","sentence":"^\\QAPI Description API Description fd File descriptor dfh The directory when the file handle can be found fh File handle count Number of bytes to be transferred fname File name buf Buffer used to transfer data dname Directory name device The device in which the file system is located\\E$"}
+{"rule":"PHRASE_REPETITION","sentence":"^\\QAPI Description API Description fd File descriptor dfh The directory when the file handle can be found fh File handle count Number of bytes to be transferred fname File name buf Buffer used to transfer data dname Directory name device The device in which the file system is located NFS APIs\\E$"}
