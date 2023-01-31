@@ -123,3 +123,28 @@
 \contentsline {paragraph}{Clarification about primary replicas and lease assignment}{58}{paragraph*.118}%
 \contentsline {paragraph}{Steps for a read request}{58}{paragraph*.119}%
 \contentsline {section}{\numberline {5.4}Locks and consensus}{58}{section.5.4}%
+\contentsline {paragraph}{Locks categories}{59}{paragraph*.120}%
+\contentsline {paragraph}{Locks management systems}{59}{paragraph*.121}%
+\contentsline {subsection}{\numberline {5.4.1}Chubby}{59}{subsection.5.4.1}%
+\contentsline {paragraph}{Chubby architecture}{59}{paragraph*.122}%
+\contentsline {paragraph}{Chubby file system}{60}{paragraph*.124}%
+\contentsline {paragraph}{Chubby locking system}{60}{paragraph*.126}%
+\contentsline {paragraph}{Chubby APIs: summary}{61}{paragraph*.127}%
+\contentsline {section}{\numberline {5.5}Distributed database: Google Big Table}{61}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}How is GBT built?}{61}{subsection.5.5.1}%
+\contentsline {paragraph}{SSTablet file format}{61}{paragraph*.129}%
+\contentsline {paragraph}{Chubby as an interface for clients}{62}{paragraph*.131}%
+\contentsline {subsection}{\numberline {5.5.2}How is GBT implemented?}{62}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}GBT operations}{63}{subsection.5.5.3}%
+\contentsline {paragraph}{Tablet location}{63}{paragraph*.133}%
+\contentsline {paragraph}{Tablet assignment}{64}{paragraph*.135}%
+\contentsline {paragraph}{Tablet server discovery}{64}{paragraph*.136}%
+\contentsline {paragraph}{Tablet server monitoring}{64}{paragraph*.137}%
+\contentsline {paragraph}{Master startup}{64}{paragraph*.138}%
+\contentsline {paragraph}{Master isolated}{64}{paragraph*.139}%
+\contentsline {paragraph}{Tablet merging/splitting}{64}{paragraph*.140}%
+\contentsline {paragraph}{Tablet serving}{65}{paragraph*.141}%
+\contentsline {paragraph}{Tablet minor compaction}{65}{paragraph*.142}%
+\contentsline {paragraph}{Tablet merging compaction}{66}{paragraph*.144}%
+\contentsline {paragraph}{Tablet major compactor}{66}{paragraph*.146}%
+\contentsline {section}{\numberline {5.6}Distributed object storage}{66}{section.5.6}%

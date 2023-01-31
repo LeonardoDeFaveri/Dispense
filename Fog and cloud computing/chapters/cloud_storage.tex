@@ -392,3 +392,418 @@ IDs. The client can then proced to contact the primary replica which responds
 with the required data.
 
 \section{Locks and consensus}
+Operating systems use \emph{lock managers} to organize and serialize access to
+resources. \emph{Locks} enable controlled access to shared storage and ensure
+atomicity of read and write operations, and sometimes, they can even provide
+reliable storage for loosely-coupled distributed systems.
+
+The \emph{lock manager}, or \emph{leader}, can be fixed or change over time. In
+the latter case, the decision can be made in a sort of \q{democratic} way by
+reaching \emph{consensus}. But before diving into that, let's talk about
+\emph{locks}.
+
+\paragraph{Locks categories}
+\emph{Locks} can be categorized by their effect and their duration. Based on
+the effect there are two possibilities:
+\begin{itemize}
+    \item \emph{Adivisory locks}: processes that don't hold the \emph{lock} can
+    still access the locked resouces by circumventing the locking mechanism;
+    \item \emph{Mandatory locks}: block access to the locked objects to all
+    processes that do not hold the \emph{lock};
+\end{itemize}
+Based on time there are again two possibilities:
+\begin{itemize}
+    \item \emph{Fine-grained locks}: \emph{locks} can be held for a short time.
+    This allows processes to access the locked resources more often, but
+    generates more workload for the \emph{lock manager}. Also, if the
+    \emph{leader} fails, more processes are affected;
+    \item \emph{Coarse-grained locks}: \emph{locks} are held for a longer time;
+\end{itemize}
+
+\paragraph{Locks management systems}
+Locking management can be delegated to clients which need to implement their
+own \emph{consensus algorithm} and provide by themselves a library of functions.
+This is cumbersome and prone to errors, must not be dependen on any other server.
+
+A better approch is to implement a \emph{locking service} and provide a library
+to be linked with an application client to support service calls. The most
+widely used \emph{consensus algorithm} is the \emph{Asynchronous PAXOS
+algorithm}. This approch allows to easily maintain existing program structure
+and communication patterns, then, \emph{lock services} ca be replicated to
+achive high-availability (i.e. quorums), but even a single client can obtain
+\emph{lock} and make progress safely. This reduces the number of servers
+needed for a realiable client system to make progress. However, scalability
+might be an issue.
+
+\subsection{Chubby}
+\emph{Chubby} is a \emph{lock service} devoloped by Google and designed to be used
+within a loosely-coupled distributed system. So, it is thought for contexts in
+which many machines (e.g. 10K) connected by high-speed network are involved and
+with reliable, but low volume, storage. \emph{Chubby} uses \emph{coarse-grained}
+and \emph{advoisory locks}. Its interface allows reading and writing on whole
+files (no seek operation included) and notification of events (to avoid polling).
+As \emph{consensus algorithm} uses the already mentioned \emph{Asynchronous
+PAXOS} with lease timers to ensure liveness.
+
+\paragraph{Chubby architecture}
+The structure is made up of two main components which communicate through remote
+procedure calls: a replica server and a library linked against client applications.
+
+Each set of replica servers (typically 5) creates a \emph{Chubby cell}. Inside
+each \emph{cell}, replicas use \emph{PAXOS} to elect a \emph{leader} which will
+carry alone every read or write request. Of course, every modification is
+replicated among all the other replicas. If the \emph{leader} fails, the other
+replicas will elect another leader when their master lease expires.
+
+Clients can find the \emph{leader} by sending master (leader) location requests
+to the replicas listed in the DNS. Non-master replicas will respond with the
+identity of the actual \emph{master}, and once a client has located a
+\emph{master}, it redirects all requests to it until it either ceases to respond
+or indicates it is no longer the \emph{master}.
+
+Clients communicate with the \emph{master} using remote procedure calls provided
+by a library. When a \emph{master} received a write request, it propagates it
+to other replicas in the \emph{cell} and responds to the client when the request
+has been accepted by a majority of the replicas. On read requests instead, the
+\emph{master} can respond directly.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/chubby-design.png}
+    \caption{\emph{Chubby} architecture}
+\end{figure}
+
+\paragraph{Chubby file system}
+\emph{Chubby} exposes a file system interface simpler than that of a \emph{UFS}.
+The file system is a tree of files and directories with name components separated
+by \texttt{/}. Each directory containes a list of files and directories which
+are collectivelly called nodes. Each file containes a sequent of uninterpreted
+bytes.
+
+The interface is simpler because there's no symbolic or hard links, no file move,
+directory times for modifications or last access and no path-dependant permission,
+meaning that permission of a file are handled by the file itself.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/chubby-design-fs.png}
+    \caption{\emph{Chubby} file path}
+\end{figure}
+
+\noindent
+Each node can be permanent (e.g. actual files and directories) or ephemeral
+(e.g. temporary files) and its metadata includes three access control list
+used to control read, write operations and modification of the lists themselves.
+By opening a node, a client can obtain a handle, which is like a file descriptor
+in Unix, and use it to access node internal data.
+
+\paragraph{Chubby locking system}
+Each node can act as an \emph{advisory reader/writer lock}. So, if an application
+want to get the \emph{lock} over a shared resource and operate on it, it has
+to acquire a \emph{lock}. In the case of multiple clients trying to get access
+to the same resource, the first one that gets the \emph{lock} becomes the one
+that can use it.
+
+As previously mentioned, \emph{locks} are mapped to nodes and are of two
+kinds:
+\begin{itemize}
+    \item \emph{Exclusive mode} (\emph{writer}): one client can hold the
+    \emph{lock};
+    \item \emph{Shared mode} (\emph{reader}): any number of clients can hold
+    the \emph{lock};
+\end{itemize}
+To acquire either mode clients must have write permission on that node.
+Both modes are implemented using two other kinds of \emph{locks}:
+\begin{itemize}
+    \item \emph{Sequencer}: is used to ensure that the order of access to the
+    shared resource remains consistent. When a client acquires this \emph{lock},
+    it is able to access the resource is a specific order. It also holds
+    information about state of the \emph{lock};
+    \item \emph{Time delay}: is used to ensure that any client attempting to
+    access the resource while a \emph{lock} is in place will have to wait until
+    that \emph{lock} is released;
+\end{itemize}
+
+\noindent
+When using \emph{shared mode}, clients can request access to a resource in either
+read or write mode. In read mode, multiple clients can access the resource
+concurrently, while in write mode only one client do it.
+
+\paragraph{Chubby APIs: summary}
+So, when using \emph{Chubby} it is possible to:
+\begin{itemize}
+    \item Open/close/delete nodes;
+    \item Read/write full content of a node;
+    \item Set access control lists;
+    \item Acquire/release \emph{locks};
+    \item Set/get/check sequencer;
+\end{itemize}
+
+\section{Distributed database: Google Big Table}
+\emph{Google Bit Table} (\emph{GBT}) is a distributed storage system for
+managing structured data. It's designed to scale allowing it to handle petabytes
+of data across thousands of servers. It is not a relational database, but a
+sparse, distributed, persistent multi-dimensional sorted map (key/value store).
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/gbt-design.png}
+    \caption{\emph{GBT data model}}
+\end{figure}
+
+\subsection{How is GBT built?}
+
+\noindent\begin{minipage}[c]{0.7\textwidth}
+    \emph{GBT} uses \emph{GFS} to store data, metadata and \emph{tablet logs}.
+    Data are organized in \emph{tablets} based on \emph{SSTablet} format. For
+    each \emph{data tablet} there's a \emph{log tablet} and metadata of each
+    \emph{data tablet} are grouped in a collection of metadata \emph{tablets}.
+
+    \paragraph{SSTablet file format}
+    \emph{SSTablet} (\emph{Sorted String Table}) is a file format that stores
+    data in a persistent and ordered immutable key-value map. Each \emph{SSTablet}
+    file contains a sequence of blocks whose size is typically 64KB.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.28\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/gbt-blocks1.png}
+\end{minipage}
+
+\noindent
+Optionally, blocks can be mapped to memory, so that lookup and scan operatios
+can be performed without interacting with the disk.
+
+At the end of the file there's a block index that's used to locate other blocks
+It is loaded in memory when the \emph{SSTablet} is opened and this allows to
+read from the disk just the required blocks. In fact, when looking for something,
+the appropriate block can be found by performing a binary search in the in-memory
+index e then loading the correct block from the disk.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=\textwidth]{images/sstable-format.png}
+    \caption{\emph{SSTablet} design}
+\end{figure}
+
+\noindent\begin{minipage}[c]{0.7\textwidth}
+\paragraph{Chubby as an interface for clients}
+\emph{GBT} uses \emph{Chubby} as a sort of interface for client applications.
+In particular, since \emph{Chubby} provides a reliable namespace that contains
+directories and small files, it is used to store bootstrap location of
+\emph{bigtable} data (aka \emph{root tablet}), to discover \emph{tablet servers},
+and finalize their death when necessary, and to store \emph{bigtable} schema
+information (i.e. column family information for each table).
+
+In addition to that, \emph{Chubby} APIs allows for access control list management,
+and its design guarantees that there's at most one active \emph{master} at any
+time in any \emph{cell}. Since \emph{Chubby} provides the interface to the users,
+if it's unavailable, \emph{GBT} will also be unreachable.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.28\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/gbt-chubby-1.png}
+\end{minipage}
+
+\subsection{How is GBT implemented?}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/gbt-design-detailed.png}
+    \caption{\emph{GBT} architecture}
+\end{figure}
+
+\noindent
+The above image shows the actual architecture of \emph{GBT}. There's one
+\emph{master server} that handles:
+\begin{itemize}
+    \item Assigning \emph{tablets} to \emph{tablet servers};
+    \item Detecting the addition and expiration of \emph{tablet servers};
+    \item Balancing \emph{tablet server} load;
+    \item Garbage collecting of files in GFS;
+    \item Handling schema changes (table creation, column family
+    creation/deletion);
+    \item providing metadata to the \emph{Chubby master};
+\end{itemize}
+Then, there are many \emph{tablet servers} that each manages a set of
+\emph{tablets}, handles read and write requests to that \emph{tablets} and
+even splits table that have grown too large (usually around 100/200MB).
+
+Finally, clients contact the \emph{Chubby master}, that responds with the
+identity of the \emph{tablet server} that holds the required data, and use that
+information to communicate directly with that server, bypassing the \emph{GBT
+master}.
+
+\bigskip\noindent
+Finally, the API provided by \emph{GBT} is the following:
+\begin{itemize}
+    \item Add/remove \emph{tablet servers};
+    \item Create/delete \emph{tablets};
+    \item Create/delete column families;
+    \item Control \emph{tablet flags} (access control rights and metadata);
+    \item Control columns family flags (access control rights and metadata);
+    \item Cell value: \texttt{put(rowkey, columnkey, value)},
+    \texttt{get/delete(rowkey, columnkey)};
+    \item Lookup value for row: \texttt{has(rowkey, columnfamily)};
+    \item Lookup value from tablet: \texttt{scan(rowfilter, columnfilter, timestampfilter)};
+    \item Operations on a single row: \texttt{transactions(atomic read-modify-write sequence)};
+\end{itemize}
+
+\subsection{GBT operations}
+\paragraph{Tablet location}\mbox{}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/gbt-tablet-location.png}
+    \caption{\emph{Tablet} location procedure}
+\end{figure}
+
+\paragraph{Tablet assignment}
+Each \emph{tablet} is assigned to one \emph{tablet server} at a time.
+\emph{Master} keeps tracks of: the set of live \emph{tablet servers} (via
+\emph{Chubby}), current assignement of \emph{tablets} to \emph{tablet servers}
+and current unassigned \emph{tablets}. When a \emph{tablet} is unassigned, the
+master assigns it to an available \emph{tablet server} by sending a \emph{tablet}
+load request.
+
+\paragraph{Tablet server discovery}
+When a \emph{tablet server} starts, it creates and acquires an
+\emph{exclusive lock} on a uniquely-named file in a specific \emph{Chubby}
+directory (\q{servers} directory) and the \emph{master} monitors this directory
+to discover \emph{tablet servers}. A \emph{tablet server} stops serving its
+\emph{tablets} if it loses its \emph{exclusive Chubby lock}, and if the
+\emph{Chubby} file no longer exists, then the \emph{tablet server} will never
+be able to serve again, so it kills itself.
+
+\paragraph{Tablet server monitoring}
+The \emph{master} is responsible for detecting when a \emph{tablet server} is no
+longer serving its \emph{tablets}, and for reassigning those \emph{tablets},
+and it does so by periodically asking each \emph{tablet server} for the status of
+its \emph{lock}. If a \emph{tablet server} reports that it has lost its
+\emph{lock}, or if the \emph{master} was unable to reach a server during its last
+attempts, the \emph{master} attempts to acquire the \emph{lock} for the
+\emph{Chubby} file.
+
+If it succedes, then \emph{Chubby} is live and the \emph{tablet server} is dead
+or isolated, so the \emph{master} deletes its server file to ensure that the
+\emph{tablet server} can never serve again. Then, the \emph{master} can assign
+all the \emph{tablets} that were previously assigned to that \emph{tablet
+server} into the set of unassigned \emph{tablets}.
+
+\paragraph{Master startup}
+When a \emph{master} is started by the cluster management system, it needs to
+discover the current \emph{tablet} assignments before it can change them. This
+is a five-steps procedure:
+\begin{enumerate}
+    \item The \emph{master} grabs a \emph{unique master lock} in \emph{Chubby}
+    to prevent concurrent \emph{master} instantiations;
+    \item It scans the \q{servers} directory in \emph{Chubby} to find all live
+    \emph{tablet servers};
+    \item It communicates with every live \emph{tablet server} to discover what
+    \emph{tablets} are already assigned to each server;
+    \item It adds the \emph{root tablet} to the set of \emph{unassigned tablets}
+    if an assignment for it wasn't previuosly discovered;
+    \item Finally, the \emph{master} scans the \emph{METADATA tablet} to learn
+    the complete set of \emph{tablets} and eventually detect unassigned ones;
+\end{enumerate}
+
+\paragraph{Master isolated}
+To ensure that a \emph{bigtable} cluster is not vulnerable to networking issues
+between the \emph{master} and \emph{Chubby}, the \emph{master} kills itself if
+its \emph{Chubby} session expires (\emph{master} failures do not change the
+assignment of \emph{tablets} to \emph{tablet servers}).
+
+\paragraph{Tablet merging/splitting}
+The set of existing \emph{tablets} only changes when a \emph{tablet} is created
+or deleted. Two existing \emph{tablets} can be merged to form a larger one, and
+a large one can be split in two smaller \emph{tablets}. \emph{Tablets} merging
+must be initiated by the \emph{master} while \emph{tablet} splitting can be
+initiated by \emph{tablet servers}. In this case, the \emph{tablet server} that
+manages the \emph{tablet} to split, commits the split by recording information
+for new the \emph{tablet} in the \emph{METADATA tablet}. After that, the server
+notifies the \emph{master}.
+
+\paragraph{Tablet serving}\mbox{}
+
+\bigskip\noindent\begin{minipage}[c]{0.65\textwidth}
+    Steps for a write operation:
+    \begin{enumerate}
+        \item \emph{Tablet server} checks if the request is well-formed;
+        \item \emph{Tablet server} checks if sender is authorized to write by
+        looking up the list of permitted writers in a \emph{Chubby} file;
+        \item The valid mutation is written to commit log that stores redo
+        records (commits can be grouped to increase throught);
+        \item After mutation is committed, its content is inserted into
+        memtable (i.e. in a memory sorted buffer);
+    \end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.33\textwidth}
+    \includegraphics[width=\textwidth]{images/gbt-tablet-write.png}
+\end{minipage}
+
+\bigskip\noindent\begin{minipage}[c]{0.65\textwidth}
+    Steps for a read operation:
+    \begin{enumerate}
+        \item \emph{Tablet server} checks if the request is well-formed;
+        \item \emph{Tablet server} checks if sender is authorized to read by
+        looking up the list of permitted readers in a \emph{Chubby} file;
+        \item The valid read operation is executed on a merged view of the
+        sequence of \emph{SSTablets} and the memtable;
+    \end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.33\textwidth}
+    \includegraphics[width=\textwidth]{images/gbt-tablet-read.png}
+\end{minipage}
+
+\bigskip\noindent\begin{minipage}[c]{0.65\textwidth}
+    Steps for a \emph{tablet} recovery operation:
+    \begin{enumerate}
+        \item \emph{Tablet server} reads its metadata from the \emph{METADATA
+        table} (lists of \emph{SSTablets} that comprise a \emph{tablet} and        a set of a redo points, which are
+        pointers into any commit logs that may contain data for the \emph{tablet});
+        \item \emph{Tablet server} reads the indices of the \emph{SSTablets}
+        into memory and reconstructs the memtable by applying all the updates
+        that have committed since the redo points;
+    \end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.33\textwidth}
+    \includegraphics[width=\textwidth]{images/gbt-tablet-recovery.png}
+\end{minipage}
+
+\paragraph{Tablet minor compaction}
+When memtable size reaches a threshold, the memtable is frozen, a new memtable
+is created, and the frozen memtable is converted to a new \emph{SSTablet} and
+written to \emph{GFS}. The goals of this operation are two: shrink the memory
+usage of the \emph{tablet server} and reduces the amount of data that has to be
+read from the commit log during a recovery.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/gbt-tablet-minor-comp.png}
+    \caption{\emph{Tablet minor compaction}}
+\end{figure}
+
+\paragraph{Tablet merging compaction}
+The problem of \emph{tablet minor compaction} is that every \emph{minor
+compaction} creates a new \emph{SSTablet} and in the long run there might be
+an inconveniently large amount of \emph{SSTablets}. The solution to this is
+doing a periodic merging of a few \emph{SSTablets} and the memtable.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/gbt-tablet-merge-comp.png}
+    \caption{\emph{Tablet merging compaction}}
+\end{figure}
+
+\paragraph{Tablet major compactor}
+It is a \emph{merging compaction} that rewrites all \emph{SSTablets} into
+exactly one \emph{SSTablet} that contains no deletion information or deleted
+data. \emph{Bigtable} cycles throught all of its \emph{tablets} and regularly
+applies \emph{major compaction} to them, that is to say that it reclaims
+resources used by deleted data in a timely fashion.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/gbt-tablet-major-comp.png}
+    \caption{\emph{Tablet major compaction}}
+\end{figure}
+
+\section{Distributed object storage}
