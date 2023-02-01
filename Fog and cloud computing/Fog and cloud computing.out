@@ -70,4 +70,5 @@
 \BOOKMARK [2][-]{subsection.5.5.1}{How is GBT built?}{section.5.5}% 70
 \BOOKMARK [2][-]{subsection.5.5.2}{How is GBT implemented?}{section.5.5}% 71
 \BOOKMARK [2][-]{subsection.5.5.3}{GBT operations}{section.5.5}% 72
-\BOOKMARK [1][-]{section.5.6}{Distributed object storage}{chapter.5}% 73
+\BOOKMARK [1][-]{section.5.6}{Distributed object storage: OpenStack Swift}{chapter.5}% 73
+\BOOKMARK [2][-]{subsection.5.6.1}{OSS architecture}{section.5.6}% 74

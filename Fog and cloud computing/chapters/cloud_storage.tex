@@ -541,7 +541,7 @@ So, when using \emph{Chubby} it is possible to:
 
 \section{Distributed database: Google Big Table}
 \emph{Google Bit Table} (\emph{GBT}) is a distributed storage system for
-managing structured data. It's designed to scale allowing it to handle petabytes
+managing structured data. It's designed to scale, allowing it to handle petabytes
 of data across thousands of servers. It is not a relational database, but a
 sparse, distributed, persistent multi-dimensional sorted map (key/value store).
 
@@ -555,13 +555,13 @@ sparse, distributed, persistent multi-dimensional sorted map (key/value store).
 
 \noindent\begin{minipage}[c]{0.7\textwidth}
     \emph{GBT} uses \emph{GFS} to store data, metadata and \emph{tablet logs}.
-    Data are organized in \emph{tablets} based on \emph{SSTablet} format. For
-    each \emph{data tablet} there's a \emph{log tablet} and metadata of each
+    Data are organized in \emph{tablets} based on the \emph{SSTable} format. For
+    each \emph{data tablet} there's a \emph{log tablet}, and metadata of each
     \emph{data tablet} are grouped in a collection of metadata \emph{tablets}.
 
-    \paragraph{SSTablet file format}
-    \emph{SSTablet} (\emph{Sorted String Table}) is a file format that stores
-    data in a persistent and ordered immutable key-value map. Each \emph{SSTablet}
+    \paragraph{SSTable file format}
+    \emph{SSTable} (\emph{Sorted String Table}) is a file format that stores
+    data in a persistent and ordered immutable key-value map. Each \emph{SSTable}
     file contains a sequence of blocks whose size is typically 64KB.
 \end{minipage}\hfill
 \begin{minipage}[c]{0.28\textwidth}
@@ -573,16 +573,16 @@ sparse, distributed, persistent multi-dimensional sorted map (key/value store).
 Optionally, blocks can be mapped to memory, so that lookup and scan operatios
 can be performed without interacting with the disk.
 
-At the end of the file there's a block index that's used to locate other blocks
-It is loaded in memory when the \emph{SSTablet} is opened and this allows to
-read from the disk just the required blocks. In fact, when looking for something,
+At the end of the file there's a block index that's used to locate other blocks.
+It is loaded in memory when the \emph{SSTable} is opened and this allows to
+avoid unnecessary disk interation. In fact, when looking for something,
 the appropriate block can be found by performing a binary search in the in-memory
-index e then loading the correct block from the disk.
+index e then loading just the correct block from the disk.
 
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=\textwidth]{images/sstable-format.png}
-    \caption{\emph{SSTablet} design}
+    \caption{\emph{SSTable} design}
 \end{figure}
 
 \noindent\begin{minipage}[c]{0.7\textwidth}
@@ -592,7 +592,7 @@ In particular, since \emph{Chubby} provides a reliable namespace that contains
 directories and small files, it is used to store bootstrap location of
 \emph{bigtable} data (aka \emph{root tablet}), to discover \emph{tablet servers},
 and finalize their death when necessary, and to store \emph{bigtable} schema
-information (i.e. column family information for each table).
+information (i.e. column family information for each \emph{tablet}).
 
 In addition to that, \emph{Chubby} APIs allows for access control list management,
 and its design guarantees that there's at most one active \emph{master} at any
@@ -617,15 +617,15 @@ The above image shows the actual architecture of \emph{GBT}. There's one
 \begin{itemize}
     \item Assigning \emph{tablets} to \emph{tablet servers};
     \item Detecting the addition and expiration of \emph{tablet servers};
-    \item Balancing \emph{tablet server} load;
+    \item Balancing \emph{tablet servers} load;
     \item Garbage collecting of files in GFS;
-    \item Handling schema changes (table creation, column family
+    \item Handling schema changes (\emph{tablet} creation, column family
     creation/deletion);
     \item providing metadata to the \emph{Chubby master};
 \end{itemize}
-Then, there are many \emph{tablet servers} that each manages a set of
-\emph{tablets}, handles read and write requests to that \emph{tablets} and
-even splits table that have grown too large (usually around 100/200MB).
+Then, there are many \emph{tablet servers} and each of them is responsible for
+managing a set of \emph{tablets}, handling read and write requests and even splitting
+\emph{tablets} that have grown too large (usually around 100/200MB).
 
 Finally, clients contact the \emph{Chubby master}, that responds with the
 identity of the \emph{tablet server} that holds the required data, and use that
@@ -633,7 +633,7 @@ information to communicate directly with that server, bypassing the \emph{GBT
 master}.
 
 \bigskip\noindent
-Finally, the API provided by \emph{GBT} is the following:
+The API provided by \emph{GBT} is the following:
 \begin{itemize}
     \item Add/remove \emph{tablet servers};
     \item Create/delete \emph{tablets};
@@ -643,7 +643,7 @@ Finally, the API provided by \emph{GBT} is the following:
     \item Cell value: \texttt{put(rowkey, columnkey, value)},
     \texttt{get/delete(rowkey, columnkey)};
     \item Lookup value for row: \texttt{has(rowkey, columnfamily)};
-    \item Lookup value from tablet: \texttt{scan(rowfilter, columnfilter, timestampfilter)};
+    \item Lookup value from \emph{tablet}: \texttt{scan(rowfilter, columnfilter, timestampfilter)};
     \item Operations on a single row: \texttt{transactions(atomic read-modify-write sequence)};
 \end{itemize}
 
@@ -679,12 +679,12 @@ longer serving its \emph{tablets}, and for reassigning those \emph{tablets},
 and it does so by periodically asking each \emph{tablet server} for the status of
 its \emph{lock}. If a \emph{tablet server} reports that it has lost its
 \emph{lock}, or if the \emph{master} was unable to reach a server during its last
-attempts, the \emph{master} attempts to acquire the \emph{lock} for the
+attempt, the \emph{master} attempts to acquire the \emph{lock} for the
 \emph{Chubby} file.
 
 If it succedes, then \emph{Chubby} is live and the \emph{tablet server} is dead
 or isolated, so the \emph{master} deletes its server file to ensure that the
-\emph{tablet server} can never serve again. Then, the \emph{master} can assign
+\emph{tablet server} can never serve again. Then, the \emph{master} can put
 all the \emph{tablets} that were previously assigned to that \emph{tablet
 server} into the set of unassigned \emph{tablets}.
 
@@ -718,7 +718,7 @@ a large one can be split in two smaller \emph{tablets}. \emph{Tablets} merging
 must be initiated by the \emph{master} while \emph{tablet} splitting can be
 initiated by \emph{tablet servers}. In this case, the \emph{tablet server} that
 manages the \emph{tablet} to split, commits the split by recording information
-for new the \emph{tablet} in the \emph{METADATA tablet}. After that, the server
+for the new \emph{tablet} in the \emph{METADATA tablet}. After that, the server
 notifies the \emph{master}.
 
 \paragraph{Tablet serving}\mbox{}
@@ -730,7 +730,7 @@ notifies the \emph{master}.
         \item \emph{Tablet server} checks if sender is authorized to write by
         looking up the list of permitted writers in a \emph{Chubby} file;
         \item The valid mutation is written to commit log that stores redo
-        records (commits can be grouped to increase throught);
+        records (commits can be grouped to increase throughtput);
         \item After mutation is committed, its content is inserted into
         memtable (i.e. in a memory sorted buffer);
     \end{enumerate}
@@ -746,7 +746,7 @@ notifies the \emph{master}.
         \item \emph{Tablet server} checks if sender is authorized to read by
         looking up the list of permitted readers in a \emph{Chubby} file;
         \item The valid read operation is executed on a merged view of the
-        sequence of \emph{SSTablets} and the memtable;
+        sequence of \emph{SSTables} and the memtable;
     \end{enumerate}
 \end{minipage}\hfill
 \begin{minipage}[c]{0.33\textwidth}
@@ -757,11 +757,11 @@ notifies the \emph{master}.
     Steps for a \emph{tablet} recovery operation:
     \begin{enumerate}
         \item \emph{Tablet server} reads its metadata from the \emph{METADATA
-        table} (lists of \emph{SSTablets} that comprise a \emph{tablet} and        a set of a redo points, which are
+        table} (lists of \emph{SSTables} that comprise a \emph{tablet} and        a set of a redo points, which are
         pointers into any commit logs that may contain data for the \emph{tablet});
-        \item \emph{Tablet server} reads the indices of the \emph{SSTablets}
+        \item \emph{Tablet server} reads the indices of the \emph{SSTables}
         into memory and reconstructs the memtable by applying all the updates
-        that have committed since the redo points;
+        that have been committed since the redo points;
     \end{enumerate}
 \end{minipage}\hfill
 \begin{minipage}[c]{0.33\textwidth}
@@ -770,9 +770,9 @@ notifies the \emph{master}.
 
 \paragraph{Tablet minor compaction}
 When memtable size reaches a threshold, the memtable is frozen, a new memtable
-is created, and the frozen memtable is converted to a new \emph{SSTablet} and
+is created, and the frozen memtable is converted to a new \emph{SSTable} and
 written to \emph{GFS}. The goals of this operation are two: shrink the memory
-usage of the \emph{tablet server} and reduces the amount of data that has to be
+usage of the \emph{tablet server} and reduce the amount of data that has to be
 read from the commit log during a recovery.
 
 \begin{figure}[h!]
@@ -783,9 +783,9 @@ read from the commit log during a recovery.
 
 \paragraph{Tablet merging compaction}
 The problem of \emph{tablet minor compaction} is that every \emph{minor
-compaction} creates a new \emph{SSTablet} and in the long run there might be
-an inconveniently large amount of \emph{SSTablets}. The solution to this is
-doing a periodic merging of a few \emph{SSTablets} and the memtable.
+compaction} creates a new \emph{SSTable} and in the long run there might be
+an inconveniently large amount of \emph{SSTables}. The solution to this is
+doing a periodic merging of a few \emph{SSTables} and the memtable.
 
 \begin{figure}[ht!]
     \centering
@@ -794,10 +794,10 @@ doing a periodic merging of a few \emph{SSTablets} and the memtable.
 \end{figure}
 
 \paragraph{Tablet major compactor}
-It is a \emph{merging compaction} that rewrites all \emph{SSTablets} into
-exactly one \emph{SSTablet} that contains no deletion information or deleted
+It is a \emph{merging compaction} that rewrites all \emph{SSTables} into
+exactly one \emph{SSTable} that contains no deletion information or deleted
 data. \emph{Bigtable} cycles throught all of its \emph{tablets} and regularly
-applies \emph{major compaction} to them, that is to say that it reclaims
+applies \emph{major compaction} to them, that is to say, that it reclaims
 resources used by deleted data in a timely fashion.
 
 \begin{figure}[h!]
@@ -806,4 +806,156 @@ resources used by deleted data in a timely fashion.
     \caption{\emph{Tablet major compaction}}
 \end{figure}
 
-\section{Distributed object storage}
+\section{Distributed object storage: OpenStack Swift}
+\emph{OpenStack Swift} (\emph{OSS}) is a distributed object storage system
+designed to scale from a single machine to thousands of servers. It's optimized
+for \emph{multi-tenancy} and high concurrency. It's ideal for backups, web and
+mobile content, and any other unstructured data that can grow without bound.
+Among the features of \emph{OSS} there are consistency, because every access to
+an item will return its most recent value, high availability, possibility to
+rely on commodity hardware, authentication procedures and possibility to set
+up quotas, access control lists and various storage policies.
+
+Since this is not a distributed file system, it's impossible to mount it, create
+a file hierarchy, create a file system from a certain state of the service, and
+even store objects which exedes a certain size (but this might not always be the
+case).
+
+\paragraph{OSS hierarchycal structure}
+Despite not allowing file hierarchies, \emph{OSS} is itself organized in a
+hierarchical way. Specifically, it is made up of three levels:
+\begin{enumerate}
+    \item \emph{Account}: is the top level and is associated to every service
+    user. It defines a namespace in which the owner can create and manage its
+    own \emph{containers};
+    \item \emph{Container}: is a namespace for \emph{objects} and can be thought
+    as a folder. Access control list, along with storage policies can be
+    associated to each \emph{container};
+    \item \emph{Object}: represent the actual data and is handled as an
+    uncompressed and unencrypted format with metadata;
+\end{enumerate}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/oss-hierarchy.png}
+    \caption{\emph{OSS} hierarchy}
+\end{figure}
+
+\subsection{OSS architecture}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/oss-architecture.png}
+    \caption{\emph{OSS} architecture}
+\end{figure}
+
+\noindent
+The \emph{proxy server} is responible for keeping together the architecture.
+For each request it receives, it looks up the location of the \emph{account},
+\emph{container} or \emph{objet} in the \emph{ring}, and routes the request
+accordingly. More precisely, the \emph{proxy server} serves as the interface
+to the users. It's responsible to implement the \emph{OSS} APIs, accept and
+answer to user requests, handle failures and make sure that communication with
+\emph{storage servers} is up and working.
+
+Then, there are two more categories of server:
+\begin{itemize}
+    \item \emph{Storage servers}:
+    \begin{itemize}
+        \item \emph{Object servers}: servers that store, retrive and delete
+        \emph{objects} stored in their local devices;
+        \item \emph{Container servers}: servers that handle listings of
+        \emph{objects}. They don't know where the \emph{objects} are, but to
+        what \emph{container} they belong. Each server keeps the listing in a
+        replicated SQLite database together with statistics about the
+        \emph{containers} it controls;
+        \item \emph{Accounts servers}: they're the same as \emph{container servers},
+        but keep listings of \emph{containers} instead of \emph{objects};
+    \end{itemize}
+    \item \emph{Consistency servers}:
+    \begin{itemize}
+        \item \emph{Replicator}: keeps the system in a consistent state in case
+        of temporary error conditions (e.g. drive failures or netwok outages);
+        \item \emph{Updater}: when \emph{containers} or \emph{accounts} data
+        cannot be immediately updated, in the case of conjestion or failures,
+        the updates are queued locally on the file system and carried out by
+        the \emph{updater} when possible;
+        \item \emph{Auditors}: scans local servers checking for integrity of
+        \emph{objects}, \emph{containers} and \emph{accounts}. All the errors
+        are logged and if a corrupted file is found, that file is quarantined
+        and will be replaced by the \emph{replicator} with a correct replica;
+    \end{itemize}
+\end{itemize}
+
+\paragraph{OSS API}
+Here's a list of some funtions exposed by \emph{OSS} APIs:
+\begin{itemize}
+    \item \texttt{GET}: download \emph{objects}, list content of \emph{containers} or
+    \emph{accounts};
+    \item \texttt{PUT}: uploads \emph{objects}, creates \emph{containers},
+    overwrites metadata headers;
+    \item \texttt{POST}: creates \emph{containers} if they do not exist, updates
+    metadata (\emph{accounts} or \emph{containers}) and overwrites metadata
+    (\emph{objects});
+    \item \texttt{DELETE}: deletes empty \emph{objects} and empty \emph{containers};
+    \item \texttt{HEAD}: retrieves header information for \emph{accounts}, \emph{containers}
+    or \emph{objects};
+\end{itemize}
+
+\begin{note}
+    \emph{OSS} provides a REST API.
+\end{note}
+
+\paragraph{OSS rings}
+A \emph{ring} is a data structure in which each node is connected to its
+neighbours forming a loop. Each node in the \emph{ring} is a \emph{storage server}.
+\emph{Rings} are managed by a \emph{ring component} and are used to determine
+where data should be stored and even redistribute data evenly aroung nodes,
+according to weights based on the available capacity of each node.
+
+A \emph{ring} keeps a mapping of the nodes using availability zones, partitions
+and replicas. Each partition is replicated across the cluster (group of
+\emph{storage servers} interconnected in a \emph{ring}) according to the
+storage policies (by default 3 replicas per partition). The location of each
+partition is also stored in the mapping maintained by the \emph{ring}. In fact,
+each node in the \emph{ring} is assigned a certain number of partions, and each
+partition is responsible for storing a certain amount of data.
+
+Replicas inside each partition are isolated in as many distinct regions, zones,
+servers and devices as possible, so as to reduce failure domains. Regions are
+based on their geographical location (e.g. West Europe), while zones are more
+abstract (e.g. city, power separtion, network separation, or any other attribute
+that would lessen multiple replicas being available at the same time). There
+might be less failure domains than replicas of a partition.
+
+\begin{eg}[Steps for a PUT request]
+    Let's see the steps needed for a simple \texttt{PUT} request.
+
+    \begin{figure}[h!]
+        \centering
+        \subfloat[Client sends the request]{
+            \includegraphics[width=0.48\textwidth]{images/oss-put-1.png}
+        }\hfill
+        \subfloat[\emph{Proxy} receives the request\\and begins processing it]{
+            \includegraphics[width=0.48\textwidth]{images/oss-put-2.png}
+        }\\
+        \subfloat[A \emph{storage server} is chosen\\as responsible for storing]{
+            \includegraphics[width=0.48\textwidth]{images/oss-put-3.png}
+        }\hfill
+        \subfloat[The server and its neighbours\\store data]{
+            \includegraphics[width=0.48\textwidth]{images/oss-put-4.png}
+        }\\
+        \subfloat[The \emph{proxy} responds to the client]{
+            \includegraphics[width=0.48\textwidth]{images/oss-put-5.png}
+        }
+    \end{figure}
+
+    \noindent
+    If the \emph{storage server} that's handling the data has a failed drive,
+    data are passed to another server. For example, it might be passed to the
+    fourth server in the image:
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.48\textwidth]{images/oss-put-6.png}
+    \end{figure}
+\end{eg}

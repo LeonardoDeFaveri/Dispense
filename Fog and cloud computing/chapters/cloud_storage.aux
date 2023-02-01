@@ -44,8 +44,8 @@
 \@writefile{toc}{\contentsline {section}{\numberline {5.5}Distributed database: Google Big Table}{61}{section.5.5}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {5.9}{\ignorespaces \emph  {GBT data model}\relax }}{61}{figure.caption.128}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.5.1}How is GBT built?}{61}{subsection.5.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{SSTablet file format}{61}{paragraph*.129}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.10}{\ignorespaces \emph  {SSTablet} design\relax }}{62}{figure.caption.130}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{SSTable file format}{61}{paragraph*.129}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.10}{\ignorespaces \emph  {SSTable} design\relax }}{62}{figure.caption.130}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Chubby as an interface for clients}{62}{paragraph*.131}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.5.2}How is GBT implemented?}{62}{subsection.5.5.2}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {5.11}{\ignorespaces \emph  {GBT} architecture\relax }}{62}{figure.caption.132}\protected@file@percent }
@@ -65,11 +65,23 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {5.14}{\ignorespaces \emph  {Tablet merging compaction}\relax }}{66}{figure.caption.145}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Tablet major compactor}{66}{paragraph*.146}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {5.15}{\ignorespaces \emph  {Tablet major compaction}\relax }}{66}{figure.caption.147}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.6}Distributed object storage}{66}{section.5.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.6}Distributed object storage: OpenStack Swift}{66}{section.5.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{OSS hierarchycal structure}{66}{paragraph*.148}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.16}{\ignorespaces \emph  {OSS} hierarchy\relax }}{67}{figure.caption.149}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.6.1}OSS architecture}{67}{subsection.5.6.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.17}{\ignorespaces \emph  {OSS} architecture\relax }}{67}{figure.caption.150}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{OSS API}{68}{paragraph*.151}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{OSS rings}{68}{paragraph*.152}\protected@file@percent }
+\newlabel{eg:6}{{6}{69}{Steps for a PUT request}{eg.6}{}}
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(a)}{\ignorespaces {Client sends the request}}}{69}{subfigure.18.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(b)}{\ignorespaces {\emph {Proxy} receives the request\\and begins processing it}}}{69}{subfigure.18.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(c)}{\ignorespaces {A \emph {storage server} is chosen\\as responsible for storing}}}{69}{subfigure.18.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(d)}{\ignorespaces {The server and its neighbours\\store data}}}{69}{subfigure.18.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {subfigure}{\numberline{(e)}{\ignorespaces {The \emph {proxy} responds to the client}}}{69}{subfigure.18.5}\protected@file@percent }
 \@setckpt{chapters/cloud_storage}{
-\setcounter{page}{67}
+\setcounter{page}{70}
 \setcounter{equation}{0}
-\setcounter{enumi}{2}
+\setcounter{enumi}{3}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
 \setcounter{enumiv}{0}
@@ -78,22 +90,22 @@
 \setcounter{part}{0}
 \setcounter{chapter}{5}
 \setcounter{section}{6}
-\setcounter{subsection}{0}
+\setcounter{subsection}{1}
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{15}
+\setcounter{figure}{17}
 \setcounter{table}{1}
-\setcounter{Item}{40}
+\setcounter{Item}{43}
 \setcounter{Hfootnote}{3}
-\setcounter{bookmark@seq@number}{73}
+\setcounter{bookmark@seq@number}{74}
 \setcounter{LT@tables}{1}
 \setcounter{LT@chunks}{1}
 \setcounter{caption@flags}{0}
 \setcounter{continuedfloat}{0}
 \setcounter{KVtest}{0}
 \setcounter{subfigure}{0}
-\setcounter{subfigure@save}{2}
+\setcounter{subfigure@save}{5}
 \setcounter{lofdepth}{1}
 \setcounter{subtable}{0}
 \setcounter{subtable@save}{0}
@@ -101,7 +113,7 @@
 \setcounter{parentequation}{0}
 \setcounter{definition}{21}
 \setcounter{problem}{0}
-\setcounter{eg}{5}
+\setcounter{eg}{6}
 \setcounter{codeblock}{0}
 \setcounter{@pps}{0}
 \setcounter{@ppsavesec}{0}

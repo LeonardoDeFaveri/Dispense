@@ -132,7 +132,7 @@
 \contentsline {paragraph}{Chubby APIs: summary}{61}{paragraph*.127}%
 \contentsline {section}{\numberline {5.5}Distributed database: Google Big Table}{61}{section.5.5}%
 \contentsline {subsection}{\numberline {5.5.1}How is GBT built?}{61}{subsection.5.5.1}%
-\contentsline {paragraph}{SSTablet file format}{61}{paragraph*.129}%
+\contentsline {paragraph}{SSTable file format}{61}{paragraph*.129}%
 \contentsline {paragraph}{Chubby as an interface for clients}{62}{paragraph*.131}%
 \contentsline {subsection}{\numberline {5.5.2}How is GBT implemented?}{62}{subsection.5.5.2}%
 \contentsline {subsection}{\numberline {5.5.3}GBT operations}{63}{subsection.5.5.3}%
@@ -147,4 +147,8 @@
 \contentsline {paragraph}{Tablet minor compaction}{65}{paragraph*.142}%
 \contentsline {paragraph}{Tablet merging compaction}{66}{paragraph*.144}%
 \contentsline {paragraph}{Tablet major compactor}{66}{paragraph*.146}%
-\contentsline {section}{\numberline {5.6}Distributed object storage}{66}{section.5.6}%
+\contentsline {section}{\numberline {5.6}Distributed object storage: OpenStack Swift}{66}{section.5.6}%
+\contentsline {paragraph}{OSS hierarchycal structure}{66}{paragraph*.148}%
+\contentsline {subsection}{\numberline {5.6.1}OSS architecture}{67}{subsection.5.6.1}%
+\contentsline {paragraph}{OSS API}{68}{paragraph*.151}%
+\contentsline {paragraph}{OSS rings}{68}{paragraph*.152}%
