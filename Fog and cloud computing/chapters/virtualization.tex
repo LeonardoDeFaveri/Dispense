@@ -111,7 +111,7 @@ I/O need to be virtualised correctly.
 
 \section{CPU virtualization}
 The \emph{VMM} assigns one or more CPU cores to the VMs so that they can run
-their OS. The ISA of the virtualised hardware will usually be the same
+their OSs. The ISA of the virtualised hardware will usually be the same
 of the physical one, but it is not mandatory. Basically, if they're different
 there will be an emulation process that will translate messagges between them.
 However, since the emulation process works by doing a binary translation between
@@ -119,7 +119,7 @@ the two different ISAs, it is too slow to be generally convinient.
 
 Going back to the \emph{VMM}, it must satisfy three characteristics:
 \begin{itemize}
-    \item The execution enviroment it exportes must be identical to the
+    \item The execution enviroment it exposes must be identical to the
     physical one, so that OSs can run unmodified;
     \item It must have complete control over real system resources, so that
     any \emph{guest OS} can access only those components it has been grant access
@@ -206,7 +206,7 @@ and it will jump to interrupt handler in OS.
 Diving deeper into \emph{trap handling}, when a \emph{trap} is generated,
 userland code (i.e. code outside the kernel) generates a \emph{software
 interrupt} (e.g. thorugh the instruction \texttt{INT xx}). Hence, the generic
-interrupt routing of the OS is started, and it determines where to jump in the
+interrupt routine of the OS is started, and it determines where to jump in the
 OS code to serve that interrupt. Finally, kernel jumps to the identified code,
 serves the interrupst and then returns control back to the caller (i.e.
 instruction \texttt{IRET}). All of this requires to load and parse the content
@@ -216,7 +216,7 @@ A more modern way to serve interrupts uses \texttt{SYSENTER} and
 \texttt{SYSEXIT} instructions (\texttt{SYSCALL} and \texttt{SYSRETURN} in
 x64 systems) to speed up the process. Practically, userland code writes the
 address of the targeted kernel routine in a specific register, then
-\texttt{SYSENTER} is called and the kernel jumps to the selected routing
+\texttt{SYSENTER} is called and the kernel jumps to the selected routine
 reading the address from the register without additional accesses to memory.
 
 \paragraph{Going back to virtualization}
@@ -250,10 +250,10 @@ modifying the state of the \emph{virtual machine}.
 \bigskip\noindent
 \begin{minipage}[t]{0.48\textwidth}
     When a \emph{system call} happens, CPU traps it to interrupt handler vector
-    of the \emph{VMM}. This then jumps back to the \emph{OS}. All of this,
+    of the \emph{VMM}. This then jumps back to the \emph{guest OS}. All of this,
     results in extra context switch operations and performance deteriorates
     further if the \emph{guest OS} isn't able to handle the interrupt
-    routing. So, the time spent to execute a single \emph{system call} might
+    routine. So, the time spent to execute a single \emph{system call} might
     be 10 times greater than what it would have been required by the \emph{host
     OS}.
 \end{minipage}
@@ -307,12 +307,12 @@ are said to be \q{non-virtualizable}.
 
 \paragraph{Possible solutions}
 So, we have some \emph{sensitive instructions} that don't trap and,
-consequently, the \emph{VMM} cannot emulate the correcct behavior during the
+consequently, the \emph{VMM} cannot emulate their correcct behavior during the
 execution.
 
-To address this problem we can change virtualization paradigm or introduce
+To address this problem, we can change virtualization paradigm, or introduce
 some code into the \emph{VMM} that parses the instruction stream to detect
-all \emph{sensitive instructions} dynamically. Then, we can both use
+dynamically all \emph{sensitive instructions}. Then, we can both use
 interpretation and binary translation. Interpretation is an old and slow approch
 in which emulating a single ASM instruction originates an overhead of one order
 of magnitude at least. Binary translation, on the other hand, introduces a
@@ -440,7 +440,7 @@ uses a particular structure called \emph{Virtual Machine Control Structure}
 (\emph{VMCS} or \emph{VMCB}). It concretely represents the control panel of
 the \emph{virtual machine}, storing information about \emph{guest} state,
 \emph{host} processor and control data (e.g. trapping condition). It also
-mirrors all registers modifications needed to set a certain configuration in
+mirrors all register modifications needed to set a certain configuration in
 \emph{guest OSs}. \emph{VMCS} introduced dedicated instructions to modify it:
 \texttt{VMWRITE} and \texttt{VMREAD}.
 
