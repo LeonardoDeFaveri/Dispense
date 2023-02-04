@@ -47,7 +47,7 @@ each user requires a dedicated set of resources to fulfill its needs, while
 them.
 
 Actually, in a \emph{multi-tenancy} enviroment, a group of users who share
-common access with specific privileges to the software isntances, is called
+common access with specific privileges to a software instance, is called
 \emph{tenent}. An instance includes, among others, data, configurations and
 users management.
 
@@ -69,13 +69,13 @@ grain (e.g. one server at a time) with a short lead time (e.g. minutes). This
 allows a close matching of resources and workloads and, together with the
 \emph{pay-as-you-go} model, brings elasticity to the users, who no longer need
 to worry about sudden spikes of resource usage. The key advantage of elasticity
-is that it reduces the problems resulting from \emph{underprovisioning} and
+is that it reduces problems resulting from \emph{underprovisioning} and
 \emph{overprovisioning}.
 
-\emph{Overprovisioning} happens when the workload is using much less resources
+\emph{Overprovisioning} happens when current workload is using much less resources
 than the ones that have been allocated, thus resulting in a waste.
 Simmetrically, \emph{underprovisioning} means that the available resources are
-insufficient to serve the requests, thus resulting in bad performance and
+insufficient to serve requests, thus resulting in bad performances and
 possible loss of clients.
 
 When users relies on proprietary resources (e.g. company's private servers) the
@@ -121,14 +121,14 @@ programming languages are used or which require hardware and software customizat
 \paragraph{Examples} Google App Engine, Heroku
 
 \subsection{Infrastructure as a Service}
-Services provided by this model includes: server hosting, storage, computing
+Services provided by this model include: server hosting, storage, computing
 hardware, operating systems, virtual instances, load balancing, internet access
 and bandwidth provisioning.
 
 System administrators can manage OSs, storage, deployed applications and may
-even have little control over network components such as firewalls. So, they're
-able to deploy arbitrary software including operating systems. However, there
-is still a below instrastructure that can't be accessed.
+even have little control over network components such as firewalls. They're
+able to deploy arbitrary software including operating systems, but there's
+still an underlying instrastructure that can't be accessed.
 
 \paragraph{Examples} Amazon EC2
 
@@ -139,9 +139,9 @@ is still a below instrastructure that can't be accessed.
 \end{note}
 
 \section{Deployment models}
-Deployment models describe the way the cloud infrastructure may be accessed
-and by whom and who is the owner. In particular, there are four types of
-environment.
+Deployment models describe the way cloud infrastructures may be accessed
+and by whom and who is responsible for their maintainance. In particular,
+there are four types of environment.
 
 \subsection{Public cloud}
 \begin{itemize}
@@ -176,7 +176,7 @@ environment.
 \subsection{Hybrid cloud}
 It's the composition of more deployment models which remain unique
 entities, but are bound together by standardised or proprietary technologies
-that enables data and applications portability.
+that enable data and applications portability.
 
-For example an organization might use public cloud for some aspects of its
-business and a private one for its sensitive data.
+For example an organization might use a \emph{public cloud} for some aspects
+of its business and a \emph{private} one for its sensitive data.
