@@ -590,7 +590,7 @@ have created conflicts and accesses to memory areas of other \emph{VMs}.
 \section{I/O virtualization}
 There are various techniques to implement I/O virtualization: \emph{device
 emulation}, \emph{paravirtualization} and \emph{direct assignment}. Unlike CPU and
-memory, I/O devices might be assigned to just one or some VMs.
+memory, I/O devices might be assigned to just one or some \emph{VMs}.
 
 \subsection{Device emulation}
 With \emph{device emulation} the \emph{VMM} proposes to \emph{Guest OSs} an
@@ -752,7 +752,7 @@ virtualization} are guaranteed, but resource consumption is much less concerning
 \emph{Lightweigth virtualization} is therefore appropriate when there is no need
 for a classical \emph{VM} or when its overhead is unacceptable. Also, when we'd like to
 have an isolated environment that is quick to deploy, migrate and dispose with
-little or no overhead, or when we want to scale both vertically (i.e. many
+little to no overhead, or when we want to scale both vertically (i.e. many
 isolated environments on the same machine) and horizontally (i.e. deploy the
 same environment on many machines), \emph{lightweight virtualization} can be a
 good solution.
@@ -766,7 +766,7 @@ the \emph{hypervisor} is the Linux kernel itself.
 As already mentioned, classical \emph{VMs} are replaced by isolated environments
 (i.e. virtual private servers, jails, containers) and each of them features a
 given extent of resources management and isolation that, usually, is less than
-what can be guaranteed by classical VMs. Finally, applications can be executed
+what can be guaranteed by classical \emph{VMs}. Finally, applications can be executed
 inside these environments.
 
 A good \emph{lightwiegth virtualization} implementation must provide a
