@@ -6,8 +6,8 @@ Historically, networks have been classified into three layers:
 \begin{itemize}
     \item \emph{Tier 1}: core part of network infrastructure that allows all
     other networks on the internet to communicate each other;
-    \item \emph{Tier 2}: portions of \emph{tier 1} infrastructure which is
-    bought by internet service providers which then sold access to customers;
+    \item \emph{Tier 2}: portions of \emph{tier 1} infrastructure which are
+    bought by internet service providers that can then sold access to customers;
     \item \emph{Tier 3}: part of the network infrastructure that allows final
     users to gain access to other networks;
 \end{itemize}
@@ -28,7 +28,7 @@ services (e.g. web applications instead of desktop applications), resulted in
 a significant increase in volumes of shared data and required bandwidth. To
 address this increase in bandwidth demand, cloud providers introduced Content
 Delivery Networks (CDN) whose function is to bring service providers closer
-to the final users. A secondo step was made with the spread of IoT and
+to final users. A secondo step was made with the spread of IoT and
 decentralized computing paradigms such as \emph{fog computing}.
 
 \begin{figure}[ht!]
@@ -43,9 +43,9 @@ decentralized computing paradigms such as \emph{fog computing}.
 Data centers are huge structures with tons of servers, so they demand high
 bandwidth with the outside and a very low RTT within their premises. Also,
 each data center is a single administrative domain, meaning that its
-administrators have full control over its intern network infrastructure, 
+administrators have full control over the internal network infrastructure, 
 endpoints and protocols. This allows them to deviate from standards and adopt
-each kind of custom solutions, as long as the services they host are reachable.
+each kind of custom solution, as long as the services they host are reachable.
 
 This liberty becames relavant as soon as we realize that most of the traffic
 in a data center is created by machine-to-machine communications, leaving
@@ -334,12 +334,12 @@ Costs also come in hand when designing an \emph{interconnection network}. Both
 servers and network apparatus costs are relevant, but talking about networking,
 the choice of routers and switches often requires a compromise between latency
 and costs. For example, based on the number of ports of a router we can have
-low-radix and high-ridix routers. The former has a few ports, while the latter
+low-radix and high-ridix routers. The former has few ports, while the latter
 has more; thus bandwidth is divided into a smaller number of wide ports and
 a larger number of narrow ports respectively.
 
 \bigskip\noindent
-In general, data centers networks are designed around the following schema:
+In general, data center networks are designed around the following schema:
 \begin{figure}[h!]
     \centering
     \img{general-schema.png}{0.6}
@@ -347,7 +347,7 @@ In general, data centers networks are designed around the following schema:
 \end{figure}
 
 \noindent
-Layer 2 and layer 3 has pros and cons that have to balanced to guarantee ease
+Layer 2 and layer 3 has pros and cons that have to be balanced to guarantee ease
 of configuration, administration and problem-solving.
 
 Layer 2, that is the ethernet switching part of the infrastructure, is easy to
@@ -357,8 +357,8 @@ domains to avoid link saturarion due to broadcast frames, and dealing with the
 Spanning Tree Protocol might be a struggle.
 
 On the other hand, IP routing on layer 3 makes scalability easy thanks to
-hieranchical addressing and allows to obtain multipath routing with equal-cost
-multipath\footnote{We will see more about this later in this section}. However,
+hierarchical addressing and allows obtaining equal-cost multipath
+routing\footnote{We will see more about this later in this section}. However,
 its configuration is more complex and migration requires changing the IP addresses.
 
 \begin{note}
@@ -376,7 +376,7 @@ time would couse a collision, so this is a \emph{blocking topology}.
 \end{note}
 \emph{Clos networks} is a \emph{non-blocking topology} that consists of two
 \emph{butterfly networks} in which the last stage of the output is fused to the
-first stage of the output. This way, all packet sent, overshoot their destination
+first stage of the output. This way, all packets sent, overshoot their destination
 and then hop back to it. However, this overshoot is mostly unnecessary and
 increases the latency because each packet takes twice as many hops as it need.
 A solution to this is the \emph{folded clos topology} which is obtained by
@@ -397,7 +397,7 @@ also called \emph{fat trees} and the \emph{topology} is also called
 In a \emph{fat tree} network, servers are placed at the leafs, while internal
 and root nodes are switches. To increase bandwidth, additional links are also
 added to near-root nodes. The advantage of such \emph{topology} is that all the
-switching elements are identical and this allows costs reductions. Another,
+switching elements are identical and this allows a reduction in costs. Another,
 already named, characteristic is the presence of multiple equal-cost path that
 both allow for load splitting and \emph{location trasparent communication.}
 
@@ -419,8 +419,8 @@ and $k/2$ switches of the upper layer.
 
 \noindent
 Similarly, each \emph{aggregation layer} switch is connected to $k/2$ \emph{core
-layer} switches which also have $k/2$ more connections to other aggregation
-switches, one for each pod. This configuration results in an infrastructure
+layer} switches which also have $k/2$ more connections to other \emph{aggregation
+switches}, one for each pod. This configuration results in an infrastructure
 that has $4$ servers, actually, $4$ racks with $4$ on-top-of-rack switches,
 $k(k+1)$ switches and a total of $(k/2)^2$ paths connecting each pairs of
 servers.
@@ -445,7 +445,7 @@ workload balancing and TCP-related issues.
 \noindent
 When it comes to workload, we distinguish between small and large flows. As the
 names suggests, the first denotates small flows of data which require low
-latency, while the second regards bigger flows which should benefit a higher
+latency, while the second is about bigger flows which should benefit a higher
 throughput.
 
 \begin{note}
@@ -464,7 +464,7 @@ $S$ to $D$:
 \noindent
 We want to assign each flow to a path in the most efficient way. We could just
 use the Equal-Cost Multipath routing (ECMP) to randomly assign a path to each
-flow. This would be a simple approch, but it would also be totally agnostic to
+flow. This would be a simple approch, but it would also be totally agnostic of
 available resources; thus we could experience long-lasting collisions between
 elephant flows.
 
@@ -506,7 +506,7 @@ that would make congestion control hard to implement.
 
 \section{Networking in virtualised environments}
 Virtualization introduces additional complexity for networking, because we need
-to deliver traffic between VMs or containers and the outer world and also grant
+to deliver traffic between VMs or containers and the outer world, and also grant
 communication between virtualised environments within the same physical machine.
 We also need to decide how to assign IP addresses to VMs and containers and
 how to provide advanced features such as load balancing, firewalls, etc.
@@ -532,7 +532,7 @@ switch and then connect the virtual switch to the physical NIC.
 
 \subsection{North/south and east/west communication on a single server}
 Although we suggested that a virtual switch might be the solution to virtual
-environments networking, in fact, three main options exists:
+environments networking, in fact, three main options exist:
 
 \noindent
 \begin{minipage}{0.48\textwidth}
@@ -540,7 +540,7 @@ environments networking, in fact, three main options exists:
     \item \emph{Host-based switching}: using a virtual switch in the
     \emph{Hypervisor} or directly in the \emph{Host OS};
     \item \emph{NIC switching}: using virtual queues in the NIC;
-    \item \emph{Haipin switching}: passing through the external switch;
+    \item \emph{Hairpin switching}: passing through the external switch;
 \end{enumerate}
 \end{minipage}
 \hfill
@@ -570,7 +570,7 @@ bridge} o \emph{softswitch}.
 
 \bigskip\noindent
 It's worth mentioning that this solution requires the physical NIC to operate in
-promiscuous mode. That's because, since virtual environments MAC addresses are
+promiscuous mode. That's because, since virtual environment MAC addresses are
 different from the physical NIC one and, by default, each NIC doesn't process
 packets whose destination MACs are different from its own, those packets would
 be dropped.
@@ -609,7 +609,7 @@ conceptually and in terms of performance.
     leave the machine unless it's necessary, we still manage to get improved
     performance in comparison to \emph{hairpin switching}. However, to be able
     to enforce complex or advanced networking policies, a standard NIC might not
-    be enught. When that's the case we could opt for a Smart NIC, that is a
+    be enought. When that's the case we could opt for a Smart NIC, that is a
     normal NIC with increased computing power.
 \end{minipage}
 \hfill
@@ -621,18 +621,18 @@ conceptually and in terms of performance.
 \bigskip\noindent
 Smart NIC are expensive, so their use must be weighed with the characteristics
 of the actual infrastructure. For example, if the amount of CPU spent due to
-networking tasks is so large that it leaves little or no time left for
+networking tasks is so large that it leaves little to no time left for
 applications, it might be worth considering smart NIC adoption. Otherwise, a
 \emph{host-based} solution could be enough.
 
 \begin{note}
     For instance, networking may become computationally relevant when using
-    overlay tunneling protocol or DDoS detection and prevention algorithms.
+    overlay tunneling protocols or DDoS detection and prevention algorithms.
 \end{note}
 
 \paragraph{Hardware VS software solutions}
 Software switches provides better performances when local VM-to-VM traffic is
-predominant, but alse when we're dealing with untrusted sources or over-subscribed
+predominant, but also when we're dealing with untrusted sources or over-subscribed
 links (i.e. tipical cloud service provider situations), or when we need a
 fine-grained control over passing data. To get all of this we pay in terms of
 CPU consumption reducing resources available to VMs or containers.
@@ -745,15 +745,15 @@ or when advanced functions (e.g. flood control) are needed.
 
 \emph{Macvlan} drivers instead, are both simpler and less CPU consuming, because
 they emulate a trivial bridge with basic functionalities. Therefore, they're
-recommended when you just need to provide egress connection to the physical
-network to virtual machines or containers.
+recommended when you just need to provide virtual machines or containers an
+egress connection to the physical network.
 
 \subsection{Open vSwitch}
 \emph{Open vSwitch} (\emph{OVS}) is a software implementation of a virtual
 multilayer network switch, designed to enable effective network automation
 through programmatic extensions. It can operate both as a software-based network
 switch running within a \emph{VMM} and a control stack for dedicated switching
-hardware. Talking about its implementation, it is implemente into the Linux
+hardware. Talking about its implementation, it's implemented into the Linux
 Kernel, and it's designed to support both standard management interfaces and
 protocols (e.g. NetFlow, sFlow, \dots) and transparent distribution across
 multiple physical servers by enabling creation of cross-server switches in a way
@@ -801,7 +801,7 @@ private network.
 \end{figure}
 
 \paragraph{Providing feature-rich network connectivity}
-Up to this point it should be clear that providing additional network services
+Up to this point, it should be clear that providing additional network services
 may require connecting VMs or containers to the physical infrastructure. For
 example, if private IPs are used for VMs, the \emph{hypervisor} must also provide
 a router, NAT and a DHCP service. To do this, we can exploit functionalities
@@ -864,7 +864,7 @@ So, virtual routers and virtual NAT services are in fact implemented into the
 Linux networking stack. Each cluster of VMs or containers is associated to a
 virtual NIC. Each virtual environment has its own MAC address and so the virtual
 NIC. In what we've called \emph{NATted mode}, all frames sent by hosts with
-a virtual MAC, passed through the kernel IP stack who translated those addresses
+a virtual MAC, pass through the kernel IP stack who translates those addresses
 according to pre-defined NAT rules. Then, inbound traffic follows the same route
 backward up to its destination.
 
@@ -883,7 +883,7 @@ backward up to its destination.
     The vNIC receives the packet, it detects that it is not the final recipient,
     so the packet is transferred to the Linux IP forwarding module. Finally,
     the Linux IP forwarding module forwards the packet to the next hop based on
-    the host routing and NAT tables as usual
+    host routing and NAT tables as usual
 \end{eg}
 
 \section{Data center-wide networking services}
@@ -897,8 +897,8 @@ requested logical view.
 \subsection{Providing layer 2 connectivity}
 Tenents may want to have a vannilla layer 2 connectivity that spans amongs all of
 its services across the data center. This is the case in which tenants want to
-take IP addressing under their own responsibility. The solution to this kind of
-request is the creation of tunnels between servers. What we'll see are tunnels
+take IP addressing under their own responsibility. The solution to this
+is the creation of tunnels between servers. What we'll see are tunnels
 managed by GRE (General Router Encapsulation).
 
 \newpage
@@ -930,7 +930,7 @@ managed by GRE (General Router Encapsulation).
     two virtual NICs). Essentially, what happens is that, when the packet sent
     by VM2 reaches the virtual switch, it forwards the packed to \texttt{vTUN0}
     device. \texttt{vTUN0} is the interface associated with the tunnel and its
-    remote IP tells what is the IP to which that packet has to be sent. In this
+    remote IP defines the destination address for that packet. In this
     case it is \texttt{3.0.0.1}, which is the address of the second physical
     server, beacause VM3 resides in it. So, the tunneling protocol wraps the
     original packet with a new IP packet that has destination address
@@ -939,7 +939,7 @@ managed by GRE (General Router Encapsulation).
     sends the packet.
 
     The destination server, receives the packet, sends it to the tunnel
-    device, which decapsulates the additional headers and finally forwars the
+    device, which decapsulates the additional header and finally forwars the
     original frame to the correct destination.
 \end{eg}
 \begin{note}
