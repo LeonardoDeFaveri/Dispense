@@ -98,9 +98,9 @@ The \emph{topology} also determines the \emph{network diameter} and
 
 \noindent
 When an \emph{interconnection network} is partitioned into two networks of
-them same size, the bisection bandwidth measures the communication bandwidth
-between the two. We talk about full bisection bandwidth when one half of nodes
-can communicate simultaneously with the other half.
+them same size, the \emph{bisection bandwidth} measures the communication
+bandwidth between the two. We talk about \emph{full bisection bandwidth} when
+one half of nodes can communicate simultaneously with the other half.
 
 \paragraph{Topologies}
 There are two main types of \emph{topologies}:
@@ -408,7 +408,7 @@ both allow for load splitting and \emph{location trasparent communication.}
 \end{figure}
 
 \noindent
-A \emph{fat tree} made of $k$ pods has two layers and $k/2$ switches for each
+A \emph{fat tree} made of $k$ pods has two layers of $k/2$ switches for each
 pod. Each switch at the lower layer is directly connected to $k/2$ servers
 and $k/2$ switches of the upper layer.
 
@@ -437,7 +437,7 @@ Existing \emph{topologies}, including \emph{Fat trees}, still fail to address
 workload balancing and TCP-related issues.
 
 \begin{note}
-    TCP retransmission and congestiona avoidance policies causes a degradation
+    TCP retransmission and congestion avoidance policies causes a degradation
     of throughput, so new protocols are currently being developed to displace
     TCP (e.g. QUIC).
 \end{note}
@@ -453,7 +453,7 @@ throughput.
 \end{note}
 
 \begin{eg}[Traffic balancing problems]
-Let's assume to be in the following situation and to have many flows going from
+Let's assume to be in the following situation and have many flows going from
 $S$ to $D$:
 
 \begin{figure}[h!]
@@ -726,7 +726,7 @@ necessarily going out of the server and then back into it.
 This mode supports only one \emph{macvlan} device, that is to say it can handle
 a single VM, for instance. This way, all traffic can be sent to the upstream
 component (e.g. the traffic can be sent directly to a VM), and said component
-can use any MAC address because, nor the \emph{macvlan} drivers, now the NIC
+can use any MAC address because, nor the \emph{macvlan} drivers, nor the NIC
 do any MAC filtering; it will be the VM virtual NIC who will take charge of that.
 In fact, MAC $A$ is no longer used. Of cource the physical NIC needs to work in
 promiscuous mode.
@@ -750,14 +750,15 @@ egress connection to the physical network.
 
 \subsection{Open vSwitch}
 \emph{Open vSwitch} (\emph{OVS}) is a software implementation of a virtual
-multilayer network switch, designed to enable effective network automation
-through programmatic extensions. It can operate both as a software-based network
-switch running within a \emph{VMM} and a control stack for dedicated switching
-hardware. Talking about its implementation, it's implemented into the Linux
-Kernel, and it's designed to support both standard management interfaces and
-protocols (e.g. NetFlow, sFlow, \dots) and transparent distribution across
-multiple physical servers by enabling creation of cross-server switches in a way
-that abstracts out the underlying server architecture.
+multilayer network switch. It's designed to enable effective network automation
+through programmatic extensions, and it can operate both as a software-based
+network switch, running within a \emph{VMM}, and a control stack for dedicated
+switching hardware. Talking about its implementation, it's implemented into the
+Linux Kernel, and it's designed to support both standard management interfaces
+and protocols (e.g. NetFlow, sFlow, \dots). It allows for a transparent
+distribution across multiple physical servers by enabling the creation of
+cross-server switches in a way that abstracts out the underlying server
+architecture.
 
 \begin{note}
     \emph{Open vSwitch} is often implemented into cloud computing software
@@ -895,8 +896,8 @@ has to manage the physical infrastructure so that it's able to provide the
 requested logical view.
 
 \subsection{Providing layer 2 connectivity}
-Tenents may want to have a vannilla layer 2 connectivity that spans amongs all of
-its services across the data center. This is the case in which tenants want to
+Tenants may want to have a vannilla layer 2 connectivity that spans amongs all of
+their services across the data center. This is the case in which tenants want to
 take IP addressing under their own responsibility. The solution to this
 is the creation of tunnels between servers. What we'll see are tunnels
 managed by GRE (General Router Encapsulation).

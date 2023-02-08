@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.26)  7 FEB 2023 14:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.26)  8 FEB 2023 14:54
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1217,104 +1217,104 @@ Package pdftex.def Info: ./images/macvlan-pass-through.png  used on input line 7
 <./images/ovs.png, id=848, 1197.47375pt x 612.2875pt>
 File: ./images/ovs.png Graphic file (type png)
 <use ./images/ovs.png>
-Package pdftex.def Info: ./images/ovs.png  used on input line 769.
+Package pdftex.def Info: ./images/ovs.png  used on input line 770.
 (pdftex.def)             Requested size: 483.69684pt x 247.32109pt.
  [43 <./images/ovs.png>]
 <./images/ip-problem-1.png, id=856, 488.82625pt x 608.2725pt>
 File: ./images/ip-problem-1.png Graphic file (type png)
 <use ./images/ip-problem-1.png>
-Package pdftex.def Info: ./images/ip-problem-1.png  used on input line 797.
+Package pdftex.def Info: ./images/ip-problem-1.png  used on input line 798.
 (pdftex.def)             Requested size: 183.80716pt x 228.72348pt.
 <./images/ip-problem-2.png, id=857, 274.02374pt x 599.23875pt>
 File: ./images/ip-problem-2.png Graphic file (type png)
 <use ./images/ip-problem-2.png>
-Package pdftex.def Info: ./images/ip-problem-2.png  used on input line 799.
+Package pdftex.def Info: ./images/ip-problem-2.png  used on input line 800.
 (pdftex.def)             Requested size: 96.73788pt x 211.54713pt.
 <./images/multi-tenancy.png, id=858, 596.2275pt x 470.75874pt>
 File: ./images/multi-tenancy.png Graphic file (type png)
 <use ./images/multi-tenancy.png>
-Package pdftex.def Info: ./images/multi-tenancy.png  used on input line 817.
+Package pdftex.def Info: ./images/multi-tenancy.png  used on input line 818.
 (pdftex.def)             Requested size: 193.47577pt x 152.75774pt.
 <./images/tenant-defined-network-services.png, id=859, 361.35pt x 384.43625pt>
 File: ./images/tenant-defined-network-services.png Graphic file (type png)
 <use ./images/tenant-defined-network-services.png>
-Package pdftex.def Info: ./images/tenant-defined-network-services.png  used on input line 834.
+Package pdftex.def Info: ./images/tenant-defined-network-services.png  used on input line 835.
 (pdftex.def)             Requested size: 145.11052pt x 154.38184pt.
  [44 <./images/ip-problem-1.png> <./images/ip-problem-2.png> <./images/multi-tenancy.png>]
 <./images/virtual-and-host-services.png, id=874, 358.33875pt x 378.41376pt>
 File: ./images/virtual-and-host-services.png Graphic file (type png)
 <use ./images/virtual-and-host-services.png>
-Package pdftex.def Info: ./images/virtual-and-host-services.png  used on input line 844.
+Package pdftex.def Info: ./images/virtual-and-host-services.png  used on input line 845.
 (pdftex.def)             Requested size: 145.11052pt x 153.23941pt.
 <./images/putting-all-together1.png, id=875, 803.0pt x 529.98pt>
 File: ./images/putting-all-together1.png Graphic file (type png)
 <use ./images/putting-all-together1.png>
-Package pdftex.def Info: ./images/putting-all-together1.png  used on input line 858.
+Package pdftex.def Info: ./images/putting-all-together1.png  used on input line 859.
 (pdftex.def)             Requested size: 193.47577pt x 127.69109pt.
  [45 <./images/tenant-defined-network-services.png> <./images/virtual-and-host-services.png> <./images/putting-all-together1.png>]
 <./images/putting-all-together-details.png, id=888, 536.0025pt x 563.10374pt>
 File: ./images/putting-all-together-details.png Graphic file (type png)
 <use ./images/putting-all-together-details.png>
-Package pdftex.def Info: ./images/putting-all-together-details.png  used on input line 876.
+Package pdftex.def Info: ./images/putting-all-together-details.png  used on input line 877.
 (pdftex.def)             Requested size: 232.17241pt x 243.9085pt.
 <./images/putting-all-together-tables.png, id=889, 638.385pt x 229.85875pt>
 File: ./images/putting-all-together-tables.png Graphic file (type png)
 <use ./images/putting-all-together-tables.png>
-Package pdftex.def Info: ./images/putting-all-together-tables.png  used on input line 878.
+Package pdftex.def Info: ./images/putting-all-together-tables.png  used on input line 879.
 (pdftex.def)             Requested size: 232.17241pt x 83.59435pt.
  [46 <./images/putting-all-together-details.png> <./images/putting-all-together-tables.png>]
 <./images/layer2.png, id=901, 1077.02374pt x 220.825pt>
 File: ./images/layer2.png Graphic file (type png)
 <use ./images/layer2.png>
-Package pdftex.def Info: ./images/layer2.png  used on input line 907.
+Package pdftex.def Info: ./images/layer2.png  used on input line 908.
 (pdftex.def)             Requested size: 386.95894pt x 79.33856pt.
 <./images/t-view1.png, id=902, 500.87125pt x 488.82625pt>
 File: ./images/t-view1.png Graphic file (type png)
 <use ./images/t-view1.png>
-Package pdftex.def Info: ./images/t-view1.png  used on input line 913.
+Package pdftex.def Info: ./images/t-view1.png  used on input line 914.
 (pdftex.def)             Requested size: 183.80716pt x 179.38602pt.
 <./images/cm-view1.png, id=903, 477.785pt x 479.7925pt>
 File: ./images/cm-view1.png Graphic file (type png)
 <use ./images/cm-view1.png>
-Package pdftex.def Info: ./images/cm-view1.png  used on input line 915.
+Package pdftex.def Info: ./images/cm-view1.png  used on input line 916.
 (pdftex.def)             Requested size: 183.80716pt x 184.57791pt.
 <./images/tunneling-l2-1.png, id=904, 1214.5375pt x 558.085pt>
 File: ./images/tunneling-l2-1.png Graphic file (type png)
 <use ./images/tunneling-l2-1.png>
-Package pdftex.def Info: ./images/tunneling-l2-1.png  used on input line 924.
+Package pdftex.def Info: ./images/tunneling-l2-1.png  used on input line 925.
 (pdftex.def)             Requested size: 386.95894pt x 177.8074pt.
  [47 <./images/layer2.png> <./images/t-view1.png> <./images/cm-view1.png> <./images/tunneling-l2-1.png>]
 <./images/layer3.png, id=919, 1062.97125pt x 236.885pt>
 File: ./images/layer3.png Graphic file (type png)
 <use ./images/layer3.png>
-Package pdftex.def Info: ./images/layer3.png  used on input line 964.
+Package pdftex.def Info: ./images/layer3.png  used on input line 965.
 (pdftex.def)             Requested size: 386.95894pt x 86.23639pt.
 <./images/layer3-t-details-1.png, id=920, 1306.8825pt x 631.35875pt>
 File: ./images/layer3-t-details-1.png Graphic file (type png)
 <use ./images/layer3-t-details-1.png>
-Package pdftex.def Info: ./images/layer3-t-details-1.png  used on input line 973.
+Package pdftex.def Info: ./images/layer3-t-details-1.png  used on input line 974.
 (pdftex.def)             Requested size: 386.95894pt x 186.93321pt.
  [48 <./images/layer3.png> <./images/layer3-t-details-1.png>]
 <./images/layer3-t-details-2.png, id=932, 1305.87875pt x 608.2725pt>
 File: ./images/layer3-t-details-2.png Graphic file (type png)
 <use ./images/layer3-t-details-2.png>
-Package pdftex.def Info: ./images/layer3-t-details-2.png  used on input line 985.
+Package pdftex.def Info: ./images/layer3-t-details-2.png  used on input line 986.
 (pdftex.def)             Requested size: 386.95894pt x 180.23705pt.
 <./images/layer-3-dr-1.png, id=933, 1305.87875pt x 645.41125pt>
 File: ./images/layer-3-dr-1.png Graphic file (type png)
 <use ./images/layer-3-dr-1.png>
-Package pdftex.def Info: ./images/layer-3-dr-1.png  used on input line 1002.
+Package pdftex.def Info: ./images/layer-3-dr-1.png  used on input line 1003.
 (pdftex.def)             Requested size: 386.95894pt x 191.24161pt.
  [49 <./images/layer3-t-details-2.png> <./images/layer-3-dr-1.png>]
 <./images/layer-3-dr-2.png, id=943, 1306.8825pt x 641.39626pt>
 File: ./images/layer-3-dr-2.png Graphic file (type png)
 <use ./images/layer-3-dr-2.png>
-Package pdftex.def Info: ./images/layer-3-dr-2.png  used on input line 1021.
+Package pdftex.def Info: ./images/layer-3-dr-2.png  used on input line 1022.
 (pdftex.def)             Requested size: 386.95894pt x 189.90512pt.
 <./images/layer-4.png, id=944, 528.97626pt x 274.02374pt>
 File: ./images/layer-4.png Graphic file (type png)
 <use ./images/layer-4.png>
-Package pdftex.def Info: ./images/layer-4.png  used on input line 1048.
+Package pdftex.def Info: ./images/layer-4.png  used on input line 1049.
 (pdftex.def)             Requested size: 241.84842pt x 125.2831pt.
 ) [50 <./images/layer-3-dr-2.png> <./images/layer-4.png>]
 \openout2 = `chapters/cloud_storage.aux'.
@@ -1329,156 +1329,156 @@ Chapter 5.
 <images/block-model-cinder.png, id=963, 1377.145pt x 589.20125pt>
 File: images/block-model-cinder.png Graphic file (type png)
 <use images/block-model-cinder.png>
-Package pdftex.def Info: images/block-model-cinder.png  used on input line 82.
+Package pdftex.def Info: images/block-model-cinder.png  used on input line 83.
 (pdftex.def)             Requested size: 338.5863pt x 144.85454pt.
  [52 <./images/block-model-cinder.png>] [53]
 <images/ufs-layering.png, id=980, 611.28375pt x 428.60126pt>
 File: images/ufs-layering.png Graphic file (type png)
 <use images/ufs-layering.png>
-Package pdftex.def Info: images/ufs-layering.png  used on input line 148.
+Package pdftex.def Info: images/ufs-layering.png  used on input line 149.
 (pdftex.def)             Requested size: 290.22105pt x 203.48306pt.
 <images/nfs-design.png, id=981, 694.595pt x 493.845pt>
 File: images/nfs-design.png Graphic file (type png)
 <use images/nfs-design.png>
-Package pdftex.def Info: images/nfs-design.png  used on input line 164.
+Package pdftex.def Info: images/nfs-design.png  used on input line 165.
 (pdftex.def)             Requested size: 290.22105pt x 206.35098pt.
  [54 <./images/ufs-layering.png> <./images/nfs-design.png>]
 <images/nfs-remote-calls.png, id=991, 592.2125pt x 693.59125pt>
 File: images/nfs-remote-calls.png Graphic file (type png)
 <use images/nfs-remote-calls.png>
-Package pdftex.def Info: images/nfs-remote-calls.png  used on input line 203.
+Package pdftex.def Info: images/nfs-remote-calls.png  used on input line 204.
 (pdftex.def)             Requested size: 290.22105pt x 339.9156pt.
  [55 <./images/nfs-remote-calls.png>]
 <images/gpfs-design.png, id=1002, 527.9725pt x 561.09625pt>
 File: images/gpfs-design.png Graphic file (type png)
 <use images/gpfs-design.png>
-Package pdftex.def Info: images/gpfs-design.png  used on input line 245.
+Package pdftex.def Info: images/gpfs-design.png  used on input line 246.
 (pdftex.def)             Requested size: 290.22105pt x 308.42409pt.
  [56 <./images/gpfs-design.png>]
 <images/gfs-architecture.png, id=1011, 919.435pt x 379.4175pt>
 File: images/gfs-architecture.png Graphic file (type png)
 <use images/gfs-architecture.png>
-Package pdftex.def Info: images/gfs-architecture.png  used on input line 344.
+Package pdftex.def Info: images/gfs-architecture.png  used on input line 345.
 (pdftex.def)             Requested size: 290.22105pt x 119.76608pt.
  [57] [58 <./images/gfs-architecture.png>]
 <images/chubby-design.png, id=1030, 921.4425pt x 291.0875pt>
 File: images/chubby-design.png Graphic file (type png)
 <use images/chubby-design.png>
-Package pdftex.def Info: images/chubby-design.png  used on input line 472.
+Package pdftex.def Info: images/chubby-design.png  used on input line 475.
 (pdftex.def)             Requested size: 290.22105pt x 91.67972pt.
  [59]
 <images/chubby-design-fs.png, id=1038, 1371.1225pt x 307.1475pt>
 File: images/chubby-design-fs.png Graphic file (type png)
 <use images/chubby-design-fs.png>
-Package pdftex.def Info: images/chubby-design-fs.png  used on input line 489.
+Package pdftex.def Info: images/chubby-design-fs.png  used on input line 492.
 (pdftex.def)             Requested size: 290.22105pt x 65.01372pt.
  [60 <./images/chubby-design.png> <./images/chubby-design-fs.png>]
 <images/gbt-design.png, id=1050, 1347.0325pt x 644.4075pt>
 File: images/gbt-design.png Graphic file (type png)
 <use images/gbt-design.png>
-Package pdftex.def Info: images/gbt-design.png  used on input line 550.
+Package pdftex.def Info: images/gbt-design.png  used on input line 552.
 (pdftex.def)             Requested size: 386.95894pt x 185.11331pt.
 <images/gbt-blocks1.png, id=1051, 539.01375pt x 614.295pt>
 File: images/gbt-blocks1.png Graphic file (type png)
 <use images/gbt-blocks1.png>
-Package pdftex.def Info: images/gbt-blocks1.png  used on input line 569.
+Package pdftex.def Info: images/gbt-blocks1.png  used on input line 571.
 (pdftex.def)             Requested size: 135.43451pt x 154.35135pt.
 <images/sstable-format.png, id=1052, 1209.51875pt x 208.78pt>
 File: images/sstable-format.png Graphic file (type png)
 <use images/sstable-format.png>
-Package pdftex.def Info: images/sstable-format.png  used on input line 584.
+Package pdftex.def Info: images/sstable-format.png  used on input line 586.
 (pdftex.def)             Requested size: 483.69684pt x 83.4914pt.
  [61 <./images/gbt-design.png> <./images/gbt-blocks1.png>]
 <images/gbt-chubby-1.png, id=1063, 411.5375pt x 408.52625pt>
 File: images/gbt-chubby-1.png Graphic file (type png)
 <use images/gbt-chubby-1.png>
-Package pdftex.def Info: images/gbt-chubby-1.png  used on input line 604.
+Package pdftex.def Info: images/gbt-chubby-1.png  used on input line 606.
 (pdftex.def)             Requested size: 135.43451pt x 134.44006pt.
 <images/gbt-design-detailed.png, id=1064, 679.53876pt x 601.24625pt>
 File: images/gbt-design-detailed.png Graphic file (type png)
 <use images/gbt-design-detailed.png>
-Package pdftex.def Info: images/gbt-design-detailed.png  used on input line 610.
+Package pdftex.def Info: images/gbt-design-detailed.png  used on input line 612.
 (pdftex.def)             Requested size: 290.22105pt x 256.77855pt.
  [62 <./images/sstable-format.png> <./images/gbt-chubby-1.png> <./images/gbt-design-detailed.png>]
 <images/gbt-tablet-location.png, id=1074, 1344.02126pt x 765.86125pt>
 File: images/gbt-tablet-location.png Graphic file (type png)
 <use images/gbt-tablet-location.png>
-Package pdftex.def Info: images/gbt-tablet-location.png  used on input line 655.
+Package pdftex.def Info: images/gbt-tablet-location.png  used on input line 657.
 (pdftex.def)             Requested size: 338.5863pt x 192.93729pt.
  [63 <./images/gbt-tablet-location.png>]
 <images/gbt-tablet-write.png, id=1082, 684.5575pt x 351.3125pt>
 File: images/gbt-tablet-write.png Graphic file (type png)
 <use images/gbt-tablet-write.png>
-Package pdftex.def Info: images/gbt-tablet-write.png  used on input line 739.
+Package pdftex.def Info: images/gbt-tablet-write.png  used on input line 742.
 (pdftex.def)             Requested size: 159.62083pt x 81.91518pt.
  [64]
 <images/gbt-tablet-read.png, id=1098, 673.51625pt x 346.29375pt>
 File: images/gbt-tablet-read.png Graphic file (type png)
 <use images/gbt-tablet-read.png>
-Package pdftex.def Info: images/gbt-tablet-read.png  used on input line 753.
+Package pdftex.def Info: images/gbt-tablet-read.png  used on input line 756.
 (pdftex.def)             Requested size: 159.62083pt x 82.07124pt.
 <images/gbt-tablet-recovery.png, id=1099, 674.52pt x 460.72125pt>
 File: images/gbt-tablet-recovery.png Graphic file (type png)
 <use images/gbt-tablet-recovery.png>
-Package pdftex.def Info: images/gbt-tablet-recovery.png  used on input line 768.
+Package pdftex.def Info: images/gbt-tablet-recovery.png  used on input line 771.
 (pdftex.def)             Requested size: 159.62083pt x 109.02171pt.
 <images/gbt-tablet-minor-comp.png, id=1100, 1354.05875pt x 363.3575pt>
 File: images/gbt-tablet-minor-comp.png Graphic file (type png)
 <use images/gbt-tablet-minor-comp.png>
-Package pdftex.def Info: images/gbt-tablet-minor-comp.png  used on input line 780.
+Package pdftex.def Info: images/gbt-tablet-minor-comp.png  used on input line 783.
 (pdftex.def)             Requested size: 386.95894pt x 103.84071pt.
  [65 <./images/gbt-tablet-write.png> <./images/gbt-tablet-read.png> <./images/gbt-tablet-recovery.png> <./images/gbt-tablet-minor-comp.png>]
 <images/gbt-tablet-merge-comp.png, id=1121, 1354.05875pt x 344.28625pt>
 File: images/gbt-tablet-merge-comp.png Graphic file (type png)
 <use images/gbt-tablet-merge-comp.png>
-Package pdftex.def Info: images/gbt-tablet-merge-comp.png  used on input line 792.
+Package pdftex.def Info: images/gbt-tablet-merge-comp.png  used on input line 795.
 (pdftex.def)             Requested size: 386.95894pt x 98.39052pt.
 <images/gbt-tablet-major-comp.png, id=1122, 1358.07375pt x 345.29pt>
 File: images/gbt-tablet-major-comp.png Graphic file (type png)
 <use images/gbt-tablet-major-comp.png>
-Package pdftex.def Info: images/gbt-tablet-major-comp.png  used on input line 805.
+Package pdftex.def Info: images/gbt-tablet-major-comp.png  used on input line 808.
 (pdftex.def)             Requested size: 386.95894pt x 98.38232pt.
  [66 <./images/gbt-tablet-merge-comp.png> <./images/gbt-tablet-major-comp.png>]
 <images/oss-hierarchy.png, id=1136, 472.76625pt x 606.265pt>
 File: images/oss-hierarchy.png Graphic file (type png)
 <use images/oss-hierarchy.png>
-Package pdftex.def Info: images/oss-hierarchy.png  used on input line 840.
+Package pdftex.def Info: images/oss-hierarchy.png  used on input line 843.
 (pdftex.def)             Requested size: 193.47577pt x 248.11696pt.
 <images/oss-architecture.png, id=1137, 1328.965pt x 668.4975pt>
 File: images/oss-architecture.png Graphic file (type png)
 <use images/oss-architecture.png>
-Package pdftex.def Info: images/oss-architecture.png  used on input line 847.
+Package pdftex.def Info: images/oss-architecture.png  used on input line 850.
 (pdftex.def)             Requested size: 386.95894pt x 194.64474pt.
  [67 <./images/oss-hierarchy.png> <./images/oss-architecture.png>] [68]
 <images/oss-put-1.png, id=1154, 1207.51125pt x 542.025pt>
 File: images/oss-put-1.png Graphic file (type png)
 <use images/oss-put-1.png>
-Package pdftex.def Info: images/oss-put-1.png  used on input line 937.
+Package pdftex.def Info: images/oss-put-1.png  used on input line 940.
 (pdftex.def)             Requested size: 232.17241pt x 104.20987pt.
 <images/oss-put-2.png, id=1155, 1373.13pt x 521.95pt>
 File: images/oss-put-2.png Graphic file (type png)
 <use images/oss-put-2.png>
-Package pdftex.def Info: images/oss-put-2.png  used on input line 940.
+Package pdftex.def Info: images/oss-put-2.png  used on input line 943.
 (pdftex.def)             Requested size: 232.17241pt x 88.25246pt.
 <images/oss-put-3.png, id=1156, 1366.10374pt x 626.34pt>
 File: images/oss-put-3.png Graphic file (type png)
 <use images/oss-put-3.png>
-Package pdftex.def Info: images/oss-put-3.png  used on input line 943.
+Package pdftex.def Info: images/oss-put-3.png  used on input line 946.
 (pdftex.def)             Requested size: 232.17241pt x 106.44771pt.
 <images/oss-put-4.png, id=1157, 1360.08125pt x 631.35875pt>
 File: images/oss-put-4.png Graphic file (type png)
 <use images/oss-put-4.png>
-Package pdftex.def Info: images/oss-put-4.png  used on input line 946.
+Package pdftex.def Info: images/oss-put-4.png  used on input line 949.
 (pdftex.def)             Requested size: 232.17241pt x 107.77272pt.
 <images/oss-put-5.png, id=1158, 1355.0625pt x 631.35875pt>
 File: images/oss-put-5.png Graphic file (type png)
 <use images/oss-put-5.png>
-Package pdftex.def Info: images/oss-put-5.png  used on input line 949.
+Package pdftex.def Info: images/oss-put-5.png  used on input line 952.
 (pdftex.def)             Requested size: 232.17241pt x 108.1677pt.
 <images/oss-put-6.png, id=1159, 1356.06625pt x 629.35126pt>
 File: images/oss-put-6.png Graphic file (type png)
 <use images/oss-put-6.png>
-Package pdftex.def Info: images/oss-put-6.png  used on input line 959.
+Package pdftex.def Info: images/oss-put-6.png  used on input line 962.
 (pdftex.def)             Requested size: 232.17241pt x 107.74693pt.
 ) [69 <./images/oss-put-1.png> <./images/oss-put-2.png> <./images/oss-put-3.png> <./images/oss-put-4.png> <./images/oss-put-5.png> <./images/oss-put-6.png>]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 188.
@@ -1499,7 +1499,7 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  64i,13n,102p,512b,1037s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecit1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1728.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1440.600pk> </home/leonardo/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on "Fog and cloud computing.pdf" (70 pages, 9402734 bytes).
+Output written on "Fog and cloud computing.pdf" (70 pages, 9402680 bytes).
 PDF statistics:
  1874 PDF objects out of 2073 (max. 8388607)
  1036 compressed objects within 11 object streams

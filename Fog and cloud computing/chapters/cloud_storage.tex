@@ -11,10 +11,10 @@ In the past, storage systems were designed according to a
 \emph{reliability-at-the-lowest-possible-cost}. For example, data replication
 allows concurrent access to data from multiple processors and decreases the
 chances of data loss, but maintaining consistency among multiple copies of data
-records increases complexity of the management software and could negatively
-affect the storage system performance as a whole if data is frequently updated.
+records increases complexity of the management software, and could negatively
+affect the storage system performance as a whole, if data is frequently updated.
 
-So, in this chapter we're going to explain some modern strategies adopted
+In this chapter we're going to explain some modern strategies adopted
 to manage cloud storage while also respecting performance and realibility
 requirements.
 
@@ -26,11 +26,11 @@ Before proceding, we need to fix some concepts.
 \end{definition}
 \begin{definition}[Data model]
     A data model captures the most important logical aspects of a data structure
-    in a database
+    in a database 
 \end{definition}
 
 \begin{definition}[Read-write coherence]
-    The result of reading of a memory cell, should be the same as the most recent
+    The result of reading by a memory cell, should be the same as the most recent
     writing done on that cell.
 \end{definition}
 \begin{definition}[Before-or-after atomicity]
@@ -54,7 +54,7 @@ There are three main types of storage:
     large amounts of data or when there's high-demand for a particular piece
     of data;
     \item \emph{Object storage}: data is managed as objects. Typically, each
-    object has a gloabal unique identifier and holds both the data itself and
+    object has a glo    bal unique identifier and holds both the data itself and
     some metadata. It's possible to access whole objects or blobs of data, but
     random accesses to data within an object is more difficult;
 \end{enumerate}
@@ -64,23 +64,24 @@ There are three main types of storage:
 storing relational information. On the other hand, \emph{Object storage} isn't
 suitable for databases, but is preferable to store content that can grow without
 bounds, for example, backups and archives. Finally, the \emph{File storage} model
-can be easily used to create \emph{distributed file system} via network protocols.
+can be easily used to create \emph{distributed file systems} via network protocols.
 
 Examples of \emph{Block storage}, \emph{File storage} and \emph{Object storage}
-are, respectivelly, \emph{Cinder}, \emph{Google file system} and OpenStack Swift.
+are, respectivelly, \emph{Cinder}, \emph{Google file system} and \emph{OpenStack
+Swift}.
 
 \section{Block storage}
-We'll give a quick look to this model by scratching the surface of \emph{OpenStack
-Cinder}. \emph{OpenStack Cinder} implements services and libraries to provide
-on-demand, self-service access to block storage resources. It provides API to
-interact with storage backends which is also exposed to the cloud. End users can
-manage their storage without knowing how it's organized and for both physical and
-virtual environments.
+We'll give a first quick look to this model by scratching the surface of
+\emph{OpenStack Cinder}. \emph{OpenStack Cinder} implements services and libraries
+to provide on-demand, self-service access to block storage resources. It provides
+API to interact with storage backends which is also exposed to the cloud. End
+users can manage their storage without knowing how it's organized and for both
+physical and virtual environments.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\textwidth]{images/block-model-cinder.png}
-    \caption{\emph{OpenStack Cinder basic architecture}}
+    \caption{\emph{OpenStack Cinder} basic architecture}
 \end{figure}
 
 \noindent
@@ -94,8 +95,8 @@ Again, we'll start by giving some definitions.
 \begin{definition}[File]
     A file is a linear array of cells stored on a persistent storage device. It
     is seen by application as a collection of logical records, and it's stored
-    on a physical device as a set of physical records, or blocks, of size
-    dictated by the physical media.
+    on a physical device as a set of physical records, or blocks, whose size
+    is dictated by the physical media.
 \end{definition}
 \begin{definition}[File pointer]
     A file pointer is a cell used as starting point for a read or write operation.
@@ -118,8 +119,8 @@ The \emph{Unix File System} (\emph{UFS}) has both a layered and hierarchical
 design. The first allows it to separate the physical file structure from the
 logical one, and this becomes useful when dealing with files stored both locally
 and remotely. The hierarchical design, on the other hand, allows grouping of
-files in directories, supports multiple levels of directories and collections of
-directories and files; thus, supporting a good degree of scalability.
+files in directories, and supports multiple levels of directories, or collections
+of directories and files; thus, supporting a good degree of scalability.
 
 The metadata that \emph{UFS} uses includes file owner, access rights, creation
 time, time of the last modification, file size, the structure of the file and
@@ -152,8 +153,8 @@ Going back to \emph{UFS} layering, there are two layers:
 \subsection{Network File System}
 The \emph{Network File System} (\emph{NFS}) is designed to provide the same
 semantics as the \emph{UFS} to ensure compatiblity with existing applications.
-\emph{NFS} is based on the client-server paradigm and, in particular, clients
-runs on the local host and interact with the server via remote procedure calls.
+\emph{NFS} is based on the client-server paradigm. Clients run on the local host
+and interact with the server via remote procedure calls.
 
 Each remote file is identified by a 32-bit file handler rather than a file
 descriptor like in \emph{UFS}. A file handler is obtained combining a file
@@ -172,8 +173,8 @@ regardless of whether the file is local or remote. Also, an operation targeting
 a local file is directed to the local file system without involving the \emph{NFS}.
 
 When a client interacts with the server, the client-side \emph{NFS} packages the
-relevant information about target, then sends those packaged information to the
-server-side \emph{NFS}. The latter then passes the received information to the
+relevant information about the target, then sends those packaged information to
+the server-side \emph{NFS}. The latter then passes the received information to the
 \emph{vnode layer} of the remote host which finally directs it to the remote
 file system.
 
@@ -205,22 +206,22 @@ file system.
 \end{figure}
 
 \paragraph{Common design choices for distributed file system}
-The vast majority of distributed file systems has been implemented in similar
-ways. That's not so surprising if we think that they all need to solve the same
-problems and that the possible or best solutions to choose from are limited.
+The vast majority of distributed file systems have been implemented in similar
+a way. That's not so surprising if we think that they all need to solve the same
+problems and that the possibles or best solutions to choose from are limited.
 
 Tipically, every distributed file system is implemented in a way that once a file
 is closed, the server will have the newest version of it on persisten storage.
 Another concern is about what to do when writing on a file. The possible
-solutions are two:
+approches are two:
 \begin{enumerate}
-    \item \emph{Write-through}: block is written to the disk as soon as it is
+    \item \emph{Write-through}: a block is written to the disk as soon as it is
     available on the cache. This approch increases reliability, but it takes more
     time to complete each write operation;
     \item \emph{Delay in write-back}: a block is first written to cache and
     writing on the disk is delayed for a time in the order of tens of seconds.
-    This speeds up writings and avoids useless writing when data is discarded
-    before the time to save it to the disk. However, data can be lost in case
+    This speeds up writings and avoids useless writings when data is discarded
+    before saving on disk is necessary. However, data can be lost in case
     of system failures;
 \end{enumerate}
 
@@ -235,7 +236,7 @@ same file at the same time? The possibilities are two:
 \end{enumerate}
 
 \subsection{General Parallel File System}
-\emph{General Paralles File System} (\emph{GPFS}) is a distributed file
+\emph{General Parallel File System} (\emph{GPFS}) is a distributed file
 system developed by IBM that's designed for optimal performance of large
 clusters. To do so, it allows parallel I/O, meaning that multiple I/O
 operations can be executed concurrently.
@@ -252,7 +253,7 @@ As the image shows, every disk is interconnected via a \emph{Storage Area Networ
 
 \emph{GPFS} is a realiable file system because it can recover from system
 failures. To achive so, \emph{GPFS} records all metadata updates in a write-ahead
-log file. Write-ahead means that updates are written to persisten storage only
+log file. Write-ahead means that updates are written to persistent storage only
 after log records have been written. Every I/O node manages one log file for
 each file system it mounts and any I/O node can initiate recovery on behalf of
 a failed node.
@@ -286,7 +287,7 @@ with various needs.
         to append to the same file\\
         \hline
         Consistency model should be relaxed to simplify the system implementation
-        but without placing an additional burden on the application developers &
+        but without placing an additional burden on application developers &
         Ensure consistency by channeling critical file operations through a
         \emph{master}, a component of the cluster which controls the entire
         system\\
@@ -306,7 +307,7 @@ Other considerations made are:
 \end{itemize}
 And other relevant design decisions are:
 \begin{itemize}
-    \item Cluster must be built around a high-bandwidth rather than a low-latency
+    \item Clusters must be built around a high-bandwidth rather than a low-latency
     interconnection network, so control and data flows should be separated.
     High-bandwidth data flow should be scheduled by pipelining data transfer over
     TCP connections and finally, the network topology should be exploited by
@@ -318,7 +319,7 @@ And other relevant design decisions are:
 \end{itemize}
 
 \paragraph{GFS chunks}
-So, as we said, files are segmented into large \emph{chunks}. To be more precise
+So, as we said, files are segmented into large \emph{chunks}. To be more precise,
 each \emph{chunk} is large exactly 64MB. This choice was motivated by the desire
 to optimize performance for large files and to reduce the amount of metadata
 maintained by the system. Also, large \emph{chunk} size increases the likelihood
@@ -346,7 +347,7 @@ directly with the applications.
 \end{figure}
 
 \begin{note}
-    Data and control flows have been graphically separated. Data paths
+    Data and control flows have been graphically separated.
 \end{note}
 
 \paragraph{Steps for a write request}
@@ -359,8 +360,8 @@ The \emph{master} will also assign a lease to the primary replica. That
 server will have an exclusive permission to read, write and modify data of a
 particulare \emph{chunk} without fear of another server changing it. When the
 lease expires\footnotemark the \emph{master} must reassign the lease to another
-server or the same server, depending on the needs of the system. This helps to
-ensure data integrity and prevents data corruption.
+server or the same server, depending on the needs of the system. This helps
+to ensure data integrity and prevents data corruption.
 
 \footnotetext{The lease time is usually aroung 60 seconds}
 
@@ -408,13 +409,13 @@ the effect there are two possibilities:
 \begin{itemize}
     \item \emph{Adivisory locks}: processes that don't hold the \emph{lock} can
     still access the locked resouces by circumventing the locking mechanism;
-    \item \emph{Mandatory locks}: block access to the locked objects to all
-    processes that do not hold the \emph{lock};
+    \item \emph{Mandatory locks}: proceses that don't hold the \emph{lock} can
+    never access the locked object;
 \end{itemize}
 Based on time there are again two possibilities:
 \begin{itemize}
     \item \emph{Fine-grained locks}: \emph{locks} can be held for a short time.
-    This allows processes to access the locked resources more often, but
+    This allows processes to access locked resources more often, but
     generates more workload for the \emph{lock manager}. Also, if the
     \emph{leader} fails, more processes are affected;
     \item \emph{Coarse-grained locks}: \emph{locks} are held for a longer time;
@@ -423,27 +424,29 @@ Based on time there are again two possibilities:
 \paragraph{Locks management systems}
 Locking management can be delegated to clients which need to implement their
 own \emph{consensus algorithm} and provide by themselves a library of functions.
-This is cumbersome and prone to errors, must not be dependen on any other server.
+This is cumbersome, prone to errors, and must not be dependent on any other server.
 
 A better approch is to implement a \emph{locking service} and provide a library
-to be linked with an application client to support service calls. The most
+linked with a client application to support service calls. The most
 widely used \emph{consensus algorithm} is the \emph{Asynchronous PAXOS
-algorithm}. This approch allows to easily maintain existing program structure
-and communication patterns, then, \emph{lock services} ca be replicated to
-achive high-availability (i.e. quorums), but even a single client can obtain
-\emph{lock} and make progress safely. This reduces the number of servers
-needed for a realiable client system to make progress. However, scalability
+algorithm}. This approch allows to easily maintain both existing program
+structures and communication patterns. Then, \emph{lock services} ca be
+replicated to achive high-availability (i.e. quorums), but even a single client
+can obtain \emph{lock} and make progress safely. This reduces the number of
+servers needed for a realiable client system to make progress, but scalability
 might be an issue.
 
 \subsection{Chubby}
 \emph{Chubby} is a \emph{lock service} devoloped by Google and designed to be used
 within a loosely-coupled distributed system. So, it is thought for contexts in
-which many machines (e.g. 10K) connected by high-speed network are involved and
-with reliable, but low volume, storage. \emph{Chubby} uses \emph{coarse-grained}
-and \emph{advoisory locks}. Its interface allows reading and writing on whole
-files (no seek operation included) and notification of events (to avoid polling).
-As \emph{consensus algorithm} uses the already mentioned \emph{Asynchronous
-PAXOS} with lease timers to ensure liveness.
+which there are many machines (e.g. 10K) connected by a high-speed network, and
+when there's a reliable, but low volume storage.
+
+\emph{Chubby} uses \emph{coarse-grained} and \emph{advisory locks}. Its
+interface allows reading and writing on whole files (no seek operation included)
+and notification of events (to avoid polling). As for \emph{consensus algorithm},
+\emph{Chubby} uses the already mentioned \emph{Asynchronous PAXOS}, with lease
+timers to ensure liveness.
 
 \paragraph{Chubby architecture}
 The structure is made up of two main components which communicate through remote
@@ -462,7 +465,7 @@ identity of the actual \emph{master}, and once a client has located a
 or indicates it is no longer the \emph{master}.
 
 Clients communicate with the \emph{master} using remote procedure calls provided
-by a library. When a \emph{master} received a write request, it propagates it
+by a library. When a \emph{master} receives a write request, it propagates it
 to other replicas in the \emph{cell} and responds to the client when the request
 has been accepted by a majority of the replicas. On read requests instead, the
 \emph{master} can respond directly.
@@ -474,15 +477,15 @@ has been accepted by a majority of the replicas. On read requests instead, the
 \end{figure}
 
 \paragraph{Chubby file system}
-\emph{Chubby} exposes a file system interface simpler than that of a \emph{UFS}.
+\emph{Chubby} exposes a file system interface simpler than that of \emph{UFS}.
 The file system is a tree of files and directories with name components separated
 by \texttt{/}. Each directory containes a list of files and directories which
 are collectivelly called nodes. Each file containes a sequent of uninterpreted
 bytes.
 
-The interface is simpler because there's no symbolic or hard links, no file move,
-directory times for modifications or last access and no path-dependant permission,
-meaning that permission of a file are handled by the file itself.
+The interface is simpler because there are no symbolic nor hard links, no file
+move, no directory times for modifications or last access, and no path-dependant
+permission, meaning that permissions of a file are handled by the file itself.
 
 \begin{figure}[h!]
     \centering
@@ -495,14 +498,13 @@ Each node can be permanent (e.g. actual files and directories) or ephemeral
 (e.g. temporary files) and its metadata includes three access control list
 used to control read, write operations and modification of the lists themselves.
 By opening a node, a client can obtain a handle, which is like a file descriptor
-in Unix, and use it to access node internal data.
+in Unix, and can use it to access node internal data.
 
 \paragraph{Chubby locking system}
 Each node can act as an \emph{advisory reader/writer lock}. So, if an application
-want to get the \emph{lock} over a shared resource and operate on it, it has
-to acquire a \emph{lock}. In the case of multiple clients trying to get access
-to the same resource, the first one that gets the \emph{lock} becomes the one
-that can use it.
+wants to get access over a shared resource and operate on it, it has to acquire a
+\emph{lock}. In the case of multiple clients trying to get access to the same
+resource, the first one that gets the \emph{lock} becomes the one that can use it.
 
 As previously mentioned, \emph{locks} are mapped to nodes and are of two
 kinds:
@@ -512,12 +514,12 @@ kinds:
     \item \emph{Shared mode} (\emph{reader}): any number of clients can hold
     the \emph{lock};
 \end{itemize}
-To acquire either mode clients must have write permission on that node.
+To acquire either mode, clients must have write permission on that node.
 Both modes are implemented using two other kinds of \emph{locks}:
 \begin{itemize}
-    \item \emph{Sequencer}: is used to ensure that the order of access to the
+    \item \emph{Sequencer}: is used to ensure that the access order to a
     shared resource remains consistent. When a client acquires this \emph{lock},
-    it is able to access the resource is a specific order. It also holds
+    it is able to access the resource in a specific order. It also holds
     information about state of the \emph{lock};
     \item \emph{Time delay}: is used to ensure that any client attempting to
     access the resource while a \emph{lock} is in place will have to wait until
@@ -527,7 +529,7 @@ Both modes are implemented using two other kinds of \emph{locks}:
 \noindent
 When using \emph{shared mode}, clients can request access to a resource in either
 read or write mode. In read mode, multiple clients can access the resource
-concurrently, while in write mode only one client do it.
+concurrently, while in write mode only one client can do it.
 
 \paragraph{Chubby APIs: summary}
 So, when using \emph{Chubby} it is possible to:
@@ -618,7 +620,7 @@ The above image shows the actual architecture of \emph{GBT}. There's one
     \item Assigning \emph{tablets} to \emph{tablet servers};
     \item Detecting the addition and expiration of \emph{tablet servers};
     \item Balancing \emph{tablet servers} load;
-    \item Garbage collecting of files in GFS;
+    \item Garbage collection of files in \emph{GFS};
     \item Handling schema changes (\emph{tablet} creation, column family
     creation/deletion);
     \item providing metadata to the \emph{Chubby master};
@@ -658,7 +660,7 @@ The API provided by \emph{GBT} is the following:
 
 \paragraph{Tablet assignment}
 Each \emph{tablet} is assigned to one \emph{tablet server} at a time.
-\emph{Master} keeps tracks of: the set of live \emph{tablet servers} (via
+\emph{Master} keeps tracks of the set of live \emph{tablet servers} (via
 \emph{Chubby}), current assignement of \emph{tablets} to \emph{tablet servers}
 and current unassigned \emph{tablets}. When a \emph{tablet} is unassigned, the
 master assigns it to an available \emph{tablet server} by sending a \emph{tablet}
@@ -667,7 +669,7 @@ load request.
 \paragraph{Tablet server discovery}
 When a \emph{tablet server} starts, it creates and acquires an
 \emph{exclusive lock} on a uniquely-named file in a specific \emph{Chubby}
-directory (\q{servers} directory) and the \emph{master} monitors this directory
+directory (\texttt{servers} directory) and the \emph{master} monitors this directory
 to discover \emph{tablet servers}. A \emph{tablet server} stops serving its
 \emph{tablets} if it loses its \emph{exclusive Chubby lock}, and if the
 \emph{Chubby} file no longer exists, then the \emph{tablet server} will never
@@ -695,11 +697,12 @@ is a five-steps procedure:
 \begin{enumerate}
     \item The \emph{master} grabs a \emph{unique master lock} in \emph{Chubby}
     to prevent concurrent \emph{master} instantiations;
-    \item It scans the \q{servers} directory in \emph{Chubby} to find all live
+    \item It scans the \texttt{servers} directory in \emph{Chubby} to find all
+    live
     \emph{tablet servers};
     \item It communicates with every live \emph{tablet server} to discover what
     \emph{tablets} are already assigned to each server;
-    \item It adds the \emph{root tablet} to the set of \emph{unassigned tablets}
+    \item It adds the \emph{root tablet} to the set of \emph{unassigned tablets},
     if an assignment for it wasn't previuosly discovered;
     \item Finally, the \emph{master} scans the \emph{METADATA tablet} to learn
     the complete set of \emph{tablets} and eventually detect unassigned ones;
@@ -813,8 +816,8 @@ for \emph{multi-tenancy} and high concurrency. It's ideal for backups, web and
 mobile content, and any other unstructured data that can grow without bound.
 Among the features of \emph{OSS} there are consistency, because every access to
 an item will return its most recent value, high availability, possibility to
-rely on commodity hardware, authentication procedures and possibility to set
-up quotas, access control lists and various storage policies.
+rely on commodity hardware, authentication procedures and possibility the
+possibility to set up quotas, access control lists and various storage policies.
 
 Since this is not a distributed file system, it's impossible to mount it, create
 a file hierarchy, create a file system from a certain state of the service, and
@@ -854,8 +857,8 @@ For each request it receives, it looks up the location of the \emph{account},
 \emph{container} or \emph{objet} in the \emph{ring}, and routes the request
 accordingly. More precisely, the \emph{proxy server} serves as the interface
 to the users. It's responsible to implement the \emph{OSS} APIs, accept and
-answer to user requests, handle failures and make sure that communication with
-\emph{storage servers} is up and working.
+answer to user requests, handle failures and make sure that the communication
+with \emph{storage servers} is up and working.
 
 Then, there are two more categories of server:
 \begin{itemize}
@@ -868,7 +871,7 @@ Then, there are two more categories of server:
         what \emph{container} they belong. Each server keeps the listing in a
         replicated SQLite database together with statistics about the
         \emph{containers} it controls;
-        \item \emph{Accounts servers}: they're the same as \emph{container servers},
+        \item \emph{Account servers}: they're the same as \emph{container servers},
         but keep listings of \emph{containers} instead of \emph{objects};
     \end{itemize}
     \item \emph{Consistency servers}:
@@ -908,7 +911,7 @@ Here's a list of some funtions exposed by \emph{OSS} APIs:
 \paragraph{OSS rings}
 A \emph{ring} is a data structure in which each node is connected to its
 neighbours forming a loop. Each node in the \emph{ring} is a \emph{storage server}.
-\emph{Rings} are managed by a \emph{ring component} and are used to determine
+\emph{Rings} are managed by a \emph{ring component} and is used to determine
 where data should be stored and even redistribute data evenly aroung nodes,
 according to weights based on the available capacity of each node.
 
