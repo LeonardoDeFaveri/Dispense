@@ -1,0 +1,154 @@
+\contentsline {chapter}{\numberline {1}Introduction}{2}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Could ecosystem}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Some definitions}{4}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Virtualization}{5}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Single-tenancy VS multi-tenancy}{5}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Elasticity and resource provisioning}{6}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Delivery models}{6}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Software as a service}{6}{subsection.2.2.1}%
+\contentsline {paragraph}{Examples}{7}{paragraph*.6}%
+\contentsline {subsection}{\numberline {2.2.2}Platform as a Service}{7}{subsection.2.2.2}%
+\contentsline {paragraph}{Examples}{7}{paragraph*.7}%
+\contentsline {subsection}{\numberline {2.2.3}Infrastructure as a Service}{7}{subsection.2.2.3}%
+\contentsline {paragraph}{Examples}{7}{paragraph*.8}%
+\contentsline {section}{\numberline {2.3}Deployment models}{7}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Public cloud}{7}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Private cloud}{7}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Community cloud}{8}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Hybrid cloud}{8}{subsection.2.3.4}%
+\contentsline {chapter}{\numberline {3}Virtualization}{9}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction}{9}{section.3.1}%
+\contentsline {paragraph}{Advantages}{9}{paragraph*.9}%
+\contentsline {paragraph}{Disadvantages}{10}{paragraph*.10}%
+\contentsline {subsection}{\numberline {3.1.1}Some definitions}{10}{subsection.3.1.1}%
+\contentsline {section}{\numberline {3.2}CPU virtualization}{11}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Some definitions}{11}{subsection.3.2.1}%
+\contentsline {paragraph}{System call invocation and hardware interrupts}{12}{paragraph*.12}%
+\contentsline {paragraph}{Going back to virtualization}{13}{paragraph*.14}%
+\contentsline {subsection}{\numberline {3.2.2}Trap \& emulate paradigm}{13}{subsection.3.2.2}%
+\contentsline {paragraph}{System call handling}{13}{paragraph*.15}%
+\contentsline {paragraph}{Privileged instruction handling}{14}{paragraph*.16}%
+\contentsline {paragraph}{Hardware interrupt handling}{14}{paragraph*.17}%
+\contentsline {paragraph}{Problems with systems virtualization}{14}{paragraph*.18}%
+\contentsline {paragraph}{Possible solutions}{14}{paragraph*.19}%
+\contentsline {paragraph}{Dynamic binary translation}{15}{paragraph*.20}%
+\contentsline {subsection}{\numberline {3.2.3}Paravirtualization}{15}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Hardware assisted virtualization}{15}{subsection.3.2.4}%
+\contentsline {paragraph}{VMX instructions}{16}{paragraph*.22}%
+\contentsline {paragraph}{Virtual machine control structure}{16}{paragraph*.23}%
+\contentsline {section}{\numberline {3.3}Memory virtualization}{17}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Memory management in general}{17}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Memory management in virtualised environments}{18}{subsection.3.3.2}%
+\contentsline {paragraph}{Shadow page table creation}{18}{paragraph*.27}%
+\contentsline {paragraph}{Problems with shadow page table}{18}{paragraph*.28}%
+\contentsline {subsection}{\numberline {3.3.3}Hardware assisted memory virtualization}{19}{subsection.3.3.3}%
+\contentsline {paragraph}{Tagged TLBs}{19}{paragraph*.30}%
+\contentsline {section}{\numberline {3.4}I/O virtualization}{19}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Device emulation}{19}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Paravirtualized devices}{20}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Direct assignment}{20}{subsection.3.4.3}%
+\contentsline {paragraph}{Hardware assisted direct assignment}{20}{paragraph*.31}%
+\contentsline {section}{\numberline {3.5}Hypervisors architectures}{21}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Type 1 architecture}{21}{subsection.3.5.1}%
+\contentsline {paragraph}{Examples}{21}{paragraph*.33}%
+\contentsline {subsection}{\numberline {3.5.2}Type 2 architecture}{21}{subsection.3.5.2}%
+\contentsline {paragraph}{Examples}{21}{paragraph*.34}%
+\contentsline {subsection}{\numberline {3.5.3}Hybrid architecture}{21}{subsection.3.5.3}%
+\contentsline {paragraph}{Examples}{21}{paragraph*.35}%
+\contentsline {section}{\numberline {3.6}OS-level virtualization}{22}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Lightweigth virtualization}{22}{subsection.3.6.1}%
+\contentsline {paragraph}{Why is process isolation so important?}{23}{paragraph*.37}%
+\contentsline {subsection}{\numberline {3.6.2}Linux cgroups}{23}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}Linux namespaces}{23}{subsection.3.6.3}%
+\contentsline {paragraph}{PID namespace}{24}{paragraph*.38}%
+\contentsline {paragraph}{Network namespace}{24}{paragraph*.40}%
+\contentsline {paragraph}{Other namespaces in short}{25}{paragraph*.42}%
+\contentsline {subsection}{\numberline {3.6.4}Linux containers}{25}{subsection.3.6.4}%
+\contentsline {paragraph}{LXC - Linux Containers in practical}{26}{paragraph*.44}%
+\contentsline {subsection}{\numberline {3.6.5}Docker}{26}{subsection.3.6.5}%
+\contentsline {paragraph}{Docker VS LXC}{27}{paragraph*.45}%
+\contentsline {subsection}{\numberline {3.6.6}Docker usage in general}{27}{subsection.3.6.6}%
+\contentsline {paragraph}{Docker network management}{27}{paragraph*.46}%
+\contentsline {paragraph}{Docker file system management}{27}{paragraph*.48}%
+\contentsline {paragraph}{Automatic build}{28}{paragraph*.51}%
+\contentsline {chapter}{\numberline {4}Cloud networking}{30}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Data centers networks}{30}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Characteristics of data center networks}{31}{subsection.4.1.1}%
+\contentsline {paragraph}{Interconnetion networks}{31}{paragraph*.55}%
+\contentsline {paragraph}{Topologies}{32}{paragraph*.56}%
+\contentsline {subsection}{\numberline {4.1.2}Topologies more in depth}{34}{subsection.4.1.2}%
+\contentsline {paragraph}{Fat tree topology}{35}{paragraph*.62}%
+\contentsline {subsection}{\numberline {4.1.3}Open issues}{36}{subsection.4.1.3}%
+\contentsline {paragraph}{Proposed solutions}{37}{paragraph*.68}%
+\contentsline {section}{\numberline {4.2}Networking in virtualised environments}{37}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}North/south and east/west communication on a single server}{37}{subsection.4.2.1}%
+\contentsline {paragraph}{Host-based switching}{38}{paragraph*.70}%
+\contentsline {paragraph}{Hairpin switching}{38}{paragraph*.71}%
+\contentsline {paragraph}{NIC switching}{38}{paragraph*.72}%
+\contentsline {paragraph}{Hardware VS software solutions}{39}{paragraph*.73}%
+\contentsline {section}{\numberline {4.3}Software bridges in Linux}{39}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Linuxbridge}{40}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Macvlan}{40}{subsection.4.3.2}%
+\contentsline {paragraph}{Private mode}{40}{paragraph*.75}%
+\contentsline {paragraph}{VEPA mode}{40}{paragraph*.76}%
+\contentsline {paragraph}{Bridge mode}{41}{paragraph*.79}%
+\contentsline {paragraph}{Pass-through mode}{41}{paragraph*.80}%
+\contentsline {paragraph}{Linuxbridge VS macvlan}{41}{paragraph*.81}%
+\contentsline {subsection}{\numberline {4.3.3}Open vSwitch}{41}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}Single server networking services}{42}{section.4.4}%
+\contentsline {paragraph}{IP assignment}{42}{paragraph*.83}%
+\contentsline {paragraph}{Providing feature-rich network connectivity}{43}{paragraph*.85}%
+\contentsline {paragraph}{Multi-tenancy}{43}{paragraph*.86}%
+\contentsline {paragraph}{Tenant-defined network services}{43}{paragraph*.88}%
+\contentsline {paragraph}{Co-existence of virtual services and host applications}{44}{paragraph*.90}%
+\contentsline {paragraph}{Putting all together}{44}{paragraph*.92}%
+\contentsline {section}{\numberline {4.5}Data center-wide networking services}{45}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Providing layer 2 connectivity}{45}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Providing layer 3 connectivity}{47}{subsection.4.5.2}%
+\contentsline {paragraph}{Tunnels in practice}{49}{paragraph*.103}%
+\contentsline {paragraph}{Tunneling VS direct routing}{49}{paragraph*.105}%
+\contentsline {chapter}{\numberline {5}Cloud storage}{50}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Preliminary definitions}{50}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Types of storage}{51}{subsection.5.1.1}%
+\contentsline {section}{\numberline {5.2}Block storage}{51}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Distributed file system}{52}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Unix File System}{52}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Network File System}{53}{subsection.5.3.2}%
+\contentsline {paragraph}{Common design choices for distributed file system}{54}{paragraph*.111}%
+\contentsline {subsection}{\numberline {5.3.3}General Parallel File System}{55}{subsection.5.3.3}%
+\contentsline {subsection}{\numberline {5.3.4}Google File System}{56}{subsection.5.3.4}%
+\contentsline {paragraph}{GFS chunks}{56}{paragraph*.114}%
+\contentsline {paragraph}{GFS architecture}{56}{paragraph*.115}%
+\contentsline {paragraph}{Steps for a write request}{57}{paragraph*.117}%
+\contentsline {paragraph}{Clarification about primary replicas and lease assignment}{57}{paragraph*.118}%
+\contentsline {paragraph}{Steps for a read request}{57}{paragraph*.119}%
+\contentsline {section}{\numberline {5.4}Locks and consensus}{57}{section.5.4}%
+\contentsline {paragraph}{Locks categories}{58}{paragraph*.120}%
+\contentsline {paragraph}{Locks management systems}{58}{paragraph*.121}%
+\contentsline {subsection}{\numberline {5.4.1}Chubby}{58}{subsection.5.4.1}%
+\contentsline {paragraph}{Chubby architecture}{58}{paragraph*.122}%
+\contentsline {paragraph}{Chubby file system}{59}{paragraph*.124}%
+\contentsline {paragraph}{Chubby locking system}{59}{paragraph*.126}%
+\contentsline {paragraph}{Chubby APIs: summary}{60}{paragraph*.127}%
+\contentsline {section}{\numberline {5.5}Distributed database: Google Big Table}{60}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}How is GBT built?}{60}{subsection.5.5.1}%
+\contentsline {paragraph}{SSTable file format}{60}{paragraph*.129}%
+\contentsline {paragraph}{Chubby as an interface for clients}{61}{paragraph*.131}%
+\contentsline {subsection}{\numberline {5.5.2}How is GBT implemented?}{61}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}GBT operations}{62}{subsection.5.5.3}%
+\contentsline {paragraph}{Tablet location}{62}{paragraph*.133}%
+\contentsline {paragraph}{Tablet assignment}{63}{paragraph*.135}%
+\contentsline {paragraph}{Tablet server discovery}{63}{paragraph*.136}%
+\contentsline {paragraph}{Tablet server monitoring}{63}{paragraph*.137}%
+\contentsline {paragraph}{Master startup}{63}{paragraph*.138}%
+\contentsline {paragraph}{Master isolated}{63}{paragraph*.139}%
+\contentsline {paragraph}{Tablet merging/splitting}{63}{paragraph*.140}%
+\contentsline {paragraph}{Tablet serving}{64}{paragraph*.141}%
+\contentsline {paragraph}{Tablet minor compaction}{64}{paragraph*.142}%
+\contentsline {paragraph}{Tablet merging compaction}{65}{paragraph*.144}%
+\contentsline {paragraph}{Tablet major compactor}{65}{paragraph*.146}%
+\contentsline {section}{\numberline {5.6}Distributed object storage: OpenStack Swift}{65}{section.5.6}%
+\contentsline {paragraph}{OSS hierarchycal structure}{65}{paragraph*.148}%
+\contentsline {subsection}{\numberline {5.6.1}OSS architecture}{66}{subsection.5.6.1}%
+\contentsline {paragraph}{OSS API}{67}{paragraph*.151}%
+\contentsline {paragraph}{OSS rings}{67}{paragraph*.152}%
