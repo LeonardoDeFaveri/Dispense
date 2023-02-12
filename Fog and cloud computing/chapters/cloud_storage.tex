@@ -158,7 +158,7 @@ and interact with the server via remote procedure calls.
 
 Each remote file is identified by a 32-bit file handler rather than a file
 descriptor like in \emph{UFS}. A file handler is obtained combining a file
-system identication, an \emph{inode} number and a generation number.
+system identification, an \emph{inode} number and a generation number.
 
 \begin{figure}[h!]
     \centering
@@ -882,7 +882,7 @@ Then, there are two more categories of server:
         cannot be immediately updated, in the case of conjestion or failures,
         the updates are queued locally on the file system and carried out by
         the \emph{updater} when possible;
-        \item \emph{Auditors}: scans local servers checking for integrity of
+        \item \emph{Auditor}: scans local servers checking for integrity of
         \emph{objects}, \emph{containers} and \emph{accounts}. All the errors
         are logged and if a corrupted file is found, that file is quarantined
         and will be replaced by the \emph{replicator} with a correct replica;
@@ -953,7 +953,7 @@ might be less failure domains than replicas of a partition.
     \end{figure}
 
     \noindent
-    If the \emph{storage server} that's handling the data has a failed drive,
+    If the storage server that's handling the data has a failed drive,
     data are passed to another server. For example, it might be passed to the
     fourth server in the image:
 
